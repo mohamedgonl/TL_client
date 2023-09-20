@@ -5,55 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/materials/ArmyCamp.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/Barrack.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/BuilderHut.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/ClanCastle.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/Defence.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/DefenceBase.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/InitGame.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/Laboratory.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/Obstacle.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/Resource.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/Storage.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/TownHall.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/Troop.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/TroopBase.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/Wall.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/Demo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/catalogy_bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/close.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/elixir.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/g.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/gold.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/icon_dElixir_bar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/icon_elixir_bar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/icon_g_bar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/icon_gold_bar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/info.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/item_background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/nen2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/res_bar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/res_info.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/slot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/slot_catalogy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/time.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/title_background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/type_army.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/type_buy_res.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/type_dc.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/type_defense.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/type_res.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/guis/shopping/type_sheild.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/GUIs/layers/PopUpLayer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/GUIs/screens/ShopGUI.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/Resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Resource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/GUIs/components/ShopItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/GUIs/components/ShopTabButton.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/GUIs/layers/MapLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/layers/MapLayer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/GUIs/layers/PopUpLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/layers/PopUpLayer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/mainmenu/ScreenMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/mainmenu/ScreenMenu.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,100 +28,6 @@
     <option name="GROUP_BY_TYPE" value="true" />
     <option name="SORT_CHILDREN" value="false" />
     <option name="SHOW_TABLE_CONSTRAINTS" value="true" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Resource.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/Resource.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="2" selection-start-line="22" selection-start-column="2" selection-end-line="22" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserData.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/framework/UserData.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScreenNetwork.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Packet.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/modules/testnetwork/network/Packet.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.40138888">
-              <caret line="62" column="5" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResourceAnimation.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/ResourceAnimation.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="2" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameClient.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/base/network/GameClient.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="61" column="51" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Resource.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/base/Resource.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UIFactory.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/base/UIFactory.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="crypt.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/framework/libs/crypt.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -254,7 +119,7 @@
     </option>
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
+  &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
@@ -442,16 +307,15 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Notification.DisplayName-DoNotAsk-Vcs Important Messages": "VCS important messages",
+    "Notification.DoNotAsk-Vcs Important Messages": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "jdk.selected.JAVA_MODULE": "1.8",
-    "last_opened_file_path": "D:/workspace/Nhom 1/team_1_client",
+    "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "database.data.csv.formats",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -819,6 +683,12 @@
       <workItem from="1553831685560" duration="3045000" />
       <workItem from="1695095541562" duration="933000" />
       <workItem from="1695174347068" duration="4797000" />
+      <workItem from="1695191730148" duration="1232000" />
+      <workItem from="1695193971066" duration="1390000" />
+      <workItem from="1695195529896" duration="98000" />
+      <workItem from="1695196528760" duration="142000" />
+      <workItem from="1695196681808" duration="176000" />
+      <workItem from="1695196873497" duration="13448000" />
     </task>
     <servers />
   </component>
@@ -908,7 +778,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="cocos javascript">
           <url>file://$PROJECT_DIR$/simulator/win32/script/jsb_boot.js</url>
-          <line>449</line>
+          <line>448</line>
           <option name="timeStamp" value="159" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="cocos javascript">

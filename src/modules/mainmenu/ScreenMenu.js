@@ -21,9 +21,9 @@ var ScreenMenu = cc.Layer.extend({
         this.addChild(btnLocalization);
         btnLocalization.addClickEventListener(this.onSelectLocalization.bind(this));
 
-        var shopGUI = gv.commonButton(200, 64, 3*cc.winSize.width/4, yBtn,"ShopGUI");
-        this.addChild(shopGUI);
-        shopGUI.addClickEventListener(this.onSelectShopGUI.bind(this));
+        var btnMap = gv.commonButton(200, 64, 3*cc.winSize.width/4, yBtn,"Map");
+        this.addChild(btnMap);
+        btnMap.addClickEventListener(this.onSelectMap.bind(this));
 
     },
     onEnter:function(){
@@ -37,9 +37,9 @@ var ScreenMenu = cc.Layer.extend({
     {
         fr.view(ScreenLocalization);
     },
-    onSelectShopGUI:function(sender)
+    onSelectMap:function(sender)
     {
-        fr.view(PopupLayer);
+        fr.view(MapLayer);
     }
 
 });

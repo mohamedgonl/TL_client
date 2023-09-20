@@ -11,6 +11,7 @@ var PopupLayer = cc.Layer.extend({
     init : function () {
         let popUp = Popup.createAsMessage("Hello", "World");
         this.addChild(popUp)
+        var camera = new cc.Camera
     },
 
 });
