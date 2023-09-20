@@ -3,6 +3,28 @@
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
+        <Folder Name="common">
+          <Folder Name="game">
+            <Folder Name="animation">
+              <Folder Name="character">
+                <Folder Name="chipu">
+                  <File Name="skeleton.xml" />
+                </Folder>
+              </Folder>
+              <Folder Name="eff_dice_number">
+                <File Name="skeleton.xml" />
+              </Folder>
+              <Folder Name="firework_test">
+                <File Name="skeleton.xml" />
+              </Folder>
+            </Folder>
+          </Folder>
+        </Folder>
+        <Folder Name="Default">
+          <Image Name="Button_Disable.png" />
+          <Image Name="Button_Normal.png" />
+          <Image Name="Button_Press.png" />
+        </Folder>
         <Folder Name="fonts">
           <PlistImageFolder Image="fista_16_non.png" PListFile="fista_16_non.plist" Name=".fista_16_non_PList.Dir">
             <PlistImageFile Name="1_idle_image0000.png" Key="1/idle/image0000.png" />
@@ -102,7 +124,178 @@
           <Fnt Name="soji_20.fnt" />
           <Fnt Name="soji_24.fnt" />
         </Folder>
+        <Folder Name="game">
+          <Folder Name="animation">
+            <Folder Name="character">
+              <Folder Name="chipu">
+                <PlistImageFolder Image="texture.png" PListFile="texture.plist" Name=".texture_PList.Dir">
+                  <PlistImageFile Name="idle0000.png copy.png" Key="idle0000.png copy.png" />
+                  <PlistImageFile Name="idle0000.png.png" Key="idle0000.png.png" />
+                  <PlistImageFile Name="idle0001.png copy.png" Key="idle0001.png copy.png" />
+                  <PlistImageFile Name="idle0001.png.png" Key="idle0001.png.png" />
+                  <PlistImageFile Name="idle0002.png copy.png" Key="idle0002.png copy.png" />
+                  <PlistImageFile Name="idle0002.png.png" Key="idle0002.png.png" />
+                  <PlistImageFile Name="idle0003.png copy.png" Key="idle0003.png copy.png" />
+                  <PlistImageFile Name="idle0003.png.png" Key="idle0003.png.png" />
+                  <PlistImageFile Name="idle0004.png copy.png" Key="idle0004.png copy.png" />
+                  <PlistImageFile Name="idle0004.png.png" Key="idle0004.png.png" />
+                  <PlistImageFile Name="idle0005.png copy.png" Key="idle0005.png copy.png" />
+                  <PlistImageFile Name="idle0005.png.png" Key="idle0005.png.png" />
+                  <PlistImageFile Name="idle0006.png copy.png" Key="idle0006.png copy.png" />
+                  <PlistImageFile Name="idle0006.png.png" Key="idle0006.png.png" />
+                  <PlistImageFile Name="idle0007.png copy.png" Key="idle0007.png copy.png" />
+                  <PlistImageFile Name="idle0007.png.png" Key="idle0007.png.png" />
+                  <PlistImageFile Name="idle0008.png copy.png" Key="idle0008.png copy.png" />
+                  <PlistImageFile Name="idle0008.png.png" Key="idle0008.png.png" />
+                  <PlistImageFile Name="idle0009.png copy.png" Key="idle0009.png copy.png" />
+                  <PlistImageFile Name="idle0009.png.png" Key="idle0009.png.png" />
+                  <PlistImageFile Name="idle0010.png copy.png" Key="idle0010.png copy.png" />
+                  <PlistImageFile Name="idle0010.png.png" Key="idle0010.png.png" />
+                  <PlistImageFile Name="jump.png copy.png" Key="jump.png copy.png" />
+                  <PlistImageFile Name="jump.png.png" Key="jump.png.png" />
+                  <PlistImageFile Name="lig.png" Key="lig.png" />
+                  <PlistImageFile Name="lightStage.png" Key="lightStage.png" />
+                  <PlistImageFile Name="roll0001.png copy.png" Key="roll0001.png copy.png" />
+                  <PlistImageFile Name="roll0001.png.png" Key="roll0001.png.png" />
+                  <PlistImageFile Name="roll0002.png copy.png" Key="roll0002.png copy.png" />
+                  <PlistImageFile Name="roll0002.png.png" Key="roll0002.png.png" />
+                  <PlistImageFile Name="roll0003.png copy.png" Key="roll0003.png copy.png" />
+                  <PlistImageFile Name="roll0003.png.png" Key="roll0003.png.png" />
+                  <PlistImageFile Name="roll0004.png copy.png" Key="roll0004.png copy.png" />
+                  <PlistImageFile Name="roll0004.png.png" Key="roll0004.png.png" />
+                  <PlistImageFile Name="roll0005.png copy.png" Key="roll0005.png copy.png" />
+                  <PlistImageFile Name="roll0005.png.png" Key="roll0005.png.png" />
+                  <PlistImageFile Name="roll0006.png copy.png" Key="roll0006.png copy.png" />
+                  <PlistImageFile Name="roll0006.png.png" Key="roll0006.png.png" />
+                  <PlistImageFile Name="roll0007.png copy.png" Key="roll0007.png copy.png" />
+                  <PlistImageFile Name="roll0007.png.png" Key="roll0007.png.png" />
+                  <PlistImageFile Name="roll0008.png copy.png" Key="roll0008.png copy.png" />
+                  <PlistImageFile Name="roll0008.png.png" Key="roll0008.png.png" />
+                  <PlistImageFile Name="roll0009.png copy.png" Key="roll0009.png copy.png" />
+                  <PlistImageFile Name="roll0009.png.png" Key="roll0009.png.png" />
+                  <PlistImageFile Name="roll0010.png copy.png" Key="roll0010.png copy.png" />
+                  <PlistImageFile Name="roll0010.png.png" Key="roll0010.png.png" />
+                  <PlistImageFile Name="roll0011.png copy.png" Key="roll0011.png copy.png" />
+                  <PlistImageFile Name="roll0011.png.png" Key="roll0011.png.png" />
+                  <PlistImageFile Name="sad0001.png copy.png" Key="sad0001.png copy.png" />
+                  <PlistImageFile Name="sad0001.png.png" Key="sad0001.png.png" />
+                  <PlistImageFile Name="sad0002.png copy.png" Key="sad0002.png copy.png" />
+                  <PlistImageFile Name="sad0002.png.png" Key="sad0002.png.png" />
+                  <PlistImageFile Name="sad0003.png copy.png" Key="sad0003.png copy.png" />
+                  <PlistImageFile Name="sad0003.png.png" Key="sad0003.png.png" />
+                  <PlistImageFile Name="sad0004.png copy.png" Key="sad0004.png copy.png" />
+                  <PlistImageFile Name="sad0004.png.png" Key="sad0004.png.png" />
+                  <PlistImageFile Name="sad0005.png copy.png" Key="sad0005.png copy.png" />
+                  <PlistImageFile Name="sad0005.png.png" Key="sad0005.png.png" />
+                  <PlistImageFile Name="sad0006.png copy.png" Key="sad0006.png copy.png" />
+                  <PlistImageFile Name="sad0006.png.png" Key="sad0006.png.png" />
+                  <PlistImageFile Name="sad0007.png copy.png" Key="sad0007.png copy.png" />
+                  <PlistImageFile Name="sad0007.png.png" Key="sad0007.png.png" />
+                  <PlistImageFile Name="sad0008.png copy.png" Key="sad0008.png copy.png" />
+                  <PlistImageFile Name="sad0008.png.png" Key="sad0008.png.png" />
+                  <PlistImageFile Name="sad0009.png copy.png" Key="sad0009.png copy.png" />
+                  <PlistImageFile Name="sad0009.png.png" Key="sad0009.png.png" />
+                  <PlistImageFile Name="sad0010.png copy.png" Key="sad0010.png copy.png" />
+                  <PlistImageFile Name="sad0010.png.png" Key="sad0010.png.png" />
+                  <PlistImageFile Name="sad0011.png copy.png" Key="sad0011.png copy.png" />
+                  <PlistImageFile Name="sad0011.png.png" Key="sad0011.png.png" />
+                  <PlistImageFile Name="win0001.png copy.png" Key="win0001.png copy.png" />
+                  <PlistImageFile Name="win0001.png.png" Key="win0001.png.png" />
+                  <PlistImageFile Name="win0002.png copy.png" Key="win0002.png copy.png" />
+                  <PlistImageFile Name="win0002.png.png" Key="win0002.png.png" />
+                  <PlistImageFile Name="win0003.png copy.png" Key="win0003.png copy.png" />
+                  <PlistImageFile Name="win0003.png.png" Key="win0003.png.png" />
+                  <PlistImageFile Name="win0004.png copy.png" Key="win0004.png copy.png" />
+                  <PlistImageFile Name="win0004.png.png" Key="win0004.png.png" />
+                  <PlistImageFile Name="win0005.png copy.png" Key="win0005.png copy.png" />
+                  <PlistImageFile Name="win0005.png.png" Key="win0005.png.png" />
+                  <PlistImageFile Name="win0006.png copy.png" Key="win0006.png copy.png" />
+                  <PlistImageFile Name="win0006.png.png" Key="win0006.png.png" />
+                  <PlistImageFile Name="win0007.png copy.png" Key="win0007.png copy.png" />
+                  <PlistImageFile Name="win0007.png.png" Key="win0007.png.png" />
+                  <PlistImageFile Name="win0008.png copy.png" Key="win0008.png copy.png" />
+                  <PlistImageFile Name="win0008.png.png" Key="win0008.png.png" />
+                </PlistImageFolder>
+                <File Name="skeleton.xml" />
+              </Folder>
+            </Folder>
+            <Folder Name="eff_dice_number">
+              <PlistImageFolder Image="texture.png" PListFile="texture.plist" Name=".texture_PList.Dir">
+                <PlistImageFile Name="bongnuoc copy 4.png" Key="bongnuoc copy 4.png" />
+                <PlistImageFile Name="dice number _gr copy 3.png" Key="dice number _gr copy 3.png" />
+                <PlistImageFile Name="dice number _gr grren copy.png" Key="dice number _gr grren copy.png" />
+                <PlistImageFile Name="dice number _gr yellow copy.png" Key="dice number _gr yellow copy.png" />
+                <PlistImageFile Name="sprite 183 copy 7.png" Key="sprite 183 copy 7.png" />
+                <PlistImageFile Name="sprite 187 copy 8.png" Key="sprite 187 copy 8.png" />
+                <PlistImageFile Name="sprite 187 copy 9.png" Key="sprite 187 copy 9.png" />
+                <PlistImageFile Name="Start copy 3.png" Key="Start copy 3.png" />
+                <PlistImageFile Name="Symbol 1 copy 19.png" Key="Symbol 1 copy 19.png" />
+                <PlistImageFile Name="Symbol 10 copy.png" Key="Symbol 10 copy.png" />
+                <PlistImageFile Name="Symbol 11 copy 2.png" Key="Symbol 11 copy 2.png" />
+                <PlistImageFile Name="Symbol 12 copy 2.png" Key="Symbol 12 copy 2.png" />
+                <PlistImageFile Name="Symbol 13 copy.png" Key="Symbol 13 copy.png" />
+                <PlistImageFile Name="Symbol 14 copy.png" Key="Symbol 14 copy.png" />
+                <PlistImageFile Name="Symbol 15 copy.png" Key="Symbol 15 copy.png" />
+                <PlistImageFile Name="Symbol 3 copy 3.png" Key="Symbol 3 copy 3.png" />
+                <PlistImageFile Name="Symbol 4 copy.png" Key="Symbol 4 copy.png" />
+                <PlistImageFile Name="Symbol 5 copy 3.png" Key="Symbol 5 copy 3.png" />
+                <PlistImageFile Name="Symbol 6 copy 4.png" Key="Symbol 6 copy 4.png" />
+                <PlistImageFile Name="Symbol 7 copy.png" Key="Symbol 7 copy.png" />
+                <PlistImageFile Name="Symbol 8 copy.png" Key="Symbol 8 copy.png" />
+                <PlistImageFile Name="Symbol 9 copy.png" Key="Symbol 9 copy.png" />
+              </PlistImageFolder>
+              <File Name="skeleton.xml" />
+            </Folder>
+            <Folder Name="firework_test">
+              <PlistImageFolder Image="texture.png" PListFile="texture.plist" Name=".texture_PList.Dir">
+                <PlistImageFile Name="Fw copy 2.png" Key="Fw copy 2.png" />
+                <PlistImageFile Name="Fw copy 3.png" Key="Fw copy 3.png" />
+                <PlistImageFile Name="Fw copy.png" Key="Fw copy.png" />
+                <PlistImageFile Name="Fw.png" Key="Fw.png" />
+                <PlistImageFile Name="shape 29 copy 2.png" Key="shape 29 copy 2.png" />
+                <PlistImageFile Name="shape 29 copy 3.png" Key="shape 29 copy 3.png" />
+                <PlistImageFile Name="sprite 183 copy 4.png" Key="sprite 183 copy 4.png" />
+                <PlistImageFile Name="sprite 183 copy 5.png" Key="sprite 183 copy 5.png" />
+                <PlistImageFile Name="Symbol 1 copy 10.png" Key="Symbol 1 copy 10.png" />
+                <PlistImageFile Name="Symbol 1 copy 11.png" Key="Symbol 1 copy 11.png" />
+                <PlistImageFile Name="Symbol 1 copy 12.png" Key="Symbol 1 copy 12.png" />
+                <PlistImageFile Name="Symbol 1 copy 13.png" Key="Symbol 1 copy 13.png" />
+                <PlistImageFile Name="Symbol 1 copy 6.png" Key="Symbol 1 copy 6.png" />
+                <PlistImageFile Name="Symbol 1 copy 7.png" Key="Symbol 1 copy 7.png" />
+                <PlistImageFile Name="Symbol 1 copy 8.png" Key="Symbol 1 copy 8.png" />
+                <PlistImageFile Name="Symbol 1 copy 9.png" Key="Symbol 1 copy 9.png" />
+                <PlistImageFile Name="Symbol 2 copy 10.png" Key="Symbol 2 copy 10.png" />
+                <PlistImageFile Name="Symbol 2 copy 11.png" Key="Symbol 2 copy 11.png" />
+                <PlistImageFile Name="Symbol 2 copy 12.png" Key="Symbol 2 copy 12.png" />
+                <PlistImageFile Name="Symbol 2 copy 5.png" Key="Symbol 2 copy 5.png" />
+                <PlistImageFile Name="Symbol 2 copy 6.png" Key="Symbol 2 copy 6.png" />
+                <PlistImageFile Name="Symbol 2 copy 7.png" Key="Symbol 2 copy 7.png" />
+                <PlistImageFile Name="Symbol 2 copy 8.png" Key="Symbol 2 copy 8.png" />
+                <PlistImageFile Name="Symbol 2 copy 9.png" Key="Symbol 2 copy 9.png" />
+              </PlistImageFolder>
+              <File Name="skeleton.xml" />
+            </Folder>
+          </Folder>
+        </Folder>
         <Folder Name="Gui">
+          <Folder Name="shopping">
+            <Image Name="back.png" />
+            <Image Name="catalogy_bg.png" />
+            <Image Name="close.png" />
+            <Image Name="nen2.png" />
+            <Image Name="res_info.png" />
+            <Image Name="slot.png" />
+            <Image Name="slot_catalogy.png" />
+            <Image Name="title_background.png" />
+            <Image Name="type_army.png" />
+            <Image Name="type_buy_res.png" />
+            <Image Name="type_dc.png" />
+            <Image Name="type_defense.png" />
+            <Image Name="type_res.png" />
+            <Image Name="type_sheild.png" />
+          </Folder>
+        </Folder>
+        <Folder Name="guis">
           <Folder Name="shopping">
             <Image Name="back.png" />
             <Image Name="catalogy_bg.png" />
@@ -132,20 +325,171 @@
             <Image Name="type_sheild.png" />
           </Folder>
         </Folder>
-        <Folder Name="item">
-          <Project Name="shop_item_building.csd" Type="Node" />
-        </Folder>
-        <Folder Name="ui-json">
-          <Folder Name="category">
-            <Project Name="shop_category_baove.csd" Type="Node" />
-            <Project Name="shop_category_ngankho.csd" Type="Node" />
-            <Project Name="shop_category_phongthu.csd" Type="Node" />
-            <Project Name="shop_category_quandoi.csd" Type="Node" />
-            <Project Name="shop_category_tainguyen.csd" Type="Node" />
-            <Project Name="shop_category_trangtri.csd" Type="Node" />
-            <Project Name="shop_popup.csd" Type="Node" />
+        <Folder Name="high">
+          <Folder Name="game">
+            <Folder Name="animation">
+              <Folder Name="character">
+                <Folder Name="chipu">
+                  <PlistImageFolder Image="texture.png" PListFile="texture.plist" Name=".texture_PList.Dir">
+                    <PlistImageFile Name="idle0000.png copy.png" Key="idle0000.png copy.png" />
+                    <PlistImageFile Name="idle0000.png.png" Key="idle0000.png.png" />
+                    <PlistImageFile Name="idle0001.png copy.png" Key="idle0001.png copy.png" />
+                    <PlistImageFile Name="idle0001.png.png" Key="idle0001.png.png" />
+                    <PlistImageFile Name="idle0002.png copy.png" Key="idle0002.png copy.png" />
+                    <PlistImageFile Name="idle0002.png.png" Key="idle0002.png.png" />
+                    <PlistImageFile Name="idle0003.png copy.png" Key="idle0003.png copy.png" />
+                    <PlistImageFile Name="idle0003.png.png" Key="idle0003.png.png" />
+                    <PlistImageFile Name="idle0004.png copy.png" Key="idle0004.png copy.png" />
+                    <PlistImageFile Name="idle0004.png.png" Key="idle0004.png.png" />
+                    <PlistImageFile Name="idle0005.png copy.png" Key="idle0005.png copy.png" />
+                    <PlistImageFile Name="idle0005.png.png" Key="idle0005.png.png" />
+                    <PlistImageFile Name="idle0006.png copy.png" Key="idle0006.png copy.png" />
+                    <PlistImageFile Name="idle0006.png.png" Key="idle0006.png.png" />
+                    <PlistImageFile Name="idle0007.png copy.png" Key="idle0007.png copy.png" />
+                    <PlistImageFile Name="idle0007.png.png" Key="idle0007.png.png" />
+                    <PlistImageFile Name="idle0008.png copy.png" Key="idle0008.png copy.png" />
+                    <PlistImageFile Name="idle0008.png.png" Key="idle0008.png.png" />
+                    <PlistImageFile Name="idle0009.png copy.png" Key="idle0009.png copy.png" />
+                    <PlistImageFile Name="idle0009.png.png" Key="idle0009.png.png" />
+                    <PlistImageFile Name="idle0010.png copy.png" Key="idle0010.png copy.png" />
+                    <PlistImageFile Name="idle0010.png.png" Key="idle0010.png.png" />
+                    <PlistImageFile Name="jump.png copy.png" Key="jump.png copy.png" />
+                    <PlistImageFile Name="jump.png.png" Key="jump.png.png" />
+                    <PlistImageFile Name="lig.png" Key="lig.png" />
+                    <PlistImageFile Name="lightStage.png" Key="lightStage.png" />
+                    <PlistImageFile Name="roll0001.png copy.png" Key="roll0001.png copy.png" />
+                    <PlistImageFile Name="roll0001.png.png" Key="roll0001.png.png" />
+                    <PlistImageFile Name="roll0002.png copy.png" Key="roll0002.png copy.png" />
+                    <PlistImageFile Name="roll0002.png.png" Key="roll0002.png.png" />
+                    <PlistImageFile Name="roll0003.png copy.png" Key="roll0003.png copy.png" />
+                    <PlistImageFile Name="roll0003.png.png" Key="roll0003.png.png" />
+                    <PlistImageFile Name="roll0004.png copy.png" Key="roll0004.png copy.png" />
+                    <PlistImageFile Name="roll0004.png.png" Key="roll0004.png.png" />
+                    <PlistImageFile Name="roll0005.png copy.png" Key="roll0005.png copy.png" />
+                    <PlistImageFile Name="roll0005.png.png" Key="roll0005.png.png" />
+                    <PlistImageFile Name="roll0006.png copy.png" Key="roll0006.png copy.png" />
+                    <PlistImageFile Name="roll0006.png.png" Key="roll0006.png.png" />
+                    <PlistImageFile Name="roll0007.png copy.png" Key="roll0007.png copy.png" />
+                    <PlistImageFile Name="roll0007.png.png" Key="roll0007.png.png" />
+                    <PlistImageFile Name="roll0008.png copy.png" Key="roll0008.png copy.png" />
+                    <PlistImageFile Name="roll0008.png.png" Key="roll0008.png.png" />
+                    <PlistImageFile Name="roll0009.png copy.png" Key="roll0009.png copy.png" />
+                    <PlistImageFile Name="roll0009.png.png" Key="roll0009.png.png" />
+                    <PlistImageFile Name="roll0010.png copy.png" Key="roll0010.png copy.png" />
+                    <PlistImageFile Name="roll0010.png.png" Key="roll0010.png.png" />
+                    <PlistImageFile Name="roll0011.png copy.png" Key="roll0011.png copy.png" />
+                    <PlistImageFile Name="roll0011.png.png" Key="roll0011.png.png" />
+                    <PlistImageFile Name="sad0001.png copy.png" Key="sad0001.png copy.png" />
+                    <PlistImageFile Name="sad0001.png.png" Key="sad0001.png.png" />
+                    <PlistImageFile Name="sad0002.png copy.png" Key="sad0002.png copy.png" />
+                    <PlistImageFile Name="sad0002.png.png" Key="sad0002.png.png" />
+                    <PlistImageFile Name="sad0003.png copy.png" Key="sad0003.png copy.png" />
+                    <PlistImageFile Name="sad0003.png.png" Key="sad0003.png.png" />
+                    <PlistImageFile Name="sad0004.png copy.png" Key="sad0004.png copy.png" />
+                    <PlistImageFile Name="sad0004.png.png" Key="sad0004.png.png" />
+                    <PlistImageFile Name="sad0005.png copy.png" Key="sad0005.png copy.png" />
+                    <PlistImageFile Name="sad0005.png.png" Key="sad0005.png.png" />
+                    <PlistImageFile Name="sad0006.png copy.png" Key="sad0006.png copy.png" />
+                    <PlistImageFile Name="sad0006.png.png" Key="sad0006.png.png" />
+                    <PlistImageFile Name="sad0007.png copy.png" Key="sad0007.png copy.png" />
+                    <PlistImageFile Name="sad0007.png.png" Key="sad0007.png.png" />
+                    <PlistImageFile Name="sad0008.png copy.png" Key="sad0008.png copy.png" />
+                    <PlistImageFile Name="sad0008.png.png" Key="sad0008.png.png" />
+                    <PlistImageFile Name="sad0009.png copy.png" Key="sad0009.png copy.png" />
+                    <PlistImageFile Name="sad0009.png.png" Key="sad0009.png.png" />
+                    <PlistImageFile Name="sad0010.png copy.png" Key="sad0010.png copy.png" />
+                    <PlistImageFile Name="sad0010.png.png" Key="sad0010.png.png" />
+                    <PlistImageFile Name="sad0011.png copy.png" Key="sad0011.png copy.png" />
+                    <PlistImageFile Name="sad0011.png.png" Key="sad0011.png.png" />
+                    <PlistImageFile Name="win0001.png copy.png" Key="win0001.png copy.png" />
+                    <PlistImageFile Name="win0001.png.png" Key="win0001.png.png" />
+                    <PlistImageFile Name="win0002.png copy.png" Key="win0002.png copy.png" />
+                    <PlistImageFile Name="win0002.png.png" Key="win0002.png.png" />
+                    <PlistImageFile Name="win0003.png copy.png" Key="win0003.png copy.png" />
+                    <PlistImageFile Name="win0003.png.png" Key="win0003.png.png" />
+                    <PlistImageFile Name="win0004.png copy.png" Key="win0004.png copy.png" />
+                    <PlistImageFile Name="win0004.png.png" Key="win0004.png.png" />
+                    <PlistImageFile Name="win0005.png copy.png" Key="win0005.png copy.png" />
+                    <PlistImageFile Name="win0005.png.png" Key="win0005.png.png" />
+                    <PlistImageFile Name="win0006.png copy.png" Key="win0006.png copy.png" />
+                    <PlistImageFile Name="win0006.png.png" Key="win0006.png.png" />
+                    <PlistImageFile Name="win0007.png copy.png" Key="win0007.png copy.png" />
+                    <PlistImageFile Name="win0007.png.png" Key="win0007.png.png" />
+                    <PlistImageFile Name="win0008.png copy.png" Key="win0008.png copy.png" />
+                    <PlistImageFile Name="win0008.png.png" Key="win0008.png.png" />
+                  </PlistImageFolder>
+                </Folder>
+              </Folder>
+              <Folder Name="eff_dice_number">
+                <PlistImageFolder Image="texture.png" PListFile="texture.plist" Name=".texture_PList.Dir">
+                  <PlistImageFile Name="bongnuoc copy 4.png" Key="bongnuoc copy 4.png" />
+                  <PlistImageFile Name="dice number _gr copy 3.png" Key="dice number _gr copy 3.png" />
+                  <PlistImageFile Name="dice number _gr grren copy.png" Key="dice number _gr grren copy.png" />
+                  <PlistImageFile Name="dice number _gr yellow copy.png" Key="dice number _gr yellow copy.png" />
+                  <PlistImageFile Name="sprite 183 copy 7.png" Key="sprite 183 copy 7.png" />
+                  <PlistImageFile Name="sprite 187 copy 8.png" Key="sprite 187 copy 8.png" />
+                  <PlistImageFile Name="sprite 187 copy 9.png" Key="sprite 187 copy 9.png" />
+                  <PlistImageFile Name="Start copy 3.png" Key="Start copy 3.png" />
+                  <PlistImageFile Name="Symbol 1 copy 19.png" Key="Symbol 1 copy 19.png" />
+                  <PlistImageFile Name="Symbol 10 copy.png" Key="Symbol 10 copy.png" />
+                  <PlistImageFile Name="Symbol 11 copy 2.png" Key="Symbol 11 copy 2.png" />
+                  <PlistImageFile Name="Symbol 12 copy 2.png" Key="Symbol 12 copy 2.png" />
+                  <PlistImageFile Name="Symbol 13 copy.png" Key="Symbol 13 copy.png" />
+                  <PlistImageFile Name="Symbol 14 copy.png" Key="Symbol 14 copy.png" />
+                  <PlistImageFile Name="Symbol 15 copy.png" Key="Symbol 15 copy.png" />
+                  <PlistImageFile Name="Symbol 3 copy 3.png" Key="Symbol 3 copy 3.png" />
+                  <PlistImageFile Name="Symbol 4 copy.png" Key="Symbol 4 copy.png" />
+                  <PlistImageFile Name="Symbol 5 copy 3.png" Key="Symbol 5 copy 3.png" />
+                  <PlistImageFile Name="Symbol 6 copy 4.png" Key="Symbol 6 copy 4.png" />
+                  <PlistImageFile Name="Symbol 7 copy.png" Key="Symbol 7 copy.png" />
+                  <PlistImageFile Name="Symbol 8 copy.png" Key="Symbol 8 copy.png" />
+                  <PlistImageFile Name="Symbol 9 copy.png" Key="Symbol 9 copy.png" />
+                </PlistImageFolder>
+              </Folder>
+              <Folder Name="firework_test">
+                <PlistImageFolder Image="texture.png" PListFile="texture.plist" Name=".texture_PList.Dir">
+                  <PlistImageFile Name="Fw copy 2.png" Key="Fw copy 2.png" />
+                  <PlistImageFile Name="Fw copy 3.png" Key="Fw copy 3.png" />
+                  <PlistImageFile Name="Fw copy.png" Key="Fw copy.png" />
+                  <PlistImageFile Name="Fw.png" Key="Fw.png" />
+                  <PlistImageFile Name="shape 29 copy 2.png" Key="shape 29 copy 2.png" />
+                  <PlistImageFile Name="shape 29 copy 3.png" Key="shape 29 copy 3.png" />
+                  <PlistImageFile Name="sprite 183 copy 4.png" Key="sprite 183 copy 4.png" />
+                  <PlistImageFile Name="sprite 183 copy 5.png" Key="sprite 183 copy 5.png" />
+                  <PlistImageFile Name="Symbol 1 copy 10.png" Key="Symbol 1 copy 10.png" />
+                  <PlistImageFile Name="Symbol 1 copy 11.png" Key="Symbol 1 copy 11.png" />
+                  <PlistImageFile Name="Symbol 1 copy 12.png" Key="Symbol 1 copy 12.png" />
+                  <PlistImageFile Name="Symbol 1 copy 13.png" Key="Symbol 1 copy 13.png" />
+                  <PlistImageFile Name="Symbol 1 copy 6.png" Key="Symbol 1 copy 6.png" />
+                  <PlistImageFile Name="Symbol 1 copy 7.png" Key="Symbol 1 copy 7.png" />
+                  <PlistImageFile Name="Symbol 1 copy 8.png" Key="Symbol 1 copy 8.png" />
+                  <PlistImageFile Name="Symbol 1 copy 9.png" Key="Symbol 1 copy 9.png" />
+                  <PlistImageFile Name="Symbol 2 copy 10.png" Key="Symbol 2 copy 10.png" />
+                  <PlistImageFile Name="Symbol 2 copy 11.png" Key="Symbol 2 copy 11.png" />
+                  <PlistImageFile Name="Symbol 2 copy 12.png" Key="Symbol 2 copy 12.png" />
+                  <PlistImageFile Name="Symbol 2 copy 5.png" Key="Symbol 2 copy 5.png" />
+                  <PlistImageFile Name="Symbol 2 copy 6.png" Key="Symbol 2 copy 6.png" />
+                  <PlistImageFile Name="Symbol 2 copy 7.png" Key="Symbol 2 copy 7.png" />
+                  <PlistImageFile Name="Symbol 2 copy 8.png" Key="Symbol 2 copy 8.png" />
+                  <PlistImageFile Name="Symbol 2 copy 9.png" Key="Symbol 2 copy 9.png" />
+                </PlistImageFolder>
+              </Folder>
+            </Folder>
           </Folder>
         </Folder>
+        <Folder Name="item">
+          <File Name="shop_item_building.json" />
+        </Folder>
+        <Folder Name="localize">
+          <File Name="config.json" />
+          <File Name="en" />
+          <File Name="id" />
+          <File Name="vi" />
+        </Folder>
+        <Folder Name="shaders">
+          <File Name="change_color.fsh" />
+        </Folder>
+        <Folder Name="ui-json" />
       </RootFolder>
     </Group>
   </SolutionFolder>
