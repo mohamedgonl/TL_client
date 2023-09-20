@@ -5,7 +5,7 @@ var MapLayer = cc.Layer.extend({
     },
 
     init: function () {
-        cc.log("hahahehe")
+        cc.log("init map layer");
         this.addEvent();
         this.initBackground();
         //add image background
