@@ -1,0 +1,511 @@
+{
+  "ID": "c898ab2d-1cc4-46c9-963b-36d34560b010",
+  "Version": "3.10.0.0",
+  "Name": "shop_popup",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 12,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "Gui/shopping/nen2.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": -1.5826
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -400.0,
+            "RightMargin": -400.0,
+            "TopMargin": -238.4174,
+            "BottomMargin": -241.5826,
+            "Tag": 13,
+            "ActionTag": -314443175,
+            "Size": {
+              "X": 800.0,
+              "Y": 480.0
+            },
+            "Name": "shopping_bg",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "Gui/shopping/res_info.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 2.5945,
+              "Y": 204.9174
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -394.4055,
+            "RightMargin": -399.5945,
+            "TopMargin": -238.4174,
+            "BottomMargin": 171.4174,
+            "Tag": 14,
+            "ActionTag": 1316763110,
+            "Size": {
+              "X": 794.0,
+              "Y": 67.0
+            },
+            "Name": "shopping_title",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "Gui/shopping/close.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5277,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 369.3581,
+              "Y": 203.3933
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 344.5577,
+            "RightMargin": -391.5577,
+            "TopMargin": -226.8933,
+            "BottomMargin": 179.8933,
+            "Tag": 15,
+            "ActionTag": 665422371,
+            "Size": {
+              "X": 47.0,
+              "Y": 47.0
+            },
+            "Name": "button_close",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "Gui/shopping/back.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -351.1658,
+              "Y": 204.693
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -388.1658,
+            "RightMargin": 314.1658,
+            "TopMargin": -228.193,
+            "BottomMargin": 181.193,
+            "Tag": 16,
+            "ActionTag": 613214074,
+            "Size": {
+              "X": 74.0,
+              "Y": 47.0
+            },
+            "Name": "button_back",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "LabelText": "CỬA HÀNG",
+            "LabelBMFontFile_CNB": {
+              "Type": "Normal",
+              "Path": "fonts/soji_24.fnt",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 200.1889
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -74.0,
+            "RightMargin": -74.0,
+            "TopMargin": -219.1889,
+            "BottomMargin": 181.1889,
+            "Tag": 374,
+            "ActionTag": 1580254034,
+            "Size": {
+              "X": 148.0,
+              "Y": 38.0
+            },
+            "Name": "shop_title",
+            "ctype": "TextBMFontObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui-json/category/shop_category_ngankho.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": -253.1663,
+              "Y": 70.7478
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -253.1663,
+            "RightMargin": 253.1663,
+            "TopMargin": -70.7478,
+            "BottomMargin": 70.7478,
+            "Tag": 375,
+            "ActionTag": 2050056367,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "ngan_kho_category",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui-json/category/shop_category_tainguyen.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": -0.1887,
+              "Y": 70.7478
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -0.1887,
+            "RightMargin": 0.1887,
+            "TopMargin": -70.7478,
+            "BottomMargin": 70.7478,
+            "Tag": 383,
+            "ActionTag": -1630126912,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "tai_nguyen_category",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui-json/category/shop_category_trangtri.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 252.7889,
+              "Y": 70.7478
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 252.7889,
+            "RightMargin": -252.7889,
+            "TopMargin": -70.7478,
+            "BottomMargin": 70.7478,
+            "Tag": 391,
+            "ActionTag": -1475401640,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "trangtri_category",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui-json/category/shop_category_quandoi.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": -249.4305,
+              "Y": -130.6268
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -249.4305,
+            "RightMargin": 249.4305,
+            "TopMargin": 130.6268,
+            "BottomMargin": -130.6268,
+            "Tag": 399,
+            "ActionTag": -331226848,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "quandoi_category",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui-json/category/shop_category_phongthu.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 2.3644,
+              "Y": -130.6268
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 2.3644,
+            "RightMargin": -2.3644,
+            "TopMargin": 130.6268,
+            "BottomMargin": -130.6268,
+            "Tag": 407,
+            "ActionTag": 1351403859,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "phongthu_category",
+            "ctype": "ProjectNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ui-json/category/shop_category_baove.json",
+              "Plist": ""
+            },
+            "StretchWidthEnable": false,
+            "StretchHeightEnable": false,
+            "InnerActionSpeed": 1.0,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 254.1593,
+              "Y": -130.6268
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 254.1593,
+            "RightMargin": -254.1593,
+            "TopMargin": 130.6268,
+            "BottomMargin": -130.6268,
+            "Tag": 415,
+            "ActionTag": 907819159,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "baove_category",
+            "ctype": "ProjectNodeObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "../../fonts/soji_24.fnt",
+        "../../fonts/soji_24.png",
+        "../../Gui/shopping/back.png",
+        "../../Gui/shopping/close.png",
+        "../../Gui/shopping/nen2.png",
+        "../../Gui/shopping/res_info.png",
+        "shop_category_baove.json",
+        "shop_category_ngankho.json",
+        "shop_category_phongthu.json",
+        "shop_category_quandoi.json",
+        "shop_category_tainguyen.json",
+        "shop_category_trangtri.json"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

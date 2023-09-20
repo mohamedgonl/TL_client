@@ -45,6 +45,7 @@
         "src/modules/testnetwork/network/Packet.js",
         "src/modules/testnetwork/ScreenNetwork.js",
         "src/game/GUIs/layers/PopUpLayer.js",
-        "src/game/GUIs/views/ShopGUI.js"
+        "src/game/GUIs/views/ShopGUI.js",
+        "src/game/GUIs/views/Shop.js"
     ]
 }

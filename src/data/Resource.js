@@ -99,3 +99,8 @@ var g_resources = [
     "zcsd/screen_network.json",
     "zcsd/screen_zalo.json"
 ];
+
+
+var res_ui = {
+    SHOP_POPUP: "ui-json/shop_popup.json"
+}

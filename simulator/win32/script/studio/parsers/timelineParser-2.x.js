@@ -182,7 +182,7 @@
             node.setColor(getColor(color));
 
         if(json.hasOwnProperty("SkyBoxEnabled") && true == json["SkyBoxEnabled"]&&
-	json.hasOwnProperty("SkyBoxValid") && true == json["SkyBoxValid"])
+            json.hasOwnProperty("SkyBoxValid") && true == json["SkyBoxValid"])
         {
             var leftFileData = resourcePath + getSkyboxRes(json, "LeftImage");
             var rightFileData = resourcePath + getSkyboxRes(json, "RightImage");
@@ -191,7 +191,7 @@
             var forwardFileData = resourcePath + getSkyboxRes(json, "ForwardImage");
             var backFileData = resourcePath + getSkyboxRes(json, "BackImage");
             var fileUtil = jsb.fileUtils;
-	    if(fileUtil.isFileExist(leftFileData)&&
+            if(fileUtil.isFileExist(leftFileData)&&
                 fileUtil.isFileExist(rightFileData)&&
                 fileUtil.isFileExist(upFileData)&&
                 fileUtil.isFileExist(downFileData)&&
@@ -664,7 +664,7 @@
         }
 
         var text = json["ButtonText"];
-		text = fr.Localization.ccsText(text);
+        text = fr.Localization.ccsText(text);
         if(text != null)
             widget.setTitleText(text);
 
@@ -712,7 +712,7 @@
 
         this.widgetAttributes(widget, json);
 
-		var customProperty = json["UserData"];
+        var customProperty = json["UserData"];
         if(customProperty !== undefined)
         {
             if(customProperty.indexOf("-press_action") >= 0)
@@ -720,15 +720,15 @@
                 widget.setPressedActionEnabled(true);
             }
         }
-		
+
         if(scale9Enabled) {
             widget.setUnifySizeEnabled(false);
             widget.ignoreContentAdaptWithSize(false);
             var capInsets = cc.rect(
-                    json["Scale9OriginX"] || 0,
-                    json["Scale9OriginY"] || 0,
-                    json["Scale9Width"] || 0,
-                    json["Scale9Height"] || 0
+                json["Scale9OriginX"] || 0,
+                json["Scale9OriginY"] || 0,
+                json["Scale9Width"] || 0,
+                json["Scale9Height"] || 0
             );
             widget.setCapInsets(capInsets);
 
@@ -736,7 +736,7 @@
 
         setContentSize(widget, json["Size"]);
 
-		//GSN custom
+        //GSN custom
         var isPlaySound = true;
         if(customProperty !== undefined)
         {
@@ -749,12 +749,12 @@
             widget.addTouchEventListener(
                 function (sender, type) {
                     if (type == ccui.Widget.TOUCH_BEGAN) {
-                        //fr.Sound.playEffectClickButton();
+                        fr.Sound.playEffectClickButton();
                     }
                 }
             );
         }
-		
+
         return widget;
 
     };
@@ -1130,7 +1130,7 @@
         this.widgetAttributes(widget, json);
 
         var text = json["LabelText"];
-		text = fr.Localization.ccsText(text);
+        text = fr.Localization.ccsText(text);
         widget.setString(text);
 
         loadTexture(json["LabelBMFontFile_CNB"], resourcePath, function(path, type){
@@ -1158,9 +1158,9 @@
 
         var placeHolder = json["PlaceHolderText"];
         if(placeHolder != null){
-			placeHolder = fr.Localization.ccsText(placeHolder);
+            placeHolder = fr.Localization.ccsText(placeHolder);
             widget.setPlaceHolder(placeHolder);
-		}
+        }
         var fontSize = json["FontSize"];
         if(fontSize != null)
             widget.setFontSize(fontSize);
@@ -1370,10 +1370,10 @@
         if(json != null){
             var path = json["Path"];
             //GSN custom
-            var type;
-                type = 1;
+            var type = 0;
             var plist = json["Plist"];
             if(plist){
+                type = 1;
                 if(cc.loader.getRes(resourcePath + plist)){
                     loadedPlist[resourcePath + plist] = true;
                     cc.spriteFrameCache.addSpriteFrames(resourcePath + plist);
@@ -1386,9 +1386,6 @@
                 if(cc.spriteFrameCache.getSpriteFrame(path))
                     cb(path, type);
                 else{
-                    if(path.indexOf(".fnt") == -1) {
-                        cc.log("failed to get spriteFrame: %s", path);
-                    }
                     cb(resourcePath + path, 0);
                 }
 
@@ -1541,7 +1538,7 @@
             node.setCameraFlag(cameraFlag);
         }
 
-	if(json.hasOwnProperty("SkyBoxEnabled") && true == json["SkyBoxEnabled"] &&
+        if(json.hasOwnProperty("SkyBoxEnabled") && true == json["SkyBoxEnabled"] &&
             json.hasOwnProperty("SkyBoxValid") && true == json["SkyBoxValid"])
         {
             var leftFileData = resourcePath + getSkyboxRes(json, "LeftImage");
@@ -1565,10 +1562,10 @@
             else
                 node.setBackgroundBrush(skyBoxBrushInstance);
         }
-	else if(skyBoxBrushInstance != null)
-	{
-		node.setBackgroundBrush(skyBoxBrushInstance);
-	}
+        else if(skyBoxBrushInstance != null)
+        {
+            node.setBackgroundBrush(skyBoxBrushInstance);
+        }
         return node;
     };
 
@@ -1692,7 +1689,7 @@
     });
 
 
-    load.registerParser("timeline", "2.*", parser);
+    load.registerParser("timeline", "3.*", parser);
 
 
 })(ccs._load, ccs._parser);

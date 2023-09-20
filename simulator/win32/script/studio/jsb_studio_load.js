@@ -33,6 +33,7 @@ ccs._load = (function(){
      */
     var load = function(file, type, path){
 
+        cc.log(file)
         var json = cc.loader.getRes(file);
 
         if(!json)
@@ -181,6 +182,8 @@ ccs._parser = cc.Class.extend({
  * @returns {{node: cc.Node, action: cc.Action}}
  */
 ccs.load = function(file, path){
+
+    var startTime = Date.now();
     var object = {
         node: null,
         action: null
@@ -190,6 +193,9 @@ ccs.load = function(file, path){
     object.action = ccs._load(file, "action", path);
     if(object.action && object.action.tag === -1 && object.node)
         object.action.tag = object.node.tag;
+
+    var endTime = Date.now();
+    console.log("timeloadccs: " + file + ": " + (endTime - startTime));
     return object;
 };
 
