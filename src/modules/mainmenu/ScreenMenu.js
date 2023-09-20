@@ -21,9 +21,9 @@ var ScreenMenu = cc.Layer.extend({
         this.addChild(btnLocalization);
         btnLocalization.addClickEventListener(this.onSelectLocalization.bind(this));
 
-        var btnDragonbones = gv.commonButton(200, 64, 3*cc.winSize.width/4, yBtn,"Dragonbone");
-        this.addChild(btnDragonbones);
-        btnDragonbones.addClickEventListener(this.onSelectDragonbones.bind(this));
+        var shopGUI = gv.commonButton(200, 64, 3*cc.winSize.width/4, yBtn,"ShopGUI");
+        this.addChild(shopGUI);
+        shopGUI.addClickEventListener(this.onSelectShopGUI.bind(this));
 
     },
     onEnter:function(){
@@ -37,9 +37,9 @@ var ScreenMenu = cc.Layer.extend({
     {
         fr.view(ScreenLocalization);
     },
-    onSelectDragonbones:function(sender)
+    onSelectShopGUI:function(sender)
     {
-        fr.view(ScreenDragonbones);
+        fr.view(PopupLayer);
     }
 
 });

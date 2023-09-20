@@ -4,22 +4,47 @@
 
 
 var res = {
-    //font
-    FONT_BITMAP_NUMBER_1:"fonts/number_1.fnt",
-    FONT_BITMAP_DICE_NUMBER: "fonts/diceNumber.fnt",
-    //zcsd
-    //screen
-    ZCSD_SCREEN_MENU:"zcsd/screen_menu.json",
-    ZCSD_SCREEN_NETWORK:"zcsd/screen_network.json",
-    ZCSD_SCREEN_LOCALIZATION:"zcsd/screen_localize.json",
-    ZCSD_SCREEN_DRAGON_BONES:"zcsd/screen_dragon_bones.json",
-    ZCSD_SCREEN_DECRYPTION:"zcsd/screen_decryption.json",
-    ZCSD_SCREEN_ZALO:"zcsd/screen_zalo.json",
-    //popup
-    ZCSD_POPUP_MINI_GAME:"zcsd/game/mini_game/PopupMiniGame.json",
+    FONT : {
+        FISTA: {
 
-    //images
-    Slot1_png : "zcsd/slot1.png"
+        },
+         SOJI: {
+            "16": 'res/fonts/soji_12.fnt'
+         }
+    },
+    BUTTON: {
+        BACK: 'res/guis/shopping/back.png',
+        CLOSE: 'res/guis/shopping/close.png',
+        INFO: 'res/guis/shopping/info.png'
+    },
+    ICON: {
+        ELIXIR: 'res/guis/shopping/elixir.png',
+        GEM: 'res/guis/shopping/g.png',
+        GOLD: 'res/guis/shopping/gold.png',
+        D_ELIXIR_BAR: 'res/guis/shopping/icon_dElixir_bar.png',
+        ELIXIR_BAR: 'res/guis/shopping/icon_elixir_bar.png',
+        G_BAR: 'res/guis/shopping/icon_g_bar.png',
+        GOLD_BAR: 'res/guis/shopping/icon_gold_bar.png',
+        TIME: 'res/guis/shopping/time.png',
+        TYPE_ARMY: 'res/guis/shopping/type_army.png',
+        TYPE_BUY_RES: 'res/guis/shopping/type_buy_res.png',
+        TYPE_DC: 'res/guis/shopping/type_dc.png',
+        TYPE_DEFENSE: 'res/guis/shopping/type_defense.png',
+        TYPE_RES: 'res/guis/shopping/type_res.png',
+        TYPE_SHIELD: 'res/guis/shopping/type_shield.png'
+    },
+    BACKGROUND: {
+        CATEGORY: 'res/guis/shopping/catalogy_bg.png',
+        ITEM: 'res/guis/shopping/item_background.png',
+        TITLE: 'res/guis/shopping/title_background.png',
+        SLOT: 'res/guis/shopping/slot.png',
+        SLOT_CATEGORY: 'res/guis/shopping/slot_catalogy.png',
+        SHOP: 'res/guis/shopping/nen2.png'
+    },
+
+
+
+
 };
 
 var g_resources = [
