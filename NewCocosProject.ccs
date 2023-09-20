@@ -489,7 +489,11 @@
         <Folder Name="shaders">
           <File Name="change_color.fsh" />
         </Folder>
-        <Folder Name="ui-json" />
+        <Folder Name="ui-json">
+          <Project Name="ShopCategoryNganKho.csd" Type="Node" />
+          <Project Name="ShopItemNgankho.csd" Type="Node" />
+          <Project Name="ShopPopup.csd" Type="Node" />
+        </Folder>
       </RootFolder>
     </Group>
   </SolutionFolder>

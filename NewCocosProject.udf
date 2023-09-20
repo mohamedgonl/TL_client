@@ -30,7 +30,12 @@
     </Item>
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
-        <ActiveDocument />
+        <OpenedDocuments>
+          <FilePathData Path="ui-json/ShopPopup.csd" />
+          <FilePathData Path="ui-json/ShopItemNgankho.csd" />
+          <FilePathData Path="ui-json/ShopCategoryNganKho.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="ui-json/ShopCategoryNganKho.csd" />
       </Value>
     </Item>
   </Properties>
