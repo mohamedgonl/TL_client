@@ -5,6 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/game/GUIs/scenes/GameScene.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/utils/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/GUIs/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/GUIs/layers/InfoLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/layers/InfoLayer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/GUIs/layers/MapLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/layers/MapLayer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -308,6 +315,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "database.data.csv.formats",
     "vue.rearranger.settings.migration": "true"
   }
@@ -319,11 +327,11 @@
       <recent name="D:\Project\lgrc_project\client\HelloJavascript\src\game\render\effect" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\workspace\GameClientJS\team_1_client\src\game\utils" />
       <recent name="D:\workspace\Nhom 1\team_1_client\src\game\GUIs\layers" />
       <recent name="D:\workspace\Nhom 1\team_1_client\src\game\GUIs\screens" />
       <recent name="D:\workspace\Nhom 1\team_1_client\res\guis\shopguis" />
       <recent name="D:\workspace\Nhom 1\team_1_client\src\game\GUIs" />
-      <recent name="D:\workspace\Nhom 1\team_1_client\materials" />
     </key>
   </component>
   <component name="RunManager" selected="JSBinding.Win32Debug">
@@ -682,6 +690,8 @@
       <workItem from="1695196528760" duration="142000" />
       <workItem from="1695196681808" duration="176000" />
       <workItem from="1695196873497" duration="13448000" />
+      <workItem from="1695217022510" duration="12000" />
+      <workItem from="1695277533419" duration="14199000" />
     </task>
     <servers />
   </component>
@@ -757,6 +767,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">

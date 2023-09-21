@@ -18,6 +18,8 @@
         "src/**/*.js"
     ],
     "jsList": [
+
+
         "src/data/Resource.js",
         "src/data/ResourceAnimation.js",
         "src/framework/AnimationMgr.js",
@@ -46,6 +48,7 @@
         "src/modules/testnetwork/ScreenNetwork.js",
         "src/game/GUIs/layers/PopUpLayer.js",
         "src/game/GUIs/layers/MapLayer.js",
+        "src/game/utils/utils.js",
         "src/game/GUIs/config.js"
 
     ]

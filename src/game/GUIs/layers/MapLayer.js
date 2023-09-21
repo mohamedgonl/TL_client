@@ -1,3 +1,4 @@
+
 var MapLayer = cc.Layer.extend({
     ctor: function () {
         this._super();
@@ -5,33 +6,29 @@ var MapLayer = cc.Layer.extend({
     },
 
     init: function () {
-        this.addEvent();
+        this.addTouch();
         this.initBackground();
-        //add image background
-        // var background = new cc.Sprite("res/guis/map/test.png");
-        // background.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
-        // this.addChild(background);
-        //function create sprite in 4 corner
+        this.setScale(ZOOM_DEFAULT);
     },
 
-    addEvent: function () {
+    addTouch: function () {
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
 
-            onTouchBegan: function (touch, event) {
-                cc.log("touch began");
-                this.test(touch);
+            onTouchBegan: function (event) {
+                //cc.log("touch began");
+                this.touch(event);
                 return true;
             }.bind(this),
 
-            onTouchEnded: function (touch, event) {
-                cc.log("touch ended");
+            onTouchEnded: function (event) {
+                //cc.log("touch ended");
                 return true;
             },
 
-            onTouchMoved: function (touch, event) {
-                this.moveView(touch.getDelta());
+            onTouchMoved: function (event) {
+                this.moveView(event.getDelta());
                 return true;
             }.bind(this)
         }, this);
@@ -39,49 +36,129 @@ var MapLayer = cc.Layer.extend({
         //scale by scroll
         cc.eventManager.addListener({
             event: cc.EventListener.MOUSE,
-            onMouseScroll: this.onMouseScroll.bind(this)
+            onMouseScroll: this.zoom.bind(this)
         }, this);
     },
-    onMouseScroll: function (event) {
-        //zoom max x2 and min x0.5, zoom step 0.1, zoom at mouse position
+
+    //use config zoom max, min, zoom step to zoom by scroll
+    zoom: function (event) {
+
         var delta = event.getScrollY();
         var scale = this.getScale();
+
+        //if scroll up, zoom in, else zoom out
         if (delta < 0) {
-            scale += 0.02;
-            if (scale > 1) {
-                scale = 1;
+            scale += ZOOM_STEP;
+            if (scale > ZOOM_MAX) {
+                scale = ZOOM_MAX;
             }
         }
         else {
-            scale -= 0.02;
-            if (scale < 0.2) {
-                scale = 0.2;
+            scale -= ZOOM_STEP;
+            if (scale < ZOOM_MIN) {
+                scale = ZOOM_MIN;
             }
         }
+
         this.setScale(scale);
+        this.limitBorder();
     },
 
+    //move view while drag
     moveView: function (delta) {
-        // cc.log("move view");
+
         var currentPos = this.getPosition();
         var newPos = cc.pAdd(currentPos, delta);
         this.setPosition(newPos);
-
+        this.limitBorder();
     },
 
-    test: function (touch) {
+    //
+    touch: function (touch) {
+
         var locationInWorld = touch.getLocation();
-        //get location touch in map
-        var locationInMap = cc.pSub(locationInWorld, this.getPosition());
-        var originX = cc.winSize.width/2;
-        var originY = cc.winSize.height/2;
-        var x = (locationInMap.x - originX) /this.getScale();
-        var y = (locationInMap.y - originY) / this.getScale();
+
+        var locationInMap = this.getMapPosFromScreenPos(locationInWorld);
+
+        var x = locationInMap.x;
+        var y = locationInMap.y;
+        //cc.log(x + " " + y);
+        x = Math.floor(x);
+        y = Math.floor(y);
+        var check = this.getGridFromScreenPos(locationInWorld);
+         cc.log("after" +check.x + " " + check.y);
+        //cc.log(x + " " + y);
+    },
+
+    //chang screen pos to map pos, map pos not change when zoom or move
+    getMapPosFromScreenPos: function (posInScreen) {
+
+        var posInMap = cc.pSub(posInScreen, this.getPosition());
+
+        var originX = cc.winSize.width / 2;
+        var originY = cc.winSize.height / 2;
+        var x = (posInMap.x - originX) / this.getScale();
+        var y = (posInMap.y - originY) / this.getScale();
+
+        return cc.p(x, y);
+    },
+
+    //use distance from
+    // bottom left grid border and bottom right grid border
+    // to get grid pos from map pos
+    getGridPosFromMapPos: function (posInMap) {
+        //calculate distance by distance formula from point to line
+
+        var distanceFromBottomRight = findDistanceFromPointToLine(posInMap, CORNER_BOTTOM, CORNER_RIGHT);
+        var distanceFromBottomLeft = findDistanceFromPointToLine(posInMap, CORNER_BOTTOM, CORNER_LEFT);
+        cc.log("pos" +posInMap.x + " " + posInMap.y)
+        cc.log("dis" +distanceFromBottomRight + " " + distanceFromBottomLeft)
+        var gridX = Math.floor(distanceFromBottomRight / GRID_SIZE*40);
+        var gridY = Math.floor(distanceFromBottomLeft / GRID_SIZE*40);
+
+        return cc.p(gridX, gridY);
+    },
+
+    //
+    getGridFromScreenPos: function (posInScreen) {
+        var posInMap = this.getMapPosFromScreenPos(posInScreen);
+        return this.getGridPosFromMapPos(posInMap);
+    },
+
+
+
+    //if moveView or Zoom out of map, move back
+    limitBorder: function () {
+
+        var pos = this.getPosition();
+        //bottom border of screen
+        var currentBottomBorder = this.getMapPosFromScreenPos(cc.p(0,0)).y;
+        if(currentBottomBorder < BORDER_LIMIT_BOTTOM)
+            this.setPositionY(pos.y + (currentBottomBorder - BORDER_LIMIT_BOTTOM));
+
+        //top border of screen
+        var currentTopBorder = this.getMapPosFromScreenPos(cc.p(0,cc.winSize.height)).y;
+        if(currentTopBorder > BORDER_LIMIT_TOP)
+           this.setPositionY(pos.y + (currentTopBorder - BORDER_LIMIT_TOP));
+
+        //left border of screen
+        var currentLeftBorder = this.getMapPosFromScreenPos(cc.p(0,0)).x;
+        if(currentLeftBorder < BORDER_LIMIT_LEFT)
+            this.setPositionX(pos.x + (currentLeftBorder - BORDER_LIMIT_LEFT));
+
+        //right border of screen
+        var currentRightBorder = this.getMapPosFromScreenPos(cc.p(cc.winSize.width,0)).x;
+        if(currentRightBorder> BORDER_LIMIT_RIGHT)
+            this.setPositionX(pos.x + (currentRightBorder - BORDER_LIMIT_RIGHT));
 
     },
 
     initBackground: function () {
+
         //load tmx file 42X42 map
+        var centerX = cc.winSize.width/2 + OFFSET_BACKGROUND_X;
+        var centerY = cc.winSize.height/2 + OFFSET_BACKGROUND_Y;
+
         var tmxMap = new cc.TMXTiledMap("res/guis/map/42x42map.tmx");
         this.addChild(tmxMap);
         tmxMap.setAnchorPoint(0.5, 0.5)
@@ -99,10 +176,10 @@ var MapLayer = cc.Layer.extend({
         backgroundDownLeft.setAnchorPoint(1,1);
         backgroundDownRight.setAnchorPoint(0,1);
 
-        backgroundUpLeft.setPosition(cc.winSize.width/2+1, cc.winSize.height/2-1);
-        backgroundUpRight.setPosition(cc.winSize.width/2-1, cc.winSize.height/2-1);
-        backgroundDownLeft.setPosition(cc.winSize.width/2+1, cc.winSize.height/2+1);
-        backgroundDownRight.setPosition(cc.winSize.width/2-1, cc.winSize.height/2+1);
+        backgroundUpLeft.setPosition(centerX + 1, centerY - 1);
+        backgroundUpRight.setPosition(centerX - 1, centerY - 1);
+        backgroundDownLeft.setPosition(centerX + 1, centerY + 1);
+        backgroundDownRight.setPosition(centerX - 1, centerY + 1);
 
         this.addChild(backgroundUpLeft);
         this.addChild(backgroundUpRight);
@@ -115,8 +192,7 @@ var MapLayer = cc.Layer.extend({
         backgroundDownRight.setScale(SCALE_BG);
     }
 
-    //function create create a sprite int 1000,550
-
-
 
 });
+
+
