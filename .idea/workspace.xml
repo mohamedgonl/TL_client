@@ -5,14 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/game/GUIs/scenes/GameScene.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/utils/utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsonSchemas.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TestLayer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/models/BuilderHut.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/models/Building.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/models/GameObject.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/Resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/Resource.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/GUIs/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/GUIs/layers/InfoLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/layers/InfoLayer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/GUIs/layers/MapLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/layers/MapLayer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/utils/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/utils/utils.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,6 +145,9 @@
         </selected-state>
       </profile-state>
     </entry>
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectReloadState">
     <option name="STATE" value="0" />
@@ -308,6 +314,7 @@
   "keyToString": {
     "Notification.DisplayName-DoNotAsk-Vcs Important Messages": "VCS important messages",
     "Notification.DoNotAsk-Vcs Important Messages": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "dev/quyet",
     "ignore.virus.scanning.warn.message": "true",
@@ -316,7 +323,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "database.data.csv.formats",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -691,7 +698,8 @@
       <workItem from="1695196681808" duration="176000" />
       <workItem from="1695196873497" duration="13448000" />
       <workItem from="1695217022510" duration="12000" />
-      <workItem from="1695277533419" duration="14199000" />
+      <workItem from="1695277533419" duration="14531000" />
+      <workItem from="1695363728704" duration="13673000" />
     </task>
     <servers />
   </component>

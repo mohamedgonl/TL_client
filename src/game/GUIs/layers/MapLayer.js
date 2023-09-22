@@ -6,24 +6,28 @@ var MapLayer = cc.Layer.extend({
     },
 
     init: function () {
+
+        this.setScale(ZOOM_DEFAULT);
+
+
         this.addTouch();
         this.initBackground();
-        this.setScale(ZOOM_DEFAULT);
+        this.test();
+
     },
 
     addTouch: function () {
+
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
 
             onTouchBegan: function (event) {
-                //cc.log("touch began");
                 this.touch(event);
                 return true;
             }.bind(this),
 
             onTouchEnded: function (event) {
-                //cc.log("touch ended");
                 return true;
             },
 
@@ -31,11 +35,13 @@ var MapLayer = cc.Layer.extend({
                 this.moveView(event.getDelta());
                 return true;
             }.bind(this)
+
         }, this);
 
         //scale by scroll
         cc.eventManager.addListener({
             event: cc.EventListener.MOUSE,
+
             onMouseScroll: this.zoom.bind(this)
         }, this);
     },
@@ -82,12 +88,11 @@ var MapLayer = cc.Layer.extend({
 
         var x = locationInMap.x;
         var y = locationInMap.y;
-        //cc.log(x + " " + y);
         x = Math.floor(x);
         y = Math.floor(y);
         var check = this.getGridFromScreenPos(locationInWorld);
-         cc.log("after" +check.x + " " + check.y);
-        //cc.log(x + " " + y);
+         cc.log("after " +check.x + " " + check.y);
+
     },
 
     //chang screen pos to map pos, map pos not change when zoom or move
@@ -129,7 +134,7 @@ var MapLayer = cc.Layer.extend({
 
     //if moveView or Zoom out of map, move back
     limitBorder: function () {
-
+        // return;
         var pos = this.getPosition();
         //bottom border of screen
         var currentBottomBorder = this.getMapPosFromScreenPos(cc.p(0,0)).y;
@@ -155,17 +160,22 @@ var MapLayer = cc.Layer.extend({
 
     initBackground: function () {
 
-        //load tmx file 42X42 map
+        //load tmx file 42X42 map grid
+        var tmxMap = new cc.TMXTiledMap("res/guis/map/42x42map.tmx");
+
+        tmxMap.setAnchorPoint(0.5, 0.5)
+        tmxMap.setPosition(cc.winSize.width/2, cc.winSize.height/2);
+        tmxMap.setScale(GRID_SCALE)
+
+        this.addChild(tmxMap,MAP_ZORDER_GRID);
+
+
+        //load 4 corner of  background
+
+        //center of backgrounds
         var centerX = cc.winSize.width/2 + OFFSET_BACKGROUND_X;
         var centerY = cc.winSize.height/2 + OFFSET_BACKGROUND_Y;
 
-        var tmxMap = new cc.TMXTiledMap("res/guis/map/42x42map.tmx");
-        this.addChild(tmxMap);
-        tmxMap.setAnchorPoint(0.5, 0.5)
-        tmxMap.setPosition(cc.winSize.width/2, cc.winSize.height/2);
-        tmxMap.setScale(SCALE_MAP)
-
-        //load 4 corner of  background
         var backgroundUpLeft = new cc.Sprite("res/guis/map/bg_up_left.png");
         var backgroundUpRight = new cc.Sprite("res/guis/map/bg_up_right.png");
         var backgroundDownLeft = new cc.Sprite("res/guis/map/bg_down_left.png");
@@ -181,15 +191,37 @@ var MapLayer = cc.Layer.extend({
         backgroundDownLeft.setPosition(centerX + 1, centerY + 1);
         backgroundDownRight.setPosition(centerX - 1, centerY + 1);
 
-        this.addChild(backgroundUpLeft);
-        this.addChild(backgroundUpRight);
-        this.addChild(backgroundDownLeft);
-        this.addChild(backgroundDownRight);
-
         backgroundUpLeft.setScale(SCALE_BG);
         backgroundUpRight.setScale(SCALE_BG);
         backgroundDownLeft.setScale(SCALE_BG);
         backgroundDownRight.setScale(SCALE_BG);
+
+
+        this.addChild(backgroundUpLeft,MAP_ZORDER_BACKGROUND);
+        this.addChild(backgroundUpRight,MAP_ZORDER_BACKGROUND);
+        this.addChild(backgroundDownLeft,MAP_ZORDER_BACKGROUND);
+        this.addChild(backgroundDownRight,MAP_ZORDER_BACKGROUND);
+    },
+
+    test: function (){
+        var builderHut = new BuilderHut();
+        builderHut.setPosition(cc.p(475, 500));
+        this.addChild(builderHut,MAP_ZORDER_BUILDING);
+    },
+
+
+    setBuildingAtGridPos: function (building, gridPos , size) {
+        var mapPos = this.getMapPosFromGridPos(gridPos);
+        building.setPosition(mapPos);
+        this.addChild(building,MAP_ZORDER_BUILDING);
+    },
+
+
+    getMapPosFromGridPos: function (gridPos) {
+
+        var posA = CORNER_BOTTOM + cc.pSub(CORNER_RIGHT,CORNER_BOTTOM) * gridPos.x;
+        var posB = CORNER_BOTTOM + cc.pSub(CORNER_LEFT,CORNER_BOTTOM) * gridPos.y;
+        return cc.p(x, y);
     }
 
 
