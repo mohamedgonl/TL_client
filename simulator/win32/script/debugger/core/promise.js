@@ -107,7 +107,7 @@ function defer(prototype) {
 
   // Create an object implementing promise API.
   var promise = Object.create(prototype, {
-    then: { value: function then(onFulfill, onError) {
+    then: { percentage: function then(onFulfill, onError) {
       var deferred = defer(prototype);
 
       function resolve(value) {

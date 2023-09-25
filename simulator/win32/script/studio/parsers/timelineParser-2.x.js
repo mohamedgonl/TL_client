@@ -749,7 +749,7 @@
             widget.addTouchEventListener(
                 function (sender, type) {
                     if (type == ccui.Widget.TOUCH_BEGAN) {
-                        fr.Sound.playEffectClickButton();
+                        // fr.Sound.playEffectClickButton();
                     }
                 }
             );

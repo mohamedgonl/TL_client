@@ -45,7 +45,11 @@
         "src/modules/testnetwork/network/Packet.js",
         "src/modules/testnetwork/ScreenNetwork.js",
         "src/game/GUIs/layers/PopUpLayer.js",
-        "src/game/GUIs/views/ShopPopup.js"
-
+        "src/game/GUIs/views/ShopPopup.js",
+        "src/game/GUIs/views/ItemInfoPopup.js",
+        "src/game/GUIs/components/ShopItem.js",
+        "src/game/gamecfg/shopConfig.js",
+        "src/game/Managers/PlayerInfo.js",
+        "src/framework/ButtonEffect.js"
     ]
 }

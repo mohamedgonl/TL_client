@@ -220,7 +220,7 @@ function defineLazyPrototypeGetter(aObject, aKey, aCallback) {
       Object.defineProperty(this, aKey, {
         configurable: true,
         writable: true,
-        value: value
+        percentage: value
       });
 
       return value;

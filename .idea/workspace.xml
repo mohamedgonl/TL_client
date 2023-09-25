@@ -5,49 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/cocosstudio/ShopPopUpLayer.csd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cocosstudio/ShopPopUpSprite.csd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/Default/ImageFile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/Default/Sprite.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/ShopPopUpLayer.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/ShopPopUpSprite.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/ipConfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/GUIs/views/ShopPopup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/Managers/PlayerInfo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/gamecfg/shopConfig.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NewCocosProject.ccs" beforeDir="false" afterPath="$PROJECT_DIR$/NewCocosProject.ccs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewCocosProject.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/NewCocosProject.cfg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NewCocosProject.udf" beforeDir="false" afterPath="$PROJECT_DIR$/NewCocosProject.udf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/fonts/.fista_16_non_PList.Dir/InfoConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cocosstudio/fonts/.fista_16_non_PList.Dir/InfoConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/game/animation/character/chipu/.texture_PList.Dir/InfoConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cocosstudio/game/animation/character/chipu/.texture_PList.Dir/InfoConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/game/animation/eff_dice_number/.texture_PList.Dir/InfoConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cocosstudio/game/animation/eff_dice_number/.texture_PList.Dir/InfoConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/game/animation/firework_test/.texture_PList.Dir/InfoConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cocosstudio/game/animation/firework_test/.texture_PList.Dir/InfoConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/high/game/animation/character/chipu/.texture_PList.Dir/InfoConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cocosstudio/high/game/animation/character/chipu/.texture_PList.Dir/InfoConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/high/game/animation/eff_dice_number/.texture_PList.Dir/InfoConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cocosstudio/high/game/animation/eff_dice_number/.texture_PList.Dir/InfoConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/high/game/animation/firework_test/.texture_PList.Dir/InfoConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cocosstudio/high/game/animation/firework_test/.texture_PList.Dir/InfoConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/ShopCategoryNganKho.csd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/ShopCategoryNganKho.udf" beforeDir="false" afterPath="$PROJECT_DIR$/cocosstudio/ShopPopUpLayer.udf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/ShopCategory_Ngankho.udf" beforeDir="false" afterPath="$PROJECT_DIR$/cocosstudio/ShopPopUpSprite.udf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/ShopItemNgankho.csd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/ShopPopup.csd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/shop_category_baove.csd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/shop_category_baove.udf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/shop_category_ngankho.csd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/shop_category_ngankho.udf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/shop_category_phongthu.csd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/shop_category_quandoi.csd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/shop_category_quandoi.udf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/shop_category_tainguyen.csd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/shop_category_tainguyen.udf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/shop_category_trangtri.csd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/shop_category_trangtri.udf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/shop_popup.csd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cocosstudio/ui-json/shop_popup.udf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cocosstudio/ShopPopUpLayer.csd" beforeDir="false" afterPath="$PROJECT_DIR$/cocosstudio/ShopPopUpLayer.csd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cocosstudio/ShopPopUpSprite.csd" beforeDir="false" afterPath="$PROJECT_DIR$/cocosstudio/ShopPopUpSprite.csd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Gui/shopping/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Gui/shopping/catalogy_bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Gui/shopping/close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Gui/shopping/nen2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Gui/shopping/res_info.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Gui/shopping/slot.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Gui/shopping/slot_catalogy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Gui/shopping/title_background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Gui/shopping/type_army.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Gui/shopping/type_buy_res.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Gui/shopping/type_dc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Gui/shopping/type_defense.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Gui/shopping/type_res.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/Gui/shopping/type_sheild.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ShopPopUpLayer.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ShopPopUpLayer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/ShopPopUpSprite.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/ShopPopUpSprite.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/item/shop_item_building.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulator/win32/script/debugger/DevToolsUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/win32/script/debugger/DevToolsUtils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulator/win32/script/debugger/core/promise.js" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/win32/script/debugger/core/promise.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulator/win32/script/studio/parsers/timelineParser-2.x.js" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/win32/script/studio/parsers/timelineParser-2.x.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/Resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Resource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/framework/StringUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/framework/StringUtils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/GUIs/components/ShopItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/components/ShopItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/GUIs/components/ShopTabButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/views/ItemInfoPopup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/GUIs/layers/PopUpLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/layers/PopUpLayer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/GUIs/views/Shop.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/GUIs/views/ShopGUI.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/GUIs/views/ShopPopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/views/ShopPopup.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,100 +53,6 @@
     <option name="GROUP_BY_TYPE" value="true" />
     <option name="SORT_CHILDREN" value="false" />
     <option name="SHOW_TABLE_CONSTRAINTS" value="true" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Resource.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/Resource.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="2" selection-start-line="22" selection-start-column="2" selection-end-line="22" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserData.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/framework/UserData.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScreenNetwork.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/testnetwork/ScreenNetwork.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Packet.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/modules/testnetwork/network/Packet.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.40138888">
-              <caret line="62" column="5" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResourceAnimation.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/ResourceAnimation.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="2" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameClient.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/base/network/GameClient.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="61" column="51" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Resource.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/base/Resource.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UIFactory.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/base/UIFactory.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="crypt.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/framework/libs/crypt.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -246,9 +143,10 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
-}</component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 8
+}]]></component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
@@ -433,22 +331,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev/long&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/workspace/Nhom 1/team_1_client/res/ui-json&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "dev/long",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\workspace\Nhom 1\team_1_client\res\ui-json" />
@@ -466,6 +359,17 @@
     </key>
   </component>
   <component name="RunManager" selected="JSBinding.Win32Debug">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -817,6 +721,12 @@
       <workItem from="1695174347068" duration="25651000" />
       <workItem from="1695276131594" duration="2907000" />
       <workItem from="1695280111841" duration="4631000" />
+      <workItem from="1695341398051" duration="4556000" />
+      <workItem from="1695346290228" duration="7734000" />
+      <workItem from="1695438557675" duration="31386000" />
+      <workItem from="1695489823619" duration="31000" />
+      <workItem from="1695515716941" duration="11735000" />
+      <workItem from="1695568092167" duration="4011000" />
     </task>
     <servers />
   </component>
@@ -892,6 +802,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">

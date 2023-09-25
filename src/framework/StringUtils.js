@@ -45,3 +45,21 @@ fr.toMoneyString = function(num)
     }
     return formattedNumber;
 };
+
+fr.toGameTimeString = function (seconds) {
+    if (seconds < 60) {
+        return seconds + "s";
+    } else if (seconds < 3600) {
+        let minutes = Math.floor(seconds / 60);
+        let remainingSeconds = seconds % 60;
+        return minutes + "m" + remainingSeconds + "s";
+    } else if (seconds < 86400) {
+        let hours = Math.floor(seconds / 3600);
+        let remainingMinutes = Math.floor((seconds % 3600) / 60);
+        return hours + "h" + remainingMinutes + "m";
+    } else {
+        let days = Math.floor(seconds / 86400);
+        let remainingHours = Math.floor((seconds % 86400) / 3600);
+        return days + "d" + remainingHours + "h";
+    }
+}

@@ -9,9 +9,10 @@ var PopupLayer = cc.Layer.extend({
     },
 
     init : function () {
-        let bg =  new ShopPopup();
-        bg.setPosition(cc.winSize.width/2, cc.winSize.height/2);
-        this.addChild(bg)
+        let shopPopup =  new ShopPopup();
+        shopPopup.setPosition(cc.winSize.width/2, cc.winSize.height/2);
+        this.addChild(shopPopup)
+
     },
 
 });
