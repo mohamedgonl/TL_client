@@ -1,0 +1,353 @@
+{
+  "ID": "3db1347a-fa68-4039-a0c3-8720855dcb45",
+  "Version": "3.10.0.0",
+  "Name": "TroopTrainPopup",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 92,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/train_troop_gui/background.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -195.5,
+            "RightMargin": -195.5,
+            "TopMargin": -136.5,
+            "BottomMargin": -136.5,
+            "Tag": 93,
+            "ActionTag": 2122758598,
+            "Size": {
+              "X": 391.0,
+              "Y": 273.0
+            },
+            "Name": "background_1",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "LabelText": "Nhà lính 3 (1/30)",
+            "LabelBMFontFile_CNB": {
+              "Type": "Normal",
+              "Path": "fonts/soji_12.fnt",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 118.03
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -66.0,
+            "RightMargin": -66.0,
+            "TopMargin": -127.53,
+            "BottomMargin": 108.53,
+            "Tag": 94,
+            "ActionTag": 1082237277,
+            "Size": {
+              "X": 132.0,
+              "Y": 19.0
+            },
+            "Name": "BitmapFontLabel_1",
+            "ctype": "TextBMFontObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/train_troop_gui/forward.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 208.8,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 0.75,
+              "ScaleY": 0.7
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 184.3,
+            "RightMargin": -233.3,
+            "TopMargin": -56.0,
+            "BottomMargin": -56.0,
+            "Tag": 95,
+            "ActionTag": -1916268795,
+            "Size": {
+              "X": 49.0,
+              "Y": 112.0
+            },
+            "Name": "forward_2",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/train_troop_gui/previous.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -210.98,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 0.75,
+              "ScaleY": 0.7
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -235.48,
+            "RightMargin": 186.48,
+            "TopMargin": -56.0,
+            "BottomMargin": -56.0,
+            "Tag": 96,
+            "ActionTag": -718687549,
+            "Size": {
+              "X": 49.0,
+              "Y": 112.0
+            },
+            "Name": "previous_3",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/train_troop_gui/queue.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -16.7634,
+              "Y": 11.6
+            },
+            "Scale": {
+              "ScaleX": 0.52,
+              "ScaleY": 0.96
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -220.7634,
+            "RightMargin": -187.2366,
+            "TopMargin": -38.6,
+            "BottomMargin": -15.4,
+            "Tag": 97,
+            "ActionTag": 1521505156,
+            "Size": {
+              "X": 408.0,
+              "Y": 54.0
+            },
+            "Name": "queue_4",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/train_troop_gui/slot.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -118.6817,
+              "Y": -40.5453
+            },
+            "Scale": {
+              "ScaleX": 0.6296,
+              "ScaleY": 0.5516
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -174.6817,
+            "RightMargin": 62.6817,
+            "TopMargin": -14.9547,
+            "BottomMargin": -96.0453,
+            "Tag": 98,
+            "Children": [
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "guis/train_troop_gui/info.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 88.3013,
+                  "Y": 90.2187
+                },
+                "Scale": {
+                  "ScaleX": 0.75,
+                  "ScaleY": 0.75
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.7884,
+                  "Y": 0.8128
+                },
+                "PreSize": {
+                  "X": 0.3304,
+                  "Y": 0.3333
+                },
+                "LeftMargin": 69.8013,
+                "RightMargin": 5.1987,
+                "TopMargin": 2.2813,
+                "BottomMargin": 71.7187,
+                "Tag": 100,
+                "ActionTag": -1497009149,
+                "Size": {
+                  "X": 37.0,
+                  "Y": 37.0
+                },
+                "Name": "button_info_troop",
+                "ctype": "SpriteObjectData"
+              }
+            ],
+            "ActionTag": -1119458435,
+            "Size": {
+              "X": 112.0,
+              "Y": 111.0
+            },
+            "Name": "troop_item",
+            "ctype": "SpriteObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "fonts/soji_12.fnt",
+        "fonts/soji_12.png",
+        "guis/train_troop_gui/background.png",
+        "guis/train_troop_gui/forward.png",
+        "guis/train_troop_gui/info.png",
+        "guis/train_troop_gui/previous.png",
+        "guis/train_troop_gui/queue.png",
+        "guis/train_troop_gui/slot.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

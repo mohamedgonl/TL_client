@@ -740,6 +740,7 @@
           <Fnt Name="soji_16.fnt" />
           <Fnt Name="soji_20.fnt" />
           <Fnt Name="soji_24.fnt" />
+          <Image Name="soji_24.png" />
         </Folder>
         <Folder Name="game">
           <Folder Name="animation">
@@ -1226,6 +1227,7 @@
             <Image Name="icon_elixir_bar.png" />
             <Image Name="icon_g_bar.png" />
             <Image Name="icon_gold_bar.png" />
+            <Image Name="image0000.png" />
             <Image Name="info.png" />
             <Image Name="item_background.png" />
             <Image Name="nen2.png" />
@@ -1702,6 +1704,7 @@
         <Project Name="ShopPopUpLayer.csd" Type="Layer" />
         <Project Name="ShopPopUpSprite.csd" Type="Node" />
         <Project Name="TroopTrainPopup.csd" Type="Node" />
+        <Project Name="ProcessBar.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

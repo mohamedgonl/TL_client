@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d55f2b-12a8-484d-a811-f49e89a3e91c" name="Default" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/src/game/Managers/PlayerInfo.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/game/gamecfg/shopConfig.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -39,6 +40,16 @@
       <change beforePath="$PROJECT_DIR$/src/game/GUIs/components/ShopTabButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/views/ItemInfoPopup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/GUIs/layers/PopUpLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/layers/PopUpLayer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/GUIs/views/ShopPopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/views/ShopPopup.js" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/src/game/GUIs/scenes/GameScene.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/utils/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/GUIs/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/GUIs/layers/InfoLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/layers/InfoLayer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/GUIs/layers/MapLayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GUIs/layers/MapLayer.js" afterDir="false" />
+>>>>>>> origin/dev/quyet
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,10 +154,16 @@
       </MavenGeneralSettings>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="ProjectColorInfo"><![CDATA[{
   "customColor": "",
   "associatedIndex": 8
 }]]></component>
+=======
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+>>>>>>> origin/dev/quyet
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
@@ -333,12 +350,22 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+<<<<<<< HEAD
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "dev/long",
+=======
+    "Notification.DisplayName-DoNotAsk-Vcs Important Messages": "VCS important messages",
+    "Notification.DoNotAsk-Vcs Important Messages": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "dev/quyet",
+    "ignore.virus.scanning.warn.message": "true",
+>>>>>>> origin/dev/quyet
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "database.data.csv.formats",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -351,11 +378,19 @@
       <recent name="D:\Project\lgrc_project\client\HelloJavascript\src\game\render\effect" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+<<<<<<< HEAD
       <recent name="D:\workspace\Nhom 1\team_1_client\res\ui-json\ui-json" />
       <recent name="D:\workspace\Nhom 1\team_1_client\res\ui-json" />
       <recent name="D:\workspace\Nhom 1\team_1_client\src\game\GUIs\layers" />
       <recent name="D:\workspace\Nhom 1\team_1_client\src\game\GUIs\screens" />
       <recent name="D:\workspace\Nhom 1\team_1_client\res\guis\shopguis" />
+=======
+      <recent name="E:\workspace\GameClientJS\team_1_client\src\game\utils" />
+      <recent name="D:\workspace\Nhom 1\team_1_client\src\game\GUIs\layers" />
+      <recent name="D:\workspace\Nhom 1\team_1_client\src\game\GUIs\screens" />
+      <recent name="D:\workspace\Nhom 1\team_1_client\res\guis\shopguis" />
+      <recent name="D:\workspace\Nhom 1\team_1_client\src\game\GUIs" />
+>>>>>>> origin/dev/quyet
     </key>
   </component>
   <component name="RunManager" selected="JSBinding.Win32Debug">
@@ -718,6 +753,7 @@
       <workItem from="1552028738912" duration="21000" />
       <workItem from="1553831685560" duration="3045000" />
       <workItem from="1695095541562" duration="933000" />
+<<<<<<< HEAD
       <workItem from="1695174347068" duration="25651000" />
       <workItem from="1695276131594" duration="2907000" />
       <workItem from="1695280111841" duration="4631000" />
@@ -727,6 +763,17 @@
       <workItem from="1695489823619" duration="31000" />
       <workItem from="1695515716941" duration="11735000" />
       <workItem from="1695568092167" duration="4011000" />
+=======
+      <workItem from="1695174347068" duration="4797000" />
+      <workItem from="1695191730148" duration="1232000" />
+      <workItem from="1695193971066" duration="1390000" />
+      <workItem from="1695195529896" duration="98000" />
+      <workItem from="1695196528760" duration="142000" />
+      <workItem from="1695196681808" duration="176000" />
+      <workItem from="1695196873497" duration="13448000" />
+      <workItem from="1695217022510" duration="12000" />
+      <workItem from="1695277533419" duration="14199000" />
+>>>>>>> origin/dev/quyet
     </task>
     <servers />
   </component>
@@ -827,7 +874,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="cocos javascript">
           <url>file://$PROJECT_DIR$/simulator/win32/script/jsb_boot.js</url>
-          <line>449</line>
+          <line>448</line>
           <option name="timeStamp" value="159" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="cocos javascript">

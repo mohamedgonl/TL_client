@@ -1793,6 +1793,7 @@
                 "ctype": "SpriteObjectData"
               },
               {
+                "IsBounceEnabled": true,
                 "InnerNodeSize": {
                   "Width": 765,
                   "Height": 345
@@ -1812,6 +1813,8 @@
                 "ColorVector": {
                   "ScaleY": 1.0
                 },
+                "Scale9Width": 1,
+                "Scale9Height": 1,
                 "TouchEnable": true,
                 "AnchorPoint": {
                   "ScaleX": 0.5,
@@ -1851,7 +1854,7 @@
               {
                 "AnchorPoint": {},
                 "Position": {
-                  "X": -201.5047,
+                  "X": -66.5,
                   "Y": -209.8344
                 },
                 "Scale": {
@@ -1868,8 +1871,8 @@
                   "X": 0.0,
                   "Y": 0.0
                 },
-                "LeftMargin": -201.5047,
-                "RightMargin": 201.5047,
+                "LeftMargin": -66.5,
+                "RightMargin": 66.5,
                 "TopMargin": 209.8344,
                 "BottomMargin": -209.8344,
                 "Tag": 169,
@@ -2014,7 +2017,7 @@
               {
                 "AnchorPoint": {},
                 "Position": {
-                  "X": -45.5889,
+                  "X": 100.41,
                   "Y": -209.8344
                 },
                 "Scale": {
@@ -2031,8 +2034,8 @@
                   "X": 0.0,
                   "Y": 0.0
                 },
-                "LeftMargin": -45.5889,
-                "RightMargin": 45.5889,
+                "LeftMargin": 100.41,
+                "RightMargin": -100.41,
                 "TopMargin": 209.8344,
                 "BottomMargin": -209.8344,
                 "Tag": 164,
@@ -2342,6 +2345,7 @@
                   "X": 0.0,
                   "Y": 0.0
                 },
+                "VisibleForFrame": false,
                 "Name": "resource_bar_dark_elixir",
                 "ctype": "SingleNodeObjectData"
               },

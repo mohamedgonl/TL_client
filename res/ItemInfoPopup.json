@@ -1,0 +1,215 @@
+{
+  "ID": "47c8b170-24c3-4d51-95bd-4f53fc25f7f9",
+  "Version": "3.10.0.0",
+  "Name": "ItemInfoPopup",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 84,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/research troop/nen 1.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -369.5,
+            "RightMargin": -369.5,
+            "TopMargin": -238.0,
+            "BottomMargin": -238.0,
+            "Tag": 85,
+            "ActionTag": -2017607543,
+            "Size": {
+              "X": 739.0,
+              "Y": 476.0
+            },
+            "Name": "Sprite_1",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "LabelText": "Nhà thợ xây cấp 1",
+            "LabelBMFontFile_CNB": {
+              "Type": "Normal",
+              "Path": "fonts/soji_20.fnt",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 210.0968
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -112.0,
+            "RightMargin": -112.0,
+            "TopMargin": -226.0968,
+            "BottomMargin": 194.0968,
+            "Tag": 86,
+            "ActionTag": 1407516119,
+            "Size": {
+              "X": 224.0,
+              "Y": 32.0
+            },
+            "Name": "BitmapFontLabel_1",
+            "ctype": "TextBMFontObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/research troop/mieng trang.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -0.0003,
+              "Y": -105.49
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.8069
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -341.0003,
+            "RightMargin": -340.9997,
+            "TopMargin": 47.99,
+            "BottomMargin": -162.99,
+            "Tag": 87,
+            "ActionTag": -1408045041,
+            "Size": {
+              "X": 682.0,
+              "Y": 115.0
+            },
+            "Name": "Sprite_2",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "LabelText": "Có công trình nào quanh đây không cần bóng dáng người thợ xây? Câu trả lời là không",
+            "LabelBMFontFile_CNB": {
+              "Type": "Normal",
+              "Path": "fonts/fista_16_non.fnt",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -1.1798,
+              "Y": -66.0984
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "R": 111,
+              "G": 55,
+              "B": 18
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -318.1798,
+            "RightMargin": -315.8202,
+            "TopMargin": 57.5984,
+            "BottomMargin": -74.5984,
+            "Tag": 89,
+            "ActionTag": -1894677487,
+            "Size": {
+              "X": 634.0,
+              "Y": 17.0
+            },
+            "Name": "BitmapFontLabel_2",
+            "ctype": "TextBMFontObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "fonts/fista_16_non.fnt",
+        "fonts/fista_16_non.png",
+        "fonts/soji_20.fnt",
+        "fonts/soji_20.png",
+        "guis/research troop/mieng trang.png",
+        "guis/research troop/nen 1.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

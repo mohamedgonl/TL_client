@@ -17,13 +17,15 @@ var ScreenMenu = cc.Layer.extend({
         this.addChild(btnNetwork);
         btnNetwork.addClickEventListener(this.onSelectNetwork.bind(this));
 
-        var btnLocalization = gv.commonButton(200, 64, cc.winSize.width/2, yBtn,"Localize");
-        this.addChild(btnLocalization);
-        btnLocalization.addClickEventListener(this.onSelectLocalization.bind(this));
+        var btnShop = gv.commonButton(200, 64, cc.winSize.width/2, yBtn,"Shop UI");
+        this.addChild(btnShop);
+        btnShop.addClickEventListener(this.onSelectShop.bind(this));
 
-        var shopGUI = gv.commonButton(200, 64, 3*cc.winSize.width/4, yBtn,"ShopGUI");
-        this.addChild(shopGUI);
-        shopGUI.addClickEventListener(this.onSelectShopGUI.bind(this));
+        var btnMap = gv.commonButton(200, 64, 3*cc.winSize.width/4, yBtn,"Map");
+        this.addChild(btnMap);
+        btnMap.addClickEventListener(this.onSelectMap.bind(this));
+
+
 
     },
     onEnter:function(){
@@ -33,13 +35,13 @@ var ScreenMenu = cc.Layer.extend({
     {
         fr.view(ScreenNetwork);
     },
-    onSelectLocalization:function(sender)
-    {
-        fr.view(ScreenLocalization);
-    },
-    onSelectShopGUI:function(sender)
+    onSelectShop:function(sender)
     {
         fr.view(PopupLayer);
+    },
+    onSelectMap:function(sender)
+    {
+        fr.view(MapLayer);
     }
 
 });

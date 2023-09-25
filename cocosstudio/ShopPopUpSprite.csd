@@ -458,7 +458,7 @@
                 <FileData Type="Normal" Path="guis/shopping/res_info.png" Plist="" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="shop_items_scrollview" ActionTag="1834017674" Tag="62" IconVisible="False" LeftMargin="-382.5000" RightMargin="-382.5000" TopMargin="-172.5000" BottomMargin="-172.5000" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ColorAngle="90.0000" ScrollDirectionType="Horizontal" ctype="ScrollViewObjectData">
+              <AbstractNodeData Name="shop_items_scrollview" ActionTag="1834017674" Tag="62" IconVisible="False" LeftMargin="-382.5000" RightMargin="-382.5000" TopMargin="-172.5000" BottomMargin="-172.5000" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Horizontal" ctype="ScrollViewObjectData">
                 <Size X="765.0000" Y="345.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position />
@@ -472,7 +472,7 @@
                 <ColorVector ScaleY="1.0000" />
                 <InnerNodeSize Width="765" Height="345" />
               </AbstractNodeData>
-              <AbstractNodeData Name="resource_bar_gold" ActionTag="-1418915449" Tag="169" IconVisible="True" LeftMargin="-201.5047" RightMargin="201.5047" TopMargin="209.8344" BottomMargin="-209.8344" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="resource_bar_gold" ActionTag="-1418915449" Tag="169" IconVisible="True" LeftMargin="-66.5000" RightMargin="66.5000" TopMargin="209.8344" BottomMargin="-209.8344" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
                   <AbstractNodeData Name="res_bar_46" ActionTag="1400466878" Tag="170" IconVisible="False" LeftMargin="-70.0000" RightMargin="-70.0000" TopMargin="-18.0000" BottomMargin="-18.0000" ctype="SpriteObjectData">
@@ -509,13 +509,13 @@
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint />
-                <Position X="-201.5047" Y="-209.8344" />
+                <Position X="-66.5000" Y="-209.8344" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="resource_bar_elixir" ActionTag="-911337489" Tag="164" IconVisible="True" LeftMargin="-45.5889" RightMargin="45.5889" TopMargin="209.8344" BottomMargin="-209.8344" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="resource_bar_elixir" ActionTag="-911337489" Tag="164" IconVisible="True" LeftMargin="100.4100" RightMargin="-100.4100" TopMargin="209.8344" BottomMargin="-209.8344" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
                   <AbstractNodeData Name="res_bar_46" ActionTag="1271539806" Tag="165" IconVisible="False" LeftMargin="-70.0000" RightMargin="-70.0000" TopMargin="-18.0000" BottomMargin="-18.0000" ctype="SpriteObjectData">
@@ -552,13 +552,13 @@
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint />
-                <Position X="-45.5889" Y="-209.8344" />
+                <Position X="100.4100" Y="-209.8344" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="resource_bar_dark_elixir" ActionTag="-177359188" Tag="173" IconVisible="True" LeftMargin="110.3270" RightMargin="-110.3270" TopMargin="209.8344" BottomMargin="-209.8344" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="resource_bar_dark_elixir" ActionTag="-177359188" VisibleForFrame="False" Tag="173" IconVisible="True" LeftMargin="110.3270" RightMargin="-110.3270" TopMargin="209.8344" BottomMargin="-209.8344" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
                   <AbstractNodeData Name="res_bar_46" ActionTag="-1299247041" Tag="174" IconVisible="False" LeftMargin="-70.0000" RightMargin="-70.0000" TopMargin="-18.0000" BottomMargin="-18.0000" ctype="SpriteObjectData">

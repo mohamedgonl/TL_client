@@ -12,8 +12,8 @@ var PopupLayer = cc.Layer.extend({
         let shopPopup =  new ShopPopup();
         shopPopup.setPosition(cc.winSize.width/2, cc.winSize.height/2);
         this.addChild(shopPopup)
-
     },
+
 
 });
 

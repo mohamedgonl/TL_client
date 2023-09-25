@@ -31,7 +31,15 @@ var res = {
         TYPE_DC: 'res/guis/shopping/type_dc.png',
         TYPE_DEFENSE: 'res/guis/shopping/type_defense.png',
         TYPE_RES: 'res/guis/shopping/type_res.png',
-        TYPE_SHIELD: 'res/guis/shopping/type_shield.png'
+        TYPE_SHIELD: 'res/guis/shopping/type_shield.png',
+        HEART: 'res/guis/upgrade_building_gui/small/Heal_icon.png',
+        GOLD_CAPACITY: 'res/guis/upgrade_building_gui/small/Gold_Capacity_Icon.png',
+        GOLD_PD_RATE: 'res/guis/upgrade_building_gui/small/Gold_ProductionRate_Icon.png',
+        ELIXIR_CAPACITY: 'res/guis/upgrade_building_gui/small/Elixir_Capacity_Icon.png',
+        ELIXIR_PD_RATE: 'res/guis/upgrade_building_gui/small/Elixir_ProductionRate_Icon.png',
+        TROOP_CAPACITY: 'res/guis/upgrade_building_gui/small/TroopCapacity_Icon.png',
+        SPELL_CAPACITY: 'res/guis/upgrade_building_gui/small/Spell_Capacity_Icon',
+
     },
     BACKGROUND: {
         CATEGORY: 'res/guis/shopping/catalogy_bg.png',
@@ -161,3 +169,4 @@ var res_shop = {
     WAL_1: 'guis/icons/shop_gui/icon/WAL_1.png',
 
 }
+

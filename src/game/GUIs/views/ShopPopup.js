@@ -4,14 +4,12 @@ var ShopPopup = cc.Sprite.extend({
     _routeLevel : 0,
     _categoryWrapper: null,
     _itemsWrapper: null,
-    _resource : null,
     ctor: function () {
         this._super();
         var shopPopup  = this;
 
         // load ui-json
-        let json = ccs.load(res_ui.SHOP_POPUP);
-        let node = json.node;
+        let node = CCSUlties.parseUIFile(res_ui.SHOP_POPUP)
 
         // get child-nodes
         let backButton = node.getChildByName("button_back");
@@ -101,6 +99,7 @@ var ShopPopup = cc.Sprite.extend({
         this._itemsWrapper.setVisible(true);
         this.changePopUpTitle(categoryNameString)
         let itemsScrollView = this._itemsWrapper.getChildByName("shop_items_scrollview");
+        itemsScrollView.setScrollBarEnabled(false);
         let itemsData = ShopItemsData[category];
         let scrollViewSize = itemsScrollView.getContentSize();
         let prevItemPosX;
@@ -131,19 +130,15 @@ var ShopPopup = cc.Sprite.extend({
 
         let res_bar_gold = this._itemsWrapper.getChildByName("resource_bar_gold");
         res_bar_gold = res_bar_gold.getChildByName("res_bar_string");
-        res_bar_gold.setString(PLAYER_RESOURCE.GOLD);
+        res_bar_gold.setString(PlayerInfoManager.getResource().gold);
 
         let res_bar_elixir = this._itemsWrapper.getChildByName("resource_bar_elixir");
         res_bar_elixir = res_bar_elixir.getChildByName("res_bar_string");
-        res_bar_elixir.setString(PLAYER_RESOURCE.ELIXIR);
-
-        let res_bar_delixir = this._itemsWrapper.getChildByName("resource_bar_dark_elixir");
-        res_bar_delixir = res_bar_delixir.getChildByName("res_bar_string");
-        res_bar_delixir.setString(PLAYER_RESOURCE.D_ELIXIR);
+        res_bar_elixir.setString(PlayerInfoManager.getResource().elixir);
 
         let res_bar_g = this._itemsWrapper.getChildByName("resource_bar_g");
         res_bar_g = res_bar_g.getChildByName("res_bar_string");
-        res_bar_g.setString(PLAYER_RESOURCE.G);
+        res_bar_g.setString(PlayerInfoManager.getResource().gem);
 
     }
     }

@@ -4,7 +4,7 @@ var ShopItem = cc.Node.extend({
     _available: true,
     ctor: function (data,category) {
         this._super()
-        let node = this._parseUIFile(res_ui.SHOP_ITEM);
+        let node = CCSUlties.parseUIFile(res_ui.SHOP_ITEM);
         // find shop_item_node
         let item = node.getChildByName("shop_item_node");
         this._itemNode = item;
@@ -12,10 +12,6 @@ var ShopItem = cc.Node.extend({
         this.addChild(node);
     },
 
-    _parseUIFile: function(file){
-        let json = ccs.load(file);
-        return json.node;
-    },
 
     getItemWidth: function () {
         let itemWidth = this._itemNode.getChildByName("shop_bg");
@@ -31,8 +27,9 @@ var ShopItem = cc.Node.extend({
             let name = this._itemNode.getChildByName("ngankho_item_name");
             name.setString(data.name);
             let value =  this._itemNode.getChildByName("ngankho_item_value");
-            let maxValue = data.value_type === RESOURCE_TYPE.GOLD ? MAX_RESOURCE.GOLD :
-                (data.value_type === RESOURCE_TYPE.ELIXIR ? MAX_RESOURCE.ELIXIR : MAX_RESOURCE.D_ELIXIR);
+            let maxValue = data.value_type === RESOURCE_TYPE.GOLD
+                ? PlayerInfoManager.getMaxResource().gold
+                : PlayerInfoManager.getMaxResource().elixir ;
             value.setString(fr.toMoneyString(maxValue* (data.nganhko_percent)));
 
             let value_icon = this._itemNode.getChildByName("ngankho_item_value_type");
@@ -55,22 +52,22 @@ var ShopItem = cc.Node.extend({
         switch (data.price_type) {
             case RESOURCE_TYPE.ELIXIR : {
                 price_type.loadTexture(res.ICON.ELIXIR);
-                if(data.price > PLAYER_RESOURCE.ELIXIR)  price_string.setColor(cc.color(255,0,0));
+                if(data.price > PlayerInfoManager.getResource().elixir)  price_string.setColor(cc.color(255,0,0));
                 break;
             }
-            case RESOURCE_TYPE.D_ELIXIR : {
-                price_type.loadTexture(res.ICON.D_ELIXIR_BAR);
-                if(data.price > PLAYER_RESOURCE.D_ELIXIR)  price_string.setColor(cc.color(255,0,0));
-                break;
-            }
+            // case RESOURCE_TYPE.D_ELIXIR : {
+            //     price_type.loadTexture(res.ICON.D_ELIXIR_BAR);
+            //     if(data.price > PlayerInfoManager.getResource().D_ELIXIR)  price_string.setColor(cc.color(255,0,0));
+            //     break;
+            // }
             case RESOURCE_TYPE.GOLD : {
                 price_type.loadTexture(res.ICON.GOLD);
-                if(data.price > PLAYER_RESOURCE.GOLD)  price_string.setColor(cc.color(255,0,0));
+                if(data.price > PlayerInfoManager.getResource().gold)  price_string.setColor(cc.color(255,0,0));
                 break;
             }
             case RESOURCE_TYPE.G : {
                 price_type.loadTexture(res.ICON.GEM);
-                if(data.price > PLAYER_RESOURCE.G)  price_string.setColor(cc.color(255,0,0));
+                if(data.price > PlayerInfoManager.getResource().gem)  price_string.setColor(cc.color(255,0,0));
                 break;
             }
             default: {
@@ -122,9 +119,7 @@ var ShopItem = cc.Node.extend({
     },
 
     handleTouchInfoButton : function (sender, type) {
-        ButtonEffect.scaleOnClick(sender, type)
+        ButtonEffect.scaleOnClick(sender, type);
     },
-
-
 
 })
