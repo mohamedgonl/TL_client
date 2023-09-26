@@ -1,5 +1,5 @@
 var PlayerInfo = cc.Class.extend({
-    maxResource : {
+    maxResource: {
         gold: 1000000,
         elixir: 1000000,
     },
@@ -16,34 +16,52 @@ var PlayerInfo = cc.Class.extend({
         return PlayerInfo.instance;
     },
 
-    getMaxResource: function() {
+    getMaxResource: function () {
         return this.maxResource;
     },
 
-    getResource: function() {
+    getResource: function () {
         return this.resource;
     },
 
-    setResource: function({gold, elixir, gem}) {
-        if(gold) {
+    setResource: function ({gold, elixir, gem}) {
+        if (gold) {
             this.resource.gold = gold;
         }
-        if(elixir) {
+        if (elixir) {
             this.resource.elixir = elixir;
         }
-        if(gem) {
+        if (gem) {
             this.resource.gem = gem;
         }
     },
 
-    setMaxResource: function({gold, elixir, gem}) {
-        if(gold) {
+    setInfo: function ({id, name, avatar, level, rank}) {
+        if (id) {
+            this.id = id;
+        }
+        if (name) {
+            this.name = name;
+        }
+        if (avatar) {
+            this.avatar = avatar;
+        }
+        if (level) {
+            this.level = level;
+        }
+        if (rank) {
+            this.rank = rank;
+        }
+    },
+
+    setMaxResource: function ({gold, elixir, gem}) {
+        if (gold) {
             this.maxResource.gold = gold;
         }
-        if(elixir) {
+        if (elixir) {
             this.maxResource.elixir = elixir;
         }
-        if(gem) {
+        if (gem) {
             this.maxResource.gem = gem;
         }
     }

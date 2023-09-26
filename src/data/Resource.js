@@ -113,7 +113,8 @@ var res_ui = {
     SHOP_POPUP: "ShopPopUpSprite.json",
     SHOP_ITEM: "ShopItem.json",
     ITEM_INFO: "ItemInfoPopup.json",
-    INFO_PROCESS_BAR: "ProcessBar.json"
+    INFO_PROCESS_BAR: "ProcessBar.json",
+    LOGIN_SCENE: "LoginScene.json",
 }
 
 var res_shop = {

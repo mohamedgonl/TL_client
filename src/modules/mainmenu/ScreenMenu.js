@@ -6,8 +6,6 @@ var ScreenMenu = cc.Layer.extend({
     _itemMenu:null,
     _beginPos:0,
     isMouseDown:false,
-    _popUpLayer: null,
-
 
     ctor:function() {
         this._super();
@@ -27,9 +25,7 @@ var ScreenMenu = cc.Layer.extend({
         this.addChild(btnMap);
         btnMap.addClickEventListener(this.onSelectMap.bind(this));
 
-        this._popUpLayer = new PopupLayer();
-        this._popUpLayer.setVisible(false);
-        this.addChild(this._popUpLayer);
+
 
 
     },
@@ -42,15 +38,11 @@ var ScreenMenu = cc.Layer.extend({
     },
     onSelectShop:function(sender)
     {
-        // fr.view(PopupLayer, 0);
-        this._popUpLayer.setVisible(true);
+        fr.view(PopupLayer);
     },
     onSelectMap:function(sender)
     {
         fr.view(MapLayer);
-    },
-    getPopUpLayer: function () {
-        return this._popUpLayer
     }
 
 });
