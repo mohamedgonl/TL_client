@@ -60,6 +60,7 @@
 
         "src/framework/ButtonEffect.js",
         "src/framework/CocosstudioUltis.js",
+        "src/framework/BuildingUltis.js",
 
         "src/game/gamecfg/shopConfig.js",
         "src/game/gamecfg/config.js"

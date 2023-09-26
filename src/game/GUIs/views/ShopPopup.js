@@ -45,6 +45,8 @@ var ShopPopup = cc.Layer.extend({
 
         })
 
+
+
         backButton.addTouchEventListener(this.handleClickBack, this)
         closeButton.addTouchEventListener(this.handleClickClose, this)
 

@@ -8,6 +8,9 @@ var ShopItem = cc.Node.extend({
         // find shop_item_node
         let item = node.getChildByName("shop_item_node");
         this._itemNode = item;
+        let button_buy = item.getChildByName("button_buy");
+        button_buy.addTouchEventListener(this.handleTouchBuyButton,this);
+
         this._data = data;
         this.setItemInfo(data,category);
         this.addChild(node);
@@ -53,7 +56,10 @@ var ShopItem = cc.Node.extend({
         switch (data.price_type) {
             case RESOURCE_TYPE.ELIXIR : {
                 price_type.loadTexture(res.ICON.ELIXIR);
-                if(data.price > PlayerInfoManager.getResource().elixir)  price_string.setColor(cc.color(255,0,0));
+                if(data.price > PlayerInfoManager.getResource().elixir) {
+                    price_string.setColor(cc.color(255,0,0));
+                    this._available = false;
+                }
                 break;
             }
             // case RESOURCE_TYPE.D_ELIXIR : {
@@ -125,5 +131,18 @@ var ShopItem = cc.Node.extend({
         fr.getCurrentScreen().getPopUpLayer().addChild(itemInfoLayer);
 
     },
+
+    handleTouchBuyButton : function (sender, type) {
+        ButtonEffect.scaleOnClick(sender, type);
+        if(type === ccui.Widget.TOUCH_ENDED) {
+            cc.log("CLICK BUY :::: ");
+            if(this._available === true) {
+
+            }
+            else {
+                cc.log("CANT BUY :::: ");
+            }
+        }
+    }
 
 })

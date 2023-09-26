@@ -31,6 +31,7 @@ var ScreenMenu = cc.Layer.extend({
         this._popUpLayer.setVisible(false);
         this.addChild(this._popUpLayer);
 
+
     },
     onEnter:function(){
         this._super();

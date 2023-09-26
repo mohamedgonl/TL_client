@@ -7,11 +7,11 @@ var Building = GameObject.extend({
     timeDone: null,
     yesButton: null,
     noButton: null,
+    configId: null,
 
     ctor: function () {
         this._super();
         this.init();
-        this.setScale(GRID_SCALE*2);
     },
 
 });

@@ -5,11 +5,20 @@ var ItemInfoPopup = cc.Layer.extend({
         this._super();
         let node = CCSUlties.parseUIFile(res_ui.ITEM_INFO);
         this._node = node;
+        this._data = data;
         this.setInfo(data);
         node.setPosition(cc.winSize.width/2, cc.winSize.height/2);
         let buttonClose = node.getChildByName("button_close");
         buttonClose.addTouchEventListener(this.handleClose,this);
         this.addChild(node);
+
+        cc.eventManager.addListener({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            swallowTouches: true,
+            onTouchEnded: function (touch, event) {
+                return true;
+            }
+        }, this);
     },
 
     handleClose : function (sender, type) {
@@ -64,8 +73,13 @@ var ItemInfoPopup = cc.Layer.extend({
             }
         }
 
+        // adding item image
         let itemIcon = this._node.getChildByName("item_image");
-        itemIcon.addChild(new BuilderHut());
+        let itemIconObj = BuildingUltis.getBuildingByConfigId(this._data.id);
+        itemIconObj.setScale(SHOP_ITEM_SCALE);
+        itemIcon.addChild(itemIconObj);
+
+        // adding description
 
     }
 })

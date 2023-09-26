@@ -5,7 +5,7 @@ var ButtonEffect = {
         sender.setSwallowTouches(true);
         switch (type) {
             case ccui.Widget.TOUCH_BEGAN: {
-                sender.setScale(BUTTON_TOUCH_SCALE);
+                sender.setScale( BUTTON_TOUCH_SCALE );
                 break;
             }
             case ccui.Widget.TOUCH_ENDED: {

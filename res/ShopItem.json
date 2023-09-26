@@ -888,6 +888,82 @@
                 "VisibleForFrame": false,
                 "Name": "wait_time_string",
                 "ctype": "TextBMFontObjectData"
+              },
+              {
+                "FontSize": 14,
+                "ButtonText": "",
+                "TextColor": {
+                  "R": 65,
+                  "G": 65,
+                  "B": 70
+                },
+                "DisabledFileData": {
+                  "Type": "Default",
+                  "Path": "Default/Button_Disable.png",
+                  "Plist": ""
+                },
+                "PressedFileData": {
+                  "Type": "Default",
+                  "Path": "Default/Button_Press.png",
+                  "Plist": ""
+                },
+                "NormalFileData": {
+                  "Type": "Default",
+                  "Path": "Default/Button_Normal.png",
+                  "Plist": ""
+                },
+                "Scale9Enable": true,
+                "Scale9OriginX": 15,
+                "Scale9OriginY": 11,
+                "Scale9Width": 16,
+                "Scale9Height": 14,
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "TouchEnable": true,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 0.0,
+                  "Y": -125.0
+                },
+                "Scale": {
+                  "ScaleX": 3.7684,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -25.5,
+                "RightMargin": -25.5,
+                "TopMargin": 102.5,
+                "BottomMargin": -147.5,
+                "Tag": 263,
+                "ActionTag": -1705698458,
+                "Size": {
+                  "X": 51.0,
+                  "Y": 45.0
+                },
+                "Alpha": 0,
+                "Name": "button_buy",
+                "ctype": "ButtonObjectData"
               }
             ],
             "ActionTag": 2004716680,
@@ -908,6 +984,8 @@
       },
       "UsedResources": [
         "Default/Button_Disable.png",
+        "Default/Button_Normal.png",
+        "Default/Button_Press.png",
         "Default/ImageFile.png",
         "fonts/fista_16_non.fnt",
         "fonts/fista_16_non.png",
