@@ -8,6 +8,7 @@ var ShopItem = cc.Node.extend({
         // find shop_item_node
         let item = node.getChildByName("shop_item_node");
         this._itemNode = item;
+        this._data = data;
         this.setItemInfo(data,category);
         this.addChild(node);
     },
@@ -120,6 +121,9 @@ var ShopItem = cc.Node.extend({
 
     handleTouchInfoButton : function (sender, type) {
         ButtonEffect.scaleOnClick(sender, type);
+        let itemInfoLayer = new ItemInfoPopup(this._data);
+        fr.getCurrentScreen().getPopUpLayer().addChild(itemInfoLayer);
+
     },
 
 })

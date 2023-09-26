@@ -111,7 +111,9 @@ var g_resources = [
 
 var res_ui = {
     SHOP_POPUP: "ShopPopUpSprite.json",
-    SHOP_ITEM: "ShopItem.json"
+    SHOP_ITEM: "ShopItem.json",
+    ITEM_INFO: "ItemInfoPopup.json",
+    INFO_PROCESS_BAR: "ProcessBar.json"
 }
 
 var res_shop = {

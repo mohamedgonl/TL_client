@@ -56,11 +56,11 @@
               "X": 739.0,
               "Y": 476.0
             },
-            "Name": "Sprite_1",
+            "Name": "bg",
             "ctype": "SpriteObjectData"
           },
           {
-            "LabelText": "Nhà thợ xây cấp 1",
+            "LabelText": "",
             "LabelBMFontFile_CNB": {
               "Type": "Normal",
               "Path": "fonts/soji_20.fnt",
@@ -88,17 +88,15 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -112.0,
-            "RightMargin": -112.0,
-            "TopMargin": -226.0968,
-            "BottomMargin": 194.0968,
+            "TopMargin": -210.0968,
+            "BottomMargin": 210.0968,
             "Tag": 86,
             "ActionTag": 1407516119,
             "Size": {
-              "X": 224.0,
-              "Y": 32.0
+              "X": 0.0,
+              "Y": 0.0
             },
-            "Name": "BitmapFontLabel_1",
+            "Name": "title",
             "ctype": "TextBMFontObjectData"
           },
           {
@@ -116,12 +114,12 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": -0.0003,
-              "Y": -105.49
+              "X": 0.0,
+              "Y": -112.0
             },
             "Scale": {
               "ScaleX": 1.0,
-              "ScaleY": 1.8069
+              "ScaleY": 1.71
             },
             "CColor": {},
             "IconVisible": false,
@@ -133,43 +131,138 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -341.0003,
-            "RightMargin": -340.9997,
-            "TopMargin": 47.99,
-            "BottomMargin": -162.99,
-            "Tag": 87,
-            "ActionTag": -1408045041,
+            "LeftMargin": -341.0,
+            "RightMargin": -341.0,
+            "TopMargin": 54.5,
+            "BottomMargin": -169.5,
+            "Tag": 91,
+            "ActionTag": -167060265,
             "Size": {
               "X": 682.0,
               "Y": 115.0
             },
-            "Name": "Sprite_2",
+            "Name": "white_sub-bg",
             "ctype": "SpriteObjectData"
           },
           {
-            "LabelText": "Có công trình nào quanh đây không cần bóng dáng người thợ xây? Câu trả lời là không",
-            "LabelBMFontFile_CNB": {
-              "Type": "Normal",
-              "Path": "fonts/fista_16_non.fnt",
-              "Plist": ""
-            },
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
+            "AnchorPoint": {},
             "Position": {
-              "X": -1.1798,
-              "Y": -66.0984
+              "X": 130.0,
+              "Y": 80.0
             },
             "Scale": {
               "ScaleX": 1.0,
               "ScaleY": 1.0
             },
-            "CColor": {
-              "R": 111,
-              "G": 55,
-              "B": 18
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
             },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 130.0,
+            "RightMargin": -130.0,
+            "TopMargin": -80.0,
+            "BottomMargin": 80.0,
+            "Tag": 102,
+            "ActionTag": 447903967,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "process_bar_list",
+            "ctype": "SingleNodeObjectData"
+          },
+          {
+            "AnchorPoint": {},
+            "Position": {
+              "X": -218.2235,
+              "Y": 80.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -218.2235,
+            "RightMargin": 218.2235,
+            "TopMargin": -80.0,
+            "BottomMargin": 80.0,
+            "Tag": 99,
+            "ActionTag": 1704300740,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "item_image",
+            "ctype": "SingleNodeObjectData"
+          },
+          {
+            "FontSize": 14,
+            "ButtonText": "",
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
+            "DisabledFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Disable.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Normal",
+              "Path": "guis/shop_gui/close.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "guis/shop_gui/close.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 11,
+            "Scale9Width": 17,
+            "Scale9Height": 25,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 337.3729,
+              "Y": 210.4088
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
             "IconVisible": false,
             "PrePosition": {
               "X": 0.0,
@@ -179,18 +272,18 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -318.1798,
-            "RightMargin": -315.8202,
-            "TopMargin": 57.5984,
-            "BottomMargin": -74.5984,
-            "Tag": 89,
-            "ActionTag": -1894677487,
+            "LeftMargin": 313.8729,
+            "RightMargin": -360.8729,
+            "TopMargin": -233.9088,
+            "BottomMargin": 186.9088,
+            "Tag": 188,
+            "ActionTag": 546316455,
             "Size": {
-              "X": 634.0,
-              "Y": 17.0
+              "X": 47.0,
+              "Y": 47.0
             },
-            "Name": "BitmapFontLabel_2",
-            "ctype": "TextBMFontObjectData"
+            "Name": "button_close",
+            "ctype": "ButtonObjectData"
           }
         ],
         "Size": {
@@ -201,12 +294,12 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
-        "fonts/fista_16_non.fnt",
-        "fonts/fista_16_non.png",
+        "Default/Button_Disable.png",
         "fonts/soji_20.fnt",
         "fonts/soji_20.png",
         "guis/research troop/mieng trang.png",
-        "guis/research troop/nen 1.png"
+        "guis/research troop/nen 1.png",
+        "guis/shop_gui/close.png"
       ],
       "ctype": "GameFileData"
     }
