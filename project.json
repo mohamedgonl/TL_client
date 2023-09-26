@@ -33,17 +33,23 @@
         "src/framework/PoolObject.js",
         "src/framework/StringUtils.js",
         "src/framework/UserData.js",
+        "src/framework/utils/utils.js",
+
         "src/base/network/GameClient.js",
         "src/base/network/GameClientListener.js",
         "src/base/network/InPacketFactory.js",
         "src/base/Resource.js",
         "src/base/UIFactory.js",
+
         "src/modules/animation/ScreenDragonbones.js",
         "src/modules/localization/ScreenLocalization.js",
         "src/modules/mainmenu/ScreenMenu.js",
         "src/modules/testnetwork/network/Network.js",
         "src/modules/testnetwork/network/Packet.js",
         "src/modules/testnetwork/ScreenNetwork.js",
+
+        "src/game/gamecfg/shopConfig.js",
+        "src/game/gamecfg/config.js",
 
         "src/game/GameObjects/GameObject.js",
         "src/game/GameObjects/buildings/Building.js",
@@ -59,9 +65,8 @@
         "src/game/Managers/PlayerInfoManager.js",
 
         "src/framework/ButtonEffect.js",
-        "src/framework/CocosstudioUltis.js",
+        "src/framework/CocosstudioUltis.js"
 
-        "src/game/gamecfg/shopConfig.js",
-        "src/game/gamecfg/config.js"
+
     ]
 }
