@@ -64,10 +64,20 @@ var LoginView = cc.Layer.extend({
             elixir: userInfo.elixir,
             gem: userInfo.gem,
         });
+        this.loadedUserInfo = true;
+        this.onReceiveData();
     },
 
     onReceiveMapInfo: function (mapInfo) {
         GameManager.init(mapInfo.listBuildings);
+        this.loadedMapInfo = true;
+        this.onReceiveData();
+    },
+
+    onReceiveData: function (){
+        if (this.loadedMapInfo && this.loadedUserInfo){
+            fr.view(MapLayer);
+        }
     },
 
     onFinishLogin: function (success) {
