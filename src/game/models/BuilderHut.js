@@ -7,7 +7,7 @@ var BuilderHut = Building.extend({
 
    init: function (){
          this._super();
-
+         //this.setPosition(cc.winSize.width/2, cc.winSize.height/2);
          this.setAnchorPoint(0.5,0.5);
 
          //building

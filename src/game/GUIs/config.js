@@ -2,6 +2,7 @@
 var OFFSET_BACKGROUND_X = 0;
 var OFFSET_BACKGROUND_Y = 2;
 var GRID_SCALE = 0.49;
+var GRID_SIZE = 40;
 var SCALE_BG =1;
 
 var ZOOM_DEFAULT = 1.5;
@@ -26,8 +27,5 @@ var MAP_ZORDER_TROOP = 2;
 var MAP_ZORDER_GUI = 3;
 
 
-//cell size calculate by distance between CORNER_BOTTOM and CORNER_LEFT divide by 40
-var GRID_SIZE = findDistanceFromPointToLine(CORNER_BOTTOM,CORNER_LEFT,CORNER_TOP);
-cc.log("grid size" + GRID_SIZE)
 
 

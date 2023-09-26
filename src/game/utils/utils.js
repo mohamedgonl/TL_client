@@ -39,5 +39,5 @@ function getIntersectPos(posA, posB, posC, posD) {
     const intersectX = posA.x + t * ABx;
     const intersectY = posA.y + t * ABy;
 
-    return cc.v2(intersectX, intersectY);
+    return cc.p(intersectX, intersectY);
 }
