@@ -63,5 +63,9 @@ var ItemInfoPopup = cc.Layer.extend({
                 }
             }
         }
+
+        let itemIcon = this._node.getChildByName("item_image");
+        itemIcon.addChild(new BuilderHut());
+
     }
 })
