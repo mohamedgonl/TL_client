@@ -128,7 +128,7 @@ var ShopItem = cc.Node.extend({
     handleTouchInfoButton : function (sender, type) {
         ButtonEffect.scaleOnClick(sender, type);
         let itemInfoLayer = new ItemInfoPopup(this._data);
-        fr.getCurrentScreen().getPopUpLayer().addChild(itemInfoLayer);
+        // fr.getCurrentScreen().getPopUpLayer().addChild(itemInfoLayer);
 
     },
 
