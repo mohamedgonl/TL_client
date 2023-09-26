@@ -54,6 +54,7 @@ var MapLayer = cc.Layer.extend({
                 {
                     this.test();
                 }
+
             }.bind(this)
 
         },this);

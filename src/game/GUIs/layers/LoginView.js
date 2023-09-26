@@ -76,7 +76,8 @@ var LoginView = cc.Layer.extend({
 
     onReceiveData: function (){
         if (this.loadedMapInfo && this.loadedUserInfo){
-            fr.view(MapLayer);
+            //fr.view(MapLayer)
+            cc.director.runScene(new GameScene());
         }
     },
 
