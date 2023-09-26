@@ -255,7 +255,8 @@ const ShopItemsData = {
                 infoList : [
                     {
                         title: "Sức chứa: 0/500",
-                        icon: res.ICON.GOLD_CAPACITY
+                        icon: res.ICON.GOLD_CAPACITY,
+                        bar_percent : 0
                     },
                     {
                         title: "Sản lượng: 200/h",
@@ -279,7 +280,8 @@ const ShopItemsData = {
                 infoList : [
                     {
                         title: "Sức chứa: 0/500",
-                        icon: res.ICON.ELIXIR_CAPACITY
+                        icon: res.ICON.ELIXIR_CAPACITY,
+                        bar_percent : 0
                     },
                     {
                         title: "Sản lượng: 200/h",
@@ -326,7 +328,9 @@ const ShopItemsData = {
         // },
     ],
 }
-const ItemsMargin = 10;
+const ITEM_MARGIN = 10;
+
+const ITEM_INFO_PROCESS_BAR_SPACING = 10;
 
 const BUTTON_TOUCH_SCALE = 1.2
 

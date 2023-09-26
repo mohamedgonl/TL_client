@@ -26,13 +26,14 @@ var ScreenMenu = cc.Layer.extend({
         btnMap.addClickEventListener(this.onSelectMap.bind(this));
 
 
+
     },
     onEnter:function(){
         this._super();
     },
     onSelectNetwork:function(sender)
     {
-        fr.view(LoginView);
+        fr.view(ScreenNetwork);
     },
     onSelectShop:function(sender)
     {

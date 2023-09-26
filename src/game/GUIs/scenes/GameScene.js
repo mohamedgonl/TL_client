@@ -6,7 +6,6 @@ var GameScene = cc.Scene.extend({
     },
 
     init: function () {
-        var mapLayer = new MapLayer();
-        var infoLayer = new InfoLayer();
+
     }
 });

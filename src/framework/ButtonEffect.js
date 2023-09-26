@@ -2,6 +2,7 @@
 
 var ButtonEffect = {
     scaleOnClick : function (sender, type) {
+        sender.setSwallowTouches(true);
         switch (type) {
             case ccui.Widget.TOUCH_BEGAN: {
                 sender.setScale(BUTTON_TOUCH_SCALE);

@@ -1,0 +1,210 @@
+{
+  "ID": "72b4166f-5d99-4dbd-9806-bbdc85d9a929",
+  "Version": "3.10.0.0",
+  "Name": "ProcessBar",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 106,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/upgrade_building_gui/info_bar.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -155.5,
+            "RightMargin": -155.5,
+            "TopMargin": -18.0,
+            "BottomMargin": -18.0,
+            "Tag": 175,
+            "ActionTag": -558565503,
+            "Size": {
+              "X": 311.0,
+              "Y": 36.0
+            },
+            "Name": "bg",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "ProgressInfo": 100,
+            "ImageFileData": {
+              "Type": "Normal",
+              "Path": "guis/upgrade_building_gui/info_bar_BG.png",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -155.5,
+            "RightMargin": -155.5,
+            "TopMargin": -18.0,
+            "BottomMargin": -18.0,
+            "Tag": 177,
+            "ActionTag": -764932229,
+            "Size": {
+              "X": 311.0,
+              "Y": 36.0
+            },
+            "Name": "process",
+            "ctype": "LoadingBarObjectData"
+          },
+          {
+            "LabelText": "",
+            "LabelBMFontFile_CNB": {
+              "Type": "Normal",
+              "Path": "fonts/soji_12.fnt",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -42.9207,
+              "Y": 13.9271
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -42.9207,
+            "RightMargin": 42.9207,
+            "TopMargin": -13.9271,
+            "BottomMargin": 13.9271,
+            "Tag": 179,
+            "ActionTag": -1709611932,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "title",
+            "ctype": "TextBMFontObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Default",
+              "Path": "Default/ImageFile.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 14,
+            "Scale9OriginY": 13,
+            "Scale9Width": 18,
+            "Scale9Height": 20,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -190.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -213.0,
+            "RightMargin": 167.0,
+            "TopMargin": -23.0,
+            "BottomMargin": -23.0,
+            "Tag": 164,
+            "ActionTag": -2072170843,
+            "Size": {
+              "X": 46.0,
+              "Y": 46.0
+            },
+            "Name": "icon",
+            "ctype": "ImageViewObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "Default/ImageFile.png",
+        "fonts/soji_12.fnt",
+        "fonts/soji_12.png",
+        "guis/upgrade_building_gui/info_bar.png",
+        "guis/upgrade_building_gui/info_bar_BG.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

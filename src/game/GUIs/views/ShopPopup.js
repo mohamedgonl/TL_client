@@ -1,5 +1,5 @@
 
-var ShopPopup = cc.Sprite.extend({
+var ShopPopup = cc.Layer.extend({
     _title: null,
     _routeLevel : 0,
     _categoryWrapper: null,
@@ -21,6 +21,7 @@ var ShopPopup = cc.Sprite.extend({
 
         // add handle when touch category
         let categories = this._categoryWrapper.getChildren();
+
         categories.map(e => {
             let categoryNameString = e.getChildByName("category_name_string").string;
             cc.eventManager.addListener({
@@ -47,6 +48,7 @@ var ShopPopup = cc.Sprite.extend({
         backButton.addTouchEventListener(this.handleClickBack, this)
         closeButton.addTouchEventListener(this.handleClickClose, this)
 
+        node.setPosition(cc.winSize.width/2, cc.winSize.height/2);
         this.addChild(node);
     },
 
@@ -115,12 +117,12 @@ var ShopPopup = cc.Sprite.extend({
                 item.setPositionX(itemWidth/2);
             }
             else {
-                item.setPositionX(prevItemPosX+ ItemsMargin + itemWidth);
+                item.setPositionX(prevItemPosX+ ITEM_MARGIN + itemWidth);
             }
             prevItemPosX = item.getPosition().x;
 
         }
-        itemsScrollView.setInnerContainerSize(cc.size(itemWidth*(itemsData.length) + ItemsMargin *(itemsData.length-1),scrollViewSize.height))
+        itemsScrollView.setInnerContainerSize(cc.size(itemWidth*(itemsData.length) + ITEM_MARGIN *(itemsData.length-1),scrollViewSize.height))
         this._itemScrollView = itemsScrollView;
 
         return true;
