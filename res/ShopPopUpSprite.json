@@ -64,6 +64,59 @@
         "Tag": 74,
         "Children": [
           {
+            "ClipAble": false,
+            "BackColorAlpha": 102,
+            "ComboBoxIndex": 1,
+            "SingleColor": {
+              "R": 80,
+              "G": 80,
+              "B": 80
+            },
+            "FirstColor": {
+              "R": 150,
+              "G": 200
+            },
+            "EndColor": {},
+            "ColorVector": {
+              "ScaleY": 1.0
+            },
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -568.0,
+            "RightMargin": -568.0,
+            "TopMargin": -320.0,
+            "BottomMargin": -320.0,
+            "Tag": 180,
+            "ActionTag": -315678450,
+            "Size": {
+              "X": 1136.0,
+              "Y": 640.0
+            },
+            "Name": "panel",
+            "ctype": "PanelObjectData"
+          },
+          {
             "FileData": {
               "Type": "Normal",
               "Path": "guis/shopping/nen2.png",
@@ -198,8 +251,84 @@
                 "RightMargin": -236.97,
                 "TopMargin": -105.17,
                 "BottomMargin": 105.17,
+                "UserData": "-press_action",
                 "Tag": 257,
                 "Children": [
+                  {
+                    "FontSize": 14,
+                    "ButtonText": "",
+                    "TextColor": {
+                      "R": 65,
+                      "G": 65,
+                      "B": 70
+                    },
+                    "DisabledFileData": {
+                      "Type": "Default",
+                      "Path": "Default/Button_Disable.png",
+                      "Plist": ""
+                    },
+                    "PressedFileData": {
+                      "Type": "Default",
+                      "Path": "Default/Button_Press.png",
+                      "Plist": ""
+                    },
+                    "NormalFileData": {
+                      "Type": "Default",
+                      "Path": "Default/Button_Normal.png",
+                      "Plist": ""
+                    },
+                    "Scale9Enable": true,
+                    "Scale9OriginX": 15,
+                    "Scale9OriginY": 11,
+                    "Scale9Width": 16,
+                    "Scale9Height": 14,
+                    "OutlineColor": {
+                      "G": 0,
+                      "B": 0
+                    },
+                    "ShadowColor": {
+                      "R": 110,
+                      "G": 110,
+                      "B": 110
+                    },
+                    "ShadowOffsetX": 2.0,
+                    "ShadowOffsetY": -2.0,
+                    "TouchEnable": true,
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": -104.0,
+                    "RightMargin": -104.0,
+                    "TopMargin": -82.5,
+                    "BottomMargin": -82.5,
+                    "Tag": 192,
+                    "ActionTag": -309856780,
+                    "Size": {
+                      "X": 208.0,
+                      "Y": 165.0
+                    },
+                    "Name": "category_trangtri_button",
+                    "ctype": "ButtonObjectData"
+                  },
                   {
                     "FileData": {
                       "Type": "Normal",
@@ -421,7 +550,42 @@
                     },
                     "Name": "category_name_string",
                     "ctype": "TextBMFontObjectData"
-                  },
+                  }
+                ],
+                "ActionTag": 899160977,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "category_trangtri",
+                "ctype": "SingleNodeObjectData"
+              },
+              {
+                "AnchorPoint": {},
+                "Position": {
+                  "X": -4.05,
+                  "Y": 105.17
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": true,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -4.05,
+                "RightMargin": 4.05,
+                "TopMargin": -105.17,
+                "BottomMargin": 105.17,
+                "Tag": 263,
+                "Children": [
                   {
                     "FontSize": 14,
                     "ButtonText": "",
@@ -471,8 +635,8 @@
                       "Y": 0.0
                     },
                     "Scale": {
-                      "ScaleX": 4.7321,
-                      "ScaleY": 4.5405
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
                     },
                     "CColor": {},
                     "IconVisible": false,
@@ -484,55 +648,19 @@
                       "X": 0.0,
                       "Y": 0.0
                     },
-                    "LeftMargin": -23.0,
-                    "RightMargin": -23.0,
-                    "TopMargin": -18.5,
-                    "BottomMargin": -18.5,
-                    "Tag": 192,
-                    "ActionTag": -309856780,
+                    "LeftMargin": -104.0,
+                    "RightMargin": -104.0,
+                    "TopMargin": -82.5,
+                    "BottomMargin": -82.5,
+                    "Tag": 193,
+                    "ActionTag": 694586429,
                     "Size": {
-                      "X": 46.0,
-                      "Y": 37.0
+                      "X": 208.0,
+                      "Y": 165.0
                     },
-                    "Alpha": 0,
-                    "Name": "category_trangtri_button",
+                    "Name": "category_tainguyen_button",
                     "ctype": "ButtonObjectData"
-                  }
-                ],
-                "ActionTag": 899160977,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "category_trangtri",
-                "ctype": "SingleNodeObjectData"
-              },
-              {
-                "AnchorPoint": {},
-                "Position": {
-                  "X": -4.98,
-                  "Y": 105.17
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PrePosition": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": -4.98,
-                "RightMargin": 4.98,
-                "TopMargin": -105.17,
-                "BottomMargin": 105.17,
-                "Tag": 263,
-                "Children": [
+                  },
                   {
                     "FileData": {
                       "Type": "Normal",
@@ -754,7 +882,42 @@
                     },
                     "Name": "category_name_string",
                     "ctype": "TextBMFontObjectData"
-                  },
+                  }
+                ],
+                "ActionTag": 857053951,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "category_tainguyen",
+                "ctype": "SingleNodeObjectData"
+              },
+              {
+                "AnchorPoint": {},
+                "Position": {
+                  "X": -249.82,
+                  "Y": 105.17
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": true,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -249.82,
+                "RightMargin": 249.82,
+                "TopMargin": -105.17,
+                "BottomMargin": 105.17,
+                "Tag": 269,
+                "Children": [
                   {
                     "FontSize": 14,
                     "ButtonText": "",
@@ -804,8 +967,8 @@
                       "Y": 0.0
                     },
                     "Scale": {
-                      "ScaleX": 4.7321,
-                      "ScaleY": 4.5405
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
                     },
                     "CColor": {},
                     "IconVisible": false,
@@ -817,55 +980,19 @@
                       "X": 0.0,
                       "Y": 0.0
                     },
-                    "LeftMargin": -23.0,
-                    "RightMargin": -23.0,
-                    "TopMargin": -18.5,
-                    "BottomMargin": -18.5,
-                    "Tag": 193,
-                    "ActionTag": 694586429,
+                    "LeftMargin": -104.0,
+                    "RightMargin": -104.0,
+                    "TopMargin": -82.5,
+                    "BottomMargin": -82.5,
+                    "Tag": 189,
+                    "ActionTag": -835457498,
                     "Size": {
-                      "X": 46.0,
-                      "Y": 37.0
+                      "X": 208.0,
+                      "Y": 165.0
                     },
-                    "Alpha": 0,
-                    "Name": "category_tainguyen_button",
+                    "Name": "category_ngankho_button",
                     "ctype": "ButtonObjectData"
-                  }
-                ],
-                "ActionTag": 857053951,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "category_tainguyen",
-                "ctype": "SingleNodeObjectData"
-              },
-              {
-                "AnchorPoint": {},
-                "Position": {
-                  "X": -246.94,
-                  "Y": 105.17
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PrePosition": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": -246.94,
-                "RightMargin": 246.94,
-                "TopMargin": -105.17,
-                "BottomMargin": 105.17,
-                "Tag": 269,
-                "Children": [
+                  },
                   {
                     "FileData": {
                       "Type": "Normal",
@@ -1087,7 +1214,42 @@
                     },
                     "Name": "category_name_string",
                     "ctype": "TextBMFontObjectData"
-                  },
+                  }
+                ],
+                "ActionTag": 423242441,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "category_ngankho",
+                "ctype": "SingleNodeObjectData"
+              },
+              {
+                "AnchorPoint": {},
+                "Position": {
+                  "X": -249.82,
+                  "Y": -106.32
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": true,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -249.82,
+                "RightMargin": 249.82,
+                "TopMargin": 106.32,
+                "BottomMargin": -106.32,
+                "Tag": 275,
+                "Children": [
                   {
                     "FontSize": 14,
                     "ButtonText": "",
@@ -1137,8 +1299,8 @@
                       "Y": 0.0
                     },
                     "Scale": {
-                      "ScaleX": 4.7321,
-                      "ScaleY": 4.5405
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
                     },
                     "CColor": {},
                     "IconVisible": false,
@@ -1150,55 +1312,19 @@
                       "X": 0.0,
                       "Y": 0.0
                     },
-                    "LeftMargin": -23.0,
-                    "RightMargin": -23.0,
-                    "TopMargin": -18.5,
-                    "BottomMargin": -18.5,
-                    "Tag": 189,
-                    "ActionTag": -835457498,
+                    "LeftMargin": -104.0,
+                    "RightMargin": -104.0,
+                    "TopMargin": -82.5,
+                    "BottomMargin": -82.5,
+                    "Tag": 190,
+                    "ActionTag": -1664164415,
                     "Size": {
-                      "X": 46.0,
-                      "Y": 37.0
+                      "X": 208.0,
+                      "Y": 165.0
                     },
-                    "Alpha": 0,
-                    "Name": "category_ngankho_button",
+                    "Name": "category_quandoi_button",
                     "ctype": "ButtonObjectData"
-                  }
-                ],
-                "ActionTag": 423242441,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "category_ngankho",
-                "ctype": "SingleNodeObjectData"
-              },
-              {
-                "AnchorPoint": {},
-                "Position": {
-                  "X": -249.82,
-                  "Y": -106.32
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PrePosition": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": -249.82,
-                "RightMargin": 249.82,
-                "TopMargin": 106.32,
-                "BottomMargin": -106.32,
-                "Tag": 275,
-                "Children": [
+                  },
                   {
                     "FileData": {
                       "Type": "Normal",
@@ -1420,7 +1546,42 @@
                     },
                     "Name": "category_name_string",
                     "ctype": "TextBMFontObjectData"
-                  },
+                  }
+                ],
+                "ActionTag": 607246614,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "category_quandoi",
+                "ctype": "SingleNodeObjectData"
+              },
+              {
+                "AnchorPoint": {},
+                "Position": {
+                  "X": -4.05,
+                  "Y": -106.32
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": true,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -4.05,
+                "RightMargin": 4.05,
+                "TopMargin": 106.32,
+                "BottomMargin": -106.32,
+                "Tag": 281,
+                "Children": [
                   {
                     "FontSize": 14,
                     "ButtonText": "",
@@ -1467,11 +1628,11 @@
                     },
                     "Position": {
                       "X": 0.0,
-                      "Y": 1.0
+                      "Y": 0.0
                     },
                     "Scale": {
-                      "ScaleX": 4.7321,
-                      "ScaleY": 4.5405
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
                     },
                     "CColor": {},
                     "IconVisible": false,
@@ -1483,55 +1644,19 @@
                       "X": 0.0,
                       "Y": 0.0
                     },
-                    "LeftMargin": -23.0,
-                    "RightMargin": -23.0,
-                    "TopMargin": -19.5,
-                    "BottomMargin": -17.5,
-                    "Tag": 190,
-                    "ActionTag": -1664164415,
+                    "LeftMargin": -104.0,
+                    "RightMargin": -104.0,
+                    "TopMargin": -82.5,
+                    "BottomMargin": -82.5,
+                    "Tag": 194,
+                    "ActionTag": -2117858168,
                     "Size": {
-                      "X": 46.0,
-                      "Y": 37.0
+                      "X": 208.0,
+                      "Y": 165.0
                     },
-                    "Alpha": 0,
-                    "Name": "category_quandoi_button",
+                    "Name": "category_phongthu_button",
                     "ctype": "ButtonObjectData"
-                  }
-                ],
-                "ActionTag": 607246614,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "category_quandoi",
-                "ctype": "SingleNodeObjectData"
-              },
-              {
-                "AnchorPoint": {},
-                "Position": {
-                  "X": -4.05,
-                  "Y": -106.32
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PrePosition": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": -4.05,
-                "RightMargin": 4.05,
-                "TopMargin": 106.32,
-                "BottomMargin": -106.32,
-                "Tag": 281,
-                "Children": [
+                  },
                   {
                     "FileData": {
                       "Type": "Normal",
@@ -1753,7 +1878,42 @@
                     },
                     "Name": "category_name_string",
                     "ctype": "TextBMFontObjectData"
-                  },
+                  }
+                ],
+                "ActionTag": 910418966,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "category_phongthu",
+                "ctype": "SingleNodeObjectData"
+              },
+              {
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 236.97,
+                  "Y": -106.32
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": true,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 236.97,
+                "RightMargin": -236.97,
+                "TopMargin": 106.32,
+                "BottomMargin": -106.32,
+                "Tag": 287,
+                "Children": [
                   {
                     "FontSize": 14,
                     "ButtonText": "",
@@ -1803,8 +1963,8 @@
                       "Y": 0.0
                     },
                     "Scale": {
-                      "ScaleX": 4.7321,
-                      "ScaleY": 4.5405
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
                     },
                     "CColor": {},
                     "IconVisible": false,
@@ -1816,55 +1976,19 @@
                       "X": 0.0,
                       "Y": 0.0
                     },
-                    "LeftMargin": -23.0,
-                    "RightMargin": -23.0,
-                    "TopMargin": -18.5,
-                    "BottomMargin": -18.5,
-                    "Tag": 194,
-                    "ActionTag": -2117858168,
+                    "LeftMargin": -104.0,
+                    "RightMargin": -104.0,
+                    "TopMargin": -82.5,
+                    "BottomMargin": -82.5,
+                    "Tag": 195,
+                    "ActionTag": -1500536369,
                     "Size": {
-                      "X": 46.0,
-                      "Y": 37.0
+                      "X": 208.0,
+                      "Y": 165.0
                     },
-                    "Alpha": 0,
-                    "Name": "category_phongthu_button",
+                    "Name": "category_baove_button",
                     "ctype": "ButtonObjectData"
-                  }
-                ],
-                "ActionTag": 910418966,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "category_phongthu",
-                "ctype": "SingleNodeObjectData"
-              },
-              {
-                "AnchorPoint": {},
-                "Position": {
-                  "X": 241.72,
-                  "Y": -106.32
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PrePosition": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": 241.72,
-                "RightMargin": -241.72,
-                "TopMargin": 106.32,
-                "BottomMargin": -106.32,
-                "Tag": 287,
-                "Children": [
+                  },
                   {
                     "FileData": {
                       "Type": "Normal",
@@ -1901,8 +2025,8 @@
                     "RightMargin": -120.5,
                     "TopMargin": -93.0,
                     "BottomMargin": -93.0,
-                    "Tag": 288,
-                    "ActionTag": -1437860256,
+                    "Tag": 178,
+                    "ActionTag": -334628561,
                     "Size": {
                       "X": 241.0,
                       "Y": 186.0
@@ -2086,82 +2210,6 @@
                     },
                     "Name": "category_name_string",
                     "ctype": "TextBMFontObjectData"
-                  },
-                  {
-                    "FontSize": 14,
-                    "ButtonText": "",
-                    "TextColor": {
-                      "R": 65,
-                      "G": 65,
-                      "B": 70
-                    },
-                    "DisabledFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Disable.png",
-                      "Plist": ""
-                    },
-                    "PressedFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Press.png",
-                      "Plist": ""
-                    },
-                    "NormalFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Normal.png",
-                      "Plist": ""
-                    },
-                    "Scale9Enable": true,
-                    "Scale9OriginX": 15,
-                    "Scale9OriginY": 11,
-                    "Scale9Width": 16,
-                    "Scale9Height": 14,
-                    "OutlineColor": {
-                      "G": 0,
-                      "B": 0
-                    },
-                    "ShadowColor": {
-                      "R": 110,
-                      "G": 110,
-                      "B": 110
-                    },
-                    "ShadowOffsetX": 2.0,
-                    "ShadowOffsetY": -2.0,
-                    "TouchEnable": true,
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "Scale": {
-                      "ScaleX": 4.7321,
-                      "ScaleY": 4.5405
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -23.0,
-                    "RightMargin": -23.0,
-                    "TopMargin": -18.5,
-                    "BottomMargin": -18.5,
-                    "Tag": 195,
-                    "ActionTag": -1500536369,
-                    "Size": {
-                      "X": 46.0,
-                      "Y": 37.0
-                    },
-                    "Alpha": 0,
-                    "Name": "category_baove_button",
-                    "ctype": "ButtonObjectData"
                   }
                 ],
                 "ActionTag": 894687098,
@@ -3048,6 +3096,7 @@
             "RightMargin": -379.1528,
             "TopMargin": -227.6617,
             "BottomMargin": 180.6617,
+            "UserData": "-press_action",
             "Tag": 103,
             "ActionTag": -1152824457,
             "Size": {
@@ -3123,6 +3172,7 @@
             "RightMargin": 316.6319,
             "TopMargin": -227.2238,
             "BottomMargin": 180.2238,
+            "UserData": "-press_action",
             "Tag": 104,
             "ActionTag": -956595095,
             "Size": {

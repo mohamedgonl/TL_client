@@ -11,7 +11,9 @@ var GameScene = cc.Scene.extend({
         this.mapLayer = new MapLayer();
         this.addChild(this.mapLayer);
         this.popUpLayer = new PopupLayer();
-        this.addChild(this.popUpLayer)
+        this.popUpLayer.setVisible(false);
+        this.addChild(this.popUpLayer);
+
 
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
@@ -19,7 +21,11 @@ var GameScene = cc.Scene.extend({
                 if(keyCode == cc.KEY.s)
                 {
                     //change visible of popup
-                    this.popUpLayer.setVisible(!this.popUpLayer.isVisible());
+                    let visible = this.popUpLayer.isVisible();
+                    this.popUpLayer.setVisible(!visible);
+                    if(!visible){
+                        this.popUpLayer.appear("shop");
+                    }
                 }
             }.bind(this)
         }, this);

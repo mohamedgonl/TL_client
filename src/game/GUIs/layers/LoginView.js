@@ -14,7 +14,7 @@ var LoginView = cc.Layer.extend({
         this.loginButton = loginButton;
 
         const textFieldUID = node.getChildByName("login-textfield");
-        textFieldUID.addEventListener(this.textFieldEvent, this);
+        textFieldUID.addTouchEventListener(this.textFieldEvent, this);
         this.textFieldUID = textFieldUID;
 
         const messageText = gv.commonText("", this.width / 2, textFieldUID.y - 110);

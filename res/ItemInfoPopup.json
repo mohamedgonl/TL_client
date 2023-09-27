@@ -15,6 +15,61 @@
         "Tag": 84,
         "Children": [
           {
+            "ClipAble": false,
+            "BackColorAlpha": 148,
+            "ComboBoxIndex": 1,
+            "SingleColor": {
+              "R": 26,
+              "G": 26,
+              "B": 26
+            },
+            "FirstColor": {
+              "R": 150,
+              "G": 200
+            },
+            "EndColor": {},
+            "ColorVector": {
+              "ScaleY": 1.0
+            },
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PositionPercentXEnabled": true,
+            "PositionPercentYEnabled": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -568.0,
+            "RightMargin": -568.0,
+            "TopMargin": -320.0,
+            "BottomMargin": -320.0,
+            "Tag": 155,
+            "ActionTag": -1834797606,
+            "Size": {
+              "X": 1136.0,
+              "Y": 640.0
+            },
+            "Name": "Panel_1",
+            "ctype": "PanelObjectData"
+          },
+          {
             "FileData": {
               "Type": "Normal",
               "Path": "guis/research troop/nen 1.png",
@@ -276,6 +331,7 @@
             "RightMargin": -360.8729,
             "TopMargin": -233.9088,
             "BottomMargin": 186.9088,
+            "UserData": "-press_action",
             "Tag": 188,
             "ActionTag": 546316455,
             "Size": {

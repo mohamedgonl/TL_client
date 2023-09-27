@@ -9,7 +9,7 @@ var ShopItem = cc.Node.extend({
         let item = node.getChildByName("shop_item_node");
         this._itemNode = item;
         let button_buy = item.getChildByName("button_buy");
-        button_buy.addTouchEventListener(this.handleTouchBuyButton,this);
+        button_buy.addClickEventListener(this.handleTouchBuyButton.bind(this));
 
         this._data = data;
         this.setItemInfo(data,category);
@@ -105,7 +105,7 @@ var ShopItem = cc.Node.extend({
                 if(this.getBuiltCount === this.getBuildMaxCount) this._available = false;
                 space.setString(this.getBuiltCount()+"/"+this.getBuildMaxCount());
                 let buttonInfo = this._itemNode.getChildByName("button_info");
-                buttonInfo.addTouchEventListener(this.handleTouchInfoButton, this);
+                buttonInfo.addClickEventListener(this.handleTouchInfoButton.bind(this));
                 let timeDone = this._itemNode.getChildByName("time_string");
                 timeDone.setString(fr.toGameTimeString(data.time));
             }
@@ -129,18 +129,16 @@ var ShopItem = cc.Node.extend({
 
     handleTouchInfoButton : function (sender, type) {
         ButtonEffect.scaleOnClick(sender, type);
-        if(type === ccui.Widget.TOUCH_ENDED) {
-            let itemInfoLayer = new ItemInfoPopup(this._data);
-            let gameScene = cc.director.getRunningScene();
-            let popUpLayer = gameScene.getPopUpLayer();
-            popUpLayer.addChild(itemInfoLayer);
-        }
+        let itemInfoLayer = new ItemInfoPopup(this._data);
+        let gameScene = cc.director.getRunningScene();
+        let popUpLayer = gameScene.getPopUpLayer();
+        popUpLayer.addChild(itemInfoLayer);
+
 
     },
 
     handleTouchBuyButton : function (sender, type) {
         ButtonEffect.scaleOnClick(sender, type);
-        if(type === ccui.Widget.TOUCH_ENDED) {
             cc.log("CLICK BUY :::: ");
             if(this._available === true) {
 
@@ -148,7 +146,6 @@ var ShopItem = cc.Node.extend({
             else {
                 cc.log("CANT BUY :::: ");
             }
-        }
     }
 
 })

@@ -6,6 +6,19 @@
       <ObjectData Name="Node" Tag="84" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
+          <AbstractNodeData Name="Panel_1" ActionTag="-1834797606" Tag="155" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-568.0000" RightMargin="-568.0000" TopMargin="-320.0000" BottomMargin="-320.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="148" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+            <Size X="1136.0000" Y="640.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <SingleColor A="255" R="26" G="26" B="26" />
+            <FirstColor A="255" R="150" G="200" B="255" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+          </AbstractNodeData>
           <AbstractNodeData Name="bg" ActionTag="-2017607543" Tag="85" IconVisible="False" LeftMargin="-369.5000" RightMargin="-369.5000" TopMargin="-238.0000" BottomMargin="-238.0000" ctype="SpriteObjectData">
             <Size X="739.0000" Y="476.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -56,7 +69,7 @@
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="button_close" ActionTag="546316455" Tag="188" IconVisible="False" LeftMargin="313.8729" RightMargin="-360.8729" TopMargin="-233.9088" BottomMargin="186.9088" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="17" Scale9Height="25" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="button_close" ActionTag="546316455" UserData="-press_action" Tag="188" IconVisible="False" LeftMargin="313.8729" RightMargin="-360.8729" TopMargin="-233.9088" BottomMargin="186.9088" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="17" Scale9Height="25" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="47.0000" Y="47.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="337.3729" Y="210.4088" />

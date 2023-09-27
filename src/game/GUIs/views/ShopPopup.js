@@ -9,7 +9,7 @@ var ShopPopup = cc.Layer.extend({
         var shopPopup  = this;
 
         // load ui-json
-        let node = CCSUlties.parseUIFile(res_ui.SHOP_POPUP)
+        let node = CCSUlties.parseUIFile(res_ui.SHOP_POPUP);
 
         // get child-nodes
         let backButton = node.getChildByName("button_back");
@@ -21,37 +21,34 @@ var ShopPopup = cc.Layer.extend({
 
         // add handle when touch category
         let categories = this._categoryWrapper.getChildren();
-
         categories.map(e => {
-            let categoryNameString = e.getChildByName("category_name_string").string;
+            let categoryButtonName =e.getName() + "_button";
+            let categoryButton = e.getChildByName(categoryButtonName)
+            let categoryNameString = e.getChildByName("category_name_string").getString();
+            categoryButton.addClickEventListener(this.handleClickCategory.bind(this, e.getName(), categoryNameString, e));
+
             cc.eventManager.addListener({
                 event: cc.EventListener.MOUSE,
                 onMouseDown: function (event) {
                     var target = event.getCurrentTarget();
-                    if (cc.rectContainsPoint(target.getBoundingBoxToWorld(), event.getLocation())
-                        && shopPopup._routeLevel === 0) {
-                            target.setScale(BUTTON_TOUCH_SCALE);
+                    if (cc.rectContainsPoint(target.getBoundingBoxToWorld(), event.getLocation())) {
+                        target.setScale(BUTTON_TOUCH_SCALE);
                     }
                 },
                 onMouseUp: function (event) {
                     var target = event.getCurrentTarget();
-                    if (cc.rectContainsPoint(target.getBoundingBoxToWorld(), event.getLocation())
-                        && shopPopup._routeLevel === 0) {
-                            target.setScale(1);
-                            shopPopup.handleClickCategory(e.getName(), categoryNameString);
+                    if (cc.rectContainsPoint(target.getBoundingBoxToWorld(), event.getLocation())) {
+                        target.setScale(1);
                     }
                 }
             }, e);
 
         })
 
-
-        backButton.addTouchEventListener(this.handleClickBack, this)
-        closeButton.addTouchEventListener(this.handleClickClose, this)
+        backButton.addClickEventListener(this.handleClickBack.bind(this))
+        closeButton.addClickEventListener(this.handleClickClose.bind(this))
 
         node.setPosition(cc.winSize.width/2, cc.winSize.height/2);
-
-
 
         this.addChild(node);
     },
@@ -61,47 +58,32 @@ var ShopPopup = cc.Layer.extend({
     },
 
     handleClickBack : function (sender, type) {
-        ButtonEffect.scaleOnClick(sender, type);
-        if(type === ccui.Widget.TOUCH_ENDED) {
-            cc.log("Click back:::: ");
-            this._routeLevel = this._routeLevel - 1 < 0 ? 0 : this._routeLevel - 1;
-            switch (this._routeLevel) {
-                case 1:  {
-                    this._itemsWrapper.setVisible(true);
-                    this._categoryWrapper.setVisible(false);
-                    break;
-                }
-                case 0: {
-                    this.changePopUpTitle("CỬA HÀNG");
-                    this._itemsWrapper.setVisible(false);
-                    this._categoryWrapper.setVisible(true);
-                    this._itemScrollView.removeAllChildren();
-                    break;
-                }
-                default: break;
-            }
-
+        cc.log("Handle click back ::::")
+        if(this._categoryWrapper.isVisible() === true) {
+            this.handleClickClose(sender, type);
         }
+        else {
+            this.changePopUpTitle("CỬA HÀNG");
+            this._itemsWrapper.setVisible(false);
+            this._categoryWrapper.setVisible(true);
+            this._itemScrollView.removeAllChildren();
+        }
+
         return true;
     },
 
     handleClickClose: function (sender, type) {
-        ButtonEffect.scaleOnClick(sender, type);
-
-        if(type === ccui.Widget.TOUCH_ENDED) {
-            cc.log("Click close:::: ");
-        }
+        cc.log("Click close:::: ");
+        PopupEffect.disappear(this, ()=>{ this.setVisible(false)});
         return true;
     },
 
     handleClickCategory: function ( category, categoryNameString) {
         cc.log("Click category:::: ", category);
-
-        this._routeLevel = this._routeLevel + 1;
-
         this.updateResourceInfo();
         this._categoryWrapper.setVisible(false);
         this._itemsWrapper.setVisible(true);
+
         this.changePopUpTitle(categoryNameString)
         let itemsScrollView = this._itemsWrapper.getChildByName("shop_items_scrollview");
         itemsScrollView.setScrollBarEnabled(false);

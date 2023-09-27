@@ -10,7 +10,7 @@ var ItemInfoPopup = cc.Layer.extend({
         node.setPosition(cc.winSize.width/2, cc.winSize.height/2);
         let buttonClose = node.getChildByName("button_close");
 
-        buttonClose.addTouchEventListener(this.handleClose,this);
+        buttonClose.addClickEventListener(this.handleClose.bind(this));
 
         this.addChild(node);
         PopupEffect.appear(this._node);
@@ -26,9 +26,7 @@ var ItemInfoPopup = cc.Layer.extend({
     },
 
     handleClose : function (sender, type) {
-        ButtonEffect.scaleOnClick(sender,  type);
-        PopupEffect.disappear(this._node);
-        this.removeFromParent();
+        PopupEffect.disappear(this._node, ()=>{ this.removeFromParent()});
     }
     ,
 

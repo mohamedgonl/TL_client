@@ -56,7 +56,7 @@
               "X": 391.0,
               "Y": 273.0
             },
-            "Name": "background_1",
+            "Name": "bg",
             "ctype": "SpriteObjectData"
           },
           {
@@ -98,7 +98,7 @@
               "X": 132.0,
               "Y": 19.0
             },
-            "Name": "BitmapFontLabel_1",
+            "Name": "title",
             "ctype": "TextBMFontObjectData"
           },
           {
@@ -143,7 +143,7 @@
               "X": 49.0,
               "Y": 112.0
             },
-            "Name": "forward_2",
+            "Name": "button_next",
             "ctype": "SpriteObjectData"
           },
           {
@@ -188,7 +188,7 @@
               "X": 49.0,
               "Y": 112.0
             },
-            "Name": "previous_3",
+            "Name": "button_prev",
             "ctype": "SpriteObjectData"
           },
           {
@@ -206,8 +206,8 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": -16.7634,
-              "Y": 11.6
+              "X": -28.7643,
+              "Y": 49.6002
             },
             "Scale": {
               "ScaleX": 0.52,
@@ -223,10 +223,10 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -220.7634,
-            "RightMargin": -187.2366,
-            "TopMargin": -38.6,
-            "BottomMargin": -15.4,
+            "LeftMargin": -232.7643,
+            "RightMargin": -175.2357,
+            "TopMargin": -76.6002,
+            "BottomMargin": 22.6002,
             "Tag": 97,
             "ActionTag": 1521505156,
             "Size": {

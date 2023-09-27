@@ -15,6 +15,56 @@
         "Tag": 18,
         "Children": [
           {
+            "ClipAble": false,
+            "BackColorAlpha": 102,
+            "ComboBoxIndex": 1,
+            "SingleColor": {
+              "R": 26,
+              "G": 26,
+              "B": 26
+            },
+            "FirstColor": {
+              "R": 150,
+              "G": 200
+            },
+            "EndColor": {},
+            "ColorVector": {
+              "ScaleY": 1.0
+            },
+            "TouchEnable": true,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 59.0,
+              "Y": 344.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0615,
+              "Y": 0.5375
+            },
+            "PreSize": {
+              "X": 0.2083,
+              "Y": 0.3125
+            },
+            "LeftMargin": 59.0,
+            "RightMargin": 701.0,
+            "TopMargin": 96.0,
+            "BottomMargin": 344.0,
+            "Tag": 154,
+            "ActionTag": 1849136413,
+            "Size": {
+              "X": 200.0,
+              "Y": 200.0
+            },
+            "Name": "Panel_1",
+            "ctype": "PanelObjectData"
+          },
+          {
             "FileData": {
               "Type": "Normal",
               "Path": "ShopPopUpSprite.json",
@@ -25,8 +75,8 @@
             "InnerActionSpeed": 1.0,
             "AnchorPoint": {},
             "Position": {
-              "X": 483.9722,
-              "Y": 335.7508
+              "X": 483.936,
+              "Y": 335.744
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -44,10 +94,10 @@
             },
             "HorizontalEdge": "BothEdge",
             "VerticalEdge": "BothEdge",
-            "LeftMargin": 483.9722,
-            "RightMargin": 476.0278,
-            "TopMargin": 304.2492,
-            "BottomMargin": 335.7508,
+            "LeftMargin": 483.936,
+            "RightMargin": 476.064,
+            "TopMargin": 304.256,
+            "BottomMargin": 335.744,
             "Tag": 111,
             "ActionTag": 930533196,
             "Size": {
