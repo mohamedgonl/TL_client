@@ -7,10 +7,11 @@ var Building = GameObject.extend({
     timeDone: null,
     yesButton: null,
     noButton: null,
-    ctor: function () {
+    ctor: function (level,posX,posY) {
         this._super();
-        this.init();
-        this.setScale(GRID_SCALE*2);
+        this.level = level;
+        this._posX = posX;
+        this._posY = posY;
+        //this.setScale(GRID_SCALE*2);
     },
-
 });

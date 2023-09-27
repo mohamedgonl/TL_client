@@ -1,7 +1,6 @@
 
 var gv = gv || {};
 
-
 var DESIGN_RESOLUTION_WIDTH = 1136;
 var DESIGN_RESOLUTION_HEIGHT = 640;
 cc.game.onStart = function () {
@@ -33,8 +32,9 @@ cc.game.onStart = function () {
         gv.poolObjects = new PoolObject();
         //modules
         testnetwork.connector = new testnetwork.Connector(gv.gameClient);
-
         fr.view(LoginView);
     }, this);
 };
+
+
 cc.game.run();

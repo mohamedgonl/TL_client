@@ -1,16 +1,20 @@
 var GoldMine = Building.extend({
     _upper: null,
-    ctor: function () {
-        this._super();
+    _width: 3,
+    _height: 3,
+    ctor: function (level,posX,posY) {
+        this._super(level,posX,posY);
         this.loadSprite();
     },
 
     loadSprite: function ()
     {
-        this._body = new cc.Sprite(res.BUILDING.BODY.GOLD_MINE.BOTTOM.LEVEL_1);
-        this._grass = new cc.Sprite(res.BUILDING.GRASS.SIZE_3);
-        this._shadow = new cc.Sprite(res.BUILDING.SHADOW.SIZE_3);
-        this._upper = new cc.Sprite(res.BUILDING.BODY.GOLD_MINE.UPPER.LEVEL_1 + "/image0000.png");
+        this._body = new cc.Sprite(res_map.BUILDING.BODY.GOLD_MINE.BOTTOM.LEVEL_1);
+        this._grass = new cc.Sprite(res_map.BUILDING.GRASS.SIZE_3);
+        this._shadow = new cc.Sprite(res_map.BUILDING.SHADOW.SIZE_3);
+
+        //chưa làm ảnh động phần upper
+        this._upper = new cc.Sprite(res_map.BUILDING.BODY.GOLD_MINE.UPPER.LEVEL_1 + "/image0000.png");
 
         this._body.setAnchorPoint(0.5,0.5);
         this._grass.setAnchorPoint(0.5,0.5);

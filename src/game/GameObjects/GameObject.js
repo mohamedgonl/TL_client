@@ -9,5 +9,8 @@ var GameObject = cc.Sprite.extend({
         this._glass = null;
         this._shadow = null;
         this._objectType = null;
+    },
+    loadLevelAndSizeFromJson: function (json) {
+
     }
 });

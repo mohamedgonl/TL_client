@@ -1,7 +1,9 @@
 
 
-var MapLayer = cc.Layer.extend({
+var MapManager = cc.Layer.extend({
+    instance: null,
     ctor: function () {
+
         this._super();
         this.init();
     },
@@ -9,11 +11,55 @@ var MapLayer = cc.Layer.extend({
     init: function () {
 
         this.setScale(ZOOM_DEFAULT);
-
-
         this.addTouch();
         this.initBackground();
-        //this.test();
+    },
+
+    loadFromServer: function (buildings) {
+        this.listBuildings = buildings;
+
+        this.loadListBuildingToMap();
+    },
+
+    loadListBuildingToMap: function (){
+
+        for(var index in this.listBuildings){
+            var building = this.listBuildings[index];
+
+            var type = building.type;
+            var nameBuilding = changeTypeBuildingToBuilding(type);
+            var posX = building.posX;
+            var posY = building.posY;
+            var level = building.level;
+
+            // create building in map
+            if(nameBuilding != null)
+                this.createBuilding(nameBuilding,cc.p(posX,posY),level);
+        }
+    },
+
+    createBuilding: function (nameBuilding, gridPos, level, state) {
+
+        var building = eval("new " + nameBuilding + "(" + level + "," + gridPos.x + "," + gridPos.y + ")");
+        if(building == null) return;
+
+        var sizeX = building._width;
+        var sizeY = building._height;
+        var previousScaleOfScreen = this.getScale();
+        this.setScale(1);
+
+        var buildingCenterX = gridPos.x + sizeX / 2;
+        var buildingCenterY = gridPos.y + sizeY / 2;
+
+        building.setPosition(this.getScreenPosFromGridPos(cc.p(buildingCenterX, buildingCenterY)));
+
+        //
+        this.setScale(previousScaleOfScreen);
+        this.addChild(building,MAP_ZORDER_BUILDING);
+        // this.addChild(builderHut,MAP_ZORDER_BUILDING);
+        // this.addChild(townhall,MAP_ZORDER_BUILDING);
+        // this.addChild(armyCamp,MAP_ZORDER_BUILDING);
+        // this.addChild(goldMine,MAP_ZORDER_BUILDING);
 
 
     },
@@ -163,6 +209,22 @@ var MapLayer = cc.Layer.extend({
         return this.getGridPosFromMapPos(posInMap);
     },
 
+
+    getMapPosFromGridPos: function (gridPos) {
+
+        var posA = cc.pLerp(CORNER_BOTTOM,CORNER_RIGHT,gridPos.x / GRID_SIZE);
+        var posB = cc.pLerp(CORNER_BOTTOM,CORNER_LEFT,gridPos.y / GRID_SIZE);
+        var posC = cc.pLerp(CORNER_LEFT,CORNER_TOP,gridPos.x / GRID_SIZE);
+        var posD = cc.pLerp(CORNER_RIGHT,CORNER_TOP,gridPos.y / GRID_SIZE);
+
+        return cc.pIntersectPoint(posA,posC,posB,posD);
+    },
+
+    getScreenPosFromGridPos: function (posInGrid) {
+        var posInMap = this.getMapPosFromGridPos(posInGrid);
+        return this.getScreenPosFromMapPos(posInMap);
+    },
+
     //if moveView or Zoom out of map, move back
     limitBorder: function () {
         // return;
@@ -249,32 +311,15 @@ var MapLayer = cc.Layer.extend({
         this.addChild(townhall,MAP_ZORDER_BUILDING);
         this.addChild(armyCamp,MAP_ZORDER_BUILDING);
         this.addChild(goldMine,MAP_ZORDER_BUILDING);
-    },
-
-
-    setBuildingAtGridPos: function (building, gridPos , size) {
-        var mapPos = this.getMapPosFromGridPos(gridPos);
-        building.setPosition(mapPos);
-        this.addChild(building,MAP_ZORDER_BUILDING);
-    },
-
-
-    getMapPosFromGridPos: function (gridPos) {
-
-        var posA = cc.pLerp(CORNER_BOTTOM,CORNER_RIGHT,gridPos.x / GRID_SIZE);
-        var posB = cc.pLerp(CORNER_BOTTOM,CORNER_LEFT,gridPos.y / GRID_SIZE);
-        var posC = cc.pLerp(CORNER_LEFT,CORNER_TOP,gridPos.x / GRID_SIZE);
-        var posD = cc.pLerp(CORNER_RIGHT,CORNER_TOP,gridPos.y / GRID_SIZE);
-
-
-        // cc.log("posA:" + posA.x + " " + posA.y);
-        // cc.log("posB:" + posB.x + " " + posB.y);
-        // cc.log("posC:" + posC.x + " " + posC.y);
-        // cc.log("posD:" + posD.x + " " + posD.y);
-
-        return cc.pIntersectPoint(posA,posC,posB,posD);
     }
 
 
 });
 
+
+MapManager.Instance = function () {
+    if (MapManager.instance == null) {
+        MapManager.instance = new MapManager();
+    }
+    return MapManager.instance;
+}

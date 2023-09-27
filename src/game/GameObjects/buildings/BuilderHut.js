@@ -1,7 +1,8 @@
 var BuilderHut = Building.extend({
-
-    ctor: function () {
-        this._super();
+        _width: 2,
+        _height: 2,
+    ctor: function (level,posX,posY) {
+        this._super(level,posX,posY);
         this.init();
     },
 
@@ -18,9 +19,9 @@ var BuilderHut = Building.extend({
 
         //game object init
 
-        this._body = new cc.Sprite(res.BUILDING.BODY.BUILDER_HUT.LEVEL_1);
-        this._grass = new cc.Sprite(res.BUILDING.GRASS.SIZE_2);
-        this._shadow = new cc.Sprite(res.BUILDING.SHADOW.SIZE_2);
+        this._body = new cc.Sprite(res_map.BUILDING.BODY.BUILDER_HUT.LEVEL_1);
+        this._grass = new cc.Sprite(res_map.BUILDING.GRASS.SIZE_2);
+        this._shadow = new cc.Sprite(res_map.BUILDING.SHADOW.SIZE_2);
 
         this._body.setAnchorPoint(0.5,0.5);
         this._grass.setAnchorPoint(0.5,0.5);

@@ -1,18 +1,19 @@
 var Townhall = Building.extend({
     gold: null,
     elixir: null,
-
-    ctor: function () {
-        this._super();
+    _width: 4,
+    _height: 4,
+    ctor: function (level,posX,posY) {
+        this._super(level,posX,posY);
         this.loadSprite();
         this.init();
     },
 
     loadSprite: function ()
     {
-        this._body = new cc.Sprite(res.BUILDING.BODY.TOWNHALL.LEVEL_1);
-        this._grass = new cc.Sprite(res.BUILDING.GRASS.SIZE_4);
-        this._shadow = new cc.Sprite(res.BUILDING.SHADOW.SIZE_4);
+        this._body = new cc.Sprite(res_map.BUILDING.BODY.TOWNHALL.LEVEL_1);
+        this._grass = new cc.Sprite(res_map.BUILDING.GRASS.SIZE_4);
+        this._shadow = new cc.Sprite(res_map.BUILDING.SHADOW.SIZE_4);
 
         this._body.setAnchorPoint(0.5,0.5);
         this._grass.setAnchorPoint(0.5,0.5);
@@ -30,11 +31,6 @@ var Townhall = Building.extend({
         this.setAnchorPoint(0.5,0.5);
 
         //building
-        this.level = 1;
-        this.state = "idle";
-        this.timeStart = null;
-        this.timeDone = null;
-
         //game object init
 
 

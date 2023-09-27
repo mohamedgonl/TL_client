@@ -1,16 +1,16 @@
 var ArmyCamp = Building.extend({
-
-    ctor: function () {
-        this._super();
+    _width: 5,
+    _height: 5,
+    ctor: function (level,posX,posY) {
+        this._super(level,posX,posY);
         this.loadSprite();
         this.init();
     },
-
     loadSprite: function ()
     {
-        this._body = new cc.Sprite(res.BUILDING.BODY.ARMY_CAMP.LEVEL_1);
-        this._grass = new cc.Sprite(res.BUILDING.GRASS.SIZE_5);
-        this._shadow = new cc.Sprite(res.BUILDING.SHADOW.SIZE_5);
+        this._body = new cc.Sprite(res_map.BUILDING.BODY.ARMY_CAMP.LEVEL_1);
+        this._grass = new cc.Sprite(res_map.BUILDING.GRASS.SIZE_5);
+        this._shadow = new cc.Sprite(res_map.BUILDING.SHADOW.SIZE_5);
 
         this._body.setAnchorPoint(0.5,0.5);
         this._grass.setAnchorPoint(0.5,0.5);

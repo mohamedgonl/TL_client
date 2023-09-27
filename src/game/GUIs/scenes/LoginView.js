@@ -1,4 +1,5 @@
-var LoginView = cc.Layer.extend({
+
+var LoginView = cc.Scene.extend({
     ctor: function () {
         this._super();
         this.init();
@@ -69,7 +70,7 @@ var LoginView = cc.Layer.extend({
     },
 
     onReceiveMapInfo: function (mapInfo) {
-        GameManager.init(mapInfo.listBuildings);
+        MapManager.Instance().loadFromServer(mapInfo.listBuildings);
         this.loadedMapInfo = true;
         this.onReceiveData();
     },

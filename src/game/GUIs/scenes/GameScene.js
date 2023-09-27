@@ -8,7 +8,7 @@ var GameScene = cc.Scene.extend({
     },
 
     init: function () {
-        this.mapLayer = new MapLayer();
+        this.mapLayer = MapManager.Instance();
         this.addChild(this.mapLayer);
         this.popUpLayer = new PopupLayer();
         this.addChild(this.popUpLayer)

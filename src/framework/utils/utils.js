@@ -20,24 +20,19 @@ function findDistanceFromPointToLine(posA, posB, posC) {
 }
 
 //get intersect pos of 2 line AC and BD
-function getIntersectPos(posA, posB, posC, posD) {
-    const ABx = posB.x - posA.x;
-    const ABy = posB.y - posA.y;
-    const ACx = posC.x - posA.x;
-    const ACy = posC.y - posA.y;
-    const ADx = posD.x - posA.x;
-    const ADy = posD.y - posA.y;
 
-    const denominator = ABx * ADy - ABy * ADx;
-
-    if (denominator === 0) {
-        // Đường thẳng AC và BD là song song, không có giao điểm
-        return null;
+function changeTypeBuildingToBuilding(type) {
+    switch (type) {
+        case 'TOW_1':
+            return 'Townhall';
+        case 'BDH_1':
+            return 'BuilderHut';
+        case 'AMC_1':
+            return 'ArmyCamp';
+        case 'RES_1':
+            return 'GoldMine';
+        case 'RES_2':
+            return 'ElixirMine';
     }
-
-    const t = (ACx * ADy - ACy * ADx) / denominator;
-    const intersectX = posA.x + t * ABx;
-    const intersectY = posA.y + t * ABy;
-
-    return cc.p(intersectX, intersectY);
+    return null;
 }
