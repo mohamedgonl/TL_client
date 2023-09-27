@@ -23,5 +23,8 @@ var GameScene = cc.Scene.extend({
                 }
             }.bind(this)
         }, this);
+    },
+    getPopUpLayer: function () {
+        return this.popUpLayer;
     }
 });

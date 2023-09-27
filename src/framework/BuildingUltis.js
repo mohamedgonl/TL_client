@@ -7,6 +7,10 @@ var BuildingUltis = {
             case "BDH": {
                 return new BuilderHut();
             }
+
+            default : {
+                return new BuilderHut();
+            }
         }
 
     }

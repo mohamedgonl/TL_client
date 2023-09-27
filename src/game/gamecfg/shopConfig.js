@@ -197,7 +197,42 @@ const ShopItemsData = {
             price: 250,
             TH_require: 1
         },
-
+        {
+            id:"DEF_2",
+            name: "Chòi cung",
+            time: 900,
+            price_type: RESOURCE_TYPE.GOLD,
+            img: res_shop.DEF_2,
+            price: 1000,
+            TH_require: 2
+        },
+        {
+            id:"DEF_3",
+            name: "Máy bắn đá",
+            time: 28800,
+            price_type: RESOURCE_TYPE.GOLD,
+            img: res_shop.DEF_3,
+            price: 8000,
+            TH_require: 3
+        },
+        {
+            id:"DEF_5",
+            name: "Pháo cao xạ",
+            time: 18000,
+            price_type: RESOURCE_TYPE.GOLD,
+            img: res_shop.DEF_5,
+            price: 22500,
+            TH_require: 4
+        },
+        {
+            id:"WAL_1",
+            name: "Tường",
+            time: 0,
+            price_type: RESOURCE_TYPE.GOLD,
+            img: res_shop.WAL_1,
+            price: 200,
+            TH_require: 1
+        },
 
     ],
     'category_baove' : [
@@ -301,6 +336,19 @@ const ShopItemsData = {
             price_type: RESOURCE_TYPE.ELIXIR,
             img: res_shop.STO_1,
             price: 300,
+            detail: {
+                infoList : [
+                    {
+                        title: "Sức chứa: 0/500",
+                        icon: res.ICON.GOLD_CAPACITY,
+                        bar_percent : 0
+                    },
+                    {
+                        title: "Máu: 400",
+                        icon: res.ICON.HEART
+                    }
+                ]
+            }
         },
         {
             id:"STO_2",
@@ -309,6 +357,19 @@ const ShopItemsData = {
             price_type: RESOURCE_TYPE.GOLD,
             img: res_shop.STO_2,
             price: 300,
+            detail: {
+                infoList : [
+                    {
+                        title: "Sức chứa: 0/500",
+                        icon: res.ICON.ELIXIR_CAPACITY,
+                        bar_percent : 0
+                    },
+                    {
+                        title: "Máu: 400",
+                        icon: res.ICON.HEART
+                    }
+                ]
+            }
         },
         // {
         //     id:"RES_3",

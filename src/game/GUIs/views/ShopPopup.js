@@ -46,18 +46,19 @@ var ShopPopup = cc.Layer.extend({
         })
 
 
-
         backButton.addTouchEventListener(this.handleClickBack, this)
         closeButton.addTouchEventListener(this.handleClickClose, this)
 
         node.setPosition(cc.winSize.width/2, cc.winSize.height/2);
+
+
+
         this.addChild(node);
     },
 
     changePopUpTitle: function (title) {
         this._title.setString(title);
     },
-
 
     handleClickBack : function (sender, type) {
         ButtonEffect.scaleOnClick(sender, type);

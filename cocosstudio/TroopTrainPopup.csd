@@ -6,7 +6,7 @@
       <ObjectData Name="Node" Tag="92" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
-          <AbstractNodeData Name="background_1" ActionTag="2122758598" Tag="93" IconVisible="False" LeftMargin="-195.5000" RightMargin="-195.5000" TopMargin="-136.5000" BottomMargin="-136.5000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="bg" ActionTag="2122758598" Tag="93" IconVisible="False" LeftMargin="-195.5000" RightMargin="-195.5000" TopMargin="-136.5000" BottomMargin="-136.5000" ctype="SpriteObjectData">
             <Size X="391.0000" Y="273.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position />
@@ -17,7 +17,7 @@
             <FileData Type="Normal" Path="guis/train_troop_gui/background.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="BitmapFontLabel_1" ActionTag="1082237277" Tag="94" IconVisible="False" LeftMargin="-66.0000" RightMargin="-66.0000" TopMargin="-127.5300" BottomMargin="108.5300" LabelText="Nhà lính 3 (1/30)" ctype="TextBMFontObjectData">
+          <AbstractNodeData Name="title" ActionTag="1082237277" Tag="94" IconVisible="False" LeftMargin="-66.0000" RightMargin="-66.0000" TopMargin="-127.5300" BottomMargin="108.5300" LabelText="Nhà lính 3 (1/30)" ctype="TextBMFontObjectData">
             <Size X="132.0000" Y="19.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position Y="118.0300" />
@@ -27,7 +27,7 @@
             <PreSize X="0.0000" Y="0.0000" />
             <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="forward_2" ActionTag="-1916268795" Tag="95" IconVisible="False" LeftMargin="184.3000" RightMargin="-233.3000" TopMargin="-56.0000" BottomMargin="-56.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="button_next" ActionTag="-1916268795" Tag="95" IconVisible="False" LeftMargin="184.3000" RightMargin="-233.3000" TopMargin="-56.0000" BottomMargin="-56.0000" ctype="SpriteObjectData">
             <Size X="49.0000" Y="112.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="208.8000" />
@@ -38,7 +38,7 @@
             <FileData Type="Normal" Path="guis/train_troop_gui/forward.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="previous_3" ActionTag="-718687549" Tag="96" IconVisible="False" LeftMargin="-235.4800" RightMargin="186.4800" TopMargin="-56.0000" BottomMargin="-56.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="button_prev" ActionTag="-718687549" Tag="96" IconVisible="False" LeftMargin="-235.4800" RightMargin="186.4800" TopMargin="-56.0000" BottomMargin="-56.0000" ctype="SpriteObjectData">
             <Size X="49.0000" Y="112.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="-210.9800" />
@@ -49,10 +49,10 @@
             <FileData Type="Normal" Path="guis/train_troop_gui/previous.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="queue_4" ActionTag="1521505156" Tag="97" IconVisible="False" LeftMargin="-220.7634" RightMargin="-187.2366" TopMargin="-38.6000" BottomMargin="-15.4000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="queue_4" ActionTag="1521505156" Tag="97" IconVisible="False" LeftMargin="-232.7643" RightMargin="-175.2357" TopMargin="-76.6002" BottomMargin="22.6002" ctype="SpriteObjectData">
             <Size X="408.0000" Y="54.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-16.7634" Y="11.6000" />
+            <Position X="-28.7643" Y="49.6002" />
             <Scale ScaleX="0.5200" ScaleY="0.9600" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />

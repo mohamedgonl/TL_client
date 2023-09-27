@@ -17,6 +17,8 @@ var ShopItem = cc.Node.extend({
     },
 
 
+
+
     getItemWidth: function () {
         let itemWidth = this._itemNode.getChildByName("shop_bg");
         return itemWidth.getContentSize().width;
@@ -127,8 +129,12 @@ var ShopItem = cc.Node.extend({
 
     handleTouchInfoButton : function (sender, type) {
         ButtonEffect.scaleOnClick(sender, type);
-        let itemInfoLayer = new ItemInfoPopup(this._data);
-        // fr.getCurrentScreen().getPopUpLayer().addChild(itemInfoLayer);
+        if(type === ccui.Widget.TOUCH_ENDED) {
+            let itemInfoLayer = new ItemInfoPopup(this._data);
+            let gameScene = cc.director.getRunningScene();
+            let popUpLayer = gameScene.getPopUpLayer();
+            popUpLayer.addChild(itemInfoLayer);
+        }
 
     },
 

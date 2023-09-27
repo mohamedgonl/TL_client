@@ -9,8 +9,11 @@ var ItemInfoPopup = cc.Layer.extend({
         this.setInfo(data);
         node.setPosition(cc.winSize.width/2, cc.winSize.height/2);
         let buttonClose = node.getChildByName("button_close");
+
         buttonClose.addTouchEventListener(this.handleClose,this);
+
         this.addChild(node);
+        PopupEffect.appear(this._node);
 
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
@@ -19,10 +22,12 @@ var ItemInfoPopup = cc.Layer.extend({
                 return true;
             }
         }, this);
+
     },
 
     handleClose : function (sender, type) {
         ButtonEffect.scaleOnClick(sender,  type);
+        PopupEffect.disappear(this._node);
         this.removeFromParent();
     }
     ,
