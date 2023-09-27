@@ -49,6 +49,41 @@ var res = {
         SLOT_CATEGORY: 'res/guis/shopping/slot_catalogy.png',
         SHOP: 'res/guis/shopping/nen2.png'
     },
+    BUILDING: {
+        BODY: {
+            BUILDER_HUT: {
+                LEVEL_1:"res/Buildings/builder hut/idle/image0000.png",
+            },
+            TOWNHALL:{
+                LEVEL_1:'res/Buildings/townhall/TOW_1_1/idle/image0000.png',
+            },
+            ARMY_CAMP:{
+                LEVEL_1:'res/Buildings/army camp/AMC_1_1/idle/image0000.png',
+            },
+            GOLD_MINE:{
+                BOTTOM:{
+                    LEVEL_1: 'res/Buildings/gold mine/RES_1_1/idle/image0000.png',
+                },
+                UPPER:{
+                    LEVEL_1: 'res/Buildings/gold mine/RES_1_1/attack01',
+                }
+            }
+        },
+        SHADOW: {
+            SIZE_1: "res/Map/map_obj_bg/GRASS_1_Shadow.png",
+            SIZE_2: "res/Map/map_obj_bg/GRASS_2_Shadow.png",
+            SIZE_3: "res/Map/map_obj_bg/GRASS_3_Shadow.png",
+            SIZE_4: "res/Map/map_obj_bg/GRASS_4_Shadow.png",
+            SIZE_5: "res/Map/map_obj_bg/GRASS_5_Shadow.png",
+        },
+        GRASS: {
+            SIZE_1: "res/Map/map_obj_bg/BG_0/1.png",
+            SIZE_2: "res/Map/map_obj_bg/BG_0/2.png",
+            SIZE_3: "res/Map/map_obj_bg/BG_0/3.png",
+            SIZE_4: "res/Map/map_obj_bg/BG_0/4.png",
+            SIZE_5: "res/Map/map_obj_bg/BG_0/5.png",
+        }
+    }
 
 
 
@@ -170,6 +205,7 @@ var res_shop = {
     TRA_4: 'guis/icons/shop_gui/icon/TRA_4.png',
     TRA_6: 'guis/icons/shop_gui/icon/TRA_6.png',
     WAL_1: 'guis/icons/shop_gui/icon/WAL_1.png',
-
 }
+
+var res
 

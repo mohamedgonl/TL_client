@@ -7,7 +7,6 @@ var Building = GameObject.extend({
     timeDone: null,
     yesButton: null,
     noButton: null,
-
     ctor: function () {
         this._super();
         this.init();

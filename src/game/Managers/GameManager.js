@@ -9,7 +9,9 @@ var GameManager = cc.Class.extend({
 
     init: function (buildings) {
         this.listBuildings = buildings;
+       // cc.log("listBuildings" + JSON.stringify(this.listBuildings));
     },
+
 })
 
 

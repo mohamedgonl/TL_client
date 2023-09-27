@@ -55,6 +55,9 @@
         "src/game/GameObjects/GameObject.js",
         "src/game/GameObjects/buildings/Building.js",
         "src/game/GameObjects/buildings/BuilderHut.js",
+        "src/game/GameObjects/buildings/Townhall.js",
+        "src/game/GameObjects/buildings/ArmyCamp.js",
+        "src/game/GameObjects/buildings/GoldMine.js",
 
 
         "src/game/GUIs/views/ShopPopup.js",
