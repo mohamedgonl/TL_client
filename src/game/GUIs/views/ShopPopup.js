@@ -63,18 +63,23 @@ var ShopPopup = cc.Layer.extend({
             this.handleClickClose(sender, type);
         }
         else {
-            this.changePopUpTitle("CỬA HÀNG");
-            this._itemsWrapper.setVisible(false);
-            this._categoryWrapper.setVisible(true);
-            this._itemScrollView.removeAllChildren();
+           this.resetInitState();
         }
-
         return true;
     },
 
-    handleClickClose: function (sender, type) {
-        cc.log("Click close:::: ");
-        PopupEffect.disappear(this, ()=>{ this.setVisible(false)});
+    resetInitState : function () {
+        this.changePopUpTitle("CỬA HÀNG");
+        this._itemsWrapper.setVisible(false);
+        this._categoryWrapper.setVisible(true);
+        this._itemScrollView.removeAllChildren();
+    },
+
+    handleClickClose: function () {
+        PopupEffect.disappear(this, ()=>{
+            this.setVisible(false);
+            this.resetInitState();
+        });
         return true;
     },
 

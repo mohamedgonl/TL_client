@@ -9,6 +9,7 @@ gv.CMD.USER_LOGIN = 1;
 gv.CMD.USER_INFO = 1001;
 gv.CMD.MAP_INFO = 1002;
 gv.CMD.MOVE = 2001;
+gv.CMD.BUY_ITEM = 3001;
 
 testnetwork = testnetwork || {};
 testnetwork.packetMap = {};
@@ -60,7 +61,7 @@ CmdSendMapInfo = fr.OutPacket.extend(
     }
 )
 
-CmdSendLogin = fr.OutPacket.extend(
+CmdSendLogin= fr.OutPacket.extend(
     {
         ctor: function () {
             this._super();
@@ -74,6 +75,21 @@ CmdSendLogin = fr.OutPacket.extend(
         }
     }
 )
+CmdSendBuyItem = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.BUY_ITEM);
+        },
+        pack: function (itemData) {
+            this.packHeader();
+            this.putString(itemData.id)
+            this.updateSize();
+        }
+    }
+)
+
 
 CmdSendMove = fr.OutPacket.extend(
     {

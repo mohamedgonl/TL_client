@@ -6,7 +6,7 @@
       <ObjectData Name="Node" Tag="92" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
-          <AbstractNodeData Name="Panel_1" ActionTag="554110726" VisibleForFrame="False" Tag="249" IconVisible="False" LeftMargin="-568.0000" RightMargin="-568.0000" TopMargin="-320.0000" BottomMargin="-320.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+          <AbstractNodeData Name="Panel_1" ActionTag="554110726" Tag="249" IconVisible="False" LeftMargin="-568.0000" RightMargin="-568.0000" TopMargin="-320.0000" BottomMargin="-320.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="1136.0000" Y="640.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position />
@@ -79,6 +79,15 @@
                     <FileData Type="Normal" Path="guis/train_troop_gui/queue.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
+                  <AbstractNodeData Name="Node_1" ActionTag="233683240" Tag="115" IconVisible="True" LeftMargin="144.5000" RightMargin="-144.5000" TopMargin="-0.1600" BottomMargin="0.1600" ctype="SingleNodeObjectData">
+                    <Size X="0.0000" Y="0.0000" />
+                    <AnchorPoint />
+                    <Position X="144.5000" Y="0.1600" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                  </AbstractNodeData>
                   <AbstractNodeData Name="troop_training" ActionTag="1918524041" Tag="325" IconVisible="False" LeftMargin="115.5000" RightMargin="-173.5000" TopMargin="-29.1623" BottomMargin="-28.8377" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="28" Scale9Height="36" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="58.0000" Y="58.0000" />
                     <Children>
@@ -92,6 +101,16 @@
                         <PreSize X="0.6897" Y="0.6897" />
                         <FileData Type="Normal" Path="guis/train_troop_gui/cancel.png" Plist="" />
                         <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="troop_count" ActionTag="2057417277" Tag="322" IconVisible="False" LeftMargin="1.0000" RightMargin="29.0000" TopMargin="0.5000" BottomMargin="38.5000" LabelText="x3" ctype="TextBMFontObjectData">
+                        <Size X="28.0000" Y="19.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="15.0000" Y="48.0000" />
+                        <Scale ScaleX="0.8000" ScaleY="0.8000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.2586" Y="0.8276" />
+                        <PreSize X="0.4828" Y="0.3276" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -171,10 +190,10 @@
                         <PreSize X="0.1769" Y="0.3654" />
                         <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="done_now_price_icon" ActionTag="1277779497" Tag="303" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="88.9000" RightMargin="9.1000" TopMargin="11.5024" BottomMargin="11.4976" LeftEage="10" RightEage="10" TopEage="9" BottomEage="9" Scale9OriginX="10" Scale9OriginY="9" Scale9Width="12" Scale9Height="11" ctype="ImageViewObjectData">
+                      <AbstractNodeData Name="done_now_price_icon" ActionTag="1277779497" Tag="303" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="88.9000" RightMargin="9.1000" TopMargin="11.5000" BottomMargin="11.5000" LeftEage="10" RightEage="10" TopEage="9" BottomEage="9" Scale9OriginX="10" Scale9OriginY="9" Scale9Width="12" Scale9Height="11" ctype="ImageViewObjectData">
                         <Size X="32.0000" Y="29.0000" />
                         <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                        <Position X="120.9000" Y="25.9976" />
+                        <Position X="120.9000" Y="26.0000" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition X="0.9300" Y="0.5000" />
@@ -202,7 +221,7 @@
               <AbstractNodeData Name="list_troop_container" ActionTag="-574558814" Tag="301" IconVisible="True" LeftMargin="-48.7242" RightMargin="48.7242" TopMargin="43.2483" BottomMargin="-43.2483" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
-                  <AbstractNodeData Name="panel11" ActionTag="1259924322" Alpha="0" Tag="257" IconVisible="False" LeftMargin="-100.0000" RightMargin="-100.0000" TopMargin="-111.5000" BottomMargin="-111.5000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+                  <AbstractNodeData Name="panel11" ActionTag="1259924322" Alpha="0" Tag="257" IconVisible="False" LeftMargin="-100.0000" RightMargin="-100.0000" TopMargin="-111.5000" BottomMargin="-111.5000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                     <Size X="200.0000" Y="223.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position />
@@ -341,7 +360,7 @@
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="-23.6669" Y="0.0000" />
+                    <Position X="-23.6669" />
                     <Scale ScaleX="0.5000" ScaleY="0.5000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
@@ -408,7 +427,7 @@
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="37.6666" Y="0.0000" />
+                    <Position X="37.6666" />
                     <Scale ScaleX="0.5000" ScaleY="0.5000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
@@ -475,7 +494,7 @@
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="99.0000" Y="0.0000" />
+                    <Position X="99.0000" />
                     <Scale ScaleX="0.5000" ScaleY="0.5000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
@@ -498,16 +517,6 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="troop_count" ActionTag="2057417277" Tag="322" IconVisible="False" LeftMargin="39.8911" RightMargin="-67.8911" TopMargin="-67.7742" BottomMargin="48.7742" LabelText="x3" ctype="TextBMFontObjectData">
-            <Size X="28.0000" Y="19.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="53.8911" Y="58.2742" />
-            <Scale ScaleX="0.8000" ScaleY="0.8000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition />
-            <PreSize X="0.0000" Y="0.0000" />
-            <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

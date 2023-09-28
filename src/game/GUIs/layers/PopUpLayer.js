@@ -9,7 +9,6 @@ let PopupLayer = cc.Layer.extend({
     },
 
     init : function () {
-        cc.log("INIT POPUPLAYER");
         this._shopPopup =  new ShopPopup();
         this._shopPopup.setVisible(false);
         this.addChild( this._shopPopup);
@@ -17,12 +16,17 @@ let PopupLayer = cc.Layer.extend({
 
 
     appear: function (popUpId) {
-        this._shopPopup.setVisible(true);
-        PopupEffect.appear(this._shopPopup)
+        if(popUpId === "shop"){
+            this.setVisible(true);
+            this._shopPopup.setVisible(true);
+            PopupEffect.appear(this._shopPopup);
+        }
+
     },
 
     disappear: function () {
-
+        this._shopPopup.handleClickClose();
+        this.setVisible(false);
     },
 
     push: function (popup) {

@@ -100,54 +100,54 @@ const ShopItemsData = {
         // },
     ],
     'category_trangtri' : [
-        {
-            id: "DEC_1",
-            name: "Tượng cung thủ",
-            img: res_shop.DEC_1,
-            price_type: RESOURCE_TYPE.G,
-            price: 50,
-            time: 0
-        },
-        {
-            id: "DEC_2",
-            name: "Tượng chiến binh",
-            img: res_shop.DEC_2,
-            price_type: RESOURCE_TYPE.G,
-            price: 50,
-            time: 0
-        },
-        {
-            id: "DEC_3",
-            name: "Cờ hiệu 1",
-            img: res_shop.DEC_3,
-            price_type: RESOURCE_TYPE.G,
-            price: 60,
-            time: 0
-        },
-        {
-            id: "DEC_4",
-            name: "Cờ hiệu 2",
-            img: res_shop.DEC_4,
-            price_type: RESOURCE_TYPE.G,
-            price: 50,
-            time: 0
-        },
-        {
-            id: "DEC_5",
-            name: "Hoa đỏ",
-            img: res_shop.DEC_5,
-            price_type: RESOURCE_TYPE.G,
-            price: 40,
-            time: 0
-        },
-        {
-            id: "DEC_6",
-            name: "Hoa cúc",
-            img: res_shop.DEC_6,
-            price_type: RESOURCE_TYPE.G,
-            price: 80,
-            time: 0
-        },
+        // {
+        //     id: "DEC_1",
+        //     name: "Tượng cung thủ",
+        //     img: res_shop.DEC_1,
+        //     price_type: RESOURCE_TYPE.G,
+        //     price: 50,
+        //     time: 0
+        // },
+        // {
+        //     id: "DEC_2",
+        //     name: "Tượng chiến binh",
+        //     img: res_shop.DEC_2,
+        //     price_type: RESOURCE_TYPE.G,
+        //     price: 50,
+        //     time: 0
+        // },
+        // {
+        //     id: "DEC_3",
+        //     name: "Cờ hiệu 1",
+        //     img: res_shop.DEC_3,
+        //     price_type: RESOURCE_TYPE.G,
+        //     price: 60,
+        //     time: 0
+        // },
+        // {
+        //     id: "DEC_4",
+        //     name: "Cờ hiệu 2",
+        //     img: res_shop.DEC_4,
+        //     price_type: RESOURCE_TYPE.G,
+        //     price: 50,
+        //     time: 0
+        // },
+        // {
+        //     id: "DEC_5",
+        //     name: "Hoa đỏ",
+        //     img: res_shop.DEC_5,
+        //     price_type: RESOURCE_TYPE.G,
+        //     price: 40,
+        //     time: 0
+        // },
+        // {
+        //     id: "DEC_6",
+        //     name: "Hoa cúc",
+        //     img: res_shop.DEC_6,
+        //     price_type: RESOURCE_TYPE.G,
+        //     price: 80,
+        //     time: 0
+        // },
     ],
     'category_quandoi' : [
         {
@@ -346,7 +346,9 @@ const ShopItemsData = {
                     {
                         title: "Máu: 400",
                         icon: res.ICON.HEART
-                    }
+                    },
+
+
                 ]
             }
         },

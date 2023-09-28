@@ -15,7 +15,8 @@ var res = {
     BUTTON: {
         BACK: 'res/guis/shopping/back.png',
         CLOSE: 'res/guis/shopping/close.png',
-        INFO: 'res/guis/shopping/info.png'
+        INFO: 'res/guis/shopping/info.png',
+        SHOP: "res/guis/Main_Gui/shop.png"
     },
     ICON: {
         ELIXIR: 'res/guis/shopping/elixir.png',

@@ -134,7 +134,6 @@ var ShopItem = cc.Node.extend({
         let popUpLayer = gameScene.getPopUpLayer();
         popUpLayer.addChild(itemInfoLayer);
 
-
     },
 
     handleTouchBuyButton : function (sender, type) {
