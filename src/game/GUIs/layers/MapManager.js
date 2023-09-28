@@ -1,7 +1,8 @@
-
+ConfigManager.Instance();
 
 var MapManager = cc.Layer.extend({
     instance: null,
+
     ctor: function () {
 
         this._super();
@@ -11,13 +12,12 @@ var MapManager = cc.Layer.extend({
     init: function () {
 
         this.setScale(ZOOM_DEFAULT);
-        this.addTouch();
+        this.addEvent();
         this.initBackground();
     },
 
     loadFromServer: function (buildings) {
         this.listBuildings = buildings;
-
         this.loadListBuildingToMap();
     },
 
@@ -40,11 +40,20 @@ var MapManager = cc.Layer.extend({
 
     createBuilding: function (nameBuilding, gridPos, level, state) {
 
-        var building = eval("new " + nameBuilding + "(" + level + "," + gridPos.x + "," + gridPos.y + ")");
+        var building;
+        //if obstacle , nameBuilding = Obstacle_1, Obstacle_2, ...
+        if(nameBuilding.substring(0,3) === 'OBS') {
+
+            building = eval( 'new Obstacle(' + nameBuilding.substring(4) + ',' + gridPos.x + ',' + gridPos.y + ')' );
+        }
+        else {
+            building = eval("new " + nameBuilding + "(" + level + "," + gridPos.x + "," + gridPos.y + ")");
+        }
         if(building == null) return;
 
         var sizeX = building._width;
         var sizeY = building._height;
+
         var previousScaleOfScreen = this.getScale();
         this.setScale(1);
 
@@ -56,15 +65,10 @@ var MapManager = cc.Layer.extend({
         //
         this.setScale(previousScaleOfScreen);
         this.addChild(building,MAP_ZORDER_BUILDING);
-        // this.addChild(builderHut,MAP_ZORDER_BUILDING);
-        // this.addChild(townhall,MAP_ZORDER_BUILDING);
-        // this.addChild(armyCamp,MAP_ZORDER_BUILDING);
-        // this.addChild(goldMine,MAP_ZORDER_BUILDING);
-
 
     },
 
-    addTouch: function () {
+    addEvent: function () {
 
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
@@ -143,21 +147,21 @@ var MapManager = cc.Layer.extend({
     //
     touch: function (touch) {
 
-        var locationInWorld = touch.getLocation();
-
-        var locationInMap = this.getMapPosFromScreenPos(locationInWorld);
-
-        var screenPos = this.getScreenPosFromMapPos(locationInMap);
-
-
-
-        var x = locationInMap.x;
-        var y = locationInMap.y;
-        x = Math.floor(x);
-        y = Math.floor(y);
-         //cc.log("before " + x + " " + y);
-        var check = this.getGridFromScreenPos(locationInWorld);
-         //cc.log("after " +check.x + " " + check.y);
+        // var locationInWorld = touch.getLocation();
+        //
+        // var locationInMap = this.getMapPosFromScreenPos(locationInWorld);
+        //
+        // var screenPos = this.getScreenPosFromMapPos(locationInMap);
+        //
+        //
+        //
+        // var x = locationInMap.x;
+        // var y = locationInMap.y;
+        // x = Math.floor(x);
+        // y = Math.floor(y);
+        //  //cc.log("before " + x + " " + y);
+        // var check = this.getGridFromScreenPos(locationInWorld);
+        //  //cc.log("after " +check.x + " " + check.y);
 
     },
 
@@ -297,20 +301,7 @@ var MapManager = cc.Layer.extend({
     },
 
     test: function (){
-        var builderHut = new BuilderHut();
-        var townhall = new Townhall();
-        var armyCamp = new ArmyCamp();
-        var goldMine = new GoldMine();
-        this.setScale(1)
-        builderHut.setPosition( this.getScreenPosFromMapPos(this.getMapPosFromGridPos(cc.p(1,1))));
-        townhall.setPosition( this.getScreenPosFromMapPos(this.getMapPosFromGridPos(cc.p(20,20))));
-        armyCamp.setPosition( this.getScreenPosFromMapPos(this.getMapPosFromGridPos(cc.p(10,10))));
-        goldMine.setPosition( this.getScreenPosFromMapPos(this.getMapPosFromGridPos(cc.p(30,30))));
-        this.setScale(ZOOM_DEFAULT)
-        this.addChild(builderHut,MAP_ZORDER_BUILDING);
-        this.addChild(townhall,MAP_ZORDER_BUILDING);
-        this.addChild(armyCamp,MAP_ZORDER_BUILDING);
-        this.addChild(goldMine,MAP_ZORDER_BUILDING);
+
     }
 
 

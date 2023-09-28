@@ -8,9 +8,9 @@ var ArmyCamp = Building.extend({
     },
     loadSprite: function ()
     {
-        this._body = new cc.Sprite(res_map.BUILDING.BODY.ARMY_CAMP.LEVEL_1);
-        this._grass = new cc.Sprite(res_map.BUILDING.GRASS.SIZE_5);
-        this._shadow = new cc.Sprite(res_map.BUILDING.SHADOW.SIZE_5);
+        this._body = new cc.Sprite(res_map.SPRITE.BODY.ARMY_CAMP.LEVEL_1);
+        this._grass = new cc.Sprite(res_map.SPRITE.GRASS.BUILDING.SIZE_5);
+        this._shadow = new cc.Sprite(res_map.SPRITE.SHADOW.SIZE_5);
 
         this._body.setAnchorPoint(0.5,0.5);
         this._grass.setAnchorPoint(0.5,0.5);

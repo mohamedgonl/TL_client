@@ -12,6 +12,6 @@ var Building = GameObject.extend({
         this.level = level;
         this._posX = posX;
         this._posY = posY;
-        //this.setScale(GRID_SCALE*2);
+
     },
 });

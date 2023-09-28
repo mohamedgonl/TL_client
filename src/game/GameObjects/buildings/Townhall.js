@@ -6,14 +6,15 @@ var Townhall = Building.extend({
     ctor: function (level,posX,posY) {
         this._super(level,posX,posY);
         this.loadSprite();
+        this.loadBackground();
         this.init();
     },
 
     loadSprite: function ()
     {
-        this._body = new cc.Sprite(res_map.BUILDING.BODY.TOWNHALL.LEVEL_1);
-        this._grass = new cc.Sprite(res_map.BUILDING.GRASS.SIZE_4);
-        this._shadow = new cc.Sprite(res_map.BUILDING.SHADOW.SIZE_4);
+        this._body = new cc.Sprite(res_map.SPRITE.BODY.TOWNHALL.LEVEL_1);
+        this._grass = new cc.Sprite(res_map.SPRITE.GRASS.BUILDING.SIZE_4);
+        this._shadow = new cc.Sprite(res_map.SPRITE.SHADOW.SIZE_4);
 
         this._body.setAnchorPoint(0.5,0.5);
         this._grass.setAnchorPoint(0.5,0.5);
@@ -24,6 +25,10 @@ var Townhall = Building.extend({
         this.addChild(this._body, 2);
         this.addChild(this._grass, 0);
         this.addChild(this._shadow, 1);
+    },
+    loadBackground: function ()
+    {
+
     },
 
     init: function (){

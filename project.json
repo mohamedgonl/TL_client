@@ -52,12 +52,15 @@
         "src/game/gamecfg/config.js",
 
 
+        "src/game/Managers/ConfigManager.js",
+
         "src/game/GameObjects/GameObject.js",
         "src/game/GameObjects/buildings/Building.js",
         "src/game/GameObjects/buildings/BuilderHut.js",
         "src/game/GameObjects/buildings/Townhall.js",
         "src/game/GameObjects/buildings/ArmyCamp.js",
         "src/game/GameObjects/buildings/GoldMine.js",
+        "src/game/GameObjects/Obstacle.js",
 
 
         "src/game/GUIs/views/ShopPopup.js",
@@ -72,6 +75,7 @@
         "src/game/GUIs/scenes/GameScene.js",
 
         "src/game/Managers/PlayerInfoManager.js",
+
 
         "src/framework/ButtonEffect.js",
         "src/framework/CocosstudioUltis.js"

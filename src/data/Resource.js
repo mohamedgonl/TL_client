@@ -170,7 +170,7 @@ var res_shop = {
 
 
 var res_map = {
-    BUILDING: {
+    SPRITE: {
         BODY: {
             BUILDER_HUT: {
                 LEVEL_1:"res/Buildings/builder hut/idle/image0000.png",
@@ -188,7 +188,8 @@ var res_map = {
                 UPPER:{
                     LEVEL_1: 'res/Buildings/gold mine/RES_1_1/attack01',
                 }
-            }
+            },
+            OBS_LINK: "res/Buildings/obstacle/OBS_",
         },
         SHADOW: {
             SIZE_1: "res/Map/map_obj_bg/GRASS_1_Shadow.png",
@@ -198,15 +199,23 @@ var res_map = {
             SIZE_5: "res/Map/map_obj_bg/GRASS_5_Shadow.png",
         },
         GRASS: {
-            SIZE_1: "res/Map/map_obj_bg/BG_0/1.png",
-            SIZE_2: "res/Map/map_obj_bg/BG_0/2.png",
-            SIZE_3: "res/Map/map_obj_bg/BG_0/3.png",
-            SIZE_4: "res/Map/map_obj_bg/BG_0/4.png",
-            SIZE_5: "res/Map/map_obj_bg/BG_0/5.png",
+            BUILDING: {
+                SIZE_1: "res/Map/map_obj_bg/BG_0/1.png",
+                SIZE_2: "res/Map/map_obj_bg/BG_0/2.png",
+                SIZE_3: "res/Map/map_obj_bg/BG_0/3.png",
+                SIZE_4: "res/Map/map_obj_bg/BG_0/4.png",
+                SIZE_5: "res/Map/map_obj_bg/BG_0/5.png",
+            },
+            OBSTACLE: {
+                SIZE_2:"res/Map/map_obj_bg/GRASS_0_2_OBS.png",
+                SIZE_3:"res/Map/map_obj_bg/GRASS_0_3_OBS.png",
+            },
+
+
         }
     },
     JSON:{
-
+        OBSTACLE: "res/configs/Obstacle.json",
     }
 
 }

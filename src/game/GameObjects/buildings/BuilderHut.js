@@ -19,9 +19,9 @@ var BuilderHut = Building.extend({
 
         //game object init
 
-        this._body = new cc.Sprite(res_map.BUILDING.BODY.BUILDER_HUT.LEVEL_1);
-        this._grass = new cc.Sprite(res_map.BUILDING.GRASS.SIZE_2);
-        this._shadow = new cc.Sprite(res_map.BUILDING.SHADOW.SIZE_2);
+        this._body = new cc.Sprite(res_map.SPRITE.BODY.BUILDER_HUT.LEVEL_1);
+        this._grass = new cc.Sprite(res_map.SPRITE.GRASS.BUILDING.SIZE_2);
+        this._shadow = new cc.Sprite(res_map.SPRITE.SHADOW.SIZE_2);
 
         this._body.setAnchorPoint(0.5,0.5);
         this._grass.setAnchorPoint(0.5,0.5);

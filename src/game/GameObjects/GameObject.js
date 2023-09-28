@@ -6,11 +6,8 @@ var GameObject = cc.Sprite.extend({
         this._posY = null;
         this._name = null;
         this._body = null;
-        this._glass = null;
+        this._grass = null;
         this._shadow = null;
         this._objectType = null;
     },
-    loadLevelAndSizeFromJson: function (json) {
-
-    }
 });
