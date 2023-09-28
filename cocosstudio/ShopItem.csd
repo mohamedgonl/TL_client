@@ -168,7 +168,7 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="button_info" ActionTag="-1149171893" VisibleForFrame="False" Tag="98" IconVisible="False" LeftMargin="65.1458" RightMargin="-102.1458" TopMargin="-155.2693" BottomMargin="116.2693" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="7" Scale9Height="17" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="button_info" ActionTag="-1149171893" VisibleForFrame="False" UserData="-press_action" Tag="98" IconVisible="False" LeftMargin="65.1458" RightMargin="-102.1458" TopMargin="-155.2693" BottomMargin="116.2693" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="7" Scale9Height="17" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="37.0000" Y="39.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="83.6458" Y="135.7693" />

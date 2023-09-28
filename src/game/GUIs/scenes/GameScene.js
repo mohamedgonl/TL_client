@@ -16,13 +16,27 @@ var GameScene = cc.Scene.extend({
 
         let shopButton = new ccui.Button(res.BUTTON.SHOP,"","");
         shopButton.setPosition(cc.winSize.width - shopButton.getContentSize().width / 2, shopButton.getContentSize().height / 2);
+
+        var trainTroopButton = new ccui.Button(res.BUTTON.TRAIN_TROOP, "", "");
+        trainTroopButton.setPosition(trainTroopButton.getContentSize().width / 2, trainTroopButton.getContentSize().height / 2);
+        this.addChild(trainTroopButton);
         this.addChild(shopButton);
+
         shopButton.addClickEventListener(()=>{
             if(this.popUpLayer.isVisible()) {
                 this.popUpLayer.disappear();
             }
             else {
                 this.popUpLayer.appear("shop");
+            }
+        })
+
+        trainTroopButton.addClickEventListener(()=>{
+            if(this.popUpLayer.isVisible()) {
+                this.popUpLayer.disappear();
+            }
+            else {
+                this.popUpLayer.appear("train");
             }
         })
     },

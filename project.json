@@ -48,8 +48,11 @@
         "src/modules/testnetwork/network/Packet.js",
         "src/modules/testnetwork/ScreenNetwork.js",
 
+        "src/game/gamecfg/ParsedConfigModel.js",
+
         "src/game/gamecfg/shopConfig.js",
         "src/game/gamecfg/config.js",
+        "src/game/gamecfg/trainningConfig.js",
 
 
         "src/game/GameObjects/GameObject.js",
@@ -61,6 +64,8 @@
         "src/game/GUIs/views/ItemInfoPopup.js",
         "src/game/GUIs/components/ShopItem.js",
         "src/game/GUIs/layers/LoginView.js",
+        "src/game/GUIs/views/TrainTroopPopup.js",
+        "src/game/GUIs/components/TroopListItem.js",
 
 
 
@@ -75,7 +80,5 @@
         "src/framework/CocosstudioUltis.js",
         "src/framework/BuildingUltis.js",
         "src/framework/PopupEffect.js"
-
-
     ]
 }

@@ -1705,6 +1705,7 @@
         <Project Name="ShopPopUpLayer.csd" Type="Layer" />
         <Project Name="ShopPopUpSprite.csd" Type="Node" />
         <Project Name="TroopTrainPopup.csd" Type="Node" />
+        <Project Name="TroopListItem.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

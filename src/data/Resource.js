@@ -16,7 +16,8 @@ var res = {
         BACK: 'res/guis/shopping/back.png',
         CLOSE: 'res/guis/shopping/close.png',
         INFO: 'res/guis/shopping/info.png',
-        SHOP: "res/guis/Main_Gui/shop.png"
+        SHOP: "res/guis/Main_Gui/shop.png",
+        TRAIN_TROOP: "res/guis/Main_Gui/003left_ic05.png",
     },
     ICON: {
         ELIXIR: 'res/guis/shopping/elixir.png',
@@ -116,6 +117,9 @@ var res_ui = {
     ITEM_INFO: "ItemInfoPopup.json",
     INFO_PROCESS_BAR: "ProcessBar.json",
     LOGIN_SCENE: "LoginScene.json",
+    TRAIN_TROOP: "TroopTrainPopup.json",
+    TROOPS_LIST_ITEM: "TroopListItem.json",
+    TROOPS_TRAINING_ITEM: "TroopTrainingItem.json",
 }
 
 var res_shop = {
@@ -172,5 +176,10 @@ var res_shop = {
     TRA_6: 'guis/icons/shop_gui/icon/TRA_6.png',
     WAL_1: 'guis/icons/shop_gui/icon/WAL_1.png',
 
+}
+
+var res_cf = {
+    TROOP_BASE: "configs/TroopBase.json",
+    TROOP: "configs/Troop.json"
 }
 
