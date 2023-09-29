@@ -28,5 +28,15 @@
         <EnableHTML5Advanced Value="False" />
       </Value>
     </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="ItemInfoPopup.csd" />
+          <FilePathData Path="ShopItem.csd" />
+          <FilePathData Path="NotiPopup.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="NotiPopup.csd" />
+      </Value>
+    </Item>
   </Properties>
 </UserData>

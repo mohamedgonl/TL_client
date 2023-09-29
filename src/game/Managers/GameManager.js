@@ -10,6 +10,12 @@ var GameManager = cc.Class.extend({
     init: function (buildings) {
         this.listBuildings = buildings;
     },
+
+    getTownHall:  function () {
+        return {
+            level: 1
+        }
+    }
 })
 
 

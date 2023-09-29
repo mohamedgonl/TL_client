@@ -17,7 +17,8 @@ const TROOPS_LIST = [
 const TROOP_SMALL_ICON_BASE_URL = "res/guis/train_troop_gui/small_icon/";
 const TROOP_BIG_ICON_BASE_URL = "res/guis/train_troop_gui/icon/";
 
-const LIST_TROOP_START_POS_X = -85;
+const LIST_TROOP_START_POS = {x:95, y: 225};
+const LIST_TROOP_TRAINING_START_POS= {x: 360, y: 67};
 
 const TROOP_ITEM_SPACING = 10;
 const TROOP_ITEM_SIZE = 112;

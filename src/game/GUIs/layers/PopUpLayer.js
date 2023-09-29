@@ -20,21 +20,38 @@ let PopupLayer = cc.Layer.extend({
     },
 
 
-    appear: function (popUpId) {
+    appear: function (popUpId, data) {
         this.setVisible(true);
-        if(popUpId === "shop"){
-            this._shopPopup.setVisible(true);
-            PopupEffect.appear(this._shopPopup);
+        let popupScreen;
+        switch (popUpId) {
+            case "shop": {
+                popupScreen = this._shopPopup;
+                break;
+            }
+            case "train": {
+                popupScreen = this._trainTroopPopup;
+                break;
+            }
+            case "pop_up" :  {
+
+            }
         }
-        if(popUpId === "train") {
-            this._trainTroopPopup.setVisible(true);
-            PopupEffect.appear(this._trainTroopPopup);
-        }
+        popupScreen.setVisible(true);
+        PopupEffect.appear(popupScreen);
 
     },
 
-    disappear: function () {
-        this._shopPopup.handleClickClose();
+    disappear: function (popUpId) {
+        switch (popUpId) {
+            case "shop": {
+                this._shopPopup.handleClickClose();
+                break;
+            }
+            case "train": {
+                break;
+            }
+        }
+
         this.setVisible(false);
     },
 

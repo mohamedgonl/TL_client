@@ -109,11 +109,10 @@
               "Plist": ""
             },
             "AnchorPoint": {
-              "ScaleX": 0.5,
               "ScaleY": 0.5
             },
             "Position": {
-              "X": -42.9207,
+              "X": -95.0,
               "Y": 13.9271
             },
             "Scale": {
@@ -130,8 +129,8 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -42.9207,
-            "RightMargin": 42.9207,
+            "LeftMargin": -95.0,
+            "RightMargin": 95.0,
             "TopMargin": -13.9271,
             "BottomMargin": 13.9271,
             "Tag": 179,

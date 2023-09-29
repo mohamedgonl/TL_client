@@ -6,7 +6,7 @@
 var res = {
     FONT : {
         FISTA: {
-
+            "16": "res/fonts/fista_16_non.fnt"
         },
          SOJI: {
             "16": 'res/fonts/soji_12.fnt'
@@ -34,13 +34,14 @@ var res = {
         TYPE_DEFENSE: 'res/guis/shopping/type_defense.png',
         TYPE_RES: 'res/guis/shopping/type_res.png',
         TYPE_SHIELD: 'res/guis/shopping/type_shield.png',
-        HEART: 'res/guis/upgrade_building_gui/small/Heal_icon.png',
+        HEART: 'res/guis/upgrade_building_gui/small/Heal_Icon.png',
         GOLD_CAPACITY: 'res/guis/upgrade_building_gui/small/Gold_Capacity_Icon.png',
         GOLD_PD_RATE: 'res/guis/upgrade_building_gui/small/Gold_ProductionRate_Icon.png',
         ELIXIR_CAPACITY: 'res/guis/upgrade_building_gui/small/Elixir_Capacity_Icon.png',
         ELIXIR_PD_RATE: 'res/guis/upgrade_building_gui/small/Elixir_ProductionRate_Icon.png',
         TROOP_CAPACITY: 'res/guis/upgrade_building_gui/small/TroopCapacity_Icon.png',
-        SPELL_CAPACITY: 'res/guis/upgrade_building_gui/small/Spell_Capacity_Icon',
+        SPELL_CAPACITY: 'res/guis/upgrade_building_gui/small/Spell_Capacity_Icon.png',
+        DAMAGE: 'res/guis/upgrade_building_gui/small/Damage_Icon.png',
 
     },
     BACKGROUND: {
@@ -120,6 +121,7 @@ var res_ui = {
     TRAIN_TROOP: "TroopTrainPopup.json",
     TROOPS_LIST_ITEM: "TroopListItem.json",
     TROOPS_TRAINING_ITEM: "TroopTrainingItem.json",
+    NOTI_POPUP: "NotiPopup.json",
 }
 
 var res_shop = {
@@ -179,7 +181,18 @@ var res_shop = {
 }
 
 var res_cf = {
-    TROOP_BASE: "configs/TroopBase.json",
-    TROOP: "configs/Troop.json"
+    TOWN_HALL: "res/configs/TownHall.json",
+    TROOP_BASE: "res/configs/TroopBase.json",
+    AMC: "res/configs/ArmyCamp.json",
+    BDH: "res/configs/BuilderHut.json",
+    CLC: "res/configs/ClanCastle.json",
+    DF: "res/configs/Defence.json",
+    INIT_GAME: "res/configs/InitGame.json",
+    LAB: "res/configs/Laboratory.json",
+    OBS: "res/configs/Obstacle.json",
+    RES: "res/configs/Resource.json",
+    STO: "res/configs/Storage.json",
+    WAL: "res/configs/Wall.json",
+    TROOP: "res/configs/Troop.json"
 }
 

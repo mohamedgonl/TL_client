@@ -69,7 +69,7 @@ var ItemInfoPopup = cc.Layer.extend({
 
                     if(_infoList[i].bar_percent !== undefined){
                         let processBar = newProcessBar.getChildByName("process");
-                        processBar.setPercent(_infoList[i].bar_percent);
+                        processBar.setPercent(_infoList[i].bar_percent*100);
                     }
 
                 }
@@ -78,11 +78,15 @@ var ItemInfoPopup = cc.Layer.extend({
 
         // adding item image
         let itemIcon = this._node.getChildByName("item_image");
-        let itemIconObj = BuildingUltis.getBuildingByConfigId(this._data.id);
+        let itemIconObj = BuildingUltis.getBuildingByConfigId(this._data.cfgId);
         itemIconObj.setScale(SHOP_ITEM_SCALE);
         itemIcon.addChild(itemIconObj);
 
         // adding description
+        let content = this._node.getChildByName("content");
+        let label = new cc.LabelBMFont(this._data.detail.description, res.FONT.FISTA["16"], 600, cc.TEXT_ALIGNMENT_CENTER);
+        label.setColor(cc.color(155, 75, 10))
+        content.addChild(label)
 
     }
 })

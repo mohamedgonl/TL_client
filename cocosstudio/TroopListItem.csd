@@ -9,15 +9,15 @@
           <AbstractNodeData Name="troop_item" ActionTag="650000912" Tag="157" IconVisible="False" LeftMargin="-56.0000" RightMargin="-56.0000" TopMargin="-55.4995" BottomMargin="-55.5005" ctype="SpriteObjectData">
             <Size X="112.0000" Y="111.0000" />
             <Children>
-              <AbstractNodeData Name="troop_image" ActionTag="-998007522" Tag="158" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="9.0000" RightMargin="9.0000" TopMargin="6.7800" BottomMargin="11.2200" LeftEage="31" RightEage="31" TopEage="30" BottomEage="30" Scale9OriginX="31" Scale9OriginY="30" Scale9Width="32" Scale9Height="33" ctype="ImageViewObjectData">
-                <Size X="94.0000" Y="93.0000" />
+              <AbstractNodeData Name="troop_image" ActionTag="-998007522" Tag="158" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="33.0000" RightMargin="33.0000" TopMargin="30.2800" BottomMargin="34.7200" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="16" Scale9Height="16" ctype="ImageViewObjectData">
+                <Size X="46.0000" Y="46.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="56.0000" Y="57.7200" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.5200" />
-                <PreSize X="0.8393" Y="0.8378" />
-                <FileData Type="Normal" Path="guis/train_troop_gui/icon/ARM_1.png" Plist="" />
+                <PreSize X="0.4107" Y="0.4144" />
+                <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="level" ActionTag="-1507544317" Tag="167" IconVisible="False" LeftMargin="18.3839" RightMargin="93.6161" TopMargin="62.1306" BottomMargin="48.8694" LabelText="" ctype="TextBMFontObjectData">
                 <Size X="0.0000" Y="0.0000" />
@@ -44,17 +44,27 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
+              <AbstractNodeData Name="count_string" ActionTag="-1368943798" Tag="168" IconVisible="False" LeftMargin="12.5278" RightMargin="64.4722" TopMargin="4.9610" BottomMargin="81.0390" LabelText="x7" ctype="TextBMFontObjectData">
+                <Size X="35.0000" Y="25.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="30.0278" Y="93.5390" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.2681" Y="0.8427" />
+                <PreSize X="0.3125" Y="0.2252" />
+                <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
+              </AbstractNodeData>
               <AbstractNodeData Name="cost_container" ActionTag="1542854071" Tag="160" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="8.5000" RightMargin="8.5000" TopMargin="77.3000" BottomMargin="10.7000" ctype="SpriteObjectData">
                 <Size X="95.0000" Y="23.0000" />
                 <Children>
-                  <AbstractNodeData Name="cost" ActionTag="1418602667" Tag="161" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="33.5000" RightMargin="33.5000" TopMargin="2.0000" BottomMargin="2.0000" LabelText="25" ctype="TextBMFontObjectData">
-                    <Size X="28.0000" Y="19.0000" />
+                  <AbstractNodeData Name="cost" ActionTag="1418602667" Tag="161" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="47.5000" RightMargin="47.5000" TopMargin="11.5000" BottomMargin="11.5000" LabelText="" ctype="TextBMFontObjectData">
+                    <Size X="0.0000" Y="0.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="47.5000" Y="11.5000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.5000" Y="0.5000" />
-                    <PreSize X="0.2947" Y="0.8261" />
+                    <PreSize X="0.0000" Y="0.0000" />
                     <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="price_icon" ActionTag="372207105" Tag="162" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="79.0000" TopMargin="1.5000" BottomMargin="1.5000" LeftEage="5" RightEage="5" TopEage="6" BottomEage="6" Scale9OriginX="5" Scale9OriginY="6" Scale9Width="6" Scale9Height="8" ctype="ImageViewObjectData">
@@ -80,7 +90,7 @@
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position Y="-0.0005" />
-            <Scale ScaleX="0.5000" ScaleY="0.5000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0100" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />

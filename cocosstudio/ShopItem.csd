@@ -218,6 +218,16 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
+              <AbstractNodeData Name="th_require_string" ActionTag="1246316883" Tag="31" IconVisible="False" TopMargin="80.0000" BottomMargin="-80.0000" LabelText="" ctype="TextBMFontObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position Y="-80.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="219" G="0" B="0" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
+              </AbstractNodeData>
             </Children>
             <AnchorPoint />
             <Position />

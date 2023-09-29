@@ -31,6 +31,8 @@
             "ColorVector": {
               "ScaleY": 1.0
             },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
             "TouchEnable": true,
             "AnchorPoint": {
               "ScaleX": 0.5,
@@ -198,6 +200,37 @@
             },
             "Name": "white_sub-bg",
             "ctype": "SpriteObjectData"
+          },
+          {
+            "AnchorPoint": {},
+            "Position": {
+              "X": 0.0,
+              "Y": -100.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "TopMargin": 100.0,
+            "BottomMargin": -100.0,
+            "Tag": 11,
+            "ActionTag": 970943034,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "content",
+            "ctype": "SingleNodeObjectData"
           },
           {
             "AnchorPoint": {},

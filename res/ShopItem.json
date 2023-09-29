@@ -965,6 +965,50 @@
                 "Alpha": 0,
                 "Name": "button_buy",
                 "ctype": "ButtonObjectData"
+              },
+              {
+                "LabelText": "",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_12.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 0.0,
+                  "Y": -80.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {
+                  "R": 219,
+                  "G": 0,
+                  "B": 0
+                },
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "TopMargin": 80.0,
+                "BottomMargin": -80.0,
+                "Tag": 31,
+                "ActionTag": 1246316883,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "th_require_string",
+                "ctype": "TextBMFontObjectData"
               }
             ],
             "ActionTag": 2004716680,
