@@ -96,10 +96,10 @@
                     <PreSize X="0.3695" Y="0.1652" />
                     <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="CurrentTroopTraining" ActionTag="1708261671" Tag="127" IconVisible="True" PositionPercentYEnabled="True" LeftMargin="484.2293" RightMargin="197.7707" TopMargin="48.3000" BottomMargin="66.7000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="CurrentTroopTraining" ActionTag="1708261671" Tag="127" IconVisible="True" LeftMargin="484.2300" RightMargin="197.7700" TopMargin="48.3000" BottomMargin="66.7000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="0.0000" Y="0.0000" />
                     <AnchorPoint />
-                    <Position X="484.2293" Y="66.7000" />
+                    <Position X="484.2300" Y="66.7000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.7100" Y="0.5800" />
@@ -180,7 +180,7 @@
                 <FileData Type="Normal" Path="guis/research troop/mieng trang.png" Plist="" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="panel" ActionTag="-1229194072" Tag="94" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="36.0000" RightMargin="36.0000" TopMargin="198.0000" BottomMargin="78.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" ctype="PanelObjectData">
+              <AbstractNodeData Name="panel" ActionTag="-1229194072" Tag="94" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="36.0000" RightMargin="36.0000" TopMargin="198.0000" BottomMargin="78.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="667.0000" Y="200.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="369.5000" Y="178.0000" />
@@ -192,16 +192,6 @@
                 <FirstColor A="255" R="150" G="200" B="255" />
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="wait_troop_0" ActionTag="283900455" Tag="139" IconVisible="True" LeftMargin="95.0000" RightMargin="644.0000" TopMargin="251.0000" BottomMargin="225.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
-                <Size X="0.0000" Y="0.0000" />
-                <AnchorPoint />
-                <Position X="95.0000" Y="225.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.1286" Y="0.4727" />
-                <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="TroopListItem.csd" Plist="" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />

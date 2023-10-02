@@ -6,8 +6,11 @@ var ShopItem = cc.Node.extend({
         // find shop_item_node
         let item = node.getChildByName("shop_item_node");
         this._itemNode = item;
-        let button_buy = item.getChildByName("button_buy");
-        button_buy.addClickEventListener(this.handleTouchBuyButton.bind(this));
+
+        let shopItem = this;
+
+        let buttonBuy = item.getChildByName("button_buy");
+        buttonBuy.addTouchEventListener(this.handleTouchBuyButton,this);
 
         this._data = data;
         this._category = category;
@@ -94,10 +97,9 @@ var ShopItem = cc.Node.extend({
             case "category_tainguyen":
             case "category_phongthu":
             case "category_quandoi": {
-                this.setVisibleFields([ "button_info"]);
                 let maxBuilt = this.getBuildMaxCount();
                 if (this.getBuiltCount >= maxBuilt) this._available = false;
-
+                this.setVisibleFields(["button_info"])
                 if(maxBuilt < 0) {
                     let thRequireString = this._itemNode.getChildByName("th_require_string");
                     thRequireString.setString("Yêu cầu nhà chính cấp "+ (-maxBuilt));
@@ -158,25 +160,41 @@ var ShopItem = cc.Node.extend({
 
     },
 
-    handleTouchBuyButton: function (sender, type) {
-        ButtonEffect.scaleOnClick(sender, type);
-        cc.log("CLICK BUY :::: ");
-        if (this._available === true) {
-            let gameScene = cc.director.getRunningScene();
-            let popUpLayer = gameScene.getPopUpLayer();
-            if(this._category === "category_ngankho"){
-                popUpLayer.disappear("shop");
-                popUpLayer.setVisible(true);
-                let label = new cc.LabelBMFont("Bạn có muốn mua số tài nguyên còn thiếu?", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
-                let
-                let buyResPopup= new NotiPopup({title: "MUA TÀI NGUYÊN"})
-                popUpLayer.addChild(buyResPopup)
-            }
-            else {
+    handleTouchBuyButton: function (sender,type) {
+        if(type === ccui.Widget.TOUCH_BEGAN) {
+            this._itemNode.setScale(BUTTON_TOUCH_SCALE_SMALL);
+        }
+        if(type === ccui.Widget.TOUCH_ENDED) {
+            cc.log("CLICK BUY :::: ");
+            this._itemNode.setScale(1);
+            if (this._available === true) {
+                let gameScene = cc.director.getRunningScene();
+                let popUpLayer = gameScene.getPopUpLayer();
+                if(this._category === "category_ngankho"){
+                    popUpLayer.disappear("shop");
+                    popUpLayer.setVisible(true);
 
+                    // create content in popup
+                    let label = new cc.LabelBMFont("Bạn có muốn mua số tài nguyên còn thiếu?", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
+                    label.setColor(new cc.Color(150, 78, 3));
+                    let price = new cc.LabelBMFont(this._data.price, res.FONT.SOJI["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
+                    price.setPositionY(-label.getContentSize().height);
+                    let content = new cc.Node();
+                    content.addChild(label);
+                    content.addChild(price);
+
+                    let buyResPopup= new NotiPopup({title: "MUA TÀI NGUYÊN", acceptCallBack: ()=>{
+                            testnetwork.connector.sendBuyResourceRequest(this._data);
+                        }, content: content})
+                    popUpLayer.addChild(buyResPopup)
+
+                }
+                else {
+
+                }
+            } else {
+                cc.log("CANT BUY :::: ");
             }
-        } else {
-            cc.log("CANT BUY :::: ");
         }
     },
 

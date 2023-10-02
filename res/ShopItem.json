@@ -340,82 +340,6 @@
                 "ctype": "TextBMFontObjectData"
               },
               {
-                "FontSize": 14,
-                "ButtonText": "",
-                "TextColor": {
-                  "R": 65,
-                  "G": 65,
-                  "B": 70
-                },
-                "DisabledFileData": {
-                  "Type": "Default",
-                  "Path": "Default/Button_Disable.png",
-                  "Plist": ""
-                },
-                "PressedFileData": {
-                  "Type": "Normal",
-                  "Path": "guis/shop_gui/info.png",
-                  "Plist": ""
-                },
-                "NormalFileData": {
-                  "Type": "Normal",
-                  "Path": "guis/shopping/info.png",
-                  "Plist": ""
-                },
-                "Scale9Enable": true,
-                "Scale9OriginX": 15,
-                "Scale9OriginY": 11,
-                "Scale9Width": 7,
-                "Scale9Height": 17,
-                "OutlineColor": {
-                  "G": 0,
-                  "B": 0
-                },
-                "ShadowColor": {
-                  "R": 110,
-                  "G": 110,
-                  "B": 110
-                },
-                "ShadowOffsetX": 2.0,
-                "ShadowOffsetY": -2.0,
-                "TouchEnable": true,
-                "AnchorPoint": {
-                  "ScaleX": 0.5,
-                  "ScaleY": 0.5
-                },
-                "Position": {
-                  "X": 82.1713,
-                  "Y": 134.301
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": false,
-                "PrePosition": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": 63.6713,
-                "RightMargin": -100.6713,
-                "TopMargin": -153.801,
-                "BottomMargin": 114.801,
-                "Tag": 318,
-                "ActionTag": 693703394,
-                "Size": {
-                  "X": 37.0,
-                  "Y": 39.0
-                },
-                "VisibleForFrame": false,
-                "Name": "item_info_button",
-                "ctype": "ButtonObjectData"
-              },
-              {
                 "LabelText": "",
                 "LabelBMFontFile_CNB": {
                   "Type": "Normal",
@@ -726,83 +650,6 @@
                 "ctype": "TextBMFontObjectData"
               },
               {
-                "FontSize": 14,
-                "ButtonText": "",
-                "TextColor": {
-                  "R": 65,
-                  "G": 65,
-                  "B": 70
-                },
-                "DisabledFileData": {
-                  "Type": "Default",
-                  "Path": "Default/Button_Disable.png",
-                  "Plist": ""
-                },
-                "PressedFileData": {
-                  "Type": "Normal",
-                  "Path": "guis/shop_gui/info.png",
-                  "Plist": ""
-                },
-                "NormalFileData": {
-                  "Type": "Normal",
-                  "Path": "guis/shop_gui/info.png",
-                  "Plist": ""
-                },
-                "Scale9Enable": true,
-                "Scale9OriginX": 15,
-                "Scale9OriginY": 11,
-                "Scale9Width": 7,
-                "Scale9Height": 17,
-                "OutlineColor": {
-                  "G": 0,
-                  "B": 0
-                },
-                "ShadowColor": {
-                  "R": 110,
-                  "G": 110,
-                  "B": 110
-                },
-                "ShadowOffsetX": 2.0,
-                "ShadowOffsetY": -2.0,
-                "TouchEnable": true,
-                "AnchorPoint": {
-                  "ScaleX": 0.5,
-                  "ScaleY": 0.5
-                },
-                "Position": {
-                  "X": 83.6458,
-                  "Y": 135.7693
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": false,
-                "PrePosition": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": 65.1458,
-                "RightMargin": -102.1458,
-                "TopMargin": -155.2693,
-                "BottomMargin": 116.2693,
-                "UserData": "-press_action",
-                "Tag": 98,
-                "ActionTag": -1149171893,
-                "Size": {
-                  "X": 37.0,
-                  "Y": 39.0
-                },
-                "VisibleForFrame": false,
-                "Name": "button_info",
-                "ctype": "ButtonObjectData"
-              },
-              {
                 "LabelText": "Thời gian chờ:",
                 "LabelBMFontFile_CNB": {
                   "Type": "Normal",
@@ -889,6 +736,84 @@
                 "VisibleForFrame": false,
                 "Name": "wait_time_string",
                 "ctype": "TextBMFontObjectData"
+              },
+              {
+                "FontSize": 14,
+                "ButtonText": "",
+                "TextColor": {
+                  "R": 65,
+                  "G": 65,
+                  "B": 70
+                },
+                "DisabledFileData": {
+                  "Type": "Default",
+                  "Path": "Default/Button_Disable.png",
+                  "Plist": ""
+                },
+                "PressedFileData": {
+                  "Type": "Normal",
+                  "Path": "guis/shop_gui/info.png",
+                  "Plist": ""
+                },
+                "NormalFileData": {
+                  "Type": "Normal",
+                  "Path": "guis/shop_gui/info.png",
+                  "Plist": ""
+                },
+                "Scale9Enable": true,
+                "Scale9OriginX": 15,
+                "Scale9OriginY": 11,
+                "Scale9Width": 7,
+                "Scale9Height": 17,
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "TouchEnable": true,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 83.6458,
+                  "Y": 135.77
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 65.1458,
+                "RightMargin": -102.1458,
+                "TopMargin": -155.27,
+                "BottomMargin": 116.27,
+                "CallBackType": "Click",
+                "UserData": "-press_action",
+                "Tag": 98,
+                "ActionTag": -1149171893,
+                "Size": {
+                  "X": 37.0,
+                  "Y": 39.0
+                },
+                "VisibleForFrame": false,
+                "Name": "button_info",
+                "ctype": "ButtonObjectData"
               },
               {
                 "FontSize": 14,
@@ -1042,7 +967,6 @@
         "fonts/soji_16.png",
         "guis/icons/shop_gui/km_2.png",
         "guis/shop_gui/info.png",
-        "guis/shopping/info.png",
         "guis/shopping/item_background.png",
         "guis/shopping/slot.png",
         "guis/shopping/time.png"

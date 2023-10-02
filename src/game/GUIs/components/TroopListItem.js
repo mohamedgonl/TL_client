@@ -2,14 +2,13 @@ var TroopListItem = cc.Node.extend({
     _troopCfgId: null,
     _level: 1,
     _space: null,
+    _count: 0,
     ctor: function (troopCfgId) {
         this._super();
         this._troopCfgId = troopCfgId;
         let node = CCSUlties.parseUIFile(res_ui.TROOPS_LIST_ITEM);
         this._node = node.getChildByName("troop_item");
-
-        // this._node.addTouchEventListener(this.handleClickTroop, this);
-
+        cc.eventManager.addListener(clickEventListener(this.handleTrainTroop.bind(this)).clone(), this._node);
         this.loadData();
         this.addChild(node);
     },
@@ -33,12 +32,28 @@ var TroopListItem = cc.Node.extend({
     },
 
     handleClickTroopInfo: function () {
+        cc.log("CLICK TROOP INFO")
 
     },
 
-    handleClickTroop: function (sender, type) {
-        cc.log("DEBUG ::::", type);
-    }
+    setCount : function (count) {
+        this._count = count;
+        let countString = this._node.getChildByName("count_string");
+        if(count > 0) {
+            countString.setString("x"+count);
+        }
+        else {
+            countString.setString("");
+        }
+    },
+
+    handleTrainTroop: function () {
+        this.setCount(this._count+1);
+        let event = new cc.EventCustom("train_troop");
+        let cfgId = this._troopCfgId;
+        event.data = {cfgId: cfgId};
+        cc.eventManager.dispatchEvent(event);
+    },
 
 
 })

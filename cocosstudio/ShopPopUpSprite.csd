@@ -22,7 +22,7 @@
       <ObjectData Name="Node" Tag="74" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
-          <AbstractNodeData Name="panel" ActionTag="-315678450" Tag="180" IconVisible="False" LeftMargin="-568.0000" RightMargin="-568.0000" TopMargin="-320.0000" BottomMargin="-320.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+          <AbstractNodeData Name="panel" ActionTag="-315678450" Tag="180" IconVisible="False" LeftMargin="-568.0000" RightMargin="-568.0000" TopMargin="-320.0000" BottomMargin="-320.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="1136.0000" Y="640.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position />
@@ -59,485 +59,473 @@
           <AbstractNodeData Name="shop_category_wrapper" ActionTag="-1059382931" Tag="127" IconVisible="True" TopMargin="28.0000" BottomMargin="-28.0000" ctype="SingleNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <Children>
-              <AbstractNodeData Name="category_trangtri" ActionTag="899160977" UserData="-press_action" Tag="257" IconVisible="True" LeftMargin="236.9700" RightMargin="-236.9700" TopMargin="-105.1700" BottomMargin="105.1700" ctype="SingleNodeObjectData">
-                <Size X="0.0000" Y="0.0000" />
+              <AbstractNodeData Name="category_trangtri" ActionTag="-109637885" Tag="160" IconVisible="False" LeftMargin="116.4700" RightMargin="-357.4700" TopMargin="-198.1700" BottomMargin="12.1700" ctype="SpriteObjectData">
+                <Size X="241.0000" Y="186.0000" />
                 <Children>
-                  <AbstractNodeData Name="category_trangtri_button" ActionTag="-309856780" Tag="192" IconVisible="False" LeftMargin="-104.0000" RightMargin="-104.0000" TopMargin="-82.5000" BottomMargin="-82.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                    <Size X="208.0000" Y="165.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
+                  <AbstractNodeData Name="category_trangtri" ActionTag="899160977" UserData="-press_action" Tag="257" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="120.5000" RightMargin="120.5000" TopMargin="93.0000" BottomMargin="93.0000" ctype="SingleNodeObjectData">
+                    <Size X="0.0000" Y="0.0000" />
+                    <Children>
+                      <AbstractNodeData Name="slot_bg" ActionTag="-1931327213" Tag="258" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_shine" ActionTag="493603431" Tag="259" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/catalogy_bg.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_img" ActionTag="1876276640" Tag="261" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/type_dc.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_name_bar" ActionTag="-1081270951" Tag="260" IconVisible="False" LeftMargin="-113.0000" RightMargin="-113.0000" TopMargin="40.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="226.0000" Y="53.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position Y="-66.5000" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/title_background.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_name_string" ActionTag="-1955683360" Tag="262" IconVisible="False" LeftMargin="-50.9999" RightMargin="-51.0001" TopMargin="53.0004" BottomMargin="-78.0004" LabelText="TRANG TRÍ" ctype="TextBMFontObjectData">
+                        <Size X="102.0000" Y="25.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="0.0001" Y="-65.5004" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
+                      </AbstractNodeData>
+                    </Children>
+                    <AnchorPoint />
+                    <Position X="120.5000" Y="93.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
+                    <PrePosition X="0.5000" Y="0.5000" />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <TextColor A="255" R="65" G="65" B="70" />
-                    <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-                    <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
-                    <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
-                    <OutlineColor A="255" R="255" G="0" B="0" />
-                    <ShadowColor A="255" R="110" G="110" B="110" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="slot_bg" ActionTag="-1931327213" Tag="258" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_shine" ActionTag="493603431" Tag="259" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/catalogy_bg.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_img" ActionTag="1876276640" Tag="261" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/type_dc.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_name_bar" ActionTag="-1081270951" Tag="260" IconVisible="False" LeftMargin="-113.0000" RightMargin="-113.0000" TopMargin="40.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="226.0000" Y="53.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position Y="-66.5000" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/title_background.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_name_string" ActionTag="-1955683360" Tag="262" IconVisible="False" LeftMargin="-50.9999" RightMargin="-51.0001" TopMargin="53.0004" BottomMargin="-78.0004" LabelText="TRANG TRÍ" ctype="TextBMFontObjectData">
-                    <Size X="102.0000" Y="25.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="0.0001" Y="-65.5004" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
                   </AbstractNodeData>
                 </Children>
-                <AnchorPoint />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="236.9700" Y="105.1700" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
+                <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="category_tainguyen" ActionTag="857053951" Tag="263" IconVisible="True" LeftMargin="-4.0500" RightMargin="4.0500" TopMargin="-105.1700" BottomMargin="105.1700" ctype="SingleNodeObjectData">
-                <Size X="0.0000" Y="0.0000" />
+              <AbstractNodeData Name="category_tainguyen" ActionTag="159467037" Tag="161" IconVisible="False" LeftMargin="-124.5500" RightMargin="-116.4500" TopMargin="-198.1700" BottomMargin="12.1700" ctype="SpriteObjectData">
+                <Size X="241.0000" Y="186.0000" />
                 <Children>
-                  <AbstractNodeData Name="category_tainguyen_button" ActionTag="694586429" Tag="193" IconVisible="False" LeftMargin="-104.0000" RightMargin="-104.0000" TopMargin="-82.5000" BottomMargin="-82.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                    <Size X="208.0000" Y="165.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
+                  <AbstractNodeData Name="category_tainguyen" ActionTag="857053951" Tag="263" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="120.5000" RightMargin="120.5000" TopMargin="93.0000" BottomMargin="93.0000" ctype="SingleNodeObjectData">
+                    <Size X="0.0000" Y="0.0000" />
+                    <Children>
+                      <AbstractNodeData Name="slot_bg" ActionTag="217226179" Tag="264" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_shine" ActionTag="506798473" Tag="265" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/catalogy_bg.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_img" ActionTag="1269514592" Tag="266" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/type_res.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_name_bar" ActionTag="503670222" Tag="267" IconVisible="False" LeftMargin="-113.0000" RightMargin="-113.0000" TopMargin="40.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="226.0000" Y="53.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position Y="-66.5000" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/title_background.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_name_string" ActionTag="1035108980" Tag="268" IconVisible="False" LeftMargin="-58.4999" RightMargin="-58.5001" TopMargin="53.0004" BottomMargin="-78.0004" LabelText="TÀI NGUYÊN" ctype="TextBMFontObjectData">
+                        <Size X="117.0000" Y="25.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="0.0001" Y="-65.5004" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
+                      </AbstractNodeData>
+                    </Children>
+                    <AnchorPoint />
+                    <Position X="120.5000" Y="93.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
+                    <PrePosition X="0.5000" Y="0.5000" />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <TextColor A="255" R="65" G="65" B="70" />
-                    <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-                    <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
-                    <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
-                    <OutlineColor A="255" R="255" G="0" B="0" />
-                    <ShadowColor A="255" R="110" G="110" B="110" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="slot_bg" ActionTag="217226179" Tag="264" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_shine" ActionTag="506798473" Tag="265" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/catalogy_bg.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_img" ActionTag="1269514592" Tag="266" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/type_res.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_name_bar" ActionTag="503670222" Tag="267" IconVisible="False" LeftMargin="-113.0000" RightMargin="-113.0000" TopMargin="40.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="226.0000" Y="53.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position Y="-66.5000" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/title_background.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_name_string" ActionTag="1035108980" Tag="268" IconVisible="False" LeftMargin="-58.4999" RightMargin="-58.5001" TopMargin="53.0004" BottomMargin="-78.0004" LabelText="TÀI NGUYÊN" ctype="TextBMFontObjectData">
-                    <Size X="117.0000" Y="25.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="0.0001" Y="-65.5004" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
                   </AbstractNodeData>
                 </Children>
-                <AnchorPoint />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="-4.0500" Y="105.1700" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
+                <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="category_ngankho" ActionTag="423242441" Tag="269" IconVisible="True" LeftMargin="-249.8200" RightMargin="249.8200" TopMargin="-105.1700" BottomMargin="105.1700" ctype="SingleNodeObjectData">
-                <Size X="0.0000" Y="0.0000" />
+              <AbstractNodeData Name="category_ngankho" ActionTag="86602223" Tag="162" IconVisible="False" LeftMargin="-370.3200" RightMargin="129.3200" TopMargin="-198.1700" BottomMargin="12.1700" ctype="SpriteObjectData">
+                <Size X="241.0000" Y="186.0000" />
                 <Children>
-                  <AbstractNodeData Name="category_ngankho_button" ActionTag="-835457498" Tag="189" IconVisible="False" LeftMargin="-104.0000" RightMargin="-104.0000" TopMargin="-82.5000" BottomMargin="-82.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                    <Size X="208.0000" Y="165.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
+                  <AbstractNodeData Name="category_ngankho" ActionTag="423242441" Tag="269" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="120.5000" RightMargin="120.5000" TopMargin="93.0000" BottomMargin="93.0000" ctype="SingleNodeObjectData">
+                    <Size X="0.0000" Y="0.0000" />
+                    <Children>
+                      <AbstractNodeData Name="slot_bg" ActionTag="1511512156" Tag="270" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_shine" ActionTag="193645455" Tag="271" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/catalogy_bg.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_img" ActionTag="898651836" Tag="272" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/type_buy_res.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_name_bar" ActionTag="-261881244" Tag="273" IconVisible="False" LeftMargin="-113.0000" RightMargin="-113.0000" TopMargin="40.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="226.0000" Y="53.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position Y="-66.5000" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/title_background.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_name_string" ActionTag="-1694268827" Tag="274" IconVisible="False" LeftMargin="-50.9999" RightMargin="-51.0001" TopMargin="53.0004" BottomMargin="-78.0004" LabelText="NGÂN KHỐ" ctype="TextBMFontObjectData">
+                        <Size X="102.0000" Y="25.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="0.0001" Y="-65.5004" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
+                      </AbstractNodeData>
+                    </Children>
+                    <AnchorPoint />
+                    <Position X="120.5000" Y="93.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
+                    <PrePosition X="0.5000" Y="0.5000" />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <TextColor A="255" R="65" G="65" B="70" />
-                    <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-                    <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
-                    <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
-                    <OutlineColor A="255" R="255" G="0" B="0" />
-                    <ShadowColor A="255" R="110" G="110" B="110" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="slot_bg" ActionTag="1511512156" Tag="270" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_shine" ActionTag="193645455" Tag="271" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/catalogy_bg.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_img" ActionTag="898651836" Tag="272" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/type_buy_res.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_name_bar" ActionTag="-261881244" Tag="273" IconVisible="False" LeftMargin="-113.0000" RightMargin="-113.0000" TopMargin="40.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="226.0000" Y="53.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position Y="-66.5000" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/title_background.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_name_string" ActionTag="-1694268827" Tag="274" IconVisible="False" LeftMargin="-50.9999" RightMargin="-51.0001" TopMargin="53.0004" BottomMargin="-78.0004" LabelText="NGÂN KHỐ" ctype="TextBMFontObjectData">
-                    <Size X="102.0000" Y="25.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="0.0001" Y="-65.5004" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
                   </AbstractNodeData>
                 </Children>
-                <AnchorPoint />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="-249.8200" Y="105.1700" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
+                <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="category_quandoi" ActionTag="607246614" Tag="275" IconVisible="True" LeftMargin="-249.8200" RightMargin="249.8200" TopMargin="106.3200" BottomMargin="-106.3200" ctype="SingleNodeObjectData">
-                <Size X="0.0000" Y="0.0000" />
+              <AbstractNodeData Name="category_quandoi" ActionTag="1279187255" Tag="163" IconVisible="False" LeftMargin="-370.3200" RightMargin="129.3200" TopMargin="13.3200" BottomMargin="-199.3200" ctype="SpriteObjectData">
+                <Size X="241.0000" Y="186.0000" />
                 <Children>
-                  <AbstractNodeData Name="category_quandoi_button" ActionTag="-1664164415" Tag="190" IconVisible="False" LeftMargin="-104.0000" RightMargin="-104.0000" TopMargin="-82.5000" BottomMargin="-82.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                    <Size X="208.0000" Y="165.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
+                  <AbstractNodeData Name="category_quandoi" ActionTag="607246614" Tag="275" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="120.5000" RightMargin="120.5000" TopMargin="93.0000" BottomMargin="93.0000" ctype="SingleNodeObjectData">
+                    <Size X="0.0000" Y="0.0000" />
+                    <Children>
+                      <AbstractNodeData Name="slot_bg" ActionTag="-333414093" Tag="276" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_shine" ActionTag="1069401168" Tag="277" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/catalogy_bg.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_img" ActionTag="-1331819949" Tag="278" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/type_army.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_name_bar" ActionTag="-287388458" Tag="279" IconVisible="False" LeftMargin="-113.0000" RightMargin="-113.0000" TopMargin="40.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="226.0000" Y="53.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position Y="-66.5000" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/title_background.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_name_string" ActionTag="-797549176" Tag="280" IconVisible="False" LeftMargin="-50.4999" RightMargin="-50.5001" TopMargin="53.0004" BottomMargin="-78.0004" LabelText="QUÂN ĐỘI" ctype="TextBMFontObjectData">
+                        <Size X="101.0000" Y="25.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="0.0001" Y="-65.5004" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
+                      </AbstractNodeData>
+                    </Children>
+                    <AnchorPoint />
+                    <Position X="120.5000" Y="93.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
+                    <PrePosition X="0.5000" Y="0.5000" />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <TextColor A="255" R="65" G="65" B="70" />
-                    <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-                    <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
-                    <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
-                    <OutlineColor A="255" R="255" G="0" B="0" />
-                    <ShadowColor A="255" R="110" G="110" B="110" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="slot_bg" ActionTag="-333414093" Tag="276" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_shine" ActionTag="1069401168" Tag="277" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/catalogy_bg.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_img" ActionTag="-1331819949" Tag="278" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/type_army.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_name_bar" ActionTag="-287388458" Tag="279" IconVisible="False" LeftMargin="-113.0000" RightMargin="-113.0000" TopMargin="40.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="226.0000" Y="53.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position Y="-66.5000" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/title_background.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_name_string" ActionTag="-797549176" Tag="280" IconVisible="False" LeftMargin="-50.4999" RightMargin="-50.5001" TopMargin="53.0004" BottomMargin="-78.0004" LabelText="QUÂN ĐỘI" ctype="TextBMFontObjectData">
-                    <Size X="101.0000" Y="25.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="0.0001" Y="-65.5004" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
                   </AbstractNodeData>
                 </Children>
-                <AnchorPoint />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="-249.8200" Y="-106.3200" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
+                <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="category_phongthu" ActionTag="910418966" Tag="281" IconVisible="True" LeftMargin="-4.0500" RightMargin="4.0500" TopMargin="106.3200" BottomMargin="-106.3200" ctype="SingleNodeObjectData">
-                <Size X="0.0000" Y="0.0000" />
+              <AbstractNodeData Name="category_phongthu" ActionTag="-77579663" Tag="164" IconVisible="False" LeftMargin="-124.5500" RightMargin="-116.4500" TopMargin="13.3200" BottomMargin="-199.3200" ctype="SpriteObjectData">
+                <Size X="241.0000" Y="186.0000" />
                 <Children>
-                  <AbstractNodeData Name="category_phongthu_button" ActionTag="-2117858168" Tag="194" IconVisible="False" LeftMargin="-104.0000" RightMargin="-104.0000" TopMargin="-82.5000" BottomMargin="-82.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                    <Size X="208.0000" Y="165.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
+                  <AbstractNodeData Name="category_phongthu" ActionTag="910418966" Tag="281" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="120.5000" RightMargin="120.5000" TopMargin="93.0000" BottomMargin="93.0000" ctype="SingleNodeObjectData">
+                    <Size X="0.0000" Y="0.0000" />
+                    <Children>
+                      <AbstractNodeData Name="slot_bg" ActionTag="-260274397" Tag="282" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_shine" ActionTag="781981886" Tag="283" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/catalogy_bg.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_img" ActionTag="796561048" Tag="284" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/type_defense.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_name_bar" ActionTag="1657169593" Tag="285" IconVisible="False" LeftMargin="-113.0000" RightMargin="-113.0000" TopMargin="40.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="226.0000" Y="53.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position Y="-66.5000" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/title_background.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_name_string" ActionTag="1595073740" Tag="286" IconVisible="False" LeftMargin="-55.9999" RightMargin="-56.0001" TopMargin="53.0004" BottomMargin="-78.0004" LabelText="PHÒNG THỦ" ctype="TextBMFontObjectData">
+                        <Size X="112.0000" Y="25.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="0.0001" Y="-65.5004" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
+                      </AbstractNodeData>
+                    </Children>
+                    <AnchorPoint />
+                    <Position X="120.5000" Y="93.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
+                    <PrePosition X="0.5000" Y="0.5000" />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <TextColor A="255" R="65" G="65" B="70" />
-                    <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-                    <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
-                    <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
-                    <OutlineColor A="255" R="255" G="0" B="0" />
-                    <ShadowColor A="255" R="110" G="110" B="110" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="slot_bg" ActionTag="-260274397" Tag="282" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_shine" ActionTag="781981886" Tag="283" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/catalogy_bg.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_img" ActionTag="796561048" Tag="284" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/type_defense.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_name_bar" ActionTag="1657169593" Tag="285" IconVisible="False" LeftMargin="-113.0000" RightMargin="-113.0000" TopMargin="40.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="226.0000" Y="53.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position Y="-66.5000" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/title_background.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_name_string" ActionTag="1595073740" Tag="286" IconVisible="False" LeftMargin="-55.9999" RightMargin="-56.0001" TopMargin="53.0004" BottomMargin="-78.0004" LabelText="PHÒNG THỦ" ctype="TextBMFontObjectData">
-                    <Size X="112.0000" Y="25.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="0.0001" Y="-65.5004" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
                   </AbstractNodeData>
                 </Children>
-                <AnchorPoint />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="-4.0500" Y="-106.3200" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
+                <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="category_baove" ActionTag="894687098" Tag="287" IconVisible="True" LeftMargin="236.9700" RightMargin="-236.9700" TopMargin="106.3200" BottomMargin="-106.3200" ctype="SingleNodeObjectData">
-                <Size X="0.0000" Y="0.0000" />
+              <AbstractNodeData Name="category_baove" ActionTag="163827624" Tag="165" IconVisible="False" LeftMargin="116.4700" RightMargin="-357.4700" TopMargin="13.3200" BottomMargin="-199.3200" ctype="SpriteObjectData">
+                <Size X="241.0000" Y="186.0000" />
                 <Children>
-                  <AbstractNodeData Name="category_baove_button" ActionTag="-1500536369" Tag="195" IconVisible="False" LeftMargin="-104.0000" RightMargin="-104.0000" TopMargin="-82.5000" BottomMargin="-82.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                    <Size X="208.0000" Y="165.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                  <AbstractNodeData Name="category_baove" ActionTag="894687098" Tag="287" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="120.5000" RightMargin="120.5000" TopMargin="93.0000" BottomMargin="93.0000" ctype="SingleNodeObjectData">
+                    <Size X="0.0000" Y="0.0000" />
+                    <Children>
+                      <AbstractNodeData Name="slot_bg" ActionTag="-334628561" Tag="178" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_shine" ActionTag="1256005230" Tag="289" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/catalogy_bg.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_img" ActionTag="-4799407" Tag="290" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="241.0000" Y="186.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/type_sheild.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_name_bar" ActionTag="-2091080930" Tag="291" IconVisible="False" LeftMargin="-113.0000" RightMargin="-113.0000" TopMargin="40.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
+                        <Size X="226.0000" Y="53.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position Y="-66.5000" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <FileData Type="Normal" Path="guis/shop_gui/title_background.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="category_name_string" ActionTag="2027728022" Tag="292" IconVisible="False" LeftMargin="-38.4999" RightMargin="-38.5001" TopMargin="53.0004" BottomMargin="-78.0004" LabelText="BẢO VỆ" ctype="TextBMFontObjectData">
+                        <Size X="77.0000" Y="25.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="0.0001" Y="-65.5004" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
+                      </AbstractNodeData>
+                    </Children>
+                    <AnchorPoint />
+                    <Position X="120.5000" Y="93.0000" />
+                    <Scale ScaleX="1.0300" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
+                    <PrePosition X="0.5000" Y="0.5000" />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <TextColor A="255" R="65" G="65" B="70" />
-                    <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-                    <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
-                    <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
-                    <OutlineColor A="255" R="255" G="0" B="0" />
-                    <ShadowColor A="255" R="110" G="110" B="110" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="slot_bg" ActionTag="-334628561" Tag="178" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_shine" ActionTag="1256005230" Tag="289" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/catalogy_bg.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_img" ActionTag="-4799407" Tag="290" IconVisible="False" LeftMargin="-120.5000" RightMargin="-120.5000" TopMargin="-93.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="241.0000" Y="186.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/type_sheild.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_name_bar" ActionTag="-2091080930" Tag="291" IconVisible="False" LeftMargin="-113.0000" RightMargin="-113.0000" TopMargin="40.0000" BottomMargin="-93.0000" ctype="SpriteObjectData">
-                    <Size X="226.0000" Y="53.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position Y="-66.5000" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="guis/shop_gui/title_background.png" Plist="" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="category_name_string" ActionTag="2027728022" Tag="292" IconVisible="False" LeftMargin="-38.4999" RightMargin="-38.5001" TopMargin="53.0004" BottomMargin="-78.0004" LabelText="BẢO VỆ" ctype="TextBMFontObjectData">
-                    <Size X="77.0000" Y="25.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="0.0001" Y="-65.5004" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
                   </AbstractNodeData>
                 </Children>
-                <AnchorPoint />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="236.9700" Y="-106.3200" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="Normal" Path="guis/shop_gui/slot_catalogy.png" Plist="" />
+                <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint />

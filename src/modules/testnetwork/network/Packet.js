@@ -9,7 +9,9 @@ gv.CMD.USER_LOGIN = 1;
 gv.CMD.USER_INFO = 1001;
 gv.CMD.MAP_INFO = 1002;
 gv.CMD.MOVE = 2001;
-gv.CMD.BUY_ITEM = 3001;
+gv.CMD.BUY_RESOURCE = 4001;
+
+
 
 testnetwork = testnetwork || {};
 testnetwork.packetMap = {};
@@ -33,6 +35,7 @@ CmdSendHandshake = fr.OutPacket.extend(
         }
     }
 )
+
 CmdSendUserInfo = fr.OutPacket.extend(
     {
         ctor: function () {
@@ -80,11 +83,11 @@ CmdSendBuyItem = fr.OutPacket.extend(
         ctor: function () {
             this._super();
             this.initData(100);
-            this.setCmdId(gv.CMD.BUY_ITEM);
+            this.setCmdId(gv.CMD.BUY_RESOURCE);
         },
         pack: function (itemData) {
             this.packHeader();
-            this.putString(itemData.id)
+            this.putString(itemData.cfgId)
             this.updateSize();
         }
     }
@@ -144,6 +147,19 @@ testnetwork.packetMap[gv.CMD.USER_INFO] = fr.InPacket.extend(
             this.avatar = this.getString();
             this.level = this.getInt();
             this.rank = this.getInt();
+            this.gold = this.getInt();
+            this.elixir = this.getInt();
+            this.gem = this.getInt();
+        }
+    }
+);
+
+testnetwork.packetMap[gv.CMD.BUY_RESOURCE] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
             this.gold = this.getInt();
             this.elixir = this.getInt();
             this.gem = this.getInt();

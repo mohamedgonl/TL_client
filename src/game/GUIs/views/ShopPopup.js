@@ -22,27 +22,8 @@ var ShopPopup = cc.Layer.extend({
         // add handle when touch category
         let categories = this._categoryWrapper.getChildren();
         categories.map(e => {
-            let categoryButtonName =e.getName() + "_button";
-            let categoryButton = e.getChildByName(categoryButtonName)
-            let categoryNameString = e.getChildByName("category_name_string").getString();
-            categoryButton.addClickEventListener(this.handleClickCategory.bind(this, e.getName(), categoryNameString, e));
-
-            cc.eventManager.addListener({
-                event: cc.EventListener.MOUSE,
-                onMouseDown: function (event) {
-                    var target = event.getCurrentTarget();
-                    if (cc.rectContainsPoint(target.getBoundingBoxToWorld(), event.getLocation())) {
-                        target.setScale(BUTTON_TOUCH_SCALE);
-                    }
-                },
-                onMouseUp: function (event) {
-                    var target = event.getCurrentTarget();
-                    if (cc.rectContainsPoint(target.getBoundingBoxToWorld(), event.getLocation())) {
-                        target.setScale(1);
-                    }
-                }
-            }, e);
-
+            let categoryNameString= e.getChildByName(e.getName()).getChildByName("category_name_string").getString();
+            cc.eventManager.addListener(clickEventListener(()=>{this.handleClickCategory(e.getName(), categoryNameString)}).clone(), e);
         })
 
         backButton.addClickEventListener(this.handleClickBack.bind(this))

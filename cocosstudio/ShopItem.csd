@@ -82,21 +82,6 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="item_info_button" ActionTag="693703394" VisibleForFrame="False" Tag="318" IconVisible="False" LeftMargin="63.6713" RightMargin="-100.6713" TopMargin="-153.8010" BottomMargin="114.8010" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="7" Scale9Height="17" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="37.0000" Y="39.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="82.1713" Y="134.3010" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition />
-                <PreSize X="0.0000" Y="0.0000" />
-                <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-                <PressedFileData Type="Normal" Path="guis/shop_gui/info.png" Plist="" />
-                <NormalFileData Type="Normal" Path="guis/shopping/info.png" Plist="" />
-                <OutlineColor A="255" R="255" G="0" B="0" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
               <AbstractNodeData Name="item_name_string" ActionTag="369707198" Tag="319" IconVisible="False" TopMargin="-138.2064" BottomMargin="138.2064" LabelText="" ctype="TextBMFontObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -168,21 +153,6 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="button_info" ActionTag="-1149171893" VisibleForFrame="False" UserData="-press_action" Tag="98" IconVisible="False" LeftMargin="65.1458" RightMargin="-102.1458" TopMargin="-155.2693" BottomMargin="116.2693" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="7" Scale9Height="17" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="37.0000" Y="39.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="83.6458" Y="135.7693" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition />
-                <PreSize X="0.0000" Y="0.0000" />
-                <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-                <PressedFileData Type="Normal" Path="guis/shop_gui/info.png" Plist="" />
-                <NormalFileData Type="Normal" Path="guis/shop_gui/info.png" Plist="" />
-                <OutlineColor A="255" R="255" G="0" B="0" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
               <AbstractNodeData Name="wait_time_title" ActionTag="1694593650" VisibleForFrame="False" Tag="96" IconVisible="False" LeftMargin="-51.5000" RightMargin="-51.5000" TopMargin="58.5412" BottomMargin="-75.5412" LabelText="Thời gian chờ:" ctype="TextBMFontObjectData">
                 <Size X="103.0000" Y="17.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -202,6 +172,21 @@
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
                 <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="button_info" ActionTag="-1149171893" VisibleForFrame="False" CallBackType="Click" UserData="-press_action" Tag="98" IconVisible="False" LeftMargin="65.1458" RightMargin="-102.1458" TopMargin="-155.2700" BottomMargin="116.2700" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="7" Scale9Height="17" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="37.0000" Y="39.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="83.6458" Y="135.7700" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <TextColor A="255" R="65" G="65" B="70" />
+                <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+                <PressedFileData Type="Normal" Path="guis/shop_gui/info.png" Plist="" />
+                <NormalFileData Type="Normal" Path="guis/shop_gui/info.png" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
               <AbstractNodeData Name="button_buy" ActionTag="-1705698458" Alpha="0" Tag="263" IconVisible="False" LeftMargin="-25.5000" RightMargin="-25.5000" TopMargin="102.5000" BottomMargin="-147.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="51.0000" Y="45.0000" />

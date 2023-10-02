@@ -31,11 +31,15 @@
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
         <OpenedDocuments>
-          <FilePathData Path="ItemInfoPopup.csd" />
+          <FilePathData Path="ShopPopUpSprite.csd" />
           <FilePathData Path="ShopItem.csd" />
+          <FilePathData Path="TroopTrainPopup.csd" />
+          <FilePathData Path="TroopTrainingItem.csd" />
+          <FilePathData Path="TroopListItem.csd" />
           <FilePathData Path="NotiPopup.csd" />
+          <FilePathData Path="ItemInfoPopup.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="NotiPopup.csd" />
+        <ActiveDocument Path="TroopTrainPopup.csd" />
       </Value>
     </Item>
   </Properties>

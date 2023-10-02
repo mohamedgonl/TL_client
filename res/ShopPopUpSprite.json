@@ -80,6 +80,8 @@
             "ColorVector": {
               "ScaleY": 1.0
             },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
             "TouchEnable": true,
             "AnchorPoint": {
               "ScaleX": 0.5,
@@ -228,7 +230,19 @@
             "Tag": 127,
             "Children": [
               {
-                "AnchorPoint": {},
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "guis/shop_gui/slot_catalogy.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
                 "Position": {
                   "X": 236.97,
                   "Y": 105.17
@@ -238,7 +252,7 @@
                   "ScaleY": 1.0
                 },
                 "CColor": {},
-                "IconVisible": true,
+                "IconVisible": false,
                 "PrePosition": {
                   "X": 0.0,
                   "Y": 0.0
@@ -247,321 +261,295 @@
                   "X": 0.0,
                   "Y": 0.0
                 },
-                "LeftMargin": 236.97,
-                "RightMargin": -236.97,
-                "TopMargin": -105.17,
-                "BottomMargin": 105.17,
-                "UserData": "-press_action",
-                "Tag": 257,
+                "LeftMargin": 116.47,
+                "RightMargin": -357.47,
+                "TopMargin": -198.17,
+                "BottomMargin": 12.17,
+                "Tag": 160,
                 "Children": [
                   {
-                    "FontSize": 14,
-                    "ButtonText": "",
-                    "TextColor": {
-                      "R": 65,
-                      "G": 65,
-                      "B": 70
-                    },
-                    "DisabledFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Disable.png",
-                      "Plist": ""
-                    },
-                    "PressedFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Press.png",
-                      "Plist": ""
-                    },
-                    "NormalFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Normal.png",
-                      "Plist": ""
-                    },
-                    "Scale9Enable": true,
-                    "Scale9OriginX": 15,
-                    "Scale9OriginY": 11,
-                    "Scale9Width": 16,
-                    "Scale9Height": 14,
-                    "OutlineColor": {
-                      "G": 0,
-                      "B": 0
-                    },
-                    "ShadowColor": {
-                      "R": 110,
-                      "G": 110,
-                      "B": 110
-                    },
-                    "ShadowOffsetX": 2.0,
-                    "ShadowOffsetY": -2.0,
-                    "TouchEnable": true,
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
+                    "AnchorPoint": {},
                     "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
+                      "X": 120.5,
+                      "Y": 93.0
                     },
                     "Scale": {
                       "ScaleX": 1.0,
                       "ScaleY": 1.0
                     },
                     "CColor": {},
-                    "IconVisible": false,
+                    "IconVisible": true,
+                    "PositionPercentXEnabled": true,
+                    "PositionPercentYEnabled": true,
                     "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
+                      "X": 0.5,
+                      "Y": 0.5
                     },
                     "PreSize": {
                       "X": 0.0,
                       "Y": 0.0
                     },
-                    "LeftMargin": -104.0,
-                    "RightMargin": -104.0,
-                    "TopMargin": -82.5,
-                    "BottomMargin": -82.5,
-                    "Tag": 192,
-                    "ActionTag": -309856780,
+                    "LeftMargin": 120.5,
+                    "RightMargin": 120.5,
+                    "TopMargin": 93.0,
+                    "BottomMargin": 93.0,
+                    "UserData": "-press_action",
+                    "Tag": 257,
+                    "Children": [
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/slot_catalogy.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 258,
+                        "ActionTag": -1931327213,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "slot_bg",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/catalogy_bg.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 259,
+                        "ActionTag": 493603431,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "category_shine",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/type_dc.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 261,
+                        "ActionTag": 1876276640,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "category_img",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/title_background.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": -66.5
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -113.0,
+                        "RightMargin": -113.0,
+                        "TopMargin": 40.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 260,
+                        "ActionTag": -1081270951,
+                        "Size": {
+                          "X": 226.0,
+                          "Y": 53.0
+                        },
+                        "Name": "category_name_bar",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "LabelText": "TRANG TRÍ",
+                        "LabelBMFontFile_CNB": {
+                          "Type": "Normal",
+                          "Path": "fonts/soji_16.fnt",
+                          "Plist": ""
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0001,
+                          "Y": -65.5004
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -50.9999,
+                        "RightMargin": -51.0001,
+                        "TopMargin": 53.0004,
+                        "BottomMargin": -78.0004,
+                        "Tag": 262,
+                        "ActionTag": -1955683360,
+                        "Size": {
+                          "X": 102.0,
+                          "Y": 25.0
+                        },
+                        "Name": "category_name_string",
+                        "ctype": "TextBMFontObjectData"
+                      }
+                    ],
+                    "ActionTag": 899160977,
                     "Size": {
-                      "X": 208.0,
-                      "Y": 165.0
-                    },
-                    "Name": "category_trangtri_button",
-                    "ctype": "ButtonObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/slot_catalogy.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
                       "X": 0.0,
                       "Y": 0.0
                     },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 258,
-                    "ActionTag": -1931327213,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "slot_bg",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/catalogy_bg.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 259,
-                    "ActionTag": 493603431,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "category_shine",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/type_dc.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 261,
-                    "ActionTag": 1876276640,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "category_img",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/title_background.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": -66.5
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -113.0,
-                    "RightMargin": -113.0,
-                    "TopMargin": 40.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 260,
-                    "ActionTag": -1081270951,
-                    "Size": {
-                      "X": 226.0,
-                      "Y": 53.0
-                    },
-                    "Name": "category_name_bar",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "LabelText": "TRANG TRÍ",
-                    "LabelBMFontFile_CNB": {
-                      "Type": "Normal",
-                      "Path": "fonts/soji_16.fnt",
-                      "Plist": ""
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0001,
-                      "Y": -65.5004
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -50.9999,
-                    "RightMargin": -51.0001,
-                    "TopMargin": 53.0004,
-                    "BottomMargin": -78.0004,
-                    "Tag": 262,
-                    "ActionTag": -1955683360,
-                    "Size": {
-                      "X": 102.0,
-                      "Y": 25.0
-                    },
-                    "Name": "category_name_string",
-                    "ctype": "TextBMFontObjectData"
+                    "Name": "category_trangtri",
+                    "ctype": "SingleNodeObjectData"
                   }
                 ],
-                "ActionTag": 899160977,
+                "ActionTag": -109637885,
                 "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
+                  "X": 241.0,
+                  "Y": 186.0
                 },
                 "Name": "category_trangtri",
-                "ctype": "SingleNodeObjectData"
+                "ctype": "SpriteObjectData"
               },
               {
-                "AnchorPoint": {},
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "guis/shop_gui/slot_catalogy.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
                 "Position": {
                   "X": -4.05,
                   "Y": 105.17
@@ -571,7 +559,7 @@
                   "ScaleY": 1.0
                 },
                 "CColor": {},
-                "IconVisible": true,
+                "IconVisible": false,
                 "PrePosition": {
                   "X": 0.0,
                   "Y": 0.0
@@ -580,320 +568,294 @@
                   "X": 0.0,
                   "Y": 0.0
                 },
-                "LeftMargin": -4.05,
-                "RightMargin": 4.05,
-                "TopMargin": -105.17,
-                "BottomMargin": 105.17,
-                "Tag": 263,
+                "LeftMargin": -124.55,
+                "RightMargin": -116.45,
+                "TopMargin": -198.17,
+                "BottomMargin": 12.17,
+                "Tag": 161,
                 "Children": [
                   {
-                    "FontSize": 14,
-                    "ButtonText": "",
-                    "TextColor": {
-                      "R": 65,
-                      "G": 65,
-                      "B": 70
-                    },
-                    "DisabledFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Disable.png",
-                      "Plist": ""
-                    },
-                    "PressedFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Press.png",
-                      "Plist": ""
-                    },
-                    "NormalFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Normal.png",
-                      "Plist": ""
-                    },
-                    "Scale9Enable": true,
-                    "Scale9OriginX": 15,
-                    "Scale9OriginY": 11,
-                    "Scale9Width": 16,
-                    "Scale9Height": 14,
-                    "OutlineColor": {
-                      "G": 0,
-                      "B": 0
-                    },
-                    "ShadowColor": {
-                      "R": 110,
-                      "G": 110,
-                      "B": 110
-                    },
-                    "ShadowOffsetX": 2.0,
-                    "ShadowOffsetY": -2.0,
-                    "TouchEnable": true,
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
+                    "AnchorPoint": {},
                     "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
+                      "X": 120.5,
+                      "Y": 93.0
                     },
                     "Scale": {
                       "ScaleX": 1.0,
                       "ScaleY": 1.0
                     },
                     "CColor": {},
-                    "IconVisible": false,
+                    "IconVisible": true,
+                    "PositionPercentXEnabled": true,
+                    "PositionPercentYEnabled": true,
                     "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
+                      "X": 0.5,
+                      "Y": 0.5
                     },
                     "PreSize": {
                       "X": 0.0,
                       "Y": 0.0
                     },
-                    "LeftMargin": -104.0,
-                    "RightMargin": -104.0,
-                    "TopMargin": -82.5,
-                    "BottomMargin": -82.5,
-                    "Tag": 193,
-                    "ActionTag": 694586429,
+                    "LeftMargin": 120.5,
+                    "RightMargin": 120.5,
+                    "TopMargin": 93.0,
+                    "BottomMargin": 93.0,
+                    "Tag": 263,
+                    "Children": [
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/slot_catalogy.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 264,
+                        "ActionTag": 217226179,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "slot_bg",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/catalogy_bg.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 265,
+                        "ActionTag": 506798473,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "category_shine",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/type_res.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 266,
+                        "ActionTag": 1269514592,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "category_img",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/title_background.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": -66.5
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -113.0,
+                        "RightMargin": -113.0,
+                        "TopMargin": 40.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 267,
+                        "ActionTag": 503670222,
+                        "Size": {
+                          "X": 226.0,
+                          "Y": 53.0
+                        },
+                        "Name": "category_name_bar",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "LabelText": "TÀI NGUYÊN",
+                        "LabelBMFontFile_CNB": {
+                          "Type": "Normal",
+                          "Path": "fonts/soji_16.fnt",
+                          "Plist": ""
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0001,
+                          "Y": -65.5004
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -58.4999,
+                        "RightMargin": -58.5001,
+                        "TopMargin": 53.0004,
+                        "BottomMargin": -78.0004,
+                        "Tag": 268,
+                        "ActionTag": 1035108980,
+                        "Size": {
+                          "X": 117.0,
+                          "Y": 25.0
+                        },
+                        "Name": "category_name_string",
+                        "ctype": "TextBMFontObjectData"
+                      }
+                    ],
+                    "ActionTag": 857053951,
                     "Size": {
-                      "X": 208.0,
-                      "Y": 165.0
-                    },
-                    "Name": "category_tainguyen_button",
-                    "ctype": "ButtonObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/slot_catalogy.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
                       "X": 0.0,
                       "Y": 0.0
                     },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 264,
-                    "ActionTag": 217226179,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "slot_bg",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/catalogy_bg.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 265,
-                    "ActionTag": 506798473,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "category_shine",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/type_res.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 266,
-                    "ActionTag": 1269514592,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "category_img",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/title_background.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": -66.5
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -113.0,
-                    "RightMargin": -113.0,
-                    "TopMargin": 40.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 267,
-                    "ActionTag": 503670222,
-                    "Size": {
-                      "X": 226.0,
-                      "Y": 53.0
-                    },
-                    "Name": "category_name_bar",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "LabelText": "TÀI NGUYÊN",
-                    "LabelBMFontFile_CNB": {
-                      "Type": "Normal",
-                      "Path": "fonts/soji_16.fnt",
-                      "Plist": ""
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0001,
-                      "Y": -65.5004
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -58.4999,
-                    "RightMargin": -58.5001,
-                    "TopMargin": 53.0004,
-                    "BottomMargin": -78.0004,
-                    "Tag": 268,
-                    "ActionTag": 1035108980,
-                    "Size": {
-                      "X": 117.0,
-                      "Y": 25.0
-                    },
-                    "Name": "category_name_string",
-                    "ctype": "TextBMFontObjectData"
+                    "Name": "category_tainguyen",
+                    "ctype": "SingleNodeObjectData"
                   }
                 ],
-                "ActionTag": 857053951,
+                "ActionTag": 159467037,
                 "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
+                  "X": 241.0,
+                  "Y": 186.0
                 },
                 "Name": "category_tainguyen",
-                "ctype": "SingleNodeObjectData"
+                "ctype": "SpriteObjectData"
               },
               {
-                "AnchorPoint": {},
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "guis/shop_gui/slot_catalogy.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
                 "Position": {
                   "X": -249.82,
                   "Y": 105.17
@@ -903,7 +865,7 @@
                   "ScaleY": 1.0
                 },
                 "CColor": {},
-                "IconVisible": true,
+                "IconVisible": false,
                 "PrePosition": {
                   "X": 0.0,
                   "Y": 0.0
@@ -912,320 +874,294 @@
                   "X": 0.0,
                   "Y": 0.0
                 },
-                "LeftMargin": -249.82,
-                "RightMargin": 249.82,
-                "TopMargin": -105.17,
-                "BottomMargin": 105.17,
-                "Tag": 269,
+                "LeftMargin": -370.32,
+                "RightMargin": 129.32,
+                "TopMargin": -198.17,
+                "BottomMargin": 12.17,
+                "Tag": 162,
                 "Children": [
                   {
-                    "FontSize": 14,
-                    "ButtonText": "",
-                    "TextColor": {
-                      "R": 65,
-                      "G": 65,
-                      "B": 70
-                    },
-                    "DisabledFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Disable.png",
-                      "Plist": ""
-                    },
-                    "PressedFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Press.png",
-                      "Plist": ""
-                    },
-                    "NormalFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Normal.png",
-                      "Plist": ""
-                    },
-                    "Scale9Enable": true,
-                    "Scale9OriginX": 15,
-                    "Scale9OriginY": 11,
-                    "Scale9Width": 16,
-                    "Scale9Height": 14,
-                    "OutlineColor": {
-                      "G": 0,
-                      "B": 0
-                    },
-                    "ShadowColor": {
-                      "R": 110,
-                      "G": 110,
-                      "B": 110
-                    },
-                    "ShadowOffsetX": 2.0,
-                    "ShadowOffsetY": -2.0,
-                    "TouchEnable": true,
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
+                    "AnchorPoint": {},
                     "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
+                      "X": 120.5,
+                      "Y": 93.0
                     },
                     "Scale": {
                       "ScaleX": 1.0,
                       "ScaleY": 1.0
                     },
                     "CColor": {},
-                    "IconVisible": false,
+                    "IconVisible": true,
+                    "PositionPercentXEnabled": true,
+                    "PositionPercentYEnabled": true,
                     "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
+                      "X": 0.5,
+                      "Y": 0.5
                     },
                     "PreSize": {
                       "X": 0.0,
                       "Y": 0.0
                     },
-                    "LeftMargin": -104.0,
-                    "RightMargin": -104.0,
-                    "TopMargin": -82.5,
-                    "BottomMargin": -82.5,
-                    "Tag": 189,
-                    "ActionTag": -835457498,
+                    "LeftMargin": 120.5,
+                    "RightMargin": 120.5,
+                    "TopMargin": 93.0,
+                    "BottomMargin": 93.0,
+                    "Tag": 269,
+                    "Children": [
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/slot_catalogy.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 270,
+                        "ActionTag": 1511512156,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "slot_bg",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/catalogy_bg.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 271,
+                        "ActionTag": 193645455,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "category_shine",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/type_buy_res.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 272,
+                        "ActionTag": 898651836,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "category_img",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/title_background.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": -66.5
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -113.0,
+                        "RightMargin": -113.0,
+                        "TopMargin": 40.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 273,
+                        "ActionTag": -261881244,
+                        "Size": {
+                          "X": 226.0,
+                          "Y": 53.0
+                        },
+                        "Name": "category_name_bar",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "LabelText": "NGÂN KHỐ",
+                        "LabelBMFontFile_CNB": {
+                          "Type": "Normal",
+                          "Path": "fonts/soji_16.fnt",
+                          "Plist": ""
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0001,
+                          "Y": -65.5004
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -50.9999,
+                        "RightMargin": -51.0001,
+                        "TopMargin": 53.0004,
+                        "BottomMargin": -78.0004,
+                        "Tag": 274,
+                        "ActionTag": -1694268827,
+                        "Size": {
+                          "X": 102.0,
+                          "Y": 25.0
+                        },
+                        "Name": "category_name_string",
+                        "ctype": "TextBMFontObjectData"
+                      }
+                    ],
+                    "ActionTag": 423242441,
                     "Size": {
-                      "X": 208.0,
-                      "Y": 165.0
-                    },
-                    "Name": "category_ngankho_button",
-                    "ctype": "ButtonObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/slot_catalogy.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
                       "X": 0.0,
                       "Y": 0.0
                     },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 270,
-                    "ActionTag": 1511512156,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "slot_bg",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/catalogy_bg.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 271,
-                    "ActionTag": 193645455,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "category_shine",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/type_buy_res.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 272,
-                    "ActionTag": 898651836,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "category_img",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/title_background.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": -66.5
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -113.0,
-                    "RightMargin": -113.0,
-                    "TopMargin": 40.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 273,
-                    "ActionTag": -261881244,
-                    "Size": {
-                      "X": 226.0,
-                      "Y": 53.0
-                    },
-                    "Name": "category_name_bar",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "LabelText": "NGÂN KHỐ",
-                    "LabelBMFontFile_CNB": {
-                      "Type": "Normal",
-                      "Path": "fonts/soji_16.fnt",
-                      "Plist": ""
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0001,
-                      "Y": -65.5004
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -50.9999,
-                    "RightMargin": -51.0001,
-                    "TopMargin": 53.0004,
-                    "BottomMargin": -78.0004,
-                    "Tag": 274,
-                    "ActionTag": -1694268827,
-                    "Size": {
-                      "X": 102.0,
-                      "Y": 25.0
-                    },
-                    "Name": "category_name_string",
-                    "ctype": "TextBMFontObjectData"
+                    "Name": "category_ngankho",
+                    "ctype": "SingleNodeObjectData"
                   }
                 ],
-                "ActionTag": 423242441,
+                "ActionTag": 86602223,
                 "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
+                  "X": 241.0,
+                  "Y": 186.0
                 },
                 "Name": "category_ngankho",
-                "ctype": "SingleNodeObjectData"
+                "ctype": "SpriteObjectData"
               },
               {
-                "AnchorPoint": {},
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "guis/shop_gui/slot_catalogy.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
                 "Position": {
                   "X": -249.82,
                   "Y": -106.32
@@ -1235,7 +1171,7 @@
                   "ScaleY": 1.0
                 },
                 "CColor": {},
-                "IconVisible": true,
+                "IconVisible": false,
                 "PrePosition": {
                   "X": 0.0,
                   "Y": 0.0
@@ -1244,320 +1180,294 @@
                   "X": 0.0,
                   "Y": 0.0
                 },
-                "LeftMargin": -249.82,
-                "RightMargin": 249.82,
-                "TopMargin": 106.32,
-                "BottomMargin": -106.32,
-                "Tag": 275,
+                "LeftMargin": -370.32,
+                "RightMargin": 129.32,
+                "TopMargin": 13.32,
+                "BottomMargin": -199.32,
+                "Tag": 163,
                 "Children": [
                   {
-                    "FontSize": 14,
-                    "ButtonText": "",
-                    "TextColor": {
-                      "R": 65,
-                      "G": 65,
-                      "B": 70
-                    },
-                    "DisabledFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Disable.png",
-                      "Plist": ""
-                    },
-                    "PressedFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Press.png",
-                      "Plist": ""
-                    },
-                    "NormalFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Normal.png",
-                      "Plist": ""
-                    },
-                    "Scale9Enable": true,
-                    "Scale9OriginX": 15,
-                    "Scale9OriginY": 11,
-                    "Scale9Width": 16,
-                    "Scale9Height": 14,
-                    "OutlineColor": {
-                      "G": 0,
-                      "B": 0
-                    },
-                    "ShadowColor": {
-                      "R": 110,
-                      "G": 110,
-                      "B": 110
-                    },
-                    "ShadowOffsetX": 2.0,
-                    "ShadowOffsetY": -2.0,
-                    "TouchEnable": true,
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
+                    "AnchorPoint": {},
                     "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
+                      "X": 120.5,
+                      "Y": 93.0
                     },
                     "Scale": {
                       "ScaleX": 1.0,
                       "ScaleY": 1.0
                     },
                     "CColor": {},
-                    "IconVisible": false,
+                    "IconVisible": true,
+                    "PositionPercentXEnabled": true,
+                    "PositionPercentYEnabled": true,
                     "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
+                      "X": 0.5,
+                      "Y": 0.5
                     },
                     "PreSize": {
                       "X": 0.0,
                       "Y": 0.0
                     },
-                    "LeftMargin": -104.0,
-                    "RightMargin": -104.0,
-                    "TopMargin": -82.5,
-                    "BottomMargin": -82.5,
-                    "Tag": 190,
-                    "ActionTag": -1664164415,
+                    "LeftMargin": 120.5,
+                    "RightMargin": 120.5,
+                    "TopMargin": 93.0,
+                    "BottomMargin": 93.0,
+                    "Tag": 275,
+                    "Children": [
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/slot_catalogy.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 276,
+                        "ActionTag": -333414093,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "slot_bg",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/catalogy_bg.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 277,
+                        "ActionTag": 1069401168,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "category_shine",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/type_army.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 278,
+                        "ActionTag": -1331819949,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "category_img",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/title_background.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": -66.5
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -113.0,
+                        "RightMargin": -113.0,
+                        "TopMargin": 40.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 279,
+                        "ActionTag": -287388458,
+                        "Size": {
+                          "X": 226.0,
+                          "Y": 53.0
+                        },
+                        "Name": "category_name_bar",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "LabelText": "QUÂN ĐỘI",
+                        "LabelBMFontFile_CNB": {
+                          "Type": "Normal",
+                          "Path": "fonts/soji_16.fnt",
+                          "Plist": ""
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0001,
+                          "Y": -65.5004
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -50.4999,
+                        "RightMargin": -50.5001,
+                        "TopMargin": 53.0004,
+                        "BottomMargin": -78.0004,
+                        "Tag": 280,
+                        "ActionTag": -797549176,
+                        "Size": {
+                          "X": 101.0,
+                          "Y": 25.0
+                        },
+                        "Name": "category_name_string",
+                        "ctype": "TextBMFontObjectData"
+                      }
+                    ],
+                    "ActionTag": 607246614,
                     "Size": {
-                      "X": 208.0,
-                      "Y": 165.0
-                    },
-                    "Name": "category_quandoi_button",
-                    "ctype": "ButtonObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/slot_catalogy.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
                       "X": 0.0,
                       "Y": 0.0
                     },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 276,
-                    "ActionTag": -333414093,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "slot_bg",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/catalogy_bg.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 277,
-                    "ActionTag": 1069401168,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "category_shine",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/type_army.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 278,
-                    "ActionTag": -1331819949,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "category_img",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/title_background.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": -66.5
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -113.0,
-                    "RightMargin": -113.0,
-                    "TopMargin": 40.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 279,
-                    "ActionTag": -287388458,
-                    "Size": {
-                      "X": 226.0,
-                      "Y": 53.0
-                    },
-                    "Name": "category_name_bar",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "LabelText": "QUÂN ĐỘI",
-                    "LabelBMFontFile_CNB": {
-                      "Type": "Normal",
-                      "Path": "fonts/soji_16.fnt",
-                      "Plist": ""
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0001,
-                      "Y": -65.5004
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -50.4999,
-                    "RightMargin": -50.5001,
-                    "TopMargin": 53.0004,
-                    "BottomMargin": -78.0004,
-                    "Tag": 280,
-                    "ActionTag": -797549176,
-                    "Size": {
-                      "X": 101.0,
-                      "Y": 25.0
-                    },
-                    "Name": "category_name_string",
-                    "ctype": "TextBMFontObjectData"
+                    "Name": "category_quandoi",
+                    "ctype": "SingleNodeObjectData"
                   }
                 ],
-                "ActionTag": 607246614,
+                "ActionTag": 1279187255,
                 "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
+                  "X": 241.0,
+                  "Y": 186.0
                 },
                 "Name": "category_quandoi",
-                "ctype": "SingleNodeObjectData"
+                "ctype": "SpriteObjectData"
               },
               {
-                "AnchorPoint": {},
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "guis/shop_gui/slot_catalogy.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
                 "Position": {
                   "X": -4.05,
                   "Y": -106.32
@@ -1567,7 +1477,7 @@
                   "ScaleY": 1.0
                 },
                 "CColor": {},
-                "IconVisible": true,
+                "IconVisible": false,
                 "PrePosition": {
                   "X": 0.0,
                   "Y": 0.0
@@ -1576,320 +1486,294 @@
                   "X": 0.0,
                   "Y": 0.0
                 },
-                "LeftMargin": -4.05,
-                "RightMargin": 4.05,
-                "TopMargin": 106.32,
-                "BottomMargin": -106.32,
-                "Tag": 281,
+                "LeftMargin": -124.55,
+                "RightMargin": -116.45,
+                "TopMargin": 13.32,
+                "BottomMargin": -199.32,
+                "Tag": 164,
                 "Children": [
                   {
-                    "FontSize": 14,
-                    "ButtonText": "",
-                    "TextColor": {
-                      "R": 65,
-                      "G": 65,
-                      "B": 70
-                    },
-                    "DisabledFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Disable.png",
-                      "Plist": ""
-                    },
-                    "PressedFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Press.png",
-                      "Plist": ""
-                    },
-                    "NormalFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Normal.png",
-                      "Plist": ""
-                    },
-                    "Scale9Enable": true,
-                    "Scale9OriginX": 15,
-                    "Scale9OriginY": 11,
-                    "Scale9Width": 16,
-                    "Scale9Height": 14,
-                    "OutlineColor": {
-                      "G": 0,
-                      "B": 0
-                    },
-                    "ShadowColor": {
-                      "R": 110,
-                      "G": 110,
-                      "B": 110
-                    },
-                    "ShadowOffsetX": 2.0,
-                    "ShadowOffsetY": -2.0,
-                    "TouchEnable": true,
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
+                    "AnchorPoint": {},
                     "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
+                      "X": 120.5,
+                      "Y": 93.0
                     },
                     "Scale": {
                       "ScaleX": 1.0,
                       "ScaleY": 1.0
                     },
                     "CColor": {},
-                    "IconVisible": false,
+                    "IconVisible": true,
+                    "PositionPercentXEnabled": true,
+                    "PositionPercentYEnabled": true,
                     "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
+                      "X": 0.5,
+                      "Y": 0.5
                     },
                     "PreSize": {
                       "X": 0.0,
                       "Y": 0.0
                     },
-                    "LeftMargin": -104.0,
-                    "RightMargin": -104.0,
-                    "TopMargin": -82.5,
-                    "BottomMargin": -82.5,
-                    "Tag": 194,
-                    "ActionTag": -2117858168,
+                    "LeftMargin": 120.5,
+                    "RightMargin": 120.5,
+                    "TopMargin": 93.0,
+                    "BottomMargin": 93.0,
+                    "Tag": 281,
+                    "Children": [
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/slot_catalogy.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 282,
+                        "ActionTag": -260274397,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "slot_bg",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/catalogy_bg.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 283,
+                        "ActionTag": 781981886,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "category_shine",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/type_defense.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 284,
+                        "ActionTag": 796561048,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "category_img",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/title_background.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": -66.5
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -113.0,
+                        "RightMargin": -113.0,
+                        "TopMargin": 40.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 285,
+                        "ActionTag": 1657169593,
+                        "Size": {
+                          "X": 226.0,
+                          "Y": 53.0
+                        },
+                        "Name": "category_name_bar",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "LabelText": "PHÒNG THỦ",
+                        "LabelBMFontFile_CNB": {
+                          "Type": "Normal",
+                          "Path": "fonts/soji_16.fnt",
+                          "Plist": ""
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0001,
+                          "Y": -65.5004
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -55.9999,
+                        "RightMargin": -56.0001,
+                        "TopMargin": 53.0004,
+                        "BottomMargin": -78.0004,
+                        "Tag": 286,
+                        "ActionTag": 1595073740,
+                        "Size": {
+                          "X": 112.0,
+                          "Y": 25.0
+                        },
+                        "Name": "category_name_string",
+                        "ctype": "TextBMFontObjectData"
+                      }
+                    ],
+                    "ActionTag": 910418966,
                     "Size": {
-                      "X": 208.0,
-                      "Y": 165.0
-                    },
-                    "Name": "category_phongthu_button",
-                    "ctype": "ButtonObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/slot_catalogy.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
                       "X": 0.0,
                       "Y": 0.0
                     },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 282,
-                    "ActionTag": -260274397,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "slot_bg",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/catalogy_bg.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 283,
-                    "ActionTag": 781981886,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "category_shine",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/type_defense.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 284,
-                    "ActionTag": 796561048,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "category_img",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/title_background.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": -66.5
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -113.0,
-                    "RightMargin": -113.0,
-                    "TopMargin": 40.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 285,
-                    "ActionTag": 1657169593,
-                    "Size": {
-                      "X": 226.0,
-                      "Y": 53.0
-                    },
-                    "Name": "category_name_bar",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "LabelText": "PHÒNG THỦ",
-                    "LabelBMFontFile_CNB": {
-                      "Type": "Normal",
-                      "Path": "fonts/soji_16.fnt",
-                      "Plist": ""
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0001,
-                      "Y": -65.5004
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -55.9999,
-                    "RightMargin": -56.0001,
-                    "TopMargin": 53.0004,
-                    "BottomMargin": -78.0004,
-                    "Tag": 286,
-                    "ActionTag": 1595073740,
-                    "Size": {
-                      "X": 112.0,
-                      "Y": 25.0
-                    },
-                    "Name": "category_name_string",
-                    "ctype": "TextBMFontObjectData"
+                    "Name": "category_phongthu",
+                    "ctype": "SingleNodeObjectData"
                   }
                 ],
-                "ActionTag": 910418966,
+                "ActionTag": -77579663,
                 "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
+                  "X": 241.0,
+                  "Y": 186.0
                 },
                 "Name": "category_phongthu",
-                "ctype": "SingleNodeObjectData"
+                "ctype": "SpriteObjectData"
               },
               {
-                "AnchorPoint": {},
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "guis/shop_gui/slot_catalogy.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
                 "Position": {
                   "X": 236.97,
                   "Y": -106.32
@@ -1899,7 +1783,7 @@
                   "ScaleY": 1.0
                 },
                 "CColor": {},
-                "IconVisible": true,
+                "IconVisible": false,
                 "PrePosition": {
                   "X": 0.0,
                   "Y": 0.0
@@ -1908,317 +1792,279 @@
                   "X": 0.0,
                   "Y": 0.0
                 },
-                "LeftMargin": 236.97,
-                "RightMargin": -236.97,
-                "TopMargin": 106.32,
-                "BottomMargin": -106.32,
-                "Tag": 287,
+                "LeftMargin": 116.47,
+                "RightMargin": -357.47,
+                "TopMargin": 13.32,
+                "BottomMargin": -199.32,
+                "Tag": 165,
                 "Children": [
                   {
-                    "FontSize": 14,
-                    "ButtonText": "",
-                    "TextColor": {
-                      "R": 65,
-                      "G": 65,
-                      "B": 70
-                    },
-                    "DisabledFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Disable.png",
-                      "Plist": ""
-                    },
-                    "PressedFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Press.png",
-                      "Plist": ""
-                    },
-                    "NormalFileData": {
-                      "Type": "Default",
-                      "Path": "Default/Button_Normal.png",
-                      "Plist": ""
-                    },
-                    "Scale9Enable": true,
-                    "Scale9OriginX": 15,
-                    "Scale9OriginY": 11,
-                    "Scale9Width": 16,
-                    "Scale9Height": 14,
-                    "OutlineColor": {
-                      "G": 0,
-                      "B": 0
-                    },
-                    "ShadowColor": {
-                      "R": 110,
-                      "G": 110,
-                      "B": 110
-                    },
-                    "ShadowOffsetX": 2.0,
-                    "ShadowOffsetY": -2.0,
-                    "TouchEnable": true,
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
+                    "AnchorPoint": {},
                     "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
+                      "X": 120.5,
+                      "Y": 93.0
                     },
                     "Scale": {
-                      "ScaleX": 1.0,
+                      "ScaleX": 1.03,
                       "ScaleY": 1.0
                     },
                     "CColor": {},
-                    "IconVisible": false,
+                    "IconVisible": true,
+                    "PositionPercentXEnabled": true,
+                    "PositionPercentYEnabled": true,
                     "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
+                      "X": 0.5,
+                      "Y": 0.5
                     },
                     "PreSize": {
                       "X": 0.0,
                       "Y": 0.0
                     },
-                    "LeftMargin": -104.0,
-                    "RightMargin": -104.0,
-                    "TopMargin": -82.5,
-                    "BottomMargin": -82.5,
-                    "Tag": 195,
-                    "ActionTag": -1500536369,
+                    "LeftMargin": 120.5,
+                    "RightMargin": 120.5,
+                    "TopMargin": 93.0,
+                    "BottomMargin": 93.0,
+                    "Tag": 287,
+                    "Children": [
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/slot_catalogy.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 178,
+                        "ActionTag": -334628561,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "slot_bg",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/catalogy_bg.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 289,
+                        "ActionTag": 1256005230,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "category_shine",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/type_sheild.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -120.5,
+                        "RightMargin": -120.5,
+                        "TopMargin": -93.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 290,
+                        "ActionTag": -4799407,
+                        "Size": {
+                          "X": 241.0,
+                          "Y": 186.0
+                        },
+                        "Name": "category_img",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "FileData": {
+                          "Type": "Normal",
+                          "Path": "guis/shop_gui/title_background.png",
+                          "Plist": ""
+                        },
+                        "BlendFunc": {
+                          "Src": 1,
+                          "Dst": 771
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0,
+                          "Y": -66.5
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -113.0,
+                        "RightMargin": -113.0,
+                        "TopMargin": 40.0,
+                        "BottomMargin": -93.0,
+                        "Tag": 291,
+                        "ActionTag": -2091080930,
+                        "Size": {
+                          "X": 226.0,
+                          "Y": 53.0
+                        },
+                        "Name": "category_name_bar",
+                        "ctype": "SpriteObjectData"
+                      },
+                      {
+                        "LabelText": "BẢO VỆ",
+                        "LabelBMFontFile_CNB": {
+                          "Type": "Normal",
+                          "Path": "fonts/soji_16.fnt",
+                          "Plist": ""
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 0.0001,
+                          "Y": -65.5004
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PrePosition": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": -38.4999,
+                        "RightMargin": -38.5001,
+                        "TopMargin": 53.0004,
+                        "BottomMargin": -78.0004,
+                        "Tag": 292,
+                        "ActionTag": 2027728022,
+                        "Size": {
+                          "X": 77.0,
+                          "Y": 25.0
+                        },
+                        "Name": "category_name_string",
+                        "ctype": "TextBMFontObjectData"
+                      }
+                    ],
+                    "ActionTag": 894687098,
                     "Size": {
-                      "X": 208.0,
-                      "Y": 165.0
-                    },
-                    "Name": "category_baove_button",
-                    "ctype": "ButtonObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/slot_catalogy.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
                       "X": 0.0,
                       "Y": 0.0
                     },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 178,
-                    "ActionTag": -334628561,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "slot_bg",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/catalogy_bg.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 289,
-                    "ActionTag": 1256005230,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "category_shine",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/type_sheild.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -120.5,
-                    "RightMargin": -120.5,
-                    "TopMargin": -93.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 290,
-                    "ActionTag": -4799407,
-                    "Size": {
-                      "X": 241.0,
-                      "Y": 186.0
-                    },
-                    "Name": "category_img",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "guis/shop_gui/title_background.png",
-                      "Plist": ""
-                    },
-                    "BlendFunc": {
-                      "Src": 1,
-                      "Dst": 771
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0,
-                      "Y": -66.5
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -113.0,
-                    "RightMargin": -113.0,
-                    "TopMargin": 40.0,
-                    "BottomMargin": -93.0,
-                    "Tag": 291,
-                    "ActionTag": -2091080930,
-                    "Size": {
-                      "X": 226.0,
-                      "Y": 53.0
-                    },
-                    "Name": "category_name_bar",
-                    "ctype": "SpriteObjectData"
-                  },
-                  {
-                    "LabelText": "BẢO VỆ",
-                    "LabelBMFontFile_CNB": {
-                      "Type": "Normal",
-                      "Path": "fonts/soji_16.fnt",
-                      "Plist": ""
-                    },
-                    "AnchorPoint": {
-                      "ScaleX": 0.5,
-                      "ScaleY": 0.5
-                    },
-                    "Position": {
-                      "X": 0.0001,
-                      "Y": -65.5004
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": -38.4999,
-                    "RightMargin": -38.5001,
-                    "TopMargin": 53.0004,
-                    "BottomMargin": -78.0004,
-                    "Tag": 292,
-                    "ActionTag": 2027728022,
-                    "Size": {
-                      "X": 77.0,
-                      "Y": 25.0
-                    },
-                    "Name": "category_name_string",
-                    "ctype": "TextBMFontObjectData"
+                    "Name": "category_baove",
+                    "ctype": "SingleNodeObjectData"
                   }
                 ],
-                "ActionTag": 894687098,
+                "ActionTag": 163827624,
                 "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
+                  "X": 241.0,
+                  "Y": 186.0
                 },
                 "Name": "category_baove",
-                "ctype": "SingleNodeObjectData"
+                "ctype": "SpriteObjectData"
               }
             ],
             "ActionTag": -1059382931,
@@ -3192,8 +3038,6 @@
       },
       "UsedResources": [
         "Default/Button_Disable.png",
-        "Default/Button_Normal.png",
-        "Default/Button_Press.png",
         "fonts/soji_12.fnt",
         "fonts/soji_12.png",
         "fonts/soji_16.fnt",

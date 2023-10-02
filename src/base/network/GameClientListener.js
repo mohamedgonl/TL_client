@@ -61,6 +61,7 @@ var GameClientListener = cc.Class.extend(
         },
         onReceivedPacket:function(cmd, packet)
         {
+            cc.log("onReceivedPacket :::: ", cmd)
             switch (cmd)
             {
                 case gv.CMD.PACKET_ERROR:
@@ -71,6 +72,8 @@ var GameClientListener = cc.Class.extend(
                 case gv.CMD.USER_LOGIN:
                     fr.getCurrentScreen().onFinishLogin();
                     break;
+                case gv.CMD.BUY_RESOURCE:
+                    fr.getCurrentScreen().onBuyResourceSuccess(packet);
             }
         }
     }

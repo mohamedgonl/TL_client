@@ -45,8 +45,7 @@ var GameScene = cc.Scene.extend({
         return this.popUpLayer;
     },
 
-    onBuyItemSuccess: function () {
-        // cập nhập lại các thông tin khi mua 1 item thành công như tài nguyên, bản đồ
-
+    onBuyResourceSuccess: function (data) {
+        PlayerInfoManager.setResource(data);
     }
 });

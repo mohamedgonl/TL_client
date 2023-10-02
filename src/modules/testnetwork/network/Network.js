@@ -27,8 +27,8 @@ testnetwork.Connector = cc.Class.extend({
                 case gv.CMD.MAP_INFO:
                 fr.getCurrentScreen().onReceiveMapInfo(packet);
                 break;
-            case gv.CMD.BUY_ITEM:
-                fr.getRunningScene().onBuyItemSuccess(packet);
+            case gv.CMD.BUY_RESOURCE:
+                cc.director.getRunningScene().onBuyResourceSuccess(packet);
                 break;
             case gv.CMD.MOVE:
                 cc.log("MOVE:", packet.x, packet.y);
@@ -54,10 +54,10 @@ testnetwork.Connector = cc.Class.extend({
         pk.pack(uid);
         this.gameClient.sendPacket(pk);
     },
-    sendBuyItemRequest: function (itemData) {
-        cc.log("SEND buy item request");
-        var pk = this.gameClient.getOutPacket(Cmd);
-        pk.pack(uid);
+    sendBuyResourceRequest: function (itemData) {
+        cc.log("SEND buy resource request");
+        var pk = this.gameClient.getOutPacket(CmdSendBuyItem);
+        pk.pack(itemData);
         this.gameClient.sendPacket(pk);
     },
     sendMove: function (direction) {
