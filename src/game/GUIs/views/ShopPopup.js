@@ -132,15 +132,15 @@ var ShopPopup = cc.Layer.extend({
 
         let res_bar_gold = this._itemsWrapper.getChildByName("resource_bar_gold");
         res_bar_gold = res_bar_gold.getChildByName("res_bar_string");
-        res_bar_gold.setString(PlayerInfoManager.getResource().gold);
+        res_bar_gold.setString(PlayerInfoManager.Instance().getResource().gold);
 
         let res_bar_elixir = this._itemsWrapper.getChildByName("resource_bar_elixir");
         res_bar_elixir = res_bar_elixir.getChildByName("res_bar_string");
-        res_bar_elixir.setString(PlayerInfoManager.getResource().elixir);
+        res_bar_elixir.setString(PlayerInfoManager.Instance().getResource().elixir);
 
         let res_bar_g = this._itemsWrapper.getChildByName("resource_bar_g");
         res_bar_g = res_bar_g.getChildByName("res_bar_string");
-        res_bar_g.setString(PlayerInfoManager.getResource().gem);
+        res_bar_g.setString(PlayerInfoManager.Instance().getResource().gem);
 
     }
     }

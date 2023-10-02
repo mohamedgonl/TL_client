@@ -1,0 +1,1882 @@
+{
+  "ID": "a2ee0952-26b5-49ae-8bf9-4f1d6279b798",
+  "Version": "3.10.0.0",
+  "Name": "InfoLayer",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Children": [
+          {
+            "AnchorPoint": {},
+            "Position": {
+              "X": 1136.0,
+              "Y": 640.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 1.0,
+              "Y": 1.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "HorizontalEdge": "RightEdge",
+            "VerticalEdge": "TopEdge",
+            "LeftMargin": 1136.0,
+            "BottomMargin": 640.0,
+            "Tag": 39,
+            "Children": [
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/bg_bar_2.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "Position": {
+                  "X": -42.7252,
+                  "Y": -22.3287
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "HorizontalEdge": "RightEdge",
+                "VerticalEdge": "TopEdge",
+                "LeftMargin": -169.7252,
+                "RightMargin": 42.7252,
+                "TopMargin": 22.3287,
+                "BottomMargin": -50.3287,
+                "Tag": 13,
+                "ActionTag": -1757621003,
+                "Size": {
+                  "X": 127.0,
+                  "Y": 28.0
+                },
+                "Name": "bar_bg",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/gold_bar.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "Position": {
+                  "X": -50.7898,
+                  "Y": -23.3585
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "HorizontalEdge": "RightEdge",
+                "VerticalEdge": "TopEdge",
+                "LeftMargin": -168.7898,
+                "RightMargin": 50.7898,
+                "TopMargin": 23.3585,
+                "BottomMargin": -43.3585,
+                "Tag": 12,
+                "ActionTag": 759174554,
+                "Size": {
+                  "X": 118.0,
+                  "Y": 20.0
+                },
+                "Name": "bar",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/gold_icon.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": -31.8687,
+                  "Y": -33.8777
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "HorizontalEdge": "RightEdge",
+                "VerticalEdge": "TopEdge",
+                "LeftMargin": -45.8687,
+                "RightMargin": 17.8687,
+                "TopMargin": 19.3777,
+                "BottomMargin": -48.3777,
+                "Tag": 5,
+                "ActionTag": 135908941,
+                "Size": {
+                  "X": 28.0,
+                  "Y": 29.0
+                },
+                "Name": "icon",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "LabelText": "Tối Đa: ",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_20.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": -170.8331,
+                  "Y": -15.9465
+                },
+                "Scale": {
+                  "ScaleX": 0.6,
+                  "ScaleY": 0.6
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -170.8331,
+                "RightMargin": 83.8331,
+                "TopMargin": -0.0535,
+                "BottomMargin": -31.9465,
+                "Tag": 55,
+                "ActionTag": 422300106,
+                "Size": {
+                  "X": 87.0,
+                  "Y": 32.0
+                },
+                "Name": "text_max",
+                "ctype": "TextBMFontObjectData"
+              },
+              {
+                "LabelText": "12345678",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_20.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": -53.5946,
+                  "Y": -35.8417
+                },
+                "Scale": {
+                  "ScaleX": 0.6,
+                  "ScaleY": 0.6
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -177.5946,
+                "RightMargin": 53.5946,
+                "TopMargin": 19.8417,
+                "BottomMargin": -51.8417,
+                "Tag": 57,
+                "ActionTag": 655841120,
+                "Size": {
+                  "X": 124.0,
+                  "Y": 32.0
+                },
+                "Name": "text",
+                "ctype": "TextBMFontObjectData"
+              }
+            ],
+            "ActionTag": -427863532,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "gold_container",
+            "ctype": "SingleNodeObjectData"
+          },
+          {
+            "AnchorPoint": {},
+            "Position": {
+              "X": 1136.0,
+              "Y": 640.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 1.0,
+              "Y": 1.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "HorizontalEdge": "RightEdge",
+            "VerticalEdge": "TopEdge",
+            "LeftMargin": 1136.0,
+            "BottomMargin": 640.0,
+            "Tag": 40,
+            "Children": [
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/bg_bar_2.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": -105.9475,
+                  "Y": -83.1509
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -169.4475,
+                "RightMargin": 42.4475,
+                "TopMargin": 69.1509,
+                "BottomMargin": -97.1509,
+                "Tag": 14,
+                "ActionTag": 1621641161,
+                "Size": {
+                  "X": 127.0,
+                  "Y": 28.0
+                },
+                "Name": "bar_bg",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/elixir_bar.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": -109.6888,
+                  "Y": -80.2665
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -168.6888,
+                "RightMargin": 50.6888,
+                "TopMargin": 70.2665,
+                "BottomMargin": -90.2665,
+                "Tag": 15,
+                "ActionTag": 72851184,
+                "Size": {
+                  "X": 118.0,
+                  "Y": 20.0
+                },
+                "Name": "bar",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/elixir_icon.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": -30.821,
+                  "Y": -80.6861
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "HorizontalEdge": "RightEdge",
+                "VerticalEdge": "TopEdge",
+                "LeftMargin": -44.321,
+                "RightMargin": 17.321,
+                "TopMargin": 64.6861,
+                "BottomMargin": -96.6861,
+                "Tag": 9,
+                "ActionTag": 698669602,
+                "Size": {
+                  "X": 27.0,
+                  "Y": 32.0
+                },
+                "Name": "icon",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "LabelText": "Tối Đa: ",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_20.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": -170.5302,
+                  "Y": -64.1435
+                },
+                "Scale": {
+                  "ScaleX": 0.6,
+                  "ScaleY": 0.6
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -170.5302,
+                "RightMargin": 83.5302,
+                "TopMargin": 48.1435,
+                "BottomMargin": -80.1435,
+                "Tag": 42,
+                "ActionTag": 438428860,
+                "Size": {
+                  "X": 87.0,
+                  "Y": 32.0
+                },
+                "Name": "text_max",
+                "ctype": "TextBMFontObjectData"
+              },
+              {
+                "LabelText": "777777",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_20.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": -52.6551,
+                  "Y": -82.7305
+                },
+                "Scale": {
+                  "ScaleX": 0.6,
+                  "ScaleY": 0.6
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -147.6551,
+                "RightMargin": 52.6551,
+                "TopMargin": 66.7305,
+                "BottomMargin": -98.7305,
+                "Tag": 43,
+                "ActionTag": 1968013350,
+                "Size": {
+                  "X": 95.0,
+                  "Y": 32.0
+                },
+                "Name": "text",
+                "ctype": "TextBMFontObjectData"
+              }
+            ],
+            "ActionTag": -1079788711,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "elixir_container",
+            "ctype": "SingleNodeObjectData"
+          },
+          {
+            "AnchorPoint": {},
+            "Position": {
+              "X": 1136.0,
+              "Y": 640.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 1.0,
+              "Y": 1.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "HorizontalEdge": "RightEdge",
+            "VerticalEdge": "TopEdge",
+            "LeftMargin": 1136.0,
+            "BottomMargin": 640.0,
+            "Tag": 41,
+            "Children": [
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/bg_bar_4.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": -104.6196,
+                  "Y": -124.7264
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -167.1196,
+                "RightMargin": 42.1196,
+                "TopMargin": 107.2264,
+                "BottomMargin": -142.2264,
+                "Tag": 17,
+                "ActionTag": -1960721078,
+                "Size": {
+                  "X": 125.0,
+                  "Y": 35.0
+                },
+                "Name": "bar_bg",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/g_icon.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": -30.3132,
+                  "Y": -124.7994
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -43.8132,
+                "RightMargin": 16.8132,
+                "TopMargin": 110.7994,
+                "BottomMargin": -138.7994,
+                "Tag": 16,
+                "ActionTag": 1743569090,
+                "Size": {
+                  "X": 27.0,
+                  "Y": 28.0
+                },
+                "Name": "icon",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/add_button.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": -150.7491,
+                  "Y": -124.7686
+                },
+                "Scale": {
+                  "ScaleX": 1.2,
+                  "ScaleY": 1.2
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -168.2491,
+                "RightMargin": 133.2491,
+                "TopMargin": 107.2686,
+                "BottomMargin": -142.2686,
+                "Tag": 18,
+                "ActionTag": -1815925975,
+                "Size": {
+                  "X": 35.0,
+                  "Y": 35.0
+                },
+                "Name": "btn_add",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "LabelText": "1234",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_20.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": -52.9948,
+                  "Y": -125.7168
+                },
+                "Scale": {
+                  "ScaleX": 0.6,
+                  "ScaleY": 0.6
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -121.9948,
+                "RightMargin": 52.9948,
+                "TopMargin": 109.7168,
+                "BottomMargin": -141.7168,
+                "Tag": 44,
+                "ActionTag": 1261362903,
+                "Size": {
+                  "X": 69.0,
+                  "Y": 32.0
+                },
+                "Name": "text",
+                "ctype": "TextBMFontObjectData"
+              }
+            ],
+            "ActionTag": -1109277851,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "g_container",
+            "ctype": "SingleNodeObjectData"
+          },
+          {
+            "AnchorPoint": {},
+            "Position": {
+              "X": 568.0,
+              "Y": 640.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PositionPercentXEnabled": true,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 1.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "VerticalEdge": "TopEdge",
+            "LeftMargin": 568.0,
+            "RightMargin": 568.0,
+            "BottomMargin": 640.0,
+            "Tag": 42,
+            "Children": [
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/bg_bar_1.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 0.0,
+                  "Y": -35.5
+                },
+                "Scale": {
+                  "ScaleX": 1.2,
+                  "ScaleY": 1.2
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "VerticalEdge": "TopEdge",
+                "LeftMargin": -50.0,
+                "RightMargin": -50.0,
+                "TopMargin": 20.0,
+                "BottomMargin": -51.0,
+                "Tag": 22,
+                "ActionTag": -1245289539,
+                "Size": {
+                  "X": 100.0,
+                  "Y": 31.0
+                },
+                "Name": "bar_bg",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/builder_icon.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": -48.2892,
+                  "Y": -35.2524
+                },
+                "Scale": {
+                  "ScaleX": 1.4,
+                  "ScaleY": 1.4
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "VerticalEdge": "TopEdge",
+                "LeftMargin": -63.7892,
+                "RightMargin": 32.7892,
+                "TopMargin": 16.7524,
+                "BottomMargin": -53.7524,
+                "Tag": 21,
+                "ActionTag": -533857333,
+                "Size": {
+                  "X": 31.0,
+                  "Y": 37.0
+                },
+                "Name": "icon",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/add_g_button.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 41.3993,
+                  "Y": -35.0
+                },
+                "Scale": {
+                  "ScaleX": 1.4,
+                  "ScaleY": 1.4
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "VerticalEdge": "TopEdge",
+                "LeftMargin": 26.8993,
+                "RightMargin": -55.8993,
+                "TopMargin": 20.0,
+                "BottomMargin": -50.0,
+                "Tag": 23,
+                "ActionTag": -1219745108,
+                "Size": {
+                  "X": 29.0,
+                  "Y": 30.0
+                },
+                "Name": "btn_add",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "LabelText": "1/3",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_20.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": -2.0954,
+                  "Y": -37.21
+                },
+                "Scale": {
+                  "ScaleX": 0.6,
+                  "ScaleY": 0.6
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "VerticalEdge": "TopEdge",
+                "LeftMargin": -25.5954,
+                "RightMargin": -21.4046,
+                "TopMargin": 21.21,
+                "BottomMargin": -53.21,
+                "Tag": 45,
+                "ActionTag": -1790464375,
+                "Size": {
+                  "X": 47.0,
+                  "Y": 32.0
+                },
+                "Name": "text",
+                "ctype": "TextBMFontObjectData"
+              }
+            ],
+            "ActionTag": 1927128317,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "builder_container",
+            "ctype": "SingleNodeObjectData"
+          },
+          {
+            "AnchorPoint": {},
+            "Position": {
+              "X": 397.6,
+              "Y": 640.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PositionPercentXEnabled": true,
+            "PrePosition": {
+              "X": 0.35,
+              "Y": 1.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "VerticalEdge": "TopEdge",
+            "LeftMargin": 397.6,
+            "RightMargin": 738.4,
+            "BottomMargin": 640.0,
+            "Tag": 43,
+            "Children": [
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/bg_bar_1.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 0.0,
+                  "Y": -35.5
+                },
+                "Scale": {
+                  "ScaleX": 1.2,
+                  "ScaleY": 1.2
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "VerticalEdge": "TopEdge",
+                "LeftMargin": -50.0,
+                "RightMargin": -50.0,
+                "TopMargin": 20.0,
+                "BottomMargin": -51.0,
+                "Tag": 25,
+                "ActionTag": 986559022,
+                "Size": {
+                  "X": 100.0,
+                  "Y": 31.0
+                },
+                "Name": "bar_bg",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/army_icon.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": -61.8668,
+                  "Y": -38.0
+                },
+                "Scale": {
+                  "ScaleX": 1.4,
+                  "ScaleY": 1.4
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "VerticalEdge": "TopEdge",
+                "LeftMargin": -84.8668,
+                "RightMargin": 38.8668,
+                "TopMargin": 20.0,
+                "BottomMargin": -56.0,
+                "Tag": 26,
+                "ActionTag": -253908510,
+                "Size": {
+                  "X": 46.0,
+                  "Y": 36.0
+                },
+                "Name": "icon",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/add_g_button.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 53.7184,
+                  "Y": -35.0
+                },
+                "Scale": {
+                  "ScaleX": 1.4,
+                  "ScaleY": 1.4
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "VerticalEdge": "TopEdge",
+                "LeftMargin": 39.2184,
+                "RightMargin": -68.2184,
+                "TopMargin": 20.0,
+                "BottomMargin": -50.0,
+                "Tag": 24,
+                "ActionTag": -942644833,
+                "Size": {
+                  "X": 29.0,
+                  "Y": 30.0
+                },
+                "Name": "btn_add",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "LabelText": "244/500",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_20.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": -0.5016,
+                  "Y": -36.7373
+                },
+                "Scale": {
+                  "ScaleX": 0.6,
+                  "ScaleY": 0.6
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -60.5016,
+                "RightMargin": -59.4984,
+                "TopMargin": 20.7373,
+                "BottomMargin": -52.7373,
+                "Tag": 46,
+                "ActionTag": 1339868202,
+                "Size": {
+                  "X": 120.0,
+                  "Y": 32.0
+                },
+                "Name": "text",
+                "ctype": "TextBMFontObjectData"
+              }
+            ],
+            "ActionTag": -1767102933,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "army_container",
+            "ctype": "SingleNodeObjectData"
+          },
+          {
+            "AnchorPoint": {},
+            "Position": {
+              "X": 1.0,
+              "Y": 640.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0009,
+              "Y": 1.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "HorizontalEdge": "LeftEdge",
+            "VerticalEdge": "TopEdge",
+            "LeftMargin": 1.0,
+            "RightMargin": 1135.0,
+            "BottomMargin": 640.0,
+            "Tag": 44,
+            "Children": [
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/exp_bg_bar.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 133.3839,
+                  "Y": -90.2134
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 80.8839,
+                "RightMargin": -185.8839,
+                "TopMargin": 78.7134,
+                "BottomMargin": -101.7134,
+                "Tag": 37,
+                "ActionTag": -514647998,
+                "Size": {
+                  "X": 105.0,
+                  "Y": 23.0
+                },
+                "Name": "elo_bar_bg",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/ranking.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 196.896,
+                  "Y": -88.8713
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 179.896,
+                "RightMargin": -213.896,
+                "TopMargin": 70.8713,
+                "BottomMargin": -106.8713,
+                "Tag": 38,
+                "ActionTag": 408020092,
+                "Size": {
+                  "X": 34.0,
+                  "Y": 36.0
+                },
+                "Name": "elo_icon",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/exp_bg_bar.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 137.702,
+                  "Y": -52.5389
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 85.202,
+                "RightMargin": -190.202,
+                "TopMargin": 41.0389,
+                "BottomMargin": -64.0389,
+                "Tag": 33,
+                "ActionTag": 501952312,
+                "Size": {
+                  "X": 105.0,
+                  "Y": 23.0
+                },
+                "Name": "exp_bar_bg",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/exp_bar.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 137.5634,
+                  "Y": -52.1709
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 85.0634,
+                "RightMargin": -190.0634,
+                "TopMargin": 40.6709,
+                "BottomMargin": -63.6709,
+                "Tag": 32,
+                "ActionTag": -794511482,
+                "Size": {
+                  "X": 105.0,
+                  "Y": 23.0
+                },
+                "Name": "exp_bar",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/exp_icon.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 195.6524,
+                  "Y": -48.4569
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 173.6524,
+                "RightMargin": -217.6524,
+                "TopMargin": 25.9569,
+                "BottomMargin": -70.9569,
+                "Tag": 34,
+                "ActionTag": 1010833848,
+                "Size": {
+                  "X": 44.0,
+                  "Y": 45.0
+                },
+                "Name": "exp_icon",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/bg_exp.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 67.0,
+                  "Y": -68.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "HorizontalEdge": "LeftEdge",
+                "VerticalEdge": "TopEdge",
+                "LeftMargin": 30.0,
+                "RightMargin": -104.0,
+                "TopMargin": 30.0,
+                "BottomMargin": -106.0,
+                "Tag": 35,
+                "ActionTag": -652669346,
+                "Size": {
+                  "X": 74.0,
+                  "Y": 76.0
+                },
+                "Name": "avt",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "LabelText": "Hang Ngo Ngu Ngoc",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_20.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 41.123,
+                  "Y": -19.3948
+                },
+                "Scale": {
+                  "ScaleX": 0.6,
+                  "ScaleY": 0.6
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 41.123,
+                "RightMargin": -262.123,
+                "TopMargin": 3.3948,
+                "BottomMargin": -35.3948,
+                "Tag": 47,
+                "ActionTag": 1135256450,
+                "Size": {
+                  "X": 221.0,
+                  "Y": 32.0
+                },
+                "Name": "username",
+                "ctype": "TextBMFontObjectData"
+              }
+            ],
+            "ActionTag": -1176674568,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "username_container",
+            "ctype": "SingleNodeObjectData"
+          },
+          {
+            "FontSize": 14,
+            "ButtonText": "",
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
+            "DisabledFileData": {
+              "Type": "Normal",
+              "Path": "Main_Gui/attack.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Normal",
+              "Path": "Main_Gui/attack.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "Main_Gui/attack.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 11,
+            "Scale9Width": 67,
+            "Scale9Height": 81,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 83.5,
+              "Y": 86.5
+            },
+            "Scale": {
+              "ScaleX": 1.4,
+              "ScaleY": 1.4
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0735,
+              "Y": 0.1352
+            },
+            "PreSize": {
+              "X": 0.0854,
+              "Y": 0.1609
+            },
+            "HorizontalEdge": "LeftEdge",
+            "VerticalEdge": "BottomEdge",
+            "LeftMargin": 35.0,
+            "RightMargin": 1004.0,
+            "TopMargin": 502.0,
+            "BottomMargin": 35.0,
+            "Tag": 49,
+            "Children": [
+              {
+                "LabelText": "Tấn Công",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_12.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 49.1176,
+                  "Y": 20.7005
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.5064,
+                  "Y": 0.201
+                },
+                "PreSize": {
+                  "X": 0.7835,
+                  "Y": 0.1845
+                },
+                "LeftMargin": 11.1176,
+                "RightMargin": 9.8824,
+                "TopMargin": 72.7995,
+                "BottomMargin": 11.2005,
+                "Tag": 50,
+                "ActionTag": -1856374002,
+                "Size": {
+                  "X": 76.0,
+                  "Y": 19.0
+                },
+                "Name": "text",
+                "ctype": "TextBMFontObjectData"
+              }
+            ],
+            "ActionTag": -1134066990,
+            "Size": {
+              "X": 97.0,
+              "Y": 103.0
+            },
+            "Name": "btn_attack",
+            "ctype": "ButtonObjectData"
+          },
+          {
+            "FontSize": 14,
+            "ButtonText": "",
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
+            "DisabledFileData": {
+              "Type": "Normal",
+              "Path": "Main_Gui/shop.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Normal",
+              "Path": "Main_Gui/shop.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "Main_Gui/shop.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 11,
+            "Scale9Width": 67,
+            "Scale9Height": 78,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 1052.5,
+              "Y": 85.0
+            },
+            "Scale": {
+              "ScaleX": 1.4,
+              "ScaleY": 1.4
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.9265,
+              "Y": 0.1328
+            },
+            "PreSize": {
+              "X": 0.0854,
+              "Y": 0.1563
+            },
+            "HorizontalEdge": "RightEdge",
+            "VerticalEdge": "BottomEdge",
+            "LeftMargin": 1004.0,
+            "RightMargin": 35.0,
+            "TopMargin": 505.0,
+            "BottomMargin": 35.0,
+            "Tag": 51,
+            "Children": [
+              {
+                "LabelText": "Cửa Hàng",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_12.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 48.2834,
+                  "Y": 19.7629
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.4978,
+                  "Y": 0.1976
+                },
+                "PreSize": {
+                  "X": 0.7938,
+                  "Y": 0.19
+                },
+                "LeftMargin": 9.7834,
+                "RightMargin": 10.2166,
+                "TopMargin": 70.7371,
+                "BottomMargin": 10.2629,
+                "Tag": 52,
+                "ActionTag": -558696998,
+                "Size": {
+                  "X": 77.0,
+                  "Y": 19.0
+                },
+                "Name": "BitmapFontLabel_4",
+                "ctype": "TextBMFontObjectData"
+              }
+            ],
+            "ActionTag": -197369463,
+            "Size": {
+              "X": 97.0,
+              "Y": 100.0
+            },
+            "Name": "btn_shop",
+            "ctype": "ButtonObjectData"
+          },
+          {
+            "FontSize": 14,
+            "ButtonText": "",
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
+            "DisabledFileData": {
+              "Type": "Normal",
+              "Path": "Main_Gui/setting.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Normal",
+              "Path": "Main_Gui/setting.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "Main_Gui/setting.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 11,
+            "Scale9Width": 28,
+            "Scale9Height": 38,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 1087.0,
+              "Y": 186.1324
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.9569,
+              "Y": 0.2908
+            },
+            "PreSize": {
+              "X": 0.0511,
+              "Y": 0.0938
+            },
+            "HorizontalEdge": "RightEdge",
+            "VerticalEdge": "BottomEdge",
+            "LeftMargin": 1058.0,
+            "RightMargin": 20.0,
+            "TopMargin": 423.8676,
+            "BottomMargin": 156.1324,
+            "Tag": 53,
+            "ActionTag": -1227040436,
+            "Size": {
+              "X": 58.0,
+              "Y": 60.0
+            },
+            "Name": "btn_setting",
+            "ctype": "ButtonObjectData"
+          }
+        ],
+        "Size": {
+          "X": 1136.0,
+          "Y": 640.0
+        },
+        "Name": "Scene",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "fonts/soji_12.fnt",
+        "fonts/soji_12.png",
+        "fonts/soji_20.fnt",
+        "fonts/soji_20.png",
+        "Main_Gui/add_button.png",
+        "Main_Gui/add_g_button.png",
+        "Main_Gui/army_icon.png",
+        "Main_Gui/attack.png",
+        "Main_Gui/bg_bar_1.png",
+        "Main_Gui/bg_bar_2.png",
+        "Main_Gui/bg_bar_4.png",
+        "Main_Gui/bg_exp.png",
+        "Main_Gui/builder_icon.png",
+        "Main_Gui/elixir_bar.png",
+        "Main_Gui/elixir_icon.png",
+        "Main_Gui/exp_bar.png",
+        "Main_Gui/exp_bg_bar.png",
+        "Main_Gui/exp_icon.png",
+        "Main_Gui/g_icon.png",
+        "Main_Gui/gold_bar.png",
+        "Main_Gui/gold_icon.png",
+        "Main_Gui/ranking.png",
+        "Main_Gui/setting.png",
+        "Main_Gui/shop.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Scene"
+}

@@ -13,11 +13,7 @@ var ConfigManager = cc.Class.extend({
 ConfigManager.Instance = function () {
     if (ConfigManager.instance == null) {
         ConfigManager.instance = new ConfigManager();
-        var a = cc.p(1,10);
-        var b = cc.p(7,1);
-        var c = cc.pProject(a,b);
-        cc.log("project of a and b: "+c.x + " " + c.y);
-        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+
     }
     return ConfigManager.instance;
 }

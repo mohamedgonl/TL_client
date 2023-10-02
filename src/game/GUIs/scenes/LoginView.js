@@ -7,8 +7,10 @@ var LoginView = cc.Scene.extend({
 
     init: function () {
         const node = CCSUlties.parseUIFile(res_ui.LOGIN_SCENE);
+
         node.setAnchorPoint(0, 0);
         node.setPosition(0, 0);
+
 
         const loginButton = node.getChildByName("Button_1");
         loginButton.addTouchEventListener(this.handleClickLogin, this);
@@ -40,7 +42,7 @@ var LoginView = cc.Scene.extend({
             // this.messageText.setString("login: " + uid);
             this.loginButton.enabled = false;
             this.textFieldUID.enabled = false;
-            PlayerInfoManager.setInfo({id: uid});
+            PlayerInfoManager.Instance().setInfo({id: uid});
             gv.gameClient.connect();
         } else {
             this.messageText.setColor(cc.color(255, 0, 0));
@@ -54,17 +56,24 @@ var LoginView = cc.Scene.extend({
     },
 
     onReceiveUserInfo: function (userInfo) {
-        PlayerInfoManager.setInfo({
-            name: userInfo.name,
-            avatar: userInfo.avatar,
-            level: userInfo.level,
-            rank: userInfo.rank,
-        });
-        PlayerInfoManager.setResource({
-            gold: userInfo.gold,
-            elixir: userInfo.elixir,
-            gem: userInfo.gem,
-        });
+        // PlayerInfoManager.Instance().setInfo({
+        //     name: userInfo.name,
+        //     avatar: userInfo.avatar,
+        //     level: userInfo.level,
+        //     rank: userInfo.rank,
+        // });
+        // PlayerInfoManager.Instance().setResource({
+        //     gold: userInfo.gold,
+        //     elixir: userInfo.elixir,
+        //     gem: userInfo.gem,
+        // });
+
+        // InfoLayer.Instance().updateResource({
+        //         gold: 700,
+        //         elixir: 700,
+        //         gem: 700,
+        //     }
+        // );
         this.loadedUserInfo = true;
         this.onReceiveData();
     },
@@ -72,6 +81,18 @@ var LoginView = cc.Scene.extend({
     onReceiveMapInfo: function (mapInfo) {
 
         MapManager.Instance().loadFromServer(mapInfo.listBuildings);
+
+        PlayerInfoManager.Instance().setInfo({
+            name: "Nguyen Van A",
+            avatar: "abc",
+            level: "1",
+            rank: "1",
+        });
+        PlayerInfoManager.Instance().setResource({
+            gold: "500",
+            elixir: "600",
+            gem: "700",
+        });
         this.loadedMapInfo = true;
         this.onReceiveData();
     },

@@ -1,4 +1,6 @@
-var PlayerInfo = cc.Class.extend({
+var PlayerInfoManager = cc.Class.extend({
+    instance: null,
+
     maxResource: {
         gold: 1000000,
         elixir: 1000000,
@@ -7,13 +9,6 @@ var PlayerInfo = cc.Class.extend({
         gold: 59000,
         elixir: 78000,
         gem: 242
-    },
-
-    ctor: function () {
-        if (!PlayerInfo.instance) {
-            PlayerInfo.instance = this;
-        }
-        return PlayerInfo.instance;
     },
 
     getMaxResource: function () {
@@ -34,6 +29,9 @@ var PlayerInfo = cc.Class.extend({
         if (gem) {
             this.resource.gem = gem;
         }
+        cc.log("update resource: " + JSON.stringify(this.resource, null, 2));
+        InfoLayer.Instance().updateResource(this.resource);
+
     },
 
     setInfo: function ({id, name, avatar, level, rank}) {
@@ -66,7 +64,13 @@ var PlayerInfo = cc.Class.extend({
         }
     }
 })
+PlayerInfoManager.Instance = function () {
+    if (PlayerInfoManager.instance == null) {
+        PlayerInfoManager.instance = new PlayerInfoManager();
+    }
+    return PlayerInfoManager.instance;
+}
 
 
-var PlayerInfoManager = new PlayerInfo()
+
 

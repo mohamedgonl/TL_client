@@ -68,13 +68,17 @@
 
         "src/game/GUIs/components/ShopItem.js",
 
+        "src/game/GUIs/layers/InfoLayer.js",
         "src/game/GUIs/layers/MapManager.js",
         "src/game/GUIs/layers/PopUpLayer.js",
 
+
         "src/game/GUIs/scenes/LoginView.js",
+        "src/game/Managers/PlayerInfoManager.js",
+
         "src/game/GUIs/scenes/GameScene.js",
 
-        "src/game/Managers/PlayerInfoManager.js",
+
 
 
         "src/framework/ButtonEffect.js",

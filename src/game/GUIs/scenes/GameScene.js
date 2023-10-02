@@ -1,3 +1,5 @@
+
+
 var GameScene = cc.Scene.extend({
 
     mapLayer: null,
@@ -8,10 +10,23 @@ var GameScene = cc.Scene.extend({
     },
 
     init: function () {
+
+
         this.mapLayer = MapManager.Instance();
+        // cc.log("map layer " + JSON.stringify(this.mapLayer, null, 2));
         this.addChild(this.mapLayer);
+
+        var x = InfoLayer.Instance();
+        // cc.log("info layer " + JSON.stringify(this.infoLayer, null, 2));
+        this.addChild(x);
+
+        //
+
+
         this.popUpLayer = new PopupLayer();
         this.addChild(this.popUpLayer)
+        this.popUpLayer.setVisible(false);
+
 
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,

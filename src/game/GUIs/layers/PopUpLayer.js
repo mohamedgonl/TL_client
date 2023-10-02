@@ -9,7 +9,6 @@ let PopupLayer = cc.Layer.extend({
     },
 
     init : function () {
-        cc.log("INIT POPUPLAYER");
         let shopPopup =  new ShopPopup();
         this.addChild(shopPopup);
     },

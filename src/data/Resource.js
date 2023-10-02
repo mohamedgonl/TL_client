@@ -106,6 +106,7 @@ var g_resources = [
 
 
 var res_ui = {
+    INFO_LAYER : "InfoLayer.json",
     SHOP_POPUP: "ShopPopUpSprite.json",
     SHOP_ITEM: "ShopItem.json",
     ITEM_INFO: "ItemInfoPopup.json",
