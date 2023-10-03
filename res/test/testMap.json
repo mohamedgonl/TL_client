@@ -1,0 +1,39 @@
+{
+    "map": {
+      "TOW_1": {
+        "posX": 20,
+        "posY": 19
+      },
+      "AMC_1": {
+        "posX": 20,
+        "posY": 24
+      },
+      "RES_1": {
+        "posX": 25,
+        "posY": 19
+      },
+      "BDH_1": {
+        "posX": 18,
+        "posY": 21
+      },
+      "CLC_1": {
+        "posX": 30,
+        "posY": 22
+      }
+    },
+    "player": {
+      "gold": 750,
+      "coin": 1000,
+      "elixir": 750,
+      "darkElixir": 750,
+      "builderNumber": 1
+    },
+    "obs": {
+      "1": {
+        "type": "OBS_1",
+        "posX": 1,
+        "posY": 1
+      },
+
+    }
+  }

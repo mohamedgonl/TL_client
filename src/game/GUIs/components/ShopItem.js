@@ -37,9 +37,10 @@ var ShopItem = cc.Node.extend({
             name.setString(data.name);
             let value = this._itemNode.getChildByName("ngankho_item_value");
             let maxValue = data.value_type === RESOURCE_TYPE.GOLD
-                ? PlayerInfoManager.getMaxResource().gold
-                : PlayerInfoManager.getMaxResource().elixir;
-            value.setString(fr.toMoneyString(maxValue * (data.nganhko_percent)));
+                ? PlayerInfoManager.Instance().getMaxResource().gold
+                : PlayerInfoManager.Instance().getMaxResource().elixir ;
+            value.setString(fr.toMoneyString(maxValue* (data.nganhko_percent)));
+
 
             let value_icon = this._itemNode.getChildByName("ngankho_item_value_type");
             let icon_image = data.value_type === RESOURCE_TYPE.GOLD ? res.ICON.GOLD :
@@ -62,20 +63,18 @@ var ShopItem = cc.Node.extend({
         switch (data.price_type) {
             case RESOURCE_TYPE.ELIXIR : {
                 price_type.loadTexture(res.ICON.ELIXIR);
-                if (data.price > PlayerInfoManager.getResource().elixir) {
-                    price_string.setColor(cc.color(255, 0, 0));
-                    this._available = false;
-                }
+
+                if(data.price > PlayerInfoManager.Instance().getResource().elixir)  price_string.setColor(cc.color(255,0,0));
                 break;
             }
             case RESOURCE_TYPE.GOLD : {
                 price_type.loadTexture(res.ICON.GOLD);
-                if (data.price > PlayerInfoManager.getResource().gold) price_string.setColor(cc.color(255, 0, 0));
+                if(data.price > PlayerInfoManager.Instance().getResource().gold)  price_string.setColor(cc.color(255,0,0));
                 break;
             }
             case RESOURCE_TYPE.G : {
                 price_type.loadTexture(res.ICON.GEM);
-                if (data.price > PlayerInfoManager.getResource().gem) price_string.setColor(cc.color(255, 0, 0));
+                if(data.price > PlayerInfoManager.Instance().getResource().gem)  price_string.setColor(cc.color(255,0,0));
                 break;
             }
             default: {

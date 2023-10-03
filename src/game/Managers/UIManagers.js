@@ -12,4 +12,4 @@ let UIManagersClass = cc.Class.extend({
 
 
 // create singleton
-var UIManager = new UIManagersClass();
+// var UIManager = new UIManagersClass();

@@ -15,7 +15,7 @@ testnetwork.Connector = cc.Class.extend({
         cc.log("onReceivedPacket:", cmd);
         switch (cmd) {
             case gv.CMD.HAND_SHAKE:
-                this.sendLoginRequest(PlayerInfoManager.id);
+                this.sendLoginRequest(PlayerInfoManager.Instance().id);
                 break;
             case gv.CMD.USER_LOGIN:
                 // this.sendGetUserInfo();
@@ -24,7 +24,7 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.USER_INFO:
                 fr.getCurrentScreen().onReceiveUserInfo(packet);
                 break;
-                case gv.CMD.MAP_INFO:
+            case gv.CMD.MAP_INFO:
                 fr.getCurrentScreen().onReceiveMapInfo(packet);
                 break;
             case gv.CMD.BUY_RESOURCE:
