@@ -38,9 +38,19 @@ var MapManager = cc.Layer.extend({
                 this.createBuilding(nameBuilding,cc.p(posX,posY),level);
 
             }
-            else {}
+
+            else {
+
+            }
+            if(type.startsWith("TOW")){
+                this.townHall = building;
+            }
                 //cc.log("error load building"+ type);
         }
+    },
+
+    getTownHall: function () {
+        return this.townHall;
     },
 
     createBuilding: function (nameBuilding, gridPos, level, state) {

@@ -53,7 +53,9 @@ var ShopPopup = cc.Layer.extend({
         this.changePopUpTitle("CỬA HÀNG");
         this._itemsWrapper.setVisible(false);
         this._categoryWrapper.setVisible(true);
-        this._itemScrollView.removeAllChildren();
+        if(this._itemsWrapper) {
+            this._itemScrollView.removeAllChildren();
+        }
     },
 
     handleClickClose: function () {

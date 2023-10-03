@@ -122,6 +122,7 @@ var res_ui = {
     TROOPS_LIST_ITEM: "TroopListItem.json",
     TROOPS_TRAINING_ITEM: "TroopTrainingItem.json",
     NOTI_POPUP: "NotiPopup.json",
+    INFO_LAYER: "InfoLayer.json"
 }
 
 var res_shop = {
@@ -195,4 +196,92 @@ var res_cf = {
     WAL: "res/configs/Wall.json",
     TROOP: "res/configs/Troop.json"
 }
+
+var res_map = {
+    SPRITE: {
+        BODY: {
+            BUILDER_HUT: {
+                1:"res/Buildings/builder hut/idle/image0000.png",
+            },
+            TOWNHALL:{
+                1:'res/Buildings/townhall/TOW_1_1/idle/image0000.png',
+            },
+            ARMY_CAMP:{
+                1:'res/Buildings/army camp/AMC_1_1/idle/image0000.png',
+            },
+            GOLD_MINE:{
+                BOTTOM:{
+                    1: 'res/Buildings/gold mine/RES_1_1/idle/image0000.png',
+                },
+                UPPER:{
+                    1: 'res/Buildings/gold mine/RES_1_1/attack01',
+                }
+            },
+            ELIXIR_MINE:{
+                BOTTOM:{
+                    1: 'res/Buildings/elixir collector/RES_2_1/idle/image0000.png',
+                },
+                UPPER:{
+                    1: 'res/Buildings/elixir collector/RES_2_1/attack01',
+                }
+            },
+            GOLD_STORAGE:{
+                1: "res/Buildings/gold storage/STO_1_1/idle/image0000.png",
+            },
+            ELIXIR_STORAGE:{
+                1:"res/Buildings/elixir storage/STO_2_1/idle/image0000.png",
+            },
+            CANNON:{
+                BOTTOM:{
+                    1: "res/Buildings/defense_base/DEF_1_1_Shadow.png"
+                },
+                UPPER:{
+                    1:"res/Buildings/cannon/canon_1/idle/image0000.png"
+                }
+            },
+            BARRACK:{
+                1:"res/Buildings/barrack/BAR_1_1/idle/image0000.png"
+            },
+            WALL:{
+                1: "res/Buildings/wall/WAL_1_1/WAL_1_1/idle/image0000.png"
+            },
+            OBS_LINK: "res/Buildings/obstacle/OBS_",
+        },
+        SHADOW: {
+            1: "res/Map/map_obj_bg/GRASS_1_Shadow.png",
+            2: "res/Map/map_obj_bg/GRASS_2_Shadow.png",
+            3: "res/Map/map_obj_bg/GRASS_3_Shadow.png",
+            4: "res/Map/map_obj_bg/GRASS_4_Shadow.png",
+            5: "res/Map/map_obj_bg/GRASS_5_Shadow.png",
+            CIRCLE: "res/Map/map_obj_bg/GRASS_5_Shadow.png",
+        },
+        GRASS: {
+            BUILDING: {
+                1: "res/Map/map_obj_bg/BG_0/1.png",
+                2: "res/Map/map_obj_bg/BG_0/2.png",
+                3: "res/Map/map_obj_bg/BG_0/3.png",
+                4: "res/Map/map_obj_bg/BG_0/4.png",
+                5: "res/Map/map_obj_bg/BG_0/5.png",
+            },
+            OBSTACLE: {
+                2:"res/Map/map_obj_bg/GRASS_0_2_OBS.png",
+                3:"res/Map/map_obj_bg/GRASS_0_3_OBS.png",
+            },
+        }
+    },
+    JSON:{
+        OBSTACLE: "res/configs/Obstacle.json",
+        RESOURCE: "res/configs/Resource.json",
+        BUILDER_HUT: "res/configs/BuilderHut.json",
+        TOWNHALL: "res/configs/TownHall.json",
+        STORAGE: "res/configs/Storage.json",
+        DEFENCE: "res/configs/Defence.json",
+        WALL: "res/configs/Wall.json",
+        ARMY_CAMP: "res/configs/ArmyCamp.json",
+        BARRACK: "res/configs/Barrack.json",
+    }
+
+}
+
+
 

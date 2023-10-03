@@ -8,8 +8,16 @@ var InfoLayer = cc.Layer.extend({
 
     },
     onTouchShop: function (sender, type) {
-      //log open shop giua man hinh
-        cc.log("open shop");
+        if(type === 2) {
+            cc.log("open shop");
+            let popUplayer = cc.director.getRunningScene().getPopUpLayer();
+            if(popUplayer.isVisible()) {
+                popUplayer.disappear();
+            }
+            else {
+                popUplayer.appear("shop");
+            }
+        }
     },
 
     //init UI, add to layer, init attributes
@@ -34,10 +42,9 @@ var InfoLayer = cc.Layer.extend({
         })
         this.addChild(node);
 
-        cc.log("HERRE 1 ::::::")
         //add touch event to btn_shop
-        this.btn_shop.addTouchEventListener(this.onTouchShop, this);
-        this.btn_shop.setPressedActionEnabled(true);
+        this.btn_shop.addTouchEventListener(this.onTouchShop,(this));
+        // this.btn_shop.setPressedActionEnabled(true);
 
         //add touch event to btn_attack
         this.btn_attack.addTouchEventListener(this.onTouchAttack, this);
@@ -58,9 +65,26 @@ var InfoLayer = cc.Layer.extend({
         //add touch event to builder add button
         this.builder_container.btn_add.addTouchEventListener(this.onTouchBuilderAdd, this);
         this.builder_container.btn_add.setPressedActionEnabled(true);
-        cc.log("HERRE  2::::::")
+
+
+
+
+
 
     },
+    onTouchArmyAdd : function () {
+        if(type === 2 ){
+
+            let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
+            if(popUpLayer.isVisible()) {
+                popUpLayer.disappear();
+            }
+            else {
+                popUpLayer.appear("train");
+            }
+        }
+    },
+
     updateUI: function (event) {
 
         if(event == null) return;
