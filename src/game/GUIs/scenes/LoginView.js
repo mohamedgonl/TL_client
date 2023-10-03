@@ -56,32 +56,6 @@ var LoginView = cc.Scene.extend({
     },
 
     onReceiveUserInfo: function (userInfo) {
-        // PlayerInfoManager.Instance().setInfo({
-        //     name: userInfo.name,
-        //     avatar: userInfo.avatar,
-        //     level: userInfo.level,
-        //     rank: userInfo.rank,
-        // });
-        // PlayerInfoManager.Instance().setResource({
-        //     gold: userInfo.gold,
-        //     elixir: userInfo.elixir,
-        //     gem: userInfo.gem,
-        // });
-
-        // InfoLayer.Instance().updateResource({
-        //         gold: 700,
-        //         elixir: 700,
-        //         gem: 700,
-        //     }
-        // );
-        this.loadedUserInfo = true;
-        this.onReceiveData();
-    },
-
-    onReceiveMapInfo: function (mapInfo) {
-
-        MapManager.Instance().loadFromServer(mapInfo.listBuildings);
-
         PlayerInfoManager.Instance().setInfo({
             name: "Nguyen Van A",
             avatar: "abc",
@@ -93,6 +67,26 @@ var LoginView = cc.Scene.extend({
             elixir: "600",
             gem: "700",
         });
+        this.loadedUserInfo = true;
+        this.onReceiveData();
+    },
+
+    onReceiveMapInfo: function (mapInfo) {
+
+        // PlayerInfoManager.Instance().setInfo({
+        //     name: "Nguyen Van A",
+        //     avatar: "abc",
+        //     level: "1",
+        //     rank: "1",
+        // });
+        // PlayerInfoManager.Instance().setResource({
+        //     gold: "500",
+        //     elixir: "600",
+        //     gem: "700",
+        // });
+        MapManager.Instance().loadFromServer(mapInfo.listBuildings);
+
+
         this.loadedMapInfo = true;
         this.onReceiveData();
     },

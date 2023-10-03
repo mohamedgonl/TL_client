@@ -30,10 +30,9 @@ var InfoLayer = cc.Layer.extend({
             })
 
         })
-
         this.addChild(node);
 
-
+        cc.log("HERRE 1 ::::::")
         //add touch event to btn_shop
         this.btn_shop.addTouchEventListener(this.onTouchShop, this);
         this.btn_shop.setPressedActionEnabled(true);
@@ -57,6 +56,7 @@ var InfoLayer = cc.Layer.extend({
         //add touch event to builder add button
         this.builder_container.btn_add.addTouchEventListener(this.onTouchBuilderAdd, this);
         this.builder_container.btn_add.setPressedActionEnabled(true);
+        cc.log("HERRE  2::::::")
 
     },
     updateUI: function (event) {

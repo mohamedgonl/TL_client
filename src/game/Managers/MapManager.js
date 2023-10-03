@@ -34,12 +34,12 @@ var MapManager = cc.Layer.extend({
 
             // create building in map
             if(nameBuilding != null){
-                cc.log(nameBuilding+ "name building")
+                //cc.log(nameBuilding+ "name building")
                 this.createBuilding(nameBuilding,cc.p(posX,posY),level);
 
             }
-            else
-                cc.log("error load building"+ type);
+            else {}
+                //cc.log("error load building"+ type);
         }
     },
 

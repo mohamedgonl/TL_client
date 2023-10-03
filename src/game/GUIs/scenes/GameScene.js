@@ -16,9 +16,9 @@ var GameScene = cc.Scene.extend({
         // cc.log("map layer " + JSON.stringify(this.mapLayer, null, 2));
         this.addChild(this.mapLayer);
 
-        var x = InfoLayer.Instance();
+        this.infoLayer = InfoLayer.Instance();
         // cc.log("info layer " + JSON.stringify(this.infoLayer, null, 2));
-        this.addChild(x);
+        this.addChild(this.infoLayer);
 
         //
 

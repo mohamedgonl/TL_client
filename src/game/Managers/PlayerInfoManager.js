@@ -60,7 +60,7 @@ var PlayerInfoManager = cc.Class.extend({
         if (rank) {
             this.info.rank = rank;
         }
-        InfoLayer.Instance().updateUI(this.info);
+        // InfoLayer.Instance().updateUI(this.info);
     },
 
     setMaxResource: function ({gold, elixir, gem}) {
