@@ -1708,6 +1708,7 @@
         <Project Name="TroopListItem.csd" Type="Node" />
         <Project Name="TroopTrainingItem.csd" Type="Node" />
         <Project Name="TroopTrainPopup.csd" Type="Node" />
+        <Project Name="Layer1.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

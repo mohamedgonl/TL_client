@@ -81,6 +81,7 @@
         "src/framework/ButtonEffect.js",
         "src/framework/CocosstudioUltis.js",
         "src/framework/BuildingUltis.js",
+        "src/framework/TroopUltis.js",
         "src/framework/PopupEffect.js"
     ]
 }

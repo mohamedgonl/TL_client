@@ -38,7 +38,9 @@ var TroopTrainingItem = cc.Node.extend({
 
     getCfgId:  function () {
         return this._troopCfgId;
-    }
+    },
+
+
 
 
 })

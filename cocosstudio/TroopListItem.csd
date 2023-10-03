@@ -44,14 +44,14 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="count_string" ActionTag="-1368943798" Tag="168" IconVisible="False" LeftMargin="12.5278" RightMargin="64.4722" TopMargin="4.9610" BottomMargin="81.0390" LabelText="x7" ctype="TextBMFontObjectData">
-                <Size X="35.0000" Y="25.0000" />
+              <AbstractNodeData Name="count_string" ActionTag="-1368943798" Tag="168" IconVisible="False" LeftMargin="30.0278" RightMargin="81.9722" TopMargin="17.4610" BottomMargin="93.5390" LabelText="" ctype="TextBMFontObjectData">
+                <Size X="0.0000" Y="0.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="30.0278" Y="93.5390" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.2681" Y="0.8427" />
-                <PreSize X="0.3125" Y="0.2252" />
+                <PreSize X="0.0000" Y="0.0000" />
                 <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="cost_container" ActionTag="1542854071" Tag="160" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="8.5000" RightMargin="8.5000" TopMargin="77.3000" BottomMargin="10.7000" ctype="SpriteObjectData">
