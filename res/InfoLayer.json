@@ -42,7 +42,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/bg_bar_2.png",
+                  "Path": "guis/Main_GUI/bg_bar_2.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -89,7 +89,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/gold_bar.png",
+                  "Path": "guis/Main_GUI/gold_bar.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -136,7 +136,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/gold_icon.png",
+                  "Path": "guis/Main_GUI/gold_icon.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -301,7 +301,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/bg_bar_2.png",
+                  "Path": "guis/Main_GUI/bg_bar_2.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -346,7 +346,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/elixir_bar.png",
+                  "Path": "guis/Main_GUI/elixir_bar.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -391,7 +391,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/elixir_icon.png",
+                  "Path": "guis/Main_GUI/elixir_icon.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -556,7 +556,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/bg_bar_4.png",
+                  "Path": "guis/Main_GUI/bg_bar_4.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -601,7 +601,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/g_icon.png",
+                  "Path": "guis/Main_GUI/g_icon.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -653,17 +653,17 @@
                 },
                 "DisabledFileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/add_button.png",
+                  "Path": "guis/Main_GUI/add_button.png",
                   "Plist": ""
                 },
                 "PressedFileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/add_button.png",
+                  "Path": "guis/Main_GUI/add_button.png",
                   "Plist": ""
                 },
                 "NormalFileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/add_button.png",
+                  "Path": "guis/Main_GUI/add_button.png",
                   "Plist": ""
                 },
                 "Scale9Enable": true,
@@ -799,7 +799,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/bg_bar_1.png",
+                  "Path": "guis/Main_GUI/bg_bar_1.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -846,7 +846,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/builder_icon.png",
+                  "Path": "guis/Main_GUI/builder_icon.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -899,17 +899,17 @@
                 },
                 "DisabledFileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/add_g_button.png",
+                  "Path": "guis/Main_GUI/add_g_button.png",
                   "Plist": ""
                 },
                 "PressedFileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/add_g_button.png",
+                  "Path": "guis/Main_GUI/add_g_button.png",
                   "Plist": ""
                 },
                 "NormalFileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/add_g_button.png",
+                  "Path": "guis/Main_GUI/add_g_button.png",
                   "Plist": ""
                 },
                 "Scale9Enable": true,
@@ -1047,7 +1047,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/bg_bar_1.png",
+                  "Path": "guis/Main_GUI/bg_bar_1.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -1093,7 +1093,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/army_icon.png",
+                  "Path": "guis/Main_GUI/army_icon.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -1146,17 +1146,17 @@
                 },
                 "DisabledFileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/add_g_button.png",
+                  "Path": "guis/Main_GUI/add_g_button.png",
                   "Plist": ""
                 },
                 "PressedFileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/add_g_button.png",
+                  "Path": "guis/Main_GUI/add_g_button.png",
                   "Plist": ""
                 },
                 "NormalFileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/add_g_button.png",
+                  "Path": "guis/Main_GUI/add_g_button.png",
                   "Plist": ""
                 },
                 "Scale9Enable": true,
@@ -1293,7 +1293,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/exp_bg_bar.png",
+                  "Path": "guis/Main_GUI/exp_bg_bar.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -1338,7 +1338,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/ranking.png",
+                  "Path": "guis/Main_GUI/ranking.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -1383,7 +1383,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/exp_bg_bar.png",
+                  "Path": "guis/Main_GUI/exp_bg_bar.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -1428,7 +1428,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/exp_bar.png",
+                  "Path": "guis/Main_GUI/exp_bar.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -1473,7 +1473,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/exp_icon.png",
+                  "Path": "guis/Main_GUI/exp_icon.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -1518,7 +1518,7 @@
               {
                 "FileData": {
                   "Type": "Normal",
-                  "Path": "Main_Gui/bg_exp.png",
+                  "Path": "guis/Main_GUI/bg_exp.png",
                   "Plist": ""
                 },
                 "BlendFunc": {
@@ -1622,17 +1622,17 @@
             },
             "DisabledFileData": {
               "Type": "Normal",
-              "Path": "Main_Gui/attack.png",
+              "Path": "guis/Main_GUI/attack.png",
               "Plist": ""
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "Main_Gui/attack.png",
+              "Path": "guis/Main_GUI/attack.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "Main_Gui/attack.png",
+              "Path": "guis/Main_GUI/attack.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -1743,17 +1743,17 @@
             },
             "DisabledFileData": {
               "Type": "Normal",
-              "Path": "Main_Gui/shop.png",
+              "Path": "guis/Main_GUI/shop.png",
               "Plist": ""
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "Main_Gui/shop.png",
+              "Path": "guis/Main_GUI/shop.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "Main_Gui/shop.png",
+              "Path": "guis/Main_GUI/shop.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -1864,17 +1864,17 @@
             },
             "DisabledFileData": {
               "Type": "Normal",
-              "Path": "Main_Gui/setting.png",
+              "Path": "guis/Main_GUI/setting.png",
               "Plist": ""
             },
             "PressedFileData": {
               "Type": "Normal",
-              "Path": "Main_Gui/setting.png",
+              "Path": "guis/Main_GUI/setting.png",
               "Plist": ""
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "Main_Gui/setting.png",
+              "Path": "guis/Main_GUI/setting.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -1944,26 +1944,26 @@
         "fonts/soji_12.png",
         "fonts/soji_20.fnt",
         "fonts/soji_20.png",
-        "Main_Gui/add_button.png",
-        "Main_Gui/add_g_button.png",
-        "Main_Gui/army_icon.png",
-        "Main_Gui/attack.png",
-        "Main_Gui/bg_bar_1.png",
-        "Main_Gui/bg_bar_2.png",
-        "Main_Gui/bg_bar_4.png",
-        "Main_Gui/bg_exp.png",
-        "Main_Gui/builder_icon.png",
-        "Main_Gui/elixir_bar.png",
-        "Main_Gui/elixir_icon.png",
-        "Main_Gui/exp_bar.png",
-        "Main_Gui/exp_bg_bar.png",
-        "Main_Gui/exp_icon.png",
-        "Main_Gui/g_icon.png",
-        "Main_Gui/gold_bar.png",
-        "Main_Gui/gold_icon.png",
-        "Main_Gui/ranking.png",
-        "Main_Gui/setting.png",
-        "Main_Gui/shop.png"
+        "guis/Main_GUI/add_button.png",
+        "guis/Main_GUI/add_g_button.png",
+        "guis/Main_GUI/army_icon.png",
+        "guis/Main_GUI/attack.png",
+        "guis/Main_GUI/bg_bar_1.png",
+        "guis/Main_GUI/bg_bar_2.png",
+        "guis/Main_GUI/bg_bar_4.png",
+        "guis/Main_GUI/bg_exp.png",
+        "guis/Main_GUI/builder_icon.png",
+        "guis/Main_GUI/elixir_bar.png",
+        "guis/Main_GUI/elixir_icon.png",
+        "guis/Main_GUI/exp_bar.png",
+        "guis/Main_GUI/exp_bg_bar.png",
+        "guis/Main_GUI/exp_icon.png",
+        "guis/Main_GUI/g_icon.png",
+        "guis/Main_GUI/gold_bar.png",
+        "guis/Main_GUI/gold_icon.png",
+        "guis/Main_GUI/ranking.png",
+        "guis/Main_GUI/setting.png",
+        "guis/Main_GUI/shop.png"
       ],
       "ctype": "GameFileData"
     }

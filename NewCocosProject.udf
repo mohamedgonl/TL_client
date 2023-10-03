@@ -36,8 +36,9 @@
           <FilePathData Path="ProcessBar.csd" />
           <FilePathData Path="ShopItem.csd" />
           <FilePathData Path="ShopPopUpSprite.csd" />
+          <FilePathData Path="Layer2.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="ShopPopUpSprite.csd" />
+        <ActiveDocument Path="Layer2.csd" />
       </Value>
     </Item>
   </Properties>

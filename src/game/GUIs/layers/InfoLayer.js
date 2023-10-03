@@ -66,13 +66,8 @@ var InfoLayer = cc.Layer.extend({
         this.builder_container.btn_add.addTouchEventListener(this.onTouchBuilderAdd, this);
         this.builder_container.btn_add.setPressedActionEnabled(true);
 
-
-
-
-
-
     },
-    onTouchArmyAdd : function () {
+    onTouchArmyAdd : function (sender, type) {
         if(type === 2 ){
 
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();

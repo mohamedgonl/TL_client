@@ -17,7 +17,6 @@ var ConfigManager = cc.Class.extend({
     getObstacle: function (index){
         return this.obstacle['OBS_'+index][1];
     },
-
     getConfigTownHall: function (level) {
         return this.townhall["TOW_1"][level];
     },
@@ -47,7 +46,9 @@ var ConfigManager = cc.Class.extend({
     },
     getConfigBarrack: function (level) {
         return this.barrack["BAR_1"][level];
-    }
+    },
+
+
 });
 
 ConfigManager.Instance = function () {

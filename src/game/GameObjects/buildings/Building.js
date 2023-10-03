@@ -8,11 +8,15 @@ var Building = GameObject.extend({
     timeDone: null,
     yesButton: null,
     noButton: null,
-    ctor: function (level,posX,posY) {
+    ctor: function (level,posX,posY,nameBuilding) {
         this._super();
         this.level = level;
         this._posX = posX;
         this._posY = posY;
+        if(nameBuilding != null)
+        {
+            return this.getNewBuildingFromName(nameBuilding);
+        }
         this.setAnchorPoint(0.5,0.5);
     },
 
@@ -67,6 +71,13 @@ var Building = GameObject.extend({
             if(key != "width" && key != "height")
             this[key] = config[key];
         }
+    }
+
+    //init building from name
+    getNewBuildingFromName(name){
+        var config = ConfigManager.Instance().getConfigBuildingByName(name);
+
+
     }
 
 });

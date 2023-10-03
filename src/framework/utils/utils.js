@@ -58,3 +58,52 @@ function changeTypeBuildingToBuilding(type) {
     }
     return null;
 }
+
+function getBuildingFromType(type, level, posX, posY) {
+    var building = null;
+
+    //obstacle
+    if(type.substring(0,3) === 'OBS'){
+
+        var typeOBS = type.substring(4);
+        building = new Obstacle(typeOBS, posX, posY);
+        return building;
+    }
+
+    //building
+    switch (type) {
+        case 'TOW_1':
+            building = new Townhall(level, posX, posY);
+            break;
+        case 'BDH_1':
+            building = new BuilderHut(level, posX, posY);
+            break;
+        case 'AMC_1':
+            building = new ArmyCamp(level, posX, posY);
+            break;
+        case 'RES_1':
+            building = new GoldMine(level, posX, posY);
+            break;
+        case 'RES_2':
+            building = new ElixirMine(level, posX, posY);
+            break;
+        case 'STO_1':
+            building = new GoldStorage(level, posX, posY);
+            break;
+        case 'STO_2':
+            building = new ElixirStorage(level, posX, posY);
+            break;
+        case 'BAR_1':
+            building = new Barrack(level, posX, posY);
+            break;
+        case 'DEF_1':
+            building = new Cannon(level, posX, posY);
+            break;
+        case 'WAL_1':
+            building = new Wall(level, posX, posY);
+            break;
+    }
+
+
+    return building;
+}
