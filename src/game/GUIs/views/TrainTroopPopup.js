@@ -28,6 +28,7 @@ var TrainTroopPopup = cc.Layer.extend({
         cc.eventManager.addCustomListener(TRAINING_EVENTS.DONE_NOW, this.handleClickDoneNow.bind(this));
 
 
+
         let trainPopup = node.getChildByName("train_popup");
         this._trainContainer = trainPopup.getChildByName("training_container");
 
@@ -196,6 +197,7 @@ var TrainTroopPopup = cc.Layer.extend({
         // update done now price
         let doneNowPrice =Math.ceil(this._totalTime / 60 )
 
+
         if(this.getCurrentTime() >= this.lastTrainingTime + curTroopTrainTime) {
             cc.log("train success!");
             this.onTrainSuccess();
@@ -246,7 +248,6 @@ var TrainTroopPopup = cc.Layer.extend({
             this._trainingQueue.splice(0, 1);
         }
     },
-
 
     handleClickDoneNow : function () {
 
