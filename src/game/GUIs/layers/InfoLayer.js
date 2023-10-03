@@ -3,13 +3,10 @@ var InfoLayer = cc.Layer.extend({
     ctor: function () {
         this._super();
         this.init();
-        //add touch to this.btn_shop
-        cc.log("ON RECEIVE DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATA");
 
     },
     onTouchShop: function (sender, type) {
         if(type === 2) {
-            cc.log("open shop");
             let popUplayer = cc.director.getRunningScene().getPopUpLayer();
             if(popUplayer.isVisible()) {
                 popUplayer.disappear();
@@ -47,7 +44,7 @@ var InfoLayer = cc.Layer.extend({
         // this.btn_shop.setPressedActionEnabled(true);
 
         //add touch event to btn_attack
-        this.btn_attack.addTouchEventListener(this.onTouchAttack, this);
+        this.btn_attack.addTouchEventListener(this.onTouchArmyAdd, this);
         this.btn_attack.setPressedActionEnabled(true);
 
         //add touch event to btn_setting
@@ -72,9 +69,8 @@ var InfoLayer = cc.Layer.extend({
 
 
     },
-    onTouchArmyAdd : function () {
+    onTouchArmyAdd : function (sender ,type) {
         if(type === 2 ){
-
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             if(popUpLayer.isVisible()) {
                 popUpLayer.disappear();

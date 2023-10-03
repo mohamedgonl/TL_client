@@ -80,7 +80,9 @@ var ItemInfoPopup = cc.Layer.extend({
         // adding item image
         let itemIcon = this._node.getChildByName("item_image");
         let itemIconObj = BuildingUltis.getBuildingByConfigId(this._data.cfgId);
-        itemIconObj.setScale(SHOP_ITEM_SCALE);
+        if(this._data.cfgId !== "AMC_1") {
+            itemIconObj.setScale(SHOP_ITEM_SCALE);
+        }
         itemIcon.addChild(itemIconObj);
 
         // adding description

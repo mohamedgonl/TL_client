@@ -8,7 +8,7 @@ var Building = GameObject.extend({
     timeDone: null,
     yesButton: null,
     noButton: null,
-    ctor: function (level,posX,posY) {
+    ctor: function (level = 1,posX = 0,posY = 0) {
         this._super();
         this.level = level;
         this._posX = posX;
@@ -56,7 +56,7 @@ var Building = GameObject.extend({
 
     //load config from config file and set attribute
     loadConfig: function (config) {
-        //var config =ConfigManager.Instance().getConfigTownHall(this.level);
+        cc.log("LOAD CONFIG :::::::::::::::::::::::::", config);
 
         if(config["width"]&&config["height"]) {
             this._width = config["width"];

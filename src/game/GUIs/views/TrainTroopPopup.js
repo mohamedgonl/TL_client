@@ -1,5 +1,5 @@
 var TrainTroopPopup = cc.Layer.extend({
-    _curPage : 1,
+    _curPage: 1,
     _pageCount: 3,
     _curBarrack: 0,
     _space: 50,
@@ -12,7 +12,7 @@ var TrainTroopPopup = cc.Layer.extend({
         this._trainingQueue = [];
 
         let node = CCSUlties.parseUIFile(res_ui.TRAIN_TROOP);
-        node.setPosition(cc.winSize.width/2, cc.winSize.height/2);
+        node.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
 
         this._trainPopup = node.getChildByName("train_popup");
         let prevButton = node.getChildByName("button_prev");
@@ -20,13 +20,13 @@ var TrainTroopPopup = cc.Layer.extend({
         let closeButton = node.getChildByName("button_close");
         let doneNowButton = node.getChildByName("button_done_now");
 
-        prevButton.addClickEventListener(this.handleChangePage.bind(this,-1));
+        prevButton.addClickEventListener(this.handleChangePage.bind(this, -1));
         nextButton.addClickEventListener(this.handleChangePage.bind(this, 1));
         closeButton.addClickEventListener(this.handleClosePopup.bind(this));
+
         cc.eventManager.addCustomListener(TRAINING_EVENTS.TRAIN, this.handleTrainTroop.bind(this));
         cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE, this.handleCancleTroopTraining.bind(this));
         cc.eventManager.addCustomListener(TRAINING_EVENTS.DONE_NOW, this.handleClickDoneNow.bind(this));
-
 
 
         let trainPopup = node.getChildByName("train_popup");
@@ -52,30 +52,29 @@ var TrainTroopPopup = cc.Layer.extend({
 
     },
 
-    updateBarrackInfo : function () {
+    updateBarrackInfo: function () {
 
     },
 
     getCurrentTime: function () {
-      let curTime = new Date().getTime() / 1000;
-      return Math.floor(curTime);
+        let curTime = new Date().getTime() / 1000;
+        return Math.floor(curTime);
     },
 
     updateTrainingPopupTitle: function () {
         let popUpTitle = this._trainPopup.getChildByName("title");
-        popUpTitle.setString("Nhà lính "+this._curPage+" ("+this._curBarrack+"/"+this._space+")");
+        popUpTitle.setString("Nhà lính " + this._curPage + " (" + this._curBarrack + "/" + this._space + ")");
     },
 
-    handleChangePage : function (addition) {
+    handleChangePage: function (addition) {
         cc.log("handle page change", addition);
 
         let page = this._curPage + addition;
-        if(page <=0 ){
+        if (page <= 0) {
             this._curPage = this._pageCount;
-        }
-        else if (page > this._pageCount) {
+        } else if (page > this._pageCount) {
             this._curPage = 1;
-        }else {
+        } else {
             this._curPage = page;
         }
         this.updateTrainingPopupTitle();
@@ -85,9 +84,11 @@ var TrainTroopPopup = cc.Layer.extend({
         // thay đổi
     },
 
-    handleClosePopup  :function () {
-        PopupEffect.disappear(this, ()=>{
-            this.setVisible(false);
+    handleClosePopup: function () {
+        let popUp = this;
+        PopupEffect.disappear(this, () => {
+            popUp.getParent().setVisible(false);
+            popUp.setVisible(false);
         })
     },
 
@@ -97,19 +98,19 @@ var TrainTroopPopup = cc.Layer.extend({
         let trainingQueue = this._trainingQueue;
         for (let i = 0; i < trainingQueue.length; i++) {
             // if this type of troop already in queue
-            if(trainingQueue[i].getCfgId() === troopCfgId) {
+            if (trainingQueue[i].getCfgId() === troopCfgId) {
                 this.onTrainSuccess(true);
                 let count = trainingQueue[i].getCount();
-                if(count === 0) {
+                if (count === 0) {
                     // sắp xếp lại wait queue
                     for (let j = trainingQueue.length - 1; j > i; j--) {
-                        trainingQueue[j].setPositionX(trainingQueue[j-1].getPosition().x);
+                        trainingQueue[j].setPositionX(trainingQueue[j - 1].getPosition().x);
                     }
                     trainingQueue[i].removeFromParent();
                     trainingQueue.splice(i, 1);
                 }
 
-                if(trainingQueue.length === 0) {
+                if (trainingQueue.length === 0) {
                     this._trainContainer.setVisible(false);
                 }
                 return;
@@ -126,17 +127,17 @@ var TrainTroopPopup = cc.Layer.extend({
 
         for (let i = 0; i < trainingQueue.length; i++) {
             // if this type of troop already in queue
-            if(trainingQueue[i].getCfgId() === troopCfgId) {
+            if (trainingQueue[i].getCfgId() === troopCfgId) {
                 let count = trainingQueue[i].getCount();
-                trainingQueue[i].setCount(count+1) ;
+                trainingQueue[i].setCount(count + 1);
                 found = true;
                 break;
             }
         }
-        if(!found) {
+        if (!found) {
             // create new waiting troop item;
             let waitingTroop = new TroopTrainingItem(troopCfgId);
-            if(trainingQueue.length === 0) {
+            if (trainingQueue.length === 0) {
 
                 this.lastTrainingTime = this.getCurrentTime();
 
@@ -144,13 +145,12 @@ var TrainTroopPopup = cc.Layer.extend({
 
                 waitingTroop.setPosition(CURRENT_TROOP_TRAINING_POS.x, CURRENT_TROOP_TRAINING_POS.y);
 
-                this.schedule(this.updateTrainTime,1);
+                this.schedule(this.updateTrainTime, 1);
 
-            } else if(trainingQueue.length === 1) {
+            } else if (trainingQueue.length === 1) {
                 waitingTroop.setPosition(FIRST_WAITING_TRAINING_TROOP_POS.x, FIRST_WAITING_TRAINING_TROOP_POS.y);
-            }
-            else {
-                let lastTroopWaiting = trainingQueue[trainingQueue.length-1];
+            } else {
+                let lastTroopWaiting = trainingQueue[trainingQueue.length - 1];
                 waitingTroop.setPosition(lastTroopWaiting.getPosition().x - TROOP_TRAIN_WAITING_SPACE - TROOP_TRAINING_ITEM_WIDTH, lastTroopWaiting.getPosition().y)
             }
             this._trainContainer.addChild(waitingTroop);
@@ -158,12 +158,13 @@ var TrainTroopPopup = cc.Layer.extend({
         }
 
         this._totalTime = this._totalTime + TroopUltis.getTrainingTime(troopCfgId);
+        this.updateDoneNowPrice();
         this.updateTotalTimeString();
     },
 
     updateAndGetTotalTrainingTime: function () {
         let total = 0;
-        for (let i = 0; i <this._trainingQueue.length; i++) {
+        for (let i = 0; i < this._trainingQueue.length; i++) {
             total += TroopUltis.getTrainingTime(this._trainingQueue[i].getCfgId()) * this._trainingQueue[i].getCount();
         }
         this._totalTime = total;
@@ -172,21 +173,21 @@ var TrainTroopPopup = cc.Layer.extend({
 
     updateTrainTime: function () {
         let curTroopTime = this._trainContainer.getChildByName("current");
-        let curTroopTrainTime = TroopUltis.getTrainingTime(this._trainingQueue[0].getCfgId()) ;
+        let curTroopTrainTime = TroopUltis.getTrainingTime(this._trainingQueue[0].getCfgId());
         let processBar = curTroopTime.getChildByName("current_process");
         let timeString = curTroopTime.getChildByName("current_time_string");
 
-        if(!this._available) {
+        if (!this._available) {
             timeString.setString("DỪNG");
             processBar.setPercent(100);
             this.unschedule(this.updateTrainTime);
 
-        }else {
+        } else {
             let timeLeft = this.lastTrainingTime + curTroopTrainTime - this.getCurrentTime();
             cc.log("TIME LEFT ::::", this.lastTrainingTime, curTroopTrainTime, this.getCurrentTime());
             timeString.setString(timeLeft + "s");
 
-            let processBarPercent = (this.getCurrentTime() - this.lastTrainingTime)/curTroopTrainTime * 100;
+            let processBarPercent = (this.getCurrentTime() - this.lastTrainingTime) / curTroopTrainTime * 100;
             processBar.setPercent(processBarPercent);
         }
 
@@ -194,62 +195,67 @@ var TrainTroopPopup = cc.Layer.extend({
         this._totalTime = this._totalTime - 1;
         this.updateTotalTimeString();
 
-        // update done now price
-        let doneNowPrice =Math.ceil(this._totalTime / 60 )
+        this.updateDoneNowPrice();
 
 
-        if(this.getCurrentTime() >= this.lastTrainingTime + curTroopTrainTime) {
+        if (this.getCurrentTime() >= this.lastTrainingTime + curTroopTrainTime) {
             cc.log("train success!");
             this.onTrainSuccess();
         }
     },
 
+    updateDoneNowPrice: function () {
+        // update done now price
+        let doneNowPrice = Math.ceil(this._totalTime / 60);
+        let buttonDoneNowString = this._trainContainer.getChildByName("button_done_now").getChildByName("done_now_cost");
+        buttonDoneNowString.setString(doneNowPrice);
+    },
 
     updateTotalTimeString: function () {
         let totalTimeString = this._trainContainer.getChildByName("total_time_string");
         totalTimeString.setString(this._totalTime + "s");
     },
 
-    onTrainSuccess : function (isCancle = false) {
-        if(!isCancle) {
+    onTrainSuccess: function (isCancle = false) {
+
+        if (!isCancle) {
             this.removeFirstTroop();
-        }
-        else {
+        } else {
             this.updateAndGetTotalTrainingTime();
             this.updateTrainTime();
         }
 
-
         this.lastTrainingTime = this.getCurrentTime();
 
-        if(this._trainingQueue.length === 0 ) {
+        if (this._trainingQueue.length === 0) {
             this._trainContainer.setVisible(false);
             this.unschedule(this.updateTrainTime);
-        }
-        else {
+        } else {
             let curTroopTime = this._trainContainer.getChildByName("current");
             let processBar = curTroopTime.getChildByName("current_process");
             let timeString = curTroopTime.getChildByName("current_time_string");
             processBar.setPercent(0);
             let troopTrainTime = TroopUltis.getTrainingTime(this._trainingQueue[0].getCfgId());
             timeString.setString(troopTrainTime + "s");
+
+            // decrease count in list troop
+
         }
     },
 
-    removeFirstTroop : function () {
-        if(this._trainingQueue[0].getCount() > 1) {
+    removeFirstTroop: function () {
+        if (this._trainingQueue[0].getCount() > 1) {
             this._trainingQueue[0].setCount(this._trainingQueue[0].getCount() - 1);
-        }
-        else {
+        } else {
             for (let i = this._trainingQueue.length - 1; i > 0; i--) {
-                this._trainingQueue[i].setPositionX(this._trainingQueue[i-1].getPosition().x);
+                this._trainingQueue[i].setPositionX(this._trainingQueue[i - 1].getPosition().x);
             }
             this._trainingQueue[0].removeFromParent();
             this._trainingQueue.splice(0, 1);
         }
     },
 
-    handleClickDoneNow : function () {
+    handleClickDoneNow: function () {
 
     }
 

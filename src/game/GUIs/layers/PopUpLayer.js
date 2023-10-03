@@ -21,6 +21,7 @@ let PopupLayer = cc.Layer.extend({
 
 
     appear: function (popUpId, data) {
+
         this.setVisible(true);
         let popupScreen;
         switch (popUpId) {
@@ -42,6 +43,7 @@ let PopupLayer = cc.Layer.extend({
     },
 
     disappear: function (popUpId) {
+
         switch (popUpId) {
             case "shop": {
                 this._shopPopup.handleClickClose();
@@ -51,8 +53,6 @@ let PopupLayer = cc.Layer.extend({
                 break;
             }
         }
-
-        this.setVisible(false);
     },
 
     push: function (popup) {
