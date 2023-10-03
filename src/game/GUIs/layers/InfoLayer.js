@@ -3,8 +3,8 @@ var InfoLayer = cc.Layer.extend({
     ctor: function () {
         this._super();
         this.init();
-
         //add touch to this.btn_shop
+        cc.log("ON RECEIVE DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATA");
 
     },
     onTouchShop: function (sender, type) {
@@ -22,10 +22,12 @@ var InfoLayer = cc.Layer.extend({
         children.map(i => {
 
             this[i.getName()] = i;
+            cc.log(i.getName())
             let childrenOfChildren = i.getChildren();
 
             childrenOfChildren.map(j => {
                 this[i.getName()] [j.getName()] = j;
+                cc.log("    "  + j.getName());
 
             })
 
@@ -63,9 +65,11 @@ var InfoLayer = cc.Layer.extend({
 
         if(event == null) return;
 
+        cc.log("EVENT GOLD ::::", event.gold)
+        cc.log("GOLD NODEE YTYPE:::",  this.gold_container.text)
         //resource
         if (event.gold) {
-            this.gold_container.text.setString(event.gold);
+            this.gold_container.getChildByName("text").setString(event.gold);
         }
         if (event.elixir) {
             this.elixir_container.text.setString(event.elixir);
@@ -78,7 +82,8 @@ var InfoLayer = cc.Layer.extend({
         if (event.name) {
             this.username_container.username.setString(event.name);
         }
-        
+
+
     },
 
 
@@ -96,8 +101,9 @@ var InfoLayer = cc.Layer.extend({
 });
 
 InfoLayer.Instance = function () {
-    if (InfoLayer.instance == null) {
+    if (!InfoLayer.instance) {
         InfoLayer.instance = new InfoLayer();
+        InfoLayer.instance.retain();
     }
     return InfoLayer.instance;
 }

@@ -56,24 +56,25 @@ var LoginView = cc.Scene.extend({
     },
 
     onReceiveUserInfo: function (userInfo) {
-        PlayerInfoManager.Instance().setInfo({
-            name: "Nguyen Van A",
-            avatar: "abc",
-            level: "1",
-            rank: "1",
+        PlayerInfoManager.Instance().setPlayerInfo({
+            name: userInfo.name,
+            avatar: userInfo.avatar,
+            level: userInfo.level,
+            rank: userInfo.rank
         });
         PlayerInfoManager.Instance().setResource({
-            gold: "500",
-            elixir: "600",
-            gem: "700",
+            gold: userInfo.gold,
+            elixir: userInfo.elixir,
+            gem: userInfo.gem,
         });
+
         this.loadedUserInfo = true;
         this.onReceiveData();
     },
 
     onReceiveMapInfo: function (mapInfo) {
 
-        // PlayerInfoManager.Instance().setInfo({
+        // PlayerInfoManager.Instance().setPlayerInfo({
         //     name: "Nguyen Van A",
         //     avatar: "abc",
         //     level: "1",

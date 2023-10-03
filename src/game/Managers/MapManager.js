@@ -317,6 +317,7 @@ var MapManager = cc.Layer.extend({
 MapManager.Instance = function () {
     if (MapManager.instance == null) {
         MapManager.instance = new MapManager();
+        MapManager.instance.retain();
     }
     return MapManager.instance;
 }

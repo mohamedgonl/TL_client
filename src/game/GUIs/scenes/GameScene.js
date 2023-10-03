@@ -13,18 +13,13 @@ var GameScene = cc.Scene.extend({
 
 
         this.mapLayer = MapManager.Instance();
+
         // cc.log("map layer " + JSON.stringify(this.mapLayer, null, 2));
-        this.addChild(this.mapLayer);
 
         this.infoLayer = InfoLayer.Instance();
         // cc.log("info layer " + JSON.stringify(this.infoLayer, null, 2));
-        this.addChild(this.infoLayer);
-
-        //
-
 
         this.popUpLayer = new PopupLayer();
-        this.addChild(this.popUpLayer)
         this.popUpLayer.setVisible(false);
 
 
@@ -38,5 +33,10 @@ var GameScene = cc.Scene.extend({
                 }
             }.bind(this)
         }, this);
+
+
+        this.addChild(this.mapLayer);
+        this.addChild(this.infoLayer);
+        this.addChild(this.popUpLayer)
     }
 });

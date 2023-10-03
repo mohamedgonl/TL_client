@@ -47,7 +47,8 @@ var PlayerInfoManager = cc.Class.extend({
         this.id = id;
     },
 
-    setInfo: function ({name, avatar, level, rank}) {
+    setPlayerInfo: function ({name, avatar, level, rank}) {
+        cc.log("CALL SET INFO in plyer  info ::::::::")
         if (name) {
             this.info.name = name;
         }
@@ -60,7 +61,7 @@ var PlayerInfoManager = cc.Class.extend({
         if (rank) {
             this.info.rank = rank;
         }
-        // InfoLayer.Instance().updateUI(this.info);
+        InfoLayer.Instance().updateUI(this.info);
     },
 
     setMaxResource: function ({gold, elixir, gem}) {
@@ -78,6 +79,7 @@ var PlayerInfoManager = cc.Class.extend({
 PlayerInfoManager.Instance = function () {
     if (PlayerInfoManager.instance == null) {
         PlayerInfoManager.instance = new PlayerInfoManager();
+        PlayerInfoManager.instance.retain();
     }
     return PlayerInfoManager.instance;
 }

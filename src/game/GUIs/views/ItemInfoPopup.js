@@ -19,6 +19,7 @@ var ItemInfoPopup = cc.Layer.extend({
     ,
 
     setInfo : function (data) {
+
         let title = this._node.getChildByName("title");
         title.setString(data.name + " cấp 1");
 
