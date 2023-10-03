@@ -72,7 +72,7 @@
                 <PreSize X="0.9229" Y="0.2416" />
                 <FileData Type="Normal" Path="guis/research troop/mieng trang.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="training_container" ActionTag="1988282960" Tag="84" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="28.5000" RightMargin="28.5000" TopMargin="51.9800" BottomMargin="309.0200" ctype="SpriteObjectData">
+              <AbstractNodeData Name="training_container" ActionTag="1988282960" VisibleForFrame="False" Tag="84" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="28.5000" RightMargin="28.5000" TopMargin="51.9800" BottomMargin="309.0200" ctype="SpriteObjectData">
                 <Size X="682.0000" Y="115.0000" />
                 <Children>
                   <AbstractNodeData Name="queue_bg" ActionTag="-453233695" Tag="113" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="34.7000" RightMargin="239.3000" TopMargin="21.3000" BottomMargin="39.7000" ctype="SpriteObjectData">

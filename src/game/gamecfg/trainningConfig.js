@@ -29,5 +29,6 @@ const TROOP_ITEM_SIZE = 112;
 
 const TRAINING_EVENTS = {
     TRAIN: "train",
-    CANCLE: "cancle"
+    CANCLE: "cancle",
+    DONE_NOW: "done_now"
 }

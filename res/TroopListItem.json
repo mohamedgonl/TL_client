@@ -218,7 +218,7 @@
                 "ctype": "ButtonObjectData"
               },
               {
-                "LabelText": "x7",
+                "LabelText": "",
                 "LabelBMFontFile_CNB": {
                   "Type": "Normal",
                   "Path": "fonts/soji_16.fnt",
@@ -243,18 +243,18 @@
                   "Y": 0.8427
                 },
                 "PreSize": {
-                  "X": 0.3125,
-                  "Y": 0.2252
+                  "X": 0.0,
+                  "Y": 0.0
                 },
-                "LeftMargin": 12.5278,
-                "RightMargin": 64.4722,
-                "TopMargin": 4.961,
-                "BottomMargin": 81.039,
+                "LeftMargin": 30.0278,
+                "RightMargin": 81.9722,
+                "TopMargin": 17.461,
+                "BottomMargin": 93.539,
                 "Tag": 168,
                 "ActionTag": -1368943798,
                 "Size": {
-                  "X": 35.0,
-                  "Y": 25.0
+                  "X": 0.0,
+                  "Y": 0.0
                 },
                 "Name": "count_string",
                 "ctype": "TextBMFontObjectData"

@@ -886,6 +886,7 @@
                   "X": 682.0,
                   "Y": 115.0
                 },
+                "VisibleForFrame": false,
                 "Name": "training_container",
                 "ctype": "SpriteObjectData"
               },
