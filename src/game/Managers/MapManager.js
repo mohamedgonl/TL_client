@@ -33,8 +33,13 @@ var MapManager = cc.Layer.extend({
             var level = building.level;
 
             // create building in map
-            if(nameBuilding != null)
+            if(nameBuilding != null){
+                cc.log(nameBuilding+ "name building")
                 this.createBuilding(nameBuilding,cc.p(posX,posY),level);
+
+            }
+            else
+                cc.log("error load building"+ type);
         }
     },
 
@@ -49,6 +54,7 @@ var MapManager = cc.Layer.extend({
         else {
             building = eval("new " + nameBuilding + "(" + level + "," + gridPos.x + "," + gridPos.y + ")");
         }
+
         if(building == null) return;
 
         var sizeX = building._width;

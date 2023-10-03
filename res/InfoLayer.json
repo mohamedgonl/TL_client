@@ -644,22 +644,52 @@
                 "ctype": "SpriteObjectData"
               },
               {
-                "FileData": {
+                "FontSize": 14,
+                "ButtonText": "",
+                "TextColor": {
+                  "R": 65,
+                  "G": 65,
+                  "B": 70
+                },
+                "DisabledFileData": {
                   "Type": "Normal",
                   "Path": "Main_Gui/add_button.png",
                   "Plist": ""
                 },
-                "BlendFunc": {
-                  "Src": 1,
-                  "Dst": 771
+                "PressedFileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/add_button.png",
+                  "Plist": ""
                 },
+                "NormalFileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/add_button.png",
+                  "Plist": ""
+                },
+                "Scale9Enable": true,
+                "Scale9OriginX": 15,
+                "Scale9OriginY": 11,
+                "Scale9Width": 5,
+                "Scale9Height": 13,
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "TouchEnable": true,
                 "AnchorPoint": {
                   "ScaleX": 0.5,
                   "ScaleY": 0.5
                 },
                 "Position": {
-                  "X": -150.7491,
-                  "Y": -124.7686
+                  "X": -151.5663,
+                  "Y": -124.1884
                 },
                 "Scale": {
                   "ScaleX": 1.2,
@@ -675,18 +705,18 @@
                   "X": 0.0,
                   "Y": 0.0
                 },
-                "LeftMargin": -168.2491,
-                "RightMargin": 133.2491,
-                "TopMargin": 107.2686,
-                "BottomMargin": -142.2686,
-                "Tag": 18,
-                "ActionTag": -1815925975,
+                "LeftMargin": -169.0663,
+                "RightMargin": 134.0663,
+                "TopMargin": 106.6884,
+                "BottomMargin": -141.6884,
+                "Tag": 42,
+                "ActionTag": 298862367,
                 "Size": {
                   "X": 35.0,
                   "Y": 35.0
                 },
                 "Name": "btn_add",
-                "ctype": "SpriteObjectData"
+                "ctype": "ButtonObjectData"
               },
               {
                 "LabelText": "1234",
@@ -860,22 +890,52 @@
                 "ctype": "SpriteObjectData"
               },
               {
-                "FileData": {
+                "FontSize": 14,
+                "ButtonText": "",
+                "TextColor": {
+                  "R": 65,
+                  "G": 65,
+                  "B": 70
+                },
+                "DisabledFileData": {
                   "Type": "Normal",
                   "Path": "Main_Gui/add_g_button.png",
                   "Plist": ""
                 },
-                "BlendFunc": {
-                  "Src": 1,
-                  "Dst": 771
+                "PressedFileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/add_g_button.png",
+                  "Plist": ""
                 },
+                "NormalFileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/add_g_button.png",
+                  "Plist": ""
+                },
+                "Scale9Enable": true,
+                "Scale9OriginX": 9,
+                "Scale9OriginY": 11,
+                "Scale9Width": 11,
+                "Scale9Height": 8,
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "TouchEnable": true,
                 "AnchorPoint": {
                   "ScaleX": 0.5,
                   "ScaleY": 0.5
                 },
                 "Position": {
-                  "X": 41.3993,
-                  "Y": -35.0
+                  "X": 42.0268,
+                  "Y": -36.0
                 },
                 "Scale": {
                   "ScaleX": 1.4,
@@ -892,18 +952,18 @@
                   "Y": 0.0
                 },
                 "VerticalEdge": "TopEdge",
-                "LeftMargin": 26.8993,
-                "RightMargin": -55.8993,
-                "TopMargin": 20.0,
-                "BottomMargin": -50.0,
-                "Tag": 23,
-                "ActionTag": -1219745108,
+                "LeftMargin": 27.5268,
+                "RightMargin": -56.5268,
+                "TopMargin": 21.0,
+                "BottomMargin": -51.0,
+                "Tag": 43,
+                "ActionTag": 2094906666,
                 "Size": {
                   "X": 29.0,
                   "Y": 30.0
                 },
                 "Name": "btn_add",
-                "ctype": "SpriteObjectData"
+                "ctype": "ButtonObjectData"
               },
               {
                 "LabelText": "1/3",
@@ -1077,22 +1137,52 @@
                 "ctype": "SpriteObjectData"
               },
               {
-                "FileData": {
+                "FontSize": 14,
+                "ButtonText": "",
+                "TextColor": {
+                  "R": 65,
+                  "G": 65,
+                  "B": 70
+                },
+                "DisabledFileData": {
                   "Type": "Normal",
                   "Path": "Main_Gui/add_g_button.png",
                   "Plist": ""
                 },
-                "BlendFunc": {
-                  "Src": 1,
-                  "Dst": 771
+                "PressedFileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/add_g_button.png",
+                  "Plist": ""
                 },
+                "NormalFileData": {
+                  "Type": "Normal",
+                  "Path": "Main_Gui/add_g_button.png",
+                  "Plist": ""
+                },
+                "Scale9Enable": true,
+                "Scale9OriginX": 9,
+                "Scale9OriginY": 11,
+                "Scale9Width": 11,
+                "Scale9Height": 8,
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "TouchEnable": true,
                 "AnchorPoint": {
                   "ScaleX": 0.5,
                   "ScaleY": 0.5
                 },
                 "Position": {
-                  "X": 53.7184,
-                  "Y": -35.0
+                  "X": 53.3613,
+                  "Y": -34.7665
                 },
                 "Scale": {
                   "ScaleX": 1.4,
@@ -1109,18 +1199,18 @@
                   "Y": 0.0
                 },
                 "VerticalEdge": "TopEdge",
-                "LeftMargin": 39.2184,
-                "RightMargin": -68.2184,
-                "TopMargin": 20.0,
-                "BottomMargin": -50.0,
-                "Tag": 24,
-                "ActionTag": -942644833,
+                "LeftMargin": 38.8613,
+                "RightMargin": -67.8613,
+                "TopMargin": 19.7665,
+                "BottomMargin": -49.7665,
+                "Tag": 44,
+                "ActionTag": -1803149490,
                 "Size": {
                   "X": 29.0,
                   "Y": 30.0
                 },
                 "Name": "btn_add",
-                "ctype": "SpriteObjectData"
+                "ctype": "ButtonObjectData"
               },
               {
                 "LabelText": "244/500",
@@ -1703,7 +1793,7 @@
             },
             "PreSize": {
               "X": 0.0854,
-              "Y": 0.1563
+              "Y": 0.1562
             },
             "HorizontalEdge": "RightEdge",
             "VerticalEdge": "BottomEdge",
@@ -1752,7 +1842,7 @@
                   "X": 77.0,
                   "Y": 19.0
                 },
-                "Name": "BitmapFontLabel_4",
+                "Name": "text",
                 "ctype": "TextBMFontObjectData"
               }
             ],

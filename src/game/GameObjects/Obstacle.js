@@ -21,7 +21,7 @@ var Obstacle = GameObject.extend({
         // res/Buildings/obstacle/ OBS_1/idle/image0000.png
 
         var body_link = res_map.SPRITE.BODY.OBS_LINK + this.type + "/idle/image0000.png";
-        var grass_link = res_map.SPRITE.GRASS.OBSTACLE['SIZE_'+ this._width];
+        var grass_link = res_map.SPRITE.GRASS.OBSTACLE[this._width];
         this._body = new cc.Sprite(body_link);
         this._grass = new cc.Sprite(grass_link);
 

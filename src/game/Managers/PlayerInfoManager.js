@@ -1,6 +1,15 @@
 var PlayerInfoManager = cc.Class.extend({
     instance: null,
 
+    id: null,
+
+    info:{
+        name: "",
+        avatar: "",
+        level: 1,
+        rank: 1,
+    },
+
     maxResource: {
         gold: 1000000,
         elixir: 1000000,
@@ -30,26 +39,28 @@ var PlayerInfoManager = cc.Class.extend({
             this.resource.gem = gem;
         }
         cc.log("update resource: " + JSON.stringify(this.resource, null, 2));
-        InfoLayer.Instance().updateResource(this.resource);
+        InfoLayer.Instance().updateUI(this.resource);
 
     },
 
-    setInfo: function ({id, name, avatar, level, rank}) {
-        if (id) {
-            this.id = id;
-        }
+    setId : function (id) {
+        this.id = id;
+    },
+
+    setInfo: function ({name, avatar, level, rank}) {
         if (name) {
-            this.name = name;
+            this.info.name = name;
         }
         if (avatar) {
-            this.avatar = avatar;
+            this.info.avatar = avatar;
         }
         if (level) {
-            this.level = level;
+            this.info.level = level;
         }
         if (rank) {
-            this.rank = rank;
+            this.info.rank = rank;
         }
+        InfoLayer.Instance().updateUI(this.info);
     },
 
     setMaxResource: function ({gold, elixir, gem}) {

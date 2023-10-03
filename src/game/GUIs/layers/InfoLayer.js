@@ -22,28 +22,48 @@ var InfoLayer = cc.Layer.extend({
         children.map(i => {
 
             this[i.getName()] = i;
-            console.log(i.getName());
             let childrenOfChildren = i.getChildren();
 
             childrenOfChildren.map(j => {
                 this[i.getName()] [j.getName()] = j;
-                console.log("    " + j.getName())
+
             })
 
         })
 
         this.addChild(node);
 
-        this.updateArmy();
-        this.updateBuilder();
 
+        //add touch event to btn_shop
         this.btn_shop.addTouchEventListener(this.onTouchShop, this);
         this.btn_shop.setPressedActionEnabled(true);
 
-    },
-    update: function (event) {
-        // if have event.gold , update gold
+        //add touch event to btn_attack
+        this.btn_attack.addTouchEventListener(this.onTouchAttack, this);
+        this.btn_attack.setPressedActionEnabled(true);
 
+        //add touch event to btn_setting
+        this.btn_setting.addTouchEventListener(this.onTouchSetting, this);
+        this.btn_setting.setPressedActionEnabled(true);
+
+        //add touch event to btn_add_G
+        this.g_container.btn_add.addTouchEventListener(this.onTouchGAdd, this);
+        this.g_container.btn_add.setPressedActionEnabled(true);
+
+        //add touch event to army add button
+        this.army_container.btn_add.addTouchEventListener(this.onTouchArmyAdd, this);
+        this.army_container.btn_add.setPressedActionEnabled(true);
+
+        //add touch event to builder add button
+        this.builder_container.btn_add.addTouchEventListener(this.onTouchBuilderAdd, this);
+        this.builder_container.btn_add.setPressedActionEnabled(true);
+
+    },
+    updateUI: function (event) {
+
+        if(event == null) return;
+
+        //resource
         if (event.gold) {
             this.gold_container.text.setString(event.gold);
         }
@@ -53,9 +73,12 @@ var InfoLayer = cc.Layer.extend({
         if (event.gem) {
             this.g_container.text.setString(event.gem);
         }
-        // if(event.army){
-        //     this.army_container.text.setString(event.army +"/"+);
-        // }
+
+        //info
+        if (event.name) {
+            this.username_container.username.setString(event.name);
+        }
+        
     },
 
 

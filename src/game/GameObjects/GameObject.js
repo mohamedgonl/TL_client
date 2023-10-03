@@ -1,4 +1,4 @@
-var GameObject = cc.Sprite.extend({
+var GameObject = cc.Node.extend({
     ctor: function () {
         this._super();
         this._id = null;
@@ -10,4 +10,8 @@ var GameObject = cc.Sprite.extend({
         this._shadow = null;
         this._objectType = null;
     },
+
+
+
+
 });
