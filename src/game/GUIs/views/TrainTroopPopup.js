@@ -4,6 +4,7 @@ var TrainTroopPopup = cc.Layer.extend({
     _curBarrack: 0,
     _space: 50,
     _trainingQueue: null,
+    _available: true,
 
     ctor: function () {
         this._super();
@@ -21,16 +22,16 @@ var TrainTroopPopup = cc.Layer.extend({
         prevButton.addClickEventListener(this.handleChangePage.bind(this,-1));
         nextButton.addClickEventListener(this.handleChangePage.bind(this, 1));
         closeButton.addClickEventListener(this.handleClosePopup.bind(this));
-        cc.eventManager.addCustomListener("train_troop", this.handleTrainTroop.bind(this))
+        cc.eventManager.addCustomListener(TRAINING_EVENTS.TRAIN, this.handleTrainTroop.bind(this));
+        cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE, this.handleCancleTroopTraining.bind(this));
 
-        // this._timeInfo = trainPopup.getChildByName("time_info");
-        this._trainInfo = trainPopup.getChildByName("train_info");
-        // this._listTroop = trainPopup.getChildByName("list_troop_container");
-        //
-        this._troopTrainingItem = this._trainInfo.getChildByName("troop_training");
-        //
+        let trainPopup = node.getChildByName("train_popup");
+        this._trainContainer = trainPopup.getChildByName("training_container");
+
         this.initListTroops();
         this.updateTrainingPopupTitle();
+
+        this._totalTime = this.getTotalTrainingTime();
 
         this.addChild(node);
     },
@@ -41,14 +42,6 @@ var TrainTroopPopup = cc.Layer.extend({
             troopItem.setPosition(LIST_TROOP_START_POS.x + index * (TROOP_ITEM_SPACING + TROOP_ITEM_SIZE), LIST_TROOP_START_POS.y);
             this._trainPopup.addChild(troopItem);
         })
-    },
-    pushToTrainingList: function (troopTrainingItem) {
-        if(this._trainingQueue.length === 0) {
-
-        }
-        else {
-
-        }
     },
 
     enableTroopList: function () {
@@ -86,7 +79,34 @@ var TrainTroopPopup = cc.Layer.extend({
         })
     },
 
-    handleCancleTroopTraining: function () {
+    handleCancleTroopTraining: function (event) {
+        cc.log("CATCH event:::", event.getEventName());
+        let troopCfgId = event.data.cfgId;
+        let trainingQueue = this._trainingQueue;
+        for (let i = 0; i < trainingQueue.length; i++) {
+            // if this type of troop already in queue
+            if(trainingQueue[i].getCfgId() === troopCfgId) {
+                let count = trainingQueue[i].getCount();
+                if(count === 0) {
+                    // sắp xếp lại wait queue
+                    for (let j = trainingQueue.length - 1; j > i; j--) {
+                        trainingQueue[j].setPositionX(trainingQueue[j-1].getPosition().x);
+                    }
+                    trainingQueue[i].removeFromParent();
+                    trainingQueue.splice(i, 1);
+                }
+
+                if(trainingQueue.length === 0) {
+                    this._trainContainer.setVisible(false);
+                }
+                return;
+            }
+        }
+
+        cc.log("DEBUG:::: Handle Cancle Training:::: not found troopcfgId:::", troopCfgId);
+    },
+
+    updateTraining: function (cfgId) {
 
     },
 
@@ -97,8 +117,9 @@ var TrainTroopPopup = cc.Layer.extend({
         let found = false;
         for (let i = 0; i < trainingQueue.length; i++) {
             // if this type of troop already in queue
-            if(trainingQueue[i].cfgId === troopCfgId) {
-                trainingQueue[i].count ++ ;
+            if(trainingQueue[i].getCfgId() === troopCfgId) {
+                let count = trainingQueue[i].getCount();
+                trainingQueue[i].setCount(count+1) ;
                 found = true;
                 break;
             }
@@ -106,12 +127,100 @@ var TrainTroopPopup = cc.Layer.extend({
         if(!found) {
             // create new waiting troop item;
             let waitingTroop = new TroopTrainingItem(troopCfgId);
-            trainingQueue.push({
-                cfgId: troopCfgId,
-                count: 1
-            })
+            if(trainingQueue.length === 0) {
+                this.currentTime = new Date().getTime();
+                this.lastTrainingTime = new Date().getTime();
+                this._trainContainer.setVisible(true);
+                waitingTroop.setPosition(CURRENT_TROOP_TRAINING_POS.x, CURRENT_TROOP_TRAINING_POS.y);
+                this.schedule(this.updateTrainTime,1);
+            } else if(trainingQueue.length === 1) {
+                waitingTroop.setPosition(FIRST_WAITING_TRAINING_TROOP_POS.x, FIRST_WAITING_TRAINING_TROOP_POS.y);
+            }
+            else {
+                let lastTroopWaiting = trainingQueue[trainingQueue.length-1];
+                waitingTroop.setPosition(lastTroopWaiting.getPosition().x - TROOP_TRAIN_WAITING_SPACE - TROOP_TRAINING_ITEM_WIDTH, lastTroopWaiting.getPosition().y)
+            }
+            this._trainContainer.addChild(waitingTroop);
+            trainingQueue.push(waitingTroop);
+        }
+    },
+
+    getTotalTrainingTime: function () {
+        let total = 0;
+        for (let i = 0; i <this._trainingQueue.length; i++) {
+            total +=   TROOP_BASE[this._trainingQueue[i].getCfgId()] * 100;
+        }
+        this._totalTime = total;
+        return this._totalTime;
+
+    },
+
+
+
+
+    updateTrainTime: function () {
+        this.currentTime = new Date().getTime();
+        let curTroopTime = this._trainContainer.getChildByName("current");
+        let troopTrainTime = TROOP_BASE[this._trainingQueue[0].getCfgId()]["trainingTime"] * 100;
+        cc.log("TROOP TRAIN TIME ::::", troopTrainTime);
+
+        // update current troop training time
+
+        let processBar = curTroopTime.getChildByName("current_process");
+        let timeString = curTroopTime.getChildByName("current_time_string");
+
+        // update processBar
+        let processBarPercent = (this.currentTime - this.lastTrainingTime)/troopTrainTime * 100;
+        processBar.setPercent(processBarPercent);
+
+        if(!this._available) {
+            timeString.setString("DỪNG");
+        }else {
+            let timeLeftString = this.lastTrainingTime + troopTrainTime - this.currentTime;
+            timeString.setString(Math.floor(timeLeftString/1000) + "s");
+        }
+        // update total time
+        let totalTime= this._totalTime + troopTrainTime;
+        let totalTimeString = this._trainContainer.getChildByName("total_time_string");
+        totalTimeString.setString(Math.floor(totalTime/ 1000) + "s");
+
+        if(this.currentTime >= this.lastTrainingTime + troopTrainTime) {
+            cc.log("train success!");
+            this.onTrainSuccess();
+
+        }
+    },
+
+    updateTotalTroopTitle: function () {
+
+    },
+
+    onTrainSuccess : function () {
+        this.removeFirstTroop();
+        this.lastTrainingTime = this.currentTime;
+        let curTroopTime = this._trainContainer.getChildByName("current");
+        let processBar = curTroopTime.getChildByName("current_process");
+        let timeString = curTroopTime.getChildByName("current_time_string");
+        processBar.setPercent(0);
+        let troopTrainTime = TROOP_BASE[this._trainingQueue[0].getCfgId()]["trainingTime"] * 100;
+        timeString.setString(Math.floor(troopTrainTime*1000) + "s");
+    },
+
+    removeFirstTroop : function () {
+        if(this._trainingQueue[0].getCount() > 1) {
+            this._trainingQueue[0].setCount(this._trainingQueue[0].getCount() - 1);
+        }
+        else {
+            for (let i = this._trainingQueue.length - 1; i > 0; i--) {
+                this._trainingQueue[i].setPositionX(this._trainingQueue[i-1].getPosition().x);
+            }
+            this._trainingQueue[0].removeFromParent();
+            this._trainingQueue.splice(0, 1);
         }
     }
+
+
+
 
 
 

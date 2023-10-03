@@ -129,7 +129,7 @@
             },
             "Position": {
               "X": 0.0,
-              "Y": 112.1213
+              "Y": 112.12
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -145,8 +145,8 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "TopMargin": -112.1213,
-            "BottomMargin": 112.1213,
+            "TopMargin": -112.12,
+            "BottomMargin": 112.12,
             "Tag": 36,
             "ActionTag": -1108006772,
             "Size": {

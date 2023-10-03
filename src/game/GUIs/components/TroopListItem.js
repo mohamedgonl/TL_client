@@ -9,6 +9,8 @@ var TroopListItem = cc.Node.extend({
         let node = CCSUlties.parseUIFile(res_ui.TROOPS_LIST_ITEM);
         this._node = node.getChildByName("troop_item");
         cc.eventManager.addListener(clickEventListener(this.handleTrainTroop.bind(this)).clone(), this._node);
+        cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE, this.handleCancleTroopTraining.bind(this));
+
         this.loadData();
         this.addChild(node);
     },
@@ -36,6 +38,13 @@ var TroopListItem = cc.Node.extend({
 
     },
 
+    handleCancleTroopTraining : function (event) {
+        let troopCfgId = event.data.cfgId;
+        if(this._troopCfgId === troopCfgId) {
+            this.setCount(this._count - 1);
+        }
+    },
+
     setCount : function (count) {
         this._count = count;
         let countString = this._node.getChildByName("count_string");
@@ -49,7 +58,7 @@ var TroopListItem = cc.Node.extend({
 
     handleTrainTroop: function () {
         this.setCount(this._count+1);
-        let event = new cc.EventCustom("train_troop");
+        let event = new cc.EventCustom(TRAINING_EVENTS.TRAIN);
         let cfgId = this._troopCfgId;
         event.data = {cfgId: cfgId};
         cc.eventManager.dispatchEvent(event);

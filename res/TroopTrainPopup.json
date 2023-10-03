@@ -309,6 +309,53 @@
                   "Path": "guis/research troop/mieng trang.png",
                   "Plist": ""
                 },
+                "Scale9OriginX": 225,
+                "Scale9OriginY": 37,
+                "Scale9Width": 232,
+                "Scale9Height": 41,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 369.5,
+                  "Y": 366.52
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.77
+                },
+                "PreSize": {
+                  "X": 0.9229,
+                  "Y": 0.2416
+                },
+                "LeftMargin": 28.5,
+                "RightMargin": 28.5,
+                "TopMargin": 51.98,
+                "BottomMargin": 309.02,
+                "Tag": 137,
+                "ActionTag": 477825558,
+                "Size": {
+                  "X": 682.0,
+                  "Y": 115.0
+                },
+                "Name": "white_bg",
+                "ctype": "ImageViewObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "guis/research troop/mieng trang.png",
+                  "Plist": ""
+                },
                 "BlendFunc": {
                   "Src": 1,
                   "Dst": 771
@@ -391,47 +438,6 @@
                     "ctype": "SpriteObjectData"
                   },
                   {
-                    "FileData": {
-                      "Type": "Normal",
-                      "Path": "TroopTrainingItem.json",
-                      "Plist": ""
-                    },
-                    "StretchWidthEnable": false,
-                    "StretchHeightEnable": false,
-                    "InnerActionSpeed": 1.0,
-                    "AnchorPoint": {},
-                    "Position": {
-                      "X": 360.0,
-                      "Y": 67.0
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": true,
-                    "PrePosition": {
-                      "X": 0.5279,
-                      "Y": 0.5826
-                    },
-                    "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "LeftMargin": 360.0,
-                    "RightMargin": 322.0,
-                    "TopMargin": 48.0,
-                    "BottomMargin": 67.0,
-                    "Tag": 133,
-                    "ActionTag": 1311945419,
-                    "Size": {
-                      "X": 0.0,
-                      "Y": 0.0
-                    },
-                    "Name": "wait_troop",
-                    "ctype": "ProjectNodeObjectData"
-                  },
-                  {
                     "LabelText": "Tổng số quân sau khi huấn luyện:  ",
                     "LabelBMFontFile_CNB": {
                       "Type": "Normal",
@@ -478,44 +484,133 @@
                   {
                     "FileData": {
                       "Type": "Normal",
-                      "Path": "TroopTrainingItem.json",
+                      "Path": "guis/train_troop_gui/bg_train_bar.png",
                       "Plist": ""
                     },
-                    "StretchWidthEnable": false,
-                    "StretchHeightEnable": false,
-                    "InnerActionSpeed": 1.0,
-                    "AnchorPoint": {},
+                    "Scale9OriginX": 22,
+                    "Scale9OriginY": 5,
+                    "Scale9Width": 25,
+                    "Scale9Height": 8,
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
                     "Position": {
-                      "X": 484.2293,
-                      "Y": 66.7
+                      "X": 484.23,
+                      "Y": 27.4
                     },
                     "Scale": {
                       "ScaleX": 1.0,
                       "ScaleY": 1.0
                     },
                     "CColor": {},
-                    "IconVisible": true,
-                    "PositionPercentYEnabled": true,
+                    "IconVisible": false,
                     "PrePosition": {
                       "X": 0.71,
-                      "Y": 0.58
+                      "Y": 0.2383
                     },
                     "PreSize": {
-                      "X": 0.0,
-                      "Y": 0.0
+                      "X": 0.1012,
+                      "Y": 0.1565
                     },
-                    "LeftMargin": 484.2293,
-                    "RightMargin": 197.7707,
-                    "TopMargin": 48.3,
-                    "BottomMargin": 66.7,
-                    "Tag": 127,
-                    "ActionTag": 1708261671,
+                    "LeftMargin": 449.73,
+                    "RightMargin": 163.27,
+                    "TopMargin": 78.6,
+                    "BottomMargin": 18.4,
+                    "Tag": 134,
+                    "Children": [
+                      {
+                        "ProgressInfo": 0,
+                        "ImageFileData": {
+                          "Type": "Normal",
+                          "Path": "guis/train_troop_gui/train_bar.png",
+                          "Plist": ""
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 34.5,
+                          "Y": 9.0
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PositionPercentXEnabled": true,
+                        "PositionPercentYEnabled": true,
+                        "PrePosition": {
+                          "X": 0.5,
+                          "Y": 0.5
+                        },
+                        "PreSize": {
+                          "X": 1.0,
+                          "Y": 1.0
+                        },
+                        "Tag": 135,
+                        "ActionTag": -1479279272,
+                        "Size": {
+                          "X": 69.0,
+                          "Y": 18.0
+                        },
+                        "Name": "current_process",
+                        "ctype": "LoadingBarObjectData"
+                      },
+                      {
+                        "LabelText": "",
+                        "LabelBMFontFile_CNB": {
+                          "Type": "Normal",
+                          "Path": "fonts/soji_12.fnt",
+                          "Plist": ""
+                        },
+                        "AnchorPoint": {
+                          "ScaleX": 0.5,
+                          "ScaleY": 0.5
+                        },
+                        "Position": {
+                          "X": 34.5,
+                          "Y": 3.42
+                        },
+                        "Scale": {
+                          "ScaleX": 1.0,
+                          "ScaleY": 1.0
+                        },
+                        "CColor": {},
+                        "IconVisible": false,
+                        "PositionPercentXEnabled": true,
+                        "PositionPercentYEnabled": true,
+                        "PrePosition": {
+                          "X": 0.5,
+                          "Y": 0.19
+                        },
+                        "PreSize": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "LeftMargin": 34.5,
+                        "RightMargin": 34.5,
+                        "TopMargin": 14.58,
+                        "BottomMargin": 3.42,
+                        "Tag": 136,
+                        "ActionTag": -1302506528,
+                        "Size": {
+                          "X": 0.0,
+                          "Y": 0.0
+                        },
+                        "Name": "current_time_string",
+                        "ctype": "TextBMFontObjectData"
+                      }
+                    ],
+                    "ActionTag": -491432194,
                     "Size": {
-                      "X": 0.0,
-                      "Y": 0.0
+                      "X": 69.0,
+                      "Y": 18.0
                     },
-                    "Name": "CurrentTroopTraining",
-                    "ctype": "ProjectNodeObjectData"
+                    "Name": "current",
+                    "ctype": "ImageViewObjectData"
                   },
                   {
                     "LabelText": "Tổng thời gian:",
@@ -809,6 +904,8 @@
                 "ColorVector": {
                   "ScaleY": 1.0
                 },
+                "Scale9Width": 1,
+                "Scale9Height": 1,
                 "TouchEnable": true,
                 "AnchorPoint": {
                   "ScaleX": 0.5,
@@ -845,47 +942,6 @@
                 },
                 "Name": "panel",
                 "ctype": "PanelObjectData"
-              },
-              {
-                "FileData": {
-                  "Type": "Normal",
-                  "Path": "TroopListItem.json",
-                  "Plist": ""
-                },
-                "StretchWidthEnable": false,
-                "StretchHeightEnable": false,
-                "InnerActionSpeed": 1.0,
-                "AnchorPoint": {},
-                "Position": {
-                  "X": 95.0,
-                  "Y": 225.0
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PrePosition": {
-                  "X": 0.1286,
-                  "Y": 0.4727
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": 95.0,
-                "RightMargin": 644.0,
-                "TopMargin": 251.0,
-                "BottomMargin": 225.0,
-                "Tag": 139,
-                "ActionTag": 283900455,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "wait_troop_0",
-                "ctype": "ProjectNodeObjectData"
               }
             ],
             "ActionTag": -1574510530,
@@ -992,12 +1048,12 @@
         "guis/research troop/mieng trang.png",
         "guis/research troop/mui ten.png",
         "guis/research troop/nen 1.png",
+        "guis/train_troop_gui/bg_train_bar.png",
         "guis/train_troop_gui/close.png",
         "guis/train_troop_gui/forward.png",
         "guis/train_troop_gui/g_icon.png",
         "guis/train_troop_gui/previous.png",
-        "TroopListItem.json",
-        "TroopTrainingItem.json"
+        "guis/train_troop_gui/train_bar.png"
       ],
       "ctype": "GameFileData"
     }

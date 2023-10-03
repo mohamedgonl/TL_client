@@ -62,6 +62,16 @@
                 <PreSize X="0.1150" Y="0.0525" />
                 <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
               </AbstractNodeData>
+              <AbstractNodeData Name="white_bg" ActionTag="477825558" Tag="137" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="28.5000" RightMargin="28.5000" TopMargin="51.9800" BottomMargin="309.0200" LeftEage="225" RightEage="225" TopEage="37" BottomEage="37" Scale9OriginX="225" Scale9OriginY="37" Scale9Width="232" Scale9Height="41" ctype="ImageViewObjectData">
+                <Size X="682.0000" Y="115.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="369.5000" Y="366.5200" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.7700" />
+                <PreSize X="0.9229" Y="0.2416" />
+                <FileData Type="Normal" Path="guis/research troop/mieng trang.png" Plist="" />
+              </AbstractNodeData>
               <AbstractNodeData Name="training_container" ActionTag="1988282960" Tag="84" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="28.5000" RightMargin="28.5000" TopMargin="51.9800" BottomMargin="309.0200" ctype="SpriteObjectData">
                 <Size X="682.0000" Y="115.0000" />
                 <Children>
@@ -76,16 +86,6 @@
                     <FileData Type="Normal" Path="guis/research troop/mui ten.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="wait_troop" ActionTag="1311945419" Tag="133" IconVisible="True" LeftMargin="360.0000" RightMargin="322.0000" TopMargin="48.0000" BottomMargin="67.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
-                    <Size X="0.0000" Y="0.0000" />
-                    <AnchorPoint />
-                    <Position X="360.0000" Y="67.0000" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5279" Y="0.5826" />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="TroopTrainingItem.csd" Plist="" />
-                  </AbstractNodeData>
                   <AbstractNodeData Name="total_troop_string" ActionTag="-385913310" Tag="114" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="112.7000" RightMargin="317.3000" TopMargin="85.9500" BottomMargin="10.0500" LabelText="Tổng số quân sau khi huấn luyện:  " ctype="TextBMFontObjectData">
                     <Size X="252.0000" Y="19.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -96,15 +96,37 @@
                     <PreSize X="0.3695" Y="0.1652" />
                     <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="CurrentTroopTraining" ActionTag="1708261671" Tag="127" IconVisible="True" LeftMargin="484.2300" RightMargin="197.7700" TopMargin="48.3000" BottomMargin="66.7000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
-                    <Size X="0.0000" Y="0.0000" />
-                    <AnchorPoint />
-                    <Position X="484.2300" Y="66.7000" />
+                  <AbstractNodeData Name="current" ActionTag="-491432194" Tag="134" IconVisible="False" LeftMargin="449.7300" RightMargin="163.2700" TopMargin="78.6000" BottomMargin="18.4000" LeftEage="22" RightEage="22" TopEage="5" BottomEage="5" Scale9OriginX="22" Scale9OriginY="5" Scale9Width="25" Scale9Height="8" ctype="ImageViewObjectData">
+                    <Size X="69.0000" Y="18.0000" />
+                    <Children>
+                      <AbstractNodeData Name="current_process" ActionTag="-1479279272" Tag="135" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" ProgressInfo="0" ctype="LoadingBarObjectData">
+                        <Size X="69.0000" Y="18.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="34.5000" Y="9.0000" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.5000" Y="0.5000" />
+                        <PreSize X="1.0000" Y="1.0000" />
+                        <ImageFileData Type="Normal" Path="guis/train_troop_gui/train_bar.png" Plist="" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="current_time_string" ActionTag="-1302506528" Tag="136" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="34.5000" RightMargin="34.5000" TopMargin="14.5800" BottomMargin="3.4200" LabelText="" ctype="TextBMFontObjectData">
+                        <Size X="0.0000" Y="0.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="34.5000" Y="3.4200" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.5000" Y="0.1900" />
+                        <PreSize X="0.0000" Y="0.0000" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
+                      </AbstractNodeData>
+                    </Children>
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="484.2300" Y="27.4000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.7100" Y="0.5800" />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="TroopTrainingItem.csd" Plist="" />
+                    <PrePosition X="0.7100" Y="0.2383" />
+                    <PreSize X="0.1012" Y="0.1565" />
+                    <FileData Type="Normal" Path="guis/train_troop_gui/bg_train_bar.png" Plist="" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="total_time_title" ActionTag="1236311239" Tag="115" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="556.3000" RightMargin="10.7000" TopMargin="-1.4500" BottomMargin="97.4500" LabelText="Tổng thời gian:" ctype="TextBMFontObjectData">
                     <Size X="115.0000" Y="19.0000" />
