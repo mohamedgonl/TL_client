@@ -7,9 +7,6 @@ var Obstacle = GameObject.extend({
    ctor: function(type,posX,posY){
        this._super();
        this.type = type;
-       this.posX = posX;
-       this.posY = posY;
-
 
        var configObstacle = ConfigManager.Instance().getObstacle(type);
        this._width = configObstacle.width;

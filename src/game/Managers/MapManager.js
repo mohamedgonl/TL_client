@@ -26,6 +26,7 @@ var MapManager = cc.Layer.extend({
         for(var index in this.listBuildings){
             var building = this.listBuildings[index];
 
+            let id = building.id;
             var type = building.type;
             var nameBuilding = changeTypeBuildingToBuilding(type);
             var posX = building.posX;
@@ -35,9 +36,7 @@ var MapManager = cc.Layer.extend({
             let buildingObj;
             // create building in map
             if(nameBuilding != null){
-                //cc.log(nameBuilding+ "name building")
-                buildingObj = this.createBuilding(nameBuilding,cc.p(posX,posY),level);
-
+                buildingObj = this.createBuilding(id, nameBuilding,cc.p(posX,posY),level);
             }
 
             else {
@@ -64,7 +63,7 @@ var MapManager = cc.Layer.extend({
         return this.townHall;
     },
 
-    createBuilding: function (nameBuilding, gridPos, level, state) {
+    createBuilding: function (id, nameBuilding, gridPos, level, state) {
 
         var building;
         //if obstacle , nameBuilding = Obstacle_1, Obstacle_2, ...
@@ -75,6 +74,8 @@ var MapManager = cc.Layer.extend({
         else {
             building = eval("new " + nameBuilding + "(" + level + "," + gridPos.x + "," + gridPos.y + ")");
         }
+
+        building.setId(id)
 
         if(building == null) return;
 

@@ -107,7 +107,7 @@ var TrainTroopPopup = cc.Layer.extend({
         for (let i = 0; i < trainingQueue.length; i++) {
             // if this type of troop already in queue
             if (trainingQueue[i].getCfgId() === troopCfgId) {
-                this.onTrainSuccess(true);
+                this.onTrainSuccess(true, troopCfgId );
                 let count = trainingQueue[i].getCount();
                 if (count === 0) {
                     // sắp xếp lại wait queue
@@ -217,7 +217,7 @@ var TrainTroopPopup = cc.Layer.extend({
 
         if (this.getCurrentTime() >= this.lastTrainingTime + curTroopTrainTime) {
             cc.log("train success!");
-            this.onTrainSuccess(false, this._trainingQueue[0].cfgId);
+            this.onTrainSuccess(false, this._trainingQueue[0].getCfgId());
         }
     },
 
@@ -233,7 +233,8 @@ var TrainTroopPopup = cc.Layer.extend({
         totalTimeString.setString(this._totalTime + "s");
     },
 
-    onTrainSuccess: function (isCancle = false, cfgId) {
+    onTrainSuccess: function (isCancle , cfgId) {
+        cc.log("CFG ID IN ontrain success :::::", cfgId);
         if (!isCancle) {
             this.removeFirstTroop();
         } else {
@@ -254,13 +255,16 @@ var TrainTroopPopup = cc.Layer.extend({
             let troopTrainTime = TroopUltis.getTrainingTime(this._trainingQueue[0].getCfgId());
             timeString.setString(troopTrainTime + "s");
         }
+        let currentBarrack = ArmyManager.Instance().getBarrackList()[this._curPage];
+        currentBarrack.removeFromTrainingQueue({cfgId: cfgId, count: 1, currentTime: this.lastTrainingTime});
 
-        ArmyManager.Instance().getBarrackList()[this._curPage].removeFromTrainingQueue({cfgId: cfgId, count: 1, currentTime: this.lastTrainingTime})
         this.updateTrainingPopupTitle();
 
     },
 
+
     removeFirstTroop: function () {
+        let cfgId = this._trainingQueue[0].cfgId;
         if (this._trainingQueue[0].getCount() > 1) {
             this._trainingQueue[0].setCount(this._trainingQueue[0].getCount() - 1);
         } else {
@@ -270,6 +274,7 @@ var TrainTroopPopup = cc.Layer.extend({
             this._trainingQueue[0].removeFromParent();
             this._trainingQueue.splice(0, 1);
         }
+        return cfgId;
     },
 
     handleClickDoneNow: function () {

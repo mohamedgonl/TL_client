@@ -60,6 +60,13 @@ testnetwork.Connector = cc.Class.extend({
         pk.pack(itemData);
         this.gameClient.sendPacket(pk);
     },
+    sendRequestTrainingCreate: function (data) {
+        cc.log("SEND train troop create request");
+        var pk = this.gameClient.getOutPacket(CmdSendTrainTroopCreate);
+        pk.pack(data);
+        this.gameClient.sendPacket(pk);
+    },
+
     sendMove: function (direction) {
         cc.log("SendMove:" + direction);
         var pk = this.gameClient.getOutPacket(CmdSendMove);

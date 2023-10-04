@@ -19,6 +19,8 @@ var Barrack = Building.extend({
         return this._trainingQueue;
     },
 
+
+
     addToTrainingQueue: function ({cfgId, count}) {
         for (let i = 0; i < this._trainingQueue.length; i++) {
             if(this._trainingQueue[i].cfgId === cfgId) {
@@ -37,6 +39,7 @@ var Barrack = Building.extend({
                     this._trainingQueue.splice(i,1);
                 }
                 this.lastTrainingTime = currentTime;
+                cc.log("removeFromTrainingQueue success");
                 return
             }
         }

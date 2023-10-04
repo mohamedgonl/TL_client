@@ -10,6 +10,7 @@ gv.CMD.USER_INFO = 1001;
 gv.CMD.MAP_INFO = 1002;
 gv.CMD.MOVE = 2001;
 gv.CMD.BUY_RESOURCE = 4001;
+gv.CMD.TRAIN_TROOP_CREATE = 5001;
 
 
 
@@ -93,6 +94,23 @@ CmdSendBuyItem = fr.OutPacket.extend(
     }
 )
 
+CmdSendTrainTroopCreate = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.TRAIN_TROOP_CREATE);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putString(data.cfgId);
+            this.putInt(data.count);
+            this.putInt(data.barrackId);
+            this.updateSize();
+        }
+    }
+)
+
 
 CmdSendMove = fr.OutPacket.extend(
     {
@@ -167,6 +185,17 @@ testnetwork.packetMap[gv.CMD.BUY_RESOURCE] = fr.InPacket.extend(
     }
 );
 
+testnetwork.packetMap[gv.CMD.TRAIN_TROOP_CREATE] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+
+        }
+    }
+);
+
 testnetwork.packetMap[gv.CMD.MAP_INFO] = fr.InPacket.extend(
     {
         ctor: function () {
@@ -188,6 +217,7 @@ testnetwork.packetMap[gv.CMD.MAP_INFO] = fr.InPacket.extend(
         }
     }
 );
+
 
 testnetwork.packetMap[gv.CMD.MOVE] = fr.InPacket.extend(
     {

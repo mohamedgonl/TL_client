@@ -92,6 +92,8 @@ var TroopListItem = cc.Node.extend({
             let cfgId = this._troopCfgId;
             event.data = {cfgId: cfgId};
             cc.eventManager.dispatchEvent(event);
+
+            testnetwork.connector.sendRequestTrainingCreate({cfgId: cfgId, count: 1, barrackId: barList[this._curBarrack].getId()})
         }
     },
 
