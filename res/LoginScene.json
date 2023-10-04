@@ -1,5 +1,5 @@
 {
-  "ID": "a2ee0952-26b5-49ae-8bf9-4f1d6279b798",
+  "ID": "e32b6eeb-4f2a-43e4-995c-ede942344aae",
   "Version": "3.10.0.0",
   "Name": "LoginScene",
   "Content": {
@@ -12,11 +12,12 @@
       },
       "AnimationList": [],
       "ObjectData": {
+        "Tag": 45,
         "Children": [
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "guis/login/loading.jpg",
+              "Path": "LoginGui/loading.jpg",
               "Plist": ""
             },
             "BlendFunc": {
@@ -49,19 +50,19 @@
             "RightMargin": 168.0,
             "TopMargin": 80.0,
             "BottomMargin": 80.0,
-            "Tag": 3,
-            "ActionTag": 1978493537,
+            "Tag": 46,
+            "ActionTag": 600733311,
             "Size": {
               "X": 800.0,
               "Y": 480.0
             },
-            "Name": "login-background",
+            "Name": "loading_1",
             "ctype": "SpriteObjectData"
           },
           {
             "FileData": {
               "Type": "Normal",
-              "Path": "guis/login/logo.png",
+              "Path": "LoginGui/logo.png",
               "Plist": ""
             },
             "BlendFunc": {
@@ -69,33 +70,33 @@
               "Dst": 771
             },
             "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
+              "ScaleX": 0.5681,
+              "ScaleY": 0.3013
             },
             "Position": {
-              "X": 80.9423,
-              "Y": 576.7133
+              "X": 98.2549,
+              "Y": 536.2871
             },
             "Scale": {
-              "ScaleX": 1.373,
-              "ScaleY": 1.2855
+              "ScaleX": 1.4201,
+              "ScaleY": 1.4823
             },
             "CColor": {},
             "IconVisible": false,
             "PrePosition": {
-              "X": 0.0713,
-              "Y": 0.9011
+              "X": 0.0865,
+              "Y": 0.8379
             },
             "PreSize": {
               "X": 0.0819,
               "Y": 0.1266
             },
-            "LeftMargin": 34.4423,
-            "RightMargin": 1008.5577,
-            "TopMargin": 22.7867,
-            "BottomMargin": 536.2133,
-            "Tag": 4,
-            "ActionTag": 745203203,
+            "LeftMargin": 45.426,
+            "RightMargin": 997.574,
+            "TopMargin": 47.1164,
+            "BottomMargin": 511.8836,
+            "Tag": 47,
+            "ActionTag": -130171247,
             "Size": {
               "X": 93.0,
               "Y": 81.0
@@ -104,99 +105,13 @@
             "ctype": "SpriteObjectData"
           },
           {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "guis/login/loadingBgBar.png",
-              "Plist": ""
-            },
-            "BlendFunc": {
-              "Src": 1,
-              "Dst": 771
-            },
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
-              "X": 569.2511,
-              "Y": 87.0828
-            },
-            "Scale": {
-              "ScaleX": 1.3148,
-              "ScaleY": 1.8133
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.5011,
-              "Y": 0.1361
-            },
-            "PreSize": {
-              "X": 0.2456,
-              "Y": 0.0437
-            },
-            "LeftMargin": 429.7511,
-            "RightMargin": 427.2489,
-            "TopMargin": 538.9172,
-            "BottomMargin": 73.0828,
-            "Tag": 6,
-            "ActionTag": 2092684215,
-            "Size": {
-              "X": 279.0,
-              "Y": 28.0
-            },
-            "Name": "login-loading-bar",
-            "ctype": "SpriteObjectData"
-          },
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "guis/login/g_background.png",
-              "Plist": ""
-            },
-            "BlendFunc": {
-              "Src": 1,
-              "Dst": 771
-            },
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
-              "X": 494.6821,
-              "Y": 149.0584
-            },
-            "Scale": {
-              "ScaleX": 1.6155,
-              "ScaleY": 1.5077
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.4355,
-              "Y": 0.2329
-            },
-            "PreSize": {
-              "X": 0.1215,
-              "Y": 0.0656
-            },
-            "LeftMargin": 425.6821,
-            "RightMargin": 572.3179,
-            "TopMargin": 469.9416,
-            "BottomMargin": 128.0584,
-            "Tag": 7,
-            "ActionTag": -2045146318,
-            "Size": {
-              "X": 138.0,
-              "Y": 42.0
-            },
-            "Name": "login-textfield-background",
-            "ctype": "SpriteObjectData"
-          },
-          {
             "FontSize": 20,
-            "ButtonText": "LOG IN",
-            "TextColor": {},
+            "ButtonText": "",
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
             "DisabledFileData": {
               "Type": "Default",
               "Path": "Default/Button_Disable.png",
@@ -209,7 +124,7 @@
             },
             "NormalFileData": {
               "Type": "Normal",
-              "Path": "guis/login/okbutton.png",
+              "Path": "LoginGui/okbutton.png",
               "Plist": ""
             },
             "Scale9Enable": true,
@@ -234,42 +149,128 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 680.2073,
-              "Y": 146.7395
+              "X": 759.5116,
+              "Y": 211.3637
             },
             "Scale": {
-              "ScaleX": 1.2595,
-              "ScaleY": 1.4331
+              "ScaleX": 1.3185,
+              "ScaleY": 1.5256
             },
             "CColor": {},
             "IconVisible": false,
             "PrePosition": {
-              "X": 0.5988,
-              "Y": 0.2293
+              "X": 0.6686,
+              "Y": 0.3303
             },
             "PreSize": {
               "X": 0.1039,
               "Y": 0.0688
             },
-            "LeftMargin": 621.2073,
-            "RightMargin": 396.7927,
-            "TopMargin": 471.2604,
-            "BottomMargin": 124.7395,
-            "Tag": 9,
-            "ActionTag": -52117077,
+            "LeftMargin": 700.5116,
+            "RightMargin": 317.4884,
+            "TopMargin": 406.6363,
+            "BottomMargin": 189.3637,
+            "Tag": 48,
+            "ActionTag": 1985672201,
             "Size": {
               "X": 118.0,
               "Y": 44.0
             },
-            "Name": "Button_1",
+            "Name": "button-login",
             "ctype": "ButtonObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "LoginGui/g_background.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 574.5051,
+              "Y": 211.3638
+            },
+            "Scale": {
+              "ScaleX": 1.5027,
+              "ScaleY": 1.413
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5057,
+              "Y": 0.3303
+            },
+            "PreSize": {
+              "X": 0.1215,
+              "Y": 0.0656
+            },
+            "LeftMargin": 505.5051,
+            "RightMargin": 492.4949,
+            "TopMargin": 407.6362,
+            "BottomMargin": 190.3638,
+            "Tag": 50,
+            "ActionTag": -1327495222,
+            "Size": {
+              "X": 138.0,
+              "Y": 42.0
+            },
+            "Name": "g_background_3",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "LabelText": "LOG IN",
+            "LabelBMFontFile_CNB": {
+              "Type": "Normal",
+              "Path": "fonts/soji_24.fnt",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 759.51,
+              "Y": 211.36
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.6686,
+              "Y": 0.3302
+            },
+            "PreSize": {
+              "X": 0.0863,
+              "Y": 0.0594
+            },
+            "LeftMargin": 710.51,
+            "RightMargin": 327.49,
+            "TopMargin": 409.64,
+            "BottomMargin": 192.36,
+            "Tag": 51,
+            "ActionTag": 462816802,
+            "Size": {
+              "X": 98.0,
+              "Y": 38.0
+            },
+            "Name": "BitmapFontLabel_1",
+            "ctype": "TextBMFontObjectData"
           },
           {
             "FontSize": 20,
             "IsCustomSize": true,
             "LabelText": "",
-            "PlaceHolderText": "UID",
-            "MaxLengthEnable": true,
+            "PlaceHolderText": "",
             "MaxLengthText": 10,
             "TouchEnable": true,
             "AnchorPoint": {
@@ -277,35 +278,122 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 493.0884,
-              "Y": 149.337
+              "X": 580.2866,
+              "Y": 211.3639
             },
             "Scale": {
-              "ScaleX": 2.0829,
-              "ScaleY": 1.565
+              "ScaleX": 2.0324,
+              "ScaleY": 1.7541
             },
             "CColor": {},
             "IconVisible": false,
             "PrePosition": {
-              "X": 0.4341,
-              "Y": 0.2333
+              "X": 0.5108,
+              "Y": 0.3303
             },
             "PreSize": {
               "X": 0.0739,
               "Y": 0.0359
             },
-            "LeftMargin": 451.0884,
-            "RightMargin": 600.9116,
-            "TopMargin": 479.163,
-            "BottomMargin": 137.837,
-            "Tag": 10,
-            "ActionTag": -768877983,
+            "LeftMargin": 538.2866,
+            "RightMargin": 513.7134,
+            "TopMargin": 417.1361,
+            "BottomMargin": 199.8639,
+            "Tag": 52,
+            "ActionTag": 812740886,
             "Size": {
               "X": 84.0,
               "Y": 23.0
             },
-            "Name": "login-textfield",
+            "Name": "textfield-uid",
             "ctype": "TextFieldObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "LoginGui/loadingBgBar.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 578.0,
+              "Y": 110.0
+            },
+            "Scale": {
+              "ScaleX": 1.36,
+              "ScaleY": 1.5
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5088,
+              "Y": 0.1719
+            },
+            "PreSize": {
+              "X": 0.2456,
+              "Y": 0.0437
+            },
+            "LeftMargin": 438.5,
+            "RightMargin": 418.5,
+            "TopMargin": 516.0,
+            "BottomMargin": 96.0,
+            "Tag": 54,
+            "ActionTag": -451929200,
+            "Size": {
+              "X": 279.0,
+              "Y": 28.0
+            },
+            "Name": "loading-bg",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "ProgressInfo": 0,
+            "ImageFileData": {
+              "Type": "Normal",
+              "Path": "LoginGui/loadingBar.png",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 580.0,
+              "Y": 110.0
+            },
+            "Scale": {
+              "ScaleX": 1.3922,
+              "ScaleY": 1.5
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5106,
+              "Y": 0.1719
+            },
+            "PreSize": {
+              "X": 0.2368,
+              "Y": 0.0312
+            },
+            "LeftMargin": 445.5,
+            "RightMargin": 421.5,
+            "TopMargin": 520.0,
+            "BottomMargin": 100.0,
+            "Tag": 53,
+            "ActionTag": 1000119490,
+            "Size": {
+              "X": 269.0,
+              "Y": 20.0
+            },
+            "Name": "loading-bar",
+            "ctype": "LoadingBarObjectData"
           }
         ],
         "Size": {
@@ -318,11 +406,14 @@
       "UsedResources": [
         "Default/Button_Disable.png",
         "Default/Button_Press.png",
-        "guis/login/g_background.png",
-        "guis/login/loading.jpg",
-        "guis/login/loadingBgBar.png",
-        "guis/login/logo.png",
-        "guis/login/okbutton.png"
+        "fonts/soji_24.fnt",
+        "fonts/soji_24.png",
+        "LoginGui/g_background.png",
+        "LoginGui/loading.jpg",
+        "LoginGui/loadingBar.png",
+        "LoginGui/loadingBgBar.png",
+        "LoginGui/logo.png",
+        "LoginGui/okbutton.png"
       ],
       "ctype": "GameFileData"
     }
