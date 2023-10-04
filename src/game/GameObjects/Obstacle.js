@@ -1,14 +1,14 @@
 var Obstacle = GameObject.extend({
     type: null,
-    posX: null,
-    posY: null,
+    _posX: null,
+    _posY: null,
     _width: null,
     _height: null,
    ctor: function(type,id,posX,posY){
        this._super();
        this.type = type;
-       this.posX = posX;
-       this.posY = posY;
+       this._posX = posX;
+       this._posY = posY;
        this._id = id;
 
 

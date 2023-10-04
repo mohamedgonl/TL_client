@@ -30,8 +30,9 @@ var MapManager = cc.Layer.extend({
     },
 
     //load from server
+    //chua lam status
     loadFromServer: function (buildings){
-
+        //cc.log("load from server:", JSON.stringify(buildings, null, 2));
         for(var index in buildings){
 
             var construct = buildings[index];
@@ -41,63 +42,61 @@ var MapManager = cc.Layer.extend({
             var posX =construct.posX;
             var posY =construct.posY;
             var level =construct.level;
+
             var building = getBuildingFromType(type,id, level, posX, posY);
             if(building == null) continue;
-
-            this.addMapGrid(id,posX,posY,building._width,building._height);
-
-            this.listBuildings.push(building);
-            switch (type.substring(0,3)){
-                case 'TOW':
-                    this.townHall = building;
-                    break;
-                case 'RES':
-                    this.listMine.push(building);
-                    break;
-                case 'STO':
-                    this.listStorage.push(building);
-                    break;
-            }
+            cc.log(building.getName()+" ____" +JSON.stringify(building, null, 2));
+            this.addBuilding(building);
         }
-        //log map grid
-        for(var i = 0; i < 40; i++){
-            var str = "";
-            for(var j = 0; j < 40; j++)
-                str += this.mapGrid[i][j] + " ";
-            cc.log(str);
-        }
-
-        // cc.log("listMine:",JSON.stringify(this.listMine, null, 2));
-        // cc.log("listSTO:",JSON.stringify(this.listStorage, null, 2));
-        // cc.log("townHall:",JSON.stringify(this.townHall, null, 2));
-        cc.log("listBuildings:",JSON.stringify(this.listBuildings, null, 2));
-        //sort list mine by level
     },
 
-    //for 2d array map grid 0 0 to 39 39 add id to each grid
-    addMapGrid: function (id,posX,posY,width,height) {
+    //add building to list and to grid
+    addBuilding: function (building) {
+        //cc.log("building  ", JSON.stringify(building, null, 2));
+        var posX = building._posX;
+        var posY = building._posY;
+        var id = building._id;
+        var width = building._width;
+        var height = building._height;
+
+
         for(var column = posX; column < posX + width; column++)
             for(var row = posY; row < posY + height; row++)
                 this.mapGrid[column][row] = id;
+
+        this.listBuildings.push(building);
+        switch (building.getName()){
+            case 'Townhall':
+                this.townHall = building;
+                break;
+            case 'GoldMine'||'ElixirMine':
+                this.listMine.push(building);
+                break;
+            case 'GoldStorage'||'ElixirStorage':
+                this.listStorage.push(building);
+                break;
+        }
+
+
     },
-    changeMapGrid: function (id,newPosX,newPosY) {
+    moveBuilding: function (building,newPosX,newPosY) {
 
-        var width = this.getBuildingById(id)._width;
-        var height = this.getBuildingById(id)._height;
+        var width = building._width;
+        var height = building._height;
 
-        // for 40x40 o, o nao co id thi set bang 0
-        for(var column = 0; column < 40; column++)
-            for(var row = 0; row < 40; row++)
-                if(this.mapGrid[column][row] == id)
-                    this.mapGrid[column][row] = 0;
+        // dat lai nhung o cu = 0
+        for(var column = building._posX; column < building._posX + width; column++)
+            for(var row = building._posY; row < building._posY + height; row++)
+                this.mapGrid[column][row] = 0;
 
+        //dat lai nhung o moi = id
+        for(var column = newPosX; column < newPosX + width; column++)
+            for(var row = newPosY; row < newPosY + height; row++)
+                this.mapGrid[column][row] = building._id;
 
-
-        //add grid vao vi tri moi
-        this.addMapGrid(id,newPosX,newPosY,width,height);
-    },
-    changePositionBuilding: function (id,newPosX,newPosY) {
-
+        //dat lai vi tri cua building va updateUI
+        building._posX = newPosX;
+        building._posY = newPosY;
     },
 
     getTownHall: function () {
@@ -173,13 +172,13 @@ var MapManager = cc.Layer.extend({
 
     test: function (){
         //log map grid
-        cc.log("map grid ::::::")
-        for(var i = 0; i < 40; i++){
-            var str = "";
-            for(var j = 0; j < 40; j++)
-                str += this.mapGrid[i][j] + " ";
-            cc.log(str);
-        }
+        // cc.log("map grid ::::::")
+        // for(var i = 0; i < 40; i++){
+        //     var str = "";
+        //     for(var j = 0; j < 40; j++)
+        //         str += this.mapGrid[i][j] + " ";
+        //     cc.log(str);
+        // }
 
         //log list building
         cc.log("list building ::::::")

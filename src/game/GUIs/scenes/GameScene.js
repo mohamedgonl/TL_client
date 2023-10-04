@@ -11,7 +11,7 @@ var GameScene = cc.Scene.extend({
 
     init: function () {
 
-        cc.log('GAME SCENE """"""""""""')
+
         this.mapLayer = new MapLayer();
 
         // cc.log("map layer " + JSON.stringify(this.mapLayer, null, 2));

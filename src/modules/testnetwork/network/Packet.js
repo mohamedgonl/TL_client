@@ -5,6 +5,7 @@ gv.CMD.USER_LOGIN = 1;
 gv.CMD.USER_INFO = 1001;
 gv.CMD.MAP_INFO = 1002;
 gv.CMD.MOVE = 2001;
+gv.CMD.MOVE_BUILDING = 2008;
 gv.CMD.BUY_RESOURCE = 4001;
 
 
@@ -105,6 +106,23 @@ CmdSendMove = fr.OutPacket.extend(
     }
 )
 
+CmdSendMoveBuilding = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.MOVE_BUILDING);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.id);
+            this.putShort(data.posX);
+            this.putShort(data.posY);
+            this.updateSize();
+        }
+    }
+)
+
 /**
  * InPacket
  */
@@ -196,6 +214,16 @@ testnetwork.packetMap[gv.CMD.MOVE] = fr.InPacket.extend(
         readData: function () {
             this.x = this.getInt();
             this.y = this.getInt();
+        }
+    }
+);
+testnetwork.packetMap[gv.CMD.MOVE_BUILDING] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.error = this.getError();
         }
     }
 );
