@@ -56,6 +56,7 @@
 
 
         "src/game/Managers/ConfigManager.js",
+        "src/game/Managers/MapManager.js",
 
         "src/game/GameObjects/GameObject.js",
         "src/game/GameObjects/buildings/Building.js",
@@ -85,7 +86,7 @@
 
 
         "src/game/GUIs/layers/InfoLayer.js",
-        "src/game/Managers/MapManager.js",
+        "src/game/GUIs/layers/MapLayer.js",
         "src/game/GUIs/layers/PopUpLayer.js",
 
 

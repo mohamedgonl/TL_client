@@ -1,5 +1,9 @@
 
-
+// Constructor Building
+// @param level: level of building
+// @param posX: position x of building
+// @param posY: position y of building
+// @param nameBuilding: name of building
 var Building = GameObject.extend({
     hitpoints: null,
     level: null,
@@ -8,15 +12,19 @@ var Building = GameObject.extend({
     timeDone: null,
     yesButton: null,
     noButton: null,
-    ctor: function (level,posX,posY,nameBuilding) {
+    _posX: null,
+    _posY: null,
+    _width: null,
+    _height: null,
+    _tempPosX: null,
+    _tempPosY: null,
+    ctor: function (level,id,posX,posY) {
         this._super();
         this.level = level;
         this._posX = posX;
         this._posY = posY;
-        if(nameBuilding != null)
-        {
-            return this.getNewBuildingFromName(nameBuilding);
-        }
+        this._id = id;
+
         this.setAnchorPoint(0.5,0.5);
     },
 
@@ -71,13 +79,6 @@ var Building = GameObject.extend({
             if(key != "width" && key != "height")
             this[key] = config[key];
         }
-    }
-
-    //init building from name
-    getNewBuildingFromName(name){
-        var config = ConfigManager.Instance().getConfigBuildingByName(name);
-
-
     }
 
 });

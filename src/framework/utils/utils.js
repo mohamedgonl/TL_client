@@ -59,48 +59,50 @@ function changeTypeBuildingToBuilding(type) {
     return null;
 }
 
-function getBuildingFromType(type, level, posX, posY) {
+
+//return new building from type
+function getBuildingFromType(type, id, level, posX, posY) {
     var building = null;
 
     //obstacle
     if(type.substring(0,3) === 'OBS'){
 
         var typeOBS = type.substring(4);
-        building = new Obstacle(typeOBS, posX, posY);
+        building = new Obstacle(typeOBS,id, posX, posY);
         return building;
     }
 
     //building
     switch (type) {
         case 'TOW_1':
-            building = new Townhall(level, posX, posY);
+            building = new Townhall(level,id, posX, posY);
             break;
         case 'BDH_1':
-            building = new BuilderHut(level, posX, posY);
+            building = new BuilderHut(level,id, posX, posY);
             break;
         case 'AMC_1':
-            building = new ArmyCamp(level, posX, posY);
+            building = new ArmyCamp(level,id, posX, posY);
             break;
         case 'RES_1':
-            building = new GoldMine(level, posX, posY);
+            building = new GoldMine(level,id, posX, posY);
             break;
         case 'RES_2':
-            building = new ElixirMine(level, posX, posY);
+            building = new ElixirMine(level,id, posX, posY);
             break;
         case 'STO_1':
-            building = new GoldStorage(level, posX, posY);
+            building = new GoldStorage(level,id, posX, posY);
             break;
         case 'STO_2':
-            building = new ElixirStorage(level, posX, posY);
+            building = new ElixirStorage(level,id, posX, posY);
             break;
         case 'BAR_1':
-            building = new Barrack(level, posX, posY);
+            building = new Barrack(level,id, posX, posY);
             break;
         case 'DEF_1':
-            building = new Cannon(level, posX, posY);
+            building = new Cannon(level,id, posX, posY);
             break;
         case 'WAL_1':
-            building = new Wall(level, posX, posY);
+            building = new Wall(level,id, posX, posY);
             break;
     }
 

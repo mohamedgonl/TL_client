@@ -1,5 +1,9 @@
 var MapLayer = cc.Layer.extend({
 
+    chosenBuildingId: null,
+    onMoveBuilding: false,
+    currentPos : null,
+    previousPos: null,
     ctor: function () {
 
         this._super();
@@ -8,31 +12,41 @@ var MapLayer = cc.Layer.extend({
 
     init: function () {
 
-        this.setScale(ZOOM_DEFAULT);
+        this.setScale(1);
         this.addEvent();
         this.initBackground();
+        this.loadBuilding();
     },
 
-    createBuildingAtMap: function (type, gridPos, level, state) {
-
-        var building = getBuildingFromType(type, level, gridPos.x, gridPos.y);
-
+    loadBuilding: function () {
+        //cc.log("load building")
+        var listBuilding = MapManager.Instance().listBuildings;
+        for(var i = 0; i < listBuilding.length; i++)
+        {
+            var building = listBuilding[i];
+            this.addBuilding(building);
+        }
+    },
+    addBuilding: function (building)
+    {
         if(building == null) return;
 
         var sizeX = building._width;
         var sizeY = building._height;
+        var gridPosX = building._posX;
+        var gridPosY = building._posY;
 
         var previousScaleOfScreen = this.getScale();
         this.setScale(1);
 
-        var buildingCenterX = gridPos.x + sizeX / 2;
-        var buildingCenterY = gridPos.y + sizeY / 2;
+        var buildingCenterX = gridPosX + sizeX / 2;
+        var buildingCenterY = gridPosY + sizeY / 2;
 
         building.setPosition(this.getScreenPosFromGridPos(cc.p(buildingCenterX, buildingCenterY)));
 
+        //
         this.setScale(previousScaleOfScreen);
         this.addChild(building,MAP_ZORDER_BUILDING);
-
     },
 
     //add touch, zoom,
@@ -53,7 +67,8 @@ var MapLayer = cc.Layer.extend({
             },
 
             onTouchMoved: function (event) {
-                this.moveView(event.getDelta());
+                //cc.log("move event :" + JSON.stringify(event,null,2));
+                this.onDrag(event);
                 return true;
             }.bind(this)
 
@@ -104,9 +119,59 @@ var MapLayer = cc.Layer.extend({
         this.limitBorder();
     },
 
-    //move view while drag
-    moveView: function (delta) {
+    //if not in move building mode, move view, else move building
+    onDrag: function (event) {
 
+        //move view while drag while not move building
+        if(!this.onMoveBuilding) {
+            this.moveView(event.getDelta());
+            return;
+        }
+
+        //move building
+        if(this.chosenBuildingId == null) return;
+        {
+            var building = MapManager.Instance().getBuildingById(this.chosenBuildingId);
+            if(building == null) return;
+            //cc.log("move building" + JSON.stringify(event.getLocation()));
+            var newPos = this.getGridFromScreenPos(event.getLocation());
+            if(newPos.x != this.currentPos.x || newPos.y != this.currentPos.y)
+            {
+                this.currentPos = newPos;
+                this.moveBuilding(this.chosenBuildingId,newPos.x,newPos.y)
+            }
+        }
+
+    },
+
+    moveBuilding: function (buildingId,gridPosX,gridPosY) {
+
+        var building = MapManager.Instance().getBuildingById(buildingId);
+
+        var isValid = MapManager.Instance().checkValidMoveBuilding(building,gridPosX,gridPosY);
+
+        if(!isValid) cc.log("not valid move")
+        else cc.log("valid move");
+
+
+        if(building == null) return;
+        building._posX = gridPosX;
+        building._posY = gridPosY;
+        var previousScaleOfScreen = this.getScale();
+        this.setScale(1);
+        var sizeX = building._width;
+        var sizeY = building._height;
+
+        var buildingCenterX = gridPosX + sizeX / 2;
+        var buildingCenterY = gridPosY + sizeY / 2;
+
+        building.setPosition(this.getScreenPosFromGridPos(cc.p(buildingCenterX, buildingCenterY)));
+
+
+        this.setScale(previousScaleOfScreen);
+
+    },
+    moveView: function (delta) {
         var currentPos = this.getPosition();
         var newPos = cc.pAdd(currentPos, delta);
         this.setPosition(newPos);
@@ -117,21 +182,57 @@ var MapLayer = cc.Layer.extend({
     touch: function (touch) {
 
         var locationInWorld = touch.getLocation();
-        //
-        // var locationInMap = this.getMapPosFromScreenPos(locationInWorld);
-        //
-        // var screenPos = this.getScreenPosFromMapPos(locationInMap);
-        //
-        //
-        //
-        // var x = locationInMap.x;
-        // var y = locationInMap.y;
-        // x = Math.floor(x);
-        // y = Math.floor(y);
-        //  //cc.log("before " + x + " " + y);
-        var check = this.getGridFromScreenPos(locationInWorld);
-         //cc.log("after " +check.x + " " + check.y);
 
+        var check = this.getGridFromScreenPos(locationInWorld);
+
+        var mapGrid = MapManager.Instance().mapGrid;
+
+        //sau sua thanh getMapGrid de MapGrid khong bi null
+        var buildingId = mapGrid[check.x][check.y];
+        cc.log("choose:::" +buildingId);
+
+        if(this.onMoveBuilding)
+        {
+            if(MapManager.Instance().checkValidMoveBuilding(MapManager.Instance().getBuildingById(this.chosenBuildingId),
+                this.currentPos.x,
+                this.currentPos.y))
+                {
+                MapManager.Instance().changeMapGrid(this.chosenBuildingId,
+                    this.currentPos.x,this.currentPos.y)
+                }
+            else
+            {
+                this.moveBuilding(this.chosenBuildingId,this.previousPos.x,this.previousPos.y);
+            }
+            this.onMoveBuilding = false;
+            this.currentPos = null;
+            this.previousPos = null;
+            this.chosenBuildingId = null;
+
+
+            return;
+        }
+        if(buildingId == 0) {
+            this.chosenBuildingId = null;
+            this.onMoveBuilding = false;
+            this.currentPos = null;
+            this.previousPos = null;
+
+            return;
+        };
+
+        if(this.chosenBuildingId!= buildingId)
+        {
+            this.chosenBuildingId = buildingId;
+            var building = MapManager.Instance().getBuildingById(this.chosenBuildingId);
+            this.currentPos = cc.p(building._posX,building._posY);
+            this.onMoveBuilding = false;
+        }
+        else
+        {
+            this.previousPos = this.currentPos;
+            this.onMoveBuilding = true;
+        }
     },
 
     //chang screen pos to map pos, map pos not change when zoom or move
@@ -165,13 +266,13 @@ var MapLayer = cc.Layer.extend({
     getGridPosFromMapPos: function (posInMap) {
         //calculate distance by distance formula from point to line
 
-        var distanceFromBottomRight = findDistanceFromPointToLine(posInMap, CORNER_BOTTOM, CORNER_RIGHT);
         var distanceFromBottomLeft = findDistanceFromPointToLine(posInMap, CORNER_BOTTOM, CORNER_LEFT);
+        var distanceFromBottomRight = findDistanceFromPointToLine(posInMap, CORNER_BOTTOM, CORNER_RIGHT);
 
         var grid_width = findDistanceFromPointToLine(CORNER_BOTTOM, CORNER_RIGHT, CORNER_TOP);
 
-        var gridX = Math.floor(distanceFromBottomRight/grid_width * GRID_SIZE);
-        var gridY = Math.floor(distanceFromBottomLeft/grid_width * GRID_SIZE);
+        var gridX = Math.floor(distanceFromBottomLeft/grid_width * GRID_SIZE);
+        var gridY = Math.floor(distanceFromBottomRight/grid_width * GRID_SIZE);
 
         return cc.p(gridX, gridY);
     },
@@ -270,17 +371,8 @@ var MapLayer = cc.Layer.extend({
     },
 
     test: function (){
-
+        MapManager.Instance().test();
     }
 
 
 });
-
-
-MapManager.Instance = function () {
-    if (MapManager.instance == null) {
-        MapManager.instance = new MapManager();
-        MapManager.instance.retain();
-    }
-    return MapManager.instance;
-}

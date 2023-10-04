@@ -1,4 +1,4 @@
-var PlayerInfoManager = cc.Class.extend({
+var PlayerInfoManager = cc.Layer.extend({
     instance: null,
 
     id: null,
@@ -38,9 +38,8 @@ var PlayerInfoManager = cc.Class.extend({
         if (gem) {
             this.resource.gem = gem;
         }
-        cc.log("update resource: " + JSON.stringify(this.resource, null, 2));
-        InfoLayer.Instance().updateUI(this.resource);
 
+        this.onChangedInfo({resource: this.resource});
     },
 
     setId : function (id) {
@@ -48,7 +47,6 @@ var PlayerInfoManager = cc.Class.extend({
     },
 
     setPlayerInfo: function ({name, avatar, level, rank}) {
-        cc.log("CALL SET INFO in plyer  info ::::::::")
         if (name) {
             this.info.name = name;
         }
@@ -61,7 +59,7 @@ var PlayerInfoManager = cc.Class.extend({
         if (rank) {
             this.info.rank = rank;
         }
-        InfoLayer.Instance().updateUI(this.info);
+        this.onChangedInfo({info: this.info});
     },
 
     setMaxResource: function ({gold, elixir, gem}) {
@@ -74,6 +72,12 @@ var PlayerInfoManager = cc.Class.extend({
         if (gem) {
             this.maxResource.gem = gem;
         }
+    },
+
+    //on changed info dispatch an event to InfoLayer to update UI
+    onChangedInfo: function (data) {
+        cc.eventManager.dispatchCustomEvent(EVENT_PLAYER_INFO_CHANGED, data);
+        cc.log("dispatch event: " + JSON.stringify(data, null, 2));
     }
 })
 PlayerInfoManager.Instance = function () {

@@ -11,16 +11,16 @@ var GameScene = cc.Scene.extend({
 
     init: function () {
 
-
-        this.mapLayer = MapManager.Instance();
+        cc.log('GAME SCENE """"""""""""')
+        this.mapLayer = new MapLayer();
 
         // cc.log("map layer " + JSON.stringify(this.mapLayer, null, 2));
 
-        this.infoLayer = InfoLayer.Instance();
+        this.infoLayer = new InfoLayer();
         // cc.log("info layer " + JSON.stringify(this.infoLayer, null, 2));
 
-        this.popUpLayer = new PopupLayer();
-        this.popUpLayer.setVisible(false);
+        //this.popUpLayer = new PopupLayer();
+        //this.popUpLayer.setVisible(false);
 
         // let shopButton = new ccui.Button(res.BUTTON.SHOP,"","");
         // shopButton.setPosition(cc.winSize.width - shopButton.getContentSize().width / 2, shopButton.getContentSize().height / 2);
@@ -46,12 +46,12 @@ var GameScene = cc.Scene.extend({
 
         this.addChild(this.mapLayer);
         this.addChild(this.infoLayer);
-        this.addChild(this.popUpLayer)
+        //this.addChild(this.popUpLayer)
     },
 
-    getPopUpLayer: function () {
-        return this.popUpLayer;
-    },
+    // getPopUpLayer: function () {
+    //     return this.popUpLayer;
+    // },
 
     onBuyResourceSuccess: function (data) {
 

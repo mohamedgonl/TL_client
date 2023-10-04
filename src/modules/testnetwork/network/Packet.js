@@ -1,7 +1,3 @@
-/**
- * Created by KienVN on 10/2/2017.
- */
-
 gv.CMD = gv.CMD || {};
 gv.CMD.HAND_SHAKE = 0;
 gv.CMD.USER_LOGIN = 1;
@@ -182,7 +178,10 @@ testnetwork.packetMap[gv.CMD.MAP_INFO] = fr.InPacket.extend(
                     type: this.getString(),
                     posX: this.getInt(),
                     posY: this.getInt(),
+                    status: this.getShort(),
                 };
+                if (building.type.startsWith("RES"))
+                    building.lastCollectTime = this.getInt();
                 this.listBuildings.push(building);
             }
         }
@@ -200,7 +199,3 @@ testnetwork.packetMap[gv.CMD.MOVE] = fr.InPacket.extend(
         }
     }
 );
-
-
-
-

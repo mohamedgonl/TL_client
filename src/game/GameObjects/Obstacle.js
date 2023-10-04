@@ -4,11 +4,12 @@ var Obstacle = GameObject.extend({
     posY: null,
     _width: null,
     _height: null,
-   ctor: function(type,posX,posY){
+   ctor: function(type,id,posX,posY){
        this._super();
        this.type = type;
        this.posX = posX;
        this.posY = posY;
+       this._id = id;
 
 
        var configObstacle = ConfigManager.Instance().getObstacle(type);
