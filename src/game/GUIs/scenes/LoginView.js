@@ -1,4 +1,3 @@
-
 var LoginView = cc.Scene.extend({
     ctor: function () {
         this._super();
@@ -6,21 +5,24 @@ var LoginView = cc.Scene.extend({
     },
 
     init: function () {
+        const size = cc.director.getVisibleSize();
         const node = CCSUlties.parseUIFile(res_ui.LOGIN_SCENE);
 
         node.setAnchorPoint(0, 0);
         node.setPosition(0, 0);
 
-
-        const loginButton = node.getChildByName("Button_1");
+        const loginButton = node.getChildByName("button-login");
         loginButton.addTouchEventListener(this.handleClickLogin, this);
         this.loginButton = loginButton;
 
-        const textFieldUID = node.getChildByName("login-textfield");
+        const textFieldUID = node.getChildByName("textfield-uid");
         textFieldUID.addTouchEventListener(this.textFieldEvent, this);
         this.textFieldUID = textFieldUID;
 
-        const messageText = gv.commonText("", this.width / 2, textFieldUID.y - 110);
+        const loadingBar = node.getChildByName("loading-bar");
+        this.loadingBar = loadingBar;
+
+        const messageText = gv.commonText("", size.width / 2, loadingBar.y - 50);
         this.messageText = messageText;
 
         this.addChild(node);
@@ -52,7 +54,13 @@ var LoginView = cc.Scene.extend({
 
     fetchUserData: function () {
         testnetwork.connector.sendGetUserInfo();
-        testnetwork.connector.sendGetMapInfo();
+
+        const interval = 0.2;
+        const repeat = 6;
+        const delay = 0;
+        this.schedule(function() {
+            this.loadingBar.setPercent(this.loadingBar.getPercent() + 10);
+        }, interval, repeat, delay);
     },
 
     onReceiveUserInfo: function (userInfo) {
@@ -68,34 +76,18 @@ var LoginView = cc.Scene.extend({
             gem: userInfo.gem,
         });
 
-        this.loadedUserInfo = true;
-        this.onReceiveData();
+        this.loadingBar.setPercent(this.loadingBar.getPercent() + 20);
+        testnetwork.connector.sendGetMapInfo();
     },
 
     onReceiveMapInfo: function (mapInfo) {
-
-        // PlayerInfoManager.Instance().setPlayerInfo({
-        //     name: "Nguyen Van A",
-        //     avatar: "abc",
-        //     level: "1",
-        //     rank: "1",
-        // });
-        // PlayerInfoManager.Instance().setResource({
-        //     gold: "500",
-        //     elixir: "600",
-        //     gem: "700",
-        // });
         MapManager.Instance().loadFromServer(mapInfo.listBuildings);
-
-
-        this.loadedMapInfo = true;
-        this.onReceiveData();
+        this.loadingBar.setPercent(100);
+        this.onReceiveAllData();
     },
 
-    onReceiveData: function (){
-        if (this.loadedMapInfo && this.loadedUserInfo){
-            cc.director.runScene(new GameScene());
-        }
+    onReceiveAllData: function () {
+        cc.director.runScene(new GameScene());
     },
 
     onFinishLogin: function (success) {
@@ -105,7 +97,7 @@ var LoginView = cc.Scene.extend({
     },
 
     onConnectSuccess: function () {
-        cc.log('connect success')
+        //cc.log('connect success')
     },
 
     onConnectFail: function (text) {
