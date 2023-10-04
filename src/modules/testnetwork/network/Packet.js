@@ -182,7 +182,10 @@ testnetwork.packetMap[gv.CMD.MAP_INFO] = fr.InPacket.extend(
                     type: this.getString(),
                     posX: this.getInt(),
                     posY: this.getInt(),
+                    status: this.getShort(),
                 };
+                if (building.type.startsWith("RES"))
+                    building.lastCollectTime = this.getInt();
                 this.listBuildings.push(building);
             }
         }
