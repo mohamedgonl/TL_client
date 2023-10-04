@@ -32,10 +32,11 @@ var MapManager = cc.Layer.extend({
             var posY = building.posY;
             var level = building.level;
 
+            let buildingObj;
             // create building in map
             if(nameBuilding != null){
                 //cc.log(nameBuilding+ "name building")
-                this.createBuilding(nameBuilding,cc.p(posX,posY),level);
+                buildingObj = this.createBuilding(nameBuilding,cc.p(posX,posY),level);
 
             }
 
@@ -47,7 +48,7 @@ var MapManager = cc.Layer.extend({
             }
             cc.log("BUILDING TYPE ::::: ", type)
             if(type.startsWith("BAR")){
-                ArmyManager.Instance().pushBarrack(building);
+                ArmyManager.Instance().pushBarrack(buildingObj);
             }
 
             if(type.startsWith("AMC")) {
@@ -91,6 +92,7 @@ var MapManager = cc.Layer.extend({
         //
         this.setScale(previousScaleOfScreen);
         this.addChild(building,MAP_ZORDER_BUILDING);
+        return building;
 
     },
 

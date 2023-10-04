@@ -11,7 +11,7 @@ var GameScene = cc.Scene.extend({
 
     init: function () {
 
-
+        this.armyManager = ArmyManager.Instance();
         this.mapLayer = MapManager.Instance();
 
         // cc.log("map layer " + JSON.stringify(this.mapLayer, null, 2));

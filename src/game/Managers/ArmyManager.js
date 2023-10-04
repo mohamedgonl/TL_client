@@ -14,11 +14,10 @@ var ArmyManager = cc.Class.extend({
 
     pushBarrack: function (barack) {
         this._barrackList.push(barack);
-        cc.log(this._barrackList);
+        cc.log("BARRACK LIST ::::::: ",this._barrackList);
     },
 
     updateTotalSpace: function (space) {
-        cc.log("UPDATE SPACE :::: ", space);
         this._totalSpace = space;
         let event = new cc.EventCustom(TRAINING_EVENTS.UPDATE_SPACE);
         event.data ={
@@ -29,7 +28,6 @@ var ArmyManager = cc.Class.extend({
     },
 
     getTotalSpace: function () {
-        cc.log("GET TOTAL SPAC :::::", this._totalSpace)
         return this._totalSpace;
     },
 

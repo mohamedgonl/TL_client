@@ -3,9 +3,10 @@ var TroopListItem = cc.Node.extend({
     _level: 1,
     _space: null,
     _count: 0,
-    ctor: function (troopCfgId, available = true, barrackRequired) {
+    ctor: function (troopCfgId, available = true, barrackRequired, curBarrack) {
         this._super();
         this._troopCfgId = troopCfgId;
+        this._curBarrack = curBarrack;
         let node = CCSUlties.parseUIFile(res_ui.TROOPS_LIST_ITEM);
         this._node = node.getChildByName("troop_item");
 
@@ -82,11 +83,16 @@ var TroopListItem = cc.Node.extend({
     },
 
     handleTrainTroop: function () {
-        this.setCount(this._count+1);
-        let event = new cc.EventCustom(TRAINING_EVENTS.TRAIN);
-        let cfgId = this._troopCfgId;
-        event.data = {cfgId: cfgId};
-        cc.eventManager.dispatchEvent(event);
+        let barList = ArmyManager.Instance().getBarrackList();
+        let curentSpace = barList[this._curBarrack].getTrainingSpace();
+        let maxSpace = barList[this._curBarrack].getMaxSpace();
+        if( curentSpace + TROOP_BASE[this._troopCfgId]["housingSpace"] <= maxSpace) {
+            this.setCount(this._count+1);
+            let event = new cc.EventCustom(TRAINING_EVENTS.TRAIN);
+            let cfgId = this._troopCfgId;
+            event.data = {cfgId: cfgId};
+            cc.eventManager.dispatchEvent(event);
+        }
     },
 
 

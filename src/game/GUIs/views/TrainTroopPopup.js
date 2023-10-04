@@ -1,8 +1,6 @@
 var TrainTroopPopup = cc.Layer.extend({
     _curPage: 0,
     _pageCount: 3,
-    _curBarrack: null,
-    _barrackList: [],
     _trainingQueue: null,
     _available: true,
 
@@ -10,9 +8,6 @@ var TrainTroopPopup = cc.Layer.extend({
         this._super();
         // test data;
         this._trainingQueue = [];
-
-        this._barrackList = ArmyManager.Instance().getBarrackList();
-        this._curBarrack = this._barrackList[this._curPage];
 
         let node = CCSUlties.parseUIFile(res_ui.TRAIN_TROOP);
         node.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
@@ -49,8 +44,8 @@ var TrainTroopPopup = cc.Layer.extend({
 
         for (let i = 0; i < TROOPS_LIST.length; i++) {
             let troopCfgId = TROOPS_LIST[i].troopCfgId;
-            let available = TROOPS_LIST[i].available && TROOP_BASE[troopCfgId]["barracksLevelRequired"] >= this._curBarrack.level;
-            let troopItem = new TroopListItem(troopCfgId, available, TROOP_BASE[troopCfgId]["barracksLevelRequired"]);
+            let available = TROOPS_LIST[i].available && TROOP_BASE[troopCfgId]["barracksLevelRequired"] >= this._barrackList[this._curPage].level;
+            let troopItem = new TroopListItem(troopCfgId, available, TROOP_BASE[troopCfgId]["barracksLevelRequired"], this._curPage);
             let indexOfLine = i >= TROOPS_LIST.length/2 ? i-TROOPS_LIST.length/2 : i;
             let posX =  LIST_TROOP_START_POS.x + indexOfLine * (TROOP_ITEM_SPACING + TROOP_ITEM_SIZE);
             let posY = i >= TROOPS_LIST.length/2
@@ -61,17 +56,10 @@ var TrainTroopPopup = cc.Layer.extend({
         }
     },
 
-    enableTroopList: function () {
-
-    },
 
     updateSpace: function (event) {
         this._space = event.data.space;
         this.updateTrainingPopupTitle();
-    },
-
-    updateBarrackInfo: function () {
-
     },
 
     getCurrentTime: function () {
@@ -80,8 +68,10 @@ var TrainTroopPopup = cc.Layer.extend({
     },
 
     updateTrainingPopupTitle: function () {
+        let barrackList = ArmyManager.Instance().getBarrackList();
+        let count = barrackList[this._curPage].getTrainingSpace();
         let popUpTitle = this._trainPopup.getChildByName("title");
-        popUpTitle.setString("Nhà lính " + (this._curPage+1) + " (" + this._curBarrack.getTrainingCount() + "/" + ArmyManager.Instance().getTotalSpace() + ")");
+        popUpTitle.setString("Nhà lính " + (this._curPage+1) + " (" + count + "/" + ArmyManager.Instance().getTotalSpace() + ")");
     },
 
     handleChangePage: function (addition) {
@@ -139,9 +129,12 @@ var TrainTroopPopup = cc.Layer.extend({
 
     handleTrainTroop: function (event) {
         cc.log("CATCH event:::", event.getEventName());
+
         let troopCfgId = event.data.cfgId;
+        let count = event.data.count || 1;
         let trainingQueue = this._trainingQueue;
         let found = false;
+
 
         for (let i = 0; i < trainingQueue.length; i++) {
             // if this type of troop already in queue
@@ -176,8 +169,14 @@ var TrainTroopPopup = cc.Layer.extend({
         }
 
         this._totalTime = this._totalTime + TroopUltis.getTrainingTime(troopCfgId);
+        let barList =ArmyManager.Instance().getBarrackList();
+        barList[this._curPage].addToTrainingQueue({cfgId: troopCfgId, count: count});
+
+        this.updateTrainingPopupTitle();
         this.updateDoneNowPrice();
         this.updateTotalTimeString();
+
+
     },
 
     updateAndGetTotalTrainingTime: function () {
@@ -218,7 +217,7 @@ var TrainTroopPopup = cc.Layer.extend({
 
         if (this.getCurrentTime() >= this.lastTrainingTime + curTroopTrainTime) {
             cc.log("train success!");
-            this.onTrainSuccess();
+            this.onTrainSuccess(false, this._trainingQueue[0].cfgId);
         }
     },
 
@@ -234,8 +233,7 @@ var TrainTroopPopup = cc.Layer.extend({
         totalTimeString.setString(this._totalTime + "s");
     },
 
-    onTrainSuccess: function (isCancle = false) {
-
+    onTrainSuccess: function (isCancle = false, cfgId) {
         if (!isCancle) {
             this.removeFirstTroop();
         } else {
@@ -255,10 +253,11 @@ var TrainTroopPopup = cc.Layer.extend({
             processBar.setPercent(0);
             let troopTrainTime = TroopUltis.getTrainingTime(this._trainingQueue[0].getCfgId());
             timeString.setString(troopTrainTime + "s");
-
-            // decrease count in list troop
-
         }
+
+        ArmyManager.Instance().getBarrackList()[this._curPage].removeFromTrainingQueue({cfgId: cfgId, count: 1, currentTime: this.lastTrainingTime})
+        this.updateTrainingPopupTitle();
+
     },
 
     removeFirstTroop: function () {
