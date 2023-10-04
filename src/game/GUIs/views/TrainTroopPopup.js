@@ -1,8 +1,8 @@
 var TrainTroopPopup = cc.Layer.extend({
-    _curPage: 1,
+    _curPage: 0,
     _pageCount: 3,
-    _curBarrack: 0,
-    _space: 50,
+    _curBarrack: null,
+    _barrackList: [],
     _trainingQueue: null,
     _available: true,
 
@@ -10,6 +10,9 @@ var TrainTroopPopup = cc.Layer.extend({
         this._super();
         // test data;
         this._trainingQueue = [];
+
+        this._barrackList = ArmyManager.Instance().getBarrackList();
+        this._curBarrack = this._barrackList[this._curPage];
 
         let node = CCSUlties.parseUIFile(res_ui.TRAIN_TROOP);
         node.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
@@ -27,6 +30,7 @@ var TrainTroopPopup = cc.Layer.extend({
         cc.eventManager.addCustomListener(TRAINING_EVENTS.TRAIN, this.handleTrainTroop.bind(this));
         cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE, this.handleCancleTroopTraining.bind(this));
         cc.eventManager.addCustomListener(TRAINING_EVENTS.DONE_NOW, this.handleClickDoneNow.bind(this));
+        cc.eventManager.addCustomListener(TRAINING_EVENTS.UPDATE_SPACE, this.updateSpace.bind(this));
 
 
         let trainPopup = node.getChildByName("train_popup");
@@ -40,16 +44,30 @@ var TrainTroopPopup = cc.Layer.extend({
         this.addChild(node);
     },
 
+
     initListTroops: function () {
-        TROOPS_LIST.map((troop, index) => {
-            let troopItem = new TroopListItem(troop.troopCfgId);
-            troopItem.setPosition(LIST_TROOP_START_POS.x + index * (TROOP_ITEM_SPACING + TROOP_ITEM_SIZE), LIST_TROOP_START_POS.y);
+
+        for (let i = 0; i < TROOPS_LIST.length; i++) {
+            let troopCfgId = TROOPS_LIST[i].troopCfgId;
+            let available = TROOPS_LIST[i].available && TROOP_BASE[troopCfgId]["barracksLevelRequired"] >= this._curBarrack.level;
+            let troopItem = new TroopListItem(troopCfgId, available, TROOP_BASE[troopCfgId]["barracksLevelRequired"]);
+            let indexOfLine = i >= TROOPS_LIST.length/2 ? i-TROOPS_LIST.length/2 : i;
+            let posX =  LIST_TROOP_START_POS.x + indexOfLine * (TROOP_ITEM_SPACING + TROOP_ITEM_SIZE);
+            let posY = i >= TROOPS_LIST.length/2
+                ? LIST_TROOP_START_POS.y - TROOP_ITEM_SIZE - TROOP_ITEM_SPACING
+                : LIST_TROOP_START_POS.y
+            troopItem.setPosition(posX, posY );
             this._trainPopup.addChild(troopItem);
-        })
+        }
     },
 
     enableTroopList: function () {
 
+    },
+
+    updateSpace: function (event) {
+        this._space = event.data.space;
+        this.updateTrainingPopupTitle();
     },
 
     updateBarrackInfo: function () {
@@ -63,7 +81,7 @@ var TrainTroopPopup = cc.Layer.extend({
 
     updateTrainingPopupTitle: function () {
         let popUpTitle = this._trainPopup.getChildByName("title");
-        popUpTitle.setString("Nhà lính " + this._curPage + " (" + this._curBarrack + "/" + this._space + ")");
+        popUpTitle.setString("Nhà lính " + (this._curPage+1) + " (" + this._curBarrack.getTrainingCount() + "/" + ArmyManager.Instance().getTotalSpace() + ")");
     },
 
     handleChangePage: function (addition) {

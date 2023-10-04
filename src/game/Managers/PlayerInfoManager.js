@@ -48,7 +48,7 @@ var PlayerInfoManager = cc.Class.extend({
     },
 
     setPlayerInfo: function ({name, avatar, level, rank}) {
-        cc.log("CALL SET INFO in plyer  info ::::::::")
+
         if (name) {
             this.info.name = name;
         }

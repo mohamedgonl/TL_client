@@ -3,17 +3,46 @@ var TroopListItem = cc.Node.extend({
     _level: 1,
     _space: null,
     _count: 0,
-    ctor: function (troopCfgId) {
+    ctor: function (troopCfgId, available = true, barrackRequired) {
         this._super();
         this._troopCfgId = troopCfgId;
         let node = CCSUlties.parseUIFile(res_ui.TROOPS_LIST_ITEM);
         this._node = node.getChildByName("troop_item");
-        cc.eventManager.addListener(clickEventListener(this.handleTrainTroop.bind(this)).clone(), this._node);
-        cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE, this.handleCancleTroopTraining.bind(this));
+
+        if(available) {
+            cc.eventManager.addListener(clickEventListener(this.handleTrainTroop.bind(this)).clone(), this._node);
+            cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE, this.handleCancleTroopTraining.bind(this));
+        }
+        else {
+            // this._node.setColor(cc.color(56,56,56));
+            this._node.setOpacity(128)
+        }
+
+        this.setCostDisplay(available, barrackRequired);
 
         this.loadData();
         this.addChild(node);
     },
+
+    setCostDisplay :function (available, barrackRequired) {
+        let costContainer = this._node.getChildByName("cost_container")
+        if(available) {
+            let costString =costContainer.getChildByName("cost");
+            let cost = TROOP[this._troopCfgId][this._level]["trainingElixir"];
+            costString.setString(cost);
+        }
+        else {
+            costContainer.setVisible(false);
+            let barRequired = this._node.getChildByName("bar_required");
+            barRequired.setVisible(true);
+            let barRqString = barRequired.getChildByName("bar_rq_string");
+            let label = new cc.LabelBMFont("Yêu cầu\nNhà lính cấp "+ barrackRequired, res.FONT.FISTA["16"], 120, cc.TEXT_ALIGNMENT_CENTER);
+            label.setColor(cc.color(255, 0, 0))
+            barRqString.addChild(label);
+        }
+    },
+
+
 
     loadData: function () {
         let icon = this._node.getChildByName("troop_image");
@@ -23,10 +52,6 @@ var TroopListItem = cc.Node.extend({
         let infoButton = this._node.getChildByName("button_info");
         infoButton.addClickEventListener(this.handleClickTroopInfo.bind(this));
 
-        let costString = this._node.getChildByName("cost_container").getChildByName("cost");
-        let cost = TROOP[this._troopCfgId][this._level]["trainingElixir"];
-
-        costString.setString(cost);
 
         let levelString = this._node.getChildByName("level");
         levelString.setString(this._level);

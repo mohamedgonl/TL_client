@@ -87,6 +87,29 @@
                 <FileData Type="Normal" Path="guis/train_troop_gui/bg_cost.png" Plist="" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
+              <AbstractNodeData Name="bar_required" ActionTag="2033480919" VisibleForFrame="False" Tag="32" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="8.5000" RightMargin="8.5000" TopMargin="60.5300" BottomMargin="9.4700" ctype="SpriteObjectData">
+                <Size X="95.0000" Y="41.0000" />
+                <Children>
+                  <AbstractNodeData Name="bar_rq_string" ActionTag="-388161757" Tag="33" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="47.5000" RightMargin="47.5000" TopMargin="20.5000" BottomMargin="20.5000" LabelText="" ctype="TextBMFontObjectData">
+                    <Size X="0.0000" Y="0.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="47.5000" Y="20.5000" />
+                    <Scale ScaleX="0.8700" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="0" B="0" />
+                    <PrePosition X="0.5000" Y="0.5000" />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <LabelBMFontFile_CNB Type="Normal" Path="fonts/fista_16_non.fnt" Plist="" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="56.0000" Y="29.9700" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.2700" />
+                <PreSize X="0.8482" Y="0.3694" />
+                <FileData Type="Normal" Path="guis/train_troop_gui/bg_cost_3.png" Plist="" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position Y="-0.0005" />

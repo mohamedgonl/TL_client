@@ -45,6 +45,16 @@ var MapManager = cc.Layer.extend({
             if(type.startsWith("TOW")){
                 this.townHall = building;
             }
+            cc.log("BUILDING TYPE ::::: ", type)
+            if(type.startsWith("BAR")){
+                ArmyManager.Instance().pushBarrack(building);
+            }
+
+            if(type.startsWith("AMC")) {
+                let currentSpace = ArmyManager.Instance().getTotalSpace();
+                cc.log("SPACE ::::", AMC["AMC_1"][level]["capacity"], currentSpace)
+                ArmyManager.Instance().updateTotalSpace(currentSpace + AMC["AMC_1"][level]["capacity"]);
+            }
                 //cc.log("error load building"+ type);
         }
     },

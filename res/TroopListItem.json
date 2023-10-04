@@ -397,6 +397,103 @@
                 },
                 "Name": "cost_container",
                 "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "guis/train_troop_gui/bg_cost_3.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 56.0,
+                  "Y": 29.97
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.27
+                },
+                "PreSize": {
+                  "X": 0.8482,
+                  "Y": 0.3694
+                },
+                "LeftMargin": 8.5,
+                "RightMargin": 8.5,
+                "TopMargin": 60.53,
+                "BottomMargin": 9.47,
+                "Tag": 32,
+                "Children": [
+                  {
+                    "LabelText": "",
+                    "LabelBMFontFile_CNB": {
+                      "Type": "Normal",
+                      "Path": "fonts/fista_16_non.fnt",
+                      "Plist": ""
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": 47.5,
+                      "Y": 20.5
+                    },
+                    "Scale": {
+                      "ScaleX": 0.87,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {
+                      "G": 0,
+                      "B": 0
+                    },
+                    "IconVisible": false,
+                    "PositionPercentXEnabled": true,
+                    "PositionPercentYEnabled": true,
+                    "PrePosition": {
+                      "X": 0.5,
+                      "Y": 0.5
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": 47.5,
+                    "RightMargin": 47.5,
+                    "TopMargin": 20.5,
+                    "BottomMargin": 20.5,
+                    "Tag": 33,
+                    "ActionTag": -388161757,
+                    "Size": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Name": "bar_rq_string",
+                    "ctype": "TextBMFontObjectData"
+                  }
+                ],
+                "ActionTag": 2033480919,
+                "Size": {
+                  "X": 95.0,
+                  "Y": 41.0
+                },
+                "VisibleForFrame": false,
+                "Name": "bar_required",
+                "ctype": "SpriteObjectData"
               }
             ],
             "ActionTag": 650000912,
@@ -418,11 +515,14 @@
       "UsedResources": [
         "Default/Button_Disable.png",
         "Default/ImageFile.png",
+        "fonts/fista_16_non.fnt",
+        "fonts/fista_16_non.png",
         "fonts/soji_12.fnt",
         "fonts/soji_12.png",
         "fonts/soji_16.fnt",
         "fonts/soji_16.png",
         "guis/train_troop_gui/bg_cost.png",
+        "guis/train_troop_gui/bg_cost_3.png",
         "guis/train_troop_gui/icon_elixir.png",
         "guis/train_troop_gui/info.png",
         "guis/train_troop_gui/slot.png"

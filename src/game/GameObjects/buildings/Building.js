@@ -56,7 +56,7 @@ var Building = GameObject.extend({
 
     //load config from config file and set attribute
     loadConfig: function (config) {
-        cc.log("LOAD CONFIG :::::::::::::::::::::::::", config);
+
 
         if(config["width"]&&config["height"]) {
             this._width = config["width"];
