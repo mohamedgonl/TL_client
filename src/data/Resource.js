@@ -122,7 +122,7 @@ var res_ui = {
     TROOPS_LIST_ITEM: "TroopListItem.json",
     TROOPS_TRAINING_ITEM: "TroopTrainingItem.json",
     NOTI_POPUP: "NotiPopup.json",
-    INFO_LAYER: "InfoLayer.json"
+    INFO_LAYER: "InfoLayer1.json"
 }
 
 var res_shop = {
