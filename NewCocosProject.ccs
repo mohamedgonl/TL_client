@@ -1694,6 +1694,17 @@
           <File Name="id" />
           <File Name="vi" />
         </Folder>
+        <Folder Name="LoginGui">
+          <Image Name="2.jpg" />
+          <Image Name="3.jpg" />
+          <Image Name="g_background.png" />
+          <Image Name="loading.jpg" />
+          <Image Name="loadingBar.png" />
+          <Image Name="loadingBgBar.png" />
+          <Image Name="LoginGuiDemo.png" />
+          <Image Name="logo.png" />
+          <Image Name="okbutton.png" />
+        </Folder>
         <Folder Name="shaders">
           <File Name="change_color.fsh" />
         </Folder>
@@ -1709,6 +1720,7 @@
         <Project Name="TroopListItem.csd" Type="Node" />
         <Project Name="TroopTrainingItem.csd" Type="Node" />
         <Project Name="TroopTrainPopup.csd" Type="Node" />
+        <Project Name="LoginScene.csd" Type="Scene" />
       </RootFolder>
     </Group>
   </SolutionFolder>
