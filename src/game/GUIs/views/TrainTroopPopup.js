@@ -125,7 +125,6 @@ var TrainTroopPopup = cc.Layer.extend({
 
     onCanCreateTrain: function (event) {
         cc.log("CAN CREATE TRAIN ::::::::::", event.data.lastTrainingTime);
-        cc.log("CURRENT TIME ::::::::", TimeManager.Instance().getCurrentTimeInSecond());
 
         let troopCfgId = event.data.cfgId;
         let count = event.data.count || 1;
@@ -215,8 +214,9 @@ var TrainTroopPopup = cc.Layer.extend({
 
 
         if (TimeManager.Instance().getCurrentTimeInSecond() >= this.lastTrainingTime + curTroopTrainTime) {
-            cc.log("train success!");
-            this.onTrainSuccess(false, this._trainingQueue[0].getCfgId());
+            // this.onTrainSuccess(false, this._trainingQueue[0].getCfgId());
+            let barrackId = ArmyManager.Instance().getBarrackList()[this._curPage].getId();
+            testnetwork.connector.sendRequestTrainingSuccess({isDoneNow: 0, barrackId: barrackId})
         }
     },
 

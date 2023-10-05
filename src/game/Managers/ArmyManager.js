@@ -14,7 +14,6 @@ var ArmyManager = cc.Class.extend({
 
     pushBarrack: function (barack) {
         this._barrackList.push(barack);
-        cc.log("BARRACK LIST ::::::: ",this._barrackList);
     },
 
     updateTotalSpace: function (space) {

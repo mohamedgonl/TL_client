@@ -48,6 +48,7 @@ function getBuildingFromType(type, id, level, posX, posY) {
         var typeOBS = type.substring(4);
         building = new Obstacle(typeOBS,id, posX, posY);
         building.setType(type);
+        building.setId(id);
         return building;
     }
 
@@ -83,9 +84,14 @@ function getBuildingFromType(type, id, level, posX, posY) {
         case 'WAL_1':
             building = new Wall(level,id, posX, posY);
             break;
+        default :
+            building = new BuilderHut(level,id, posX, posY);
+            break;
     }
 
     building.setType(type);
+    building.setId(id);
+
     return building;
 }
 

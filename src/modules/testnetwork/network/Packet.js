@@ -120,6 +120,7 @@ CmdSendTrainTroopSuccess = fr.OutPacket.extend(
             this.setCmdId(gv.CMD.TRAIN_TROOP_SUCCESS);
         },
         pack: function (data) {
+            cc.log("PACKET ::::: ",data.isDoneNow, data.barrackId);
             this.packHeader();
             this.putInt(data.isDoneNow);
             this.putInt(data.barrackId);
@@ -217,6 +218,20 @@ testnetwork.packetMap[gv.CMD.TRAIN_TROOP_CREATE] = fr.InPacket.extend(
         }
     }
 );
+
+testnetwork.packetMap[gv.CMD.TRAIN_TROOP_SUCCESS] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.barrackId = this.getInt();
+            this.isDoneNow = this.getInt();
+            this.cfgId = this.getString();
+        }
+    }
+);
+
 
 testnetwork.packetMap[gv.CMD.MAP_INFO] = fr.InPacket.extend(
     {

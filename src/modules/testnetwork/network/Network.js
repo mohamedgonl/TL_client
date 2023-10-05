@@ -53,6 +53,7 @@ testnetwork.Connector = cc.Class.extend({
                 }
                 else {
                     cc.log("TRAIN TROOP DONE REQUEST SUCCESS ::::::::: ");
+                    cc.director.getRunningScene().getTrainingPopup().onTrainSuccess(false, packet.cfgId);
                 }
                 break;
 
@@ -80,12 +81,14 @@ testnetwork.Connector = cc.Class.extend({
         pk.pack(uid);
         this.gameClient.sendPacket(pk);
     },
+
     sendBuyResourceRequest: function (itemData) {
         cc.log("SEND buy resource request");
         var pk = this.gameClient.getOutPacket(CmdSendBuyItem);
         pk.pack(itemData);
         this.gameClient.sendPacket(pk);
     },
+
     sendRequestTrainingCreate: function (data) {
         cc.log("SEND train troop create request");
         var pk = this.gameClient.getOutPacket(CmdSendTrainTroopCreate);
@@ -94,7 +97,6 @@ testnetwork.Connector = cc.Class.extend({
     },
 
     sendRequestTrainingSuccess: function (data) {
-        cc.log("SEND train troop success request");
         var pk = this.gameClient.getOutPacket(CmdSendTrainTroopSuccess);
         pk.pack(data);
         this.gameClient.sendPacket(pk);
