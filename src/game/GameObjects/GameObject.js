@@ -9,11 +9,7 @@ var GameObject = cc.Node.extend({
         this._grass = null;
         this._shadow = null;
         this._objectType = null;
-        this.isChosen = false;
-    },
-
-    setId: function (id) {
-        this._id = id;
+        this._isChosen = false;
     },
 
     setId: function (id) {

@@ -12,7 +12,7 @@ var GameScene = cc.Scene.extend({
 
     init: function () {
         //load config and resource
-        ConfigManager.Instance();
+        LoadManager.Instance();
         this.armyManager= ArmyManager.Instance();
 
         TimeManager.Instance().setDeltaTimeClientServer();
@@ -41,6 +41,7 @@ var GameScene = cc.Scene.extend({
     getPopUpLayer: function () {
         return this.popUpLayer;
     },
+
 
 
     onBuyResourceSuccess: function (data) {

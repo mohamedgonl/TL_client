@@ -4,25 +4,34 @@
 //  posX: position x of building
 //  posY: position y of building
 var Building = GameObject.extend({
-    hitpoints: null,
-    level: null,
-    state:null,
-    timeStart: null,
-    timeDone: null,
-    yesButton: null,
-    noButton: null,
+    _hitpoints: null,
+    _level: null,
+    _state:null,
+    _timeStart: null,
+    _timeDone: null,
+    _yesButton: null,
+    _noButton: null,
     _width: null,
     _height: null,
-    arrow_move: null,
-    ctor: function (level =1 ,id,posX,posY) {
+    _arrow_move: null,
+    //building = new Townhall(type, level,id, posX, posY);
+    ctor: function (type,level =1 ,id,posX,posY) {
 
         this._super();
-        this.posX = posX;
-        this.posY = posY;
-        this.level = level;
+
+
+        this._level = level;
         this._posX = posX;
         this._posY = posY;
         this._id = id;
+        this._type = type ;
+        cc.log("before get config ------------type: " + type + " level: " + level);
+        let config = LoadManager.Instance().getConfig(this._type,level);
+        this._width = config.width;
+        this._height = config.height;
+        this._hitpoints = config.hitpoints;
+
+
         this.setAnchorPoint(0.5,0.5);
     },
 
@@ -58,19 +67,18 @@ var Building = GameObject.extend({
         //upper
         if(upperSprite != null){
             if(isUpperAnimation){
-                this._upper = new cc.Sprite();
+
+                this._upper = new cc.Sprite(upperSprite[0]);
                 this.addChild(this._upper,999);
 
                 var animation = new cc.Animation();
                 var countFrame = Object.keys(upperSprite).length;
-                cc.log("countFrame: ---------------------------------" + countFrame);
+
 
                 for (var i = 0; i < countFrame; i++) {
-                    cc.log("upperSprite[i]: ---------------------------------" + upperSprite[i]);
-                    var frame = new cc.SpriteFrame(upperSprite[i]);
-                    animation.addSpriteFrame(frame);
+                    animation.addSpriteFrameWithFile(upperSprite[i]);
                 }
-
+                cc.log(animation.getFrames().length);
                 animation.setDelayPerUnit(0.3);
                 animation.setRestoreOriginalFrame(true);
                 var action = cc.animate(animation);
@@ -79,6 +87,7 @@ var Building = GameObject.extend({
 
                 this._upper.setAnchorPoint(0.5, 0.5);
                 this._upper.setScale(SCALE_BUILDING_BODY);
+
             }
             else {
                 this._upper = new cc.Sprite(upperSprite);
@@ -89,40 +98,24 @@ var Building = GameObject.extend({
         }
     },
     loadSubSprite: function(){
-        cc.log("loadSub :::::",this._id)
         //arrow move
-        this.arrow_move = new cc.Sprite(res_map.SPRITE.ARROW_MOVE[this._width]);
-        this.arrow_move.setAnchorPoint(0.5,0.5);
-        this.arrow_move.setScale(SCALE_BUILDING_BODY);
-        this.arrow_move.setPosition(0,0);
-        this.arrow_move.setVisible(false);
-        this.addChild(this.arrow_move);
+        this._arrow_move = new cc.Sprite(res_map.SPRITE.ARROW_MOVE[this._width]);
+        this._arrow_move.setAnchorPoint(0.5,0.5);
+        this._arrow_move.setScale(SCALE_BUILDING_BODY);
+        this._arrow_move.setPosition(0,0);
+        this._arrow_move.setVisible(false);
+        this.addChild(this._arrow_move);
 
     },
 
-    //load config from config file and set attribute
-    loadConfig: function (config) {
-
-
-        if(config["width"]&&config["height"]) {
-            this._width = config["width"];
-            this._height = config["height"];
-        }
-
-        for(var key in config){
-            if(key !== "width" && key !== "height")
-            this[key] = config[key];
-        }
-    },
     setState: function (state) {
         this.state = state;
     },
     onSelected: function(){
-        cc.log("building id in onSelected---------------",this._id);
-        this.arrow_move.setVisible(true);
+        this._arrow_move.setVisible(true);
     },
     onUnselected: function(){
-          this.arrow_move.setVisible(false);
+          this._arrow_move.setVisible(false);
     },
 
     setType: function (type) {

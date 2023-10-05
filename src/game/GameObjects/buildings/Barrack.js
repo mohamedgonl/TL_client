@@ -4,11 +4,11 @@ var Barrack = Building.extend({
     _height: null,
     _trainingQueue: [],
     lastTrainingTime: null,
-    ctor: function (level,posX,posY) {
-        this._super(level,posX,posY);
+    ctor: function (level,id,posX,posY) {
+        this._super(level,id,posX,posY);
 
-        this.loadConfig(ConfigManager.Instance().getConfigBarrack(this.level));
         this.loadSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
+        this.loadSubSprite();
     },
 
     getLastTrainingTime: function () {

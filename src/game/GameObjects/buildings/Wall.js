@@ -4,7 +4,7 @@ var Wall = Building.extend({
     ctor: function (level,id,posX,posY) {
         this._super(level,id,posX,posY);
 
-        this.loadConfig(ConfigManager.Instance().getConfigWall(this.level));
+
 
         this.loadSprite(res_map.SPRITE.BODY.WALL[level],null,0);
         this.loadSubSprite();

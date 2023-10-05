@@ -39,53 +39,52 @@ function findDistanceFromPointToLine(posA, posB, posC) {
 
 
 //return new building from type
-function getBuildingFromType(type, id, level, posX, posY) {
+function getBuildingFromType(type, level, id, posX, posY) {
     var building = null;
 
     //obstacle
     if(type.substring(0,3) === 'OBS'){
 
         var typeOBS = type.substring(4);
-        building = new Obstacle(typeOBS,id, posX, posY);
-        building.setType(type);
+        building = new Obstacle(type,id, posX, posY);
         return building;
     }
 
     //building
     switch (type) {
         case 'TOW_1':
-            building = new Townhall(level,id, posX, posY);
+            building = new Townhall(type, level,id, posX, posY);
             break;
         case 'BDH_1':
-            building = new BuilderHut(level,id, posX, posY);
+            building = new BuilderHut(type, level,id, posX, posY);
             break;
         case 'AMC_1':
-            building = new ArmyCamp(level,id, posX, posY);
+            building = new ArmyCamp(type, level,id, posX, posY);
             break;
         case 'RES_1':
-            building = new GoldMine(level,id, posX, posY);
+            building = new GoldMine(type, level,id, posX, posY);
             break;
         case 'RES_2':
-            building = new ElixirMine(level,id, posX, posY);
+            building = new ElixirMine(type, level,id, posX, posY);
             break;
         case 'STO_1':
-            building = new GoldStorage(level,id, posX, posY);
+            building = new GoldStorage(type, level,id, posX, posY);
             break;
         case 'STO_2':
-            building = new ElixirStorage(level,id, posX, posY);
+            building = new ElixirStorage(type, level,id, posX, posY);
             break;
         case 'BAR_1':
-            building = new Barrack(level,id, posX, posY);
+            building = new Barrack(type, level,id, posX, posY);
             break;
         case 'DEF_1':
-            building = new Cannon(level,id, posX, posY);
+
+            building = new Cannon(type, level,id, posX, posY);
             break;
         case 'WAL_1':
-            building = new Wall(level,id, posX, posY);
+            building = new Wall(type, level,id, posX, posY);
             break;
     }
-    if(building == null) return null;
-    building.setType(type);
+
     return building;
 }
 

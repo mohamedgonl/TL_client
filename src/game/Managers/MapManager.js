@@ -1,4 +1,4 @@
-ConfigManager.Instance();
+LoadManager.Instance();
 
 var MapManager = cc.Layer.extend({
     instance: null,
@@ -33,7 +33,7 @@ var MapManager = cc.Layer.extend({
     //load from server
     //chua lam status
     loadFromServer: function (buildings){
-        //cc.log("load from server:", JSON.stringify(buildings, null, 2));
+        cc.log("load from server:", JSON.stringify(buildings, null, 2));
         for(let index in buildings){
 
             let construct = buildings[index];
@@ -43,24 +43,30 @@ var MapManager = cc.Layer.extend({
             let posY =construct.posY;
             let level =construct.level;
 
-            let building = getBuildingFromType(type,id, level, posX, posY);
-            if(building == null) continue;
-            this.addBuilding(building);
+            let building = getBuildingFromType(type, level,id, posX, posY);
+            if(building == null)
+            {
+                cc.log("building null------------------------------------------",type);
+                continue;
+            }
+            else
+            {
+                cc.log("building Add------------------------------------------",type);
+                this.addBuilding(building);
+            }
+
         }
 
     },
 
     //add building to list and to grid
     addBuilding: function (building) {
-        //cc.log("building  ", JSON.stringify(building, null, 2));
+        // cc.log("building  ", JSON.stringify(building, null, 2));
         let posX = building._posX;
         let posY = building._posY;
         let id = building._id;
         let width = building._width;
         let height = building._height;
-
-
-        cc.log("BUILDING ......................................", building.getType())
 
 
         for(let column = posX; column < posX + width; column++)
@@ -147,20 +153,20 @@ var MapManager = cc.Layer.extend({
 
     test: function (){
         //log map grid
-        // cc.log("map grid ::::::")
-        // for(var i = 0; i < 40; i++){
-        //     var str = "";
-        //     for(var j = 0; j < 40; j++)
-        //         str += this.mapGrid[i][j] + " ";
-        //     cc.log(str);
-        // }
+        cc.log("map grid ::::::")
+        for(var i = 0; i < 40; i++){
+            var str = "";
+            for(var j = 0; j < 40; j++)
+                str += this.mapGrid[i][j] + " ";
+            cc.log(str);
+        }
 
         //
-        // //log list building
+        //log list building
         // this.listBuildings.forEach(function (building) {
         //     cc.log(JSON.stringify(building, null, 2));
         // });
-        PlayerInfoManager.Instance().setResource({gold: 1000000, elixir: 1000000, gem: 1000000});
+        // PlayerInfoManager.Instance().setResource({gold: 1000000, elixir: 1000000, gem: 1000000});
 
     }
 

@@ -20,6 +20,7 @@ var MapLayer = cc.Layer.extend({
     loadBuilding: function () {
         //cc.log("load building")
         var listBuilding = MapManager.Instance().getAllBuilding();
+        //cc.log("list building " + JSON.stringify(listBuilding,null,2));
         for(var i = 0; i < listBuilding.length; i++)
         {
             var building = listBuilding[i];
@@ -28,8 +29,9 @@ var MapLayer = cc.Layer.extend({
     },
     addBuildingToLayer: function (building)
     {
-        if(building == null) return;
 
+        if(building == null) return;
+        cc.log("add building to layer " + building._id)
         var sizeX = building._width;
         var sizeY = building._height;
         var gridPosX = building._posX;
@@ -248,7 +250,6 @@ var MapLayer = cc.Layer.extend({
 
     // move view of building, not change building pos in MapManager and Building
     moveBuildingInLayer: function (building, newPosX, newPosY) {
-        cc.log("name building " + building.getName());
         if(building == null) return;
 
         var sizeX = building._width;

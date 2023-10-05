@@ -27,6 +27,8 @@ var PlayerInfoManager = cc.Layer.extend({
     getResource: function () {
         return this.resource;
     },
+    getInfo: function () {
+    },
 
     setResource: function ({gold, elixir, gem}) {
         if (gold) {
@@ -39,7 +41,7 @@ var PlayerInfoManager = cc.Layer.extend({
             this.resource.gem = gem;
         }
 
-        this.onChangedInfo({resource: this.resource});
+        this.setUI({resource: this.resource})
     },
 
     setId : function (id) {
@@ -59,7 +61,7 @@ var PlayerInfoManager = cc.Layer.extend({
         if (rank) {
             this.info.rank = rank;
         }
-        this.onChangedInfo({info: this.info});
+        this.setUI({info: this.info});
     },
 
     setMaxResource: function ({gold, elixir, gem}) {
@@ -72,13 +74,20 @@ var PlayerInfoManager = cc.Layer.extend({
         if (gem) {
             this.maxResource.gem = gem;
         }
+        this.setUI({maxResource: this.maxResource});
     },
 
+
     //on changed info dispatch an event to InfoLayer to update UI
-    onChangedInfo: function (data) {
-        cc.eventManager.dispatchCustomEvent(EVENT_PLAYER_INFO_CHANGED, data);
-        cc.log("dispatch event: " + JSON.stringify(data, null, 2));
-    }
+
+    setUI:function (data)
+    {
+        let InfoLayer = cc.director.getRunningScene().infoLayer;
+        if(InfoLayer == null) return;
+        InfoLayer.updateUI(data);
+    },
+
+
 })
 PlayerInfoManager.Instance = function () {
     if (PlayerInfoManager.instance == null) {
