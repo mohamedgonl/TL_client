@@ -24,8 +24,15 @@ function findDistanceFromPointToLine(posA, posB, posC) {
     var CB = cc.pSub(posB, posC);
     //project of CA on CB
     var project = cc.pProject(CA, CB);
+
     //distance from A to line BC
     var distance = cc.pDistance(CA, project);
+
+    //if A is on the left of BC
+    //cc.log("cross: " + cc.pCross(CA, CB));
+    if (cc.pCross(CA, CB) > 0) {
+        distance = -distance;
+    }
     return distance;
 
 }

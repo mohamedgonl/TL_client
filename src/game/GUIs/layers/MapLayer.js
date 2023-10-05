@@ -11,7 +11,7 @@ var MapLayer = cc.Layer.extend({
 
     init: function () {
 
-        this.setScale(1);
+        this.setScale(1.5);
         this.addEvent();
         this.initBackground();
         this.loadBuilding();
@@ -101,7 +101,9 @@ var MapLayer = cc.Layer.extend({
 
         this.positionTouchBegan = locationInScreen;
 
-        var chosenGrid = this.getGridFromScreenPos(locationInScreen);
+        var chosenGrid = this.getGridPosFromScreenPos(locationInScreen);
+
+        cc.log("chosen grid " + chosenGrid.x + " " + chosenGrid.y);
 
         var buildingId = MapManager.Instance().mapGrid[chosenGrid.x][chosenGrid.y];
 
@@ -132,7 +134,7 @@ var MapLayer = cc.Layer.extend({
         //move building
         if(this.chosenBuilding == null) return;
 
-        var newPos = this.getGridFromScreenPos(event.getLocation());
+        var newPos = this.getGridPosFromScreenPos(event.getLocation());
         if(newPos.x != this.currentPos.x || newPos.y != this.currentPos.y)
         {
             this.moveBuildingInLayer(this.chosenBuilding,newPos.x,newPos.y);
@@ -169,7 +171,7 @@ var MapLayer = cc.Layer.extend({
 
        // cc.log("click event :" + JSON.stringify(locationInScreen,null,2));
 
-        var chosenGrid = this.getGridFromScreenPos(locationInScreen);
+        var chosenGrid = this.getGridPosFromScreenPos(locationInScreen);
 
         var mapGrid = MapManager.Instance().mapGrid;
 
@@ -294,18 +296,21 @@ var MapLayer = cc.Layer.extend({
         //calculate distance by distance formula from point to line
 
         var distanceFromBottomLeft = findDistanceFromPointToLine(posInMap, CORNER_BOTTOM, CORNER_LEFT);
-        var distanceFromBottomRight = findDistanceFromPointToLine(posInMap, CORNER_BOTTOM, CORNER_RIGHT);
+        var distanceFromBottomRight = findDistanceFromPointToLine(posInMap, CORNER_RIGHT, CORNER_BOTTOM);
 
-        var grid_width = findDistanceFromPointToLine(CORNER_BOTTOM, CORNER_RIGHT, CORNER_TOP);
+        var grid_width = findDistanceFromPointToLine(CORNER_BOTTOM, CORNER_TOP, CORNER_RIGHT);
 
         var gridX = Math.floor(distanceFromBottomLeft/grid_width * GRID_SIZE);
         var gridY = Math.floor(distanceFromBottomRight/grid_width * GRID_SIZE);
+
+        if(gridX < 0 || gridX >= GRID_SIZE || gridY < 0 || gridY >= GRID_SIZE)
+            return null;
 
         return cc.p(gridX, gridY);
     },
 
     //
-    getGridFromScreenPos: function (posInScreen) {
+    getGridPosFromScreenPos: function (posInScreen) {
         var posInMap = this.getMapPosFromScreenPos(posInScreen);
         return this.getGridPosFromMapPos(posInMap);
     },

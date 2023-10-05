@@ -40,16 +40,19 @@ var Obstacle = GameObject.extend({
     loadSubSprite: function(){
 
         //arrow move
-        this.subSprite.arrow_move = new cc.Sprite(res_map.SPRITE.ARROW_MOVE[this._width]);
-        this.subSprite.arrow_move.setAnchorPoint(0.5,0.5);
-        this.subSprite.arrow_move.setScale(SCALE_BUILDING_BODY);
+        let subSprite= {};
+        subSprite.arrow_move = new cc.Sprite(res_map.SPRITE.ARROW_MOVE[this._width]);
+        subSprite.arrow_move.setAnchorPoint(0.5,0.5);
+        subSprite.arrow_move.setScale(SCALE_BUILDING_BODY);
 
-        this.subSprite.arrow_move.setVisible(false);
-        this.addChild(this.subSprite.arrow_move);
+        subSprite.arrow_move.setVisible(false);
+        this.subSprite = subSprite;
+        this.addChild(subSprite.arrow_move);
 
     },
 
     onSelected: function(){
+
         this.subSprite.arrow_move.setVisible(true);
     },
     onUnselected: function(){

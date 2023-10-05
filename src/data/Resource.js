@@ -194,7 +194,8 @@ var res_cf = {
     RES: "res/configs/Resource.json",
     STO: "res/configs/Storage.json",
     WAL: "res/configs/Wall.json",
-    TROOP: "res/configs/Troop.json"
+    TROOP: "res/configs/Troop.json",
+    BAR : "res/configs/Barrack.json"
 }
 
 var res_map = {

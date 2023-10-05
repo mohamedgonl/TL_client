@@ -76,7 +76,6 @@ var LoginView = cc.Scene.extend({
 
         MapManager.Instance().loadFromServer(mapInfo.listBuildings);
 
-
         this.loadedMapInfo = true;
         this.onReceiveData();
     },

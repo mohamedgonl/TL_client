@@ -34,38 +34,40 @@ var MapManager = cc.Layer.extend({
     //chua lam status
     loadFromServer: function (buildings){
         //cc.log("load from server:", JSON.stringify(buildings, null, 2));
-        for(var index in buildings){
+        for(let index in buildings){
 
-            var construct = buildings[index];
+            let construct = buildings[index];
+            let id = construct.id;
+            let type = construct.type;
+            let posX =construct.posX;
+            let posY =construct.posY;
+            let level =construct.level;
 
-            var id = construct.id;
-            var type = construct.type;
-            var posX =construct.posX;
-            var posY =construct.posY;
-            var level =construct.level;
-
-            var building = getBuildingFromType(type,id, level, posX, posY);
+            let building = getBuildingFromType(type,id, level, posX, posY);
             if(building == null) continue;
             this.addBuilding(building);
         }
+
     },
 
     //add building to list and to grid
     addBuilding: function (building) {
         //cc.log("building  ", JSON.stringify(building, null, 2));
-        var posX = building._posX;
-        var posY = building._posY;
-        var id = building._id;
-        var width = building._width;
-        var height = building._height;
+        let posX = building._posX;
+        let posY = building._posY;
+        let id = building._id;
+        let width = building._width;
+        let height = building._height;
 
 
-        for(var column = posX; column < posX + width; column++)
-            for(var row = posY; row < posY + height; row++)
+
+        for(let column = posX; column < posX + width; column++)
+            for(let row = posY; row < posY + height; row++)
                 this.mapGrid[column][row] = id;
 
         // add to list building {building._id: building}
         this.listBuildings.set(building._id, building);
+
         switch (building.getName()){
             case 'Townhall':
                 this.townHall = building;
@@ -76,15 +78,20 @@ var MapManager = cc.Layer.extend({
             case 'GoldStorage'||'ElixirStorage':
                 this.listStorage.push(building);
                 break;
+            case 'Barrack':
+                ArmyManager.Instance().pushBarrack(building);
+                break;
+            case 'ArmyCamp':
+                let currentSpace = ArmyManager.Instance().getTotalSpace();
+                ArmyManager.Instance().updateTotalSpace(currentSpace + AMC["AMC_1"][building.level]["capacity"]);
+                break;
         }
-
 
     },
     moveBuilding: function (building,newPosX,newPosY) {
 
         var width = building._width;
         var height = building._height;
-
         // dat lai nhung o cu = 0
         for(var column = building._posX; column < building._posX + width; column++)
             for(var row = building._posY; row < building._posY + height; row++)
@@ -110,14 +117,16 @@ var MapManager = cc.Layer.extend({
             return this.listBuildings.get(id) || null;
     },
 
+
     checkValidMoveBuilding: function (building,newPosX, newPosY) {
         var id = building._id;
         var width = building._width;
         var height = building._height;
 
+
         //check out of map
-        // if(newPosX < 0 || newPosX + width > 40 || newPosY < 0 || newPosY + height > 40)
-        //     return false;
+        if(newPosX < 0 || newPosX + width > 40 || newPosY < 0 || newPosY + height > 40)
+            return false;
 
         //check overlap
         for(var column = newPosX; column < newPosX + width; column++)

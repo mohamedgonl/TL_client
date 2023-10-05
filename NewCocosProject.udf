@@ -33,12 +33,11 @@
         <OpenedDocuments>
           <FilePathData Path="TroopTrainPopup.csd" />
           <FilePathData Path="ItemInfoPopup.csd" />
-          <FilePathData Path="ProcessBar.csd" />
-          <FilePathData Path="ShopItem.csd" />
+          <FilePathData Path="TroopTrainingItem.csd" />
+          <FilePathData Path="TroopListItem.csd" />
           <FilePathData Path="ShopPopUpSprite.csd" />
-          <FilePathData Path="Layer2.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="Layer2.csd" />
+        <ActiveDocument Path="TroopListItem.csd" />
       </Value>
     </Item>
   </Properties>

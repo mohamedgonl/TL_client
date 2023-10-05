@@ -11,22 +11,19 @@ var Building = GameObject.extend({
     timeDone: null,
     yesButton: null,
     noButton: null,
-    _posX: null,
-    _posY: null,
     _width: null,
     _height: null,
-    _tempPosX: null,
-    _tempPosY: null,
     arrow_move: null,
-    ctor: function (level,id,posX,posY) {
+    ctor: function (level =1 ,id,posX,posY) {
+
         this._super();
+        this.posX = posX;
+        this.posY = posY;
         this.level = level;
         this._posX = posX;
         this._posY = posY;
         this._id = id;
-
         this.setAnchorPoint(0.5,0.5);
-
     },
 
     //load sprite with size,
@@ -43,18 +40,18 @@ var Building = GameObject.extend({
         this._body.setScale(SCALE_BUILDING_BODY);
 
         //shadow
-        if(shadow_type == 1){
+        if(shadow_type === 1){
             this._shadow = new cc.Sprite(res_map.SPRITE.SHADOW[size]);
             this._shadow.setAnchorPoint(0.5,0.5);
         }
-        else if(shadow_type == 2){
+        else if(shadow_type === 2){
             this._shadow = new cc.Sprite(res_map.SPRITE.SHADOW.CIRCLE);
            this._shadow.setAnchorPoint(0.5,0.5);
         }
 
         //add child
         this.addChild(this._grass);
-        if(shadow_type != 0)
+        if(shadow_type !== 0)
             this.addChild(this._shadow);
         this.addChild(this._body);
 
@@ -105,7 +102,7 @@ var Building = GameObject.extend({
 
     //load config from config file and set attribute
     loadConfig: function (config) {
-        //var config =ConfigManager.Instance().getConfigTownHall(this.level);
+
 
         if(config["width"]&&config["height"]) {
             this._width = config["width"];
@@ -113,7 +110,7 @@ var Building = GameObject.extend({
         }
 
         for(var key in config){
-            if(key != "width" && key != "height")
+            if(key !== "width" && key !== "height")
             this[key] = config[key];
         }
     },

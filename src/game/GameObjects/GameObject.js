@@ -12,7 +12,14 @@ var GameObject = cc.Node.extend({
         this.isChosen = false;
     },
 
+    setId: function (id) {
+        this._id = id;
+    },
 
+
+    getId: function () {
+        return this._id;
+    }
 
 
 });

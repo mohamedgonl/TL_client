@@ -91,6 +91,7 @@
 
 
         "src/game/Managers/PlayerInfoManager.js",
+        "src/game/Managers/ArmyManager.js",
 
         "src/game/GUIs/scenes/GameScene.js",
 
