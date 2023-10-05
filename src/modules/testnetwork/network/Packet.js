@@ -191,7 +191,10 @@ testnetwork.packetMap[gv.CMD.TRAIN_TROOP_CREATE] = fr.InPacket.extend(
             this._super();
         },
         readData: function () {
-
+            this.barrackId = this.getInt();
+            this.cfgId = this.getString();
+            this.count = this.getInt();
+            this.lastTrainingTime = this.getInt();
         }
     }
 );

@@ -53,8 +53,8 @@ var GameScene = cc.Scene.extend({
         return this.popUpLayer;
     },
 
-    onBuyResourceSuccess: function (data) {
 
+    onBuyResourceSuccess: function (data) {
         PlayerInfoManager.Instance().setResource(data);
     }
 

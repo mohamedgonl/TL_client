@@ -1,6 +1,5 @@
 var TrainTroopPopup = cc.Layer.extend({
     _curPage: 0,
-    _pageCount: 3,
     _trainingQueue: null,
     _available: true,
 
@@ -26,7 +25,7 @@ var TrainTroopPopup = cc.Layer.extend({
         cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE, this.handleCancleTroopTraining.bind(this));
         cc.eventManager.addCustomListener(TRAINING_EVENTS.DONE_NOW, this.handleClickDoneNow.bind(this));
         cc.eventManager.addCustomListener(TRAINING_EVENTS.UPDATE_SPACE, this.updateSpace.bind(this));
-
+        cc.eventManager.addCustomListener(TRAINING_EVENTS.CREATE_TRAIN_SUCCESS,this.onCanCreateTrain.bind(this));
 
         let trainPopup = node.getChildByName("train_popup");
         this._trainContainer = trainPopup.getChildByName("training_container");
@@ -79,8 +78,8 @@ var TrainTroopPopup = cc.Layer.extend({
 
         let page = this._curPage + addition;
         if (page <= 0) {
-            this._curPage = this._pageCount;
-        } else if (page > this._pageCount) {
+            this._curPage = ArmyManager.Instance().getBarrackList().length;
+        } else if (page > ArmyManager.Instance().getBarrackList().length) {
             this._curPage = 1;
         } else {
             this._curPage = page;
@@ -127,14 +126,13 @@ var TrainTroopPopup = cc.Layer.extend({
         cc.log("BUG:::: Handle Cancle Training:::: not found troopcfgId:::", troopCfgId);
     },
 
-    handleTrainTroop: function (event) {
-        cc.log("CATCH event:::", event.getEventName());
+    onCanCreateTrain: function (event) {
+        cc.log("CAN CREATE TRAIN ::::::::::", event.lastTrainingTime);
 
         let troopCfgId = event.data.cfgId;
         let count = event.data.count || 1;
         let trainingQueue = this._trainingQueue;
         let found = false;
-
 
         for (let i = 0; i < trainingQueue.length; i++) {
             // if this type of troop already in queue
@@ -150,7 +148,7 @@ var TrainTroopPopup = cc.Layer.extend({
             let waitingTroop = new TroopTrainingItem(troopCfgId);
             if (trainingQueue.length === 0) {
 
-                this.lastTrainingTime = this.getCurrentTime();
+                this.lastTrainingTime = event.lastTrainingTime;
 
                 this._trainContainer.setVisible(true);
 
@@ -175,8 +173,12 @@ var TrainTroopPopup = cc.Layer.extend({
         this.updateTrainingPopupTitle();
         this.updateDoneNowPrice();
         this.updateTotalTimeString();
+    },
 
-
+    handleTrainTroop: function (event) {
+        cc.log("CATCH event:::", event.getEventName());
+        let barrackId = ArmyManager.Instance().getBarrackList()[this._curPage];
+        testnetwork.connector.sendRequestTrainingCreate({cfgId: event.data.cfgId, count: event.data.count, barrackId: barrackId});
     },
 
     updateAndGetTotalTrainingTime: function () {
@@ -201,7 +203,6 @@ var TrainTroopPopup = cc.Layer.extend({
 
         } else {
             let timeLeft = this.lastTrainingTime + curTroopTrainTime - this.getCurrentTime();
-            cc.log("TIME LEFT ::::", this.lastTrainingTime, curTroopTrainTime, this.getCurrentTime());
             timeString.setString(timeLeft + "s");
 
             let processBarPercent = (this.getCurrentTime() - this.lastTrainingTime) / curTroopTrainTime * 100;

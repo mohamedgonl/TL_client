@@ -30,6 +30,23 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.BUY_RESOURCE:
                 cc.director.getRunningScene().onBuyResourceSuccess(packet);
                 break;
+            case gv.CMD.TRAIN_TROOP_CREATE:
+
+                if(packet.getError() !== ErrorCode.SUCCESS) {
+                    cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
+                }
+                else {
+                    cc.log("TRAIN TROOP REQUEST SUCCESS ::::::::: ");
+                    let event = new cc.EventCustom(TRAINING_EVENTS.CREATE_TRAIN_SUCCESS);
+                    event.data = {
+                        barrackId: packet.barrackId,
+                        cfgId: packet.cfgId,
+                        count: packet.count,
+                        lastTrainingTime: packet.lastTrainingTime
+                    }
+                    cc.eventManager.dispatchEvent(event);
+                }
+                break;
             case gv.CMD.MOVE:
                 cc.log("MOVE:", packet.x, packet.y);
                 fr.getCurrentScreen().updateMove(packet.x, packet.y);
