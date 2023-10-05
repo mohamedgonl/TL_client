@@ -3,7 +3,6 @@ var MapLayer = cc.Layer.extend({
     chosenBuilding: null,
     onModeMovingBuilding: false,
     currentPos : null,
-    previousPos: null,
     ctor: function () {
 
         this._super();
@@ -20,7 +19,7 @@ var MapLayer = cc.Layer.extend({
 
     loadBuilding: function () {
         //cc.log("load building")
-        var listBuilding = MapManager.Instance().listBuildings;
+        var listBuilding = MapManager.Instance().getAllBuilding();
         for(var i = 0; i < listBuilding.length; i++)
         {
             var building = listBuilding[i];
@@ -57,7 +56,7 @@ var MapLayer = cc.Layer.extend({
             swallowTouches: true,
 
             onTouchBegan: function (event) {
-                this.touch(event);
+                this.onTouchBegan(event);
                 return true;
             }.bind(this),
 
@@ -67,6 +66,7 @@ var MapLayer = cc.Layer.extend({
             }.bind(this),
 
             onTouchMoved: function (event) {
+                this.handMoved = true;
                 //cc.log("move event :" + JSON.stringify(event,null,2));
                 this.onDrag(event);
                 return true;
@@ -94,59 +94,30 @@ var MapLayer = cc.Layer.extend({
 
         },this);
     },
-    onTouchEnded: function (event) {
-        if(this.onModeMovingBuilding)
+
+    onTouchBegan: function (touch) {
+
+        var locationInScreen = touch.getLocation();
+
+        this.positionTouchBegan = locationInScreen;
+
+        var chosenGrid = this.getGridFromScreenPos(locationInScreen);
+
+        var buildingId = MapManager.Instance().mapGrid[chosenGrid.x][chosenGrid.y];
+
+        if(this.chosenBuilding == null ) return;
+
+        if(buildingId == this.chosenBuilding._id)
         {
-            var newPosX = this.currentPos.x;
-            var newPosY = this.currentPos.y;
-            var mapManager = MapManager.Instance();
-            if(mapManager.checkValidMoveBuilding(this.chosenBuilding, newPosX, newPosY))
-            {
-                testnetwork.connector.sendMoveBuilding(this.chosenBuilding._id,newPosX,newPosY);
-                // mapManager.moveBuilding(this.chosenBuilding, newPosX,newPosY)
-            }
-            else
-            {
-                this.moveBuildingInLayer(this.chosenBuilding,this.previousPos.x,this.previousPos.y);
-            }
-            this.onModeMovingBuilding = false;
-            this.previousPos = null;
-
-
+            // this.onModeMovingBuilding = true;
+            this.enterModeMoveBuilding();
         }
-
-    },
-
-    onReceivedCheckMoveBuilding: function (data) {
-        cc.log("received in layer map::::::::::::::::::::::::::::::::")
-         MapManager.Instance().moveBuilding(this.chosenBuilding, this.currentPos.x, this.currentPos.y)
-        this.currentPos = null;
-        this.chosenBuilding = null;
-    },
-
-
-    //use config zoom max, min, zoom step to zoom by scroll
-    zoom: function (event) {
-
-        var delta = event.getScrollY();
-        var scale = this.getScale();
-
-        //if scroll up, zoom in, else zoom out
-        if (delta < 0) {
-            scale += ZOOM_STEP;
-            if (scale > ZOOM_MAX) {
-                scale = ZOOM_MAX;
-            }
+        else
+        {
+            //ve sau update lai thanh khi nha invalid van moveView dc
+            //this.onModeMovingBuilding = false;
+            this.exitModeMoveBuilding();
         }
-        else {
-            scale -= ZOOM_STEP;
-            if (scale < ZOOM_MIN) {
-                scale = ZOOM_MIN;
-            }
-        }
-
-        this.setScale(scale);
-        this.limitBorder();
     },
 
     //if not in move building mode, move view, else move building
@@ -164,11 +135,118 @@ var MapLayer = cc.Layer.extend({
         var newPos = this.getGridFromScreenPos(event.getLocation());
         if(newPos.x != this.currentPos.x || newPos.y != this.currentPos.y)
         {
+            this.moveBuildingInLayer(this.chosenBuilding,newPos.x,newPos.y);
             this.currentPos = newPos;
-            this.moveBuildingInLayer(this.chosenBuilding,newPos.x,newPos.y)
         }
     },
+    onTouchEnded: function (event) {
+        var locationInScreen = event.getLocation();
+        var distance = cc.pDistance(locationInScreen,this.positionTouchBegan);
+
+        if(distance < 10) this.onClicked(this.positionTouchBegan);
+
+        if(this.onModeMovingBuilding)
+        {
+            var newPosX = this.currentPos.x;
+            var newPosY = this.currentPos.y;
+            var mapManager = MapManager.Instance();
+            if(mapManager.checkValidMoveBuilding(this.chosenBuilding, newPosX, newPosY))
+            {
+                //testnetwork.connector.sendMoveBuilding(this.chosenBuilding._id,newPosX,newPosY);
+                this.onReceivedCheckMoveBuilding({error:0})
+            }
+            else
+            {
+                //move back to old pos
+                this.moveBuildingInLayer(this.chosenBuilding,this.chosenBuilding._posX,this.chosenBuilding._posY);
+            }
+
+        }
+
+    },
+
+    onClicked: function (locationInScreen) {
+
+       // cc.log("click event :" + JSON.stringify(locationInScreen,null,2));
+
+        var chosenGrid = this.getGridFromScreenPos(locationInScreen);
+
+        var mapGrid = MapManager.Instance().mapGrid;
+
+        //sau sua thanh getMapGrid de MapGrid khong bi null
+        var buildingId = mapGrid[chosenGrid.x][chosenGrid.y];
+
+
+        //if click nothing -> buildingId = 0
+        if(buildingId == 0) {
+            this.unSelectBuilding();
+            return;
+        }
+
+        //click building first time or click another building
+        if(this.chosenBuilding == null || this.chosenBuilding._id != buildingId)
+        {
+            var building = MapManager.Instance().getBuildingById(buildingId);
+
+            this.selectBuilding(building);
+        }
+
+    },
+
+    selectBuilding: function (building) {
+        this.unSelectBuilding(this.chosenBuilding)
+
+        building.onSelected();
+        this.chosenBuilding = building;
+        this.currentPos = cc.p(this.chosenBuilding._posX,this.chosenBuilding._posY);
+    },
+
+    unSelectBuilding: function () {
+
+        if(this.chosenBuilding) {
+            cc.log("unselect building " + this.chosenBuilding._id);
+            this.chosenBuilding.onUnselected();
+        }
+        this.chosenBuilding = null;
+        // this.onModeMovingBuilding = false;
+        this.exitModeMoveBuilding();
+        this.currentPos = null;
+    },
+
+    onReceivedCheckMoveBuilding: function (data) {
+        cc.log("received in layer map::::::::::::::::::::::::::::::::"+JSON.stringify(data,null,2));
+        //if valid move, move building in map manager
+        if(data.error ==0) {
+            MapManager.Instance().moveBuilding(this.chosenBuilding, this.currentPos.x, this.currentPos.y)
+            this.unSelectBuilding();
+        }
+        else
+        {
+            //move back to old pos
+            this.moveBuildingInLayer(this.chosenBuilding,this.chosenBuilding._posX,this.chosenBuilding._posY);
+        }
+    },
+
+
+    enterModeMoveBuilding: function () {
+        this.onModeMovingBuilding = true;
+        var infoLayer = cc.director.getRunningScene().infoLayer;
+        infoLayer.setVisible(false);
+    },
+    exitModeMoveBuilding: function () {
+        this.onModeMovingBuilding = false;
+        var infoLayer = cc.director.getRunningScene().infoLayer;
+        infoLayer.setVisible(true);
+    },
+
+
+    //use config zoom max, min, zoom step to zoom by scroll
+
+
+
+    // move view of building, not change building pos in MapManager and Building
     moveBuildingInLayer: function (building, newPosX, newPosY) {
+        cc.log("name building " + building.getName());
         if(building == null) return;
 
         var sizeX = building._width;
@@ -182,51 +260,6 @@ var MapLayer = cc.Layer.extend({
         building.setPosition(this.getScreenPosFromGridPos(cc.p(buildingCenterX, buildingCenterY)));
 
         this.setScale(previousScaleOfScreen);
-    },
-    moveView: function (delta) {
-        var currentPos = this.getPosition();
-        var newPos = cc.pAdd(currentPos, delta);
-        this.setPosition(newPos);
-        this.limitBorder();
-    },
-
-    //
-    touch: function (touch) {
-
-        var locationInWorld = touch.getLocation();
-
-        var check = this.getGridFromScreenPos(locationInWorld);
-
-        var mapGrid = MapManager.Instance().mapGrid;
-
-        //sau sua thanh getMapGrid de MapGrid khong bi null
-        var buildingId = mapGrid[check.x][check.y];
-        cc.log("choose:::" +buildingId);
-
-        //neu an ra ngoai, an vao dat trong
-        if(buildingId == 0) {
-            this.chosenBuilding = null;
-            this.onModeMovingBuilding = false;
-            this.currentPos = null;
-            this.previousPos = null;
-
-            return;
-        };
-
-        //neu an vao building khac
-        if(this.chosenBuilding == null || this.chosenBuilding._id != buildingId)
-        {
-            this.chosenBuilding = MapManager.Instance().getBuildingById(buildingId);
-
-            this.currentPos = cc.p(this.chosenBuilding._posX,this.chosenBuilding._posY);
-            this.onModeMovingBuilding = false;
-        }
-        //neu an vao building dang chonS
-        else
-        {
-            this.previousPos = this.currentPos;
-            this.onModeMovingBuilding = true;
-        }
     },
 
     //chang screen pos to map pos, map pos not change when zoom or move
@@ -293,6 +326,35 @@ var MapLayer = cc.Layer.extend({
         return this.getScreenPosFromMapPos(posInMap);
     },
 
+    moveView: function (delta) {
+        var currentPos = this.getPosition();
+        var newPos = cc.pAdd(currentPos, delta);
+        this.setPosition(newPos);
+        this.limitBorder();
+    },
+
+    zoom: function (event) {
+
+        var delta = event.getScrollY();
+        var scale = this.getScale();
+
+        //if scroll up, zoom in, else zoom out
+        if (delta < 0) {
+            scale += ZOOM_STEP;
+            if (scale > ZOOM_MAX) {
+                scale = ZOOM_MAX;
+            }
+        }
+        else {
+            scale -= ZOOM_STEP;
+            if (scale < ZOOM_MIN) {
+                scale = ZOOM_MIN;
+            }
+        }
+
+        this.setScale(scale);
+        this.limitBorder();
+    },
     //if moveView or Zoom out of map, move back
     limitBorder: function () {
         // return;

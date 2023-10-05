@@ -35,3 +35,10 @@ var EVENT_PLAYER_INFO_CHANGED = "event_player_info_changed";
 
 
 
+
+
+
+
+//ANIMATION
+
+var COUNT_FRAME_GOLD_MINE_EFFECT = 10;

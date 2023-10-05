@@ -5,6 +5,7 @@ var BuilderHut = Building.extend({
 
         this.loadConfig(ConfigManager.Instance().getConfigBuilderHut(this.level));
         this.loadSprite(res_map.SPRITE.BODY.BUILDER_HUT[level],null,1)
-    }
+        this.loadSubSprite();
+    },
 
 });

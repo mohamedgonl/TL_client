@@ -131,13 +131,13 @@ var InfoLayer = cc.Layer.extend({
     onTouchShop: function (sender, type) {
         if(type === 2) {
             cc.log("open shop");
-            let popUplayer = cc.director.getRunningScene().getPopUpLayer();
-            if(popUplayer.isVisible()) {
-                popUplayer.disappear();
-            }
-            else {
-                popUplayer.appear("shop");
-            }
+            // let popUplayer = cc.director.getRunningScene().getPopUpLayer();
+            // if(popUplayer.isVisible()) {
+            //     popUplayer.disappear();
+            // }
+            // else {
+            //     popUplayer.appear("shop");
+            // }
         }
     },
 

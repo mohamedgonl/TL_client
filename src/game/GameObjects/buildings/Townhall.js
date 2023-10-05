@@ -9,9 +9,8 @@ var Townhall = Building.extend({
 
         this.loadConfig(ConfigManager.Instance().getConfigTownHall(this.level));
         this.loadSprite(res_map.SPRITE.BODY.TOWNHALL[level],null,1);
+        this.loadSubSprite();
     },
-
-
 
 
 

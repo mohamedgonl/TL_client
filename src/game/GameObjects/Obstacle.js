@@ -4,20 +4,22 @@ var Obstacle = GameObject.extend({
     _posY: null,
     _width: null,
     _height: null,
+    subSprite:{
+        arrow_move: null,
+    },
    ctor: function(type,id,posX,posY){
        this._super();
        this.type = type;
        this._posX = posX;
        this._posY = posY;
        this._id = id;
-
-
        var configObstacle = ConfigManager.Instance().getObstacle(type);
        this._width = configObstacle.width;
        this._height = configObstacle.height;
       this.loadImage();
+      this.loadSubSprite();
    },
-
+    //load main sprite
     loadImage: function(){
         // res/Buildings/obstacle/ OBS_1/idle/image0000.png
 
@@ -33,8 +35,24 @@ var Obstacle = GameObject.extend({
 
         this.addChild(this._grass);
         this.addChild(this._body);
+    },
+
+    loadSubSprite: function(){
+
+        //arrow move
+        this.subSprite.arrow_move = new cc.Sprite(res_map.SPRITE.ARROW_MOVE[this._width]);
+        this.subSprite.arrow_move.setAnchorPoint(0.5,0.5);
+        this.subSprite.arrow_move.setScale(SCALE_BUILDING_BODY);
+
+        this.subSprite.arrow_move.setVisible(false);
+        this.addChild(this.subSprite.arrow_move);
+
+    },
+
+    onSelected: function(){
+        this.subSprite.arrow_move.setVisible(true);
+    },
+    onUnselected: function(){
+        this.subSprite.arrow_move.setVisible(false);
     }
-
-    //get width, height bt type
-
 });

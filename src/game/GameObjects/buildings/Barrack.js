@@ -6,6 +6,7 @@ var Barrack = Building.extend({
         this.loadConfig(ConfigManager.Instance().getConfigBarrack(this.level));
 
         this.loadSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
+        this.loadSubSprite();
     },
 
 

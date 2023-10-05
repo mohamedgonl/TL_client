@@ -7,6 +7,7 @@ var Wall = Building.extend({
         this.loadConfig(ConfigManager.Instance().getConfigWall(this.level));
 
         this.loadSprite(res_map.SPRITE.BODY.WALL[level],null,0);
+        this.loadSubSprite();
     },
 
 

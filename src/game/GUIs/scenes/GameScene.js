@@ -7,16 +7,20 @@ var GameScene = cc.Scene.extend({
     ctor: function () {
         this._super();
         this.init();
+        MapManager.Instance().gameScene = this;
     },
 
     init: function () {
-
+        //load config and resource
+        ConfigManager.Instance();
 
         this.mapLayer = new MapLayer();
+
 
         // cc.log("map layer " + JSON.stringify(this.mapLayer, null, 2));
 
         this.infoLayer = new InfoLayer();
+
         // cc.log("info layer " + JSON.stringify(this.infoLayer, null, 2));
 
         //this.popUpLayer = new PopupLayer();

@@ -30,35 +30,6 @@ function findDistanceFromPointToLine(posA, posB, posC) {
 
 }
 
-function changeTypeBuildingToBuilding(type) {
-    if (type.substring(0, 3) === 'OBS') {
-        return type;
-    }
-    switch (type) {
-        case 'TOW_1':
-            return 'Townhall';
-        case 'BDH_1':
-            return 'BuilderHut';
-        case 'AMC_1':
-            return 'ArmyCamp';
-        case 'RES_1':
-            return 'GoldMine';
-        case 'RES_2':
-            return 'ElixirMine';
-        case 'STO_1':
-            return 'GoldStorage';
-        case 'STO_2':
-            return 'ElixirStorage';
-        case 'BAR_1':
-            return 'Barrack';
-        case 'DEF_1':
-            return 'Cannon';
-        case 'WAL_1':
-            return 'Wall';
-    }
-    return null;
-}
-
 
 //return new building from type
 function getBuildingFromType(type, id, level, posX, posY) {
@@ -109,3 +80,5 @@ function getBuildingFromType(type, id, level, posX, posY) {
 
     return building;
 }
+
+

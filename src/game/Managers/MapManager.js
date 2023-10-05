@@ -2,12 +2,13 @@ ConfigManager.Instance();
 
 var MapManager = cc.Layer.extend({
     instance: null,
-    listBuildings: [],
+    listBuildings: new Map(),
     townHall: null,
     listStorage: [],
     listMine:[],
     //mapGrid is [][]
     mapGrid: [],
+    gameScene : null,
     ctor: function () {
 
         this._super();
@@ -45,7 +46,6 @@ var MapManager = cc.Layer.extend({
 
             var building = getBuildingFromType(type,id, level, posX, posY);
             if(building == null) continue;
-            cc.log(building.getName()+" ____" +JSON.stringify(building, null, 2));
             this.addBuilding(building);
         }
     },
@@ -64,7 +64,8 @@ var MapManager = cc.Layer.extend({
             for(var row = posY; row < posY + height; row++)
                 this.mapGrid[column][row] = id;
 
-        this.listBuildings.push(building);
+        // add to list building {building._id: building}
+        this.listBuildings.set(building._id, building);
         switch (building.getName()){
             case 'Townhall':
                 this.townHall = building;
@@ -98,15 +99,15 @@ var MapManager = cc.Layer.extend({
         building._posX = newPosX;
         building._posY = newPosY;
     },
+    getAllBuilding: function () {
+        return Array.from(this.listBuildings.values());
+    },
 
     getTownHall: function () {
         return this.townHall;
     },
     getBuildingById: function (id) {
-        for(var i = 0; i < this.listBuildings.length; i++)
-            if(this.listBuildings[i]._id == id)
-                return this.listBuildings[i];
-        return null;
+            return this.listBuildings.get(id) || null;
     },
 
     checkValidMoveBuilding: function (building,newPosX, newPosY) {
@@ -180,11 +181,11 @@ var MapManager = cc.Layer.extend({
         //     cc.log(str);
         // }
 
+
         //log list building
-        cc.log("list building ::::::")
-        for(var i = 0; i < this.listBuildings.length; i++){
-            cc.log(JSON.stringify(this.listBuildings[i], null, 2));
-        }
+        this.listBuildings.forEach(function (building) {
+            cc.log(JSON.stringify(building, null, 2));
+        });
 
     }
 
