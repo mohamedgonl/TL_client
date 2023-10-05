@@ -47,13 +47,18 @@ testnetwork.Connector = cc.Class.extend({
                     cc.eventManager.dispatchEvent(event);
                 }
                 break;
+            case gv.CMD.TRAIN_TROOP_SUCCESS:
+                if(packet.getError() !== ErrorCode.SUCCESS) {
+                    cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
+                }
+                else {
+                    cc.log("TRAIN TROOP DONE REQUEST SUCCESS ::::::::: ");
+                }
+                break;
+
             case gv.CMD.MOVE:
                 cc.log("MOVE:", packet.x, packet.y);
                 fr.getCurrentScreen().updateMove(packet.x, packet.y);
-                break;
-            case gv.CMD.MOVE_BUILDING:
-                cc.log("MOVE_BUILDING", packet);
-                cc.director.getRunningScene().mapLayer.onReceivedCheckMoveBuilding(packet);
                 break;
         }
     },
@@ -88,16 +93,17 @@ testnetwork.Connector = cc.Class.extend({
         this.gameClient.sendPacket(pk);
     },
 
+    sendRequestTrainingSuccess: function (data) {
+        cc.log("SEND train troop success request");
+        var pk = this.gameClient.getOutPacket(CmdSendTrainTroopSuccess);
+        pk.pack(data);
+        this.gameClient.sendPacket(pk);
+    },
+
     sendMove: function (direction) {
         cc.log("SendMove:" + direction);
         var pk = this.gameClient.getOutPacket(CmdSendMove);
         pk.pack(direction);
-        this.gameClient.sendPacket(pk);
-    },
-    sendMoveBuilding: function (id, posX,posY) {
-        cc.log("SendMoveBuilding:" + id + " " + posX + " " + posY);
-        var pk = this.gameClient.getOutPacket(CmdSendMoveBuilding);
-        pk.pack({id,posX,posY});
         this.gameClient.sendPacket(pk);
     }
 });

@@ -60,6 +60,8 @@ var MapManager = cc.Layer.extend({
         let height = building._height;
 
 
+        cc.log("BUILDING ......................................", building.getType())
+
 
         for(let column = posX; column < posX + width; column++)
             for(let row = posY; row < posY + height; row++)
@@ -68,17 +70,22 @@ var MapManager = cc.Layer.extend({
         // add to list building {building._id: building}
         this.listBuildings.set(building._id, building);
 
-        switch (building.getName()){
-            case 'Townhall':
+
+
+        switch (building.getType().substring(0,3)){
+            case 'TOW':
                 this.townHall = building;
                 break;
-            case 'GoldMine'||'ElixirMine':
+            case 'GoldMine':
+            case 'ElixirMine':
                 this.listMine.push(building);
                 break;
-            case 'GoldStorage'||'ElixirStorage':
+            case 'GoldStorage':
+            case 'ElixirStorage':
                 this.listStorage.push(building);
                 break;
-            case 'Barrack':
+            case 'BAR':
+                cc.log("hanve barrack+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
                 ArmyManager.Instance().pushBarrack(building);
                 break;
             case 'ArmyCamp':

@@ -15,6 +15,19 @@ var GameScene = cc.Scene.extend({
         ConfigManager.Instance();
         this.armyManager= ArmyManager.Instance();
 
+        TimeManager.Instance().setDeltaTimeClientServer();
+
+        cc.eventManager.addListener({
+            event: cc.EventListener.KEYBOARD,
+            onKeyPressed: function (keyCode) {
+                if(keyCode == cc.KEY.s)
+                {
+                    //change visible of popup
+                    this.popUpLayer.setVisible(!this.popUpLayer.isVisible());
+                }
+            }.bind(this)
+        }, this);
+
         this.mapLayer = new MapLayer();
         this.infoLayer = new InfoLayer();
         this.popUpLayer = new PopupLayer();

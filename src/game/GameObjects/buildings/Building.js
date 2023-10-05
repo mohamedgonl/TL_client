@@ -123,6 +123,14 @@ var Building = GameObject.extend({
     },
     onUnselected: function(){
           this.arrow_move.setVisible(false);
+    },
+
+    setType: function (type) {
+        this._type = type;
+    },
+
+    getType: function () {
+        return this._type;
     }
 
 });

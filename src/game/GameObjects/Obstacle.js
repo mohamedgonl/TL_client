@@ -57,5 +57,12 @@ var Obstacle = GameObject.extend({
     },
     onUnselected: function(){
         this.subSprite.arrow_move.setVisible(false);
+    },
+    setType: function (type) {
+        this._type = type;
+    },
+
+    getType: function () {
+        return this._type;
     }
 });
