@@ -24,37 +24,68 @@ function findDistanceFromPointToLine(posA, posB, posC) {
     var CB = cc.pSub(posB, posC);
     //project of CA on CB
     var project = cc.pProject(CA, CB);
+
     //distance from A to line BC
     var distance = cc.pDistance(CA, project);
+
+    //if A is on the left of BC
+    //cc.log("cross: " + cc.pCross(CA, CB));
+    if (cc.pCross(CA, CB) > 0) {
+        distance = -distance;
+    }
     return distance;
 
 }
 
-function changeTypeBuildingToBuilding(type) {
-    if (type.substring(0, 3) === 'OBS') {
-        return type;
+
+//return new building from type
+function getBuildingFromType(type, id, level, posX, posY) {
+    var building = null;
+
+    //obstacle
+    if(type.substring(0,3) === 'OBS'){
+
+        var typeOBS = type.substring(4);
+        building = new Obstacle(typeOBS,id, posX, posY);
+        return building;
     }
+
+    //building
     switch (type) {
         case 'TOW_1':
-            return 'Townhall';
+            building = new Townhall(level,id, posX, posY);
+            break;
         case 'BDH_1':
-            return 'BuilderHut';
+            building = new BuilderHut(level,id, posX, posY);
+            break;
         case 'AMC_1':
-            return 'ArmyCamp';
+            building = new ArmyCamp(level,id, posX, posY);
+            break;
         case 'RES_1':
-            return 'GoldMine';
+            building = new GoldMine(level,id, posX, posY);
+            break;
         case 'RES_2':
-            return 'ElixirMine';
+            building = new ElixirMine(level,id, posX, posY);
+            break;
         case 'STO_1':
-            return 'GoldStorage';
+            building = new GoldStorage(level,id, posX, posY);
+            break;
         case 'STO_2':
-            return 'ElixirStorage';
+            building = new ElixirStorage(level,id, posX, posY);
+            break;
         case 'BAR_1':
-            return 'Barrack';
+            building = new Barrack(level,id, posX, posY);
+            break;
         case 'DEF_1':
-            return 'Cannon';
+            building = new Cannon(level,id, posX, posY);
+            break;
         case 'WAL_1':
-            return 'Wall';
+            building = new Wall(level,id, posX, posY);
+            break;
     }
-    return null;
+
+
+    return building;
 }
+
+

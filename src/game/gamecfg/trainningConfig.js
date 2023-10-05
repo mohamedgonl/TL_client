@@ -64,5 +64,6 @@ const TRAINING_EVENTS = {
     TRAIN: "train",
     CANCLE: "cancle",
     DONE_NOW: "done_now",
-    UPDATE_SPACE: "update_space"
+    UPDATE_SPACE: "update_space",
+    CREATE_TRAIN_SUCCESS: "create_train_success"
 }

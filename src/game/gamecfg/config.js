@@ -30,7 +30,15 @@ var MAP_ZORDER_GUI = 3;
 var SCALE_BUILDING_BODY = 0.5;
 
 
+//EVENT
+var EVENT_PLAYER_INFO_CHANGED = "event_player_info_changed";
 
 
 
 
+
+
+
+//ANIMATION
+
+var COUNT_FRAME_GOLD_MINE_EFFECT = 10;

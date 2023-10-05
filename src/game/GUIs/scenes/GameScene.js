@@ -7,42 +7,18 @@ var GameScene = cc.Scene.extend({
     ctor: function () {
         this._super();
         this.init();
+        MapManager.Instance().gameScene = this;
     },
 
     init: function () {
+        //load config and resource
+        ConfigManager.Instance();
+        this.armyManager= ArmyManager.Instance();
 
-        this.armyManager = ArmyManager.Instance();
-        this.mapLayer = MapManager.Instance();
-
-        // cc.log("map layer " + JSON.stringify(this.mapLayer, null, 2));
-
-        this.infoLayer = InfoLayer.Instance();
-        // cc.log("info layer " + JSON.stringify(this.infoLayer, null, 2));
-
+        this.mapLayer = new MapLayer();
+        this.infoLayer = new InfoLayer();
         this.popUpLayer = new PopupLayer();
         this.popUpLayer.setVisible(false);
-
-        // let shopButton = new ccui.Button(res.BUTTON.SHOP,"","");
-        // shopButton.setPosition(cc.winSize.width - shopButton.getContentSize().width / 2, shopButton.getContentSize().height / 2);
-        //
-        // var trainTroopButton = new ccui.Button(res.BUTTON.TRAIN_TROOP, "", "");
-        // trainTroopButton.setPosition(trainTroopButton.getContentSize().width / 2, trainTroopButton.getContentSize().height / 2);
-        // this.addChild(trainTroopButton);
-        // this.addChild(shopButton);
-
-
-
-        cc.eventManager.addListener({
-            event: cc.EventListener.KEYBOARD,
-            onKeyPressed: function (keyCode) {
-                if(keyCode == cc.KEY.s)
-                {
-                    //change visible of popup
-                    this.popUpLayer.setVisible(!this.popUpLayer.isVisible());
-                }
-            }.bind(this)
-        }, this);
-
 
         this.addChild(this.mapLayer);
         this.addChild(this.infoLayer);
@@ -53,8 +29,8 @@ var GameScene = cc.Scene.extend({
         return this.popUpLayer;
     },
 
-    onBuyResourceSuccess: function (data) {
 
+    onBuyResourceSuccess: function (data) {
         PlayerInfoManager.Instance().setResource(data);
     }
 

@@ -42,7 +42,7 @@ var ScreenMenu = cc.Layer.extend({
     },
     onSelectMap:function(sender)
     {
-        fr.view(MapLayer);
+
     }
 
 });

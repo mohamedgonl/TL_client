@@ -74,17 +74,6 @@ var LoginView = cc.Scene.extend({
 
     onReceiveMapInfo: function (mapInfo) {
 
-        // PlayerInfoManager.Instance().setPlayerInfo({
-        //     name: "Nguyen Van A",
-        //     avatar: "abc",
-        //     level: "1",
-        //     rank: "1",
-        // });
-        // PlayerInfoManager.Instance().setResource({
-        //     gold: "500",
-        //     elixir: "600",
-        //     gem: "700",
-        // });
         MapManager.Instance().loadFromServer(mapInfo.listBuildings);
 
         this.loadedMapInfo = true;

@@ -60,6 +60,10 @@ let PopupLayer = cc.Layer.extend({
         }
     },
 
+    getTrainingPopup: function () {
+        return this._trainTroopPopup;
+    },
+
     push: function (popup) {
         this.addChild(popup);
     },

@@ -56,6 +56,7 @@
 
 
         "src/game/Managers/ConfigManager.js",
+        "src/game/Managers/MapManager.js",
 
         "src/game/GameObjects/GameObject.js",
         "src/game/GameObjects/buildings/Building.js",
@@ -71,9 +72,6 @@
         "src/game/GameObjects/buildings/Cannon.js",
         "src/game/GameObjects/Obstacle.js",
 
-        "src/game/Managers/MapManager.js",
-        "src/game/Managers/ArmyManager.js",
-        "src/game/Managers/PlayerInfoManager.js",
 
         "src/game/GUIs/views/ShopPopup.js",
         "src/game/GUIs/views/ItemInfoPopup.js",
@@ -88,9 +86,12 @@
 
 
         "src/game/GUIs/layers/InfoLayer.js",
+        "src/game/GUIs/layers/MapLayer.js",
         "src/game/GUIs/layers/PopUpLayer.js",
 
 
+        "src/game/Managers/PlayerInfoManager.js",
+        "src/game/Managers/ArmyManager.js",
 
         "src/game/GUIs/scenes/GameScene.js",
 

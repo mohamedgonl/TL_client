@@ -1,7 +1,3 @@
-/**
- * Created by KienVN on 10/2/2017.
- */
-
 gv.CMD = gv.CMD || {};
 gv.CMD.HAND_SHAKE = 0;
 gv.CMD.USER_LOGIN = 1;
@@ -9,6 +5,7 @@ gv.CMD.USER_LOGIN = 1;
 gv.CMD.USER_INFO = 1001;
 gv.CMD.MAP_INFO = 1002;
 gv.CMD.MOVE = 2001;
+gv.CMD.MOVE_BUILDING = 2008;
 gv.CMD.BUY_RESOURCE = 4001;
 gv.CMD.TRAIN_TROOP_CREATE = 5001;
 
@@ -127,6 +124,23 @@ CmdSendMove = fr.OutPacket.extend(
     }
 )
 
+CmdSendMoveBuilding = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.MOVE_BUILDING);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.id);
+            this.putShort(data.posX);
+            this.putShort(data.posY);
+            this.updateSize();
+        }
+    }
+)
+
 /**
  * InPacket
  */
@@ -191,7 +205,10 @@ testnetwork.packetMap[gv.CMD.TRAIN_TROOP_CREATE] = fr.InPacket.extend(
             this._super();
         },
         readData: function () {
-
+            this.barrackId = this.getInt();
+            this.cfgId = this.getString();
+            this.count = this.getInt();
+            this.lastTrainingTime = this.getInt();
         }
     }
 );
@@ -233,7 +250,13 @@ testnetwork.packetMap[gv.CMD.MOVE] = fr.InPacket.extend(
         }
     }
 );
-
-
-
-
+testnetwork.packetMap[gv.CMD.MOVE_BUILDING] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.error = this.getError();
+        }
+    }
+);
