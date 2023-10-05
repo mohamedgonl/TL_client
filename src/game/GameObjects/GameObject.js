@@ -9,12 +9,20 @@ var GameObject = cc.Node.extend({
         this._grass = null;
         this._shadow = null;
         this._objectType = null;
+        this.isChosen = false;
     },
 
     setId: function (id) {
         this._id = id;
     },
 
+    setId: function (id) {
+        this._id = id;
+    },
+
+    getId: function () {
+        return this._id;
+    },
 
     getId: function () {
         return this._id;

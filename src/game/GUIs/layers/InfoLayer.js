@@ -9,7 +9,8 @@ var InfoLayer = cc.Layer.extend({
         if(type === 2) {
             let popUplayer = cc.director.getRunningScene().getPopUpLayer();
             if(popUplayer.isVisible()) {
-                popUplayer.disappear();
+            cc.log("onTouchShop:::::::::::::::::::::::::::");
+                popUplayer.disappear("shop");
             }
             else {
                 popUplayer.appear("shop");
@@ -40,7 +41,7 @@ var InfoLayer = cc.Layer.extend({
 
         //add touch event to btn_shop
         this.btn_shop.addTouchEventListener(this.onTouchShop,(this));
-        // this.btn_shop.setPressedActionEnabled(true);
+        this.btn_shop.setPressedActionEnabled(true);
 
         //add touch event to btn_attack
         this.btn_attack.addTouchEventListener(this.onTouchArmyAdd, this);

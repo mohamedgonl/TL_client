@@ -215,7 +215,9 @@ var res_map = {
                     1: 'res/Buildings/gold mine/RES_1_1/idle/image0000.png',
                 },
                 UPPER:{
-                    1: 'res/Buildings/gold mine/RES_1_1/attack01',
+                    1: {
+
+                    }
                 }
             },
             ELIXIR_MINE:{
@@ -268,7 +270,15 @@ var res_map = {
                 2:"res/Map/map_obj_bg/GRASS_0_2_OBS.png",
                 3:"res/Map/map_obj_bg/GRASS_0_3_OBS.png",
             },
+        },
+        ARROW_MOVE: {
+            1: "res/Map/map_obj_bg/BG/arrowmove1.png",
+            2: "res/Map/map_obj_bg/BG/arrowmove2.png",
+            3: "res/Map/map_obj_bg/BG/arrowmove3.png",
+            4: "res/Map/map_obj_bg/BG/arrowmove4.png",
+            5: "res/Map/map_obj_bg/BG/arrowmove5.png",
         }
+
     },
     JSON:{
         OBSTACLE: "res/configs/Obstacle.json",

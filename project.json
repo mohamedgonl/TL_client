@@ -91,6 +91,7 @@
 
         "src/game/GUIs/layers/InfoLayer.js",
         "src/game/GUIs/layers/PopUpLayer.js",
+        "src/game/GUIs/layers/MapLayer.js",
 
 
 

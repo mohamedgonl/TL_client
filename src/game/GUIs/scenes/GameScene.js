@@ -7,25 +7,15 @@ var GameScene = cc.Scene.extend({
     ctor: function () {
         this._super();
         this.init();
+        MapManager.Instance().gameScene = this;
     },
 
     init: function () {
+        //load config and resource
+        ConfigManager.Instance();
+        this.armyManager= ArmyManager.Instance();
 
-        this.armyManager = ArmyManager.Instance();
-        this.mapLayer = MapManager.Instance();
         TimeManager.Instance().setDeltaTimeClientServer();
-
-        // cc.log("map layer " + JSON.stringify(this.mapLayer, null, 2));
-
-        this.infoLayer = InfoLayer.Instance();
-        // cc.log("info layer " + JSON.stringify(this.infoLayer, null, 2));
-
-        this.popUpLayer = new PopupLayer();
-        this.popUpLayer.setVisible(false);
-
-
-
-
 
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
@@ -38,6 +28,10 @@ var GameScene = cc.Scene.extend({
             }.bind(this)
         }, this);
 
+        this.mapLayer = new MapLayer();
+        this.infoLayer = new InfoLayer();
+        this.popUpLayer = new PopupLayer();
+        this.popUpLayer.setVisible(false);
 
         this.addChild(this.mapLayer);
         this.addChild(this.infoLayer);
