@@ -11,8 +11,17 @@ var TroopListItem = cc.Node.extend({
         this._node = node.getChildByName("troop_item");
 
         if(available) {
+            let item = this;
             cc.eventManager.addListener(clickEventListener(this.handleTrainTroop.bind(this)).clone(), this._node);
             cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE, this.handleCancleTroopTraining.bind(this));
+
+            cc.eventManager.addCustomListener(TRAINING_EVENTS.TRAIN_SUCCESS, (event)=>{
+                let count = event.data.count;
+                let cfgId = event.data.cfgId;
+                if(cfgId === item._troopCfgId) {
+                    item._count = item.setCount(item._count - count);
+                }
+            });
         }
         else {
             // this._node.setColor(cc.color(56,56,56));

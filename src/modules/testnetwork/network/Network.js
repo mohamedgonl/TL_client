@@ -47,6 +47,15 @@ testnetwork.Connector = cc.Class.extend({
                     cc.eventManager.dispatchEvent(event);
                 }
                 break;
+            case gv.CMD.TRAIN_TROOP_SUCCESS:
+                if(packet.getError() !== ErrorCode.SUCCESS) {
+                    cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
+                }
+                else {
+                    cc.log("TRAIN TROOP DONE REQUEST SUCCESS ::::::::: ");
+                }
+                break;
+
             case gv.CMD.MOVE:
                 cc.log("MOVE:", packet.x, packet.y);
                 fr.getCurrentScreen().updateMove(packet.x, packet.y);
@@ -80,6 +89,13 @@ testnetwork.Connector = cc.Class.extend({
     sendRequestTrainingCreate: function (data) {
         cc.log("SEND train troop create request");
         var pk = this.gameClient.getOutPacket(CmdSendTrainTroopCreate);
+        pk.pack(data);
+        this.gameClient.sendPacket(pk);
+    },
+
+    sendRequestTrainingSuccess: function (data) {
+        cc.log("SEND train troop success request");
+        var pk = this.gameClient.getOutPacket(CmdSendTrainTroopSuccess);
         pk.pack(data);
         this.gameClient.sendPacket(pk);
     },

@@ -57,6 +57,7 @@
 
 
         "src/game/Managers/ConfigManager.js",
+        "src/game/Managers/TimeManager.js",
 
         "src/game/GameObjects/GameObject.js",
         "src/game/GameObjects/buildings/Building.js",

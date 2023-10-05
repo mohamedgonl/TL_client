@@ -13,6 +13,7 @@ var GameScene = cc.Scene.extend({
 
         this.armyManager = ArmyManager.Instance();
         this.mapLayer = MapManager.Instance();
+        TimeManager.Instance().setDeltaTimeClientServer();
 
         // cc.log("map layer " + JSON.stringify(this.mapLayer, null, 2));
 
@@ -22,13 +23,7 @@ var GameScene = cc.Scene.extend({
         this.popUpLayer = new PopupLayer();
         this.popUpLayer.setVisible(false);
 
-        // let shopButton = new ccui.Button(res.BUTTON.SHOP,"","");
-        // shopButton.setPosition(cc.winSize.width - shopButton.getContentSize().width / 2, shopButton.getContentSize().height / 2);
-        //
-        // var trainTroopButton = new ccui.Button(res.BUTTON.TRAIN_TROOP, "", "");
-        // trainTroopButton.setPosition(trainTroopButton.getContentSize().width / 2, trainTroopButton.getContentSize().height / 2);
-        // this.addChild(trainTroopButton);
-        // this.addChild(shopButton);
+
 
 
 

@@ -11,6 +11,7 @@ gv.CMD.MAP_INFO = 1002;
 gv.CMD.MOVE = 2001;
 gv.CMD.BUY_RESOURCE = 4001;
 gv.CMD.TRAIN_TROOP_CREATE = 5001;
+gv.CMD.TRAIN_TROOP_SUCCESS = 5002;
 
 
 
@@ -111,6 +112,23 @@ CmdSendTrainTroopCreate = fr.OutPacket.extend(
     }
 )
 
+CmdSendTrainTroopSuccess = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.TRAIN_TROOP_SUCCESS);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.isDoneNow);
+            this.putInt(data.barrackId);
+            this.updateSize();
+        }
+    }
+)
+
+
 
 CmdSendMove = fr.OutPacket.extend(
     {
@@ -138,6 +156,7 @@ testnetwork.packetMap[gv.CMD.HAND_SHAKE] = fr.InPacket.extend(
             this._super();
         },
         readData: function () {
+            this.error = this.getError();
             this.token = this.getString();
         }
     }
