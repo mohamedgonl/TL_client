@@ -16,6 +16,10 @@ var GameObject = cc.Node.extend({
         this._id = id;
     },
 
+    setId: function (id) {
+        this._id = id;
+    },
+
 
     getId: function () {
         return this._id;
