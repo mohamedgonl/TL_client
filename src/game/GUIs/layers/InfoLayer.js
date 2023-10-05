@@ -3,16 +3,14 @@ var InfoLayer = cc.Layer.extend({
     ctor: function () {
         this._super();
         this.init();
-
     },
     onTouchShop: function (sender, type) {
-        if(type === 2) {
+        if (type === 2) {
             let popUplayer = cc.director.getRunningScene().getPopUpLayer();
-            if(popUplayer.isVisible()) {
-            cc.log("onTouchShop:::::::::::::::::::::::::::");
+            if (popUplayer.isVisible()) {
+                cc.log("onTouchShop:::::::::::::::::::::::::::");
                 popUplayer.disappear("shop");
-            }
-            else {
+            } else {
                 popUplayer.appear("shop");
             }
         }
@@ -40,7 +38,7 @@ var InfoLayer = cc.Layer.extend({
         this.addChild(node);
 
         //add touch event to btn_shop
-        this.btn_shop.addTouchEventListener(this.onTouchShop,(this));
+        this.btn_shop.addTouchEventListener(this.onTouchShop, (this));
         this.btn_shop.setPressedActionEnabled(true);
 
         //add touch event to btn_attack
@@ -63,19 +61,19 @@ var InfoLayer = cc.Layer.extend({
         this.builder_container.btn_add.addTouchEventListener(this.onTouchBuilderAdd, this);
         this.builder_container.btn_add.setPressedActionEnabled(true);
 
-
-
-
-
-
+        //add event listener change Info UI
+        cc.eventManager.addListener({
+            event: cc.EventListener.CUSTOM,
+            eventName: EVENT_PLAYER_INFO_CHANGED,
+            callback: this.updateUI.bind(this)
+        }, this);
     },
-    onTouchArmyAdd : function (sender ,type) {
-        if(type === 2 ){
+    onTouchArmyAdd: function (sender, type) {
+        if (type === 2) {
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
-            if(popUpLayer.isVisible()) {
+            if (popUpLayer.isVisible()) {
                 popUpLayer.disappear();
-            }
-            else {
+            } else {
                 popUpLayer.appear("train");
             }
         }
@@ -83,42 +81,51 @@ var InfoLayer = cc.Layer.extend({
 
     updateUI: function (event) {
 
-        if(event == null) return;
+        if (event == null) return;
+        let data = event.getUserData();
 
-
-
+        cc.log("updateUI: " + JSON.stringify(data, null, 2));
         //resource
-        if (event.gold) {
-            this.gold_container.getChildByName("text").setString(event.gold);
+        if (data.resource) {
+            let res = data.resource;
+        if (res.gold) {
+            this.gold_container.getChildByName("text").setString(res.gold);
         }
-        if (event.elixir) {
-            this.elixir_container.text.setString(event.elixir);
+        if (res.elixir) {
+            this.elixir_container.text.setString(res.elixir);
         }
-        if (event.gem) {
-            this.g_container.text.setString(event.gem);
+        if (res.gem) {
+            this.g_container.text.setString(res.gem);
         }
+    }
 
-        //info
-        if (event.name) {
-            this.username_container.username.setString(event.name);
+    //info
+    if(data.info)
+    {
+        if(data.info.name)
+        {
+            this.username_container.username.setString(data.info.name);
         }
+    }
 
 
-    },
+},
 
 
-    test: function (data,category) {
-        this._super()
-        let node = CCSUlties.parseUIFile(res_ui.SHOP_ITEM);
-        // find shop_item_node
-        let item = node.getChildByName("shop_item_node");
-        this._itemNode = item;
-        this._data = data;
-        this.setItemInfo(data,category);
-        this.addChild(node);
-    },
+test: function (data, category) {
+    this._super()
+    let node = CCSUlties.parseUIFile(res_ui.SHOP_ITEM);
+    // find shop_item_node
+    let item = node.getChildByName("shop_item_node");
+    this._itemNode = item;
+    this._data = data;
+    this.setItemInfo(data, category);
+    this.addChild(node);
+}
+,
 
-});
+})
+;
 
 InfoLayer.Instance = function () {
     if (!InfoLayer.instance) {

@@ -144,48 +144,6 @@ var MapManager = cc.Layer.extend({
         return true;
     },
 
-    addEvent: function () {
-
-        cc.eventManager.addListener({
-            event: cc.EventListener.TOUCH_ONE_BY_ONE,
-            swallowTouches: true,
-
-            onTouchBegan: function (event) {
-                this.touch(event);
-                return true;
-            }.bind(this),
-
-            onTouchEnded: function (event) {
-                return true;
-            },
-
-            onTouchMoved: function (event) {
-                this.moveView(event.getDelta());
-                return true;
-            }.bind(this)
-
-        }, this);
-
-        //scale by scroll
-        cc.eventManager.addListener({
-            event: cc.EventListener.MOUSE,
-
-            onMouseScroll: this.zoom.bind(this)
-        }, this);
-
-        //click space to check
-        cc.eventManager.addListener({
-            event: cc.EventListener.KEYBOARD,
-            onKeyPressed: function (keyCode) {
-                if(keyCode == cc.KEY.space)
-                {
-                    this.test();
-                }
-
-            }.bind(this)
-
-        },this);
-    },
 
     test: function (){
         //log map grid
@@ -197,11 +155,12 @@ var MapManager = cc.Layer.extend({
         //     cc.log(str);
         // }
 
-
-        //log list building
-        this.listBuildings.forEach(function (building) {
-            cc.log(JSON.stringify(building, null, 2));
-        });
+        //
+        // //log list building
+        // this.listBuildings.forEach(function (building) {
+        //     cc.log(JSON.stringify(building, null, 2));
+        // });
+        PlayerInfoManager.Instance().setResource({gold: 1000000, elixir: 1000000, gem: 1000000});
 
     }
 

@@ -84,7 +84,7 @@ function getBuildingFromType(type, id, level, posX, posY) {
             building = new Wall(level,id, posX, posY);
             break;
     }
-
+    if(building == null) return null;
     building.setType(type);
     return building;
 }

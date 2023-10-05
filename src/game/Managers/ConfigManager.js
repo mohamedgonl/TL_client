@@ -80,7 +80,7 @@ var ConfigManager = cc.Class.extend({
             ".png",
             goldMineLevelCount,
             COUNT_FRAME_GOLD_MINE_EFFECT);
-        cc.log(JSON.stringify(res_map.SPRITE.BODY.GOLD_MINE, null, 2));
+       // cc.log(JSON.stringify(res_map.SPRITE.BODY.GOLD_MINE, null, 2));
     },
     loadSpriteToRes: function (res_address, prefix, suffix, count) {
         for(var i = 1; i <= count; i++){
@@ -104,7 +104,7 @@ var ConfigManager = cc.Class.extend({
 
                 res[j] = frame;
 
-                cc.log("added res " + frame)    ;
+                //cc.log("added res " + frame)    ;
             }
             res_address[i] = res;
         }
