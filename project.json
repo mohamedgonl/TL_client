@@ -84,6 +84,7 @@
 
         "src/game/GUIs/scenes/LoginView.js",
         "src/game/GUIs/views/TrainTroopPopup.js",
+        "src/game/GUIs/views/TrainTroopPage.js",
         "src/game/GUIs/components/TroopListItem.js",
         "src/game/GUIs/components/TroopTrainingItem.js",
         "src/game/GUIs/views/NotiPopup.js",

@@ -16,14 +16,12 @@ let PopupLayer = cc.Layer.extend({
 
 
     appear: function (popUpId, data) {
-
         this.setVisible(true);
         let popupScreen;
         switch (popUpId) {
             case "shop": {
                 if(!this._shopPopup){
                     this._shopPopup =  new ShopPopup();
-                    this._shopPopup.setVisible(false);
                     this.addChild( this._shopPopup);
                 }
                 popupScreen = this._shopPopup;
@@ -32,16 +30,19 @@ let PopupLayer = cc.Layer.extend({
             case "train": {
                 if(!this._trainTroopPopup) {
                     this._trainTroopPopup = new TrainTroopPopup();
-                    this._trainTroopPopup.setVisible(false);
                     this.addChild(this._trainTroopPopup);
                 }
                 popupScreen = this._trainTroopPopup;
+                this._trainTroopPopup.open(data.page);
                 break;
             }
             case "pop_up" :  {
 
             }
         }
+
+        // cc.log("TRAIN POPUP: ::::::::::::::::", this._trainTroopPopup.isVisible());
+
         popupScreen.setVisible(true);
         PopupEffect.appear(popupScreen);
 
@@ -55,6 +56,7 @@ let PopupLayer = cc.Layer.extend({
                 break;
             }
             case "train": {
+                // this._trainTroopPopup.close();
                 break;
             }
         }

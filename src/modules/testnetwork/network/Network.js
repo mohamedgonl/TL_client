@@ -52,7 +52,7 @@ testnetwork.Connector = cc.Class.extend({
             cc.log("TRAIN TROOP DONE REQUEST SUCCESS ::::::::: ");
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
-            trainingPopup.onTrainSuccess(false, packet);
+            trainingPopup.getPage({barackId: packet.barrackId}).onTrainSuccess(packet);
         }
     },
 

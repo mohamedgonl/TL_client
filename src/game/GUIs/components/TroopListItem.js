@@ -12,7 +12,7 @@ var TroopListItem = cc.Node.extend({
 
         if(available) {
             let item = this;
-            cc.eventManager.addListener(clickEventListener(this.handleTrainTroop.bind(this)).clone(), this._node);
+            cc.eventManager.addListener(clickEventListener(item.handleTrainTroop.bind(item)).clone(), item._node);
             cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE, this.handleCancleTroopTraining.bind(this));
 
             cc.eventManager.addCustomListener(TRAINING_EVENTS.TRAIN_SUCCESS, (event)=>{
@@ -92,6 +92,8 @@ var TroopListItem = cc.Node.extend({
     },
 
     handleTrainTroop: function () {
+        cc.log("EVENT _+_+_+_+_+_+")
+
         let barList = ArmyManager.Instance().getBarrackList();
         let curentSpace = barList[this._curBarrack].getTrainingSpace();
         let maxSpace = barList[this._curBarrack].getMaxSpace();
@@ -99,10 +101,9 @@ var TroopListItem = cc.Node.extend({
             this.setCount(this._count+1);
             let event = new cc.EventCustom(TRAINING_EVENTS.TRAIN);
             let cfgId = this._troopCfgId;
-            event.data = {cfgId: cfgId};
+            event.data = {cfgId: cfgId, count: 1};
             cc.eventManager.dispatchEvent(event);
 
-            testnetwork.connector.sendRequestTrainingCreate({cfgId: cfgId, count: 1, barrackId: barList[this._curBarrack].getId()})
         }
     },
 

@@ -2,11 +2,11 @@ var Barrack = Building.extend({
     _upper: null,
     _width: null,
     _height: null,
-    _trainingQueue: [],
+    _trainingQueue: null,
     _lastTrainingTime: null,
     ctor: function (level,posX,posY) {
         this._super(level,posX,posY);
-
+        this._trainingQueue = [];
         this.loadConfig(ConfigManager.Instance().getConfigBarrack(this.level));
         this.loadSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
     },
@@ -20,22 +20,25 @@ var Barrack = Building.extend({
     },
 
     getTrainingList: function () {
+        cc.log("_________________________________________________________ 0",  this._trainingQueue.length);
         return this._trainingQueue;
     },
 
 
-
+    //return true when this type of troop already exist
     addToTrainingQueue: function ({cfgId, count}) {
         for (let i = 0; i < this._trainingQueue.length; i++) {
             if(this._trainingQueue[i].cfgId === cfgId) {
                 this._trainingQueue[i].count += count;
-                return
+                return true;
             }
         }
-        this._trainingQueue.push({cfgId, count});
+        this._trainingQueue.push({cfgId: cfgId,count: count});
+        return false;
     },
 
     removeFromTrainingQueue: function ({cfgId, count, currentTime}) {
+        cc.log("REMOVE nhận params:::::::::::::", cfgId, count, currentTime);
         this._lastTrainingTime = currentTime;
         for (let i = 0; i < this._trainingQueue.length; i++) {
             if(this._trainingQueue[i].cfgId === cfgId) {
@@ -43,18 +46,26 @@ var Barrack = Building.extend({
                 if(this._trainingQueue[i].count === 0) {
                     this._trainingQueue.splice(i,1);
                 }
-                cc.log("removeFromTrainingQueue success");
-                return
+                return;
             }
         }
     },
     
     getTrainingSpace: function () {
-        return this._trainingQueue.reduce((sum,e) => sum+e.count * TROOP_BASE[e.cfgId]["housingSpace"],0);
+        cc.log("_________________________________________________________ 3",  this._trainingQueue.length);
+        return this._trainingQueue.reduce((sum,e) => {
+            cc.log("CFG =====  ",e.cfgId);
+            return sum+e.count * TROOP_BASE[e.cfgId]["housingSpace"];
+        },0);
     },
 
     getMaxSpace: function () {
         return BAR["BAR_1"][this.level]["queueLength"];
+    },
+
+    test: function () {
+        this._test++;
+        cc.log("TEST CHANGE ::::", this._test);
     }
 
 
