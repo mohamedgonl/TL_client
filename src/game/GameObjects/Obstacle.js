@@ -1,5 +1,5 @@
 var Obstacle = GameObject.extend({
-    type: null,
+    _type: null,
     _posX: null,
     _posY: null,
     _width: null,
@@ -9,11 +9,11 @@ var Obstacle = GameObject.extend({
     },
    ctor: function(type,id,posX,posY){
        this._super();
-       this.type = type;
+       this._type = type;
        this._posX = posX;
        this._posY = posY;
        this._id = id;
-       var configObstacle = LoadManager.Instance().getConfig(this.type,1);
+       var configObstacle = LoadManager.Instance().getConfig(this._type,1);
        this._width = configObstacle.width;
        this._height = configObstacle.height;
       this.loadImage();
@@ -22,7 +22,7 @@ var Obstacle = GameObject.extend({
     //load main sprite
     loadImage: function(){
 
-        let typeIndex = this.type.substring(4);
+        let typeIndex = this._type.substring(4);
         var body_link = res_map.SPRITE.BODY.OBS_LINK + typeIndex + "/idle/image0000.png";
         var grass_link = res_map.SPRITE.GRASS.OBSTACLE[this._width];
         this._body = new cc.Sprite(body_link);

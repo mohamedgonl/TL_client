@@ -33,7 +33,7 @@ var MapManager = cc.Layer.extend({
     //load from server
     //chua lam status
     loadFromServer: function (buildings){
-        cc.log("load from server:", JSON.stringify(buildings, null, 2));
+        //cc.log("load from server:", JSON.stringify(buildings, null, 2));
         for(let index in buildings){
 
             let construct = buildings[index];
@@ -46,12 +46,12 @@ var MapManager = cc.Layer.extend({
             let building = getBuildingFromType(type, level,id, posX, posY);
             if(building == null)
             {
-                cc.log("building null------------------------------------------",type);
+                //cc.log("building null------------------------------------------",type);
                 continue;
             }
             else
             {
-                cc.log("building Add------------------------------------------",type);
+                //cc.log("building Add------------------------------------------",type);
                 this.addBuilding(building);
             }
 
@@ -76,8 +76,6 @@ var MapManager = cc.Layer.extend({
         // add to list building {building._id: building}
         this.listBuildings.set(building._id, building);
 
-
-
         switch (building.getType().substring(0,3)){
             case 'TOW':
                 this.townHall = building;
@@ -91,7 +89,7 @@ var MapManager = cc.Layer.extend({
                 this.listStorage.push(building);
                 break;
             case 'BAR':
-                cc.log("hanve barrack+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+                //cc.log("hanve barrack+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
                 ArmyManager.Instance().pushBarrack(building);
                 break;
             case 'ArmyCamp':
@@ -153,13 +151,13 @@ var MapManager = cc.Layer.extend({
 
     test: function (){
         //log map grid
-        cc.log("map grid ::::::")
-        for(var i = 0; i < 40; i++){
-            var str = "";
-            for(var j = 0; j < 40; j++)
-                str += this.mapGrid[i][j] + " ";
-            cc.log(str);
-        }
+        // cc.log("map grid ::::::")
+        // for(var i = 0; i < 40; i++){
+        //     var str = "";
+        //     for(var j = 0; j < 40; j++)
+        //         str += this.mapGrid[i][j] + " ";
+        //     cc.log(str);
+        // }
 
         //
         //log list building

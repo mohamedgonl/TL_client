@@ -14,12 +14,11 @@ var Building = GameObject.extend({
     _width: null,
     _height: null,
     _arrow_move: null,
-    //building = new Townhall(type, level,id, posX, posY);
+
+    //  example: building = new Townhall(type, level,id, posX, posY);
     ctor: function (type,level =1 ,id,posX,posY) {
 
         this._super();
-
-
         this._level = level;
         this._posX = posX;
         this._posY = posY;

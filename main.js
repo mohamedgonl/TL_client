@@ -29,7 +29,10 @@ cc.game.onStart = function () {
         //socket
         gv.gameClient = new GameClient();
         gv.poolObjects = new PoolObject();
-        //modules
+
+        //cc.director.runScene(new GameScene());
+
+        // //modules
         testnetwork.connector = new testnetwork.Connector(gv.gameClient);
         fr.view(LoginView);
 

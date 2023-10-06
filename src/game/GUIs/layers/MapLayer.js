@@ -2,36 +2,38 @@ var MapLayer = cc.Layer.extend({
 
     chosenBuilding: null,
     onModeMovingBuilding: false,
-    currentPos : null,
     ctor: function () {
 
         this._super();
+
         this.init();
     },
 
+    //init map layer with scale, add event, load background, load building
     init: function () {
 
-        this.setScale(1.5);
+        this.setScale(ZOOM_DEFAULT);
         this.addEvent();
         this.initBackground();
         this.loadBuilding();
     },
 
+    //load all building in map manager and add it to MapLayer
     loadBuilding: function () {
-        //cc.log("load building")
         var listBuilding = MapManager.Instance().getAllBuilding();
-        //cc.log("list building " + JSON.stringify(listBuilding,null,2));
         for(var i = 0; i < listBuilding.length; i++)
         {
             var building = listBuilding[i];
             this.addBuildingToLayer(building);
         }
     },
-    addBuildingToLayer: function (building)
-    {
 
-        if(building == null) return;
-        cc.log("add building to layer " + building._id)
+    //add building to layer with gridPos of it
+    addBuildingToLayer: function (building) {
+        if(building == null) {
+            cc.log("ERORR::::::::add building to layer null");
+            return;
+        }
         var sizeX = building._width;
         var sizeY = building._height;
         var gridPosX = building._posX;
@@ -46,10 +48,10 @@ var MapLayer = cc.Layer.extend({
         building.setPosition(this.getScreenPosFromGridPos(cc.p(buildingCenterX, buildingCenterY)));
 
         this.setScale(previousScaleOfScreen);
-        this.addChild(building,MAP_ZORDER_BUILDING);
+        this.addChild(building,this.getZOrderBuilding(gridPosX,gridPosY));
     },
 
-    //add touch, zoom,
+    //add event listener for map layer
     addEvent: function () {
 
         //add touch
@@ -87,7 +89,7 @@ var MapLayer = cc.Layer.extend({
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
             onKeyPressed: function (keyCode) {
-                if(keyCode == cc.KEY.space)
+                if(keyCode === cc.KEY.space)
                 {
                     this.test();
                 }
@@ -97,31 +99,74 @@ var MapLayer = cc.Layer.extend({
         },this);
     },
 
+    initBackground: function () {
+
+        //load tmx file 42X42 map grid
+        var tmxMap = new cc.TMXTiledMap("res/guis/map/42x42map.tmx");
+
+        tmxMap.setAnchorPoint(0.5, 0.5)
+        tmxMap.setPosition(cc.winSize.width/2, cc.winSize.height/2);
+        tmxMap.setScale(GRID_SCALE)
+
+        this.addChild(tmxMap,MAP_ZORDER_GRID);
+
+
+        //load 4 corner of  background
+
+        //center of backgrounds
+        var centerX = cc.winSize.width/2 + OFFSET_BACKGROUND_X;
+        var centerY = cc.winSize.height/2 + OFFSET_BACKGROUND_Y;
+
+        var backgroundUpLeft = new cc.Sprite("res/guis/map/bg_up_left.png");
+        var backgroundUpRight = new cc.Sprite("res/guis/map/bg_up_right.png");
+        var backgroundDownLeft = new cc.Sprite("res/guis/map/bg_down_left.png");
+        var backgroundDownRight = new cc.Sprite("res/guis/map/bg_down_right.png");
+
+        backgroundUpLeft.setAnchorPoint(1,0);
+        backgroundUpRight.setAnchorPoint(0,0);
+        backgroundDownLeft.setAnchorPoint(1,1);
+        backgroundDownRight.setAnchorPoint(0,1);
+
+        backgroundUpLeft.setPosition(centerX + 1, centerY - 1);
+        backgroundUpRight.setPosition(centerX - 1, centerY - 1);
+        backgroundDownLeft.setPosition(centerX + 1, centerY + 1);
+        backgroundDownRight.setPosition(centerX - 1, centerY + 1);
+
+        backgroundUpLeft.setScale(SCALE_BG);
+        backgroundUpRight.setScale(SCALE_BG);
+        backgroundDownLeft.setScale(SCALE_BG);
+        backgroundDownRight.setScale(SCALE_BG);
+
+
+        this.addChild(backgroundUpLeft,MAP_ZORDER_BACKGROUND);
+        this.addChild(backgroundUpRight,MAP_ZORDER_BACKGROUND);
+        this.addChild(backgroundDownLeft,MAP_ZORDER_BACKGROUND);
+        this.addChild(backgroundDownRight,MAP_ZORDER_BACKGROUND);
+    },
+
+    getZOrderBuilding: function (gridPosX,gridPosY) {
+        return MAP_ZORDER_BUILDING + (GRID_SIZE -gridPosX) + (GRID_SIZE -gridPosY);
+    },
+
     onTouchBegan: function (touch) {
 
-        var locationInScreen = touch.getLocation();
+        let locationInScreen = touch.getLocation();
 
         this.positionTouchBegan = locationInScreen;
 
-        var chosenGrid = this.getGridPosFromScreenPos(locationInScreen);
+        let chosenGrid = this.getGridPosFromScreenPos(locationInScreen);
 
         cc.log("chosen grid " + chosenGrid.x + " " + chosenGrid.y);
 
-        var buildingId = MapManager.Instance().mapGrid[chosenGrid.x][chosenGrid.y];
+        let buildingId = MapManager.Instance().mapGrid[chosenGrid.x][chosenGrid.y];
 
         if(this.chosenBuilding == null ) return;
 
-        if(buildingId == this.chosenBuilding._id)
+        if(buildingId === this.chosenBuilding._id)
         {
-            // this.onModeMovingBuilding = true;
             this.enterModeMoveBuilding();
         }
-        else
-        {
-            //ve sau update lai thanh khi nha invalid van moveView dc
-            //this.onModeMovingBuilding = false;
-            this.exitModeMoveBuilding();
-        }
+
     },
 
     //if not in move building mode, move view, else move building
@@ -136,8 +181,8 @@ var MapLayer = cc.Layer.extend({
         //move building
         if(this.chosenBuilding == null) return;
 
-        var newPos = this.getGridPosFromScreenPos(event.getLocation());
-        if(newPos.x != this.currentPos.x || newPos.y != this.currentPos.y)
+        let newPos = this.getGridPosFromScreenPos(event.getLocation());
+        if(newPos.x !== this.currentPos.x || newPos.y !== this.currentPos.y)
         {
             this.moveBuildingInLayer(this.chosenBuilding,newPos.x,newPos.y);
             this.currentPos = newPos;
@@ -169,37 +214,45 @@ var MapLayer = cc.Layer.extend({
 
     },
 
+    getBuildingFromTouch: function (locationInScreen) {
+        let chosenGrid = this.getGridPosFromScreenPos(locationInScreen);
+        let mapGrid = MapManager.Instance().mapGrid;
+        let buildingId = mapGrid[chosenGrid.x][chosenGrid.y];
+        if(buildingId === 0) return null;
+        return MapManager.Instance().getBuildingById(buildingId);
+    },
+
     onClicked: function (locationInScreen) {
 
-       // cc.log("click event :" + JSON.stringify(locationInScreen,null,2));
+        let building = this.getBuildingFromTouch(locationInScreen);
 
-        var chosenGrid = this.getGridPosFromScreenPos(locationInScreen);
+        //if click nothing -> building = null
+        if(building == null) {
 
-        var mapGrid = MapManager.Instance().mapGrid;
+            if(this.onModeMovingBuilding)
+            {
+                this.exitModeMoveBuilding();
+            }
 
-        //sau sua thanh getMapGrid de MapGrid khong bi null
-        var buildingId = mapGrid[chosenGrid.x][chosenGrid.y];
-
-
-        //if click nothing -> buildingId = 0
-        if(buildingId == 0) {
             this.unSelectBuilding();
             return;
         }
 
         //click building first time or click another building
-        if(this.chosenBuilding == null || this.chosenBuilding._id != buildingId)
+        if(this.chosenBuilding == null || this.chosenBuilding !== building)
         {
-            var building = MapManager.Instance().getBuildingById(buildingId);
-
             this.selectBuilding(building);
         }
 
     },
 
     selectBuilding: function (building) {
-        this.unSelectBuilding(this.chosenBuilding)
 
+        //if have chosen building, unselect it
+        this.unSelectBuilding(this.chosenBuilding);
+
+
+        cc.log("select building " + building._id);
         building.onSelected();
         this.chosenBuilding = building;
         this.currentPos = cc.p(this.chosenBuilding._posX,this.chosenBuilding._posY);
@@ -218,11 +271,9 @@ var MapLayer = cc.Layer.extend({
     },
 
     onReceivedCheckMoveBuilding: function (data) {
-        cc.log("received in layer map::::::::::::::::::::::::::::::::"+JSON.stringify(data,null,2));
         //if valid move, move building in map manager
-        if(data.error ==0) {
+        if(data.error ===0 ) {
             MapManager.Instance().moveBuilding(this.chosenBuilding, this.currentPos.x, this.currentPos.y)
-            this.unSelectBuilding();
         }
         else
         {
@@ -243,8 +294,6 @@ var MapLayer = cc.Layer.extend({
         infoLayer.setVisible(true);
     },
 
-
-    //use config zoom max, min, zoom step to zoom by scroll
 
 
 
@@ -339,6 +388,7 @@ var MapLayer = cc.Layer.extend({
         this.limitBorder();
     },
 
+    //use config zoom max, min, zoom step to zoom by scroll
     zoom: function (event) {
 
         var delta = event.getScrollY();
@@ -387,53 +437,13 @@ var MapLayer = cc.Layer.extend({
 
     },
 
-    initBackground: function () {
 
-        //load tmx file 42X42 map grid
-        var tmxMap = new cc.TMXTiledMap("res/guis/map/42x42map.tmx");
-
-        tmxMap.setAnchorPoint(0.5, 0.5)
-        tmxMap.setPosition(cc.winSize.width/2, cc.winSize.height/2);
-        tmxMap.setScale(GRID_SCALE)
-
-        this.addChild(tmxMap,MAP_ZORDER_GRID);
-
-
-        //load 4 corner of  background
-
-        //center of backgrounds
-        var centerX = cc.winSize.width/2 + OFFSET_BACKGROUND_X;
-        var centerY = cc.winSize.height/2 + OFFSET_BACKGROUND_Y;
-
-        var backgroundUpLeft = new cc.Sprite("res/guis/map/bg_up_left.png");
-        var backgroundUpRight = new cc.Sprite("res/guis/map/bg_up_right.png");
-        var backgroundDownLeft = new cc.Sprite("res/guis/map/bg_down_left.png");
-        var backgroundDownRight = new cc.Sprite("res/guis/map/bg_down_right.png");
-
-        backgroundUpLeft.setAnchorPoint(1,0);
-        backgroundUpRight.setAnchorPoint(0,0);
-        backgroundDownLeft.setAnchorPoint(1,1);
-        backgroundDownRight.setAnchorPoint(0,1);
-
-        backgroundUpLeft.setPosition(centerX + 1, centerY - 1);
-        backgroundUpRight.setPosition(centerX - 1, centerY - 1);
-        backgroundDownLeft.setPosition(centerX + 1, centerY + 1);
-        backgroundDownRight.setPosition(centerX - 1, centerY + 1);
-
-        backgroundUpLeft.setScale(SCALE_BG);
-        backgroundUpRight.setScale(SCALE_BG);
-        backgroundDownLeft.setScale(SCALE_BG);
-        backgroundDownRight.setScale(SCALE_BG);
-
-
-        this.addChild(backgroundUpLeft,MAP_ZORDER_BACKGROUND);
-        this.addChild(backgroundUpRight,MAP_ZORDER_BACKGROUND);
-        this.addChild(backgroundDownLeft,MAP_ZORDER_BACKGROUND);
-        this.addChild(backgroundDownRight,MAP_ZORDER_BACKGROUND);
-    },
 
     test: function (){
-        MapManager.Instance().test();
+
+        //add building to layer
+        // var building = new Townhall("TOW_1",1,1,0,0);
+
     }
 
 

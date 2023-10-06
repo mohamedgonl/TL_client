@@ -3,8 +3,8 @@ var Townhall = Building.extend({
     elixir: null,
     capacityGold: null,
     capacityElixir: null,
-    ctor: function (level,id,posX,posY) {
-        this._super(level,id,posX,posY);
+    ctor: function (type,level,id,posX,posY) {
+        this._super(type,level,id,posX,posY);
 
         this.init();
 
@@ -14,7 +14,7 @@ var Townhall = Building.extend({
 
     //init all properties
     init: function () {
-        let config = LoadManager.Instance().getConfig(this.type,this.level);
+        let config = LoadManager.Instance().getConfig(this._type,this._level);
         this.gold = 0;
         this.elixir = 0;
         this.capacityGold = config.capacityGold;

@@ -4,8 +4,8 @@ var Barrack = Building.extend({
     _height: null,
     _trainingQueue: [],
     lastTrainingTime: null,
-    ctor: function (level,id,posX,posY) {
-        this._super(level,id,posX,posY);
+    ctor: function (type,level,id,posX,posY) {
+        this._super(type,level,id,posX,posY);
 
         this.loadSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
         this.loadSubSprite();

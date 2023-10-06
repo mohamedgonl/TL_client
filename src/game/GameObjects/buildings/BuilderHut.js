@@ -1,7 +1,7 @@
 var BuilderHut = Building.extend({
 
-    ctor: function (level,id,posX,posY) {
-        this._super(level,id,posX,posY);
+    ctor: function (type,level,id,posX,posY) {
+        this._super(type,level,id,posX,posY);
 
         this.init();
         this.loadSprite(res_map.SPRITE.BODY.BUILDER_HUT[level],null,1)

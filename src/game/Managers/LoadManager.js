@@ -5,15 +5,15 @@ var LoadManager = cc.Class.extend({
     obstacle: null,
     ctor: function () {
 
-        this['OBS'] = cc.loader.getRes(res_map.JSON.OBSTACLE);
-        this['TOW_1'] = cc.loader.getRes(res_map.JSON.TOWNHALL);
+
+        this['TOW_1'] = cc.loader.getRes(res_map.JSON.TOWNHALL)['TOW_1'];
         this['STO_1'] = cc.loader.getRes(res_map.JSON.STORAGE)['STO_1'];
         this['STO_2'] = cc.loader.getRes(res_map.JSON.STORAGE)['STO_2'];
-        this['BAR_1'] = cc.loader.getRes(res_map.JSON.BARRACK);
-        this['AMC_1'] = cc.loader.getRes(res_map.JSON.ARMY_CAMP);
-        this['BDH_1'] = cc.loader.getRes(res_map.JSON.BUILDER_HUT);
-        this['DEF_1'] = cc.loader.getRes(res_map.JSON.DEFENCE);
-        this['WAL_1'] = cc.loader.getRes(res_map.JSON.WALL);
+        this['BAR_1'] = cc.loader.getRes(res_map.JSON.BARRACK)['BAR_1'];
+        this['AMC_1'] = cc.loader.getRes(res_map.JSON.ARMY_CAMP)['AMC_1'];
+        this['BDH_1'] = cc.loader.getRes(res_map.JSON.BUILDER_HUT)['BDH_1'];
+        this['DEF_1'] = cc.loader.getRes(res_map.JSON.DEFENCE)['DEF_1'];
+        this['WAL_1'] = cc.loader.getRes(res_map.JSON.WALL)['WAL_1'];
         this['RES_1'] = cc.loader.getRes(res_map.JSON.RESOURCE)['RES_1'];
         this['RES_2'] = cc.loader.getRes(res_map.JSON.RESOURCE)['RES_2'];
 
@@ -21,8 +21,6 @@ var LoadManager = cc.Class.extend({
         //add to resource OBS_1 to OBS_27
         var jsonObstacle = cc.loader.getRes(res_map.JSON.OBSTACLE);
         var obstacleCount = Object.keys(jsonObstacle).length;
-        cc.log("obstacleCount: " + obstacleCount)
-
         for(var i = 1; i <= obstacleCount; i++){
             var res = jsonObstacle['OBS_'+i];
             this['OBS_'+i] = res;
@@ -34,7 +32,7 @@ var LoadManager = cc.Class.extend({
 
     //get config from json
     // type: TOW_1, level: 1, key: posX
-    getConfig: function (type, level, key) {
+    getConfig: function (type, level=1, key) {
         if(key == null)
             return this[type][level];
        return this[type][level][key];
