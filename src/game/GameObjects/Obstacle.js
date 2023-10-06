@@ -7,12 +7,17 @@ var Obstacle = GameObject.extend({
     subSprite:{
         arrow_move: null,
     },
-   ctor: function(type,id,posX,posY){
+    //status = 0: normal, 1: removing
+   ctor: function(type,id,posX,posY,status=0,startTime,endTime){
        this._super();
        this._type = type;
        this._posX = posX;
        this._posY = posY;
        this._id = id;
+       this._status = status;
+       this._startTime = startTime;
+       this._endTime = endTime;
+
        var configObstacle = LoadManager.Instance().getConfig(this._type,1);
        this._width = configObstacle.width;
        this._height = configObstacle.height;
@@ -49,6 +54,15 @@ var Obstacle = GameObject.extend({
         this.subSprite = subSprite;
         this.addChild(subSprite.arrow_move);
 
+        //progress bar
+        this.progressBar = new ccui.Slider();
+        this.progressBar.setScale(SCALE_BUILDING_BODY);
+        this.progressBar.loadBarTexture(res_map.SPRITE.PROGRESS_BAR_BG);
+        this.progressBar.loadProgressBarTexture(res_map.SPRITE.PROGRESS_BAR);
+        this.progressBar.setAnchorPoint(0.5, 0.5);
+        this.progressBar.setPosition(0,30);
+        this.addChild(this.progressBar);
+
     },
 
     onSelected: function(){
@@ -61,8 +75,10 @@ var Obstacle = GameObject.extend({
     setType: function (type) {
         this._type = type;
     },
-
     getType: function () {
         return this._type;
-    }
+    },
+    setProgress(percent){
+        this.progressBar.setPercent(percent);
+    },
 });

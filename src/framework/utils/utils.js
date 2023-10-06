@@ -39,49 +39,50 @@ function findDistanceFromPointToLine(posA, posB, posC) {
 
 
 //return new building from type
-function getBuildingFromType(type, level, id, posX, posY) {
+//getBuildingFromType(data.type, 1, data.id, data.posX, data.posY,data.status,data.startTime,data.endTime);
+function getBuildingFromType(type, level, id, posX, posY,status,startTime,endTime) {
     var building = null;
 
     //obstacle
     if(type.substring(0,3) === 'OBS'){
 
         var typeOBS = type.substring(4);
-        building = new Obstacle(type,id, posX, posY);
+        building = new Obstacle(type,id, posX, posY,status,startTime,endTime);
         return building;
     }
 
     //building
     switch (type) {
         case 'TOW_1':
-            building = new Townhall(type, level,id, posX, posY);
+            building = new Townhall(type, level,id, posX, posY,status,startTime,endTime);
             break;
         case 'BDH_1':
-            building = new BuilderHut(type, level,id, posX, posY);
+            building = new BuilderHut(type, level,id, posX, posY,status,startTime,endTime);
             break;
         case 'AMC_1':
-            building = new ArmyCamp(type, level,id, posX, posY);
+            building = new ArmyCamp(type, level,id, posX, posY, status, startTime,endTime);
             break;
         case 'RES_1':
-            building = new GoldMine(type, level,id, posX, posY);
+            building = new GoldMine(type, level,id, posX, posY, status, startTime,endTime);
             break;
         case 'RES_2':
-            building = new ElixirMine(type, level,id, posX, posY);
+            building = new ElixirMine(type, level,id, posX, posY, status, startTime,endTime);
             break;
         case 'STO_1':
-            building = new GoldStorage(type, level,id, posX, posY);
+            building = new GoldStorage(type, level,id, posX, posY, status, startTime,endTime);
             break;
         case 'STO_2':
-            building = new ElixirStorage(type, level,id, posX, posY);
+            building = new ElixirStorage(type, level,id, posX, posY, status, startTime,endTime);
             break;
         case 'BAR_1':
-            building = new Barrack(type, level,id, posX, posY);
+            building = new Barrack(type, level,id, posX, posY, status, startTime,endTime);
             break;
         case 'DEF_1':
 
-            building = new Cannon(type, level,id, posX, posY);
+            building = new Cannon(type, level,id, posX, posY, status, startTime,endTime);
             break;
         case 'WAL_1':
-            building = new Wall(type, level,id, posX, posY);
+            building = new Wall(type, level,id, posX, posY, status, startTime,endTime);
             break;
     }
 

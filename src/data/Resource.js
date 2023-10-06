@@ -291,9 +291,9 @@ var res_map = {
             3: "res/Map/map_obj_bg/BG/RED_3.png",
             4: "res/Map/map_obj_bg/BG/RED_4.png",
             5: "res/Map/map_obj_bg/BG/RED_5.png",
-        }
-
-
+        },
+        PROGRESS_BAR: "res/guis/upgrade_building_gui/building_time_bar.png",
+        PROGRESS_BAR_BG: "res/guis/upgrade_building_gui/building_time_bg.png",
     },
     JSON:{
         OBSTACLE: "res/configs/Obstacle.json",
