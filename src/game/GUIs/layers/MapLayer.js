@@ -2,9 +2,15 @@ var MapLayer = cc.Layer.extend({
 
     chosenBuilding: null,
     onModeMovingBuilding: false,
+    canDragBuilding: false,
     ctor: function () {
 
         this._super();
+
+        this.tempPosChosenBuilding= {
+            x: 0,
+            y: 0
+        }
 
         this.init();
     },
@@ -149,31 +155,22 @@ var MapLayer = cc.Layer.extend({
     },
 
     onTouchBegan: function (touch) {
-
-        let locationInScreen = touch.getLocation();
-
-        this.positionTouchBegan = locationInScreen;
-
-        let chosenGrid = this.getGridPosFromScreenPos(locationInScreen);
-
-        cc.log("chosen grid " + chosenGrid.x + " " + chosenGrid.y);
-
-        let buildingId = MapManager.Instance().mapGrid[chosenGrid.x][chosenGrid.y];
-
+        this.positionTouchBegan = touch.getLocation();
         if(this.chosenBuilding == null ) return;
 
-        if(buildingId === this.chosenBuilding._id)
-        {
-            this.enterModeMoveBuilding();
-        }
-
+        let building = this.getBuildingFromTouch(touch.getLocation());
+        if(building !== this.chosenBuilding
+            ||this.chosenBuilding._type.startsWith("OBS"))
+            return;
+        this.enterModeMoveBuilding();
     },
 
     //if not in move building mode, move view, else move building
     onDrag: function (event) {
 
         //move view while drag while not move building
-        if(!this.onModeMovingBuilding) {
+
+        if(!this.canDragBuilding) {
             this.moveView(event.getDelta());
             return;
         }
@@ -182,40 +179,44 @@ var MapLayer = cc.Layer.extend({
         if(this.chosenBuilding == null) return;
 
         let newPos = this.getGridPosFromScreenPos(event.getLocation());
-        if(newPos.x !== this.currentPos.x || newPos.y !== this.currentPos.y)
+
+        if(newPos.x !== this.tempPosChosenBuilding.x || newPos.y !== this.tempPosChosenBuilding.y)
         {
             this.moveBuildingInLayer(this.chosenBuilding,newPos.x,newPos.y);
-            this.currentPos = newPos;
+
         }
     },
     onTouchEnded: function (event) {
         var locationInScreen = event.getLocation();
         var distance = cc.pDistance(locationInScreen,this.positionTouchBegan);
-
+        this.canDragBuilding = false;
         if(distance < 10) this.onClicked(this.positionTouchBegan);
-
-        if(this.onModeMovingBuilding)
-        {
-            var newPosX = this.currentPos.x;
-            var newPosY = this.currentPos.y;
-            var mapManager = MapManager.Instance();
-            if(mapManager.checkValidMoveBuilding(this.chosenBuilding, newPosX, newPosY))
-            {
-                //testnetwork.connector.sendMoveBuilding(this.chosenBuilding._id,newPosX,newPosY);
-                this.onReceivedCheckMoveBuilding({error:0})
-            }
-            else
-            {
-                //move back to old pos
-                this.moveBuildingInLayer(this.chosenBuilding,this.chosenBuilding._posX,this.chosenBuilding._posY);
-            }
-
-        }
 
     },
 
     getBuildingFromTouch: function (locationInScreen) {
         let chosenGrid = this.getGridPosFromScreenPos(locationInScreen);
+
+        if(this.onModeMovingBuilding)
+        {
+            let width = this.chosenBuilding._width;
+            let height = this.chosenBuilding._height;
+
+            cc.log("-----------------------------------")
+            cc.log("chosen grid: " + chosenGrid.x + " " + chosenGrid.y)
+            cc.log("width: " + width + " height: " + height)
+            cc.log("current pos: " + this.tempPosChosenBuilding.x + " " + this.tempPosChosenBuilding.y)
+            cc.log("-----------------------------------")
+            //if click in building -> return building
+            if(chosenGrid.x >= this.tempPosChosenBuilding.x && chosenGrid.x < this.tempPosChosenBuilding.x + width
+                && chosenGrid.y >= this.tempPosChosenBuilding.y && chosenGrid.y < this.tempPosChosenBuilding.y + height)
+            {
+                cc.log("click temp building")
+                return this.chosenBuilding;
+            }
+
+        }
+
         let mapGrid = MapManager.Instance().mapGrid;
         let buildingId = mapGrid[chosenGrid.x][chosenGrid.y];
         if(buildingId === 0) return null;
@@ -224,7 +225,10 @@ var MapLayer = cc.Layer.extend({
 
     onClicked: function (locationInScreen) {
 
+
+
         let building = this.getBuildingFromTouch(locationInScreen);
+
 
         //if click nothing -> building = null
         if(building == null) {
@@ -233,7 +237,6 @@ var MapLayer = cc.Layer.extend({
             {
                 this.exitModeMoveBuilding();
             }
-
             this.unSelectBuilding();
             return;
         }
@@ -255,7 +258,7 @@ var MapLayer = cc.Layer.extend({
         cc.log("select building " + building._id);
         building.onSelected();
         this.chosenBuilding = building;
-        this.currentPos = cc.p(this.chosenBuilding._posX,this.chosenBuilding._posY);
+        this.tempPosChosenBuilding = cc.p(this.chosenBuilding._posX,this.chosenBuilding._posY);
     },
 
     unSelectBuilding: function () {
@@ -266,14 +269,14 @@ var MapLayer = cc.Layer.extend({
         }
         this.chosenBuilding = null;
         // this.onModeMovingBuilding = false;
-        this.exitModeMoveBuilding();
-        this.currentPos = null;
+
+        this.tempPosChosenBuilding = null;
     },
 
     onReceivedCheckMoveBuilding: function (data) {
         //if valid move, move building in map manager
         if(data.error ===0 ) {
-            MapManager.Instance().moveBuilding(this.chosenBuilding, this.currentPos.x, this.currentPos.y)
+            MapManager.Instance().moveBuilding(this.chosenBuilding, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y)
         }
         else
         {
@@ -284,22 +287,54 @@ var MapLayer = cc.Layer.extend({
 
 
     enterModeMoveBuilding: function () {
+        this.chosenBuilding.setLocalZOrder(999);
+        this.canDragBuilding = true;
         this.onModeMovingBuilding = true;
         var infoLayer = cc.director.getRunningScene().infoLayer;
+        //if chosen building can put in new pos, set green square, else set red square
+        if(MapManager.Instance().checkValidPutBuilding(this.chosenBuilding,this.chosenBuilding._posX, this.chosenBuilding._posY)){
+            this.chosenBuilding.setSquare(1);
+        }
+        else{
+            this.chosenBuilding.setSquare(2);
+        }
         infoLayer.setVisible(false);
     },
     exitModeMoveBuilding: function () {
+        this.canDragBuilding = false;
         this.onModeMovingBuilding = false;
         var infoLayer = cc.director.getRunningScene().infoLayer;
+
+        var newPosX = this.tempPosChosenBuilding.x;
+        var newPosY = this.tempPosChosenBuilding.y;
+        var mapManager = MapManager.Instance();
+
+        if(mapManager.checkValidPutBuilding(this.chosenBuilding, newPosX, newPosY))
+        {
+            //testnetwork.connector.sendMoveBuilding(this.chosenBuilding._id,newPosX,newPosY);
+            this.onReceivedCheckMoveBuilding({error:0})
+        }
+        else
+        {
+            //move back to old pos
+            this.moveBuildingInLayer(this.chosenBuilding,this.chosenBuilding._posX,this.chosenBuilding._posY);
+        }
+        this.chosenBuilding.setSquare(0);
         infoLayer.setVisible(true);
     },
-
-
-
 
     // move view of building, not change building pos in MapManager and Building
     moveBuildingInLayer: function (building, newPosX, newPosY) {
         if(building == null) return;
+
+        this.tempPosChosenBuilding = {x: newPosX, y: newPosY};
+        //change color of square
+        if(MapManager.Instance().checkValidPutBuilding(building,newPosX,newPosY)){
+            building.setSquare(1);
+        }
+        else{
+            building.setSquare(2);
+        }
 
         var sizeX = building._width;
         var sizeY = building._height;
@@ -382,7 +417,7 @@ var MapLayer = cc.Layer.extend({
     },
 
     moveView: function (delta) {
-        var currentPos = this.getPosition();
+        var  currentPos = this.getPosition();
         var newPos = cc.pAdd(currentPos, delta);
         this.setPosition(newPos);
         this.limitBorder();
@@ -442,7 +477,17 @@ var MapLayer = cc.Layer.extend({
     test: function (){
 
         //add building to layer
-        // var building = new Townhall("TOW_1",1,1,0,0);
+        // this.addTemporaryBuilding("TOW_1");
+        this.print();
+    },
+    addTemporaryBuilding: function (buildingType) {
+        var building = getBuildingFromType(buildingType,1)
+        let validPosition = MapManager.Instance().getEmptyPositionPutBuilding(building);
+        building.setGridPosition(validPosition.x,validPosition.y);
+        this.addBuildingToLayer(building);
+        this.selectBuilding(building)
+    },
+    print: function () {
 
     }
 

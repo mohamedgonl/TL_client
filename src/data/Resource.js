@@ -277,7 +277,22 @@ var res_map = {
             3: "res/Map/map_obj_bg/BG/arrowmove3.png",
             4: "res/Map/map_obj_bg/BG/arrowmove4.png",
             5: "res/Map/map_obj_bg/BG/arrowmove5.png",
+        },
+        GREEN_SQUARE:{
+            1: "res/Map/map_obj_bg/BG/GREEN_1.png",
+            2: "res/Map/map_obj_bg/BG/GREEN_2.png",
+            3: "res/Map/map_obj_bg/BG/GREEN_3.png",
+            4: "res/Map/map_obj_bg/BG/GREEN_4.png",
+            5: "res/Map/map_obj_bg/BG/GREEN_5.png",
+        },
+        RED_SQUARE:{
+            1: "res/Map/map_obj_bg/BG/RED_1.png",
+            2: "res/Map/map_obj_bg/BG/RED_2.png",
+            3: "res/Map/map_obj_bg/BG/RED_3.png",
+            4: "res/Map/map_obj_bg/BG/RED_4.png",
+            5: "res/Map/map_obj_bg/BG/RED_5.png",
         }
+
 
     },
     JSON:{

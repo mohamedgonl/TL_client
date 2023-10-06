@@ -129,7 +129,7 @@ var MapManager = cc.Layer.extend({
     },
 
 
-    checkValidMoveBuilding: function (building,newPosX, newPosY) {
+    checkValidPutBuilding: function (building, newPosX, newPosY) {
         var id = building._id;
         var width = building._width;
         var height = building._height;
@@ -148,24 +148,18 @@ var MapManager = cc.Layer.extend({
         return true;
     },
 
+    getEmptyPositionPutBuilding: function (building) {
+        let width = building._width;
+        let height = building._height;
+        cc.log("width: " + width + " height: " + height)
 
-    test: function (){
-        //log map grid
-        // cc.log("map grid ::::::")
-        // for(var i = 0; i < 40; i++){
-        //     var str = "";
-        //     for(var j = 0; j < 40; j++)
-        //         str += this.mapGrid[i][j] + " ";
-        //     cc.log(str);
-        // }
+        //find empty rect to place building in mapGrid
+        for(let column = 0; column < 40; column++)
+            for(let row = 0; row < 40; row++)
+                if(this.checkValidPutBuilding(building, column, row))
+                    return {x: column, y: row};
 
-        //
-        //log list building
-        // this.listBuildings.forEach(function (building) {
-        //     cc.log(JSON.stringify(building, null, 2));
-        // });
-        // PlayerInfoManager.Instance().setResource({gold: 1000000, elixir: 1000000, gem: 1000000});
-
+        return null;
     }
 
 

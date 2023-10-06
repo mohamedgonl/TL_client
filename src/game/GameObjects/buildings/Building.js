@@ -30,7 +30,6 @@ var Building = GameObject.extend({
         this._height = config.height;
         this._hitpoints = config.hitpoints;
 
-
         this.setAnchorPoint(0.5,0.5);
     },
 
@@ -57,18 +56,13 @@ var Building = GameObject.extend({
            this._shadow.setAnchorPoint(0.5,0.5);
         }
 
-        //add child
-        this.addChild(this._grass);
-        if(shadow_type !== 0)
-            this.addChild(this._shadow);
-        this.addChild(this._body);
 
         //upper
         if(upperSprite != null){
             if(isUpperAnimation){
 
                 this._upper = new cc.Sprite(upperSprite[0]);
-                this.addChild(this._upper,999);
+
 
                 var animation = new cc.Animation();
                 var countFrame = Object.keys(upperSprite).length;
@@ -90,21 +84,39 @@ var Building = GameObject.extend({
             }
             else {
                 this._upper = new cc.Sprite(upperSprite);
-                this.addChild(this._upper);
                 this._upper.setAnchorPoint(0.5, 0.5);
                 this._upper.setScale(SCALE_BUILDING_BODY);
             }
         }
+
+        //add child
+        this.addChild(this._grass,ZORDER_BUILDING_GRASS);
+        this.addChild(this._body,ZORDER_BUILDING_BODY);
+        if(shadow_type !== 0)
+            this.addChild(this._shadow,ZORDER_BUILDING_SHADOW);
+
+        if(upperSprite != null)
+            this.addChild(this._upper,ZORDER_BUILDING_UPPER);
     },
     loadSubSprite: function(){
         //arrow move
         this._arrow_move = new cc.Sprite(res_map.SPRITE.ARROW_MOVE[this._width]);
         this._arrow_move.setAnchorPoint(0.5,0.5);
         this._arrow_move.setScale(SCALE_BUILDING_BODY);
-        this._arrow_move.setPosition(0,0);
         this._arrow_move.setVisible(false);
         this.addChild(this._arrow_move);
 
+        //green square
+        this._green_square = new cc.Sprite(res_map.SPRITE.GREEN_SQUARE[this._width]);
+        this._green_square.setAnchorPoint(0.5,0.5);
+        this.addChild(this._green_square,ZORDER_BUILDING_SQUARE);
+        this._green_square.setVisible(false);
+
+        //red square
+        this._red_square = new cc.Sprite(res_map.SPRITE.RED_SQUARE[this._width]);
+        this._red_square.setAnchorPoint(0.5,0.5);
+        this.addChild(this._red_square,ZORDER_BUILDING_SQUARE);
+        this._red_square.setVisible(false);
     },
 
     setState: function (state) {
@@ -123,6 +135,32 @@ var Building = GameObject.extend({
 
     getType: function () {
         return this._type;
+    },
+
+    getGridPosition: function (){
+        return cc.p(this._posX, this._posY);
+    },
+    setGridPosition: function (posX, posY) {
+        this._posX = posX;
+        this._posY = posY;
+    },
+    //3 state of Square: 0: no square, 1: green square, 2: red square
+    setSquare: function (square) {
+        if(square === 0){
+            this._green_square.setVisible(false);
+            this._red_square.setVisible(false);
+        }
+        else if(square === 1){
+            this._green_square.setVisible(true);
+            this._red_square.setVisible(false);
+        }
+        else if(square === 2){
+            this._green_square.setVisible(false);
+            this._red_square.setVisible(true);
+        }
     }
+
+
+
 
 });

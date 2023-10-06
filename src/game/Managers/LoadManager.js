@@ -31,7 +31,7 @@ var LoadManager = cc.Class.extend({
     },
 
     //get config from json
-    // type: TOW_1, level: 1, key: posX
+    // example {type: TOW_1, level: 1, key: posX}
     getConfig: function (type, level=1, key) {
         if(key == null)
             return this[type][level];
