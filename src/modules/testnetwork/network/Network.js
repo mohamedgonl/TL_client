@@ -31,30 +31,10 @@ testnetwork.Connector = cc.Class.extend({
                 cc.director.getRunningScene().onBuyResourceSuccess(packet);
                 break;
             case gv.CMD.TRAIN_TROOP_CREATE:
-
-                if(packet.getError() !== ErrorCode.SUCCESS) {
-                    cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
-                }
-                else {
-                    cc.log("TRAIN TROOP REQUEST SUCCESS ::::::::: ");
-                    let event = new cc.EventCustom(TRAINING_EVENTS.CREATE_TRAIN_SUCCESS);
-                    event.data = {
-                        barrackId: packet.barrackId,
-                        cfgId: packet.cfgId,
-                        count: packet.count,
-                        lastTrainingTime: packet.lastTrainingTime
-                    }
-                    cc.eventManager.dispatchEvent(event);
-                }
+                this.onReceiveTrainTroopCreate(packet);
                 break;
             case gv.CMD.TRAIN_TROOP_SUCCESS:
-                if(packet.getError() !== ErrorCode.SUCCESS) {
-                    cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
-                }
-                else {
-                    cc.log("TRAIN TROOP DONE REQUEST SUCCESS ::::::::: ");
-                    cc.director.getRunningScene().getTrainingPopup().onTrainSuccess(false, packet.cfgId);
-                }
+                this.onReceiveTrainTroopSuccess(packet);
                 break;
 
             case gv.CMD.MOVE:
@@ -63,6 +43,36 @@ testnetwork.Connector = cc.Class.extend({
                 break;
         }
     },
+
+    onReceiveTrainTroopSuccess: function(packet) {
+        if(packet.getError() !== ErrorCode.SUCCESS) {
+            cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
+        }
+        else {
+            cc.log("TRAIN TROOP DONE REQUEST SUCCESS ::::::::: ");
+            let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
+            let trainingPopup = popUpLayer.getTrainingPopup();
+            trainingPopup.onTrainSuccess(false, packet);
+        }
+    },
+
+    onReceiveTrainTroopCreate: function (packet) {
+        if(packet.getError() !== ErrorCode.SUCCESS) {
+            cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
+        }
+        else {
+            cc.log("TRAIN TROOP CREATE REQUEST SUCCESS ::::::::: ");
+            let event = new cc.EventCustom(TRAINING_EVENTS.CREATE_TRAIN_SUCCESS);
+            event.data = {
+                barrackId: packet.barrackId,
+                cfgId: packet.cfgId,
+                count: packet.count,
+                lastTrainingTime: packet.lastTrainingTime
+            }
+            cc.eventManager.dispatchEvent(event);
+        }
+    },
+
     sendGetUserInfo: function () {
         cc.log("sendGetUserInfo");
         var pk = this.gameClient.getOutPacket(CmdSendUserInfo);

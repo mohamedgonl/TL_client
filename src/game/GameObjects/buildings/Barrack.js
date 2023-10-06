@@ -3,7 +3,7 @@ var Barrack = Building.extend({
     _width: null,
     _height: null,
     _trainingQueue: [],
-    lastTrainingTime: null,
+    _lastTrainingTime: null,
     ctor: function (level,posX,posY) {
         this._super(level,posX,posY);
 
@@ -12,7 +12,11 @@ var Barrack = Building.extend({
     },
 
     getLastTrainingTime: function () {
-        return this.lastTrainingTime;
+        return this._lastTrainingTime;
+    },
+
+    setLastTrainingTime: function (time) {
+        this._lastTrainingTime = time;
     },
 
     getTrainingList: function () {
@@ -32,13 +36,13 @@ var Barrack = Building.extend({
     },
 
     removeFromTrainingQueue: function ({cfgId, count, currentTime}) {
+        this._lastTrainingTime = currentTime;
         for (let i = 0; i < this._trainingQueue.length; i++) {
             if(this._trainingQueue[i].cfgId === cfgId) {
                 this._trainingQueue[i].count -= count;
                 if(this._trainingQueue[i].count === 0) {
                     this._trainingQueue.splice(i,1);
                 }
-                this.lastTrainingTime = currentTime;
                 cc.log("removeFromTrainingQueue success");
                 return
             }

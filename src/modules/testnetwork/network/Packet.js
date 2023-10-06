@@ -225,9 +225,10 @@ testnetwork.packetMap[gv.CMD.TRAIN_TROOP_SUCCESS] = fr.InPacket.extend(
             this._super();
         },
         readData: function () {
-            this.barrackId = this.getInt();
             this.isDoneNow = this.getInt();
+            this.barrackId = this.getInt();
             this.cfgId = this.getString();
+            this.lastTrainingTime = this.getInt();
         }
     }
 );

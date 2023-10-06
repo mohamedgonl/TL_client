@@ -59,10 +59,6 @@ var MapManager = cc.Layer.extend({
         let width = building._width;
         let height = building._height;
 
-
-        cc.log("BUILDING ......................................", building.getType())
-
-
         for(let column = posX; column < posX + width; column++)
             for(let row = posY; row < posY + height; row++)
                 this.mapGrid[column][row] = id;
@@ -85,7 +81,6 @@ var MapManager = cc.Layer.extend({
                 this.listStorage.push(building);
                 break;
             case 'BAR':
-                cc.log("hanve barrack+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
                 ArmyManager.Instance().pushBarrack(building);
                 break;
             case 'ArmyCamp':
