@@ -11,9 +11,6 @@ var TrainTroopPage = cc.Node.extend({
         // lưu các sprite nằm trong training container
         this._trainingItem = [];
 
-        if(this._trainingItem.length>0) {
-            this.initTrainingList();
-        }
 
         let node = CCSUlties.parseUIFile(res_ui.TRAIN_TROOP);
         node.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
@@ -55,9 +52,9 @@ var TrainTroopPage = cc.Node.extend({
                 lastTrainingTime: this._curBarrack.getLastTrainingTime(),
                 isInit : true
             }
-            cc.log("INIT ONCAN CREATE     " + JSON.stringify(event))
             this.onCanCreateTrain(event);
-        })
+        });
+        this.schedule(this.updateTrainTime, 1);
     },
 
     getBarrackId: function () {
@@ -65,8 +62,6 @@ var TrainTroopPage = cc.Node.extend({
     },
 
     initListTroops: function () {
-
-
         for (let i = 0; i < TROOPS_LIST.length; i++) {
             let troopCfgId = TROOPS_LIST[i].troopCfgId;
             let available = TROOPS_LIST[i].available && TROOP_BASE[troopCfgId]["barracksLevelRequired"] >= this._curBarrack.level;
@@ -131,7 +126,6 @@ var TrainTroopPage = cc.Node.extend({
     },
 
     handleTrainTroop: function (event) {
-        cc.log("SEND REQUEST CREATE ::::::::::::::::::::::::::::")
         testnetwork.connector.sendRequestTrainingCreate({cfgId: event.data.cfgId, count: event.data.count, barrackId: this._curBarrack.getId()});
     },
 
@@ -139,9 +133,7 @@ var TrainTroopPage = cc.Node.extend({
         cc.log("ON CAN CREATE TRAIN ::::::::::::::::::::::::::", event.data.cfgId);
 
         let troopCfgId = event.data.cfgId;
-
         let count = event.data.count || 1;
-
         let trainingQueue =  this._curBarrack.getTrainingList();
 
         let found  = false;
@@ -155,7 +147,7 @@ var TrainTroopPage = cc.Node.extend({
                 this._trainContainer.setVisible(true);
                 waitingTroop.setPosition(CURRENT_TROOP_TRAINING_POS.x, CURRENT_TROOP_TRAINING_POS.y);
 
-                this.schedule(this.updateTrainTime, 1);
+                if(!event.data.isInit) this.schedule(this.updateTrainTime, 1);
 
             } else if (trainingQueue.length === 2) {
                 waitingTroop.setPosition(FIRST_WAITING_TRAINING_TROOP_POS.x, FIRST_WAITING_TRAINING_TROOP_POS.y);

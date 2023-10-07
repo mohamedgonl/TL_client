@@ -89,6 +89,9 @@ testnetwork.Connector = cc.Class.extend({
                 if(barracks[i].getId() === packet.barrackId) {
                     barracks[i].setTrainingList(packet.trainingList);
                     barracks[i].setLastTrainingTime(packet.lastTrainingTime);
+                    let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
+                    let trainingPopup = popUpLayer.getTrainingPopup();
+                    trainingPopup.getPage({barackId: packet.barrackId}).initTrainingList();
                     return;
                 }
             }
