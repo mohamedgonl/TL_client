@@ -7,7 +7,13 @@ var TrainTroopPage = cc.Node.extend({
         this._super();
         this._curPage = curPage;
         this._curBarrack = ArmyManager.Instance().getBarrackList()[this._curPage];
+
+        // lưu các sprite nằm trong training container
         this._trainingItem = [];
+
+        if(this._trainingItem.length>0) {
+            this.initTrainingList();
+        }
 
         let node = CCSUlties.parseUIFile(res_ui.TRAIN_TROOP);
         node.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
@@ -22,11 +28,11 @@ var TrainTroopPage = cc.Node.extend({
         nextButton.addClickEventListener(this.handleChangePage.bind(this, 1));
         closeButton.addClickEventListener(this.handleClosePopup.bind(this));
 
-        cc.eventManager.addCustomListener(TRAINING_EVENTS.TRAIN, this.handleTrainTroop.bind(this));
-        cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE, this.handleCancleTroopTraining.bind(this));
-        cc.eventManager.addCustomListener(TRAINING_EVENTS.DONE_NOW, this.handleClickDoneNow.bind(this));
-        cc.eventManager.addCustomListener(TRAINING_EVENTS.UPDATE_SPACE, this.updateSpace.bind(this));
-        cc.eventManager.addCustomListener(TRAINING_EVENTS.CREATE_TRAIN_SUCCESS,this.onCanCreateTrain.bind(this));
+        cc.eventManager.addCustomListener(TRAINING_EVENTS.TRAIN+this._curPage, this.handleTrainTroop.bind(this));
+        cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE+this._curPage, this.handleCancleTroopTraining.bind(this));
+        cc.eventManager.addCustomListener(TRAINING_EVENTS.DONE_NOW+this._curPage, this.handleClickDoneNow.bind(this));
+        cc.eventManager.addCustomListener(TRAINING_EVENTS.UPDATE_SPACE+this._curPage, this.updateSpace.bind(this));
+        // cc.eventManager.addCustomListener(TRAINING_EVENTS.CREATE_TRAIN_SUCCESS+this._curPage,this.onCanCreateTrain.bind(this));
 
         let trainPopup = node.getChildByName("train_popup");
         this._trainContainer = trainPopup.getChildByName("training_container");
@@ -38,6 +44,20 @@ var TrainTroopPage = cc.Node.extend({
         this._totalTime = this.updateAndGetTotalTrainingTime();
 
         this.addChild(node);
+    },
+
+    initTrainingList: function () {
+        this._curBarrack.getTrainingList().map(e => {
+            let event = {};
+            event.data = {
+                cfgId: e.cfgId,
+                count: e.count,
+                lastTrainingTime: this._curBarrack.getLastTrainingTime(),
+                isInit : true
+            }
+            cc.log("INIT ONCAN CREATE     " + JSON.stringify(event))
+            this.onCanCreateTrain(event);
+        })
     },
 
     getBarrackId: function () {
@@ -111,6 +131,7 @@ var TrainTroopPage = cc.Node.extend({
     },
 
     handleTrainTroop: function (event) {
+        cc.log("SEND REQUEST CREATE ::::::::::::::::::::::::::::")
         testnetwork.connector.sendRequestTrainingCreate({cfgId: event.data.cfgId, count: event.data.count, barrackId: this._curBarrack.getId()});
     },
 
@@ -118,17 +139,19 @@ var TrainTroopPage = cc.Node.extend({
         cc.log("ON CAN CREATE TRAIN ::::::::::::::::::::::::::", event.data.cfgId);
 
         let troopCfgId = event.data.cfgId;
+
         let count = event.data.count || 1;
 
         let trainingQueue =  this._curBarrack.getTrainingList();
 
-        let found = this._curBarrack.addToTrainingQueue({cfgId: troopCfgId, count: count});
+        let found  = false;
+        if(!event.data.isInit) found = this._curBarrack.addToTrainingQueue({cfgId: troopCfgId, count: count});
 
         if (!found) {
             // create new waiting troop item;
             let waitingTroop = new TroopTrainingItem(troopCfgId);
             if (trainingQueue.length === 1) {
-                this._curBarrack.setLastTrainingTime(event.data.lastTrainingTime);
+                if(!event.data.isInit)  this._curBarrack.setLastTrainingTime(event.data.lastTrainingTime);
                 this._trainContainer.setVisible(true);
                 waitingTroop.setPosition(CURRENT_TROOP_TRAINING_POS.x, CURRENT_TROOP_TRAINING_POS.y);
 
@@ -216,6 +239,7 @@ var TrainTroopPage = cc.Node.extend({
 
         if (this._curBarrack.getTrainingList().length === 0) {
             this._trainContainer.setVisible(false);
+            this._trainingItem[0].removeFromParent();
             this._trainingItem = [];
             this.unschedule(this.updateTrainTime);
         } else {
@@ -229,7 +253,7 @@ var TrainTroopPage = cc.Node.extend({
             timeString.setString(troopTrainTime + "s");
         }
 
-        let event = new cc.EventCustom(TRAINING_EVENTS.TRAIN_SUCCESS);
+        let event = new cc.EventCustom(TRAINING_EVENTS.TRAIN_SUCCESS+this._curPage);
         event.data = {count: 1, cfgId: data.cfgId};
         cc.eventManager.dispatchEvent(event);
 

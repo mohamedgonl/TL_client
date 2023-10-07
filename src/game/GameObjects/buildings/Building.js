@@ -63,10 +63,8 @@ var Building = GameObject.extend({
 
                 var animation = new cc.Animation();
                 var countFrame = Object.keys(upperSprite).length;
-                cc.log("countFrame: ---------------------------------" + countFrame);
 
                 for (var i = 0; i < countFrame; i++) {
-                    cc.log("upperSprite[i]: ---------------------------------" + upperSprite[i]);
                     var frame = new cc.SpriteFrame(upperSprite[i]);
                     animation.addSpriteFrame(frame);
                 }
@@ -89,7 +87,6 @@ var Building = GameObject.extend({
         }
     },
     loadSubSprite: function(){
-        cc.log("loadSub :::::",this._id)
         //arrow move
         this.arrow_move = new cc.Sprite(res_map.SPRITE.ARROW_MOVE[this._width]);
         this.arrow_move.setAnchorPoint(0.5,0.5);

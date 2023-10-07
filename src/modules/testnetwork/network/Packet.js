@@ -12,6 +12,7 @@ gv.CMD.MOVE = 2001;
 gv.CMD.BUY_RESOURCE = 4001;
 gv.CMD.TRAIN_TROOP_CREATE = 5001;
 gv.CMD.TRAIN_TROOP_SUCCESS = 5002;
+gv.CMD.GET_TRAINING_LIST = 5003;
 
 
 
@@ -129,6 +130,21 @@ CmdSendTrainTroopSuccess = fr.OutPacket.extend(
     }
 )
 
+CmdSendGetTrainingList = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.GET_TRAINING_LIST);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.barrackId);
+            this.updateSize();
+        }
+    }
+)
+
 
 
 CmdSendMove = fr.OutPacket.extend(
@@ -229,6 +245,29 @@ testnetwork.packetMap[gv.CMD.TRAIN_TROOP_SUCCESS] = fr.InPacket.extend(
             this.barrackId = this.getInt();
             this.cfgId = this.getString();
             this.lastTrainingTime = this.getInt();
+        }
+    }
+);
+
+testnetwork.packetMap[gv.CMD.GET_TRAINING_LIST] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.barrackId = this.getInt();
+            this.lastTrainingTime = this.getInt();
+            let trainingListSize = this.getInt();
+            let _trainingList = [];
+            for (let i = 0; i < trainingListSize; i++) {
+                let item = {};
+                item.cfgId  = this.getString();
+                item.count = this.getInt();
+                _trainingList.push(item);
+            }
+            cc.log("NHẬN QUEUE ::::::::::::::::::::::::" + JSON.stringify(_trainingList) );
+            this.trainingList = _trainingList;
+
         }
     }
 );

@@ -9,6 +9,7 @@ var Barrack = Building.extend({
         this._trainingQueue = [];
         this.loadConfig(ConfigManager.Instance().getConfigBarrack(this.level));
         this.loadSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
+        cc.log("KHỞI TẠO  ::::::::::::::::::   ", this._trainingQueue.length);
     },
 
     getLastTrainingTime: function () {
@@ -20,13 +21,17 @@ var Barrack = Building.extend({
     },
 
     getTrainingList: function () {
-        cc.log("_________________________________________________________ 0",  this._trainingQueue.length);
         return this._trainingQueue;
+    },
+
+    setTrainingList: function (list) {
+        this._trainingQueue = list;
     },
 
 
     //return true when this type of troop already exist
     addToTrainingQueue: function ({cfgId, count}) {
+        cc.log("KHỞI TẠO 1 ::::::::::::::::::   ", this._trainingQueue.length);
         for (let i = 0; i < this._trainingQueue.length; i++) {
             if(this._trainingQueue[i].cfgId === cfgId) {
                 this._trainingQueue[i].count += count;
@@ -34,6 +39,7 @@ var Barrack = Building.extend({
             }
         }
         this._trainingQueue.push({cfgId: cfgId,count: count});
+        cc.log("KHỞI TẠO  2 ::::::::::::::::::   ",JSON.stringify(this._trainingQueue));
         return false;
     },
 
@@ -52,9 +58,8 @@ var Barrack = Building.extend({
     },
     
     getTrainingSpace: function () {
-        cc.log("_________________________________________________________ 3",  this._trainingQueue.length);
+        cc.log(" TAO R A ĐÂY :::::::" + JSON.stringify(this._trainingQueue))
         return this._trainingQueue.reduce((sum,e) => {
-            cc.log("CFG =====  ",e.cfgId);
             return sum+e.count * TROOP_BASE[e.cfgId]["housingSpace"];
         },0);
     },

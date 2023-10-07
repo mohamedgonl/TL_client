@@ -10,7 +10,6 @@ var GameObject = cc.Node.extend({
         this._shadow = null;
         this._objectType = null;
         this.isChosen = false;
-        cc.log("SET ID FOR GAME OBJECT ::::: ", this._id)
     },
 
     setId: function (id) {

@@ -36,7 +36,9 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.TRAIN_TROOP_SUCCESS:
                 this.onReceiveTrainTroopSuccess(packet);
                 break;
-
+            case gv.CMD.GET_TRAINING_LIST:
+                this.onReceiveGetTrainingList(packet);
+                break;
             case gv.CMD.MOVE:
                 cc.log("MOVE:", packet.x, packet.y);
                 fr.getCurrentScreen().updateMove(packet.x, packet.y);
@@ -62,14 +64,34 @@ testnetwork.Connector = cc.Class.extend({
         }
         else {
             cc.log("TRAIN TROOP CREATE REQUEST SUCCESS ::::::::: ");
-            let event = new cc.EventCustom(TRAINING_EVENTS.CREATE_TRAIN_SUCCESS);
+            let event = {}
             event.data = {
                 barrackId: packet.barrackId,
                 cfgId: packet.cfgId,
                 count: packet.count,
                 lastTrainingTime: packet.lastTrainingTime
             }
-            cc.eventManager.dispatchEvent(event);
+            let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
+            let trainingPopup = popUpLayer.getTrainingPopup();
+            trainingPopup.getPage({barackId: packet.barrackId}).onCanCreateTrain(event);
+
+        }
+    },
+
+    onReceiveGetTrainingList :function (packet) {
+        if(packet.getError() !== ErrorCode.SUCCESS) {
+            cc.log("GET TRAINING LIST ERROR :::::::::::", packet.getError());
+        }
+        else {
+            cc.log("GET TRAINING LIST SUCCESS :::::::::::");
+            let barracks = ArmyManager.Instance().getBarrackList();
+            for (let i = 0; i < barracks.length; i++) {
+                if(barracks[i].getId() === packet.barrackId) {
+                    barracks[i].setTrainingList(packet.trainingList);
+                    barracks[i].setLastTrainingTime(packet.lastTrainingTime);
+                    return;
+                }
+            }
         }
     },
 
@@ -108,6 +130,13 @@ testnetwork.Connector = cc.Class.extend({
 
     sendRequestTrainingSuccess: function (data) {
         var pk = this.gameClient.getOutPacket(CmdSendTrainTroopSuccess);
+        pk.pack(data);
+        this.gameClient.sendPacket(pk);
+    },
+
+    sendGetTrainingList : function (data) {
+        cc.log(" TAO NHẬN " + JSON.stringify(data))
+        var pk = this.gameClient.getOutPacket(CmdSendGetTrainingList);
         pk.pack(data);
         this.gameClient.sendPacket(pk);
     },
