@@ -3,6 +3,8 @@ var TrainTroopPage = cc.Node.extend({
     _available: true,
     _curBarrack: null,
     _trainingItem: null,
+    _timePassed: 0,
+    _isActive: false,
     ctor: function (curPage) {
         this._super();
         this._curPage = curPage;
@@ -29,7 +31,6 @@ var TrainTroopPage = cc.Node.extend({
         cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE+this._curPage, this.handleCancleTroopTraining.bind(this));
         cc.eventManager.addCustomListener(TRAINING_EVENTS.DONE_NOW+this._curPage, this.handleClickDoneNow.bind(this));
         cc.eventManager.addCustomListener(TRAINING_EVENTS.UPDATE_SPACE+this._curPage, this.updateSpace.bind(this));
-        // cc.eventManager.addCustomListener(TRAINING_EVENTS.CREATE_TRAIN_SUCCESS+this._curPage,this.onCanCreateTrain.bind(this));
 
         let trainPopup = node.getChildByName("train_popup");
         this._trainContainer = trainPopup.getChildByName("training_container");
@@ -39,11 +40,11 @@ var TrainTroopPage = cc.Node.extend({
         this.updateTrainingPopupTitle();
 
         this._totalTime = this.updateAndGetTotalTrainingTime();
-
         this.addChild(node);
     },
 
     initTrainingList: function () {
+        let events = []
         this._curBarrack.getTrainingList().map(e => {
             let event = {};
             event.data = {
@@ -52,10 +53,23 @@ var TrainTroopPage = cc.Node.extend({
                 lastTrainingTime: this._curBarrack.getLastTrainingTime(),
                 isInit : true
             }
-            this.onCanCreateTrain(event);
+            events.push(event);
         });
-        this.schedule(this.updateTrainTime, 1);
+        this.onCanCreateTrain(events);
     },
+
+    updateUI: function (time) {
+        if(time) this._interval = time;
+        this._isActive = true;
+        this.scheduleOnce(this.updateTrainTime)
+        this.schedule(this.updateTrainTime, this._interval);
+    },
+
+    stopUpdateUI: function () {
+        this._isActive = false;
+        this.unschedule(this.updateTrainTime);
+    },
+
 
     getBarrackId: function () {
       return this._curBarrack.getId();
@@ -76,6 +90,7 @@ var TrainTroopPage = cc.Node.extend({
         }
     },
 
+
     updateSpace: function (event) {
         this._space = event.data.space;
         this.updateTrainingPopupTitle();
@@ -87,6 +102,30 @@ var TrainTroopPage = cc.Node.extend({
         let popUpTitle = this._trainPopup.getChildByName("title");
         popUpTitle.setString("Nhà lính " + (this._curPage+1) + " (" + count + "/" + max + ")");
     },
+
+    updateDoneNowPrice: function () {
+        // update done now price
+        let doneNowPrice = Math.ceil(this._totalTime / 60);
+        let buttonDoneNowString = this._trainContainer.getChildByName("button_done_now").getChildByName("done_now_cost");
+        buttonDoneNowString.setString(doneNowPrice);
+    },
+
+    updateTotalTimeString: function () {
+        let totalTimeString = this._trainContainer.getChildByName("total_time_string");
+        totalTimeString.setString(this._totalTime + "s");
+    },
+
+    updateAndGetTotalTrainingTime: function () {
+        let total = 0;
+        let trainingQueue = this._curBarrack.getTrainingList();
+        for (let i = 0; i < trainingQueue.length; i++) {
+            total += TroopUltis.getTrainingTime(trainingQueue[i].cfgId) * trainingQueue[i].getCount();
+        }
+        this._totalTime = total;
+        return this._totalTime;
+    },
+
+
 
     handleChangePage: function (addition) {
         let trainPopup = this.getParent();
@@ -129,62 +168,14 @@ var TrainTroopPage = cc.Node.extend({
         testnetwork.connector.sendRequestTrainingCreate({cfgId: event.data.cfgId, count: event.data.count, barrackId: this._curBarrack.getId()});
     },
 
-    onCanCreateTrain: function (event) {
-        cc.log("ON CAN CREATE TRAIN ::::::::::::::::::::::::::", event.data.cfgId);
+    handleClickDoneNow: function () {
 
-        let troopCfgId = event.data.cfgId;
-        let count = event.data.count || 1;
-        let trainingQueue =  this._curBarrack.getTrainingList();
-
-        let found  = false;
-        if(!event.data.isInit) found = this._curBarrack.addToTrainingQueue({cfgId: troopCfgId, count: count});
-
-        if (!found) {
-            // create new waiting troop item;
-            let waitingTroop = new TroopTrainingItem(troopCfgId);
-            if (trainingQueue.length === 1) {
-                if(!event.data.isInit)  this._curBarrack.setLastTrainingTime(event.data.lastTrainingTime);
-                this._trainContainer.setVisible(true);
-                waitingTroop.setPosition(CURRENT_TROOP_TRAINING_POS.x, CURRENT_TROOP_TRAINING_POS.y);
-
-                if(!event.data.isInit) this.schedule(this.updateTrainTime, 1);
-
-            } else if (trainingQueue.length === 2) {
-                waitingTroop.setPosition(FIRST_WAITING_TRAINING_TROOP_POS.x, FIRST_WAITING_TRAINING_TROOP_POS.y);
-            } else {
-                let lastTroopWaiting = trainingQueue[trainingQueue.length - 1];
-                waitingTroop.setPosition(lastTroopWaiting.getPosition().x - TROOP_TRAIN_WAITING_SPACE - TROOP_TRAINING_ITEM_WIDTH, lastTroopWaiting.getPosition().y)
-            }
-            this._trainingItem.push(waitingTroop);
-            this._trainContainer.addChild(waitingTroop);
-        }
-        else {
-            let item = this._trainingItem.find(e => e.getCfgId() === event.data.cfgId);
-            item.setCount(item.getCount() + 1);
-        }
-
-        this._totalTime = this._totalTime + TroopUltis.getTrainingTime(troopCfgId);
-        this.updateTotalTimeString();
-
-        this.updateTrainingPopupTitle();
-        this.updateDoneNowPrice();
-
-    },
-
-    updateAndGetTotalTrainingTime: function () {
-        let total = 0;
-        let trainingQueue = this._curBarrack.getTrainingList();
-        for (let i = 0; i < trainingQueue.length; i++) {
-            total += TroopUltis.getTrainingTime(trainingQueue[i].cfgId) * trainingQueue[i].getCount();
-        }
-        this._totalTime = total;
-        return this._totalTime;
     },
 
     updateTrainTime: function () {
+        cc.log("CALL UPDATE TRAIN TIME");
 
         let trainingQueue = this._curBarrack.getTrainingList();
-        cc.log("UPDATE TRAIN TIME :::::::::::::::::::::::::::::::::::", trainingQueue.length)
         let curTroopTime = this._trainContainer.getChildByName("current");
         let curTroopTrainTime = TroopUltis.getTrainingTime(trainingQueue[0].cfgId);
         let processBar = curTroopTime.getChildByName("current_process");
@@ -193,7 +184,6 @@ var TrainTroopPage = cc.Node.extend({
         if (!this._available) {
             timeString.setString("DỪNG");
             processBar.setPercent(100);
-            this.unschedule(this.updateTrainTime);
 
         } else {
             let timeLeft = this._curBarrack.getLastTrainingTime() + curTroopTrainTime - TimeManager.Instance().getCurrentTimeInSecond();
@@ -205,27 +195,70 @@ var TrainTroopPage = cc.Node.extend({
 
         // update total time
         this._totalTime = this._totalTime - 1;
+
         this.updateTotalTimeString();
         this.updateDoneNowPrice();
 
         if (TimeManager.Instance().getCurrentTimeInSecond() >= this._curBarrack.getLastTrainingTime() + curTroopTrainTime) {
+            cc.log("STOP UPDATE UI")
+            this.stopUpdateUI();
             testnetwork.connector.sendRequestTrainingSuccess({isDoneNow: 0, barrackId: this._curBarrack.getId()})
         }
     },
 
-    updateDoneNowPrice: function () {
-        // update done now price
-        let doneNowPrice = Math.ceil(this._totalTime / 60);
-        let buttonDoneNowString = this._trainContainer.getChildByName("button_done_now").getChildByName("done_now_cost");
-        buttonDoneNowString.setString(doneNowPrice);
-    },
 
-    updateTotalTimeString: function () {
-        let totalTimeString = this._trainContainer.getChildByName("total_time_string");
-        totalTimeString.setString(this._totalTime + "s");
+    onCanCreateTrain: function (events) {
+        cc.log("ON CAN CREATE TRAIN ::::::::::::::::::::::::::" + JSON.stringify(events));
+
+        events.map(event => {
+
+            let troopCfgId = event.data.cfgId;
+            if(!troopCfgId) return;
+
+            let count = event.data.count || 1;
+            let trainingQueue =  this._curBarrack.getTrainingList();
+
+            // update UI
+            let found  = false;
+            if(!event.data.isInit) found = this._curBarrack.addToTrainingQueue({cfgId: troopCfgId, count: count});
+
+            if (!found) {
+                // create new waiting troop item;
+                let waitingTroop = new TroopTrainingItem(troopCfgId);
+                if (trainingQueue.length === 1) {
+                    if(!event.data.isInit)  this._curBarrack.setLastTrainingTime(event.data.lastTrainingTime);
+                    this._trainContainer.setVisible(true);
+                    waitingTroop.setPosition(CURRENT_TROOP_TRAINING_POS.x, CURRENT_TROOP_TRAINING_POS.y);
+
+                } else if (trainingQueue.length === 2) {
+                    waitingTroop.setPosition(FIRST_WAITING_TRAINING_TROOP_POS.x, FIRST_WAITING_TRAINING_TROOP_POS.y);
+                } else {
+                    let lastTroopWaiting = trainingQueue[trainingQueue.length - 1];
+                    waitingTroop.setPosition(lastTroopWaiting.getPosition().x - TROOP_TRAIN_WAITING_SPACE - TROOP_TRAINING_ITEM_WIDTH, lastTroopWaiting.getPosition().y)
+                }
+                this._trainingItem.push(waitingTroop);
+                this._trainContainer.addChild(waitingTroop);
+            }
+            else {
+                let item = this._trainingItem.find(e => e.getCfgId() === event.data.cfgId);
+                item.setCount(item.getCount() + 1);
+            }
+
+            this._totalTime = this._totalTime + TroopUltis.getTrainingTime(troopCfgId);
+
+            this.updateTotalTimeString();
+            this.updateTrainingPopupTitle();
+            this.updateDoneNowPrice();
+        })
+
+        if(!this._isActive && events.length >0) {
+            cc.log("UPDATE UI")
+            this.updateUI(1);
+        }
     },
 
     onTrainSuccess: function (data) {
+        cc.log("ON TRAIN SUCCESS " + JSON.stringify(data));
 
         this._curBarrack.removeFromTrainingQueue({cfgId: data.cfgId, count: 1, currentTime: data.lastTrainingTime});
 
@@ -233,7 +266,7 @@ var TrainTroopPage = cc.Node.extend({
             this._trainContainer.setVisible(false);
             this._trainingItem[0].removeFromParent();
             this._trainingItem = [];
-            this.unschedule(this.updateTrainTime);
+
         } else {
             let curTroopTime = this._trainContainer.getChildByName("current");
             let processBar = curTroopTime.getChildByName("current_process");
@@ -253,8 +286,5 @@ var TrainTroopPage = cc.Node.extend({
     },
 
 
-    handleClickDoneNow: function () {
-
-    }
 
 })

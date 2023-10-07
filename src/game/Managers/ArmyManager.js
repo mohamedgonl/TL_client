@@ -3,7 +3,8 @@ var ArmyManager = cc.Class.extend({
     _barrackList: [],
     _armyCampList: [],
     _armyAmount: {},
-    _totalSpace: 0,
+    _maxTotalSpace: 0,
+    _currentSpace:0,
 
     ctor: function () {
         this.init();
@@ -16,8 +17,8 @@ var ArmyManager = cc.Class.extend({
         this._barrackList.push(barack);
     },
 
-    updateTotalSpace: function (space) {
-        this._totalSpace = space;
+    updateMaxTotalSpace: function (space) {
+        this._maxTotalSpace = space;
         let event = new cc.EventCustom(TRAINING_EVENTS.UPDATE_SPACE);
         event.data ={
             space: space
@@ -25,6 +26,11 @@ var ArmyManager = cc.Class.extend({
         cc.eventManager.dispatchEvent(event);
 
     },
+
+    getCurrentSpace:  function () {
+
+    },
+
 
     getTotalSpace: function () {
         return this._totalSpace;
@@ -37,6 +43,18 @@ var ArmyManager = cc.Class.extend({
     getTroopCount : function () {
 
     },
+
+    updateArmyAmount: function (troops) {
+        troops.map(e => {
+            if(!this._armyAmount[e.cfgId]) {
+                this._armyAmount[e.cfgId] = e.count;
+            }
+            else {
+                this._armyAmount[e.cfgId] += e.count;
+            }
+            this._totalSpace += TROOP_BASE[e.cfgId]["housingSpace"] * e.count;
+        })
+    }
 
 
 

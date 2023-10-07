@@ -9,7 +9,6 @@ var TroopTrainingItem = cc.Node.extend({
         cc.eventManager.addListener(clickEventListener(this.handleCancleTroopTraining.bind(this)), this._node);
         this.setCount(1);
         this.loadData();
-        this.setTag(11119999)
         this.addChild(node);
     },
 

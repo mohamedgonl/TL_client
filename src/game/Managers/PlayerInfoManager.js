@@ -11,14 +11,16 @@ var PlayerInfoManager = cc.Layer.extend({
     },
 
     maxResource: {
-        gold: 1000000,
-        elixir: 1000000,
+        gold: 0,
+        elixir: 0,
     },
     resource: {
-        gold: 59000,
-        elixir: 78000,
-        gem: 242
+        gold: 0,
+        elixir: 0,
+        gem: 0
     },
+
+
 
     getMaxResource: function () {
         return this.maxResource;

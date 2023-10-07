@@ -73,7 +73,8 @@ testnetwork.Connector = cc.Class.extend({
             }
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
-            trainingPopup.getPage({barackId: packet.barrackId}).onCanCreateTrain(event);
+
+            trainingPopup.getPage({barackId: packet.barrackId}).onCanCreateTrain([event]);
 
         }
     },
@@ -138,7 +139,6 @@ testnetwork.Connector = cc.Class.extend({
     },
 
     sendGetTrainingList : function (data) {
-        cc.log(" TAO NHẬN " + JSON.stringify(data))
         var pk = this.gameClient.getOutPacket(CmdSendGetTrainingList);
         pk.pack(data);
         this.gameClient.sendPacket(pk);
