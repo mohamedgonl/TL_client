@@ -1,6 +1,5 @@
 var PlayerInfoManager = cc.Layer.extend({
     instance: null,
-
     id: null,
 
     info:{
@@ -9,7 +8,6 @@ var PlayerInfoManager = cc.Layer.extend({
         level: 1,
         rank: 1,
     },
-
     maxResource: {
         gold: 1000000,
         elixir: 1000000,
@@ -18,6 +16,14 @@ var PlayerInfoManager = cc.Layer.extend({
         gold: 59000,
         elixir: 78000,
         gem: 242
+    },
+    builder:{
+        current: 0,
+        max: 0,
+    },
+    army:{
+        current: 0,
+        max: 0,
     },
 
     getMaxResource: function () {
@@ -28,8 +34,11 @@ var PlayerInfoManager = cc.Layer.extend({
         return this.resource;
     },
     getInfo: function () {
+        return this.info;
     },
-
+    getBuilder: function () {
+        return this.builder;
+    },
     setResource: function ({gold, elixir, gem}) {
         if (gold) {
             this.resource.gold = gold;
@@ -76,19 +85,56 @@ var PlayerInfoManager = cc.Layer.extend({
         }
         this.setUI({maxResource: this.maxResource});
     },
-
-
-    //on changed info dispatch an event to InfoLayer to update UI
-
+    changeResource: function (type, value) {
+        if (type === "gold") {
+            this.resource.gold += value;
+        }
+        else if (type === "elixir") {
+            this.resource.elixir += value;
+        }
+        this.setUI({resource: this.resource});
+    },
+    changeMaxResource: function (type, value) {
+        if (type === "gold") {
+            this.maxResource.gold += value;
+        }
+        else if (type === "elixir") {
+            this.maxResource.elixir += value;
+        }
+        this.setUI({maxResource: this.maxResource});
+    },
+    changeBuilder: function (type, value) {
+        if (type === "current") {
+            this.builder.current += value;
+        }
+        else if (type === "max") {
+            this.builder.max += value;
+        }
+        this.setUI({builder: this.builder});
+    },
+    changeInfo: function (type, value) {
+        if (type === "name") {
+            this.info.name = value;
+        }
+        else if (type === "avatar") {
+            this.info.avatar = value;
+        }
+        else if (type === "level") {
+            this.info.level = value;
+        }
+        else if (type === "rank") {
+            this.info.rank = value;
+        }
+        this.setUI({info: this.info});
+    },
     setUI:function (data)
     {
         let InfoLayer = cc.director.getRunningScene().infoLayer;
         if(InfoLayer == null) return;
         InfoLayer.updateUI(data);
     },
-
-
 })
+
 PlayerInfoManager.Instance = function () {
     if (PlayerInfoManager.instance == null) {
         PlayerInfoManager.instance = new PlayerInfoManager();

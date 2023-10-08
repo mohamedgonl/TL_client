@@ -42,6 +42,11 @@ function findDistanceFromPointToLine(posA, posB, posC) {
 //getBuildingFromType(data.type, 1, data.id, data.posX, data.posY,data.status,data.startTime,data.endTime);
 function getBuildingFromType(type, level, id, posX, posY,status,startTime,endTime) {
     var building = null;
+    //log all param
+    // cc.log("type: " + type + " level: " + level +
+    //     " posX: " + posX + " posY: " + posY + " id: " + id +
+    //     " status: " + status + " startTime: " + startTime + " endTime: " + endTime);
+
 
     //obstacle
     if(type.substring(0,3) === 'OBS'){

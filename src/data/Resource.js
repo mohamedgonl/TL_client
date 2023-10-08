@@ -6,10 +6,13 @@
 var res = {
     FONT : {
         FISTA: {
-            "16": "res/fonts/fista_16_non.fnt"
+                16: "res/fonts/fista_16_non.fnt"
         },
          SOJI: {
-            "16": 'res/fonts/soji_12.fnt'
+                12: 'res/fonts/soji_12.fnt',
+                16: 'res/fonts/soji_12.fnt',
+                20: 'res/fonts/soji_20.fnt',
+                24: 'res/fonts/soji_24.fnt',
          }
     },
     BUTTON: {
@@ -18,6 +21,17 @@ var res = {
         INFO: 'res/guis/shopping/info.png',
         SHOP: "res/guis/Main_Gui/shop.png",
         TRAIN_TROOP: "res/guis/Main_Gui/003left_ic05.png",
+        ACCEPT: "res/guis/Action_Building_Icon/accept.png",
+        CANCEL: "res/guis/Action_Building_Icon/cancel.png",
+        HARVEST_ELIXIR: "res/guis/Action_Building_Icon/harvest_elixir.png",
+        HARVEST_GOLD: "res/guis/Action_Building_Icon/harvest_gold.png",
+        CANCEL_ICON: "res/guis/Action_Building_Icon/cancel_icon.png",
+        UPGRADE: "res/guis/Action_Building_Icon/upgrade_icon.png",
+        TRAIN: "res/guis/Action_Building_Icon/train_icon.png",
+        SELECT_LINE: "res/guis/Action_Building_Icon/select_line.png",
+        ROTATE: "res/guis/Action_Building_Icon/rotate_icon.png",
+        INFO_ICON: "res/guis/Action_Building_Icon/info_icon.png",
+        REMOVE: "res/guis/Action_Building_Icon/remove_icon.png",
     },
     ICON: {
         ELIXIR: 'res/guis/shopping/elixir.png',

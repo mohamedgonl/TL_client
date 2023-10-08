@@ -21,8 +21,8 @@ const CORNER_LEFT = cc.p(-745,0);
 const CORNER_RIGHT = cc.p(745,0);
 
 const MAP_ZORDER_GRID = 0;
-const MAP_ZORDER_BACKGROUND = 1;
-const MAP_ZORDER_BUILDING = 2; // max to about 400
+const MAP_ZORDER_BACKGROUND = 1000;
+const MAP_ZORDER_BUILDING = 2000; // max to about 400
 
 const MAP_ZORDER_TROOP = 500;
 
@@ -36,10 +36,14 @@ const ZORDER_BUILDING_SHADOW = 90;
 const ZORDER_BUILDING_UPPER = 110;
 const ZORDER_BUILDING_SQUARE = 10;
 const ZORDER_BUILDING_EFFECT = 150;
+const FONT_SIZE_NAME_LABEL = 16;
+
 
 
 //EVENT
 const EVENT_PLAYER_INFO_CHANGED = "event_player_info_changed";
+const EVENT_SELECT_BUILDING = "event_select_building";
+const EVENT_UNSELECT_BUILDING = "event_unselect_building";
 
 
 
@@ -50,3 +54,7 @@ const EVENT_PLAYER_INFO_CHANGED = "event_player_info_changed";
 //ANIMATION
 
 const COUNT_FRAME_GOLD_MINE_EFFECT = 10;
+
+//UI
+const SCALE_BUTTON_BUY_BUILDING = 0.4;
+const OFFSET_BUTTON_BUY_BUILDING = cc.p(30,30);

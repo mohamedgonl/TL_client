@@ -8,10 +8,12 @@ gv.CMD.USER_LOGIN = 1;
 
 gv.CMD.USER_INFO = 1001;
 gv.CMD.MAP_INFO = 1002;
-gv.CMD.MOVE = 2001;
+gv.CMD.MOVE = 9999;
 gv.CMD.BUY_RESOURCE = 4001;
 gv.CMD.TRAIN_TROOP_CREATE = 5001;
 gv.CMD.TRAIN_TROOP_SUCCESS = 5002;
+gv.CMD.MOVE_BUILDING = 2008;
+gv.CMD.BUY_BUILDING = 2001;
 
 
 
@@ -128,6 +130,39 @@ CmdSendTrainTroopSuccess = fr.OutPacket.extend(
     }
 )
 
+CmdSendMoveBuilding = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.MOVE_BUILDING);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.id);
+            this.putShort(data.posX);
+            this.putShort(data.posY);
+            this.updateSize();
+        }
+    }
+)
+CmdSendBuyBuilding = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.BUY_BUILDING);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putString(data.type);
+            this.putShort(data.posX);
+            this.putShort(data.posY);
+            this.updateSize();
+        }
+    }
+)
+
 
 
 CmdSendMove = fr.OutPacket.extend(
@@ -234,7 +269,13 @@ testnetwork.packetMap[gv.CMD.MAP_INFO] = fr.InPacket.extend(
                     posX: this.getInt(),
                     posY: this.getInt(),
                     status: this.getShort(),
+                    startTime: this.getInt(),
+                    endTime: this.getInt()
                 };
+
+                // console.log("id: " + building.id + " level: " + building.level +
+                //     " type: " + building.type + " posX: " + building.posX + " posY: " + building.posY + " status: " + building.status)
+
                 if (building.type.startsWith("RES"))
                     building.lastCollectTime = this.getInt();
                 this.listBuildings.push(building);
@@ -243,6 +284,16 @@ testnetwork.packetMap[gv.CMD.MAP_INFO] = fr.InPacket.extend(
     }
 );
 
+testnetwork.packetMap[gv.CMD.MOVE_BUILDING] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.error = this.getError();
+        }
+    }
+);
 
 testnetwork.packetMap[gv.CMD.MOVE] = fr.InPacket.extend(
     {
@@ -252,6 +303,25 @@ testnetwork.packetMap[gv.CMD.MOVE] = fr.InPacket.extend(
         readData: function () {
             this.x = this.getInt();
             this.y = this.getInt();
+        }
+    }
+);
+
+testnetwork.packetMap[gv.CMD.BUY_BUILDING] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+
+        },
+        readData: function () {
+            this.error = this.getError();
+            this.id = this.getInt();
+            this.type = this.getString();
+            this.posX = this.getShort();
+            this.posY = this.getShort();
+            this.status = this.getShort();
+            this.startTime = this.getInt();
+            this.endTime = this.getInt();
         }
     }
 );

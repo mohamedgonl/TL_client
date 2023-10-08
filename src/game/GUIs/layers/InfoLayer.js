@@ -3,70 +3,59 @@ var InfoLayer = cc.Layer.extend({
         ctor: function () {
             this._super();
             this.init();
-            this.loadFromServer();
-            //update all UI
-        },
-        loadFromServer: function () {
-            
-        },
-        onTouchShop: function (sender, type) {
-            if (type === 2) {
-                let popUplayer = cc.director.getRunningScene().getPopUpLayer();
-                if (popUplayer.isVisible()) {
-                    cc.log("onTouchShop:::::::::::::::::::::::::::");
-                    popUplayer.disappear("shop");
-                } else {
-                    popUplayer.appear("shop");
-                }
-            }
         },
 
-        //init UI, add to layer, init attributes
+        //init UI, add to layer, init attributes, load resources
         init: function () {
             var node = CCSUlties.parseUIFile(res_ui.INFO_LAYER);
             //for all child in node, add to layer
             let children = node.getChildren();
-
             //add to attribute
             children.map(i => {
-
                 this[i.getName()] = i;
-
                 let childrenOfChildren = i.getChildren();
-
                 childrenOfChildren.map(j => {
                     this[i.getName()] [j.getName()] = j;
-
                 })
-
             })
             this.addChild(node);
+            this.loadResources();
+            this.addEventListener();
+        },
 
-            //add touch event to btn_shop
-            this.btn_shop.addTouchEventListener(this.onTouchShop, (this));
-            this.btn_shop.setPressedActionEnabled(true);
+        //after init UI, get all resources to display
+        loadResources: function () {
+            var resource = PlayerInfoManager.Instance().resource;
+            var maxResource = PlayerInfoManager.Instance().maxResource;
+            var builder = PlayerInfoManager.Instance().builder;
+            var info = PlayerInfoManager.Instance().info;
+            // var army = PlayerInfoManager.Instance().army;
+            //update UI
+            this.updateUI({resource: resource, maxResource: maxResource, builder: builder, info: info});
+        },
 
-            //add touch event to btn_attack
-            this.btn_attack.addTouchEventListener(this.onTouchArmyAdd, this);
-            this.btn_attack.setPressedActionEnabled(true);
+        //add event listener to button
+        addEventListener: function () {
+            this.addTouchEventForButton(this.btn_attack, this.onTouchArmyAdd);
+            this.addTouchEventForButton(this.btn_shop, this.onTouchShop);
+            this.addTouchEventForButton(this.btn_setting, this.onTouchSetting);
+            this.addTouchEventForButton(this.g_container.btn_add, this.onTouchGAdd);
+            this.addTouchEventForButton(this.army_container.btn_add, this.onTouchArmyAdd);
+            this.addTouchEventForButton(this.builder_container.btn_add, this.onTouchBuilderAdd);
 
-            //add touch event to btn_setting
-            this.btn_setting.addTouchEventListener(this.onTouchSetting, this);
-            this.btn_setting.setPressedActionEnabled(true);
-
-            //add touch event to btn_add_G
-            this.g_container.btn_add.addTouchEventListener(this.onTouchGAdd, this);
-            this.g_container.btn_add.setPressedActionEnabled(true);
-
-            //add touch event to army add button
-            this.army_container.btn_add.addTouchEventListener(this.onTouchArmyAdd, this);
-            this.army_container.btn_add.setPressedActionEnabled(true);
-
-            //add touch event to builder add button
-            this.builder_container.btn_add.addTouchEventListener(this.onTouchBuilderAdd, this);
-            this.builder_container.btn_add.setPressedActionEnabled(true);
+            //listen to EVENT_SELECT_BUILDING with callback onSelectBuilding(id)
+            cc.eventManager.addCustomListener(EVENT_SELECT_BUILDING, this.onSelectBuilding.bind(this));
+            //listen to EVENT_UNSELECT_BUILDING with callback onUnselectBuilding()
+            cc.eventManager.addCustomListener(EVENT_UNSELECT_BUILDING, this.onUnselectBuilding.bind(this));
 
         },
+
+
+        addTouchEventForButton: function (button, callback) {
+            button.addTouchEventListener(callback, this);
+            button.setPressedActionEnabled(true);
+        },
+
         onTouchArmyAdd: function (sender, type) {
             if (type === 2) {
                 let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
@@ -78,16 +67,24 @@ var InfoLayer = cc.Layer.extend({
             }
         },
 
-        updateUI: function (event) {
-            cc.log("updateUI: " + JSON.stringify(event, null, 2));
-            return
+        onTouchShop: function (sender, type) {
+        if (type === 2) {
+            let popUplayer = cc.director.getRunningScene().getPopUpLayer();
+            if (popUplayer.isVisible()) {
+                cc.log("onTouchShop:::::::::::::::::::::::::::");
+                popUplayer.disappear("shop");
+            } else {
+                popUplayer.appear("shop");
+            }
+        }
+    },
 
-            //
-            if (event == null) return;
-
+        updateUI: function (data) {
+            if (data == null) return;
 
             //resource
             if (data.resource) {
+                cc.log("data.resource: " + JSON.stringify(data.resource, null, 2));
                 let res = data.resource;
                 if (res.gold) {
                     this.gold_container.getChildByName("text").setString(res.gold);
@@ -110,16 +107,18 @@ var InfoLayer = cc.Layer.extend({
             //max resource
             if (data.maxResource) {
                 if(data.maxResource.gold){
-                    this.gold_container.text_max.setString(data.maxResource.gold);
+                    this.gold_container.text_max.setString("Tối đa:"+data.maxResource.gold);
                 }
                 if(data.maxResource.elixir){
-                    this.elixir_container.text_max.setString(data.maxResource.elixir);
+                    this.elixir_container.text_max.setString("Tối đa:"+data.maxResource.elixir);
                 }
             }
-
-
+            if(data.builder){
+                //set text builder = available/total
+                this.builder_container.text.setString(data.builder.available + "/" + data.builder.total);
+            }
+            //army ------------------------------------------------------------
         },
-
 
         test: function (data, category) {
             this._super()
@@ -130,11 +129,26 @@ var InfoLayer = cc.Layer.extend({
             this._data = data;
             this.setItemInfo(data, category);
             this.addChild(node);
-        }
-        ,
+        },
 
-    })
-;
+        onSelectBuilding: function (event) {
+            let id = event.getUserData();
+            let building = MapManager.Instance().getBuildingById(id);
+            this.building_button = new SelectedBuildingContainer(building);
+            this.addChild(this.building_button,9999);
+            //set pos at middle bottom of screen
+            this.building_button.setPosition(cc.winSize.width / 2, 0);
+        },
+
+        onUnselectBuilding: function (event) {
+            if (this.building_button) {
+                this.building_button.removeFromParent(true);
+                this.building_button = null;
+            }
+        }
+
+
+    });
 
 InfoLayer.Instance = function () {
     if (!InfoLayer.instance) {

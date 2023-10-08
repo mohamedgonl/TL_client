@@ -38,6 +38,7 @@
         "src/base/network/GameClient.js",
         "src/base/network/GameClientListener.js",
         "src/base/network/InPacketFactory.js",
+
         "src/base/Resource.js",
         "src/base/UIFactory.js",
 
@@ -86,7 +87,9 @@
         "src/game/GUIs/views/TrainTroopPopup.js",
         "src/game/GUIs/components/TroopListItem.js",
         "src/game/GUIs/components/TroopTrainingItem.js",
+        "src/game/GUIs/components/SelectedBuildingContainer.js",
         "src/game/GUIs/views/NotiPopup.js",
+
 
 
         "src/game/GUIs/layers/InfoLayer.js",

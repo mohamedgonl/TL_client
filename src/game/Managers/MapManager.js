@@ -6,6 +6,7 @@ var MapManager = cc.Layer.extend({
     townHall: null,
     listStorage: [],
     listMine:[],
+    listBuilderHut: [],
     //mapGrid is [][]
     mapGrid: [],
     gameScene : null,
@@ -20,20 +21,16 @@ var MapManager = cc.Layer.extend({
                 this.mapGrid[i][j] = 0;
         }
 
-        //this.init();
-    },
-
-    init: function () {
-
-        this.setScale(ZOOM_DEFAULT);
-        this.addEvent();
-        this.initBackground();
     },
 
     //load from server
     //chua lam status
     loadFromServer: function (buildings){
-        //cc.log("load from server:", JSON.stringify(buildings, null, 2));
+        //cc.log("buildings",JSON.stringify(buildings,null,2));
+
+
+
+
         for(let index in buildings){
 
             let construct = buildings[index];
@@ -42,11 +39,14 @@ var MapManager = cc.Layer.extend({
             let posX =construct.posX;
             let posY =construct.posY;
             let level =construct.level;
+            let status = construct.status;
+            let startTime = construct.startTime;
+            let endTime = construct.endTime;
 
-            let building = getBuildingFromType(type, level,id, posX, posY);
+            let building = getBuildingFromType(type, level,id, posX, posY,status,startTime,endTime);
             if(building == null)
             {
-                //cc.log("building null------------------------------------------",type);
+                cc.log("building null------------------------------------------",type);
                 continue;
             }
             else
@@ -80,12 +80,10 @@ var MapManager = cc.Layer.extend({
             case 'TOW':
                 this.townHall = building;
                 break;
-            case 'GoldMine':
-            case 'ElixirMine':
+            case 'RES':
                 this.listMine.push(building);
                 break;
-            case 'GoldStorage':
-            case 'ElixirStorage':
+            case 'STO':
                 this.listStorage.push(building);
                 break;
             case 'BAR':
@@ -96,6 +94,11 @@ var MapManager = cc.Layer.extend({
                 let currentSpace = ArmyManager.Instance().getTotalSpace();
                 ArmyManager.Instance().updateTotalSpace(currentSpace + AMC["AMC_1"][building.level]["capacity"]);
                 break;
+            case 'BDH':
+                this.listBuilderHut.push(building);
+                var playerInfoManager = PlayerInfoManager.Instance();
+                playerInfoManager.changeBuilder("total",1);
+                playerInfoManager.changeBuilder("available",1);
         }
 
     },
@@ -128,7 +131,6 @@ var MapManager = cc.Layer.extend({
             return this.listBuildings.get(id) || null;
     },
 
-
     checkValidPutBuilding: function (building, newPosX, newPosY) {
         var id = building._id;
         var width = building._width;
@@ -160,6 +162,14 @@ var MapManager = cc.Layer.extend({
                     return {x: column, y: row};
 
         return null;
+    },
+    removeObstacle: function (obstacle){
+        //remove from list
+        this.listBuildings.delete(obstacle._id);
+        //remove from mapGrid
+        for(var column = obstacle._posX; column < obstacle._posX + obstacle._width; column++)
+            for(var row = obstacle._posY; row < obstacle._posY + obstacle._height; row++)
+                this.mapGrid[column][row] = 0;
     }
 
 

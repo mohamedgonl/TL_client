@@ -13,13 +13,13 @@ var MapLayer = cc.Layer.extend({
             x: 0,
             y: 0
         }
-
         this.init();
     },
+    addChoiceButtonToBuilding: function (building) {
 
+    },
     //init map layer with scale, add event, load background, load building
     init: function () {
-
         this.setScale(ZOOM_DEFAULT);
         this.addEventListener();
         this.initBackground();
@@ -109,19 +109,26 @@ var MapLayer = cc.Layer.extend({
                     this.acceptBuyBuilding();
                 }
                 if (keyCode === cc.KEY.z) {
-                    this.cancelBuyBuilding();
+                    this.exitModeBuyBuilding();
                 }
 
             }.bind(this)
 
         }, this);
     },
+    removeObstacle: function (obstacle) {
+        //remove child from layer
+        obstacle.removeFromParent(true);
+    },
 
-    cancelBuyBuilding: function () {
+    exitModeBuyBuilding: function () {
         this.chosenBuilding.removeFromParent();
         this.chosenBuilding = null;
         this.onModeBuyBuilding = false;
         this.tempPosChosenBuilding = null;
+        //bat lai info
+        var infoLayer = cc.director.getRunningScene().infoLayer;
+        infoLayer.setVisible(true);
     },
     acceptBuyBuilding: function () {
         //check valid put building
@@ -131,16 +138,29 @@ var MapLayer = cc.Layer.extend({
         }
 
         //gui cho server
+        // testnetwork.connector.sendBuyBuilding(this.chosenBuilding._type, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y);
         //id = getAllBuilding().length + 1
+
         let error = 0;
-        let id = MapManager.Instance().getAllBuilding().length + 2;
+        //get min id in list building
+        let listBuilding = MapManager.Instance().getAllBuilding();
+
+        let id = 1;
+        for (let i = 0; i < listBuilding.length; i++) {
+            if (listBuilding[i]._id === id) {
+                id++;
+            } else break;
+        }
+
         let type = this.chosenBuilding._type;
         let posX = this.tempPosChosenBuilding.x;
         let posY = this.tempPosChosenBuilding.y;
         let status = 1;
-        let startTime = TimeManager.Instance().getCurrentTimeInSecond();
-        let endTime = startTime + LoadManager.Instance().getConfig(type, 1, "buildTime");
-        this.onReceivedCheckBuyBuilding({error, id, type, posX, posY, status, startTime, endTime});
+        let startTime = Date.now();
+        let endTime = startTime + 10000;
+        cc.log(error);
+        this.onReceivedCheckBuyBuilding({error: error,id: id,type: type,posX: posX,posY: posY,
+                                                status: status,startTime: startTime,endTime: endTime});
 
     },
 
@@ -148,16 +168,23 @@ var MapLayer = cc.Layer.extend({
     //   input: type(str, posX(short), posY(short)
     //   output: error, id, type(str), posX, posY, status(short), startTime, endTime
     onReceivedCheckBuyBuilding: function (data) {
+
         if (data.error === 0) {
             cc.log("valid buy");
-            //xoa chosen building
-            this.chosenBuilding.removeFromParent();
-            this.chosenBuilding = null;
-            this.unSelectBuilding();
-            this.onModeBuyBuilding = false;
+
+            this.exitModeBuyBuilding();
+            cc.log("data building::::::::::::::::::::::",JSON.stringify(data,null,2));
+            cc.log("type::::::::::::::::::::::",data.type);
+            cc.log("id::::::::::::::::::::::",data.id);
+            cc.log("posX::::::::::::::::::::::",data.posX);
+            cc.log("posY::::::::::::::::::::::",data.posY);
+            cc.log("status::::::::::::::::::::::",data.status);
+            cc.log("startTime::::::::::::::::::::::",data.startTime);
+            cc.log("endTime::::::::::::::::::::::",data.endTime);
             let building = getBuildingFromType(data.type, 1, data.id, data.posX, data.posY,data.status,data.startTime,data.endTime);
             MapManager.Instance().addBuilding(building);
             this.addBuildingToLayer(building);
+            //bat lai info
         }
     },
 
@@ -207,7 +234,8 @@ var MapLayer = cc.Layer.extend({
     },
 
     getZOrderBuilding: function (gridPosX, gridPosY) {
-        return MAP_ZORDER_BUILDING + (GRID_SIZE - gridPosX) + (GRID_SIZE - gridPosY);
+        // gridPos cang thap thi zỎder cang cao, cao nhat la MAP_ZORDER_BUILDING
+        return MAP_ZORDER_BUILDING - gridPosX - gridPosY;
     },
 
     onTouchBegan: function (touch) {
@@ -236,11 +264,14 @@ var MapLayer = cc.Layer.extend({
 
         let newPos = this.getGridPosFromScreenPos(event.getLocation());
 
+        if(newPos == null) return;
+
         if (newPos.x !== this.tempPosChosenBuilding.x || newPos.y !== this.tempPosChosenBuilding.y) {
             this.moveBuildingInLayer(this.chosenBuilding, newPos.x, newPos.y);
 
         }
     },
+
     onTouchEnded: function (event) {
         var locationInScreen = event.getLocation();
         var distance = cc.pDistance(locationInScreen, this.positionTouchBegan);
@@ -251,23 +282,16 @@ var MapLayer = cc.Layer.extend({
 
     getBuildingFromTouch: function (locationInScreen) {
         let chosenGrid = this.getGridPosFromScreenPos(locationInScreen);
-
+        if (chosenGrid == null) return null;
         if (this.chosenBuilding != null) {
             let width = this.chosenBuilding._width;
             let height = this.chosenBuilding._height;
 
-            cc.log("-----------------------------------")
-            cc.log("chosen grid: " + chosenGrid.x + " " + chosenGrid.y)
-            cc.log("width: " + width + " height: " + height)
-            cc.log("current pos: " + this.tempPosChosenBuilding.x + " " + this.tempPosChosenBuilding.y)
-            cc.log("-----------------------------------")
             //if click in building -> return building
             if (chosenGrid.x >= this.tempPosChosenBuilding.x && chosenGrid.x < this.tempPosChosenBuilding.x + width
                 && chosenGrid.y >= this.tempPosChosenBuilding.y && chosenGrid.y < this.tempPosChosenBuilding.y + height) {
-                cc.log("click temp building")
                 return this.chosenBuilding;
             }
-
         }
 
         let mapGrid = MapManager.Instance().mapGrid;
@@ -285,9 +309,8 @@ var MapLayer = cc.Layer.extend({
 
             if (this.onModeMovingBuilding) {
                 this.exitModeMoveBuilding();
-
             }
-            this.unSelectBuilding();
+            else this.unSelectBuilding();
             return;
         }
 
@@ -300,9 +323,9 @@ var MapLayer = cc.Layer.extend({
 
     selectBuilding: function (building) {
         if (this.onModeBuyBuilding && building !== this.chosenBuilding) return;
+
         //if have chosen building, unselect it
         this.unSelectBuilding(this.chosenBuilding);
-        cc.log("select building " + building._id);
         this.tempPosChosenBuilding = cc.p(building._posX, building._posY);
         building.onSelected();
         this.chosenBuilding = building;
@@ -312,7 +335,6 @@ var MapLayer = cc.Layer.extend({
     unSelectBuilding: function () {
 
         if (this.chosenBuilding) {
-            cc.log("unselect building " + this.chosenBuilding._id);
             this.chosenBuilding.onUnselected();
         }
         this.chosenBuilding = null;
@@ -329,11 +351,10 @@ var MapLayer = cc.Layer.extend({
             //move back to old pos
             this.moveBuildingInLayer(this.chosenBuilding, this.chosenBuilding._posX, this.chosenBuilding._posY);
         }
+        this.unSelectBuilding();
     },
-
-
     enterModeMoveBuilding: function () {
-        this.chosenBuilding.setLocalZOrder(999);
+        this.chosenBuilding.setLocalZOrder(MAP_ZORDER_BUILDING+1);
         this.canDragBuilding = true;
         this.onModeMovingBuilding = true;
         var infoLayer = cc.director.getRunningScene().infoLayer;
@@ -346,17 +367,17 @@ var MapLayer = cc.Layer.extend({
         infoLayer.setVisible(false);
     },
     exitModeMoveBuilding: function () {
+        this.chosenBuilding.setLocalZOrder(this.getZOrderBuilding(this.chosenBuilding._posX, this.chosenBuilding._posY));
         this.canDragBuilding = false;
         this.onModeMovingBuilding = false;
         var infoLayer = cc.director.getRunningScene().infoLayer;
-
         var newPosX = this.tempPosChosenBuilding.x;
         var newPosY = this.tempPosChosenBuilding.y;
         var mapManager = MapManager.Instance();
 
         if (mapManager.checkValidPutBuilding(this.chosenBuilding, newPosX, newPosY)) {
-            //testnetwork.connector.sendMoveBuilding(this.chosenBuilding._id,newPosX,newPosY);
-            this.onReceivedCheckMoveBuilding({error: 0})
+            testnetwork.connector.sendMoveBuilding(this.chosenBuilding._id,newPosX,newPosY);
+            // this.onReceivedCheckMoveBuilding({error: 0})
         } else {
             //move back to old pos
             this.moveBuildingInLayer(this.chosenBuilding, this.chosenBuilding._posX, this.chosenBuilding._posY);
@@ -516,64 +537,60 @@ var MapLayer = cc.Layer.extend({
     test: function () {
 
         //add building to layer
-        this.buyBuilding("AMC_1");
+        this.enterModeBuyBuilding("AMC_1");
 
     },
-    buyBuilding: function (buildingType) {
+    enterModeBuyBuilding: function (buildingType) {
 
         if(this.onModeBuyBuilding){
 
-            this.cancelBuyBuilding();
+            this.exitModeBuyBuilding();
         }
         else (this.chosenBuilding !== null)
         {
             this.unSelectBuilding();
         }
 
-
         this.onModeBuyBuilding = true;
         this.chosenBuilding = getBuildingFromType(buildingType, 1)
-        // this.chosenBuilding.setType(buildingType)
+
+        //add button accept and cancel to building
+        var buttonAccept = new ccui.Button(res.BUTTON.ACCEPT);
+        buttonAccept.setScale(SCALE_BUTTON_BUY_BUILDING);
+        buttonAccept.setPosition(OFFSET_BUTTON_BUY_BUILDING);
+        buttonAccept.addClickEventListener(this.acceptBuyBuilding.bind(this));
+        this.chosenBuilding.addChild(buttonAccept, MAP_ZORDER_GUI);
+
+        var buttonCancel = new ccui.Button(res.BUTTON.CANCEL);
+        buttonCancel.setScale(SCALE_BUTTON_BUY_BUILDING);
+        buttonCancel.setPosition(cc.p(-OFFSET_BUTTON_BUY_BUILDING.x, OFFSET_BUTTON_BUY_BUILDING.y));
+        buttonCancel.addClickEventListener(this.exitModeBuyBuilding.bind(this));
+        this.chosenBuilding.addChild(buttonCancel, MAP_ZORDER_GUI);
+
+
+        //set position of building
         let validPosition = MapManager.Instance().getEmptyPositionPutBuilding(this.chosenBuilding);
-        if (validPosition != null) {
-            this.chosenBuilding.setGridPosition(validPosition.x, validPosition.y);
-            this.tempPosChosenBuilding = cc.p(validPosition.x, validPosition.y);
-        } else {
-            cc.log("no valid position");
-            this.chosenBuilding.setGridPosition(GRID_SIZE / 2, GRID_SIZE / 2)
-            this.tempPosChosenBuilding = cc.p(GRID_SIZE / 2, GRID_SIZE / 2);
-        }
+        if(validPosition == null) validPosition = cc.p(GRID_SIZE / 2, GRID_SIZE / 2)
+        this.chosenBuilding.setGridPosition(validPosition.x, validPosition.y);
+        this.tempPosChosenBuilding = cc.p(validPosition.x, validPosition.y);
 
-        //set this.chosenBuilding
-        //set square of this.chosenBuilding depend on valid position
-
-        if (MapManager.Instance().checkValidPutBuilding(
-            this.chosenBuilding, this.chosenBuilding._posX, this.chosenBuilding._posY))
+        //set square of this.chosenBuilding depend on valid position : red or green
+        if (MapManager.Instance().checkValidPutBuilding( this.chosenBuilding, this.chosenBuilding._posX, this.chosenBuilding._posY))
         {
             this.chosenBuilding.setSquare(1);
         }
         else
             this.chosenBuilding.setSquare(2);
 
+        //add building to layer to display
         this.addBuildingToLayer(this.chosenBuilding,MAP_ZORDER_BUILDING);
+
+        //set chosen building
         this.selectBuilding(this.chosenBuilding);
 
     },
     print: function () {
-        cc.log(this.chosenBuilding);
-        //log all building in MapManager
-        // var listBuilding = MapManager.Instance().getAllBuilding();
-        // for (var i = 0; i < listBuilding.length; i++) {
-        //     var building = listBuilding[i];
-        //     cc.log("building " + building._id + " " + building._type + " " + building._level + " " + building._posX + " " + building._posY);
-        // }
-        //log canDragBuilding, onModeMovingBuilding, chosenBuilding, tempPosChosenBuilding
-        // cc.log("-----------------------------------")
-        // cc.log("canDragBuilding: " + this.canDragBuilding);
-        // cc.log("onModeMovingBuilding: " + this.onModeMovingBuilding);
-        // cc.log("chosenBuilding: " + this.chosenBuilding);
-        // cc.log("tempPosChosenBuilding: " + this.tempPosChosenBuilding.x + " " + this.tempPosChosenBuilding.y);
-        // cc.log("-----------------------------------")
+
     }
 
 

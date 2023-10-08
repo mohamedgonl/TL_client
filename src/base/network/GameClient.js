@@ -73,7 +73,7 @@ var GameClient = cc.Class.extend(
         },
         _onReceived:function(cmd, pkg)
         {
-            cc.log("_onReceived:", cmd, pkg);
+            cc.log("_onReceived:", cmd, JSON.stringify(pkg,null,2));
             var packet = gv.gameClient.getInPacket(cmd,pkg);
             if(packet == null) {
                 cc.log("PACKET NULL!");
