@@ -36,6 +36,9 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.TRAIN_TROOP_SUCCESS:
                 this.onReceiveTrainTroopSuccess(packet);
                 break;
+            case gv.CMD.CANCLE_TRAINING:
+                this.onReceiveCancleTrain(packet);
+                break;
             case gv.CMD.GET_TRAINING_LIST:
                 this.onReceiveGetTrainingList(packet);
                 break;
@@ -54,7 +57,13 @@ testnetwork.Connector = cc.Class.extend({
             cc.log("TRAIN TROOP DONE REQUEST SUCCESS ::::::::: ");
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
-            trainingPopup.getPage({barackId: packet.barrackId}).onTrainSuccess(packet);
+            let trainingPage = trainingPopup.getPage({barackId: packet.barrackId});
+            if(packet.isDoneNow) {
+                trainingPage.onDoneNowSuccess(packet);
+            }
+            else {
+                trainingPage.onTrainSuccess(packet);
+            }
         }
     },
 
@@ -99,6 +108,27 @@ testnetwork.Connector = cc.Class.extend({
         }
     },
 
+    onReceiveCancleTrain: function (packet) {
+        if(packet.getError() !== ErrorCode.SUCCESS) {
+            cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
+        }
+        else {
+            cc.log("TRAIN TROOP CANCLE REQUEST SUCCESS ::::::::: ");
+            let event = {}
+            event.data = {
+                barrackId: packet.barrackId,
+                cfgId: packet.cfgId,
+                lastTrainingTime: packet.lastTrainingTime,
+                additionElixir: packet.additionElixir,
+            }
+            let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
+            let trainingPopup = popUpLayer.getTrainingPopup();
+            cc.log("DÂT TRUYEN VAO DAY NE EM  "+ JSON.stringify(event))
+            trainingPopup.getPage({barackId: packet.barrackId}).onCancleTrainTroopSuccess(event);
+
+        }
+    },
+
     sendGetUserInfo: function () {
         cc.log("sendGetUserInfo");
         var pk = this.gameClient.getOutPacket(CmdSendUserInfo);
@@ -128,6 +158,13 @@ testnetwork.Connector = cc.Class.extend({
     sendRequestTrainingCreate: function (data) {
         cc.log("SEND train troop create request");
         var pk = this.gameClient.getOutPacket(CmdSendTrainTroopCreate);
+        pk.pack(data);
+        this.gameClient.sendPacket(pk);
+    },
+
+    sendRequestCancleTrain: function (data) {
+        cc.log("SEND train troop create request");
+        var pk = this.gameClient.getOutPacket(CmdSendCancleTrain);
         pk.pack(data);
         this.gameClient.sendPacket(pk);
     },

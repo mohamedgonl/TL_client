@@ -41,7 +41,6 @@ var Barrack = Building.extend({
     },
 
     removeFromTrainingQueue: function ({cfgId, count, currentTime}) {
-        cc.log("REMOVE nhận params:::::::::::::", cfgId, count, currentTime);
         this._lastTrainingTime = currentTime;
         for (let i = 0; i < this._trainingQueue.length; i++) {
             if(this._trainingQueue[i].cfgId === cfgId) {
@@ -63,12 +62,6 @@ var Barrack = Building.extend({
     getMaxSpace: function () {
         return BAR["BAR_1"][this.level]["queueLength"];
     },
-
-    test: function () {
-        this._test++;
-        cc.log("TEST CHANGE ::::", this._test);
-    }
-
 
 
     
