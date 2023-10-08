@@ -83,9 +83,8 @@ var MapManager = cc.Layer.extend({
             case 'BAR':
                 ArmyManager.Instance().pushBarrack(building);
                 break;
-            case 'ArmyCamp':
-                let currentSpace = ArmyManager.Instance().getTotalSpace();
-                ArmyManager.Instance().updateTotalSpace(currentSpace + AMC["AMC_1"][building.level]["capacity"]);
+            case 'AMC':
+                ArmyManager.Instance().pushArmyCamp(building);
                 break;
         }
 

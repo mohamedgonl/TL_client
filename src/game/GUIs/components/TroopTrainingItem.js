@@ -1,9 +1,10 @@
 var TroopTrainingItem = cc.Node.extend({
     _troopCfgId: null,
     _count : null,
-    ctor: function (cfgId) {
+    ctor: function (cfgId,curpage) {
         this._super();
         this._troopCfgId = cfgId;
+        this._curPage= curpage;
         let node = CCSUlties.parseUIFile(res_ui.TROOPS_TRAINING_ITEM);
         this._node = node.getChildByName("bg");
         cc.eventManager.addListener(clickEventListener(this.handleCancleTroopTraining.bind(this)), this._node);
@@ -19,10 +20,10 @@ var TroopTrainingItem = cc.Node.extend({
     },
 
     handleCancleTroopTraining: function () {
-        this.setCount(this._count - 1);
-        let event = new cc.EventCustom(TRAINING_EVENTS.CANCLE);
+        let event = new cc.EventCustom(TRAINING_EVENTS.CANCLE+ this._curPage);
         let cfgId = this._troopCfgId;
-        event.data = {cfgId: cfgId};
+        let barrackId = ArmyManager.Instance().getBarrackList()[this._curPage].getId();
+        event.data = {cfgId: cfgId, barrackId: barrackId};
         cc.eventManager.dispatchEvent(event);
     },
 

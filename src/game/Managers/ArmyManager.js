@@ -17,6 +17,11 @@ var ArmyManager = cc.Class.extend({
         this._barrackList.push(barack);
     },
 
+    pushArmyCamp: function (armyCamp) {
+        this._armyCampList.push(armyCamp);
+        this._maxTotalSpace += AMC["AMC_1"][armyCamp.level]["capacity"];
+    },
+
     updateMaxTotalSpace: function (space) {
         this._maxTotalSpace = space;
         let event = new cc.EventCustom(TRAINING_EVENTS.UPDATE_SPACE);
@@ -28,7 +33,11 @@ var ArmyManager = cc.Class.extend({
     },
 
     getCurrentSpace:  function () {
+        return this._currentSpace;
+    },
 
+    getMaxSpace  :function () {
+        return this._maxTotalSpace;
     },
 
 
@@ -52,7 +61,7 @@ var ArmyManager = cc.Class.extend({
             else {
                 this._armyAmount[e.cfgId] += e.count;
             }
-            this._totalSpace += TROOP_BASE[e.cfgId]["housingSpace"] * e.count;
+            this._currentSpace += TROOP_BASE[e.cfgId]["housingSpace"] * e.count;
         })
     }
 

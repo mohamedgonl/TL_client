@@ -13,6 +13,7 @@ gv.CMD.BUY_RESOURCE = 4001;
 gv.CMD.TRAIN_TROOP_CREATE = 5001;
 gv.CMD.TRAIN_TROOP_SUCCESS = 5002;
 gv.CMD.GET_TRAINING_LIST = 5003;
+gv.CMD.CANCLE_TRAINING = 5004;
 
 
 
@@ -107,7 +108,7 @@ CmdSendTrainTroopCreate = fr.OutPacket.extend(
             this.packHeader();
             this.putString(data.cfgId);
             this.putInt(data.count);
-            this.putInt(data.barrackId);
+            this.putInt(data.barrackId)
             this.updateSize();
         }
     }
@@ -140,6 +141,22 @@ CmdSendGetTrainingList = fr.OutPacket.extend(
         pack: function (data) {
             this.packHeader();
             this.putInt(data.barrackId);
+            this.updateSize();
+        }
+    }
+)
+
+CmdSendCancleTrain = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.CANCLE_TRAINING);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.barrackId);
+            this.putString(data.cfgId);
             this.updateSize();
         }
     }
@@ -245,6 +262,21 @@ testnetwork.packetMap[gv.CMD.TRAIN_TROOP_SUCCESS] = fr.InPacket.extend(
             this.barrackId = this.getInt();
             this.cfgId = this.getString();
             this.lastTrainingTime = this.getInt();
+            this.gem = this.getInt();
+        }
+    }
+);
+
+testnetwork.packetMap[gv.CMD.CANCLE_TRAINING] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.barrackId = this.getInt();
+            this.cfgId = this.getString();
+            this.lastTrainingTime = this.getInt();
+            this.additionElixir = this.getInt();
         }
     }
 );
