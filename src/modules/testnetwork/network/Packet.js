@@ -122,7 +122,6 @@ CmdSendTrainTroopSuccess = fr.OutPacket.extend(
             this.setCmdId(gv.CMD.TRAIN_TROOP_SUCCESS);
         },
         pack: function (data) {
-            cc.log("PACKET ::::: ",data.isDoneNow, data.barrackId);
             this.packHeader();
             this.putInt(data.isDoneNow);
             this.putInt(data.barrackId);

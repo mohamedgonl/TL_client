@@ -3,7 +3,7 @@ var PlayerInfoManager = cc.Layer.extend({
 
     id: null,
 
-    info:{
+    info: {
         name: "",
         avatar: "",
         level: 1,
@@ -19,7 +19,6 @@ var PlayerInfoManager = cc.Layer.extend({
         elixir: 0,
         gem: 0
     },
-
 
 
     getMaxResource: function () {
@@ -44,7 +43,21 @@ var PlayerInfoManager = cc.Layer.extend({
         this.onChangedInfo({resource: this.resource});
     },
 
-    setId : function (id) {
+    addResource: function ({gold, elixir, gem}) {
+        if (gold) {
+            this.resource.gold += gold;
+        }
+        if (elixir) {
+            this.resource.elixir += elixir;
+        }
+        if (gem) {
+            this.resource.gem += gem;
+        }
+
+        this.onChangedInfo({resource: this.resource});
+    },
+
+    setId: function (id) {
         this.id = id;
     },
 

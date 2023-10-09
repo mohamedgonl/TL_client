@@ -47,8 +47,11 @@ var MapManager = cc.Layer.extend({
             if(building == null) continue;
             this.addBuilding(building);
         }
+        cc.log("MAP GRID: \n" + JSON.stringify(this.mapGrid))
 
     },
+
+
 
     //add building to list and to grid
     addBuilding: function (building) {

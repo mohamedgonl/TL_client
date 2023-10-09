@@ -13,6 +13,8 @@ var TroopTrainingItem = cc.Node.extend({
         this.addChild(node);
     },
 
+
+
     loadData: function () {
         let icon = this._node.getChildByName("troop_icon");
         icon.loadTexture(TROOP_SMALL_ICON_BASE_URL+this._troopCfgId+".png");
@@ -32,6 +34,7 @@ var TroopTrainingItem = cc.Node.extend({
     },
 
     setCount : function (count) {
+        cc.log("SET LẠI COUNT "+ count);
         let countString = this._node.getChildByName("count_string");
         countString.setString("x"+count);
         this._count = count;

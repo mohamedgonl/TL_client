@@ -119,11 +119,11 @@ testnetwork.Connector = cc.Class.extend({
                 barrackId: packet.barrackId,
                 cfgId: packet.cfgId,
                 lastTrainingTime: packet.lastTrainingTime,
-                additionElixir: packet.additionElixir,
             }
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
             cc.log("DÂT TRUYEN VAO DAY NE EM  "+ JSON.stringify(event))
+            PlayerInfoManager.Instance().addResource({elixir: event.data.additionElixir});
             trainingPopup.getPage({barackId: packet.barrackId}).onCancleTrainTroopSuccess(event);
 
         }

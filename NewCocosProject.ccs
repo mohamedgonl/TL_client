@@ -1712,6 +1712,7 @@
         <TmxFile Name="42x42map.tmx" />
         <Project Name="ItemInfoPopup.csd" Type="Node" />
         <Project Name="Layer1.csd" Type="Layer" />
+        <Project Name="LoginScene.csd" Type="Scene" />
         <Project Name="NotiPopup.csd" Type="Node" />
         <Project Name="ProcessBar.csd" Type="Node" />
         <Project Name="ShopItem.csd" Type="Node" />
@@ -1720,7 +1721,7 @@
         <Project Name="TroopListItem.csd" Type="Node" />
         <Project Name="TroopTrainingItem.csd" Type="Node" />
         <Project Name="TroopTrainPopup.csd" Type="Node" />
-        <Project Name="LoginScene.csd" Type="Scene" />
+        <Project Name="Skeleton.csd" Type="Skeleton" />
       </RootFolder>
     </Group>
   </SolutionFolder>

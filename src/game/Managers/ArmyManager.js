@@ -62,7 +62,9 @@ var ArmyManager = cc.Class.extend({
                 this._armyAmount[e.cfgId] += e.count;
             }
             this._currentSpace += TROOP_BASE[e.cfgId]["housingSpace"] * e.count;
-        })
+        });
+
+
     }
 
 

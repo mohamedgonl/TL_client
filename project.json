@@ -72,6 +72,7 @@
         "src/game/GameObjects/buildings/Barrack.js",
         "src/game/GameObjects/buildings/Cannon.js",
         "src/game/GameObjects/Obstacle.js",
+        "src/game/GameObjects/troops/Troop.js",
 
         "src/game/Managers/MapManager.js",
         "src/game/Managers/ArmyManager.js",
@@ -83,6 +84,7 @@
         "src/game/GUIs/components/ShopItem.js",
 
         "src/game/GUIs/scenes/LoginView.js",
+        "src/game/GUIs/scenes/TestScene.js",
         "src/game/GUIs/views/TrainTroopPopup.js",
         "src/game/GUIs/views/TrainTroopPage.js",
         "src/game/GUIs/components/TroopListItem.js",

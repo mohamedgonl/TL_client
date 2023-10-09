@@ -178,7 +178,6 @@ var TrainTroopPage = cc.Node.extend({
     },
 
     updateTrainTime: function () {
-        cc.log("CALL UPDATE TRAIN TIME");
 
         let trainingQueue = this._curBarrack.getTrainingList();
         let curTroopTrainTime = TroopUltis.getTrainingTime(trainingQueue[0].cfgId);
@@ -294,13 +293,16 @@ var TrainTroopPage = cc.Node.extend({
     },
 
     onCancleTrainTroopSuccess:function (event) {
-        cc.log("CATCH event:::", event.getEventName());
+        cc.log("ON CANCLE TRAIN TROOP" );
 
         let troopCfgId = event.data.cfgId;
+        this._curBarrack.removeFromTrainingQueue({cfgId: troopCfgId, count: 1, currentTime: event.data.lastTrainingTime})
         let trainingQueue = this._trainingItem;
+
+        // update ui
         for (let i = 0; i < trainingQueue.length; i++) {
 
-            if (trainingQueue[i].cfgId === troopCfgId) {
+            if (trainingQueue[i].getCfgId() === troopCfgId) {
                 let count = trainingQueue[i].getCount();
                 trainingQueue[i].setCount(count-1);
                 if (count === 0) {
@@ -315,11 +317,12 @@ var TrainTroopPage = cc.Node.extend({
                 if (trainingQueue.length === 0) {
                     this._trainContainer.setVisible(false);
                 }
-
-                this._curBarrack.removeFromTrainingQueue({cfgId: troopCfgId, count: 1, currentTime: event.lastTrainingTime})
+                this.updateTrainingPopupTitle();
+                this.updateSpaceAfterTrainLabel();
                 return;
             }
         }
+
         cc.log("BUG:::: Handle Cancle Training:::: not found troopcfgId:::", troopCfgId);
     }
 
