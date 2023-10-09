@@ -9,5 +9,7 @@ var ElixirMine = Building.extend({
         var upper_sprite = res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level] + "/image0000.png";
         this.loadSprite(res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level],upper_sprite,1);
         this.loadSubSprite();
+        this.update();
+        this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
     },
 });

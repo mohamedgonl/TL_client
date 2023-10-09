@@ -9,13 +9,13 @@ var PlayerInfoManager = cc.Layer.extend({
         rank: 1,
     },
     maxResource: {
-        gold: 1000000,
-        elixir: 1000000,
+        gold: 0,
+        elixir: 0,
     },
     resource: {
-        gold: 59000,
-        elixir: 78000,
-        gem: 242
+        gold: 0,
+        elixir: 0,
+        gem: 0
     },
     builder:{
         current: 0,
@@ -92,6 +92,7 @@ var PlayerInfoManager = cc.Layer.extend({
         else if (type === "elixir") {
             this.resource.elixir += value;
         }
+        else return;
         this.setUI({resource: this.resource});
     },
     changeMaxResource: function (type, value) {
@@ -101,6 +102,7 @@ var PlayerInfoManager = cc.Layer.extend({
         else if (type === "elixir") {
             this.maxResource.elixir += value;
         }
+        else return;
         this.setUI({maxResource: this.maxResource});
     },
     changeBuilder: function (type, value) {
@@ -110,6 +112,7 @@ var PlayerInfoManager = cc.Layer.extend({
         else if (type === "max") {
             this.builder.max += value;
         }
+        else return;
         this.setUI({builder: this.builder});
     },
     changeInfo: function (type, value) {
@@ -126,6 +129,12 @@ var PlayerInfoManager = cc.Layer.extend({
             this.info.rank = value;
         }
         this.setUI({info: this.info});
+    },
+    checkEnoughResource: function (gold, elixir) {
+        if (this.resource.gold >= gold && this.resource.elixir >= elixir) {
+            return true;
+        }
+        return false;
     },
     setUI:function (data)
     {

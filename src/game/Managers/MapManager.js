@@ -67,7 +67,8 @@ var MapManager = cc.Layer.extend({
         let id = building._id;
         let width = building._width;
         let height = building._height;
-
+        let level = building._level;
+        let typeBuilding = building._type;
 
         for(let column = posX; column < posX + width; column++)
             for(let row = posY; row < posY + height; row++)
@@ -76,15 +77,26 @@ var MapManager = cc.Layer.extend({
         // add to list building {building._id: building}
         this.listBuildings.set(building._id, building);
 
-        switch (building.getType().substring(0,3)){
+        //update list storage, list mine, list builder hut
+        var playerInfoManager = PlayerInfoManager.Instance();
+
+        switch (typeBuilding.substring(0,3)){
             case 'TOW':
                 this.townHall = building;
+                let capacityGold = LoadManager.Instance().getConfig(typeBuilding,level,"capacityGold");
+                let capacityElixir = LoadManager.Instance().getConfig(typeBuilding,level,"capacityElixir");
+                playerInfoManager.changeMaxResource("gold",capacityGold);
+                playerInfoManager.changeMaxResource("elixir",capacityElixir);
                 break;
             case 'RES':
                 this.listMine.push(building);
+
                 break;
             case 'STO':
                 this.listStorage.push(building);
+                let capacityBuilding = LoadManager.Instance().getConfig(typeBuilding,level,"capacity");
+                let typeResource = LoadManager.Instance().getConfig(typeBuilding,level,"type");
+                playerInfoManager.changeMaxResource(typeResource,capacityBuilding);
                 break;
             case 'BAR':
                 //cc.log("hanve barrack+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
@@ -96,9 +108,8 @@ var MapManager = cc.Layer.extend({
                 break;
             case 'BDH':
                 this.listBuilderHut.push(building);
-                var playerInfoManager = PlayerInfoManager.Instance();
-                playerInfoManager.changeBuilder("total",1);
-                playerInfoManager.changeBuilder("available",1);
+                playerInfoManager.changeBuilder("current",1);
+                playerInfoManager.changeBuilder("max",1);
         }
 
     },

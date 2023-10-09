@@ -315,13 +315,15 @@ testnetwork.packetMap[gv.CMD.BUY_BUILDING] = fr.InPacket.extend(
         },
         readData: function () {
             this.error = this.getError();
-            this.id = this.getInt();
-            this.type = this.getString();
-            this.posX = this.getShort();
-            this.posY = this.getShort();
-            this.status = this.getShort();
-            this.startTime = this.getInt();
-            this.endTime = this.getInt();
+            if(this.error === 0) {
+                this.id = this.getInt();
+                this.type = this.getString();
+                this.posX = this.getShort();
+                this.posY = this.getShort();
+                this.status = this.getShort();
+                this.startTime = this.getInt();
+                this.endTime = this.getInt();
+            }
         }
     }
 );

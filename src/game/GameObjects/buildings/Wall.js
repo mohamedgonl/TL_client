@@ -8,6 +8,8 @@ var Wall = Building.extend({
 
         this.loadSprite(res_map.SPRITE.BODY.WALL[level],null,0);
         this.loadSubSprite();
+        this.update();
+        this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
     },
 
 

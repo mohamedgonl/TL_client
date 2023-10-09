@@ -62,10 +62,10 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.BUY_BUILDING:
                 cc.log("BUY_BUILDING", packet);
                 cc.director.getRunningScene().mapLayer.onReceivedCheckBuyBuilding(packet);
-
+                break;
             case gv.CMD.MOVE:
                 cc.log("MOVE:", packet.x, packet.y);
-                fr.getCurrentScreen().updateMove(packet.x, packet.y);
+                // fr.getCurrentScreen().updateMove(packet.x, packet.y);
                 break;
         }
     },
