@@ -1,10 +1,11 @@
 var TestScene = cc.Scene.extend({
     ctor: function () {
+        this._super();
+        cc.log("INIT SCENE")
         let troop = new Troop("ARM_1", 1);
-
-        troop.setPosition(cc.winSize.width/2, cc.winSize.height/2);
-
         this.addChild(troop)
+
+
     },
 
 

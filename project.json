@@ -34,6 +34,7 @@
         "src/framework/StringUtils.js",
         "src/framework/UserData.js",
         "src/framework/utils/utils.js",
+        "src/framework/NumberUltis.js",
 
         "src/base/network/GameClient.js",
         "src/base/network/GameClientListener.js",
@@ -54,6 +55,7 @@
         "src/game/gamecfg/shopConfig.js",
         "src/game/gamecfg/config.js",
         "src/game/gamecfg/trainningConfig.js",
+        "src/game/gamecfg/troopConfig.js",
 
 
         "src/game/Managers/ConfigManager.js",
@@ -84,7 +86,6 @@
         "src/game/GUIs/components/ShopItem.js",
 
         "src/game/GUIs/scenes/LoginView.js",
-        "src/game/GUIs/scenes/TestScene.js",
         "src/game/GUIs/views/TrainTroopPopup.js",
         "src/game/GUIs/views/TrainTroopPage.js",
         "src/game/GUIs/components/TroopListItem.js",
@@ -96,9 +97,8 @@
         "src/game/GUIs/layers/PopUpLayer.js",
         "src/game/GUIs/layers/MapLayer.js",
 
-
-
         "src/game/GUIs/scenes/GameScene.js",
+        "src/game/GUIs/scenes/TestScene.js",
 
         "src/framework/ButtonEffect.js",
         "src/framework/CocosstudioUltis.js",
