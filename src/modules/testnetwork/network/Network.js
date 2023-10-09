@@ -13,6 +13,7 @@ testnetwork.Connector = cc.Class.extend({
     },
     onReceivedPacket: function (cmd, packet) {
         cc.log("onReceivedPacket:", cmd);
+
         switch (cmd) {
             case gv.CMD.HAND_SHAKE:
                 this.sendLoginRequest(PlayerInfoManager.Instance().id);

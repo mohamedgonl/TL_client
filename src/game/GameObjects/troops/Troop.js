@@ -10,14 +10,11 @@ var Troop = cc.Node.extend({
 
         let url = TroopConfig.BASE_URL + cfgId +"_" + level + "/" + cfgId+ "_" + level;
         let troop = new cc.Sprite(url+"/idle/image0000.png");
-        this.addChild(troop);
-        troop.setPosition(cc.winSize.width/2, cc.winSize.height/2);
-
+        this.setScale(0.5)
 
         var animation = new cc.Animation();
-        for (var i = TroopConfig.ARM_1.run.down[0]; i <= TroopConfig.ARM_1.run.down[1]; i++) {
-            // var frameName = url+"/run/image000"+i+".png";
-            var frameName = url+"/run/image"+NumberUltis.formatNumberTo4Digits(i)+".png";
+        for (let i = TroopConfig[cfgId].run.down[0]; i <= TroopConfig[cfgId].run.down[1]; i++) {
+            let frameName = url+"/run/image"+NumberUltis.formatNumberTo4Digits(i)+".png";
             animation.addSpriteFrameWithFile(frameName);
         }
         animation.setDelayPerUnit(TroopConfig.ARM_1.delay_time);
@@ -26,6 +23,7 @@ var Troop = cc.Node.extend({
         let action = cc.animate(animation);
         troop.runAction(action.repeatForever())
 
+        this.addChild(troop);
 
     },
 

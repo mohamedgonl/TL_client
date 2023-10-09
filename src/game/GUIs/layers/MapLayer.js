@@ -95,8 +95,17 @@ var MapLayer = cc.Layer.extend({
         },this);
     },
 
-    onTouchBegan: function (touch) {
+    testTroop: function (touch) {
+        var locationInScreen = touch.getLocation();
+        let troop = new Troop("ARM_1",1);
+        // troop.setPosition(this.getScreenPosFromGridPos(cc.p(locationInScreen.x, locationInScreen.y)));
+        troop.setPosition(locationInScreen.x, locationInScreen.y);
+        this.addChild(troop,MAP_ZORDER_TROOP);
+        cc.log("ADD TROOP FOR TESTING WITH POSITION X: "+locationInScreen.x + " Y: "+locationInScreen.y)
+    },
 
+    onTouchBegan: function (touch) {
+        this.testTroop(touch)
         var locationInScreen = touch.getLocation();
 
         this.positionTouchBegan = locationInScreen;
