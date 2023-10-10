@@ -86,7 +86,9 @@ var ArmyManager = cc.Class.extend({
     },
 
     createTroopOnMap : function ({barrackIndex, cfgId, count, armyCampIndex }) {
-        cc.log(JSON.stringify({barrackIndex, cfgId, count, armyCampIndex }))
+        let newTroop = new Troop(cfgId, 1, barrackIndex, armyCampIndex)
+        let mapLayer = cc.director.getRunningScene().getMapLayer();
+        mapLayer.addChild(newTroop,MAP_ZORDER_TROOP);
     }
 
 

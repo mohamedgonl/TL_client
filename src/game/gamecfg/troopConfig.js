@@ -7,6 +7,7 @@ const TroopConfig = {
             height: 192,
         },
         frame_time: 0.05,
+        scale: 0.5,
         run: {
             down: [0,13],
             down_left: [14,27],

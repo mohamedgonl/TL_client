@@ -7,42 +7,18 @@ var Troop = cc.Node.extend({
         this._super();
         this._cfgId = cfgId;
         this._level = level;
-
-        // let initPos = (ArmyManager.Instance().getBarrackList())[barrackIndex].getPosition();
-        // let targetPos = (ArmyManager.Instance().getArmyCampList())[armyCampIndex].getPosition();
-
-        // let way = AlgorithmImplement.Instance().searchPathByAStar([12,12],[500,500])
-        let initPos =  cc.p(12, 12);
-        let targetPos = cc.p(500, 500);
-
-        let url = TroopConfig.BASE_URL + cfgId +"_" + level + "/" + cfgId+ "_" + level;
-        this.troop = new cc.Sprite(url+"/idle/image0000.png");
+        this._moveSpeed = TROOP_BASE[cfgId]["moveSpeed"];
+        this._url = TroopConfig.BASE_URL + cfgId +"_" + level + "/" + cfgId+ "_" + level;
+        this.troop = new cc.Sprite(this._url+"/idle/image0000.png");
         this.troop.setAnchorPoint(0.5,0.5);
-        this.troop.setScale(0.5);
+        this.troop.setScale(TroopConfig[cfgId].scale);
 
-
-
-        let speed = 20; // Vận tốc (pixel/giây)
-
-        let distance = cc.pDistance(initPos, targetPos);
-        let duration = distance / speed;
-        this.troop.setPosition(initPos)
-
-
-
-        let moveToAction = cc.moveTo(duration, targetPos);
-
-        let animate = cc.animate(animation);
-        let parallelAction  = cc.spawn([moveToAction, animate.repeatForever()])
-
-        this.troop.runAction(parallelAction)
-
+        let barrack = ArmyManager.Instance().getBarrackList()[barrackIndex];
+        let armyCamp = ArmyManager.Instance().getArmyCampList()[armyCampIndex];
+        this.troop.setPosition(barrack.getPosition().x  , barrack.getPosition().y );
+        this.runTo(armyCamp.getPosition());
         this.addChild(this.troop);
 
-    },
-
-    init: function (cfgId) {
-        this._moveSpeed = TROOP_BASE[cfgId]["moveSpeed"];
     },
 
     initAnimation:  function () {
@@ -58,13 +34,11 @@ var Troop = cc.Node.extend({
                 directions.map(direct => {
 
                     for (let i = TroopConfig[cfgId][e][direct][0]; i <= TroopConfig[cfgId][e][direct][1]; i++) {
-                        let frameName = url+"/"+e+"/image"+NumberUltis.formatNumberTo4Digits(i)+".png";
+                        let frameName = this._url+"/"+e+"/image"+NumberUltis.formatNumberTo4Digits(i)+".png";
                         animation.addSpriteFrameWithFile(frameName);
                     }
                 })
             }
-
-
 
             animation.setDelayPerUnit(TroopConfig.ARM_1.frame_time);
             animation.setRestoreOriginalFrame(true);
@@ -81,16 +55,41 @@ var Troop = cc.Node.extend({
 
     },
 
-    findPath : function () {
 
-    },
 
-    runTo: function(){
+
+    runTo: function(target){
+        let mapLayer = cc.director.getRunningScene().getMapLayer();
+        cc.log("TROOP POS : \n" + this.troop.getPosition())
+        let start = mapLayer.getGridPosFromScreenPos(this.troop.getPosition());
+        cc.log(JSON.stringify(start))
+        let end = mapLayer.getGridPosFromScreenPos(target);
+        cc.log(JSON.stringify(end))
+        const Algorithm = AlgorithmImplement.Instance();
+        Algorithm.setGridMapStar(MapManager.Instance().mapGrid)
+        let wayGrid = Algorithm.searchPathByAStar([start.x,start.y], [end.x, end.y]);
+        let wayMap = [];
+        let res = []
+        wayGrid.map(path => {
+            res.push(path);
+            let targetPos = mapLayer.getScreenPosFromGridPos(path, true);
+            let run = cc.moveTo(2, targetPos);
+            wayMap.push(run)
+        });
+        // let run = cc.moveTo(2, cc.p(100,100));
+        // wayMap.push(run);
+
+        cc.log("RES ALGORITHM : \n" + (res))
+        this.troop.runAction(cc.sequence(wayMap))
 
     },
     
     stay: function () {
         
+    },
+
+    goDirect: function () {
+
     }
 
 })
