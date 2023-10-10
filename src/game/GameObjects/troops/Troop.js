@@ -25,7 +25,6 @@ var Troop = cc.Node.extend({
         let speed = 20; // Vận tốc (pixel/giây)
 
         let distance = cc.pDistance(initPos, targetPos);
-        cc.log(JSON.stringify(initPos))
         let duration = distance / speed;
         this.troop.setPosition(initPos)
 

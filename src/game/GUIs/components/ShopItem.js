@@ -198,8 +198,7 @@ var ShopItem = cc.Node.extend({
                 let gameScene = cc.director.getRunningScene();
                 let popUpLayer = gameScene.getPopUpLayer();
                 if(this._category === "category_ngankho"){
-                    popUpLayer.disappear("shop");
-                    popUpLayer.setVisible(true);
+                    popUpLayer.disappear("shop", {closePopupLayer: true});
 
                     // create content in popup
                     let label = new cc.LabelBMFont("Bạn có muốn mua số tài nguyên còn thiếu?", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
@@ -212,7 +211,11 @@ var ShopItem = cc.Node.extend({
 
                     let buyResPopup= new NotiPopup({title: "MUA TÀI NGUYÊN", acceptCallBack: ()=>{
                             testnetwork.connector.sendBuyResourceRequest(this._data);
-                        }, content: content})
+                            popUpLayer.setVisible(false);
+                        }, content: content, cancleCallBack: ()=>{
+                        popUpLayer.setVisible(false);
+                        buyResPopup.removeFromParent(true)
+                        }})
                     popUpLayer.addChild(buyResPopup)
                 }
                 else {

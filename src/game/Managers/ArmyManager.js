@@ -57,7 +57,7 @@ var ArmyManager = cc.Class.extend({
     },
 
     updateArmyAmount: function (troops, curPage) {
-        cc.log("DÂT EM NE ANH "+ JSON.stringify(troops) +" "+curPage)
+
         troops.map(e => {
             if(!this._armyAmount[e.cfgId]) {
                 this._armyAmount[e.cfgId] = e.count;
@@ -67,9 +67,9 @@ var ArmyManager = cc.Class.extend({
             }
             this._currentSpace += TROOP_BASE[e.cfgId]["housingSpace"] * e.count;
 
-            // create troop sprite run to army camp
-            let event = new cc.EventCustom(TRAINING_EVENTS.CREATE_TROOP_ON_MAP);
 
+
+            // create troop sprite run to army camp
             let armyCampIndex;
             if(this._armyCampList.length === 1) {
                 armyCampIndex = 0;
@@ -77,17 +77,16 @@ var ArmyManager = cc.Class.extend({
             else {
                 armyCampIndex = this._armyAmount[e.cfgId] % (this._armyCampList.length) - 1;
             }
+            let data = {barrackIndex: curPage, cfgId: e.cfgId, count: e.count, armyCampIndex: armyCampIndex};
+            this.createTroopOnMap(data);
 
-            event.data = {barrackIndex: curPage, cfgId: e.cfgId, count: e.count, armyCampIndex: armyCampIndex};
-            cc.log("BẮN  EVENT " +JSON.stringify(event.data))
-            cc.eventManager.dispatchEvent(event);
         });
 
 
     },
 
-    createTroopOnMap : function (barrack, armyCamp, troopCfgId) {
-
+    createTroopOnMap : function ({barrackIndex, cfgId, count, armyCampIndex }) {
+        cc.log(JSON.stringify({barrackIndex, cfgId, count, armyCampIndex }))
     }
 
 

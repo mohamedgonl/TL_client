@@ -481,10 +481,16 @@ var MapLayer = cc.Layer.extend({
         return cc.p(gridX, gridY);
     },
 
-    //
-    getGridPosFromScreenPos: function (posInScreen) {
-        var posInMap = this.getMapPosFromScreenPos(posInScreen);
-        return this.getGridPosFromMapPos(posInMap);
+
+    getScreenPosFromGridPos: function (posInGrid,isCenter){
+        let posInMap = this.getMapPosFromGridPos(posInGrid);
+        if(isCenter)
+        {
+            let posInMapUpperGrid = this.getMapPosFromGridPos(cc.p(posInGrid.x+1,posInGrid.y+1));
+            posInMap = cc.pLerp(posInMap,posInMapUpperGrid,0.5);
+        }
+
+        return this.getScreenPosFromMapPos(posInMap);
     },
 
 
