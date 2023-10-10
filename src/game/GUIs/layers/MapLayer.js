@@ -414,6 +414,10 @@ var MapLayer = cc.Layer.extend({
 
         this.setScale(previousScaleOfScreen);
     },
+    getGridPosFromScreenPos: function (posInScreen) {
+        var posInMap = this.getMapPosFromScreenPos(posInScreen);
+        return this.getGridPosFromMapPos(posInMap);
+    },
 
     getBuildingFromTouch: function (locationInScreen) {
         let chosenGrid = this.getGridPosFromScreenPos(locationInScreen);
@@ -504,10 +508,10 @@ var MapLayer = cc.Layer.extend({
         return cc.pIntersectPoint(posA, posC, posB, posD);
     },
 
-    getScreenPosFromGridPos: function (posInGrid) {
-        var posInMap = this.getMapPosFromGridPos(posInGrid);
-        return this.getScreenPosFromMapPos(posInMap);
-    },
+    // getScreenPosFromGridPos: function (posInGrid) {
+    //     var posInMap = this.getMapPosFromGridPos(posInGrid);
+    //     return this.getScreenPosFromMapPos(posInMap);
+    // },
 
     moveView: function (delta) {
         var currentPos = this.getPosition();
