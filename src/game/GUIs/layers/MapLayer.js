@@ -15,6 +15,7 @@ var MapLayer = cc.Layer.extend({
         this.addEvent();
         this.initBackground();
         this.loadBuilding();
+        cc.eventManager.addCustomListener(TRAINING_EVENTS.CREATE_TROOP_ON_MAP, this.initTroopOnMap.bind(this));
     },
 
     loadBuilding: function () {
@@ -95,17 +96,21 @@ var MapLayer = cc.Layer.extend({
         },this);
     },
 
-    testTroop: function (touch) {
-        var locationInScreen = touch.getLocation();
-        let troop = new Troop("ARM_1",1);
-        // troop.setPosition(this.getScreenPosFromGridPos(cc.p(locationInScreen.x, locationInScreen.y)));
-        troop.setPosition(locationInScreen.x, locationInScreen.y);
+
+    initTroopOnMap: function (event) {
+        cc.log("CREATE NEW TROOP ON MAP WITH data: "+JSON.stringify(event.data));
+
+        let barrackIndex  = event.data.barrackIndex;
+        let armyCampIndex = event.data.armyCampIndex;
+        let troopCfgId = event.data.cfgId;
+        let count = event.data.count;
+
+        let troop = new Troop(troopCfgId, 1 , barrackIndex, armyCampIndex);
+
         this.addChild(troop,MAP_ZORDER_TROOP);
-        cc.log("ADD TROOP FOR TESTING WITH POSITION X: "+locationInScreen.x + " Y: "+locationInScreen.y)
     },
 
     onTouchBegan: function (touch) {
-        this.testTroop(touch)
         var locationInScreen = touch.getLocation();
 
         this.positionTouchBegan = locationInScreen;

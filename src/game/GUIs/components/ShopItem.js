@@ -7,17 +7,32 @@ var ShopItem = cc.Node.extend({
         let item = node.getChildByName("shop_item_node");
         this._itemNode = item;
 
-        let shopItem = this;
-
         let buttonBuy = item.getChildByName("button_buy");
         buttonBuy.addTouchEventListener(this.handleTouchBuyButton,this);
 
         this._data = data;
         this._category = category;
         this.setItemInfo(data, category);
+        this.checkValid();
 
         this.addChild(node);
 
+    },
+
+    checkValid: function () {
+        if(!this._available) {
+            let objs = this.getElements(["item_bg","shop_bg","price_type", "item_image"])
+            ColorUlties.setGrayObjects(objs)
+        }
+    },
+
+    getElements: function (names) {
+        let elements = []
+        names.map(e => {
+            let child = this._itemNode.getChildByName(e);
+            elements.push(child);
+        })
+        return elements
     },
 
 
@@ -54,27 +69,27 @@ var ShopItem = cc.Node.extend({
 
 
         let item_img = this._itemNode.getChildByName("item_image");
-        item_img.loadTexture(data.img);
-        item_img.color = new cc.Color(255,255,255);
-        item_img.ignoreContentAdaptWithSize(true);
+        item_img.setTexture(data.img);
 
         let price_type = this._itemNode.getChildByName("price_type");
 
         switch (data.price_type) {
             case RESOURCE_TYPE.ELIXIR : {
-                price_type.loadTexture(res.ICON.ELIXIR);
-
-                if(data.price > PlayerInfoManager.Instance().getResource().elixir)  price_string.setColor(cc.color(255,0,0));
+                price_type.setTexture(res.ICON.ELIXIR);
+                if(data.price > PlayerInfoManager.Instance().getResource().elixir)  price_string.setColor(COLOR_SHOP_RED);
+                this._available = false;
                 break;
             }
             case RESOURCE_TYPE.GOLD : {
-                price_type.loadTexture(res.ICON.GOLD);
-                if(data.price > PlayerInfoManager.Instance().getResource().gold)  price_string.setColor(cc.color(255,0,0));
+                price_type.setTexture(res.ICON.GOLD);
+                if(data.price > PlayerInfoManager.Instance().getResource().gold)  price_string.setColor(COLOR_SHOP_RED);
+                this._available = false;
                 break;
             }
             case RESOURCE_TYPE.G : {
-                price_type.loadTexture(res.ICON.GEM);
-                if(data.price > PlayerInfoManager.Instance().getResource().gem)  price_string.setColor(cc.color(255,0,0));
+                price_type.setTexture(res.ICON.GEM);
+                if(data.price > PlayerInfoManager.Instance().getResource().gem)  price_string.setColor(COLOR_SHOP_RED);
+                this._available = false;
                 break;
             }
             default: {
@@ -106,6 +121,10 @@ var ShopItem = cc.Node.extend({
                 }
                 else {
                     let space = this._itemNode.getChildByName("space_string");
+                    if(this.getBuiltCount() >= maxBuilt) {
+                        space.setColor(COLOR_SHOP_RED);
+                        this._available = false;
+                    }
                     space.setString(this.getBuiltCount() + "/" + maxBuilt);
                     let timeDone = this._itemNode.getChildByName("time_string");
                     timeDone.setString(fr.toGameTimeString(data.time));
@@ -189,7 +208,7 @@ var ShopItem = cc.Node.extend({
 
                 }
                 else {
-
+                    
                 }
             } else {
                 cc.log("CANT BUY :::: ");

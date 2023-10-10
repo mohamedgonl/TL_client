@@ -55,13 +55,13 @@
               {
                 "FileData": {
                   "Type": "Default",
-                  "Path": "Default/ImageFile.png",
+                  "Path": "Default/Sprite.png",
                   "Plist": ""
                 },
-                "Scale9OriginX": 15,
-                "Scale9OriginY": 15,
-                "Scale9Width": 16,
-                "Scale9Height": 16,
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
                 "AnchorPoint": {
                   "ScaleX": 0.5,
                   "ScaleY": 0.5
@@ -90,14 +90,14 @@
                 "RightMargin": 33.0,
                 "TopMargin": 30.28,
                 "BottomMargin": 34.72,
-                "Tag": 158,
-                "ActionTag": -998007522,
+                "Tag": 40,
+                "ActionTag": -1410123317,
                 "Size": {
                   "X": 46.0,
                   "Y": 46.0
                 },
                 "Name": "troop_image",
-                "ctype": "ImageViewObjectData"
+                "ctype": "SpriteObjectData"
               },
               {
                 "LabelText": "",
@@ -514,7 +514,7 @@
       },
       "UsedResources": [
         "Default/Button_Disable.png",
-        "Default/ImageFile.png",
+        "Default/Sprite.png",
         "fonts/fista_16_non.fnt",
         "fonts/fista_16_non.png",
         "fonts/soji_12.fnt",

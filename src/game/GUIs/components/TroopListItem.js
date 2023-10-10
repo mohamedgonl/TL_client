@@ -9,6 +9,7 @@ var TroopListItem = cc.Node.extend({
         this._curPage = curPage;
         let node = CCSUlties.parseUIFile(res_ui.TROOPS_LIST_ITEM);
         this._node = node.getChildByName("troop_item");
+        this._available = available;
 
         if(available) {
             let item = this;
@@ -24,13 +25,11 @@ var TroopListItem = cc.Node.extend({
             });
         }
         else {
-            // this._node.setColor(cc.color(56,56,56));
-            this._node.setOpacity(128)
+            ColorUlties.setGrayObjects([this._node, ]);
+
         }
-
-        this.setCostDisplay(available, barrackRequired);
-
         this.loadData();
+        this.setCostDisplay(available, barrackRequired);
         this.addChild(node);
     },
 
@@ -56,8 +55,10 @@ var TroopListItem = cc.Node.extend({
 
     loadData: function () {
         let icon = this._node.getChildByName("troop_image");
-        icon.loadTexture(TROOP_BIG_ICON_BASE_URL+this._troopCfgId+".png");
-        icon.ignoreContentAdaptWithSize(true);
+        icon.setTexture(TROOP_BIG_ICON_BASE_URL+this._troopCfgId+".png");
+        if(!this._available) {
+            ColorUlties.setGrayObjects(icon)
+        }
 
         let infoButton = this._node.getChildByName("button_info");
         infoButton.addClickEventListener(this.handleClickTroopInfo.bind(this));
@@ -91,7 +92,7 @@ var TroopListItem = cc.Node.extend({
         }
     },
 
-    handleTrainTroop: function () {
+    handleTrainTroop: function (isHold = false) {
 
         let barList = ArmyManager.Instance().getBarrackList();
         let curentSpace = barList[this._curPage].getTrainingSpace();
@@ -100,9 +101,8 @@ var TroopListItem = cc.Node.extend({
             this.setCount(this._count+1);
             let event = new cc.EventCustom(TRAINING_EVENTS.TRAIN+this._curPage);
             let cfgId = this._troopCfgId;
-            event.data = {cfgId: cfgId, count: 1};
+            event.data = {cfgId: cfgId, count: 1, hold: isHold};
             cc.eventManager.dispatchEvent(event);
-
         }
     },
 

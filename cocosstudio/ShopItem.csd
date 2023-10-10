@@ -31,7 +31,7 @@
                 <FileData Type="Normal" Path="guis/shopping/item_background.png" Plist="" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="price_type" ActionTag="350692260" Tag="313" IconVisible="False" LeftMargin="56.5600" RightMargin="-102.5600" TopMargin="103.9600" BottomMargin="-149.9600" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="price_type" ActionTag="1487927379" Tag="23" IconVisible="False" LeftMargin="56.5600" RightMargin="-102.5600" TopMargin="103.9600" BottomMargin="-149.9600" ctype="SpriteObjectData">
                 <Size X="46.0000" Y="46.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="79.5600" Y="-126.9600" />
@@ -39,7 +39,8 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
+                <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
+                <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="item_price" ActionTag="-670213198" Tag="314" IconVisible="False" TopMargin="126.5400" BottomMargin="-126.5400" LabelText="" ctype="TextBMFontObjectData">
                 <Size X="0.0000" Y="0.0000" />
@@ -133,7 +134,7 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="item_image" ActionTag="-218686527" Tag="95" IconVisible="False" LeftMargin="-23.0000" RightMargin="-23.0000" TopMargin="-23.0000" BottomMargin="-23.0000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="item_image" ActionTag="1243711323" Tag="22" IconVisible="False" LeftMargin="-23.0000" RightMargin="-23.0000" TopMargin="-23.0000" BottomMargin="-23.0000" ctype="SpriteObjectData">
                 <Size X="46.0000" Y="46.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position />
@@ -141,7 +142,8 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
+                <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
+                <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="left_space_string" ActionTag="-992557042" Tag="99" IconVisible="False" LeftMargin="-66.7312" RightMargin="66.7312" TopMargin="80.7534" BottomMargin="-80.7534" LabelText="" ctype="TextBMFontObjectData">
                 <Size X="0.0000" Y="0.0000" />

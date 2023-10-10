@@ -123,9 +123,8 @@ testnetwork.Connector = cc.Class.extend({
             }
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
-            cc.log("DÂT TRUYEN VAO DAY NE EM  "+ JSON.stringify(event))
             PlayerInfoManager.Instance().addResource({elixir: event.data.additionElixir});
-            trainingPopup.getPage({barackId: packet.barrackId}).onCancleTrainTroopSuccess(event);
+            trainingPopup.getPage({barackId: packet.barrackId}).onCancelTrainTroopSuccess(event);
 
         }
     },
