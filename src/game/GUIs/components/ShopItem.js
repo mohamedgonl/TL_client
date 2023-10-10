@@ -76,20 +76,26 @@ var ShopItem = cc.Node.extend({
         switch (data.price_type) {
             case RESOURCE_TYPE.ELIXIR : {
                 price_type.setTexture(res.ICON.ELIXIR);
-                if(data.price > PlayerInfoManager.Instance().getResource().elixir)  price_string.setColor(COLOR_SHOP_RED);
-                this._available = false;
+                if(data.price > PlayerInfoManager.Instance().getResource().elixir) {
+                    price_string.setColor(COLOR_SHOP_RED);
+                    this._available = false;
+                }
                 break;
             }
             case RESOURCE_TYPE.GOLD : {
                 price_type.setTexture(res.ICON.GOLD);
-                if(data.price > PlayerInfoManager.Instance().getResource().gold)  price_string.setColor(COLOR_SHOP_RED);
-                this._available = false;
+                if(data.price > PlayerInfoManager.Instance().getResource().gold) {
+                    price_string.setColor(COLOR_SHOP_RED);
+                    this._available = false;
+                }
                 break;
             }
             case RESOURCE_TYPE.G : {
                 price_type.setTexture(res.ICON.GEM);
-                if(data.price > PlayerInfoManager.Instance().getResource().gem)  price_string.setColor(COLOR_SHOP_RED);
-                this._available = false;
+                if(data.price > PlayerInfoManager.Instance().getResource().gem) {
+                    price_string.setColor(COLOR_SHOP_RED);
+                    this._available = false;
+                }
                 break;
             }
             default: {
@@ -112,7 +118,9 @@ var ShopItem = cc.Node.extend({
             case "category_phongthu":
             case "category_quandoi": {
                 let maxBuilt = this.getBuildMaxCount();
-                if (this.getBuiltCount >= maxBuilt) this._available = false;
+                if (this.getBuiltCount >= maxBuilt) {
+                    this._available = false;
+                }
                 this.setVisibleFields(["button_info"])
                 if(maxBuilt < 0) {
                     let thRequireString = this._itemNode.getChildByName("th_require_string");
@@ -169,7 +177,7 @@ var ShopItem = cc.Node.extend({
     },
 
     getBuiltCount: function () {
-        return 3;
+        return 0;
     },
 
     handleTouchInfoButton: function () {
@@ -206,10 +214,12 @@ var ShopItem = cc.Node.extend({
                             testnetwork.connector.sendBuyResourceRequest(this._data);
                         }, content: content})
                     popUpLayer.addChild(buyResPopup)
-
                 }
                 else {
-                    
+                    var mapLayer = cc.director.getRunningScene().mapLayer;
+                    popUpLayer.disappear("shop");
+                    mapLayer.enterModeBuyBuilding(this._data.cfgId);
+
                 }
             } else {
                 cc.log("CANT BUY :::: ");
