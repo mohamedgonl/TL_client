@@ -145,7 +145,8 @@ var ShopItem = cc.Node.extend({
     },
 
     getBuildMaxCount: function () {
-        let townHallLevel = MapManager.Instance().getTownHall().level;
+        let townHallLevel = MapManager.Instance().getTownHall()._level;
+        cc.log(townHallLevel)
 
         let maxCount = TOW["TOW_1"][townHallLevel][this._data.cfgId];
 

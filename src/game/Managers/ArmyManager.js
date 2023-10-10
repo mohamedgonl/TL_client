@@ -23,9 +23,8 @@ var ArmyManager = cc.Class.extend({
 
     pushArmyCamp: function (armyCamp) {
         this._armyCampList.push(armyCamp);
-        this._maxTotalSpace += AMC["AMC_1"][armyCamp.level]["capacity"];
+        this._maxTotalSpace += AMC["AMC_1"][armyCamp._level]["capacity"];
     },
-
     updateMaxTotalSpace: function (space) {
         this._maxTotalSpace = space;
         let event = new cc.EventCustom(TRAINING_EVENTS.UPDATE_SPACE);

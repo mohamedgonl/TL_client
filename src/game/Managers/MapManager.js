@@ -90,7 +90,6 @@ var MapManager = cc.Layer.extend({
                 break;
             case 'RES':
                 this.listMine.push(building);
-
                 break;
             case 'STO':
                 this.listStorage.push(building);
@@ -102,9 +101,8 @@ var MapManager = cc.Layer.extend({
                 //cc.log("hanve barrack+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
                 ArmyManager.Instance().pushBarrack(building);
                 break;
-            case 'ArmyCamp':
-                let currentSpace = ArmyManager.Instance().getTotalSpace();
-                ArmyManager.Instance().updateTotalSpace(currentSpace + AMC["AMC_1"][building.level]["capacity"]);
+            case 'AMC':
+                ArmyManager.Instance().pushArmyCamp(building);
                 break;
             case 'BDH':
                 this.listBuilderHut.push(building);

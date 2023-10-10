@@ -39,6 +39,7 @@ var TrainTroopPopup = cc.Layer.extend({
         }
         if(barackId) {
             for (let i = 0; i <this._trainPages.length; i++) {
+                cc.log("HERRE:", this._trainPages[i].getBarrackId())
                 if(this._trainPages[i].getBarrackId() === barackId) {
                     return  this._trainPages[i];
                 }

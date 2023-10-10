@@ -7,11 +7,8 @@ var Barrack = Building.extend({
     ctor: function (type,level,id,posX,posY,status,startTime,endTime) {
         this._super(type,level,id,posX,posY,status,startTime,endTime);
         this._trainingQueue = [];
-        this.loadConfig(ConfigManager.Instance().getConfigBarrack(this.level));
-        this.loadSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
+        this.lastTrainingTime = 0;
 
-        // this.loadSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
-        // this.loadSubSprite();
     },
     loadSpriteByLevel: function (level) {
         this.loadSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
@@ -66,7 +63,7 @@ var Barrack = Building.extend({
     },
 
     getMaxSpace: function () {
-        return BAR["BAR_1"][this.level]["queueLength"];
+        return BAR["BAR_1"][this._level]["queueLength"];
     },
 
 

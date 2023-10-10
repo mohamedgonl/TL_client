@@ -114,7 +114,7 @@ var InfoLayer = cc.Layer.extend({
                 if (popUpLayer.isVisible()) {
                     popUpLayer.disappear();
                 } else {
-                    popUpLayer.appear("train");
+                    popUpLayer.appear("train",{page: 0});
                 }
             }
         },
