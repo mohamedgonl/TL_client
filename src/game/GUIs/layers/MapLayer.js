@@ -21,6 +21,7 @@ var MapLayer = cc.Layer.extend({
         this.addEventListener();
         this.initBackground();
         this.loadBuilding();
+        AlgorithmImplement.Instance().setGridMapStar(MapManager.Instance().mapGrid)
     },
     //load all building in map manager and add it to MapLayer
     loadBuilding: function () {

@@ -25,14 +25,12 @@ var Troop = cc.Node.extend({
         let cfgId = this._cfgId;
         const animas = ["run","idle", "attack01", "dead"];
         const directions = ["down", "up", "left", "right", "down_left", "up_left","down_right", "up_right"];
-
         this._animations = {};
 
         animas.map(e => {
             let animation = new cc.Animation();
             if(TroopConfig[cfgId][e]) {
                 directions.map(direct => {
-
                     for (let i = TroopConfig[cfgId][e][direct][0]; i <= TroopConfig[cfgId][e][direct][1]; i++) {
                         let frameName = this._url+"/"+e+"/image"+NumberUltis.formatNumberTo4Digits(i)+".png";
                         animation.addSpriteFrameWithFile(frameName);
@@ -66,14 +64,13 @@ var Troop = cc.Node.extend({
         let end = mapLayer.getGridPosFromScreenPos(target);
         cc.log(JSON.stringify(end))
         const Algorithm = AlgorithmImplement.Instance();
-        Algorithm.setGridMapStar(MapManager.Instance().mapGrid)
         let wayGrid = Algorithm.searchPathByAStar([start.x,start.y], [end.x, end.y]);
         let wayMap = [];
         let res = []
         wayGrid.map(path => {
             res.push(path);
             let targetPos = mapLayer.getScreenPosFromGridPos(path, true);
-            let run = cc.moveTo(2, targetPos);
+            let run = cc.moveTo(1, targetPos);
             wayMap.push(run)
         });
         // let run = cc.moveTo(2, cc.p(100,100));
@@ -88,7 +85,7 @@ var Troop = cc.Node.extend({
         
     },
 
-    goDirect: function () {
+    motionAnimation: function (direct) {
 
     }
 
