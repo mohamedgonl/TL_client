@@ -1,16 +1,20 @@
 
 const TROOPS_LIST = [
     {
-        troopCfgId: "ARM_1"
+        troopCfgId: "ARM_1",
+        available: true
     },
     {
-        troopCfgId: "ARM_2"
+        troopCfgId: "ARM_2",
+        available: true
     },
     {
-        troopCfgId: "ARM_3"
+        troopCfgId: "ARM_3",
+        available: true
     },
     {
-        troopCfgId: "ARM_4"
+        troopCfgId: "ARM_4",
+        available: true
     },
     {
         troopCfgId: "ARM_5",
@@ -66,5 +70,6 @@ const TRAINING_EVENTS = {
     DONE_NOW: "done_now",
     UPDATE_SPACE: "update_space",
     CREATE_TRAIN_SUCCESS: "create_train_success",
-    TRAIN_SUCCESS: "train_success"
+    TRAIN_SUCCESS: "train_success",
+    CREATE_TROOP_ON_MAP:  "create_on_map"
 }

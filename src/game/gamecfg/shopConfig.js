@@ -6,6 +6,8 @@ const RESOURCE_TYPE = {
     G: 3
 }
 
+const COLOR_SHOP_RED = cc.color(255,0,0)
+
 const ShopItemsData = {
     'category_ngankho' : [
         {

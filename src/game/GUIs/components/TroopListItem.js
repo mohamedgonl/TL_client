@@ -3,34 +3,33 @@ var TroopListItem = cc.Node.extend({
     _level: 1,
     _space: null,
     _count: 0,
-    ctor: function (troopCfgId, available = true, barrackRequired, curBarrack) {
+    ctor: function (troopCfgId, available = true, barrackRequired, curPage) {
         this._super();
         this._troopCfgId = troopCfgId;
-        this._curBarrack = curBarrack;
+        this._curPage = curPage;
         let node = CCSUlties.parseUIFile(res_ui.TROOPS_LIST_ITEM);
         this._node = node.getChildByName("troop_item");
+        this._available = available;
 
         if(available) {
             let item = this;
-            cc.eventManager.addListener(clickEventListener(this.handleTrainTroop.bind(this)).clone(), this._node);
-            cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE, this.handleCancleTroopTraining.bind(this));
+            cc.eventManager.addListener(clickEventListener(item.handleTrainTroop.bind(item)).clone(), item._node);
+            cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE+curPage, this.handleCancleTroopTraining.bind(this));
 
-            cc.eventManager.addCustomListener(TRAINING_EVENTS.TRAIN_SUCCESS, (event)=>{
+            cc.eventManager.addCustomListener(TRAINING_EVENTS.TRAIN_SUCCESS+curPage, (event)=>{
                 let count = event.data.count;
                 let cfgId = event.data.cfgId;
                 if(cfgId === item._troopCfgId) {
-                    item._count = item.setCount(item._count - count);
+                   item.setCount(item._count - count);
                 }
             });
         }
         else {
-            // this._node.setColor(cc.color(56,56,56));
-            this._node.setOpacity(128)
+            ColorUlties.setGrayObjects([this._node, ]);
+
         }
-
-        this.setCostDisplay(available, barrackRequired);
-
         this.loadData();
+        this.setCostDisplay(available, barrackRequired);
         this.addChild(node);
     },
 
@@ -56,8 +55,10 @@ var TroopListItem = cc.Node.extend({
 
     loadData: function () {
         let icon = this._node.getChildByName("troop_image");
-        icon.loadTexture(TROOP_BIG_ICON_BASE_URL+this._troopCfgId+".png");
-        icon.ignoreContentAdaptWithSize(true);
+        icon.setTexture(TROOP_BIG_ICON_BASE_URL+this._troopCfgId+".png");
+        if(!this._available) {
+            ColorUlties.setGrayObjects(icon)
+        }
 
         let infoButton = this._node.getChildByName("button_info");
         infoButton.addClickEventListener(this.handleClickTroopInfo.bind(this));
@@ -91,18 +92,17 @@ var TroopListItem = cc.Node.extend({
         }
     },
 
-    handleTrainTroop: function () {
+    handleTrainTroop: function (isHold = false) {
+
         let barList = ArmyManager.Instance().getBarrackList();
-        let curentSpace = barList[this._curBarrack].getTrainingSpace();
-        let maxSpace = barList[this._curBarrack].getMaxSpace();
+        let curentSpace = barList[this._curPage].getTrainingSpace();
+        let maxSpace = barList[this._curPage].getMaxSpace();
         if( curentSpace + TROOP_BASE[this._troopCfgId]["housingSpace"] <= maxSpace) {
             this.setCount(this._count+1);
-            let event = new cc.EventCustom(TRAINING_EVENTS.TRAIN);
+            let event = new cc.EventCustom(TRAINING_EVENTS.TRAIN+this._curPage);
             let cfgId = this._troopCfgId;
-            event.data = {cfgId: cfgId};
+            event.data = {cfgId: cfgId, count: 1, hold: isHold};
             cc.eventManager.dispatchEvent(event);
-
-            testnetwork.connector.sendRequestTrainingCreate({cfgId: cfgId, count: 1, barrackId: barList[this._curBarrack].getId()})
         }
     },
 

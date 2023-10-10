@@ -6,6 +6,9 @@ var Barrack = Building.extend({
     lastTrainingTime: null,
     ctor: function (type,level,id,posX,posY,status,startTime,endTime) {
         this._super(type,level,id,posX,posY,status,startTime,endTime);
+        this._trainingQueue = [];
+        this.loadConfig(ConfigManager.Instance().getConfigBarrack(this.level));
+        this.loadSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
 
         // this.loadSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
         // this.loadSubSprite();
@@ -13,48 +16,58 @@ var Barrack = Building.extend({
     loadSpriteByLevel: function (level) {
         this.loadSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
     },
+
     getLastTrainingTime: function () {
-        return this.lastTrainingTime;
+        return this._lastTrainingTime;
+    },
+
+    setLastTrainingTime: function (time) {
+        this._lastTrainingTime = time;
     },
 
     getTrainingList: function () {
         return this._trainingQueue;
     },
 
+    setTrainingList: function (list) {
+        this._trainingQueue = list;
+    },
 
 
+    //return true when this type of troop already exist
     addToTrainingQueue: function ({cfgId, count}) {
         for (let i = 0; i < this._trainingQueue.length; i++) {
             if(this._trainingQueue[i].cfgId === cfgId) {
                 this._trainingQueue[i].count += count;
-                return
+                return true;
             }
         }
-        this._trainingQueue.push({cfgId, count});
+        this._trainingQueue.push({cfgId: cfgId,count: count});
+        return false;
     },
 
     removeFromTrainingQueue: function ({cfgId, count, currentTime}) {
+        this._lastTrainingTime = currentTime;
         for (let i = 0; i < this._trainingQueue.length; i++) {
             if(this._trainingQueue[i].cfgId === cfgId) {
                 this._trainingQueue[i].count -= count;
                 if(this._trainingQueue[i].count === 0) {
                     this._trainingQueue.splice(i,1);
                 }
-                this.lastTrainingTime = currentTime;
-                cc.log("removeFromTrainingQueue success");
-                return
+                return;
             }
         }
     },
     
     getTrainingSpace: function () {
-        return this._trainingQueue.reduce((sum,e) => sum+e.count * TROOP_BASE[e.cfgId]["housingSpace"],0);
+        return this._trainingQueue.reduce((sum,e) => {
+            return sum+e.count * TROOP_BASE[e.cfgId]["housingSpace"];
+        },0);
     },
 
     getMaxSpace: function () {
         return BAR["BAR_1"][this.level]["queueLength"];
-    }
-
+    },
 
 
     

@@ -129,11 +129,13 @@
               {
                 "FileData": {
                   "Type": "Default",
-                  "Path": "Default/ImageFile.png",
+                  "Path": "Default/Sprite.png",
                   "Plist": ""
                 },
-                "Scale9Width": 46,
-                "Scale9Height": 46,
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
                 "AnchorPoint": {
                   "ScaleX": 0.5,
                   "ScaleY": 0.5
@@ -160,14 +162,14 @@
                 "RightMargin": -102.56,
                 "TopMargin": 103.96,
                 "BottomMargin": -149.96,
-                "Tag": 313,
-                "ActionTag": 350692260,
+                "Tag": 23,
+                "ActionTag": 1487927379,
                 "Size": {
                   "X": 46.0,
                   "Y": 46.0
                 },
                 "Name": "price_type",
-                "ctype": "ImageViewObjectData"
+                "ctype": "SpriteObjectData"
               },
               {
                 "LabelText": "",
@@ -567,11 +569,13 @@
               {
                 "FileData": {
                   "Type": "Default",
-                  "Path": "Default/ImageFile.png",
+                  "Path": "Default/Sprite.png",
                   "Plist": ""
                 },
-                "Scale9Width": 46,
-                "Scale9Height": 46,
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
                 "AnchorPoint": {
                   "ScaleX": 0.5,
                   "ScaleY": 0.5
@@ -598,14 +602,14 @@
                 "RightMargin": -23.0,
                 "TopMargin": -23.0,
                 "BottomMargin": -23.0,
-                "Tag": 95,
-                "ActionTag": -218686527,
+                "Tag": 22,
+                "ActionTag": 1243711323,
                 "Size": {
                   "X": 46.0,
                   "Y": 46.0
                 },
                 "Name": "item_image",
-                "ctype": "ImageViewObjectData"
+                "ctype": "SpriteObjectData"
               },
               {
                 "LabelText": "",
@@ -957,6 +961,7 @@
         "Default/Button_Normal.png",
         "Default/Button_Press.png",
         "Default/ImageFile.png",
+        "Default/Sprite.png",
         "fonts/fista_16_non.fnt",
         "fonts/fista_16_non.png",
         "fonts/fista_20_non.fnt",

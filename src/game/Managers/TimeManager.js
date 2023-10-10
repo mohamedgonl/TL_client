@@ -16,7 +16,8 @@ var TimeManager = cc.Class.extend({
     setDeltaTimeClientServer: function (serverTime = new Date().getTime()) {
         let curTime = new Date().getTime();
         this.deltaTimeClientServer = serverTime - curTime;
-    }
+    },
+
 
 })
 

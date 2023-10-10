@@ -9,7 +9,7 @@
           <AbstractNodeData Name="troop_item" ActionTag="650000912" Tag="157" IconVisible="False" LeftMargin="-56.0000" RightMargin="-56.0000" TopMargin="-55.4995" BottomMargin="-55.5005" ctype="SpriteObjectData">
             <Size X="112.0000" Y="111.0000" />
             <Children>
-              <AbstractNodeData Name="troop_image" ActionTag="-998007522" Tag="158" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="33.0000" RightMargin="33.0000" TopMargin="30.2800" BottomMargin="34.7200" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="16" Scale9Height="16" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="troop_image" ActionTag="-1410123317" Tag="40" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="33.0000" RightMargin="33.0000" TopMargin="30.2800" BottomMargin="34.7200" ctype="SpriteObjectData">
                 <Size X="46.0000" Y="46.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="56.0000" Y="57.7200" />
@@ -17,7 +17,8 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.5200" />
                 <PreSize X="0.4107" Y="0.4144" />
-                <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
+                <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
+                <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="level" ActionTag="-1507544317" Tag="167" IconVisible="False" LeftMargin="18.3839" RightMargin="93.6161" TopMargin="62.1306" BottomMargin="48.8694" LabelText="" ctype="TextBMFontObjectData">
                 <Size X="0.0000" Y="0.0000" />

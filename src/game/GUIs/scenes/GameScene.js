@@ -45,6 +45,7 @@ var GameScene = cc.Scene.extend({
 
 
     onBuyResourceSuccess: function (data) {
+        cc.log("ON BUY SUCCESS  ++++++++++++++++++++++")
         PlayerInfoManager.Instance().setResource(data);
     }
 
