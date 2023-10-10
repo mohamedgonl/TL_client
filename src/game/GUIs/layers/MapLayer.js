@@ -17,7 +17,7 @@ var MapLayer = cc.Layer.extend({
     },
     //init map layer with scale, add event, load background, load building
     init: function () {
-        this.setScale(ZOOM_DEFAULT);
+        this.setScale(1.77);
         this.addEventListener();
         this.initBackground();
         this.loadBuilding();
@@ -42,15 +42,15 @@ var MapLayer = cc.Layer.extend({
         var gridPosX = building._posX;
         var gridPosY = building._posY;
 
-        var previousScaleOfScreen = this.getScale();
-        this.setScale(1);
+        // var previousScaleOfScreen = this.getScale();
+        // this.setScale(1);
 
         var buildingCenterX = gridPosX + sizeX / 2;
         var buildingCenterY = gridPosY + sizeY / 2;
 
         building.setPosition(this.getScreenPosFromGridPos(cc.p(buildingCenterX, buildingCenterY)));
 
-        this.setScale(previousScaleOfScreen);
+        // this.setScale(previousScaleOfScreen);
 
         const zOrderValue = zOrder == null ? this.getZOrderBuilding(gridPosX, gridPosY) : zOrder;
         this.addChild(building, zOrderValue);
@@ -408,15 +408,15 @@ var MapLayer = cc.Layer.extend({
 
         var sizeX = building._width;
         var sizeY = building._height;
-        var previousScaleOfScreen = this.getScale();
-        this.setScale(1);
+        //var previousScaleOfScreen = this.getScale();
+       // this.setScale(1);
 
         var buildingCenterX = newPosX + sizeX / 2;
         var buildingCenterY = newPosY + sizeY / 2;
 
         building.setPosition(this.getScreenPosFromGridPos(cc.p(buildingCenterX, buildingCenterY)));
 
-        this.setScale(previousScaleOfScreen);
+        //this.setScale(previousScaleOfScreen);
     },
 
     getBuildingFromTouch: function (locationInScreen) {
@@ -459,9 +459,8 @@ var MapLayer = cc.Layer.extend({
         var originX = cc.winSize.width / 2;
         var originY = cc.winSize.height / 2;
 
-        var x = posInMap.x * this.getScale() + originX;
-        var y = posInMap.y * this.getScale() + originY;
-
+        var x = posInMap.x*this.getScale()  + originX;
+        var y = posInMap.y*this.getScale()  + originY;
         return cc.p(x, y);
     },
 
@@ -620,3 +619,4 @@ var MapLayer = cc.Layer.extend({
     },
 
 });
+
