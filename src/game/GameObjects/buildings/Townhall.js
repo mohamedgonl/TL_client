@@ -3,8 +3,9 @@ var Townhall = Building.extend({
     elixir: null,
     capacityGold: null,
     capacityElixir: null,
-    ctor: function (type,level,id,posX,posY,status,startTime,endTime) {
-        this._super(type,level,id,posX,posY,status,startTime,endTime);
+    _type: "TOW_1",
+    ctor: function (level,id,posX,posY,status,startTime,endTime) {
+        this._super(level,id,posX,posY,status,startTime,endTime);
         this.init();
         // this.loadSpriteByLevel(level);
         // this.loadSubSprite();

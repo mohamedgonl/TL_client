@@ -338,6 +338,10 @@ var MapLayer = cc.Layer.extend({
     unSelectBuilding: function () {
 
         if (this.chosenBuilding) {
+            if(this.onModeMovingBuilding)
+            {
+                this.exitModeMoveBuilding();
+            }
             this.chosenBuilding.setLocalZOrder(this.getZOrderBuilding(this.chosenBuilding._posX, this.chosenBuilding._posY));
             this.chosenBuilding.onUnselected();
         }
@@ -498,8 +502,14 @@ var MapLayer = cc.Layer.extend({
         return cc.pIntersectPoint(posA, posC, posB, posD);
     },
 
-    getScreenPosFromGridPos: function (posInGrid) {
-        var posInMap = this.getMapPosFromGridPos(posInGrid);
+    getScreenPosFromGridPos: function (posInGrid,isCenter=false){
+        let posInMap = this.getMapPosFromGridPos(posInGrid);
+        if(isCenter)
+        {
+            let posInMapUpperGrid = this.getMapPosFromGridPos(cc.p(posInGrid.x+1,posInGrid.y+1));
+            posInMap = cc.pLerp(posInMap,posInMapUpperGrid,0.5);
+        }
+
         return this.getScreenPosFromMapPos(posInMap);
     },
 
@@ -585,7 +595,7 @@ var MapLayer = cc.Layer.extend({
         let validPosition = MapManager.Instance().getEmptyPositionPutBuilding(this.chosenBuilding);
 
 
-        //if not valid position, set to center of map and square to red, else set to valid position and square to green
+        //if not valid position, set to center of map and square to red, else set to valid position and square to green, move screen to see building
         if(validPosition == null) {
             validPosition = cc.p(GRID_SIZE / 2, GRID_SIZE / 2)
             this.chosenBuilding.setSquare(2);
@@ -596,6 +606,10 @@ var MapLayer = cc.Layer.extend({
         }
         this.chosenBuilding.setGridPosition(validPosition.x, validPosition.y);
         this.tempPosChosenBuilding = cc.p(validPosition.x, validPosition.y);
+
+        cc.log("screen pos: " + this.getScreenPosFromGridPos(validPosition).x + " " + this.getScreenPosFromGridPos(validPosition).y);
+        this.setPosition(this.getScreenPosFromGridPos(validPosition));
+        this.limitBorder();
 
         //add building to layer to display
         this.addBuildingToLayer(this.chosenBuilding,MAP_ZORDER_BUILDING);

@@ -262,6 +262,9 @@ var res_map = {
             WALL:{
                 1: "res/Buildings/wall/WAL_1_1/WAL_1_1/idle/image0000.png"
             },
+            CLAN_CASTLE:{
+                1: "res/Buildings/clan_castle/CLC_1_0/idle/image0000.png"
+            },
             OBS_LINK: "res/Buildings/obstacle/OBS_",
         },
         SHADOW: {

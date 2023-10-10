@@ -177,12 +177,12 @@ var Obstacle = GameObject.extend({
         let playerInfoManager = PlayerInfoManager.Instance();
         let priceGold = LoadManager.Instance().getConfig(this._type,this._level,"gold");
         let priceElixir = LoadManager.Instance().getConfig(this._type,this._level,"elixir");
+        cc.log("gold: " + priceGold + " elixir: " + priceElixir)
         if(playerInfoManager.getResource("gold") < priceGold || playerInfoManager.getResource("elixir") < priceElixir)
         {
             cc.log("not enough resource");
             return;
         }
-
         if(playerInfoManager.getBuilder().current <= 0)
         {
             cc.log("not enough builder");

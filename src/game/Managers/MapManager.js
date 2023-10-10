@@ -54,9 +54,7 @@ var MapManager = cc.Layer.extend({
                 //cc.log("building Add------------------------------------------",type);
                 this.addBuilding(building);
             }
-
         }
-
     },
 
     //add building to list and to grid

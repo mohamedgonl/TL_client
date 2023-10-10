@@ -4,8 +4,9 @@ var Barrack = Building.extend({
     _height: null,
     _trainingQueue: [],
     lastTrainingTime: null,
-    ctor: function (type,level,id,posX,posY,status,startTime,endTime) {
-        this._super(type,level,id,posX,posY,status,startTime,endTime);
+    _type: "BAR_1",
+    ctor: function (level,id,posX,posY,status,startTime,endTime) {
+        this._super(level,id,posX,posY,status,startTime,endTime);
         this._trainingQueue = [];
         this.lastTrainingTime = 0;
 

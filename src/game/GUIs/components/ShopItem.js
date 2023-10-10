@@ -216,10 +216,11 @@ var ShopItem = cc.Node.extend({
                     popUpLayer.addChild(buyResPopup)
                 }
                 else {
+
+                    //accept buy building
                     var mapLayer = cc.director.getRunningScene().mapLayer;
                     popUpLayer.disappear("shop");
                     mapLayer.enterModeBuyBuilding(this._data.cfgId);
-
                 }
             } else {
                 cc.log("CANT BUY :::: ");

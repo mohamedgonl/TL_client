@@ -15,14 +15,13 @@ var Building = GameObject.extend({
     _buttons: [],
 
     //  example: building = new Townhall(type, level,id, posX, posY);
-    ctor: function (type,level =1 ,id,posX,posY,status,startTime,endTime) {
+    ctor: function (level =1 ,id,posX,posY,status,startTime,endTime) {
 
         this._super();
         this._level = level;
         this._posX = posX;
         this._posY = posY;
         this._id = id;
-        this._type = type ;
         this._state = status;
         this._startTime = startTime;
         this._endTime = endTime;

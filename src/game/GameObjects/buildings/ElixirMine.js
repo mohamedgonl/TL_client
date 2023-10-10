@@ -1,8 +1,8 @@
 var ElixirMine = Building.extend({
     _upper: null,
-
-    ctor: function (type,level,id,posX,posY,status,startTime,endTime) {
-        this._super(type,level,id,posX,posY,status,startTime,endTime);
+    _type: "RES_2",
+    ctor: function (level,id,posX,posY,status,startTime,endTime) {
+        this._super(level,id,posX,posY,status,startTime,endTime);
 
 
 

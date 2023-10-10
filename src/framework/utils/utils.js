@@ -59,38 +59,39 @@ function getBuildingFromType(type, level, id, posX, posY,status,startTime,endTim
     //building
     switch (type) {
         case 'TOW_1':
-            building = new Townhall(type, level,id, posX, posY,status,startTime,endTime);
+            building = new Townhall( level,id, posX, posY,status,startTime,endTime);
             break;
         case 'BDH_1':
-            building = new BuilderHut(type, level,id, posX, posY,status,startTime,endTime);
+            building = new BuilderHut( level,id, posX, posY,status,startTime,endTime);
             break;
         case 'AMC_1':
-            building = new ArmyCamp(type, level,id, posX, posY, status, startTime,endTime);
+            building = new ArmyCamp( level,id, posX, posY, status, startTime,endTime);
             break;
         case 'RES_1':
-            building = new GoldMine(type, level,id, posX, posY, status, startTime,endTime);
+            building = new GoldMine( level,id, posX, posY, status, startTime,endTime);
             break;
         case 'RES_2':
-            building = new ElixirMine(type, level,id, posX, posY, status, startTime,endTime);
+            building = new ElixirMine( level,id, posX, posY, status, startTime,endTime);
             break;
         case 'STO_1':
-            building = new GoldStorage(type, level,id, posX, posY, status, startTime,endTime);
+            building = new GoldStorage( level,id, posX, posY, status, startTime,endTime);
             break;
         case 'STO_2':
-            building = new ElixirStorage(type, level,id, posX, posY, status, startTime,endTime);
+            building = new ElixirStorage( level,id, posX, posY, status, startTime,endTime);
             break;
         case 'BAR_1':
-            building = new Barrack(type, level,id, posX, posY, status, startTime,endTime);
+            building = new Barrack(level,id, posX, posY, status, startTime,endTime);
             break;
         case 'DEF_1':
-
-            building = new Cannon(type, level,id, posX, posY, status, startTime,endTime);
+            building = new Cannon( level,id, posX, posY, status, startTime,endTime);
             break;
         case 'WAL_1':
-            building = new Wall(type, level,id, posX, posY, status, startTime,endTime);
+            building = new Wall( level,id, posX, posY, status, startTime,endTime);
             break;
+        case 'CLC_1':
+            building = new ClanCastle( level,id, posX, posY, status, startTime,endTime);
     }
-
+    building.setType(type);
     return building;
 }
 

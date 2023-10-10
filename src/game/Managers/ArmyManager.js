@@ -83,6 +83,7 @@ var ArmyManager = cc.Class.extend({
             cc.eventManager.dispatchEvent(event);
         });
 
+        cc.director.getRunningScene().infoLayer.updateUI({army: {current: this._currentSpace, max: this._maxTotalSpace}});
 
     },
 

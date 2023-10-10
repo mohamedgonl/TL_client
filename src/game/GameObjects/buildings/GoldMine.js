@@ -1,8 +1,9 @@
 var GoldMine = Building.extend({
     _upper: null,
     _last_time_harvest: null,
-    ctor: function (type,level,id,posX,posY,status,startTime,endTime) {
-        this._super(type,level,id,posX,posY,status,startTime,endTime);
+    _type: "RES_1",
+    ctor: function (level,id,posX,posY,status,startTime,endTime) {
+        this._super(level,id,posX,posY,status,startTime,endTime);
 
 
         // var upper_sprite = res_map.SPRITE.BODY.GOLD_MINE.UPPER[level];
