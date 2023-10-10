@@ -92,9 +92,8 @@ var Obstacle = GameObject.extend({
 
     loadButton: function(){
         let infoLayer = cc.director.getRunningScene().infoLayer;
-        infoLayer.addButtonToMenu("Dọn dẹp",res.BUTTON.REMOVE_BUTTON,0,this.onClickRemove.bind(this));
+        infoLayer.addButtonToMenu("Dọn dẹp",res.BUTTON.REMOVE_BUTTON,0,this.onClickRemove.bind(this),this);
     },
-
     onSelected: function(){
         this.loadButton();
         this._arrowMove.setVisible(true);
@@ -109,7 +108,6 @@ var Obstacle = GameObject.extend({
     },
     showButtonToInfoLayer: function(){
         let infoLayer = cc.director.getRunningScene().infoLayer;
-
     },
     setType: function (type) {
         this._type = type;
@@ -119,37 +117,15 @@ var Obstacle = GameObject.extend({
     },
     updateProgress: function (){
         //log start time, end time, current time
-        cc.log("elasped time: " + (this._endTime - this._startTime));
-        cc.log("current time: " + (new Date().getTime() - this._startTime));
         let currentTime = new Date().getTime();
         let percent = (currentTime - this._startTime)/(this._endTime - this._startTime)*100;
         this._progressBar.setPercent(percent);
 
-        //set time label = end time - current time in 1d2h3m40s format, if 0d -> 2h3m40s, if 0d0h -> 3m40s
+        //update time left
         let time = this._endTime - currentTime;
-        let timeString = "";
-        if(time >= 86400000){
-            timeString += Math.floor(time/86400000) + "d";
-            time = time%86400000;
-        }
-        if(time >= 3600000){
-            timeString += Math.floor(time/3600000) + "h";
-            time = time%3600000;
-        }
-        if(time >= 60000){
-            timeString += Math.floor(time/60000) + "m";
-            time = time%60000;
-        }
-        if(time >= 1000){
-            timeString += Math.floor(time/1000) + "s";
-        }
-        else
-            timeString += "0s";
-
-        this._timeLabel.setString(timeString);
-
+        this._timeLabel.setString(getTimeString(time));
         if(currentTime >= this._endTime){
-            this.doneRemove();
+            this.completeRemove();
         }
     },
     update: function (dt) {
@@ -168,10 +144,8 @@ var Obstacle = GameObject.extend({
         this._startTime = startTime;
         this._endTime = endTime;
 
-        //decrease buildtime 10 times
         //test
-        this._endTime = this._startTime + (this._endTime - this._startTime)/10;
-
+        this.test();
 
         let playerInfoManager = PlayerInfoManager.Instance();
         let priceGold = LoadManager.Instance().getConfig(this._type,this._level,"gold");
@@ -180,21 +154,25 @@ var Obstacle = GameObject.extend({
         playerInfoManager.changeResource("elixir",-priceElixir);
         playerInfoManager.changeBuilder("current",-1);
     },
-    doneRemove: function () {
+    completeRemove: function () {
         this._status = 0;
         this._startTime = null;
         this._endTime = null;
+
+        //xoa khoi map
         MapManager.Instance().removeObstacle(this)
         //xoa obstacle khoi layer
         cc.director.getRunningScene().mapLayer.removeObstacle(this);
 
+        //tra ve builder
         let playerInfoManager = PlayerInfoManager.Instance();
         playerInfoManager.changeBuilder("current",1);
 
     },
     //check to client, if valid then send packet to server
     onClickRemove: function(){
-
+        cc.log("onClickRemove");
+        cc.log("type: " + this._type + " level: " + this._level)
         //check client
         let playerInfoManager = PlayerInfoManager.Instance();
         let priceGold = LoadManager.Instance().getConfig(this._type,this._level,"gold");
@@ -234,5 +212,8 @@ var Obstacle = GameObject.extend({
         {
             cc.log("error: " + packet.error);
         }
+    },
+    test: function(){
+        this._endTime = this._startTime + (this._endTime - this._startTime)/10;
     }
 });

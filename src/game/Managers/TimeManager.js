@@ -9,7 +9,10 @@ var TimeManager = cc.Class.extend({
         let curTime = new Date().getTime();
         return Math.floor ((curTime + this.deltaTimeClientServer)/1000);
     },
-
+    getCurrentTime: function () {
+        let curTime = new Date().getTime();
+        return curTime + this.deltaTimeClientServer;
+    },
     setDeltaTimeClientServer: function (serverTime = new Date().getTime()) {
         let curTime = new Date().getTime();
         this.deltaTimeClientServer = serverTime - curTime;

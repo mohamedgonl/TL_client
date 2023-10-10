@@ -31,15 +31,14 @@ var Building = GameObject.extend({
             " posX: " + this._posX + " posY: " + this._posY + " id: " + this._id +
             " status: " + this._state + " startTime: " + this._startTime + " endTime: " + this._endTime);
 
-
-
         let config = LoadManager.Instance().getConfig(this._type,level);
         this._width = config.width;
         this._height = config.height;
         this._hitpoints = config.hitpoints;
 
         this.setAnchorPoint(0.5,0.5);
-
+        this.loadSpriteByLevel(level);
+        this.loadSubSprite();
     },
 
     //load sprite with size,
@@ -167,13 +166,17 @@ var Building = GameObject.extend({
 
         this._progressBar.addChild(this._timeLabel,ZORDER_BUILDING_EFFECT);
     },
-
+    loadButton: function(){
+        let infoLayer = cc.director.getRunningScene().infoLayer;
+        infoLayer.addButtonToMenu("Thông tin",res.BUTTON.INFO_BUTTON,0,this.onClickInfo.bind(this),this);
+    },
     //init button for building in middle bottom of screen
     setState: function (state) {
         this.state = state;
     },
 
     onSelected: function(){
+        this.loadButton();
         this._arrow_move.setVisible(true);
         this._nameLabel.setVisible(true);
         this._levelLabel.setVisible(true);
@@ -223,62 +226,77 @@ var Building = GameObject.extend({
         this._progressBar.setPercent(percent);
         //set time label = end time - current time in 1d2h3m40s format, if 0d -> 2h3m40s, if 0d0h -> 3m40s
         let time = this._endTime - currentTime;
-        let timeString = "";
-        if(time >= 86400000){
-            timeString += Math.floor(time/86400000) + "d";
-            time = time%86400000;
-        }
-        if(time >= 3600000){
-            timeString += Math.floor(time/3600000) + "h";
-            time = time%3600000;
-        }
-        if(time >= 60000){
-            timeString += Math.floor(time/60000) + "m";
-            time = time%60000;
-        }
-        if(time >= 1000){
-            timeString += Math.floor(time/1000) + "s";
-        }
-        else
-            timeString += "0s";
+        this._timeLabel.setString(getTimeString(time));
 
-        this._timeLabel.setString(timeString);
-
+        //if end
         if(currentTime >= this._endTime){
             switch (this._state){
                 case 1:
-                    this.doneBuild();
+                    this.completeBuild();
                     break;
                 case 2:
-                    this.doneUpgrade();
+                    this.completeUpgrade();
                     break;
             }
         }
     },
+
     update: function () {
-
-        if(this._state === 1){
-
-            if(this._progressBar.isVisible() === false)
-                this._progressBar.setVisible(true);
+        if(this._state === 1 || this._state === 2){
             this.updateProgress();
         }
-        else{
-            if(this._progressBar.isVisible() === true)
-                this._progressBar.setVisible(false);
-        }
     },
-    doneBuild: function () {
-        cc.log("done build")
+    completeProcess: function () {
         this._state = 0;
         this._startTime = null;
         this._endTime = null;
+        this._progressBar.setVisible(false);
+        //unschedule update
+        this.unschedule(this.update);
     },
-    doneUpgrade: function () {
-        cc.log("done upgrade")
-        this._state = 0;
-        this._startTime = null;
-        this._endTime = null;
-    }
+    completeBuild: function () {
+        this.completeProcess();
+    },
+    completeUpgrade: function () {
+        this.completeProcess();
+        this._level += 1;
+        //set sprite for new level and update level label
+        this._levelLabel.setString("Level " + this._level);
+        this.loadSprite(this._level)
+    },
+    build: function (startTime,endTime) {
 
+        //change when build
+        let priceGold = LoadManager.Instance().getConfig(this._type, 1, "gold") || 0;
+        let priceElixir = LoadManager.Instance().getConfig(this._type, 1, "elixir") || 0;
+        PlayerInfoManager.Instance().changeResource("gold", -priceGold);
+        PlayerInfoManager.Instance().changeResource("elixir", -priceElixir);
+        PlayerInfoManager.Instance().changeBuilder("current", -1);
+        this._state = 1;
+        this._startTime = startTime;
+        this._endTime = endTime;
+        //enable progress bar
+        this._progressBar.setVisible(true);
+        this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
+    },
+    upgrade: function (startTime,endTime) {
+
+        let priceGold = LoadManager.Instance().getConfig(this._type, this._level, "gold") || 0;
+        let priceElixir = LoadManager.Instance().getConfig(this._type, this._level, "elixir") || 0;
+        PlayerInfoManager.Instance().changeResource("gold", -priceGold);
+        PlayerInfoManager.Instance().changeResource("elixir", -priceElixir);
+        PlayerInfoManager.Instance().changeBuilder("current", -1);
+
+        this._state = 2;
+        this._startTime = startTime;
+        this._endTime = endTime;
+        //enable progress bar
+        this._progressBar.setVisible(true);
+    },
+    onClickInfo: function () {
+        cc.log("onClickInfo" + this._id);
+    },
+    onClickUpgrade: function () {
+        cc.log("onClickUpgrade" + this._id);
+    }
 });

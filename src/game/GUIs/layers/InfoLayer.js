@@ -5,6 +5,9 @@ var InfoLayer = cc.Layer.extend({
         ctor: function () {
             this._super();
             this.init();
+
+
+
         },
 
         //init UI, add to layer, init attributes, load resources
@@ -26,24 +29,26 @@ var InfoLayer = cc.Layer.extend({
 
             //container for button when select building
             this.button_container = new cc.Node();
-            this.addChild(this.button_container);
+            this.addChild(this.button_container,99999999);
             this.button_container.setPosition(cc.winSize.width / 2, 0);
             this.button_container.setVisible(false);
             this.button_container.nameBuilding = new cc.LabelBMFont("Obstacle", res.FONT.SOJI[20], null, cc.TEXT_ALIGNMENT_CENTER);
             this.button_container.nameBuilding.setPosition(0, 140);
-            this.button_container.menu = new cc.Menu();
             this.button_container.addChild(this.button_container.nameBuilding);
-            this.button_container.addChild(this.button_container.menu);
 
-            let menu = this.button_container.menu;
-            menu.setPosition(0, 60);
-            menu.alignItemsHorizontallyWithPadding(10);
+            this.menu = new cc.Menu();
+            this.menu.setPosition(cc.winSize.width/2, 60);
+            this.addChild(this.menu,9999999999);
+            this.menu.alignItemsHorizontallyWithPadding(10);
 
-
+            // this._menu = new cc.Menu();
+            // this.addChild(this._menu);
+            // this._menu.setPosition(cc.winSize.width/2,60);
+            // this._menu.alignItemsHorizontallyWithPadding(10);
         },
 
-        //add button to menu button_containerm, status = 0: normal, status = 1: disable
-        addButtonToMenu: function (text, sprite,status , callback,textGold,textElixir) {
+        // add button to menu button_containerm, status = 0: normal, status = 1: disable
+        addButtonToMenu: function (text, sprite,status , callback,target,textGold,textElixir) {
 
             //button
             // Tạo sprite cho trạng thái bình thường
@@ -55,22 +60,22 @@ var InfoLayer = cc.Layer.extend({
             var selectedSprite = new cc.Sprite(sprite,
                 cc.rect(-spriteWidth/20,-spriteHeight/20,spriteWidth+spriteWidth/10,spriteHeight+spriteHeight/10));
             selectedSprite.setScale(20/22)
-
-            // Tạo sprite cho trạng thái khi bị vô hiệu hóa
             var disabledSprite = new cc.Sprite(sprite);
-            //lam mo sprite di
             disabledSprite.setOpacity(100);
-            let button = new cc.MenuItemSprite(normalSprite, selectedSprite, disabledSprite, callback, this);
-            if(status === 1){
-                button.setEnabled(false);
-            }
-            let label = new cc.LabelBMFont(text, res.FONT.SOJI[16],null,cc.TEXT_ALIGNMENT_CENTER);
-            //label hien o giua duoi cua button
-            label.setPosition(spriteWidth/2,spriteHeight/11);
-            label.setAnchorPoint(0.5,0);
-            button.addChild(label);
-            this.button_container.menu.addChild(button);
+
+            var button = new cc.MenuItemSprite(normalSprite, selectedSprite, disabledSprite, callback, this);
+            // if(status === 1){
+            //     button.setEnabled(false);
+            // }
+            // let label = new cc.LabelBMFont(text, res.FONT.SOJI[16],null,cc.TEXT_ALIGNMENT_CENTER);
+            // //label hien o giua duoi cua button
+            // label.setPosition(spriteWidth/2,spriteHeight/11);
+            // label.setAnchorPoint(0.5,0);
+            // button.addChild(label);
+            this.menu.addChild(button);
+            this.menu.alignItemsHorizontallyWithPadding(10);
         },
+
 
         //after init UI, get all resources to display
         loadResources: function () {
@@ -167,37 +172,28 @@ var InfoLayer = cc.Layer.extend({
             //army ------------------------------------------------------------
         },
 
-        test: function (data, category) {
-            this._super()
-            let node = CCSUlties.parseUIFile(res_ui.SHOP_ITEM);
-            // find shop_item_node
-            let item = node.getChildByName("shop_item_node");
-            this._itemNode = item;
-            this._data = data;
-            this.setItemInfo(data, category);
-            this.addChild(node);
-        },
-
         onSelectBuilding: function (event) {
-            // let id = event.getUserData();
-            // let building = MapManager.Instance().getBuildingById(id);
-            // this.building_button = new SelectedBuildingContainer(building);
-            // this.addChild(this.building_button,9999);
-            // //set pos at middle bottom of screen
-            // this.building_button.setPosition(cc.winSize.width / 2, 0);
-            cc.log("onSelectBuilding::::::::::::::::")
-            this.button_container.setVisible(true);
-        },
+            let id = event.getUserData();
+            cc.log("onSelectBuilding::::::::::::::::" + id)
+            let building = MapManager.Instance().getBuildingById(id);
 
+;
+            //rename nameBuilding
+            this.button_container.nameBuilding.setString(building._type);
+            this.button_container.setVisible(true);
+            //test
+
+        },
         onUnselectBuilding: function (event) {
             this.button_container.setVisible(false);
             //delete building_buttons in menu
-            this.button_container.menu.removeAllChildren();
+            this.menu.removeAllChildren();
             // if (this.building_button) {
             //     this.building_button.removeFromParent(true);
             //     this.building_button = null;
             // }
-        }
+        },
+
 
 
     });

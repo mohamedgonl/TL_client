@@ -7,10 +7,12 @@ var Barrack = Building.extend({
     ctor: function (type,level,id,posX,posY,status,startTime,endTime) {
         this._super(type,level,id,posX,posY,status,startTime,endTime);
 
-        this.loadSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
-        this.loadSubSprite();
+        // this.loadSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
+        // this.loadSubSprite();
     },
-
+    loadSpriteByLevel: function (level) {
+        this.loadSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
+    },
     getLastTrainingTime: function () {
         return this.lastTrainingTime;
     },
