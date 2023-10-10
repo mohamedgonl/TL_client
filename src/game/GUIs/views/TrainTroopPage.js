@@ -272,14 +272,14 @@ var TrainTroopPage = cc.Node.extend({
         event.data = {count: 1, cfgId: data.cfgId};
         cc.eventManager.dispatchEvent(event);
 
-        ArmyManager.Instance().updateArmyAmount([{cfgId:data.cfgId, count:1, curBarrack: this._curBarrack}])
+        ArmyManager.Instance().updateArmyAmount([{cfgId:data.cfgId, count:1}], this._curPage)
         this.updateTrainingPopupTitle();
     },
 
     onDoneNowSuccess:function (data) {
         this.stopUpdateUI();
         this._trainContainer.setVisible(false);
-        ArmyManager.Instance().updateArmyAmount(this._curBarrack.getTrainingList());
+        ArmyManager.Instance().updateArmyAmount(this._curBarrack.getTrainingList(), this._curPage);
         this._curBarrack.setTrainingList([]);
         this._curBarrack.setLastTrainingTime(data.lastTrainingTime);
         this._trainingItem.map(e => {

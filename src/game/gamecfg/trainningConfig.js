@@ -70,5 +70,6 @@ const TRAINING_EVENTS = {
     DONE_NOW: "done_now",
     UPDATE_SPACE: "update_space",
     CREATE_TRAIN_SUCCESS: "create_train_success",
-    TRAIN_SUCCESS: "train_success"
+    TRAIN_SUCCESS: "train_success",
+    CREATE_TROOP_ON_MAP:  "create_on_map"
 }

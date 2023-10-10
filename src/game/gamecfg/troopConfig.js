@@ -6,7 +6,7 @@ const TroopConfig = {
             width: 192,
             height: 192,
         },
-        delay_time: 0.05,
+        frame_time: 0.05,
         run: {
             down: [0,13],
             down_left: [14,27],
