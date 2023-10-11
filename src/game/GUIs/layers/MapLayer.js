@@ -419,8 +419,10 @@ var MapLayer = cc.Layer.extend({
         var buildingCenterX = newPosX + sizeX / 2;
         var buildingCenterY = newPosY + sizeY / 2;
 
-        let middleScreen = cc.p(cc.winSize.width/2,cc.winSize.height/2);
-        let newPosInMap = cc.pAdd(this.getMapPosFromGridPos(cc.p(buildingCenterX,buildingCenterY)),middleScreen);
+        // let middleScreen = cc.p(cc.winSize.width/2,cc.winSize.height/2);
+        // let newPosInMap = cc.pAdd(this.getMapPosFromGridPos(cc.p(buildingCenterX,buildingCenterY)),middleScreen);
+
+        let newPosInMap = this.getLayerPositionFromGrid(buildingCenterX,buildingCenterY);
         building.setPosition(newPosInMap);
 
     },
@@ -451,7 +453,7 @@ var MapLayer = cc.Layer.extend({
         var posInMap =  cc.pSub(cc.pSub(posInScreen, this.getPosition()), cc.p(cc.winSize.width / 2, cc.winSize.height / 2)) ;
         let x = posInMap.x / this.getScale();
         let y = posInMap.y / this.getScale();
-
+        cc.log("map pos from screen pos----------------- : " + x + " " + y);
         return cc.p(x, y);
 
     },
@@ -460,7 +462,7 @@ var MapLayer = cc.Layer.extend({
     // bottom left grid border and bottom right grid border
     // to get grid pos from map pos
     getGridPosFromMapPos: function (posInMap) {
-        posInMap = cc.pSub(posInMap,cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
+        // posInMap = cc.pSub(posInMap,cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
         //calculate distance by distance formula from point to line
         var distanceFromBottomLeft = findDistanceFromPointToLine(posInMap, CORNER_BOTTOM, CORNER_LEFT);
         var distanceFromBottomRight = findDistanceFromPointToLine(posInMap, CORNER_RIGHT, CORNER_BOTTOM);
@@ -490,6 +492,8 @@ var MapLayer = cc.Layer.extend({
         return cc.pIntersectPoint(posA, posC, posB, posD);
 
     },
+
+    //use it to add, calculate position to add child in map layer
     //------------------------------------------------------------------------------------------------------------------
 
     addGameObjectToMapLayer: function (gameObject,gridPosX,gridPosY,zOrder,isCenter=false) {
@@ -501,13 +505,13 @@ var MapLayer = cc.Layer.extend({
         // let posInMap = this.getMapPosFromGridPos(cc.p(gridPosX,gridPosY));
         // let posToAdd = cc.pAdd(posInMap,middleScreen);
 
-        let posToAdd = this.getPositionInMapLayer(gridPosX,gridPosY,isCenter);
+        let posToAdd = this.getLayerPositionFromGrid(gridPosX,gridPosY,isCenter);
 
         this.addChild(gameObject,zOrder);
         gameObject.setPosition(posToAdd);
     },
 
-    getPositionInMapLayer: function (gridPosX,gridPosY, isCenter = false) {
+    getLayerPositionFromGrid: function (gridPosX, gridPosY, isCenter = false) {
         let gridPos = cc.p(gridPosX, gridPosY);
         let mapPos = this.getMapPosFromGridPos(gridPos);
         if (isCenter) {
@@ -516,6 +520,11 @@ var MapLayer = cc.Layer.extend({
         }
         let middleScreen = cc.p(cc.winSize.width/2,cc.winSize.height/2);
         return cc.pAdd(mapPos,middleScreen);
+    },
+    getGridFromLayerPosition: function (posInLayer) {
+        let posInMap = cc.pSub(posInLayer,cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
+        let gridPos = this.getGridPosFromMapPos(posInMap);
+        return gridPos;
     },
     //------------------------------------------------------------------------------------------------------------------
     moveView: function (delta) {
