@@ -128,13 +128,13 @@ var MapLayer = cc.Layer.extend({
         }, this);
     },
 
-    removeObstacle: function (obstacle) {
+    removeBuilding: function (building) {
         //remove child from layer
-        if(obstacle === this.chosenBuilding)
+        if(building === this.chosenBuilding)
         {
             this.unSelectBuilding();
         }
-        obstacle.removeFromParent(true);
+        building.removeFromParent(true);
 
     },
 
@@ -346,7 +346,7 @@ var MapLayer = cc.Layer.extend({
             {
                 this.exitModeMoveBuilding();
             }
-            this.chosenBuilding.setLocalZOrder(this.getZOrderBuilding(this.chosenBuilding._posX, this.chosenBuilding._posY));
+            this.chosenBuilding.setLocalZOrder(this.getZOrderBuilding(this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y));
             this.chosenBuilding.onUnselected();
         }
         this.chosenBuilding = null;
@@ -453,7 +453,6 @@ var MapLayer = cc.Layer.extend({
         var posInMap =  cc.pSub(cc.pSub(posInScreen, this.getPosition()), cc.p(cc.winSize.width / 2, cc.winSize.height / 2)) ;
         let x = posInMap.x / this.getScale();
         let y = posInMap.y / this.getScale();
-        cc.log("map pos from screen pos----------------- : " + x + " " + y);
         return cc.p(x, y);
 
     },
@@ -472,7 +471,7 @@ var MapLayer = cc.Layer.extend({
         var gridX = Math.floor(distanceFromBottomLeft / grid_width * GRID_SIZE);
         var gridY = Math.floor(distanceFromBottomRight / grid_width * GRID_SIZE);
 
-        cc.log("gridX : " + gridX + " gridY : " + gridY)
+
         if (gridX < 0 || gridX >= GRID_SIZE || gridY < 0 || gridY >= GRID_SIZE)
             return null;
 

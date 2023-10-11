@@ -59,7 +59,6 @@ var PlayerInfoManager = cc.Layer.extend({
         if (gem >= 0) {
             this.resource.gem = gem;
         }
-
         this.setUI({resource: this.resource})
     },
 

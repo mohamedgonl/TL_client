@@ -102,6 +102,7 @@ var InfoLayer = cc.Layer.extend({
     },
     removeAllButtonInMenu: function () {
         this.menu.removeAllChildren();
+
     },
 
 
