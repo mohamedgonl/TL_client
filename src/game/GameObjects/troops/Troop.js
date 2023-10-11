@@ -23,6 +23,10 @@ var Troop = cc.Node.extend({
         let end = mapLayer.getPositionInMapLayer(this.armyCamp._posX, this.armyCamp._posY, true);
 
         this.troop.setPosition(barrack.getPosition().x, barrack.getPosition().y);
+
+        let shadow = new cc.Sprite(res_map.SPRITE.SHADOW.TROOP_SMALL);
+        this.troop.addChild(shadow);
+
         this.initAnimation()
         this.runTo(start, end);
         // this.test()
