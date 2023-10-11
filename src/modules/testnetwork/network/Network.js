@@ -28,6 +28,14 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.MAP_INFO:
                 fr.getCurrentScreen().onReceiveMapInfo(packet);
                 break;
+            case gv.CMD.CHEAT_RESOURCE:
+                if (packet.error === 0)
+                    PlayerInfoManager.Instance().setResource({
+                        gold: packet.gold,
+                        elixir: packet.elixir,
+                        gem: packet.gem,
+                    });
+                break;
             case gv.CMD.BUY_RESOURCE:
                 cc.director.getRunningScene().onBuyResourceSuccess(packet);
                 break;
@@ -62,29 +70,26 @@ testnetwork.Connector = cc.Class.extend({
         }
     },
 
-    onReceiveTrainTroopSuccess: function(packet) {
-        if(packet.getError() !== ErrorCode.SUCCESS) {
+    onReceiveTrainTroopSuccess: function (packet) {
+        if (packet.getError() !== ErrorCode.SUCCESS) {
             cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
-        }
-        else {
+        } else {
             cc.log("TRAIN TROOP DONE REQUEST SUCCESS ::::::::: ");
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
             let trainingPage = trainingPopup.getPage({barackId: packet.barrackId});
-            if(packet.isDoneNow) {
+            if (packet.isDoneNow) {
                 trainingPage.onDoneNowSuccess(packet);
-            }
-            else {
+            } else {
                 trainingPage.onTrainSuccess(packet);
             }
         }
     },
 
     onReceiveTrainTroopCreate: function (packet) {
-        if(packet.getError() !== ErrorCode.SUCCESS) {
+        if (packet.getError() !== ErrorCode.SUCCESS) {
             cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
-        }
-        else {
+        } else {
             cc.log("TRAIN TROOP CREATE REQUEST SUCCESS ::::::::: ");
             let event = {}
             event.data = {
@@ -101,15 +106,14 @@ testnetwork.Connector = cc.Class.extend({
         }
     },
 
-    onReceiveGetTrainingList :function (packet) {
-        if(packet.getError() !== ErrorCode.SUCCESS) {
+    onReceiveGetTrainingList: function (packet) {
+        if (packet.getError() !== ErrorCode.SUCCESS) {
             cc.log("GET TRAINING LIST ERROR :::::::::::", packet.getError());
-        }
-        else {
+        } else {
             cc.log("GET TRAINING LIST SUCCESS :::::::::::");
             let barracks = ArmyManager.Instance().getBarrackList();
             for (let i = 0; i < barracks.length; i++) {
-                if(barracks[i].getId() === packet.barrackId) {
+                if (barracks[i].getId() === packet.barrackId) {
                     barracks[i].setTrainingList(packet.trainingList);
                     barracks[i].setLastTrainingTime(packet.lastTrainingTime);
                     let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
@@ -122,10 +126,9 @@ testnetwork.Connector = cc.Class.extend({
     },
 
     onReceiveCancleTrain: function (packet) {
-        if(packet.getError() !== ErrorCode.SUCCESS) {
+        if (packet.getError() !== ErrorCode.SUCCESS) {
             cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
-        }
-        else {
+        } else {
             cc.log("TRAIN TROOP CANCLE REQUEST SUCCESS ::::::::: ");
             let event = {}
             event.data = {
@@ -151,6 +154,17 @@ testnetwork.Connector = cc.Class.extend({
         cc.log("sendGetMapInfo");
         var pk = this.gameClient.getOutPacket(CmdSendMapInfo);
         pk.pack();
+        this.gameClient.sendPacket(pk);
+    },
+    sendCheatResource: function (dataRes) {
+        cc.log("send cheat res");
+        var pk = this.gameClient.getOutPacket(CmdSendCheatResource);
+        const data = {
+            gold: dataRes.gold >= 0 ? dataRes.gold : -1,
+            elixir: dataRes.elixir >= 0 ? dataRes.elixir : -1,
+            gem: dataRes.gem >= 0 ? dataRes.gem : -1,
+        }
+        pk.pack(data);
         this.gameClient.sendPacket(pk);
     },
     sendLoginRequest: function (uid) {
@@ -187,15 +201,15 @@ testnetwork.Connector = cc.Class.extend({
         this.gameClient.sendPacket(pk);
     },
 
-    sendGetTrainingList : function (data) {
+    sendGetTrainingList: function (data) {
         var pk = this.gameClient.getOutPacket(CmdSendGetTrainingList);
         pk.pack(data);
         this.gameClient.sendPacket(pk);
     },
-    sendMoveBuilding: function(id, posX, posY) {
+    sendMoveBuilding: function (id, posX, posY) {
         cc.log("SEND move building request");
         var pk = this.gameClient.getOutPacket(CmdSendMoveBuilding);
-        pk.pack({id,posX, posY});
+        pk.pack({id, posX, posY});
         this.gameClient.sendPacket(pk);
     },
     sendBuyBuilding: function (type, posX, posY) {
@@ -207,10 +221,10 @@ testnetwork.Connector = cc.Class.extend({
     },
 
     sendMove: function (direction) {
-        cc.log("SendMove:" + direction);
-        var pk = this.gameClient.getOutPacket(CmdSendMove);
-        pk.pack(direction);
-        this.gameClient.sendPacket(pk);
+        // cc.log("SendMove:" + direction);
+        // var pk = this.gameClient.getOutPacket(CmdSendMove);
+        // pk.pack(direction);
+        // this.gameClient.sendPacket(pk);
     }
 });
 

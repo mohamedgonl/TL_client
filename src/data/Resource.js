@@ -136,6 +136,7 @@ var res_ui = {
     TROOPS_LIST_ITEM: "TroopListItem.json",
     TROOPS_TRAINING_ITEM: "TroopTrainingItem.json",
     NOTI_POPUP: "NotiPopup.json",
+    CHEAT_POPUP: "CheatPopup.json",
     INFO_LAYER: "InfoLayer1.json"
 }
 
