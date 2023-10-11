@@ -28,13 +28,5 @@
         <EnableHTML5Advanced Value="False" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="CheatPopup.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="CheatPopup.csd" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>
