@@ -17,11 +17,11 @@ var PlayerInfoManager = cc.Layer.extend({
         elixir: 0,
         gem: 0
     },
-    builder:{
+    builder: {
         current: 0,
         max: 0,
     },
-    army:{
+    army: {
         current: 0,
         max: 0,
     },
@@ -40,13 +40,13 @@ var PlayerInfoManager = cc.Layer.extend({
         return this.builder;
     },
     setResource: function ({gold, elixir, gem}) {
-        if (gold) {
+        if (gold >= 0) {
             this.resource.gold = gold;
         }
-        if (elixir) {
+        if (elixir >= 0) {
             this.resource.elixir = elixir;
         }
-        if (gem) {
+        if (gem >= 0) {
             this.resource.gem = gem;
         }
 
@@ -102,44 +102,35 @@ var PlayerInfoManager = cc.Layer.extend({
     changeResource: function (type, value) {
         if (type === "gold") {
             this.resource.gold += value;
-        }
-        else if (type === "elixir") {
+        } else if (type === "elixir") {
             this.resource.elixir += value;
-        }
-        else return;
+        } else return;
         this.setUI({resource: this.resource});
     },
     changeMaxResource: function (type, value) {
         if (type === "gold") {
             this.maxResource.gold += value;
-        }
-        else if (type === "elixir") {
+        } else if (type === "elixir") {
             this.maxResource.elixir += value;
-        }
-        else return;
+        } else return;
         this.setUI({maxResource: this.maxResource});
     },
     changeBuilder: function (type, value) {
         if (type === "current") {
             this.builder.current += value;
-        }
-        else if (type === "max") {
+        } else if (type === "max") {
             this.builder.max += value;
-        }
-        else return;
+        } else return;
         this.setUI({builder: this.builder});
     },
     changeInfo: function (type, value) {
         if (type === "name") {
             this.info.name = value;
-        }
-        else if (type === "avatar") {
+        } else if (type === "avatar") {
             this.info.avatar = value;
-        }
-        else if (type === "level") {
+        } else if (type === "level") {
             this.info.level = value;
-        }
-        else if (type === "rank") {
+        } else if (type === "rank") {
             this.info.rank = value;
         }
         this.setUI({info: this.info});
@@ -150,10 +141,9 @@ var PlayerInfoManager = cc.Layer.extend({
         }
         return false;
     },
-    setUI:function (data)
-    {
+    setUI: function (data) {
         let InfoLayer = cc.director.getRunningScene().infoLayer;
-        if(InfoLayer == null) return;
+        if (InfoLayer == null) return;
         InfoLayer.updateUI(data);
     },
 })

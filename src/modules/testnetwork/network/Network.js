@@ -28,6 +28,14 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.MAP_INFO:
                 fr.getCurrentScreen().onReceiveMapInfo(packet);
                 break;
+            case gv.CMD.CHEAT_RESOURCE:
+                if (packet.error === 0)
+                    PlayerInfoManager.Instance().setResource({
+                        gold: packet.gold,
+                        elixir: packet.elixir,
+                        gem: packet.gem,
+                    });
+                break;
             case gv.CMD.BUY_RESOURCE:
                 cc.director.getRunningScene().onBuyResourceSuccess(packet);
                 break;
@@ -165,6 +173,17 @@ testnetwork.Connector = cc.Class.extend({
         pk.pack();
         this.gameClient.sendPacket(pk);
     },
+    sendCheatResource: function (dataRes) {
+        cc.log("send cheat res");
+        var pk = this.gameClient.getOutPacket(CmdSendCheatResource);
+        const data = {
+            gold: dataRes.gold >= 0 ? dataRes.gold : -1,
+            elixir: dataRes.elixir >= 0 ? dataRes.elixir : -1,
+            gem: dataRes.gem >= 0 ? dataRes.gem : -1,
+        }
+        pk.pack(data);
+        this.gameClient.sendPacket(pk);
+    },
     sendLoginRequest: function (uid) {
         cc.log("sendLoginRequest");
         var pk = this.gameClient.getOutPacket(CmdSendLogin);
@@ -199,15 +218,15 @@ testnetwork.Connector = cc.Class.extend({
         this.gameClient.sendPacket(pk);
     },
 
-    sendGetTrainingList : function (data) {
+    sendGetTrainingList: function (data) {
         var pk = this.gameClient.getOutPacket(CmdSendGetTrainingList);
         pk.pack(data);
         this.gameClient.sendPacket(pk);
     },
-    sendMoveBuilding: function(id, posX, posY) {
+    sendMoveBuilding: function (id, posX, posY) {
         cc.log("SEND move building request");
         var pk = this.gameClient.getOutPacket(CmdSendMoveBuilding);
-        pk.pack({id,posX, posY});
+        pk.pack({id, posX, posY});
         this.gameClient.sendPacket(pk);
     },
     sendBuyBuilding: function (type, posX, posY) {
@@ -219,10 +238,10 @@ testnetwork.Connector = cc.Class.extend({
     },
 
     sendMove: function (direction) {
-        cc.log("SendMove:" + direction);
-        var pk = this.gameClient.getOutPacket(CmdSendMove);
-        pk.pack(direction);
-        this.gameClient.sendPacket(pk);
+        // cc.log("SendMove:" + direction);
+        // var pk = this.gameClient.getOutPacket(CmdSendMove);
+        // pk.pack(direction);
+        // this.gameClient.sendPacket(pk);
     }
 });
 
