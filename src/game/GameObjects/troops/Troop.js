@@ -17,9 +17,14 @@ var Troop = cc.Node.extend({
 
         let barrack = ArmyManager.Instance().getBarrackList()[barrackIndex];
         this.armyCamp = ArmyManager.Instance().getArmyCampList()[armyCampIndex];
+        let mapLayer = cc.director.getRunningScene().getMapLayer();
+
+        let start = mapLayer.getPositionInMapLayer(barrack._posX, barrack._posY, true);
+        let end = mapLayer.getPositionInMapLayer(this.armyCamp._posX, this.armyCamp._posY, true);
+
         this.troop.setPosition(barrack.getPosition().x, barrack.getPosition().y);
         this.initAnimation()
-        this.runTo(this.armyCamp.getPosition());
+        this.runTo(start, end);
         // this.test()
 
         cc.eventManager.addCustomListener(EVENT_TROOP_NAME.MOVE_BUILDING, this.handleMapChange.bind(this))
@@ -30,15 +35,11 @@ var Troop = cc.Node.extend({
 
     initAnimation: function () {
         let cfgId = this._cfgId;
-        const animas = ["run", "idle", "attack01", "dead"];
-        const directions = ["down", "left", "down_left", "down_right", "up_right", "up_left", "right", "up"];
-
         this._animations = {};
-
-        animas.map(action => {
+        ANIMAS.map(action => {
             this._animations[action] = {};
             if (TroopConfig[cfgId][action]) {
-                directions.map((direct, index) => {
+                DIRECTIONS.map((direct, index) => {
                     if (TroopConfig[cfgId][action][direct]) {
                         let animation = new cc.Animation();
                         for (let i = TroopConfig[cfgId][action][direct][0]; i <= TroopConfig[cfgId][action][direct][1]; i++) {
@@ -52,25 +53,25 @@ var Troop = cc.Node.extend({
                             //     cc.SpriteFrameCache.getInstance().addSpriteFrame(frameName, frameName);
                             // }
                         }
-                        animation.setDelayPerUnit(TroopConfig[cfgId].frame_time);
+                        animation.setDelayPerUnit(TroopConfig[cfgId][action].frame_time);
                         animation.setRestoreOriginalFrame(true);
                         this._animations[action][direct] = animation;
                     } else {
-                        let oppositeDir = directions[directions.length - 1 - index];
-
-                        let animation = new cc.Animation();
-                        for (let i = TroopConfig[cfgId][action][oppositeDir][0]; i <= TroopConfig[cfgId][action][oppositeDir][1]; i++) {
-                            let frame = (this._url + "/" + action + "/image" + NumberUltis.formatNumberTo4Digits(i) + ".png");
-                            cc.loader.load(frame, (err, texture) => {
-                                let spriteFrame = new cc.SpriteFrame(texture);
-                                spriteFrame.setFlipX(true);
-                                animation.addSpriteFrame(spriteFrame);
-                            })
-
-                        }
-                        animation.setDelayPerUnit(TroopConfig[cfgId].frame_time);
-                        animation.setRestoreOriginalFrame(true);
-                        this._animations[action][direct] = animation;
+                        // let oppositeDir = directions[directions.length - 1 - index];
+                        // cc.log(oppositeDir, action)
+                        // let animation = new cc.Animation();
+                        // for (let i = TroopConfig[cfgId][action][oppositeDir][0]; i <= TroopConfig[cfgId][action][oppositeDir][1]; i++) {
+                        //     let frame = (this._url + "/" + action + "/image" + NumberUltis.formatNumberTo4Digits(i) + ".png");
+                        //     cc.loader.load(frame, (err, texture) => {
+                        //         let spriteFrame = new cc.SpriteFrame(texture);
+                        //         spriteFrame.setFlipX(true);
+                        //         animation.addSpriteFrame(spriteFrame);
+                        //     })
+                        //
+                        // }
+                        // animation.setDelayPerUnit(TroopConfig[cfgId].frame_time);
+                        // animation.setRestoreOriginalFrame(true);
+                        // this._animations[action][direct] = animation;
 
                     }
 
@@ -81,7 +82,10 @@ var Troop = cc.Node.extend({
     },
 
     runAnimation: function (direction, action) {
-        cc.log(this._animations[action][direction])
+        if (!this._animations[action][direction]) {
+            let i = DIRECTIONS.indexOf(direction);
+            return this._animations[action][DIRECTIONS[DIRECTIONS.length - 1 - i]];
+        }
         return this._animations[action][direction];
     },
 
@@ -96,46 +100,108 @@ var Troop = cc.Node.extend({
 
     handleMapChange: function () {
         cc.log("GRID MAP CHANGED!");
+        const Algorithm = AlgorithmImplement.Instance();
+        Algorithm.setGridMapStar(MapManager.Instance().mapGrid)
+    },
+
+
+    runAndMotionAction: function (isStay, direction= "up") {
+
+        let runAnim = cc.animate(this.runAnimation(direction, "run")).repeatForever();
+        if (isStay) {
+            runAnim = cc.animate(this.runAnimation(direction, "idle")).repeatForever();
+        }
+        runAnim.retain();
+        if (!runAnim) {
+            cc.log("DONT HANVE ::: " + direction)
+        }
+
+        let stopPreviousAction = cc.callFunc(() => {
+            if (this.previousAction) {
+                this.troop.stopAction(this.previousAction);
+            }
+            this.previousAction = runAnim;
+        }, this);
+
+        let runCurrentAction = cc.callFunc(() => {
+            this.troop.runAction(runAnim);
+        }, this);
+
+        return [stopPreviousAction, runCurrentAction]
+    },
+
+    getDegree: function (origin, target) {
+        const deltaX = target.x - origin.x;
+        const deltaY = target.y - origin.y;
+
+        const radians = Math.atan2(deltaY, deltaX);
+        const degrees = radians * (180 / Math.PI);
+
+        return degrees;
+    },
+
+    getDirection: function (origin, target) {
+        let angle = this.getDegree(origin, target);
+        angle = (angle + 360) % 360;
+
+        switch (angle) {
+            case 180: {
+                return DIRECTIONS_STRING.DOWN_LEFT;
+            }
+            case 135: {
+                return DIRECTIONS_STRING.UP_LEFT;
+            }
+            case 225: {
+                return DIRECTIONS_STRING.DOWN;
+            }
+            case 270: {
+                return DIRECTIONS_STRING.UP_RIGHT;
+            }
+            default: {
+                return DIRECTIONS_STRING.UP;
+            }
+
+        }
 
     },
 
 
-    runTo: function (target) {
+    runTo: function (origin, target) {
         let mapLayer = cc.director.getRunningScene().getMapLayer();
-        cc.log("TROOP POS : \n" + this.troop.getPosition())
-        let start = mapLayer.getGridPosFromScreenPos(this.troop.getPosition());
-        cc.log(JSON.stringify(start))
-        let end = mapLayer.getGridPosFromScreenPos(target);
-        cc.log(JSON.stringify(end))
+        let start = mapLayer.getGridPosFromMapPos(origin);
+        let end = mapLayer.getGridPosFromMapPos(target);
         const Algorithm = AlgorithmImplement.Instance();
+
+        if (!Algorithm._gridMapAStar) {
+            Algorithm.setGridMapStar(MapManager.Instance().mapGrid)
+        }
         let wayGrid = Algorithm.searchPathByAStar([start.x, start.y], [end.x, end.y]);
-        let wayMap = [];
+        let wayActions = [];
         let res = []
-        wayGrid.map(path => {
+        let i = 0;
+        wayGrid.map((path, index) => {
             res.push(path);
-            let targetPos = mapLayer.getScreenPosFromGridPos(path, true);
+            // run action
+            let targetPos = mapLayer.getPositionInMapLayer(path.x, path.y, true);
             let distance = cc.pDistance(this.troop.getPosition(), target);
             let duration = distance / this._moveSpeed;
-            let run = cc.moveTo(duration, targetPos);
-            // let parallel = cc.Spawn.create(runAnim,run);
+            if (index === wayActions.length - 1) {
+                target.x += 100;
+                target.y += 100;
+            }
+            let run = cc.moveTo(duration / 50, targetPos);
+            let direction = this.getDirection(index === 0 ? start : wayGrid[index - 1], path);
 
-            // wayMap.push(parallel)
+            let isStay = false;
+            let parallel;
+            parallel = cc.spawn(...this.runAndMotionAction(isStay, direction), run);
+            wayActions.push(parallel);
         });
-        let runAnim = cc.repeatForever(cc.animate(this.runAnimation("left", "run")))
-        // let run = cc.moveTo(2, cc.p(100,100));
-        // wayMap.push(run);
 
+        wayActions.push(cc.spawn(...this.runAndMotionAction(true)));
         cc.log("RES ALGORITHM : \n" + (res))
-
-
-        let moveAction = cc.sequence(wayMap);
-
-        this.troop.runAction(runAnim)
-
-    },
-
-    stay: function () {
-
+        let moveAction = cc.sequence(wayActions);
+        this.troop.runAction(moveAction)
     },
 
 
@@ -144,7 +210,6 @@ var Troop = cc.Node.extend({
         let animation = new cc.Animation();
         for (let i = 0; i <= 69; i++) {
             let frameName = this._url + "/" + "run" + "/image" + NumberUltis.formatNumberTo4Digits(i) + ".png";
-            cc.log(frameName)
             animation.addSpriteFrameWithFile(frameName);
         }
         animation.setDelayPerUnit(0.5);

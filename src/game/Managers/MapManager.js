@@ -24,6 +24,7 @@ var MapManager = cc.Layer.extend({
     },
 
 
+
     //load from server
     //chua lam status
     loadFromServer: function (buildings){
