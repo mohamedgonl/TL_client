@@ -25,3 +25,7 @@ const TroopConfig = {
 
 
 }
+
+const EVENT_TROOP_NAME ={
+    MOVE_BUILDING: 'move_building'
+}

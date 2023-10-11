@@ -65,6 +65,10 @@ testnetwork.Connector = cc.Class.extend({
     onReceiveTrainTroopSuccess: function(packet) {
         if(packet.getError() !== ErrorCode.SUCCESS) {
             cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
+            let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
+            let trainingPopup = popUpLayer.getTrainingPopup();
+
+            trainingPopup.getPage({barackId: packet.barrackId}).updateUI(1);
         }
         else {
             cc.log("TRAIN TROOP DONE REQUEST SUCCESS ::::::::: ");
@@ -83,6 +87,10 @@ testnetwork.Connector = cc.Class.extend({
     onReceiveTrainTroopCreate: function (packet) {
         if(packet.getError() !== ErrorCode.SUCCESS) {
             cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
+            let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
+            let trainingPopup = popUpLayer.getTrainingPopup();
+
+            trainingPopup.getPage({barackId: packet.barrackId}).updateUI(1);
         }
         else {
             cc.log("TRAIN TROOP CREATE REQUEST SUCCESS ::::::::: ");
@@ -124,6 +132,10 @@ testnetwork.Connector = cc.Class.extend({
     onReceiveCancleTrain: function (packet) {
         if(packet.getError() !== ErrorCode.SUCCESS) {
             cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
+            let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
+            let trainingPopup = popUpLayer.getTrainingPopup();
+
+            trainingPopup.getPage({barackId: packet.barrackId}).updateUI(1);
         }
         else {
             cc.log("TRAIN TROOP CANCLE REQUEST SUCCESS ::::::::: ");
@@ -175,7 +187,7 @@ testnetwork.Connector = cc.Class.extend({
     },
 
     sendRequestCancleTrain: function (data) {
-        cc.log("SEND train troop create request");
+        cc.log("SEND train troop cancel request");
         var pk = this.gameClient.getOutPacket(CmdSendCancleTrain);
         pk.pack(data);
         this.gameClient.sendPacket(pk);

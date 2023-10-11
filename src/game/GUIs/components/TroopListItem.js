@@ -93,17 +93,23 @@ var TroopListItem = cc.Node.extend({
     },
 
     handleTrainTroop: function (isHold = false) {
-
-        let barList = ArmyManager.Instance().getBarrackList();
-        let curentSpace = barList[this._curPage].getTrainingSpace();
-        let maxSpace = barList[this._curPage].getMaxSpace();
-        if( curentSpace + TROOP_BASE[this._troopCfgId]["housingSpace"] <= maxSpace) {
-            this.setCount(this._count+1);
-            let event = new cc.EventCustom(TRAINING_EVENTS.TRAIN+this._curPage);
-            let cfgId = this._troopCfgId;
-            event.data = {cfgId: cfgId, count: 1, hold: isHold};
-            cc.eventManager.dispatchEvent(event);
+        let price = TROOP[this._troopCfgId][1]["trainingElixir"];
+        if(PlayerInfoManager.Instance().getResource().elixir >= price) {
+            let barList = ArmyManager.Instance().getBarrackList();
+            let curentSpace = barList[this._curPage].getTrainingSpace();
+            let maxSpace = barList[this._curPage].getMaxSpace();
+            if( curentSpace + TROOP_BASE[this._troopCfgId]["housingSpace"] <= maxSpace) {
+                let event = new cc.EventCustom(TRAINING_EVENTS.TRAIN+this._curPage);
+                let cfgId = this._troopCfgId;
+                event.data = {cfgId: cfgId, count: 1, hold: isHold};
+                cc.eventManager.dispatchEvent(event);
+            }
         }
+        else {
+            let costContainer = this._node.getChildByName("cost_container");
+            costContainer.setColor(COLOR_SHOP_RED);
+        }
+
     },
 
 

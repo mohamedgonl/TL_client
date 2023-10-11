@@ -393,6 +393,8 @@ var MapLayer = cc.Layer.extend({
         this.chosenBuilding.setSquare(0);
         // this.unSelectBuilding();
         infoLayer.setVisible(true);
+
+        cc.eventManager.dispatchCustomEvent(EVENT_TROOP_NAME.MOVE_BUILDING)
     },
 
     // move view of building, not change building pos in MapManager and Building
