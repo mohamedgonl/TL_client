@@ -12,7 +12,11 @@ var Building = GameObject.extend({
     _width: null,
     _height: null,
     _arrow_move: null,
-    _buttons: [],
+
+
+    _shadow: null,
+    _grass: null,
+    _body: null,
 
     //  example: building = new Townhall(type, level,id, posX, posY);
     ctor: function (level =1 ,id,posX,posY,status,startTime,endTime) {
@@ -26,9 +30,7 @@ var Building = GameObject.extend({
         this._startTime = startTime;
         this._endTime = endTime;
         //log all properties, 1 line 1 property
-        cc.log("type: " + this._type + " level: " + this._level +
-            " posX: " + this._posX + " posY: " + this._posY + " id: " + this._id +
-            " status: " + this._state + " startTime: " + this._startTime + " endTime: " + this._endTime);
+
 
         let config = LoadManager.Instance().getConfig(this._type,level);
         this._width = config.width;
@@ -36,8 +38,10 @@ var Building = GameObject.extend({
         this._hitpoints = config.hitpoints;
 
         this.setAnchorPoint(0.5,0.5);
+
         this.loadSpriteByLevel(level);
         this.loadSubSprite();
+        this.initState();
     },
 
     //load sprite with size,
@@ -62,7 +66,6 @@ var Building = GameObject.extend({
             this._shadow = new cc.Sprite(res_map.SPRITE.SHADOW.CIRCLE);
            this._shadow.setAnchorPoint(0.5,0.5);
         }
-
 
         //upper
         if(upperSprite != null){
@@ -96,16 +99,15 @@ var Building = GameObject.extend({
             }
         }
 
-        //add child
-        this.addChild(this._grass,ZORDER_BUILDING_GRASS);
-        this.addChild(this._body,ZORDER_BUILDING_BODY);
-        if(shadow_type !== 0)
+
+        if(this._grass.getParent() === null)
+            this.addChild(this._grass,ZORDER_BUILDING_GRASS);
+        if(this._body.getParent() === null)
+            this.addChild(this._body,ZORDER_BUILDING_BODY);
+        if(shadow_type !== 0 && this._shadow.getParent() === null)
             this.addChild(this._shadow,ZORDER_BUILDING_SHADOW);
-
-        if(upperSprite != null)
+        if(upperSprite != null && this._upper.getParent() === null)
             this.addChild(this._upper,ZORDER_BUILDING_UPPER);
-
-
     },
     loadSubSprite: function(){
         //arrow move
@@ -148,14 +150,14 @@ var Building = GameObject.extend({
         this.addChild(this._progressBar,ZORDER_BUILDING_EFFECT);
 
         //level label
-        this._levelLabel = new cc.LabelBMFont("Level " + this._level, res.FONT.SOJI[FONT_SIZE_LEVEL_LABEL], 350, cc.TEXT_ALIGNMENT_CENTER);
+        this._levelLabel = new cc.LabelBMFont("Cấp " + this._level, res.FONT.SOJI[FONT_SIZE_LEVEL_LABEL], 350, cc.TEXT_ALIGNMENT_CENTER);
         this._levelLabel.setAnchorPoint(0.5,0.5);
         this._levelLabel.setPosition(0,50);
         this._levelLabel.setVisible(false);
         this.addChild(this._levelLabel,ZORDER_BUILDING_EFFECT);
 
         //time label
-        this._timeLabel = new cc.LabelBMFont("timeLabel", res.FONT.SOJI[12], 350, cc.TEXT_ALIGNMENT_CENTER);
+        this._timeLabel = new cc.LabelBMFont("", res.FONT.SOJI[12], 350, cc.TEXT_ALIGNMENT_CENTER);
         this._timeLabel.setAnchorPoint(0.5,0);
         //x = progress bar witdh /2 , y = progress bar height + 10
 
@@ -165,13 +167,23 @@ var Building = GameObject.extend({
 
         this._progressBar.addChild(this._timeLabel,ZORDER_BUILDING_EFFECT);
     },
+    initState: function () {
+        switch (this._state){
+            case 0:
+                this._arrow_move.setVisible(false);
+                this._nameLabel.setVisible(false);
+                this._levelLabel.setVisible(false);
+                break;
+            case 1:
+            case 2:
+                this._progressBar.setVisible(true);
+                this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
+                break;
+        }
+    },
     loadButton: function(){
         let infoLayer = cc.director.getRunningScene().infoLayer;
         infoLayer.addButtonToMenu("Thông tin",res.BUTTON.INFO_BUTTON,0,this.onClickInfo.bind(this),this);
-    },
-    //init button for building in middle bottom of screen
-    setState: function (state) {
-        this.state = state;
     },
 
     onSelected: function(){
@@ -195,6 +207,9 @@ var Building = GameObject.extend({
     getType: function () {
         return this._type;
     },
+    setLastCollectTime: function (lastCollectTime) {
+        this._lastCollectTime = lastCollectTime;
+    },
 
     getGridPosition: function (){
         return cc.p(this._posX, this._posY);
@@ -202,6 +217,12 @@ var Building = GameObject.extend({
     setGridPosition: function (posX, posY) {
         this._posX = posX;
         this._posY = posY;
+    },
+    getState: function () {
+        return this._state;
+    },
+    setState: function (state) {
+        this._state = state;
     },
     //3 state of Square: 0: no square, 1: green square, 2: red square
     setSquare: function (square) {
@@ -220,21 +241,21 @@ var Building = GameObject.extend({
     },
     updateProgress: function (){
         //log start time, end time, current time
-        let currentTime = new Date().getTime();
+        let currentTime = TimeManager.Instance().getCurrentTimeInSecond();
         let percent = (currentTime - this._startTime)/(this._endTime - this._startTime)*100;
         this._progressBar.setPercent(percent);
         //set time label = end time - current time in 1d2h3m40s format, if 0d -> 2h3m40s, if 0d0h -> 3m40s
         let time = this._endTime - currentTime;
         this._timeLabel.setString(getTimeString(time));
 
-        //if end
+        //send to server tp check
         if(currentTime >= this._endTime){
             switch (this._state){
                 case 1:
-                    this.completeBuild();
+                    testnetwork.connector.sendBuildBuildingSuccess(this._id);
                     break;
                 case 2:
-                    this.completeUpgrade();
+                    testnetwork.connector.sendUpgradeBuildingSuccess(this._id);
                     break;
             }
         }
@@ -250,52 +271,69 @@ var Building = GameObject.extend({
         this._startTime = null;
         this._endTime = null;
         this._progressBar.setVisible(false);
+        PlayerInfoManager.Instance().changeBuilder("current", 1);
         //unschedule update
         this.unschedule(this.update);
     },
     completeBuild: function () {
         this.completeProcess();
+        cc.log("level: " + this._level);
     },
     completeUpgrade: function () {
         this.completeProcess();
         this._level += 1;
         //set sprite for new level and update level label
-        this._levelLabel.setString("Level " + this._level);
-        this.loadSprite(this._level)
+        this._levelLabel.setString("Cấp " + this._level);
+        this.loadSpriteByLevel(this._level)
     },
-    build: function (startTime,endTime) {
-
-        //change when build
-        let priceGold = LoadManager.Instance().getConfig(this._type, 1, "gold") || 0;
-        let priceElixir = LoadManager.Instance().getConfig(this._type, 1, "elixir") || 0;
-        PlayerInfoManager.Instance().changeResource("gold", -priceGold);
-        PlayerInfoManager.Instance().changeResource("elixir", -priceElixir);
-        PlayerInfoManager.Instance().changeBuilder("current", -1);
-        this._state = 1;
-        this._startTime = startTime;
-        this._endTime = endTime;
-        //enable progress bar
-        this._progressBar.setVisible(true);
-        this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
-    },
-    upgrade: function (startTime,endTime) {
-
+    startProcess: function () {
         let priceGold = LoadManager.Instance().getConfig(this._type, this._level, "gold") || 0;
         let priceElixir = LoadManager.Instance().getConfig(this._type, this._level, "elixir") || 0;
         PlayerInfoManager.Instance().changeResource("gold", -priceGold);
         PlayerInfoManager.Instance().changeResource("elixir", -priceElixir);
         PlayerInfoManager.Instance().changeBuilder("current", -1);
+        //enable progress bar
+        this._progressBar.setVisible(true);
+        this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
+    },
+    build: function (startTime,endTime) {
+
+        this._state = 1;
+        this._startTime = startTime;
+        this._endTime = endTime;
+
+        this.startProcess();
+    },
+    upgrade: function (startTime,endTime) {
 
         this._state = 2;
         this._startTime = startTime;
         this._endTime = endTime;
-        //enable progress bar
-        this._progressBar.setVisible(true);
+
+        this.startProcess();
     },
     onClickInfo: function () {
-        cc.log("onClickInfo" + this._id);
+        cc.log("onClickInfo " + this._id);
     },
+
+    //if valid, send to server
     onClickUpgrade: function () {
-        cc.log("onClickUpgrade" + this._id);
+        cc.log("onClickUpgrade " + this._id);
+        let priceGold = LoadManager.Instance().getConfig(this._type, this._level + 1, "gold") || 0;
+        let priceElixir = LoadManager.Instance().getConfig(this._type, this._level + 1, "elixir") || 0;
+        if(!PlayerInfoManager.Instance().checkEnoughResource(priceGold, priceElixir)){
+            cc.log("not enough resource");
+            return;
+        }
+        if(!PlayerInfoManager.Instance().getBuilder().current){
+            cc.log("not enough builder");
+            return;
+        }
+        //send to server
+        cc.log("send to server");
+        testnetwork.connector.sendUpgradeBuilding(this._id);
+    },
+    onClickStop: function () {
+        cc.log("onClickStop undone")
     }
 });

@@ -134,7 +134,6 @@ var InfoLayer = cc.Layer.extend({
 
             //resource
             if (data.resource != null) {
-                cc.log("data.resource: " + JSON.stringify(data.resource, null, 2));
                 let res = data.resource;
                 if (res.gold != null) {
                     this.gold_container.getChildByName("text").setString(res.gold);

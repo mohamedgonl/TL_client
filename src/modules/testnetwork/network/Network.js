@@ -53,11 +53,31 @@ testnetwork.Connector = cc.Class.extend({
                 break;
             case gv.CMD.BUY_BUILDING:
                 cc.log("BUY_BUILDING", packet);
-                cc.director.getRunningScene().mapLayer.onReceivedCheckBuyBuilding(packet);
+                this.onReceivedCheckBuyBuilding(packet);
                 break;
-            case gv.CMD.MOVE:
-                cc.log("MOVE:", packet.x, packet.y);
-                // fr.getCurrentScreen().updateMove(packet.x, packet.y);
+            case gv.CMD.REMOVE_OBSTACLE:
+                cc.log("REMOVE_OBSTACLE", packet);
+                this.onReceivedRemoveObstacle(packet);
+                break;
+            case gv.CMD.REMOVE_OBSTACLE_SUCCESS:
+                cc.log("REMOVE_OBSTACLE_SUCCESS", packet);
+                this.onReceivedRemoveObstacleSuccess(packet);
+                break;
+            case gv.CMD.UPGRADE_BUILDING:
+                cc.log("UPGRADE_BUILDING", packet);
+                this.onReceivedUpgradeBuilding(packet);
+                break;
+            case gv.CMD.UPGRADE_SUCCESS:
+                cc.log("UPGRADE_BUILDING_SUCCESS", packet);
+                this.onReceivedUpgradeBuildingSuccess(packet);
+                break;
+            case gv.CMD.BUILD_SUCCESS:
+                cc.log("BUILD_BUILDING_SUCCESS", packet);
+                this.onReceivedBuildBuildingSuccess(packet);
+                break;
+            case gv.CMD.COLLECT_RESOURCE:
+                cc.log("COLLECT_RESOURCE", packet);
+                this.onReceivedHarvest(packet);
                 break;
         }
     },
@@ -141,6 +161,100 @@ testnetwork.Connector = cc.Class.extend({
         }
     },
 
+    onReceivedCheckBuyBuilding: function (packet) {
+        if(packet.error !== 0) {
+            cc.log("BUY BUILDING ERROR with code ::::::::: ", packet.error);
+        }
+        else {
+            cc.log("BUY BUILDING SUCCESS ::::::::: ");
+            //log all packet
+            cc.log("packet: ", JSON.stringify(packet, null, 2));
+            let mapLayer = cc.director.getRunningScene().mapLayer;
+
+            mapLayer.exitModeBuyBuilding();
+            let building = getBuildingFromType(packet.type, 1, packet.id, packet.posX, packet.posY,packet.status,packet.startTime,packet.endTime);
+            MapManager.Instance().addBuilding(building);
+            mapLayer.addBuildingToLayer(building);
+            building.build(packet.startTime, packet.endTime);
+            //bat lai info
+        }
+    },
+    onReceivedRemoveObstacle: function (packet) {
+      if(packet.error !==0){
+          cc.log("REMOVE OBSTACLE ERROR with code ::::::::: ", packet.error);
+      }
+      else
+      {
+          cc.log("REMOVE OBSTACLE SUCCESS ::::::::: ");
+          let obstacle = MapManager.Instance().getBuildingById(packet.id);
+          obstacle.startRemove(packet.startTime, packet.endTime);
+      }
+    },
+    onReceivedRemoveObstacleSuccess: function (packet) {
+        if(packet.error !==0){
+            cc.log("REMOVE OBSTACLE SUCCESS ERROR with code ::::::::: ", packet.error);
+        }
+        else
+        {
+            cc.log("REMOVE OBSTACLE SUCCESS SUCCESS ::::::::: ");
+            let obstacle = MapManager.Instance().getBuildingById(packet.id);
+            obstacle.completeRemove();
+        }
+    },
+    onReceivedUpgradeBuilding: function (packet) {
+        if(packet.error !==0){
+            cc.log("UPGRADE BUILDING ERROR with code ::::::::: ", packet.error);
+        }
+        else
+        {
+            cc.log(JSON.stringify(packet, null, 2));
+            cc.log("UPGRADE BUILDING SUCCESS ::::::::: ");
+            let building = MapManager.Instance().getBuildingById(packet.id);
+            building.upgrade(packet.startTime, packet.endTime);
+        }
+    },
+    onReceivedUpgradeBuildingSuccess: function (packet) {
+        if(packet.error !==0){
+            cc.log("UPGRADE BUILDING SUCCESS ERROR with code ::::::::: ", packet.error);
+        }
+        else
+        {
+            cc.log("UPGRADE BUILDING SUCCESS SUCCESS ::::::::: ");
+            let building = MapManager.Instance().getBuildingById(packet.id);
+            building.completeUpgrade();
+        }
+    },
+    onReceivedBuildBuildingSuccess: function (packet) {
+        if(packet.error !==0){
+            cc.log("BUILD BUILDING SUCCESS ERROR with code ::::::::: ", packet.error);
+        }
+        else
+        {
+            cc.log("BUILD BUILDING SUCCESS SUCCESS ::::::::: ");
+            let building = MapManager.Instance().getBuildingById(packet.id);
+            building.completeBuild();
+        }
+    },
+    //+ api collect resource: 2007
+    //   input: id
+    //   output: error, id, gold, elixir, lastCollectTime
+    onReceivedHarvest: function (packet) {
+        cc.log("packet: ", JSON.stringify(packet, null, 2)  );
+        if(packet.error !==0){
+            cc.log("HARVEST ERROR with code ::::::::: ", packet.error);
+        }
+        else
+        {
+            cc.log("HARVEST SUCCESS ::::::::: ");
+            let building = MapManager.Instance().getBuildingById(packet.id);
+            building.harvest(packet.lastCollectTime, packet.gold, packet.elixir);
+        }
+
+    },
+
+
+
+
     sendGetUserInfo: function () {
         cc.log("sendGetUserInfo");
         var pk = this.gameClient.getOutPacket(CmdSendUserInfo);
@@ -192,6 +306,8 @@ testnetwork.Connector = cc.Class.extend({
         pk.pack(data);
         this.gameClient.sendPacket(pk);
     },
+
+    //quyet-------------------------------------------------------------------
     sendMoveBuilding: function(id, posX, posY) {
         cc.log("SEND move building request");
         var pk = this.gameClient.getOutPacket(CmdSendMoveBuilding);
@@ -203,15 +319,44 @@ testnetwork.Connector = cc.Class.extend({
         var pk = this.gameClient.getOutPacket(CmdSendBuyBuilding);
         pk.pack({type, posX, posY});
         this.gameClient.sendPacket(pk);
-
     },
-
-    sendMove: function (direction) {
-        cc.log("SendMove:" + direction);
-        var pk = this.gameClient.getOutPacket(CmdSendMove);
-        pk.pack(direction);
+    sendRemoveObstacle: function (id) {
+        cc.log("SEND remove obstacle request");
+        var pk = this.gameClient.getOutPacket(CmdSendRemoveObstacle);
+        pk.pack({id});
+        this.gameClient.sendPacket(pk);
+    },
+    sendRemoveObstacleSuccess: function (id) {
+        cc.log("SEND remove obstacle success");
+        var pk = this.gameClient.getOutPacket(CmdSendRemoveObstacleSuccess);
+        pk.pack({id});
+        this.gameClient.sendPacket(pk);
+    },
+    sendUpgradeBuilding: function (id) {
+        cc.log("SEND upgrade building request");
+        var pk = this.gameClient.getOutPacket(CmdSendUpgradeBuilding);
+        pk.pack({id});
+        this.gameClient.sendPacket(pk);
+    },
+    sendBuildBuildingSuccess: function (id) {
+        cc.log("SEND build building success");
+        var pk = this.gameClient.getOutPacket(CmdSendBuildBuildingSuccess);
+        pk.pack({id});
+        this.gameClient.sendPacket(pk);
+    },
+    sendUpgradeBuildingSuccess: function (id) {
+        cc.log("SEND upgrade building success");
+        var pk = this.gameClient.getOutPacket(CmdSendUpgradeBuildingSuccess);
+        pk.pack({id});
+        this.gameClient.sendPacket(pk);
+    },
+    sendHarvest: function (id) {
+        cc.log("SEND harvest request");
+        var pk = this.gameClient.getOutPacket(CmdSendHarvest);
+        pk.pack({id});
         this.gameClient.sendPacket(pk);
     }
+
 });
 
 

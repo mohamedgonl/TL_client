@@ -107,10 +107,10 @@ function createButton(imagePath, scale, position, callback, target) {
 //have time in ms, return string time format 3d2m or 2m3s or 12s , max 2 unit
 function getTimeString(time) {
     var timeString = "";
-    var day = Math.floor(time / (24 * 3600 * 1000));
-    var hour = Math.floor(time / (3600 * 1000)) % 24;
-    var minute = Math.floor(time / (60 * 1000)) % 60;
-    var second = Math.floor(time / 1000) % 60;
+    var day = Math.floor(time / (24 * 3600)  );
+    var hour = Math.floor(time / 3600) % 24;
+    var minute = Math.floor(time / 60 ) % 60;
+    var second = Math.floor(time )% 60;
 
     if (day > 0) {
         timeString += day + "d";

@@ -17,7 +17,7 @@ var MapLayer = cc.Layer.extend({
     },
     //init map layer with scale, add event, load background, load building
     init: function () {
-        this.setScale(1.77);
+        this.setScale(ZOOM_DEFAULT);
         this.addEventListener();
         this.initBackground();
         this.loadBuilding();
@@ -37,23 +37,33 @@ var MapLayer = cc.Layer.extend({
             cc.log("ERORR::::::::add building to layer null");
             return;
         }
-        var sizeX = building._width;
-        var sizeY = building._height;
-        var gridPosX = building._posX;
-        var gridPosY = building._posY;
 
-        // var previousScaleOfScreen = this.getScale();
-        // this.setScale(1);
+        let sizeX = building._width;
+        let sizeY = building._height;
+        let gridPosX = building._posX;
+        let gridPosY = building._posY;
 
-        var buildingCenterX = gridPosX + sizeX / 2;
-        var buildingCenterY = gridPosY + sizeY / 2;
 
-        building.setPosition(this.getScreenPosFromGridPos(cc.p(buildingCenterX, buildingCenterY)));
+        let buildingCenterX = gridPosX + sizeX / 2;
+        let buildingCenterY = gridPosY + sizeY / 2;
+        let zOrderValue = zOrder == null ? this.getZOrderBuilding(gridPosX, gridPosY) : zOrder;
 
-        // this.setScale(previousScaleOfScreen);
+        //nếu buildingCenterX không phải là số nguyên, add vào giữa của ô trung tâm
+        if(buildingCenterX % 1 !== 0 || buildingCenterY % 1 !== 0)
+        {
+            buildingCenterX = Math.floor(buildingCenterX);
+            buildingCenterY = Math.floor(buildingCenterY);
+            this.addGameObjectToMapLayer(building,buildingCenterX,buildingCenterY,zOrderValue,true);
+        }
+        //add vào góc trái dưới của ô trung tâm
+        else
+        {
+            this.addGameObjectToMapLayer(building,buildingCenterX,buildingCenterY,zOrderValue)
+        }
 
-        const zOrderValue = zOrder == null ? this.getZOrderBuilding(gridPosX, gridPosY) : zOrder;
-        this.addChild(building, zOrderValue);
+        // building.setPosition(this.getScreenPosFromGridPos(cc.p(buildingCenterX, buildingCenterY)));
+        //
+        // this.addChild(building, zOrderValue);
 
     },
 
@@ -95,17 +105,21 @@ var MapLayer = cc.Layer.extend({
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
             onKeyPressed: function (keyCode) {
+                let building1 =  getBuildingFromType("BDH_1", 1, 1, 0, 0, 0, 0, 0);
+                let building2 =  getBuildingFromType("BDH_1", 1, 1, 0, 0, 0, 0, 0);
+                let building3 =  getBuildingFromType("BDH_1", 1, 1, 0, 0, 0, 0, 0);
+                let building4 =  getBuildingFromType("BDH_1", 1, 1, 0, 0, 0, 0, 0);
                 if (keyCode === cc.KEY.space) {
-                    this.enterModeBuyBuilding("AMC_1");
+                    this.addGameObjectToMapLayer(building1, 1, 1, 9999);
                 }
                 if (keyCode === cc.KEY.x) {
-                    this.enterModeBuyBuilding("STO_1");
+                    this.addGameObjectToMapLayer(building2, 5, 5, 9999);
                 }
                 if (keyCode === cc.KEY.c) {
-                    this.enterModeBuyBuilding("BDH_1");
+                    this.addGameObjectToMapLayer(building3, 10, 10, 9999);
                 }
                 if (keyCode === cc.KEY.z) {
-                    this.enterModeBuyBuilding("RES_2");
+                    this.addGameObjectToMapLayer(building4, 15, 15, 9999);
                 }
 
             }.bind(this)
@@ -158,45 +172,33 @@ var MapLayer = cc.Layer.extend({
         }
 
         //gui cho server
-        //testnetwork.connector.sendBuyBuilding(this.chosenBuilding._type, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y);
+        cc.log("send buy building request",this.chosenBuilding._type,this.tempPosChosenBuilding.x,this.tempPosChosenBuilding.y)
+        testnetwork.connector.sendBuyBuilding(this.chosenBuilding._type, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y);
 
-        let error = 0;
-        //get min id in list building
-        let listBuilding = MapManager.Instance().getAllBuilding();
-
-        let id = 1;
-        for (let i = 0; i < listBuilding.length; i++) {
-            if (listBuilding[i]._id === id) {
-                id++;
-            } else break;
-        }
-
-        let type = this.chosenBuilding._type;
-        let posX = this.tempPosChosenBuilding.x;
-        let posY = this.tempPosChosenBuilding.y;
-        let status = 1;
-        let startTime = Date.now();
-        let endTime = LoadManager.Instance().getConfig(type, 1, "buildTime") * 1000 + startTime || 0;
-        cc.log(error);
-        this.onReceivedCheckBuyBuilding({error: error,id: id,type: type,posX: posX,posY: posY,
-                                                status: status,startTime: startTime,endTime: endTime});
+        // let error = 0;
+        // //get min id in list building
+        // let listBuilding = MapManager.Instance().getAllBuilding();
+        //
+        // let id = 1;
+        // for (let i = 0; i < listBuilding.length; i++) {
+        //     if (listBuilding[i]._id === id) {
+        //         id++;
+        //     } else break;
+        // }
+        //
+        // let type = this.chosenBuilding._type;
+        // let posX = this.tempPosChosenBuilding.x;
+        // let posY = this.tempPosChosenBuilding.y;
+        // let status = 1;
+        // let startTime = Date.now();
+        // let endTime = LoadManager.Instance().getConfig(type, 1, "buildTime") * 1000 + startTime || 0;
+        // this.onReceivedCheckBuyBuilding({error: error,id: id,type: type,posX: posX,posY: posY,
+        //                                         status: status,startTime: startTime,endTime: endTime});
     },
 
     //+ api buyBuilding: 2001
     //   input: type(str, posX(short), posY(short)
     //   output: error, id, type(str), posX, posY, status(short), startTime, endTime
-    onReceivedCheckBuyBuilding: function (data) {
-        cc.log(JSON.stringify(data,null,2));
-        if (data.error === 0) {
-            this.exitModeBuyBuilding();
-
-            let building = getBuildingFromType(data.type, 1, data.id, data.posX, data.posY,data.status,data.startTime,data.endTime);
-            MapManager.Instance().addBuilding(building);
-            this.addBuildingToLayer(building);
-            building.build(data.startTime, data.endTime);
-            //bat lai info
-        }
-    },
 
     initBackground: function () {
 
@@ -286,12 +288,13 @@ var MapLayer = cc.Layer.extend({
         this.canDragBuilding = false;
         if (distance < 10) this.onClicked(this.positionTouchBegan);
 
+        if(this.onModeBuyBuilding) return;
+
         //if onModeMoveBuilding and current pos of chosenBuilding is valid, send to server to recheck
         if (this.onModeMovingBuilding) {
-            cc.log("hehe")
+
             if(MapManager.Instance().checkValidPutBuilding(this.chosenBuilding, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y))
                     this.exitModeMoveBuilding();
-
         }
     },
     onClicked: function (locationInScreen) {
@@ -360,6 +363,7 @@ var MapLayer = cc.Layer.extend({
             this.moveBuildingInLayer(this.chosenBuilding, this.chosenBuilding._posX, this.chosenBuilding._posY);
         }
     },
+
     enterModeMoveBuilding: function () {
         this.chosenBuilding.setLocalZOrder(MAP_ZORDER_BUILDING+1);
         this.canDragBuilding = true;
@@ -373,7 +377,10 @@ var MapLayer = cc.Layer.extend({
         }
         infoLayer.setVisible(false);
     },
+
+    //exit mode move building, send to server to recheck if valid, else move back to old pos
     exitModeMoveBuilding: function () {
+
         this.chosenBuilding.setLocalZOrder(this.getZOrderBuilding(this.chosenBuilding._posX, this.chosenBuilding._posY));
         this.canDragBuilding = false;
         this.onModeMovingBuilding = false;
@@ -383,14 +390,13 @@ var MapLayer = cc.Layer.extend({
         var mapManager = MapManager.Instance();
 
         if (mapManager.checkValidPutBuilding(this.chosenBuilding, newPosX, newPosY)) {
-            // testnetwork.connector.sendMoveBuilding(this.chosenBuilding._id,newPosX,newPosY);
-             this.onReceivedCheckMoveBuilding({error: 0})
+            testnetwork.connector.sendMoveBuilding(this.chosenBuilding._id,newPosX,newPosY);
         } else {
             //move back to old pos
             this.moveBuildingInLayer(this.chosenBuilding, this.chosenBuilding._posX, this.chosenBuilding._posY);
         }
         this.chosenBuilding.setSquare(0);
-        // this.unSelectBuilding();
+
         infoLayer.setVisible(true);
     },
 
@@ -408,15 +414,14 @@ var MapLayer = cc.Layer.extend({
 
         var sizeX = building._width;
         var sizeY = building._height;
-        //var previousScaleOfScreen = this.getScale();
-       // this.setScale(1);
 
         var buildingCenterX = newPosX + sizeX / 2;
         var buildingCenterY = newPosY + sizeY / 2;
 
-        building.setPosition(this.getScreenPosFromGridPos(cc.p(buildingCenterX, buildingCenterY)));
+        let middleScreen = cc.p(cc.winSize.width/2,cc.winSize.height/2);
+        let newPosInMap = cc.pAdd(this.getMapPosFromGridPos(cc.p(buildingCenterX,buildingCenterY)),middleScreen);
+        building.setPosition(newPosInMap);
 
-        //this.setScale(previousScaleOfScreen);
     },
 
     getBuildingFromTouch: function (locationInScreen) {
@@ -440,36 +445,21 @@ var MapLayer = cc.Layer.extend({
         return MapManager.Instance().getBuildingById(buildingId);
     },
 
-    //chang screen pos to map pos, map pos not change when zoom or move
     getMapPosFromScreenPos: function (posInScreen) {
 
-        var posInMap = cc.pSub(posInScreen, this.getPosition());
+        var posInMap =  cc.pSub(cc.pSub(posInScreen, this.getPosition()), cc.p(cc.winSize.width / 2, cc.winSize.height / 2)) ;
+        let x = posInMap.x / this.getScale();
+        let y = posInMap.y / this.getScale();
 
-        var originX = cc.winSize.width / 2;
-        var originY = cc.winSize.height / 2;
-        var x = (posInMap.x - originX) / this.getScale();
-        var y = (posInMap.y - originY) / this.getScale();
-
-        //cc.log("map pos " + cc.p(x, y).x + " " + cc.p(x, y).y);
         return cc.p(x, y);
+
     },
-
-    getScreenPosFromMapPos: function (posInMap) {
-
-        var originX = cc.winSize.width / 2;
-        var originY = cc.winSize.height / 2;
-
-        var x = posInMap.x*this.getScale()  + originX;
-        var y = posInMap.y*this.getScale()  + originY;
-        return cc.p(x, y);
-    },
-
     //use distance from
     // bottom left grid border and bottom right grid border
     // to get grid pos from map pos
     getGridPosFromMapPos: function (posInMap) {
-        //calculate distance by distance formula from point to line
 
+        //calculate distance by distance formula from point to line
         var distanceFromBottomLeft = findDistanceFromPointToLine(posInMap, CORNER_BOTTOM, CORNER_LEFT);
         var distanceFromBottomRight = findDistanceFromPointToLine(posInMap, CORNER_RIGHT, CORNER_BOTTOM);
 
@@ -483,13 +473,10 @@ var MapLayer = cc.Layer.extend({
 
         return cc.p(gridX, gridY);
     },
-
-    //
     getGridPosFromScreenPos: function (posInScreen) {
         var posInMap = this.getMapPosFromScreenPos(posInScreen);
         return this.getGridPosFromMapPos(posInMap);
     },
-
 
     getMapPosFromGridPos: function (gridPos) {
 
@@ -497,21 +484,37 @@ var MapLayer = cc.Layer.extend({
         var posB = cc.pLerp(CORNER_BOTTOM, CORNER_LEFT, gridPos.y / GRID_SIZE);
         var posC = cc.pLerp(CORNER_LEFT, CORNER_TOP, gridPos.x / GRID_SIZE);
         var posD = cc.pLerp(CORNER_RIGHT, CORNER_TOP, gridPos.y / GRID_SIZE);
-
         return cc.pIntersectPoint(posA, posC, posB, posD);
+
+    },
+    //------------------------------------------------------------------------------------------------------------------
+
+    addGameObjectToMapLayer: function (gameObject,gridPosX,gridPosY,zOrder,isCenter=false) {
+        //posXInMap, posYInMap = this.getMapPosFromGridPos(gridPosX,gridPosY) + offset
+
+
+        // //because mapLayer is center of screen, so offset = cc.winSize/2
+        // let middleScreen = cc.p(cc.winSize.width/2,cc.winSize.height/2);
+        // let posInMap = this.getMapPosFromGridPos(cc.p(gridPosX,gridPosY));
+        // let posToAdd = cc.pAdd(posInMap,middleScreen);
+
+        let posToAdd = this.getPositionInMapLayer(gridPosX,gridPosY,isCenter);
+
+        this.addChild(gameObject,zOrder);
+        gameObject.setPosition(posToAdd);
     },
 
-    getScreenPosFromGridPos: function (posInGrid,isCenter=false){
-        let posInMap = this.getMapPosFromGridPos(posInGrid);
-        if(isCenter)
-        {
-            let posInMapUpperGrid = this.getMapPosFromGridPos(cc.p(posInGrid.x+1,posInGrid.y+1));
-            posInMap = cc.pLerp(posInMap,posInMapUpperGrid,0.5);
+    getPositionInMapLayer: function (gridPosX,gridPosY, isCenter = false) {
+        let gridPos = cc.p(gridPosX, gridPosY);
+        let mapPos = this.getMapPosFromGridPos(gridPos);
+        if (isCenter) {
+            let mapPosUpperGrid = this.getMapPosFromGridPos(cc.p(gridPos.x + 1, gridPos.y + 1));
+            mapPos = cc.pLerp(mapPos, mapPosUpperGrid, 0.5);
         }
-
-        return this.getScreenPosFromMapPos(posInMap);
+        let middleScreen = cc.p(cc.winSize.width/2,cc.winSize.height/2);
+        return cc.pAdd(mapPos,middleScreen);
     },
-
+    //------------------------------------------------------------------------------------------------------------------
     moveView: function (delta) {
         var currentPos = this.getPosition();
         var newPos = cc.pAdd(currentPos, delta);
@@ -544,13 +547,12 @@ var MapLayer = cc.Layer.extend({
 
     //if moveView or Zoom out of map, move back
     limitBorder: function () {
-        // return;
+
         var pos = this.getPosition();
         //bottom border of screen
         var currentBottomBorder = this.getMapPosFromScreenPos(cc.p(0, 0)).y;
         if (currentBottomBorder < BORDER_LIMIT_BOTTOM)
             this.setPositionY(pos.y + (currentBottomBorder - BORDER_LIMIT_BOTTOM));
-
         //top border of screen
         var currentTopBorder = this.getMapPosFromScreenPos(cc.p(0, cc.winSize.height)).y;
         if (currentTopBorder > BORDER_LIMIT_TOP)
@@ -560,7 +562,6 @@ var MapLayer = cc.Layer.extend({
         var currentLeftBorder = this.getMapPosFromScreenPos(cc.p(0, 0)).x;
         if (currentLeftBorder < BORDER_LIMIT_LEFT)
             this.setPositionX(pos.x + (currentLeftBorder - BORDER_LIMIT_LEFT));
-
         //right border of screen
         var currentRightBorder = this.getMapPosFromScreenPos(cc.p(cc.winSize.width, 0)).x;
         if (currentRightBorder > BORDER_LIMIT_RIGHT)
@@ -569,7 +570,6 @@ var MapLayer = cc.Layer.extend({
     },
 
     enterModeBuyBuilding: function (buildingType) {
-
         if(this.onModeBuyBuilding){
 
             this.exitModeBuyBuilding();
@@ -578,7 +578,6 @@ var MapLayer = cc.Layer.extend({
         {
             this.unSelectBuilding();
         }
-
         this.onModeBuyBuilding = true;
 
         //init building and set it to chosen building
@@ -593,7 +592,6 @@ var MapLayer = cc.Layer.extend({
         //set position of building
         let validPosition = MapManager.Instance().getEmptyPositionPutBuilding(this.chosenBuilding);
 
-
         //if not valid position, set to center of map and square to red, else set to valid position and square to green, move screen to see building
         if(validPosition == null) {
             validPosition = cc.p(GRID_SIZE / 2, GRID_SIZE / 2)
@@ -606,8 +604,8 @@ var MapLayer = cc.Layer.extend({
         this.chosenBuilding.setGridPosition(validPosition.x, validPosition.y);
         this.tempPosChosenBuilding = cc.p(validPosition.x, validPosition.y);
 
-        cc.log("screen pos: " + this.getScreenPosFromGridPos(validPosition).x + " " + this.getScreenPosFromGridPos(validPosition).y);
-        this.setPosition(this.getScreenPosFromGridPos(validPosition));
+        // this.setPosition(this.getScreenPosFromGridPos(validPosition));
+
         this.limitBorder();
 
         //add building to layer to display
@@ -617,6 +615,5 @@ var MapLayer = cc.Layer.extend({
         this.selectBuilding(this.chosenBuilding);
 
     },
-
 });
 

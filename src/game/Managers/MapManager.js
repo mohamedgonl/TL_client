@@ -26,10 +26,7 @@ var MapManager = cc.Layer.extend({
     //load from server
     //chua lam status
     loadFromServer: function (buildings){
-        //cc.log("buildings",JSON.stringify(buildings,null,2));
-
-
-
+        cc.log("buildings",JSON.stringify(buildings,null,2));
 
         for(let index in buildings){
 
@@ -43,7 +40,16 @@ var MapManager = cc.Layer.extend({
             let startTime = construct.startTime;
             let endTime = construct.endTime;
 
+
             let building = getBuildingFromType(type, level,id, posX, posY,status,startTime,endTime);
+
+            if(type.startsWith("RES"))
+            {
+                let lastCollectTime = construct.lastCollectTime;
+                building.setLastCollectTime(lastCollectTime);
+            }
+
+
             if(building == null)
             {
                 cc.log("building null------------------------------------------",type);

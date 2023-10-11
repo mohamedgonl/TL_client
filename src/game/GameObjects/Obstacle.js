@@ -6,6 +6,7 @@ var Obstacle = GameObject.extend({
     _height: null,
     _arrowMove: null,
     _buttons: {},
+    _level : 1,
     //status = 0: normal, 1: removing
    ctor: function(type,id,posX,posY,status=0,startTime,endTime){
        this._super();
@@ -13,12 +14,13 @@ var Obstacle = GameObject.extend({
        this._posX = posX;
        this._posY = posY;
        this._id = id;
-       this._status = status;
+       this._state = status;
        this._startTime = startTime;
        this._endTime = endTime;
        //log all
-         cc.log("type: " + this._type + " posX: " + this._posX + " posY: " + this._posY + " id: " + this._id + " status: " + this._status + " startTime: " + this._startTime + " endTime: " + this._endTime);
+         cc.log("type: " + this._type + " posX: " + this._posX + " posY: " + this._posY + " id: " + this._id + " status: " + this._state + " startTime: " + this._startTime + " endTime: " + this._endTime);
        this.init();
+
    },
     init: function (){
 
@@ -30,9 +32,22 @@ var Obstacle = GameObject.extend({
         //load sprites
         this.loadMainSprite();
         this.loadSubSprite();
+        this.initState();
         //schedule update 1s 1 time
         this.update()
         this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0)
+    },
+
+    initState: function(){
+        if(this._state === 1){
+            //-1 tho xay
+            let playerInfoManager = PlayerInfoManager.Instance();
+            playerInfoManager.changeBuilder("current",-1);
+            this._progressBar.setVisible(true);
+        }
+        else{
+            this._progressBar.setVisible(false);
+        }
     },
     //load main sprite
     loadMainSprite: function(){
@@ -115,9 +130,15 @@ var Obstacle = GameObject.extend({
     getType: function () {
         return this._type;
     },
+    getState: function () {
+       return this._state;
+    },
+    setState: function (state) {
+        this._state = state;
+    },
     updateProgress: function (){
         //log start time, end time, current time
-        let currentTime = new Date().getTime();
+        let currentTime = TimeManager.Instance().getCurrentTimeInSecond();
         let percent = (currentTime - this._startTime)/(this._endTime - this._startTime)*100;
         this._progressBar.setPercent(percent);
 
@@ -125,11 +146,13 @@ var Obstacle = GameObject.extend({
         let time = this._endTime - currentTime;
         this._timeLabel.setString(getTimeString(time));
         if(currentTime >= this._endTime){
-            this.completeRemove();
+            //send to server to check
+            testnetwork.connector.sendRemoveObstacleSuccess(this._id);
+            // this.completeRemove();
         }
     },
     update: function (dt) {
-        if(this._status === 1){
+        if(this._state === 1){
             if(this._progressBar.isVisible() === false)
                 this._progressBar.setVisible(true);
             this.updateProgress();
@@ -139,13 +162,12 @@ var Obstacle = GameObject.extend({
         }
     },
     startRemove: function (startTime,endTime) {
+        cc.log("startTime: " + startTime + " endTime: " + endTime);
         //enable progress bar
-        this._status = 1;
+        this._state = 1;
         this._startTime = startTime;
         this._endTime = endTime;
 
-        //test
-        this.test();
 
         let playerInfoManager = PlayerInfoManager.Instance();
         let priceGold = LoadManager.Instance().getConfig(this._type,this._level,"gold");
@@ -155,7 +177,7 @@ var Obstacle = GameObject.extend({
         playerInfoManager.changeBuilder("current",-1);
     },
     completeRemove: function () {
-        this._status = 0;
+        this._state = 0;
         this._startTime = null;
         this._endTime = null;
 
@@ -189,17 +211,19 @@ var Obstacle = GameObject.extend({
             return;
         }
 
+        //send packet to server
+        testnetwork.connector.sendRemoveObstacle(this._id);
         //gui goi tin xoa obstacle
 
-        let packet = {
-            error : 0,
-            id : this._id,
-            status: 1,
-            type: this._type,
-            startTime: Date.now(),
-            endTime: Date.now() + LoadManager.Instance().getConfig(this._type,this._level,"buildTime")*1000
-        }
-        this.onReceiveClickRemove(packet);
+        // let packet = {
+        //     error : 0,
+        //     id : this._id,
+        //     status: 1,
+        //     type: this._type,
+        //     startTime: Date.now(),
+        //     endTime: Date.now() + LoadManager.Instance().getConfig(this._type,this._level,"buildTime")*1000
+        // }
+        // this.onReceiveClickRemove(packet);
     },
     //if server response error = 0, then start remove obstacle
     onReceiveClickRemove: function(packet){
@@ -213,7 +237,5 @@ var Obstacle = GameObject.extend({
             cc.log("error: " + packet.error);
         }
     },
-    test: function(){
-        this._endTime = this._startTime + (this._endTime - this._startTime)/10;
-    }
+
 });
