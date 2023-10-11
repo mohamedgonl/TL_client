@@ -24,7 +24,7 @@ const MAP_ZORDER_GRID = 0;
 const MAP_ZORDER_BACKGROUND = 1000;
 const MAP_ZORDER_BUILDING = 2000; // max to about 400
 
-const MAP_ZORDER_TROOP = 500;
+const MAP_ZORDER_TROOP = 9999;
 
 const MAP_ZORDER_GUI = 1000;
 

@@ -42,6 +42,10 @@ var GameScene = cc.Scene.extend({
         return this.popUpLayer;
     },
 
+    getMapLayer : function () {
+        return this.mapLayer;
+    },
+
 
 
     onBuyResourceSuccess: function (data) {

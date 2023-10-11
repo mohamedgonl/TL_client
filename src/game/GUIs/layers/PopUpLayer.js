@@ -48,11 +48,11 @@ let PopupLayer = cc.Layer.extend({
 
     },
 
-    disappear: function (popUpId) {
+    disappear: function (popUpId, data ={}) {
 
         switch (popUpId) {
             case "shop": {
-                this._shopPopup.handleClickClose();
+                this._shopPopup.handleClickClose(data.closePopupLayer );
                 break;
             }
             case "train": {

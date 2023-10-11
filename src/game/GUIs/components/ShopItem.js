@@ -8,7 +8,7 @@ var ShopItem = cc.Node.extend({
         this._itemNode = item;
 
         let buttonBuy = item.getChildByName("button_buy");
-        buttonBuy.addTouchEventListener(this.handleTouchBuyButton,this);
+        cc.eventManager.addListener(clickEventListener(this.handleTouchBuyButton.bind(this)), item);
 
         this._data = data;
         this._category = category;
@@ -20,8 +20,8 @@ var ShopItem = cc.Node.extend({
     },
 
     checkValid: function () {
-        if(!this._available) {
-            let objs = this.getElements(["item_bg","shop_bg","price_type", "item_image"])
+        if (!this._available) {
+            let objs = this.getElements(["item_bg", "shop_bg", "price_type", "item_image"])
             ColorUlties.setGrayObjects(objs)
         }
     },
@@ -45,16 +45,14 @@ var ShopItem = cc.Node.extend({
         if (category !== "category_ngankho") {
             let name = this._itemNode.getChildByName("item_name_string");
             name.setString(data.name);
-        }
-        else
-        {
+        } else {
             let name = this._itemNode.getChildByName("ngankho_item_name");
             name.setString(data.name);
             let value = this._itemNode.getChildByName("ngankho_item_value");
             let maxValue = data.value_type === RESOURCE_TYPE.GOLD
                 ? PlayerInfoManager.Instance().getMaxResource().gold
-                : PlayerInfoManager.Instance().getMaxResource().elixir ;
-            value.setString(fr.toMoneyString(maxValue* (data.nganhko_percent)));
+                : PlayerInfoManager.Instance().getMaxResource().elixir;
+            value.setString(fr.toMoneyString(maxValue * (data.nganhko_percent)));
 
 
             let value_icon = this._itemNode.getChildByName("ngankho_item_value_type");
@@ -76,7 +74,7 @@ var ShopItem = cc.Node.extend({
         switch (data.price_type) {
             case RESOURCE_TYPE.ELIXIR : {
                 price_type.setTexture(res.ICON.ELIXIR);
-                if(data.price > PlayerInfoManager.Instance().getResource().elixir) {
+                if (data.price > PlayerInfoManager.Instance().getResource().elixir) {
                     price_string.setColor(COLOR_SHOP_RED);
                     this._available = false;
                 }
@@ -84,7 +82,7 @@ var ShopItem = cc.Node.extend({
             }
             case RESOURCE_TYPE.GOLD : {
                 price_type.setTexture(res.ICON.GOLD);
-                if(data.price > PlayerInfoManager.Instance().getResource().gold) {
+                if (data.price > PlayerInfoManager.Instance().getResource().gold) {
                     price_string.setColor(COLOR_SHOP_RED);
                     this._available = false;
                 }
@@ -92,7 +90,7 @@ var ShopItem = cc.Node.extend({
             }
             case RESOURCE_TYPE.G : {
                 price_type.setTexture(res.ICON.GEM);
-                if(data.price > PlayerInfoManager.Instance().getResource().gem) {
+                if (data.price > PlayerInfoManager.Instance().getResource().gem) {
                     price_string.setColor(COLOR_SHOP_RED);
                     this._available = false;
                 }
@@ -122,14 +120,13 @@ var ShopItem = cc.Node.extend({
                     this._available = false;
                 }
                 this.setVisibleFields(["button_info"])
-                if(maxBuilt < 0) {
+                if (maxBuilt < 0) {
                     let thRequireString = this._itemNode.getChildByName("th_require_string");
-                    thRequireString.setString("Yêu cầu nhà chính cấp "+ (-maxBuilt));
+                    thRequireString.setString("Yêu cầu nhà chính cấp " + (-maxBuilt));
                     thRequireString.setVisible(true);
-                }
-                else {
+                } else {
                     let space = this._itemNode.getChildByName("space_string");
-                    if(this.getBuiltCount() >= maxBuilt) {
+                    if (this.getBuiltCount() >= maxBuilt) {
                         space.setColor(COLOR_SHOP_RED);
                         this._available = false;
                     }
@@ -158,19 +155,18 @@ var ShopItem = cc.Node.extend({
 
         let maxCount = TOW["TOW_1"][townHallLevel][this._data.cfgId];
 
-        if(maxCount === undefined && this._data.cfgId === "BDH_1"){
+        if (maxCount === undefined && this._data.cfgId === "BDH_1") {
             return 5;
-        }else {
+        } else {
 
-            if(maxCount === 0) {
-                while(TOW["TOW_1"][townHallLevel][this._data.cfgId]===0)  {
+            if (maxCount === 0) {
+                while (TOW["TOW_1"][townHallLevel][this._data.cfgId] === 0) {
                     townHallLevel++;
                     //catch infinity loop error
-                    if(townHallLevel===1000) break;
+                    if (townHallLevel === 1000) break;
                 }
                 return -townHallLevel
-            }
-            else {
+            } else {
                 return maxCount;
             }
         }
@@ -187,45 +183,44 @@ var ShopItem = cc.Node.extend({
         popUpLayer.addChild(itemInfoLayer);
     },
 
-    handleTouchBuyButton: function (sender,type) {
-        if(type === ccui.Widget.TOUCH_BEGAN) {
-            this._itemNode.setScale(BUTTON_TOUCH_SCALE_SMALL);
-        }
-        if(type === ccui.Widget.TOUCH_ENDED) {
-            cc.log("CLICK BUY :::: ");
-            this._itemNode.setScale(1);
-            if (this._available === true) {
-                let gameScene = cc.director.getRunningScene();
-                let popUpLayer = gameScene.getPopUpLayer();
-                if(this._category === "category_ngankho"){
-                    popUpLayer.disappear("shop");
-                    popUpLayer.setVisible(true);
+    handleTouchBuyButton: function (sender, type) {
+        cc.log("CLICK BUY :::: ");
+        this._itemNode.setScale(1);
+        if (this._available === true) {
+            let gameScene = cc.director.getRunningScene();
+            let popUpLayer = gameScene.getPopUpLayer();
+            if (this._category === "category_ngankho") {
+                popUpLayer.disappear("shop", {closePopupLayer: true});
 
-                    // create content in popup
-                    let label = new cc.LabelBMFont("Bạn có muốn mua số tài nguyên còn thiếu?", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
-                    label.setColor(new cc.Color(150, 78, 3));
-                    let price = new cc.LabelBMFont(this._data.price, res.FONT.SOJI["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
-                    price.setPositionY(-label.getContentSize().height);
-                    let content = new cc.Node();
-                    content.addChild(label);
-                    content.addChild(price);
+                // create content in popup
+                let label = new cc.LabelBMFont("Bạn có muốn mua số tài nguyên còn thiếu?", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
+                label.setColor(new cc.Color(150, 78, 3));
+                let price = new cc.LabelBMFont(this._data.price, res.FONT.SOJI["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
+                price.setPositionY(-label.getContentSize().height);
+                let content = new cc.Node();
+                content.addChild(label);
+                content.addChild(price);
 
-                    let buyResPopup= new NotiPopup({title: "MUA TÀI NGUYÊN", acceptCallBack: ()=>{
-                            testnetwork.connector.sendBuyResourceRequest(this._data);
-                        }, content: content})
-                    popUpLayer.addChild(buyResPopup)
-                }
-                else {
-
-                    //accept buy building
-                    var mapLayer = cc.director.getRunningScene().mapLayer;
-                    popUpLayer.disappear("shop");
-                    mapLayer.enterModeBuyBuilding(this._data.cfgId);
-                }
+                let buyResPopup = new NotiPopup({
+                    title: "MUA TÀI NGUYÊN", acceptCallBack: () => {
+                        testnetwork.connector.sendBuyResourceRequest(this._data);
+                        popUpLayer.setVisible(false);
+                    }, content: content, cancleCallBack: () => {
+                        popUpLayer.setVisible(false);
+                        buyResPopup.removeFromParent(true)
+                    }
+                })
+                popUpLayer.addChild(buyResPopup)
             } else {
-                cc.log("CANT BUY :::: ");
+                var mapLayer = cc.director.getRunningScene().mapLayer;
+                popUpLayer.disappear("shop");
+                mapLayer.enterModeBuyBuilding(this._data.cfgId);
+
             }
+        } else {
+            cc.log("CANT BUY :::: ");
         }
+
     },
 
     handleBuild: function () {

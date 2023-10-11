@@ -58,12 +58,12 @@ var ShopPopup = cc.Layer.extend({
         }
     },
 
-    handleClickClose: function () {
+    handleClickClose: function (closePopupLayer) {
         let popUp = this;
         PopupEffect.disappear(this, ()=>{
             popUp.setVisible(false);
             popUp.resetInitState();
-            popUp.getParent().setVisible(false);
+            if(!closePopupLayer) popUp.getParent().setVisible(false);
         });
         return true;
     },

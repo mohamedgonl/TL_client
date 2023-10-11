@@ -1,0 +1,949 @@
+{
+  "ID": "60d9455f-e6b2-4085-8634-212848f24b98",
+  "Version": "3.10.0.0",
+  "Name": "CheatPopup",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 33,
+        "Children": [
+          {
+            "ClipAble": false,
+            "BackColorAlpha": 102,
+            "ComboBoxIndex": 1,
+            "SingleColor": {
+              "R": 80,
+              "G": 80,
+              "B": 80
+            },
+            "FirstColor": {
+              "R": 150,
+              "G": 200
+            },
+            "EndColor": {},
+            "ColorVector": {
+              "ScaleY": 1.0
+            },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PositionPercentXEnabled": true,
+            "PositionPercentYEnabled": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -568.0,
+            "RightMargin": -568.0,
+            "TopMargin": -320.0,
+            "BottomMargin": -320.0,
+            "Tag": 34,
+            "ActionTag": -1515666677,
+            "Size": {
+              "X": 1136.0,
+              "Y": 640.0
+            },
+            "Name": "pnel",
+            "ctype": "PanelObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/train_troop_gui/background.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -195.5,
+            "RightMargin": -195.5,
+            "TopMargin": -136.5,
+            "BottomMargin": -136.5,
+            "Tag": 35,
+            "ActionTag": -1807681367,
+            "Size": {
+              "X": 391.0,
+              "Y": 273.0
+            },
+            "Name": "bg",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "LabelText": "",
+            "LabelBMFontFile_CNB": {
+              "Type": "Normal",
+              "Path": "fonts/soji_20.fnt",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 112.12
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "TopMargin": -112.12,
+            "BottomMargin": 112.12,
+            "Tag": 36,
+            "ActionTag": -1108006772,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "popup_title",
+            "ctype": "TextBMFontObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/research troop/mieng trang.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0001,
+              "Y": 22.2356
+            },
+            "Scale": {
+              "ScaleX": 0.5,
+              "ScaleY": 1.1
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -340.9999,
+            "RightMargin": -341.0001,
+            "TopMargin": -79.7356,
+            "BottomMargin": -35.2644,
+            "Tag": 37,
+            "ActionTag": 909446018,
+            "Size": {
+              "X": 682.0,
+              "Y": 115.0
+            },
+            "Name": "content_bg",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/pop_up/button.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 88.7082,
+              "Y": -85.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 20.2082,
+            "RightMargin": -157.2082,
+            "TopMargin": 55.0,
+            "BottomMargin": -115.0,
+            "Tag": 38,
+            "Children": [
+              {
+                "LabelText": "",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_20.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 68.5,
+                  "Y": 30.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.5
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 68.5,
+                "RightMargin": 68.5,
+                "TopMargin": 30.0,
+                "BottomMargin": 30.0,
+                "Tag": 45,
+                "ActionTag": 1506949770,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "ok_string",
+                "ctype": "TextBMFontObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "guis/train_troop_gui/g_icon.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 109.9995,
+                  "Y": 30.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.8029,
+                  "Y": 0.5
+                },
+                "PreSize": {
+                  "X": 0.2336,
+                  "Y": 0.4833
+                },
+                "LeftMargin": 93.9995,
+                "RightMargin": 11.0005,
+                "TopMargin": 15.5,
+                "BottomMargin": 15.5,
+                "Tag": 44,
+                "ActionTag": -1994270288,
+                "Size": {
+                  "X": 32.0,
+                  "Y": 29.0
+                },
+                "VisibleForFrame": false,
+                "Name": "icon",
+                "ctype": "SpriteObjectData"
+              }
+            ],
+            "ActionTag": -2051986735,
+            "Size": {
+              "X": 137.0,
+              "Y": 60.0
+            },
+            "Name": "button_ok",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/pop_up/button2.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -84.1863,
+              "Y": -85.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -154.6863,
+            "RightMargin": 13.6863,
+            "TopMargin": 55.0,
+            "BottomMargin": -115.0,
+            "Tag": 39,
+            "Children": [
+              {
+                "LabelText": "",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_16.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 70.5,
+                  "Y": 30.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.5
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 70.5,
+                "RightMargin": 70.5,
+                "TopMargin": 30.0,
+                "BottomMargin": 30.0,
+                "Tag": 43,
+                "ActionTag": -798891540,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "cancle_string",
+                "ctype": "TextBMFontObjectData"
+              }
+            ],
+            "ActionTag": 675037721,
+            "Size": {
+              "X": 141.0,
+              "Y": 60.0
+            },
+            "Name": "button_cancle",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FontSize": 14,
+            "ButtonText": "",
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
+            "DisabledFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Disable.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Normal",
+              "Path": "guis/pop_up/close.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "guis/pop_up/close.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 11,
+            "Scale9Width": 17,
+            "Scale9Height": 25,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 154.5611,
+              "Y": 113.7626
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 131.0611,
+            "RightMargin": -178.0611,
+            "TopMargin": -137.2626,
+            "BottomMargin": 90.2626,
+            "UserData": "-press_action",
+            "Tag": 40,
+            "ActionTag": 896390437,
+            "Size": {
+              "X": 47.0,
+              "Y": 47.0
+            },
+            "VisibleForFrame": false,
+            "Name": "button_close",
+            "ctype": "ButtonObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "LoginGui/g_background.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 24.4637,
+              "Y": 64.9789
+            },
+            "Scale": {
+              "ScaleX": 1.7977,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -44.5363,
+            "RightMargin": -93.4637,
+            "TopMargin": -85.9789,
+            "BottomMargin": 43.9789,
+            "Tag": 107,
+            "ActionTag": -1119336677,
+            "Size": {
+              "X": 138.0,
+              "Y": 42.0
+            },
+            "Name": "g_background_1",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "LoginGui/g_background.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 24.5261,
+              "Y": 24.4021
+            },
+            "Scale": {
+              "ScaleX": 1.7977,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -44.4739,
+            "RightMargin": -93.5261,
+            "TopMargin": -45.4021,
+            "BottomMargin": 3.4021,
+            "Tag": 108,
+            "ActionTag": -955620478,
+            "Size": {
+              "X": 138.0,
+              "Y": 42.0
+            },
+            "Name": "g_background_1_0",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "LoginGui/g_background.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 25.3512,
+              "Y": -16.5865
+            },
+            "Scale": {
+              "ScaleX": 1.7977,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -43.6488,
+            "RightMargin": -94.3512,
+            "TopMargin": -4.4135,
+            "BottomMargin": -37.5865,
+            "Tag": 109,
+            "ActionTag": -798823699,
+            "Size": {
+              "X": 138.0,
+              "Y": 42.0
+            },
+            "Name": "g_background_1_1",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FontSize": 20,
+            "IsCustomSize": true,
+            "LabelText": "",
+            "PlaceHolderText": "Gold",
+            "MaxLengthText": 10,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 20.0,
+              "Y": 65.0001
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -80.0,
+            "RightMargin": -120.0,
+            "TopMargin": -76.5001,
+            "BottomMargin": 53.5001,
+            "Tag": 101,
+            "ActionTag": 1778696083,
+            "Size": {
+              "X": 200.0,
+              "Y": 23.0
+            },
+            "Name": "tf-gold",
+            "ctype": "TextFieldObjectData"
+          },
+          {
+            "FontSize": 20,
+            "IsCustomSize": true,
+            "LabelText": "",
+            "PlaceHolderText": "Elixir",
+            "MaxLengthText": 20,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 21.529,
+              "Y": 23.8846
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -78.471,
+            "RightMargin": -121.529,
+            "TopMargin": -35.3846,
+            "BottomMargin": 12.3846,
+            "Tag": 102,
+            "ActionTag": -602478323,
+            "Size": {
+              "X": 200.0,
+              "Y": 23.0
+            },
+            "Name": "tf-elixir",
+            "ctype": "TextFieldObjectData"
+          },
+          {
+            "FontSize": 20,
+            "IsCustomSize": true,
+            "LabelText": "",
+            "PlaceHolderText": "G",
+            "MaxLengthText": 10,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 20.0002,
+              "Y": -16.5865
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -79.9998,
+            "RightMargin": -120.0002,
+            "TopMargin": 5.0865,
+            "BottomMargin": -28.0865,
+            "Tag": 103,
+            "ActionTag": 659493049,
+            "Size": {
+              "X": 200.0,
+              "Y": 23.0
+            },
+            "Name": "tf-gem",
+            "ctype": "TextFieldObjectData"
+          },
+          {
+            "LabelText": "Gold",
+            "LabelBMFontFile_CNB": {
+              "Type": "Normal",
+              "Path": "fonts/fista_20_non.fnt",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -130.0,
+              "Y": 64.978
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -146.5,
+            "RightMargin": 113.5,
+            "TopMargin": -75.478,
+            "BottomMargin": 54.478,
+            "Tag": 104,
+            "ActionTag": -2123137921,
+            "Size": {
+              "X": 33.0,
+              "Y": 21.0
+            },
+            "Name": "BitmapFontLabel_1",
+            "ctype": "TextBMFontObjectData"
+          },
+          {
+            "LabelText": "Elixir",
+            "LabelBMFontFile_CNB": {
+              "Type": "Normal",
+              "Path": "fonts/fista_20_non.fnt",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -129.9996,
+              "Y": 25.4135
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -150.4996,
+            "RightMargin": 109.4996,
+            "TopMargin": -35.9135,
+            "BottomMargin": 14.9135,
+            "Tag": 105,
+            "ActionTag": -503627698,
+            "Size": {
+              "X": 41.0,
+              "Y": 21.0
+            },
+            "Name": "BitmapFontLabel_2",
+            "ctype": "TextBMFontObjectData"
+          },
+          {
+            "LabelText": "G",
+            "LabelBMFontFile_CNB": {
+              "Type": "Normal",
+              "Path": "fonts/fista_20_non.fnt",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -129.9996,
+              "Y": -16.5863
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -135.9996,
+            "RightMargin": 123.9996,
+            "TopMargin": 6.0863,
+            "BottomMargin": -27.0863,
+            "Tag": 106,
+            "ActionTag": -728001553,
+            "Size": {
+              "X": 12.0,
+              "Y": 21.0
+            },
+            "Name": "BitmapFontLabel_3",
+            "ctype": "TextBMFontObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "Default/Button_Disable.png",
+        "fonts/fista_20_non.fnt",
+        "fonts/fista_20_non.png",
+        "fonts/soji_16.fnt",
+        "fonts/soji_16.png",
+        "fonts/soji_20.fnt",
+        "fonts/soji_20.png",
+        "guis/pop_up/button.png",
+        "guis/pop_up/button2.png",
+        "guis/pop_up/close.png",
+        "guis/research troop/mieng trang.png",
+        "guis/train_troop_gui/background.png",
+        "guis/train_troop_gui/g_icon.png",
+        "LoginGui/g_background.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

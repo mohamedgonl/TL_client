@@ -8,6 +8,7 @@ gv.CMD.USER_LOGIN = 1;
 
 gv.CMD.USER_INFO = 1001;
 gv.CMD.MAP_INFO = 1002;
+gv.CMD.CHEAT_RESOURCE = 1900;
 gv.CMD.MOVE = 9999;
 gv.CMD.BUY_RESOURCE = 4001;
 gv.CMD.TRAIN_TROOP_CREATE = 5001;
@@ -27,7 +28,6 @@ gv.CMD.MOVE_BUILDING = 2008;
 gv.CMD.BUY_BUILDING = 2001;
 gv.CMD.REMOVE_OBSTACLE_SUCCESS = 2010;
 //quyet----------------------
-
 
 
 testnetwork = testnetwork || {};
@@ -81,7 +81,7 @@ CmdSendMapInfo = fr.OutPacket.extend(
     }
 )
 
-CmdSendLogin= fr.OutPacket.extend(
+CmdSendLogin = fr.OutPacket.extend(
     {
         ctor: function () {
             this._super();
@@ -292,6 +292,25 @@ CmdSendHarvest = fr.OutPacket.extend(
         }
     });
 
+
+CmdSendCheatResource = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.CHEAT_RESOURCE);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.gold);
+            this.putInt(data.elixir);
+            this.putInt(data.gem);
+            this.updateSize();
+        }
+    }
+)
+
+
 CmdSendCancelBuild = fr.OutPacket.extend(
     {
         ctor: function () {
@@ -367,6 +386,22 @@ testnetwork.packetMap[gv.CMD.USER_INFO] = fr.InPacket.extend(
     }
 );
 
+testnetwork.packetMap[gv.CMD.CHEAT_RESOURCE] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.error = this.getError();
+            if (this.error === 0) {
+                this.gold = this.getInt();
+                this.elixir = this.getInt();
+                this.gem = this.getInt();
+            }
+        }
+    }
+);
+
 testnetwork.packetMap[gv.CMD.BUY_RESOURCE] = fr.InPacket.extend(
     {
         ctor: function () {
@@ -435,11 +470,11 @@ testnetwork.packetMap[gv.CMD.GET_TRAINING_LIST] = fr.InPacket.extend(
             let _trainingList = [];
             for (let i = 0; i < trainingListSize; i++) {
                 let item = {};
-                item.cfgId  = this.getString();
+                item.cfgId = this.getString();
                 item.count = this.getInt();
                 _trainingList.push(item);
             }
-            cc.log("NHẬN QUEUE ::::::::::::::::::::::::" + JSON.stringify(_trainingList) );
+            cc.log("NHẬN QUEUE ::::::::::::::::::::::::" + JSON.stringify(_trainingList));
             this.trainingList = _trainingList;
 
         }
@@ -493,7 +528,7 @@ testnetwork.packetMap[gv.CMD.BUY_BUILDING] = fr.InPacket.extend(
         },
         readData: function () {
             this.error = this.getError();
-            if(this.error === 0) {
+            if (this.error === 0) {
                 this.id = this.getInt();
                 this.type = this.getString();
                 this.posX = this.getShort();
