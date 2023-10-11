@@ -211,7 +211,6 @@ var MapLayer = cc.Layer.extend({
 
         this.addChild(tmxMap, MAP_ZORDER_GRID);
 
-
         //load 4 corner of  background
 
         //center of backgrounds

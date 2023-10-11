@@ -71,6 +71,9 @@ var InfoLayer = cc.Layer.extend({
             this.menu.addChild(button);
             this.menu.alignItemsHorizontallyWithPadding(10);
         },
+        removeAllButtonInMenu: function () {
+            this.menu.removeAllChildren();
+        },
 
 
         //after init UI, get all resources to display
@@ -187,7 +190,7 @@ var InfoLayer = cc.Layer.extend({
         },
         onUnselectBuilding: function (event) {
             this.button_container.setVisible(false);
-            this.menu.removeAllChildren();
+            this.removeAllButtonInMenu();
         },
 
     });

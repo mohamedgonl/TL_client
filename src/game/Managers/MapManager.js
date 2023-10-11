@@ -62,6 +62,15 @@ var MapManager = cc.Layer.extend({
             }
         }
     },
+    addToListMine: function (building) {
+        this.listMine.push(building);
+    },
+    addToListStorage: function (building) {
+        this.listStorage.push(building);
+    },
+    addToListBuilderHut: function (building) {
+        this.listBuilderHut.push(building);
+    },
 
     //add building to list and to grid
     addBuilding: function (building) {
@@ -78,28 +87,24 @@ var MapManager = cc.Layer.extend({
             for(let row = posY; row < posY + height; row++)
                 this.mapGrid[column][row] = id;
 
+        building.onAddIntoMapManager();
+
         // add to list building {building._id: building}
-        this.listBuildings.set(building._id, building);
+        this.listBuildings.set(id,building);
+
 
         //update list storage, list mine, list builder hut
-        var playerInfoManager = PlayerInfoManager.Instance();
+
 
         switch (typeBuilding.substring(0,3)){
             case 'TOW':
-                this.townHall = building;
-                let capacityGold = LoadManager.Instance().getConfig(typeBuilding,level,"capacityGold");
-                let capacityElixir = LoadManager.Instance().getConfig(typeBuilding,level,"capacityElixir");
-                playerInfoManager.changeMaxResource("gold",capacityGold);
-                playerInfoManager.changeMaxResource("elixir",capacityElixir);
+
+
                 break;
             case 'RES':
-                this.listMine.push(building);
                 break;
             case 'STO':
-                this.listStorage.push(building);
-                let capacityBuilding = LoadManager.Instance().getConfig(typeBuilding,level,"capacity");
-                let typeResource = LoadManager.Instance().getConfig(typeBuilding,level,"type");
-                playerInfoManager.changeMaxResource(typeResource,capacityBuilding);
+
                 break;
             case 'BAR':
                 //cc.log("hanve barrack+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
@@ -109,9 +114,7 @@ var MapManager = cc.Layer.extend({
                 ArmyManager.Instance().pushArmyCamp(building);
                 break;
             case 'BDH':
-                this.listBuilderHut.push(building);
-                playerInfoManager.changeBuilder("current",1);
-                playerInfoManager.changeBuilder("max",1);
+
         }
 
     },
@@ -176,13 +179,15 @@ var MapManager = cc.Layer.extend({
 
         return null;
     },
-    removeObstacle: function (obstacle){
+    removeBuilding: function (building){
         //remove from list
-        this.listBuildings.delete(obstacle._id);
+        this.listBuildings.delete(building._id);
         //remove from mapGrid
-        for(var column = obstacle._posX; column < obstacle._posX + obstacle._width; column++)
-            for(var row = obstacle._posY; row < obstacle._posY + obstacle._height; row++)
+        for(var column = building._posX; column < building._posX + building._width; column++)
+            for(var row = building._posY; row < building._posY + building._height; row++)
                 this.mapGrid[column][row] = 0;
+
+
     }
 
 

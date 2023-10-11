@@ -68,7 +68,6 @@ var Obstacle = GameObject.extend({
     },
 
     loadSubSprite: function(){
-
         //arrow move
         this._arrowMove = new cc.Sprite(res_map.SPRITE.ARROW_MOVE[this._width]);
         this._arrowMove.setScale(SCALE_BUILDING_BODY);
@@ -107,7 +106,10 @@ var Obstacle = GameObject.extend({
 
     loadButton: function(){
         let infoLayer = cc.director.getRunningScene().infoLayer;
-        infoLayer.addButtonToMenu("Dọn dẹp",res.BUTTON.REMOVE_BUTTON,0,this.onClickRemove.bind(this),this);
+        if(this._state ===0)
+            infoLayer.addButtonToMenu("Dọn dẹp",res.BUTTON.REMOVE_BUTTON,0,this.onClickRemove.bind(this),this);
+        else
+            infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this),this);
     },
     onSelected: function(){
         this.loadButton();
@@ -162,7 +164,6 @@ var Obstacle = GameObject.extend({
         }
     },
     startRemove: function (startTime,endTime) {
-        cc.log("startTime: " + startTime + " endTime: " + endTime);
         //enable progress bar
         this._state = 1;
         this._startTime = startTime;
@@ -182,7 +183,7 @@ var Obstacle = GameObject.extend({
         this._endTime = null;
 
         //xoa khoi map
-        MapManager.Instance().removeObstacle(this)
+        MapManager.Instance().removeBuilding(this)
         //xoa obstacle khoi layer
         cc.director.getRunningScene().mapLayer.removeObstacle(this);
 
@@ -194,12 +195,10 @@ var Obstacle = GameObject.extend({
     //check to client, if valid then send packet to server
     onClickRemove: function(){
         cc.log("onClickRemove");
-        cc.log("type: " + this._type + " level: " + this._level)
         //check client
         let playerInfoManager = PlayerInfoManager.Instance();
         let priceGold = LoadManager.Instance().getConfig(this._type,this._level,"gold");
         let priceElixir = LoadManager.Instance().getConfig(this._type,this._level,"elixir");
-        cc.log("gold: " + priceGold + " elixir: " + priceElixir)
         if(playerInfoManager.getResource("gold") < priceGold || playerInfoManager.getResource("elixir") < priceElixir)
         {
             cc.log("not enough resource");
@@ -213,17 +212,6 @@ var Obstacle = GameObject.extend({
 
         //send packet to server
         testnetwork.connector.sendRemoveObstacle(this._id);
-        //gui goi tin xoa obstacle
-
-        // let packet = {
-        //     error : 0,
-        //     id : this._id,
-        //     status: 1,
-        //     type: this._type,
-        //     startTime: Date.now(),
-        //     endTime: Date.now() + LoadManager.Instance().getConfig(this._type,this._level,"buildTime")*1000
-        // }
-        // this.onReceiveClickRemove(packet);
     },
     //if server response error = 0, then start remove obstacle
     onReceiveClickRemove: function(packet){
@@ -237,5 +225,12 @@ var Obstacle = GameObject.extend({
             cc.log("error: " + packet.error);
         }
     },
+    onAddIntoMapManager: function () {
+
+    },
+    onClickQuickFinish: function () {
+        cc.log("onClickQuickFinish");
+        testnetwork.connector.sendQuickFinish(this._id);
+    }
 
 });

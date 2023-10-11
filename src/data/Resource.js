@@ -32,6 +32,7 @@ var res = {
         ROTATE_BUTTON: "res/guis/Action_Building_Icon/rotate_icon.png",
         INFO_BUTTON: "res/guis/Action_Building_Icon/info_icon.png",
         REMOVE_BUTTON: "res/guis/Action_Building_Icon/remove_icon.png",
+        QUICK_FINISH_BUTTON: "res/guis/Action_Building_Icon/quick_finish.png",
     },
     ICON: {
         ELIXIR: 'res/guis/shopping/elixir.png',

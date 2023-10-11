@@ -79,6 +79,14 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log("COLLECT_RESOURCE", packet);
                 this.onReceivedHarvest(packet);
                 break;
+            case gv.CMD.CANCEL_BUILD:
+                cc.log("CANCEL_BUILD", packet);
+                this.onReceivedCancelBuild(packet);
+                break;
+            case gv.CMD.CANCEL_UPGRADE:
+                cc.log("CANCEL_UPGRADE", packet);
+                this.onReceivedCancelUpgrade(packet);
+                break;
         }
     },
 
@@ -175,7 +183,7 @@ testnetwork.Connector = cc.Class.extend({
             let building = getBuildingFromType(packet.type, 1, packet.id, packet.posX, packet.posY,packet.status,packet.startTime,packet.endTime);
             MapManager.Instance().addBuilding(building);
             mapLayer.addBuildingToLayer(building);
-            building.build(packet.startTime, packet.endTime);
+            building.startBuild(packet.startTime, packet.endTime);
             //bat lai info
         }
     },
@@ -210,7 +218,7 @@ testnetwork.Connector = cc.Class.extend({
             cc.log(JSON.stringify(packet, null, 2));
             cc.log("UPGRADE BUILDING SUCCESS ::::::::: ");
             let building = MapManager.Instance().getBuildingById(packet.id);
-            building.upgrade(packet.startTime, packet.endTime);
+            building.startUpgrade(packet.startTime, packet.endTime);
         }
     },
     onReceivedUpgradeBuildingSuccess: function (packet) {
@@ -239,8 +247,7 @@ testnetwork.Connector = cc.Class.extend({
     //   input: id
     //   output: error, id, gold, elixir, lastCollectTime
     onReceivedHarvest: function (packet) {
-        cc.log("packet: ", JSON.stringify(packet, null, 2)  );
-        if(packet.error !==0){
+      if(packet.error !==0){
             cc.log("HARVEST ERROR with code ::::::::: ", packet.error);
         }
         else
@@ -250,6 +257,28 @@ testnetwork.Connector = cc.Class.extend({
             building.harvest(packet.lastCollectTime, packet.gold, packet.elixir);
         }
 
+    },
+    onReceivedCancelBuild: function (packet) {
+        if(packet.error !==0){
+            cc.log("CANCEL BUILD ERROR with code ::::::::: ", packet.error);
+        }
+        else
+        {
+            cc.log("CANCEL BUILD SUCCESS ::::::::: ");
+            let building = MapManager.Instance().getBuildingById(packet.id);
+            building.cancelBuild();
+        }
+    },
+    onReceivedCancelUpgrade: function (packet) {
+        if(packet.error !==0){
+            cc.log("CANCEL UPGRADE ERROR with code ::::::::: ", packet.error);
+        }
+        else
+        {
+            cc.log("CANCEL UPGRADE SUCCESS ::::::::: ");
+            let building = MapManager.Instance().getBuildingById(packet.id);
+            building.cancelUpgrade();
+        }
     },
 
 
@@ -351,11 +380,29 @@ testnetwork.Connector = cc.Class.extend({
         this.gameClient.sendPacket(pk);
     },
     sendHarvest: function (id) {
-        cc.log("SEND harvest request");
+        cc.log("SEND harvest ");
         var pk = this.gameClient.getOutPacket(CmdSendHarvest);
         pk.pack({id});
         this.gameClient.sendPacket(pk);
+    },
+    sendCancelBuild: function (id) {
+        cc.log("SEND cancel building ");
+        var pk = this.gameClient.getOutPacket(CmdSendCancelBuild);
+        pk.pack({id});
+        this.gameClient.sendPacket(pk);
+    },
+    sendCancelUpgrade: function (id) {
+        cc.log("SEND cancel upgrade ");
+        var pk = this.gameClient.getOutPacket(CmdSendCancelUpgrade);
+        pk.pack({id});
+        this.gameClient.sendPacket(pk);
     }
+    // sendQuickFinish: function (id) {
+    //     cc.log("SEND quick finish request");
+    //     var pk = this.gameClient.getOutPacket(CmdSendQuickFinish);
+    //     pk.pack({id});
+    //     this.gameClient.sendPacket(pk);
+    // }
 
 });
 

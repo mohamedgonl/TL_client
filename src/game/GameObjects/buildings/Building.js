@@ -177,13 +177,19 @@ var Building = GameObject.extend({
             case 1:
             case 2:
                 this._progressBar.setVisible(true);
+                // this.update();
                 this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
                 break;
         }
     },
+
+    //load button for building, reload when select building, upgrade, build, cancel
     loadButton: function(){
         let infoLayer = cc.director.getRunningScene().infoLayer;
+        //xoa het button cu
+        infoLayer.removeAllButtonInMenu();
         infoLayer.addButtonToMenu("Thông tin",res.BUTTON.INFO_BUTTON,0,this.onClickInfo.bind(this),this);
+        if(this._state !==0) infoLayer.addButtonToMenu("Hủy",res.BUTTON.CANCEL_BUTTON,0,this.onClickStop.bind(this),this);
     },
 
     onSelected: function(){
@@ -260,12 +266,46 @@ var Building = GameObject.extend({
             }
         }
     },
-
     update: function () {
         if(this._state === 1 || this._state === 2){
             this.updateProgress();
         }
     },
+
+    startProcess: function () {
+        //if state = 1, get price
+        let priceGold = LoadManager.Instance().getConfig(this._type, this._level, "gold") || 0;
+        let priceElixir = LoadManager.Instance().getConfig(this._type, this._level, "elixir") || 0;
+        if(this._state === 2){
+            priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
+            priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
+        }
+
+        PlayerInfoManager.Instance().changeResource("gold", -priceGold);
+        PlayerInfoManager.Instance().changeResource("elixir", -priceElixir);
+        PlayerInfoManager.Instance().changeBuilder("current", -1);
+        //enable progress bar
+        this._progressBar.setVisible(true);
+        // this.update();
+        this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
+    },
+    startBuild: function (startTime,endTime) {
+
+        this._state = 1;
+        this._startTime = startTime;
+        this._endTime = endTime;
+
+        this.startProcess();
+    },
+    startUpgrade: function (startTime,endTime) {
+
+        this._state = 2;
+        this._startTime = startTime;
+        this._endTime = endTime;
+
+        this.startProcess();
+    },
+
     completeProcess: function () {
         this._state = 0;
         this._startTime = null;
@@ -286,41 +326,60 @@ var Building = GameObject.extend({
         this._levelLabel.setString("Cấp " + this._level);
         this.loadSpriteByLevel(this._level)
     },
-    startProcess: function () {
+
+    cancelProcess: function () {
+
+        //return 50% resource
         let priceGold = LoadManager.Instance().getConfig(this._type, this._level, "gold") || 0;
         let priceElixir = LoadManager.Instance().getConfig(this._type, this._level, "elixir") || 0;
-        PlayerInfoManager.Instance().changeResource("gold", -priceGold);
-        PlayerInfoManager.Instance().changeResource("elixir", -priceElixir);
-        PlayerInfoManager.Instance().changeBuilder("current", -1);
-        //enable progress bar
-        this._progressBar.setVisible(true);
-        this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
+        if(this._state === 2){
+            priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
+            priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
+        }
+
+        let returnGold = Math.floor(priceGold/2);
+        let returnElixir = Math.floor(priceElixir/2);
+        PlayerInfoManager.Instance().changeResource("gold", returnGold);
+        PlayerInfoManager.Instance().changeResource("elixir", returnElixir);
+        PlayerInfoManager.Instance().changeBuilder("current", 1);
+        //return state
+        this._state = 0;
+        this._startTime = null;
+        this._endTime = null;
+        this._progressBar.setVisible(false);
+        //reload button
+        this.loadButton();
+        //unschedule update
+        this.unschedule(this.update);
     },
-    build: function (startTime,endTime) {
 
-        this._state = 1;
-        this._startTime = startTime;
-        this._endTime = endTime;
+    cancelBuild: function () {
 
-        this.startProcess();
+        this.cancelProcess();
+
+        //remove from layer
+        this.removeFromParent(true);
+
+        //remove from mapManager
+        MapManager.Instance().removeBuilding(this._id);
+
     },
-    upgrade: function (startTime,endTime) {
 
-        this._state = 2;
-        this._startTime = startTime;
-        this._endTime = endTime;
-
-        this.startProcess();
+    cancelUpgrade: function () {
+        this.cancelProcess();
     },
+
+    onAddIntoMapManager: function () {
+
+    },
+
     onClickInfo: function () {
         cc.log("onClickInfo " + this._id);
     },
-
     //if valid, send to server
     onClickUpgrade: function () {
-        cc.log("onClickUpgrade " + this._id);
-        let priceGold = LoadManager.Instance().getConfig(this._type, this._level + 1, "gold") || 0;
-        let priceElixir = LoadManager.Instance().getConfig(this._type, this._level + 1, "elixir") || 0;
+        let priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
+        let priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
         if(!PlayerInfoManager.Instance().checkEnoughResource(priceGold, priceElixir)){
             cc.log("not enough resource");
             return;
@@ -333,7 +392,35 @@ var Building = GameObject.extend({
         cc.log("send to server");
         testnetwork.connector.sendUpgradeBuilding(this._id);
     },
+
+    //on cancel, request to server
     onClickStop: function () {
-        cc.log("onClickStop undone")
-    }
+
+
+        //if cancel, return 50% resource, if current resource + return resource > max resource, cannot cancel
+        let priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
+        let priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
+        let returnGold = Math.floor(priceGold/2);
+        let returnElixir = Math.floor(priceElixir/2);
+        let maxResource = PlayerInfoManager.Instance().getMaxResource();
+
+        if(PlayerInfoManager.Instance().getResource().gold + returnGold > maxResource.gold){
+            cc.log("kho đã đầy, không thể hủy");
+            return
+        }
+        if(PlayerInfoManager.Instance().getResource().elixir + returnElixir > maxResource.elixir){
+            cc.log("kho đã đầy, không thể hủy");
+            return
+        }
+
+        switch (this._state){
+            case 1:
+                testnetwork.connector.sendCancelBuild(this._id);
+                break;
+            case 2:
+                testnetwork.connector.sendCancelUpgrade(this._id);
+                break;
+        }
+    },
+
 });

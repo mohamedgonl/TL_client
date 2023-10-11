@@ -292,6 +292,32 @@ CmdSendHarvest = fr.OutPacket.extend(
         }
     });
 
+CmdSendCancelBuild = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.CANCEL_BUILD);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.id);
+            this.updateSize();
+        }
+    });
+CmdSendCancelUpgrade = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.CANCEL_UPGRADE);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.id);
+            this.updateSize();
+        }
+    });
 
 
 
@@ -564,9 +590,38 @@ testnetwork.packetMap[gv.CMD.COLLECT_RESOURCE] = fr.InPacket.extend(
             this.error = this.getError();
             if(this.error === 0) {
                 this.id = this.getInt();
+                this.lastCollectTime = this.getInt();
                 this.gold = this.getInt();
                 this.elixir = this.getInt();
-                this.lastCollectTime = this.getInt();
+
+            }
+        }
+    });
+
+testnetwork.packetMap[gv.CMD.CANCEL_BUILD] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        //error, id
+        readData: function () {
+            this.error = this.getError();
+            if(this.error === 0) {
+                this.id = this.getInt();
+            }
+        }
+    });
+
+testnetwork.packetMap[gv.CMD.CANCEL_UPGRADE] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        //error, id
+        readData: function () {
+            this.error = this.getError();
+            if(this.error === 0) {
+                this.id = this.getInt();
             }
         }
     });

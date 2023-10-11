@@ -17,6 +17,14 @@ var GoldStorage = Building.extend({
         this._super();
         let infoLayer = cc.director.getRunningScene().infoLayer;
         infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,0,this.onClickUpgrade.bind(this),this);
+    },
+    onAddIntoMapManager: function () {
+        let mapManager = MapManager.Instance();
+        let playerInfoManager = PlayerInfoManager.Instance();
+
+        mapManager.addToListStorage(this);
+        let capacity = LoadManager.Instance().getConfig(this._type,this._level,"capacity");
+        playerInfoManager.changeMaxResource("gold",capacity);
     }
 
 
