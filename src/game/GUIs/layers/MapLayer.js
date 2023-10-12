@@ -23,6 +23,10 @@ var MapLayer = cc.Layer.extend({
         this.initBackground();
         this.loadBuilding();
     },
+    onEnter: function () {
+        this._super();
+        ArmyManager.Instance().initTroopSprites();
+    },
     //load all building in map manager and add it to MapLayer
     loadBuilding: function () {
         var listBuilding = MapManager.Instance().getAllBuilding();

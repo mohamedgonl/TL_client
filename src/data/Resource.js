@@ -271,6 +271,8 @@ var res_map = {
             4: "res/Map/map_obj_bg/GRASS_4_Shadow.png",
             5: "res/Map/map_obj_bg/GRASS_5_Shadow.png",
             CIRCLE: "res/Map/map_obj_bg/GRASS_5_Shadow.png",
+            TROOP_SMALL: "res/Map/map_obj_bg/1x1_bong.png",
+            TROOP_BIG: "res/Map/map_obj_bg/big_shadow_troop.png"
         },
         GRASS: {
             BUILDING: {

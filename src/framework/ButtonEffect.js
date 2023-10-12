@@ -21,31 +21,47 @@ var ButtonEffect = {
     },
 }
 
-var clickEventListener = (callback) => {
+var clickEventListener = (callback, isSwallow = true, startScale = BUTTON_TOUCH_SCALE_BIG, endScale = 1, targetScale) => {
 
     return cc.EventListener.create({
         event: cc.EventListener.TOUCH_ONE_BY_ONE,
-        swallowTouches: true,
+        swallowTouches: isSwallow,
         onTouchBegan: function (touch, event) {
             let target = event.getCurrentTarget();
             let location = target.convertToNodeSpace(touch.getLocation());
             let spriteSize = target.getContentSize();
-            let rect = cc.rect(0,0,spriteSize.width, spriteSize.height)
+            let rect = cc.rect(0,0,spriteSize.width, spriteSize.height);
+            this.oldPos = touch.getLocation().x;
             if (cc.rectContainsPoint(rect, location)) {
-                target.setScale(BUTTON_TOUCH_SCALE_BIG)
+                if(!targetScale) {
+                    target.setScale(startScale);
+                }
+                else {
+                    targetScale.setScale(startScale);
+                }
                 return true;
             }
             return false;
         },
 
+
+
         onTouchEnded: function (touch,event) {
+            let oldPos = this.oldPos || 0;
+            let newPos = touch.getLocation().x;
+
             let target = event.getCurrentTarget();
             let location = target.convertToNodeSpace(touch.getLocation());
             let spriteSize = target.getContentSize();
-            let rect = cc.rect(0,0,spriteSize.width, spriteSize.height)
+            let rect = cc.rect(0,0,spriteSize.width, spriteSize.height);
+            if(!targetScale) {
+                target.setScale(endScale);
+            }
+            else {
+                targetScale.setScale(endScale);
+            }
             if (cc.rectContainsPoint(rect, location)) {
-                target.setScale(1)
-                callback();
+                if( Math.abs(newPos - oldPos) <= 100) callback();
                 return true;
             }
 

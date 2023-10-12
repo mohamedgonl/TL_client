@@ -1,13 +1,16 @@
 var TrainTroopPage = cc.Node.extend({
-    _curPage: null,
-    _available: true,
-    _curBarrack: null,
-    _trainingItem: null,
-    _timePassed: 0,
-    _isActive: false,
-    _troopListItem: [],
+
     ctor: function (curPage) {
         this._super();
+
+        this._curPage = null;
+        this._available = true;
+        this._curBarrack = null;
+        this._trainingItem = null;
+        this._timePassed = 0;
+        this._isActive = false;
+        this._troopListItem = [];
+
         this._curPage = curPage;
         this._curBarrack = ArmyManager.Instance().getBarrackList()[this._curPage];
 
@@ -59,7 +62,7 @@ var TrainTroopPage = cc.Node.extend({
     },
 
     updateUI: function (time) {
-        if(this.checkAvailable()) {
+        if (this.checkAvailable()) {
             if (time) this._interval = time;
             this._isActive = true;
             this.schedule(this.updateTrainTime, this._interval);
@@ -79,8 +82,7 @@ var TrainTroopPage = cc.Node.extend({
     initListTroops: function () {
         for (let i = 0; i < TROOPS_LIST.length; i++) {
             let troopCfgId = TROOPS_LIST[i].troopCfgId;
-            let available = TROOPS_LIST[i].available && (TROOP_BASE[troopCfgId]["barracksLevelRequired"] <= this._curBarrack._level);
-            let troopItem = new TroopListItem(troopCfgId, available, TROOP_BASE[troopCfgId]["barracksLevelRequired"], this._curPage);
+            let troopItem = new TroopListItem(troopCfgId, TROOP_BASE[troopCfgId]["barracksLevelRequired"], this._curPage, i);
             let indexOfLine = i >= TROOPS_LIST.length / 2 ? i - TROOPS_LIST.length / 2 : i;
             let posX = LIST_TROOP_START_POS.x + indexOfLine * (TROOP_ITEM_SPACING + TROOP_ITEM_SIZE);
             let posY = i >= TROOPS_LIST.length / 2
@@ -170,15 +172,11 @@ var TrainTroopPage = cc.Node.extend({
     },
 
     handleTrainTroop: function (event) {
-        if (!event.data.hold) {
-            testnetwork.connector.sendRequestTrainingCreate({
-                cfgId: event.data.cfgId,
-                count: event.data.count,
-                barrackId: this._curBarrack.getId()
-            });
-        } else {
-
-        }
+        testnetwork.connector.sendRequestTrainingCreate({
+            cfgId: event.data.cfgId,
+            count: event.data.count,
+            barrackId: this._curBarrack.getId()
+        });
     },
 
     handleClickDoneNow: function () {
@@ -222,15 +220,15 @@ var TrainTroopPage = cc.Node.extend({
             this.cleanUI();
         }
 
-       if(!this.checkAvailable()) {
-           this.stopUpdateUI();
-       }
+        if (!this.checkAvailable()) {
+            this.stopUpdateUI();
+        }
 
     },
 
     cleanUI: function () {
         this._trainContainer.setVisible(false);
-        if(this._trainingItem.length > 0) {
+        if (this._trainingItem.length > 0) {
             this._trainingItem[0].removeFromParent();
         }
         this._trainingItem = [];

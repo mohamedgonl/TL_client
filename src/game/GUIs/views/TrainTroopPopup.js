@@ -3,6 +3,7 @@ var TrainTroopPopup = cc.Layer.extend({
     _curPage: 0,
     ctor: function () {
         this._super();
+        this.initPages();
         this.updateBarracks();
         this.setVisible(false);
     },
@@ -34,10 +35,13 @@ var TrainTroopPopup = cc.Layer.extend({
     },
 
     getPage:  function ({page, barackId}){
+        cc.log(JSON.stringify({page, barackId}))
         if(page) {
+            cc.log("GO TO PAGE")
             return this._trainPages[page];
         }
         if(barackId) {
+            cc.log("GO TO BARRACK ID")
             for (let i = 0; i <this._trainPages.length; i++) {
                 cc.log("HERRE:", this._trainPages[i].getBarrackId())
                 if(this._trainPages[i].getBarrackId() === barackId) {
@@ -48,16 +52,18 @@ var TrainTroopPopup = cc.Layer.extend({
     },
 
     open: function (page) {
-        if(this._trainPages.length === 0) {
-            this.initPages();
-        }
+        // if(this._trainPages.length === 0) {
+        //     this.initPages();
+        // }
         if(page >= this._trainPages.length || page < 0 || page === undefined || page === null) return;
 
         this._curPage = page;
         this._trainPages[this._curPage].setVisible(true);
+        cc.log("ĐI QUA DAY =-----------------------------------" + this._curPage);
     },
 
     changePage: function (page) {
+        cc.log("OLD PAGE :::: "+this._curPage)
         this._trainPages[this._curPage].setVisible(false);
         if(page >= this._trainPages.length ) {
             this._curPage = 0;
@@ -69,6 +75,7 @@ var TrainTroopPopup = cc.Layer.extend({
             this._curPage = page;
         }
         this._trainPages[this._curPage].setVisible(true);
+        cc.log("CHANGE PAGE :::: "+this._curPage)
 
     }
 

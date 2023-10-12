@@ -15,6 +15,7 @@ var GameScene = cc.Scene.extend({
         LoadManager.Instance();
         this.armyManager= ArmyManager.Instance();
 
+
         TimeManager.Instance().setDeltaTimeClientServer();
 
         cc.eventManager.addListener({

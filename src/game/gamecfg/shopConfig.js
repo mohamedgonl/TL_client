@@ -289,84 +289,84 @@ const ShopItemsData = {
                 "công trình phòng thủ tiêu diệt kẻ địch."
             }
         },
-        // {
-        //     cfgId:"DEF_2",
-        //     name: "Chòi cung",
-        //     time: 900,
-        //     price_type: RESOURCE_TYPE.GOLD,
-        //     img: res_shop.DEF_2,
-        //     price: 1000,
-        //     TH_require: 2,
-        //     detail: {
-        //         infoList : [
-        //             {
-        //                 title: "Sát thương: 11",
-        //                 icon: res.ICON.DAMAGE,
-        //                 bar_percent: 0.14
-        //             },
-        //             {
-        //                 title: "Máu: 200",
-        //                 icon: res.ICON.HEART
-        //             }
-        //         ],
-        //         description: "Chòi cung là 1 trong những công trình phòng thủ có tầm bắn xa nhất của vương "+
-        //         "quốc. Tấn công được cả các đơn vị bay chính là 1 ưu thế không thể bỏ qua so với "+
-        //         "Pháo."
-        //
-        //     }
-        // },
-        // {
-        //     cfgId:"DEF_3",
-        //     name: "Máy bắn đá",
-        //     time: 28800,
-        //     price_type: RESOURCE_TYPE.GOLD,
-        //     img: res_shop.DEF_3,
-        //     price: 8000,
-        //     TH_require: 3,
-        //     detail: {
-        //         infoList : [
-        //             {
-        //                 title: "Sát thương: 20",
-        //                 icon: res.ICON.DAMAGE,
-        //                 bar_percent: 0.2
-        //             },
-        //             {
-        //                 title: "Máu: 200",
-        //                 icon: res.ICON.HEART
-        //             }
-        //         ],
-        //         description: "Với khả năng bắn lan, sức phá hủy lớn, tầm bắn xa thứ nhì chỉ sau Thần tiễn, "+
-        //         "đây là công trình phòng thủ không thể thiếu nếu bạn muốn có 1 giấc ngủ ngon "+
-        //         "lành."
-        //
-        //     }
-        // },
-        // {
-        //     cfgId:"DEF_5",
-        //     name: "Pháo cao xạ",
-        //     time: 18000,
-        //     price_type: RESOURCE_TYPE.GOLD,
-        //     img: res_shop.DEF_5,
-        //     price: 22500,
-        //     TH_require: 4,
-        //     detail: {
-        //         infoList : [
-        //             {
-        //                 title: "Sát thương: 80",
-        //                 icon: res.ICON.DAMAGE,
-        //                 bar_percent: 0.3
-        //             },
-        //             {
-        //                 title: "Máu: 200",
-        //                 icon: res.ICON.HEART
-        //             }
-        //         ],
-        //         description: "Cái tên nói lên tất cả. Pháo cao xạ là nỗi kinh hoàng của các đơn vị bay dám bén "+
-        //         "mảng lại gần tầm bắn của mình" +
-        //         "Còn bộ binh ư? Hãy để các công trình khác lo."
-        //
-        //     }
-        // },
+        {
+            cfgId:"DEF_2",
+            name: "Chòi cung",
+            time: 900,
+            price_type: RESOURCE_TYPE.GOLD,
+            img: res_shop.DEF_2,
+            price: 1000,
+            TH_require: 2,
+            detail: {
+                infoList : [
+                    {
+                        title: "Sát thương: 11",
+                        icon: res.ICON.DAMAGE,
+                        bar_percent: 0.14
+                    },
+                    {
+                        title: "Máu: 200",
+                        icon: res.ICON.HEART
+                    }
+                ],
+                description: "Chòi cung là 1 trong những công trình phòng thủ có tầm bắn xa nhất của vương "+
+                "quốc. Tấn công được cả các đơn vị bay chính là 1 ưu thế không thể bỏ qua so với "+
+                "Pháo."
+
+            }
+        },
+        {
+            cfgId:"DEF_3",
+            name: "Máy bắn đá",
+            time: 28800,
+            price_type: RESOURCE_TYPE.GOLD,
+            img: res_shop.DEF_3,
+            price: 8000,
+            TH_require: 3,
+            detail: {
+                infoList : [
+                    {
+                        title: "Sát thương: 20",
+                        icon: res.ICON.DAMAGE,
+                        bar_percent: 0.2
+                    },
+                    {
+                        title: "Máu: 200",
+                        icon: res.ICON.HEART
+                    }
+                ],
+                description: "Với khả năng bắn lan, sức phá hủy lớn, tầm bắn xa thứ nhì chỉ sau Thần tiễn, "+
+                "đây là công trình phòng thủ không thể thiếu nếu bạn muốn có 1 giấc ngủ ngon "+
+                "lành."
+
+            }
+        },
+        {
+            cfgId:"DEF_5",
+            name: "Pháo cao xạ",
+            time: 18000,
+            price_type: RESOURCE_TYPE.GOLD,
+            img: res_shop.DEF_5,
+            price: 22500,
+            TH_require: 4,
+            detail: {
+                infoList : [
+                    {
+                        title: "Sát thương: 80",
+                        icon: res.ICON.DAMAGE,
+                        bar_percent: 0.3
+                    },
+                    {
+                        title: "Máu: 200",
+                        icon: res.ICON.HEART
+                    }
+                ],
+                description: "Cái tên nói lên tất cả. Pháo cao xạ là nỗi kinh hoàng của các đơn vị bay dám bén "+
+                "mảng lại gần tầm bắn của mình" +
+                "Còn bộ binh ư? Hãy để các công trình khác lo."
+
+            }
+        },
 
     ],
     'category_baove' : [

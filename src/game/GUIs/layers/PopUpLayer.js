@@ -10,8 +10,8 @@ let PopupLayer = cc.Layer.extend({
     },
 
     init : function () {
-
-
+        this._trainTroopPopup = new TrainTroopPopup();
+        this.addChild(this._trainTroopPopup);
     },
 
 
@@ -28,10 +28,6 @@ let PopupLayer = cc.Layer.extend({
                 break;
             }
             case "train": {
-                if(!this._trainTroopPopup) {
-                    this._trainTroopPopup = new TrainTroopPopup();
-                    this.addChild(this._trainTroopPopup);
-                }
                 popupScreen = this._trainTroopPopup;
                 this._trainTroopPopup.open(data.page);
                 break;

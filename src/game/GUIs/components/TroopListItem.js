@@ -3,42 +3,47 @@ var TroopListItem = cc.Node.extend({
     _level: 1,
     _space: null,
     _count: 0,
-    ctor: function (troopCfgId, available = true, barrackRequired, curPage) {
+    ctor: function (troopCfgId,  barrackRequired, curPage,i) {
+
         this._super();
         this._troopCfgId = troopCfgId;
         this._curPage = curPage;
         let node = CCSUlties.parseUIFile(res_ui.TROOPS_LIST_ITEM);
-        this._node = node.getChildByName("troop_item");
-        this._available = available;
+        this._nodeButton = node.getChildByName("troop_item_button")
+        this._node = this._nodeButton.getChildByName("troop_item");
+        this._cost = TROOP[this._troopCfgId][this._level]["trainingElixir"];
+        this._curBarrack = ArmyManager.Instance().getBarrackList()[curPage];
+        this.checkAvailable(i);
+        this.loadData();
+        this.setCostDisplay(this._available, barrackRequired);
+        this.addChild(node);
+    },
 
-        if(available) {
+    checkAvailable: function (i) {
+        this._available = TROOPS_LIST[i].available && (TROOP_BASE[this._troopCfgId]["barracksLevelRequired"] >= this._curBarrack._level);
+        if(this._available) {
             let item = this;
-            cc.eventManager.addListener(clickEventListener(item.handleTrainTroop.bind(item)).clone(), item._node);
-            cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE+curPage, this.handleCancleTroopTraining.bind(this));
-
-            cc.eventManager.addCustomListener(TRAINING_EVENTS.TRAIN_SUCCESS+curPage, (event)=>{
+            // cc.eventManager.addListener(clickEventListener(item.handleTrainTroop.bind(item)).clone(), item._nodeButton);
+            this._nodeButton.addClickEventListener(this.handleTrainTroop.bind(this))
+            cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE+this._curPage, this.handleCancleTroopTraining.bind(this));
+            cc.eventManager.addCustomListener(TRAINING_EVENTS.TRAIN_SUCCESS+this._curPage, (event)=>{
                 let count = event.data.count;
                 let cfgId = event.data.cfgId;
                 if(cfgId === item._troopCfgId) {
-                   item.setCount(item._count - count);
+                    item.setCount(item._count - count);
                 }
             });
         }
         else {
-            ColorUlties.setGrayObjects([this._node, ]);
-
+            ColorUlties.setGrayObjects([this._node]);
         }
-        this.loadData();
-        this.setCostDisplay(available, barrackRequired);
-        this.addChild(node);
     },
 
     setCostDisplay :function (available, barrackRequired) {
         let costContainer = this._node.getChildByName("cost_container")
         if(available) {
             let costString =costContainer.getChildByName("cost");
-            let cost = TROOP[this._troopCfgId][this._level]["trainingElixir"];
-            costString.setString(cost);
+            costString.setString(this._cost);
         }
         else {
             costContainer.setVisible(false);
@@ -93,6 +98,8 @@ var TroopListItem = cc.Node.extend({
     },
 
     handleTrainTroop: function (isHold = false) {
+        cc.log("**** PAGE NUMBER "+ this._curPage + " receive action")
+
         let price = TROOP[this._troopCfgId][1]["trainingElixir"];
         if(PlayerInfoManager.Instance().getResource().elixir >= price) {
             let barList = ArmyManager.Instance().getBarrackList();

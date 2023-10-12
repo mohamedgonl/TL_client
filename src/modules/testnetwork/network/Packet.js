@@ -8,6 +8,7 @@ gv.CMD.USER_LOGIN = 1;
 
 gv.CMD.USER_INFO = 1001;
 gv.CMD.MAP_INFO = 1002;
+gv.CMD.ARMY_INFO = 1004;
 gv.CMD.CHEAT_RESOURCE = 1900;
 gv.CMD.MOVE = 9999;
 gv.CMD.BUY_RESOURCE = 4001;
@@ -82,6 +83,20 @@ CmdSendMapInfo = fr.OutPacket.extend(
     }
 )
 
+CmdSendArmyInfo = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.ARMY_INFO);
+        },
+        pack: function () {
+            this.packHeader();
+            this.updateSize();
+        }
+    }
+)
+
 CmdSendLogin = fr.OutPacket.extend(
     {
         ctor: function () {
@@ -122,7 +137,7 @@ CmdSendTrainTroopCreate = fr.OutPacket.extend(
             this.packHeader();
             this.putString(data.cfgId);
             this.putInt(data.count);
-            this.putInt(data.barrackId)
+            this.putInt(data.barrackId);
             this.updateSize();
         }
     }
@@ -400,6 +415,23 @@ testnetwork.packetMap[gv.CMD.USER_INFO] = fr.InPacket.extend(
     }
 );
 
+testnetwork.packetMap[gv.CMD.ARMY_INFO] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            const size = this.getInt();
+            this.listTroops = {};
+            for (let i = 0; i < size; i++) {
+                const type = this.getString();
+                const amount = this.getInt();
+                this.listTroops[type] = amount;
+            }
+        }
+    }
+);
+
 testnetwork.packetMap[gv.CMD.CHEAT_RESOURCE] = fr.InPacket.extend(
     {
         ctor: function () {
@@ -439,6 +471,7 @@ testnetwork.packetMap[gv.CMD.TRAIN_TROOP_CREATE] = fr.InPacket.extend(
             this.cfgId = this.getString();
             this.count = this.getInt();
             this.lastTrainingTime = this.getInt();
+            this.newElixir = this.getInt();
         }
     }
 );

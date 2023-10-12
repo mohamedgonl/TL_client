@@ -28,6 +28,9 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.MAP_INFO:
                 fr.getCurrentScreen().onReceiveMapInfo(packet);
                 break;
+            case gv.CMD.ARMY_INFO:
+                fr.getCurrentScreen().onReceiveArmyInfo(packet);
+                break;
             case gv.CMD.CHEAT_RESOURCE:
                 if (packet.error === 0)
                     cc.log("CHEAT RESOURCE SUCCESS",JSON.stringify(packet, null, 2));
@@ -130,7 +133,7 @@ testnetwork.Connector = cc.Class.extend({
             cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
-
+            cc.log(packet.barrackId)
             trainingPopup.getPage({barackId: packet.barrackId}).updateUI(1);
         }
         else {
@@ -144,8 +147,9 @@ testnetwork.Connector = cc.Class.extend({
             }
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
-
             trainingPopup.getPage({barackId: packet.barrackId}).onCanCreateTrain([event]);
+
+            PlayerInfoManager.Instance().setResource({elixir: packet.newElixir})
 
         }
     },
@@ -153,6 +157,7 @@ testnetwork.Connector = cc.Class.extend({
     onReceiveGetTrainingList :function (packet) {
         if(packet.getError() !== ErrorCode.SUCCESS) {
             cc.log("GET TRAINING LIST ERROR :::::::::::", packet.getError());
+            ArmyManager.Instance();
         }
         else {
             cc.log("GET TRAINING LIST SUCCESS :::::::::::");
@@ -163,6 +168,7 @@ testnetwork.Connector = cc.Class.extend({
                     barracks[i].setLastTrainingTime(packet.lastTrainingTime);
                     let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
                     let trainingPopup = popUpLayer.getTrainingPopup();
+                    cc.log("TRAIN : " + trainingPopup._trainPages)
                     trainingPopup.getPage({barackId: packet.barrackId}).initTrainingList();
                     return;
                 }
@@ -332,6 +338,12 @@ testnetwork.Connector = cc.Class.extend({
     sendGetMapInfo: function () {
         cc.log("sendGetMapInfo");
         var pk = this.gameClient.getOutPacket(CmdSendMapInfo);
+        pk.pack();
+        this.gameClient.sendPacket(pk);
+    },
+    sendGetArmyInfo: function () {
+        cc.log("sendGet army Info");
+        var pk = this.gameClient.getOutPacket(CmdSendArmyInfo);
         pk.pack();
         this.gameClient.sendPacket(pk);
     },
