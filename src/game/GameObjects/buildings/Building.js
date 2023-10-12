@@ -396,7 +396,14 @@ var Building = GameObject.extend({
     },
 
     onAddIntoMapManager: function () {
-        cc.log("onAddIntoMapManager",this._type,this._state);
+        let mapManager = MapManager.Instance();
+        cc.log("------",this._type,"-------",JSON.stringify(mapManager.buildingAmount,null,2));
+        if(!mapManager.buildingAmount[this._type]){
+            mapManager.buildingAmount[this._type] = 1;
+        }
+        else {
+            mapManager.buildingAmount[this._type] ++;
+        }
         switch (this._state){
             case 0:
                 this._arrow_move.setVisible(false);

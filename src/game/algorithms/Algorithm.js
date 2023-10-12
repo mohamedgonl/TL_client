@@ -17,7 +17,7 @@ var AlgorithmImplement = cc.Class.extend({
         let armyCamps = ArmyManager.Instance().getArmyCampList();
         let armyCampIds = armyCamps.map(e => e.getId());
         this._results = {};
-        let gridMap = gridMapGame;
+        let gridMap = JSON.parse(JSON.stringify(gridMapGame)) ;
         for (let i = 0; i < gridMap.length; i++) {
             for (let j = 0; j < gridMap[i].length; j++) {
                 if (gridMap[i][j] === 0 || barrackIds.indexOf(gridMap[i][j]) !== -1|| armyCampIds.indexOf(gridMap[i][j]) !== -1) {

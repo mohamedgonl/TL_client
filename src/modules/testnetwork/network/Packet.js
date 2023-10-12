@@ -716,6 +716,7 @@ testnetwork.packetMap[gv.CMD.QUICK_FINISH] = fr.InPacket.extend(
         readData: function () {
             this.error = this.getError();
             if(this.error === 0) {
+                this.id = this.getInt();
                 this.gem = this.getInt();
             }
         }

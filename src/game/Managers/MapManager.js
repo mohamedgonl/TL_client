@@ -62,14 +62,10 @@ var MapManager = cc.Layer.extend({
             {
                 //cc.log("building Add------------------------------------------",type);
                 this.addBuilding(building);
-                if(!this.buildingAmount[type]){
-                    this.buildingAmount[type] = 1;
-                }
-                else {
-                    this.buildingAmount[type] ++;
-                }
+
             }
         }
+        cc.log(JSON.stringify(this.buildingAmount,null,2));
     },
     addToListMine: function (building) {
         this.listMine.push(building);

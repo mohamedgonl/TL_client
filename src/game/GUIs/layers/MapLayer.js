@@ -303,6 +303,7 @@ var MapLayer = cc.Layer.extend({
         }
     },
     onClicked: function (locationInScreen) {
+        this.test()
         if (this.onModeBuyBuilding) return;
         let building = this.getBuildingFromTouch(locationInScreen);
         //click building first time or click another building
@@ -432,6 +433,7 @@ var MapLayer = cc.Layer.extend({
     },
 
     getBuildingFromTouch: function (locationInScreen) {
+        cc.log("+++++++++++++++++++getBuildingFromTouch",JSON.stringify(locationInScreen,null,2));
         let chosenGrid = this.getGridPosFromScreenPos(locationInScreen);
         if (chosenGrid == null) return null;
         if (this.chosenBuilding != null) {
@@ -523,6 +525,8 @@ var MapLayer = cc.Layer.extend({
         }
         let middleScreen = cc.p(cc.winSize.width/2,cc.winSize.height/2);
         return cc.pAdd(mapPos,middleScreen);
+
+        return cc.p(cc.winSize.width/2,cc.winSize.height/2)
     },
     getGridFromLayerPosition: function (posInLayer) {
         let posInMap = cc.pSub(posInLayer,cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
@@ -630,5 +634,20 @@ var MapLayer = cc.Layer.extend({
         this.selectBuilding(this.chosenBuilding);
 
     },
+    test: function () {
+        //print grid map
+        var mapGrid = MapManager.Instance().mapGrid;
+        for(var i = 0; i < GRID_SIZE; i++)
+        {
+            var str = "";
+            for(var j = 0; j < GRID_SIZE; j++)
+            {
+                str += mapGrid[i][j] + " ";
+            }
+            cc.log(str);
+        }
+
+
+    }
 });
 
