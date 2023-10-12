@@ -57,7 +57,7 @@
         "src/game/gamecfg/config.js",
         "src/game/gamecfg/trainningConfig.js",
         "src/game/gamecfg/troopConfig.js",
-
+        "src/game/gamecfg/infoConfig.js",
 
         "src/game/Managers/LoadManager.js",
         "src/game/Managers/TimeManager.js",

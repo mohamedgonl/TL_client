@@ -13,11 +13,6 @@ var ElixirStorage = Building.extend({
     loadSpriteByLevel: function (level) {
         this.loadSprite(res_map.SPRITE.BODY.ELIXIR_STORAGE[level],null,1);
     },
-    loadButton: function () {
-        this._super();
-        let infoLayer = cc.director.getRunningScene().infoLayer;
-        infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,0,this.onClickUpgrade.bind(this),this);
-    },
     onAddIntoMapManager: function () {
         let mapManager = MapManager.Instance();
         let playerInfoManager = PlayerInfoManager.Instance();

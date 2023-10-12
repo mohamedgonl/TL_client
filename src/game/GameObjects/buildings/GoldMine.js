@@ -4,6 +4,7 @@ var GoldMine = Building.extend({
     _type: "RES_1",
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
+        this._canHarvest = true;
     },
     onAddIntoMapManager: function () {
         let mapManager = MapManager.Instance();
@@ -16,14 +17,11 @@ var GoldMine = Building.extend({
     loadButton: function () {
         this._super();
         let infoLayer = cc.director.getRunningScene().infoLayer;
-        if(this._state ===0) infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,0,this.onClickUpgrade.bind(this),this);
         if(this._state ===0) {
-            let timeNow = TimeManager.Instance().getCurrentTime();
-            //delay 5s between 2 harvest
-            if(timeNow - this._lastCollectTime > 5)
-                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_GOLD_BUTTON,0,this.onClickHarvest.bind(this),this);
+            if(this._canHarvest)
+                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_GOLD_BUTTON,0,this.onClickHarvest.bind(this));
             else
-                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_GOLD_BUTTON,1,this.onClickHarvest.bind(this),this);
+                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_GOLD_BUTTON,1,this.onClickHarvest.bind(this));
         }
     },
 
@@ -37,5 +35,13 @@ var GoldMine = Building.extend({
     harvest: function (lastCollectTime,gold,elixir) {
         this._lastCollectTime = lastCollectTime;
         PlayerInfoManager.Instance().setResource({gold:gold});
+
+        //sau 5s moi duoc nhan 1 lan
+        this._canHarvest = false;
+        this.loadButton();
+        this.scheduleOnce(function () {
+            this._canHarvest = true;
+            this.loadButton();
+        }.bind(this),5);
     }
 });

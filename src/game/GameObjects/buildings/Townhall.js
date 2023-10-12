@@ -33,11 +33,6 @@ var Townhall = Building.extend({
     checkCanUpgrade: function () {
         return true;
     },
-    loadButton: function () {
-        this._super();
-        let infoLayer = cc.director.getRunningScene().infoLayer;
-        infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,0,this.onClickUpgrade.bind(this),this);
-    }
 
 });
 

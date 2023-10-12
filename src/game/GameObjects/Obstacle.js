@@ -106,10 +106,22 @@ var Obstacle = GameObject.extend({
 
     loadButton: function(){
         let infoLayer = cc.director.getRunningScene().infoLayer;
+        infoLayer.removeAllButtonInMenu();
         if(this._state ===0)
-            infoLayer.addButtonToMenu("Dọn dẹp",res.BUTTON.REMOVE_BUTTON,0,this.onClickRemove.bind(this),this);
+        {
+            let priceGold = LoadManager.Instance().getConfig(this._type,this._level,"gold");
+            let priceElixir = LoadManager.Instance().getConfig(this._type,this._level,"elixir");
+            if(priceGold > 0)
+            {
+                infoLayer.addButtonToMenu("Dọn dẹp",res.BUTTON.REMOVE_BUTTON,0,this.onClickRemove.bind(this),priceGold,"gold");
+            }
+            else
+            {
+                infoLayer.addButtonToMenu("Dọn dẹp",res.BUTTON.REMOVE_BUTTON,0,this.onClickRemove.bind(this),priceElixir, "elixir");
+            }
+        }
         else
-            infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this),this);
+            infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this));
     },
     onSelected: function(){
         this.loadButton();

@@ -13,10 +13,6 @@ var Cannon = Building.extend({
         var upper_sprite =  res_map.SPRITE.BODY.CANNON.UPPER[level];
         this.loadSprite(res_map.SPRITE.BODY.CANNON.BOTTOM[level],upper_sprite,2);
     },
-    loadButton: function () {
-        this._super();
-        let infoLayer = cc.director.getRunningScene().infoLayer;
-        infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,0,this.onClickUpgrade.bind(this),this);
-    },
+
 
 });

@@ -197,10 +197,29 @@ var Building = GameObject.extend({
         let infoLayer = cc.director.getRunningScene().infoLayer;
         //xoa het button cu
         infoLayer.removeAllButtonInMenu();
-        infoLayer.addButtonToMenu("Thông tin",res.BUTTON.INFO_BUTTON,0,this.onClickInfo.bind(this),this);
+        infoLayer.addButtonToMenu("Thông tin",res.BUTTON.INFO_BUTTON,0,this.onClickInfo.bind(this));
+        if(this._state === 0){
+            //upgrade button
+            let status = this.getStateUpgradeButton();
+            //2 is state max level, not show upgrade button  ; 1 is not enough resource, show upgrade button but red text, 0 is normal
+            if(status !== 2 )
+            {
+                let priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
+                let priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
+                if(priceGold)
+                {
+                    infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,status,this.onClickUpgrade.bind(this),priceGold,"gold");
+                }
+                else{
+                    infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,status,this.onClickUpgrade.bind(this),priceElixir,"elixir");
+                }
+            }
+
+
+        }
         if(this._state !==0) {
-            infoLayer.addButtonToMenu("Hủy",res.BUTTON.CANCEL_BUTTON,0,this.onClickStop.bind(this),this);
-            infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this),this);
+            infoLayer.addButtonToMenu("Hủy",res.BUTTON.CANCEL_BUTTON,0,this.onClickStop.bind(this));
+            infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this));
         }
     },
 
@@ -303,6 +322,7 @@ var Building = GameObject.extend({
         //enable progress bar
         this._progressBar.setVisible(true);
 
+        this.loadButton();
         this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
     },
     startBuild: function (startTime,endTime) {
@@ -329,6 +349,7 @@ var Building = GameObject.extend({
         this._progressBar.setVisible(false);
         PlayerInfoManager.Instance().changeBuilder("current", 1);
         //unschedule update
+        this.loadButton();
         this.unschedule(this.update);
     },
     completeBuild: function () {
@@ -452,5 +473,25 @@ var Building = GameObject.extend({
                 this.completeUpgrade();
                 break;
         }
+    },
+
+    //return 0 if can show upgrade button, 1 if not enough resource, 2 if max level
+    getStateUpgradeButton:function(){
+        let max_level = BuildingInfo[this._type].max_level;
+        let townHall = MapManager.Instance().getTownHall();
+
+        if(this._level === max_level || this._type == "BDH_1"){
+            return 2;
+        }
+        let priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
+        let priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
+        if(!PlayerInfoManager.Instance().checkEnoughResource(priceGold, priceElixir)){
+            return 1;
+        }
+        return 0;
+    },
+
+    getLevel: function () {
+        return this._level;
     }
 });
