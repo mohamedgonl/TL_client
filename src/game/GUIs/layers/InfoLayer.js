@@ -7,6 +7,7 @@ var InfoLayer = cc.Layer.extend({
         this.init();
 
 
+
     },
 
     //init UI, add to layer, init attributes, load resources
@@ -40,12 +41,7 @@ var InfoLayer = cc.Layer.extend({
         this.addChild(this.menu, 9999999999);
         this.menu.alignItemsHorizontallyWithPadding(10);
 
-        // this._menu = new cc.Menu();
-        // this.addChild(this._menu);
-        // this._menu.setPosition(cc.winSize.width/2,60);
-        // this._menu.alignItemsHorizontallyWithPadding(10);
-
-        //
+        //cheat btn
         const btnCheat = new ccui.Button();
         btnCheat.setTitleText("CHEAT");
         btnCheat.setTitleFontSize(24);
@@ -104,6 +100,9 @@ var InfoLayer = cc.Layer.extend({
         this.menu.addChild(button);
         this.menu.alignItemsHorizontallyWithPadding(10);
     },
+    removeAllButtonInMenu: function () {
+        this.menu.removeAllChildren();
+    },
 
 
     //after init UI, get all resources to display
@@ -112,9 +111,11 @@ var InfoLayer = cc.Layer.extend({
         var maxResource = PlayerInfoManager.Instance().maxResource;
         var builder = PlayerInfoManager.Instance().builder;
         var info = PlayerInfoManager.Instance().info;
+            let armyCurrent = ArmyManager.Instance().getCurrentSpace();
+            let armyMax = ArmyManager.Instance().getMaxSpace();
         // var army = PlayerInfoManager.Instance().army;
         //update UI
-        this.updateUI({resource: resource, maxResource: maxResource, builder: builder, info: info});
+            this.updateUI({resource: resource, maxResource: maxResource, builder: builder, info: info,army:{current:armyCurrent,max:armyMax}});
     },
 
 //add event listener to button
@@ -164,41 +165,44 @@ var InfoLayer = cc.Layer.extend({
         if (data == null) return;
 
         //resource
-        if (data.resource) {
-            cc.log("data.resource: " + JSON.stringify(data.resource, null, 2));
+            if (data.resource != null) {
             let res = data.resource;
-            if (res.gold >= 0) {
+                if (res.gold != null) {
                 this.gold_container.getChildByName("text").setString(res.gold);
             }
-            if (res.elixir >= 0) {
+                if (res.elixir != null) {
                 this.elixir_container.text.setString(res.elixir);
             }
-            if (res.gem >= 0) {
+                if (res.gem != null ) {
                 this.g_container.text.setString(res.gem);
             }
         }
 
         //info
-        if (data.info) {
-            if (data.info.name) {
+            if (data.info!= null) {
+                if (data.info.name!= null) {
                 this.username_container.username.setString(data.info.name);
             }
         }
 
         //max resource
-        if (data.maxResource) {
-            if (data.maxResource.gold) {
+            if (data.maxResource!= null) {
+                if(data.maxResource.gold!= null){
                 this.gold_container.text_max.setString("Tối đa:" + data.maxResource.gold);
             }
-            if (data.maxResource.elixir) {
+                if(data.maxResource.elixir!= null){
                 this.elixir_container.text_max.setString("Tối đa:" + data.maxResource.elixir);
             }
         }
-        if (data.builder) {
+            if(data.builder!= null){
             //set text builder = available/total
             this.builder_container.text.setString(data.builder.current + "/" + data.builder.max);
         }
-        //army ------------------------------------------------------------
+            //army
+            if(data.army != null){
+                //set text army = available/total
+                this.army_container.text.setString(data.army.current + "/" + data.army.max);
+            }
     },
 
     onSelectBuilding: function (event) {
@@ -214,13 +218,9 @@ var InfoLayer = cc.Layer.extend({
     },
     onUnselectBuilding: function (event) {
         this.button_container.setVisible(false);
-        //delete building_buttons in menu
-        this.menu.removeAllChildren();
-        // if (this.building_button) {
-        //     this.building_button.removeFromParent(true);
-        //     this.building_button = null;
-        // }
+            this.removeAllButtonInMenu();
     },
+
 });
 
 InfoLayer.Instance = function () {

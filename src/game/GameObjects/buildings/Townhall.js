@@ -3,13 +3,11 @@ var Townhall = Building.extend({
     elixir: null,
     capacityGold: null,
     capacityElixir: null,
-    ctor: function (type,level,id,posX,posY,status,startTime,endTime) {
-        this._super(type,level,id,posX,posY,status,startTime,endTime);
+    _type: "TOW_1",
+    ctor: function (level,id,posX,posY,status,startTime,endTime) {
+        this._super(level,id,posX,posY,status,startTime,endTime);
         this.init();
-        // this.loadSpriteByLevel(level);
-        // this.loadSubSprite();
-        // this.update();
-        // this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
+
     },
     loadSpriteByLevel: function (level) {
         this.loadSprite(res_map.SPRITE.BODY.TOWNHALL[level],null,1);
@@ -22,6 +20,15 @@ var Townhall = Building.extend({
         this.elixir = 0;
         this.capacityGold = config.capacityGold;
         this.capacityElixir = config.capacityElixir;
+    },
+    onAddIntoMapManager: function () {
+        let mapManager = MapManager.Instance();
+        let playerInfoManager = PlayerInfoManager.Instance();
+        mapManager.townHall = this;
+        let capacityGold = LoadManager.Instance().getConfig(this._type,this._level,"capacityGold");
+        let capacityElixir = LoadManager.Instance().getConfig(this._type,this._level,"capacityElixir");
+        playerInfoManager.changeMaxResource("gold",capacityGold);
+        playerInfoManager.changeMaxResource("elixir",capacityElixir);
     },
     checkCanUpgrade: function () {
         return true;

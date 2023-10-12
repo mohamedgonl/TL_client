@@ -13,10 +13,21 @@ gv.CMD.MOVE = 9999;
 gv.CMD.BUY_RESOURCE = 4001;
 gv.CMD.TRAIN_TROOP_CREATE = 5001;
 gv.CMD.TRAIN_TROOP_SUCCESS = 5002;
-gv.CMD.MOVE_BUILDING = 2008;
-gv.CMD.BUY_BUILDING = 2001;
 gv.CMD.GET_TRAINING_LIST = 5003;
 gv.CMD.CANCLE_TRAINING = 5004;
+
+//quyet----------------------
+gv.CMD.REMOVE_OBSTACLE = 2009;
+gv.CMD.CANCEL_BUILD = 2002;
+gv.CMD.BUILD_SUCCESS = 2003;
+gv.CMD.UPGRADE_BUILDING = 2004;
+gv.CMD.CANCEL_UPGRADE = 2005;
+gv.CMD.UPGRADE_SUCCESS = 2006;
+gv.CMD.COLLECT_RESOURCE = 2007;
+gv.CMD.MOVE_BUILDING = 2008;
+gv.CMD.BUY_BUILDING = 2001;
+gv.CMD.REMOVE_OBSTACLE_SUCCESS = 2010;
+//quyet----------------------
 
 
 testnetwork = testnetwork || {};
@@ -165,6 +176,35 @@ CmdSendBuyBuilding = fr.OutPacket.extend(
     }
 )
 
+CmdSendRemoveObstacle = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.REMOVE_OBSTACLE);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.id);
+            this.updateSize();
+        }
+    }
+)
+CmdSendRemoveObstacleSuccess = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.REMOVE_OBSTACLE_SUCCESS);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.id);
+            this.updateSize();
+        }
+    }
+)
+
 CmdSendGetTrainingList = fr.OutPacket.extend(
     {
         ctor: function () {
@@ -196,21 +236,62 @@ CmdSendCancleTrain = fr.OutPacket.extend(
     }
 )
 
-
-CmdSendMove = fr.OutPacket.extend(
+CmdSendUpgradeBuilding = fr.OutPacket.extend(
     {
         ctor: function () {
             this._super();
             this.initData(100);
-            this.setCmdId(gv.CMD.MOVE);
+            this.setCmdId(gv.CMD.UPGRADE_BUILDING);
         },
-        pack: function (direction) {
+        pack: function (data) {
             this.packHeader();
-            this.putShort(direction);
+            this.putInt(data.id);
             this.updateSize();
         }
-    }
-)
+    })
+
+CmdSendBuildBuildingSuccess = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.BUILD_SUCCESS);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.id);
+            this.updateSize();
+        }
+    })
+
+CmdSendUpgradeBuildingSuccess = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.UPGRADE_SUCCESS);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.id);
+            this.updateSize();
+        }
+    });
+
+CmdSendHarvest = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.COLLECT_RESOURCE);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.id);
+            this.updateSize();
+        }
+    });
+
 
 CmdSendCheatResource = fr.OutPacket.extend(
     {
@@ -228,6 +309,36 @@ CmdSendCheatResource = fr.OutPacket.extend(
         }
     }
 )
+
+
+CmdSendCancelBuild = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.CANCEL_BUILD);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.id);
+            this.updateSize();
+        }
+    });
+CmdSendCancelUpgrade = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.CANCEL_UPGRADE);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.id);
+            this.updateSize();
+        }
+    });
+
+
 
 /**
  * InPacket
@@ -410,18 +521,6 @@ testnetwork.packetMap[gv.CMD.MOVE_BUILDING] = fr.InPacket.extend(
     }
 );
 
-testnetwork.packetMap[gv.CMD.MOVE] = fr.InPacket.extend(
-    {
-        ctor: function () {
-            this._super();
-        },
-        readData: function () {
-            this.x = this.getInt();
-            this.y = this.getInt();
-        }
-    }
-);
-
 testnetwork.packetMap[gv.CMD.BUY_BUILDING] = fr.InPacket.extend(
     {
         ctor: function () {
@@ -443,6 +542,123 @@ testnetwork.packetMap[gv.CMD.BUY_BUILDING] = fr.InPacket.extend(
     }
 );
 
+testnetwork.packetMap[gv.CMD.REMOVE_OBSTACLE] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
 
+        },
+        readData: function () {
+            this.error = this.getError();
+            if(this.error === 0) {
+                this.id = this.getInt();
+                this.status = this.getShort();
+                this.startTime = this.getInt();
+                this.endTime = this.getInt();
+            }
+        }
+    })
 
+testnetwork.packetMap[gv.CMD.REMOVE_OBSTACLE_SUCCESS] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+
+        },
+        readData: function () {
+            this.error = this.getError();
+            if(this.error === 0) {
+                this.id = this.getInt();
+            }
+        }
+    }
+)
+testnetwork.packetMap[gv.CMD.UPGRADE_BUILDING] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+
+        },
+        // output: error, id, status(short), startTime, endTime
+        readData: function () {
+            this.error = this.getError();
+            if(this.error === 0) {
+                this.id = this.getInt();
+                this.status = this.getShort();
+                this.startTime = this.getInt();
+                this.endTime = this.getInt();
+            }
+        }
+    });
+
+testnetwork.packetMap[gv.CMD.BUILD_SUCCESS] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+
+        },
+        readData: function () {
+            this.error = this.getError();
+            if(this.error === 0) {
+                this.id = this.getInt();
+            }
+        }
+    })
+
+testnetwork.packetMap[gv.CMD.UPGRADE_SUCCESS] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.error = this.getError();
+            if(this.error === 0) {
+                this.id = this.getInt();
+            }
+        }
+    })
+testnetwork.packetMap[gv.CMD.COLLECT_RESOURCE] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.error = this.getError();
+            if(this.error === 0) {
+                this.id = this.getInt();
+                this.lastCollectTime = this.getInt();
+                this.gold = this.getInt();
+                this.elixir = this.getInt();
+
+            }
+        }
+    });
+
+testnetwork.packetMap[gv.CMD.CANCEL_BUILD] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        //error, id
+        readData: function () {
+            this.error = this.getError();
+            if(this.error === 0) {
+                this.id = this.getInt();
+            }
+        }
+    });
+
+testnetwork.packetMap[gv.CMD.CANCEL_UPGRADE] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        //error, id
+        readData: function () {
+            this.error = this.getError();
+            if(this.error === 0) {
+                this.id = this.getInt();
+            }
+        }
+    });
 

@@ -79,7 +79,7 @@ var ItemInfoPopup = cc.Layer.extend({
 
         // adding item image
         let itemIcon = this._node.getChildByName("item_image");
-        let itemIconObj = BuildingUltis.getBuildingByConfigId(this._data.cfgId);
+        let itemIconObj = getBuildingFromType(this._data.cfgId,1)
         if(this._data.cfgId !== "AMC_1") {
             itemIconObj.setScale(SHOP_ITEM_SCALE);
         }
@@ -90,6 +90,5 @@ var ItemInfoPopup = cc.Layer.extend({
         let label = new cc.LabelBMFont(this._data.detail.description, res.FONT.FISTA["16"], 600, cc.TEXT_ALIGNMENT_CENTER);
         label.setColor(cc.color(155, 75, 10))
         content.addChild(label)
-
     }
 })

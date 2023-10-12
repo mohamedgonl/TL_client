@@ -30,7 +30,17 @@ var PlayerInfoManager = cc.Layer.extend({
         return this.maxResource;
     },
 
-    getResource: function () {
+    getResource: function (type) {
+        if(type)
+        {
+            if(type === "gold")
+                return this.resource.gold;
+            else if(type === "elixir")
+                return this.resource.elixir;
+            else if(type === "gem")
+                return this.resource.gem;
+            else return 0;
+        }
         return this.resource;
     },
     getInfo: function () {

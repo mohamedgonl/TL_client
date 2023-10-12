@@ -19,14 +19,15 @@ var Troop = cc.Node.extend({
         this.armyCamp = ArmyManager.Instance().getArmyCampList()[armyCampIndex];
         let mapLayer = cc.director.getRunningScene().getMapLayer();
 
-        let start = mapLayer.getPositionInMapLayer(barrack._posX, barrack._posY, true);
-        let end = mapLayer.getPositionInMapLayer(this.armyCamp._posX, this.armyCamp._posY, true);
+        let start = mapLayer.getLayerPositionFromGrid(barrack._posX, barrack._posY, true);
+        let end = mapLayer.getLayerPositionFromGrid(this.armyCamp._posX, this.armyCamp._posY, true);
 
         this.troop.setPosition(barrack.getPosition().x, barrack.getPosition().y);
         this.initShadow();
 
         this.initAnimation()
         this.runTo(start, end);
+        // this.test()
 
         cc.eventManager.addCustomListener(EVENT_TROOP_NAME.MOVE_BUILDING, this.handleMapChange.bind(this))
 
@@ -171,10 +172,9 @@ var Troop = cc.Node.extend({
 
     runTo: function (origin, target) {
         let mapLayer = cc.director.getRunningScene().getMapLayer();
-        let start = mapLayer.getGridPosFromMapPos(origin);
-        let end = mapLayer.getGridPosFromMapPos(target);
-        cc.log(JSON.stringify(end))
 
+        let start = mapLayer.getGridFromLayerPosition(origin);
+        let end = mapLayer.getGridFromLayerPosition(target);
         const Algorithm = AlgorithmImplement.Instance();
 
         if (!Algorithm._gridMapAStar) {
@@ -188,7 +188,7 @@ var Troop = cc.Node.extend({
         wayGrid.map((path, index) => {
             res.push(path);
             // run action
-            let targetPos = mapLayer.getPositionInMapLayer(path.x, path.y, true);
+            let targetPos = mapLayer.getLayerPositionFromGrid(path.x, path.y, true);
             let distance = cc.pDistance(this.troop.getPosition(), target);
             let duration = distance / this._moveSpeed;
             if (index === wayActions.length - 1) {
