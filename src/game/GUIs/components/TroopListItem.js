@@ -4,11 +4,13 @@ var TroopListItem = cc.Node.extend({
     _space: null,
     _count: 0,
     ctor: function (troopCfgId,  barrackRequired, curPage,i) {
+
         this._super();
         this._troopCfgId = troopCfgId;
         this._curPage = curPage;
         let node = CCSUlties.parseUIFile(res_ui.TROOPS_LIST_ITEM);
-        this._node = node.getChildByName("troop_item");
+        this._nodeButton = node.getChildByName("troop_item_button")
+        this._node = this._nodeButton.getChildByName("troop_item");
         this._cost = TROOP[this._troopCfgId][this._level]["trainingElixir"];
         this._curBarrack = ArmyManager.Instance().getBarrackList()[curPage];
         this.checkAvailable(i);
@@ -18,10 +20,11 @@ var TroopListItem = cc.Node.extend({
     },
 
     checkAvailable: function (i) {
-        this._available = TROOPS_LIST[i].available && (TROOP_BASE[this._troopCfgId]["barracksLevelRequired"] <= this._curBarrack._level);
+        // this._available = TROOPS_LIST[i].available && (TROOP_BASE[this._troopCfgId]["barracksLevelRequired"] <= this._curBarrack._level);
         if(this._available) {
             let item = this;
-            cc.eventManager.addListener(clickEventListener(item.handleTrainTroop.bind(item)).clone(), item._node);
+            // cc.eventManager.addListener(clickEventListener(item.handleTrainTroop.bind(item)).clone(), item._nodeButton);
+            this._nodeButton.addClickEventListener(this.handleTrainTroop.bind(this))
             cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE+this._curPage, this.handleCancleTroopTraining.bind(this));
             cc.eventManager.addCustomListener(TRAINING_EVENTS.TRAIN_SUCCESS+this._curPage, (event)=>{
                 let count = event.data.count;
@@ -95,6 +98,8 @@ var TroopListItem = cc.Node.extend({
     },
 
     handleTrainTroop: function (isHold = false) {
+        cc.log("**** PAGE NUMBER "+ this._curPage + " receive action")
+
         let price = TROOP[this._troopCfgId][1]["trainingElixir"];
         if(PlayerInfoManager.Instance().getResource().elixir >= price) {
             let barList = ArmyManager.Instance().getBarrackList();

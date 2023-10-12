@@ -453,7 +453,7 @@ var MapLayer = cc.Layer.extend({
         var posInMap =  cc.pSub(cc.pSub(posInScreen, this.getPosition()), cc.p(cc.winSize.width / 2, cc.winSize.height / 2)) ;
         let x = posInMap.x / this.getScale();
         let y = posInMap.y / this.getScale();
-        cc.log("map pos from screen pos----------------- : " + x + " " + y);
+        // cc.log("map pos from screen pos----------------- : " + x + " " + y);
         return cc.p(x, y);
 
     },

@@ -4,6 +4,7 @@ var Troop = cc.Node.extend({
     _level: null,
     _animations: null,
     ctor: function (cfgId, level, barrackIndex, armyCampIndex) {
+        cc.log({barrackIndex, armyCampIndex})
 
         this._super();
         this._cfgId = cfgId;

@@ -1710,6 +1710,7 @@
         </Folder>
         <Folder Name="ui-json" />
         <TmxFile Name="42x42map.tmx" />
+        <Project Name="CheatPopup.csd" Type="Node" />
         <Project Name="ItemInfoPopup.csd" Type="Node" />
         <Project Name="Layer1.csd" Type="Layer" />
         <Project Name="LoginScene.csd" Type="Scene" />
@@ -1722,7 +1723,6 @@
         <Project Name="TroopListItem.csd" Type="Node" />
         <Project Name="TroopTrainingItem.csd" Type="Node" />
         <Project Name="TroopTrainPopup.csd" Type="Node" />
-        <Project Name="CheatPopup.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

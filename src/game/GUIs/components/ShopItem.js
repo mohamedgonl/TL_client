@@ -7,8 +7,8 @@ var ShopItem = cc.Node.extend({
         let item = node.getChildByName("shop_item_node");
         this._itemNode = item;
 
-        let buttonBuy = item.getChildByName("button_buy");
-        cc.eventManager.addListener(clickEventListener(this.handleTouchBuyButton.bind(this)), item);
+        let buttonBuy = item.getChildByName("item_image");
+        cc.eventManager.addListener(clickEventListener(this.handleTouchBuyButton.bind(this), false, 0.9, 1, item), buttonBuy);
 
         this._data = data;
         this._category = category;

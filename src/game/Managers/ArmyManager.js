@@ -75,7 +75,8 @@ var ArmyManager = cc.Class.extend({
                 armyCampIndex = 0;
             }
             else {
-                armyCampIndex = this._armyAmount[e.cfgId] % (this._armyCampList.length) - 1;
+                // armyCampIndex = this._armyAmount[e.cfgId] % (this._armyCampList.length) - 1;
+                armyCampIndex = 0;
             }
             let data = {barrackIndex: curPage, cfgId: e.cfgId, count: e.count, armyCampIndex: armyCampIndex};
             this.createTroopOnMap(data);
