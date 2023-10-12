@@ -97,7 +97,7 @@ testnetwork.Connector = cc.Class.extend({
             cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
-
+            cc.log(packet.barrackId)
             trainingPopup.getPage({barackId: packet.barrackId}).updateUI(1);
         }
         else {
@@ -111,8 +111,9 @@ testnetwork.Connector = cc.Class.extend({
             }
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
-
             trainingPopup.getPage({barackId: packet.barrackId}).onCanCreateTrain([event]);
+
+            PlayerInfoManager.Instance().setResource({elixir: packet.newElixir})
 
         }
     },
@@ -120,6 +121,7 @@ testnetwork.Connector = cc.Class.extend({
     onReceiveGetTrainingList :function (packet) {
         if(packet.getError() !== ErrorCode.SUCCESS) {
             cc.log("GET TRAINING LIST ERROR :::::::::::", packet.getError());
+            ArmyManager.Instance();
         }
         else {
             cc.log("GET TRAINING LIST SUCCESS :::::::::::");
@@ -130,6 +132,7 @@ testnetwork.Connector = cc.Class.extend({
                     barracks[i].setLastTrainingTime(packet.lastTrainingTime);
                     let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
                     let trainingPopup = popUpLayer.getTrainingPopup();
+                    cc.log("TRAIN : " + trainingPopup._trainPages)
                     trainingPopup.getPage({barackId: packet.barrackId}).initTrainingList();
                     return;
                 }

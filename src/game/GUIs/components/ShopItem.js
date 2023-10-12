@@ -116,7 +116,7 @@ var ShopItem = cc.Node.extend({
             case "category_phongthu":
             case "category_quandoi": {
                 let maxBuilt = this.getBuildMaxCount();
-                if (this.getBuiltCount >= maxBuilt) {
+                if (this.getBuiltCount(this._data.cfgId) >= maxBuilt) {
                     this._available = false;
                 }
                 this.setVisibleFields(["button_info"])
@@ -126,11 +126,11 @@ var ShopItem = cc.Node.extend({
                     thRequireString.setVisible(true);
                 } else {
                     let space = this._itemNode.getChildByName("space_string");
-                    if (this.getBuiltCount() >= maxBuilt) {
+                    if (this.getBuiltCount(this._data.cfgId) >= maxBuilt) {
                         space.setColor(COLOR_SHOP_RED);
                         this._available = false;
                     }
-                    space.setString(this.getBuiltCount() + "/" + maxBuilt);
+                    space.setString(this.getBuiltCount(this._data.cfgId) + "/" + maxBuilt);
                     let timeDone = this._itemNode.getChildByName("time_string");
                     timeDone.setString(fr.toGameTimeString(data.time));
                     this.setVisibleFields(["time_icon", "time_string", "space_string"]);
@@ -172,8 +172,8 @@ var ShopItem = cc.Node.extend({
         }
     },
 
-    getBuiltCount: function () {
-        return 0;
+    getBuiltCount: function (type) {
+        return MapManager.Instance().getBuildingCountByType(type)
     },
 
     handleTouchInfoButton: function () {

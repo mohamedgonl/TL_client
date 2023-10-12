@@ -79,8 +79,7 @@ var TrainTroopPage = cc.Node.extend({
     initListTroops: function () {
         for (let i = 0; i < TROOPS_LIST.length; i++) {
             let troopCfgId = TROOPS_LIST[i].troopCfgId;
-            let available = TROOPS_LIST[i].available && (TROOP_BASE[troopCfgId]["barracksLevelRequired"] <= this._curBarrack._level);
-            let troopItem = new TroopListItem(troopCfgId, available, TROOP_BASE[troopCfgId]["barracksLevelRequired"], this._curPage);
+            let troopItem = new TroopListItem(troopCfgId, TROOP_BASE[troopCfgId]["barracksLevelRequired"], this._curPage,i);
             let indexOfLine = i >= TROOPS_LIST.length / 2 ? i - TROOPS_LIST.length / 2 : i;
             let posX = LIST_TROOP_START_POS.x + indexOfLine * (TROOP_ITEM_SPACING + TROOP_ITEM_SIZE);
             let posY = i >= TROOPS_LIST.length / 2

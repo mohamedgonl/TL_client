@@ -23,6 +23,75 @@ const TroopConfig = {
             up: [24, 29]
         }
     },
+    ARM_2: {
+        size: {
+            width: 192,
+            height: 192,
+        },
+        scale: 0.5,
+        run: {
+            frame_time: 0.07,
+            down: [0, 15],
+            down_left: [16, 31],
+            left: [32, 47],
+            up_left: [48, 63],
+            up: [64, 79]
+        },
+        idle: {
+            frame_time: 0.2,
+            down:[0,5],
+            down_left:  [6,11],
+            left: [12,17],
+            up_left: [18,23],
+            up: [24,29]
+        }
+    },
+    ARM_3: {
+        size: {
+            width: 192,
+            height: 192,
+        },
+        scale: 0.5,
+        run: {
+            frame_time: 0.07,
+            down: [0, 11],
+            down_left: [12, 23],
+            left: [24, 35],
+            up_left: [36, 47],
+            up: [48, 59]
+        },
+        idle: {
+            frame_time: 0.2,
+            down:[0,5],
+            down_left:  [6,11],
+            left: [12,17],
+            up_left: [18,23],
+            up: [24,29]
+        }
+    },
+    ARM_4: {
+        size: {
+            width: 192,
+            height: 192,
+        },
+        scale: 0.5,
+        run: {
+            frame_time: 0.07,
+            down: [0, 15],
+            down_left: [16, 31],
+            left: [32, 47],
+            up_left: [48, 63],
+            up: [64, 79]
+        },
+        idle: {
+            frame_time: 0.2,
+            down:[0,5],
+            down_left:  [6,11],
+            left: [12,17],
+            up_left: [18,23],
+            up: [24,29]
+        }
+    },
 
 
 }

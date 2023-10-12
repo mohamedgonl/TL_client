@@ -2,16 +2,19 @@ var AlgorithmImplement = cc.Class.extend({
     instance: null,
     _gridMapAStar: null,
     _results: {},
+    _amcSize: 5,
     ctor: function () {
 
     },
 
-    setGridMapStar : function (gridMapGame) {
+    setGridMapStar: function (gridMapGame) {
+        let barracks = ArmyManager.Instance().getBarrackList();
+        let barrackIds = barracks.map(e => e.getId());
         this._results = {};
         let gridMap = gridMapGame;
         for (let i = 0; i < gridMap.length; i++) {
             for (let j = 0; j < gridMap[i].length; j++) {
-                if (gridMap[i][j] === 0) {
+                if (gridMap[i][j] === 0 || barrackIds.indexOf(gridMap[i][j]) !== -1) {
                     gridMap[i][j] = 1;
                 } else {
                     gridMap[i][j] = 0;
@@ -23,15 +26,23 @@ var AlgorithmImplement = cc.Class.extend({
 
     searchPathByAStar: function (start, end) {
         let key = start.toString() + end.toString();
-        if(this._results[key]) {
+        if (this._results[key]) {
             return this._results[key];
-        }
-        else {
+        } else {
             let _start = this._gridMapAStar.grid[start[0]][start[1]];
             let _end = this._gridMapAStar.grid[end[0]][end[1]];
-            let result = a_star.search(this._gridMapAStar,_start, _end, {closest: true});
+            let result = a_star.search(this._gridMapAStar, _start, _end, {closest: true});
             this._results[key] = result;
             return result;
+        }
+    },
+
+    printGridMap: function (grid) {
+        for (let i = 0; i < grid.length; i++) {
+            for (let j = 0; j < grid[i].length; j++) {
+                cc.log(grid[i][j] + "|");
+            }
+            cc.log("\n");
         }
     }
 

@@ -7,6 +7,7 @@ var MapManager = cc.Layer.extend({
     listStorage: [],
     listMine:[],
     listBuilderHut: [],
+    buildingAmount : {},
     //mapGrid is [][]
     mapGrid: [],
     gameScene : null,
@@ -55,6 +56,12 @@ var MapManager = cc.Layer.extend({
             {
                 //cc.log("building Add------------------------------------------",type);
                 this.addBuilding(building);
+                if(!this.buildingAmount[type]){
+                    this.buildingAmount[type] = 1;
+                }
+                else {
+                    this.buildingAmount[type] ++;
+                }
             }
 
         }
@@ -181,6 +188,13 @@ var MapManager = cc.Layer.extend({
         for(var column = obstacle._posX; column < obstacle._posX + obstacle._width; column++)
             for(var row = obstacle._posY; row < obstacle._posY + obstacle._height; row++)
                 this.mapGrid[column][row] = 0;
+    },
+
+    getBuildingCountByType:  function (type) {
+        if(this.buildingAmount[type] === undefined) return 0;
+        else {
+            return this.buildingAmount[type];
+        }
     }
 
 

@@ -110,7 +110,7 @@ CmdSendTrainTroopCreate = fr.OutPacket.extend(
             this.packHeader();
             this.putString(data.cfgId);
             this.putInt(data.count);
-            this.putInt(data.barrackId)
+            this.putInt(data.barrackId);
             this.updateSize();
         }
     }
@@ -314,6 +314,7 @@ testnetwork.packetMap[gv.CMD.TRAIN_TROOP_CREATE] = fr.InPacket.extend(
             this.cfgId = this.getString();
             this.count = this.getInt();
             this.lastTrainingTime = this.getInt();
+            this.newElixir = this.getInt();
         }
     }
 );

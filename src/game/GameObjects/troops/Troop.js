@@ -10,8 +10,8 @@ var Troop = cc.Node.extend({
         this._level = level;
         this._moveSpeed = TROOP_BASE[cfgId]["moveSpeed"];
         this._url = TroopConfig.BASE_URL + cfgId + "_" + level + "/" + cfgId + "_" + level;
-        this.troop = new cc.Sprite(this._url + "/idle/image0000.png");
 
+        this.troop = new cc.Sprite(this._url + "/idle/image0000.png");
         this.troop.setAnchorPoint(0.5, 0.5);
         this.troop.setScale(TroopConfig[cfgId].scale);
 
@@ -23,17 +23,25 @@ var Troop = cc.Node.extend({
         let end = mapLayer.getPositionInMapLayer(this.armyCamp._posX, this.armyCamp._posY, true);
 
         this.troop.setPosition(barrack.getPosition().x, barrack.getPosition().y);
-
-        let shadow = new cc.Sprite(res_map.SPRITE.SHADOW.TROOP_SMALL);
-        this.troop.addChild(shadow);
+        this.initShadow();
 
         this.initAnimation()
         this.runTo(start, end);
-        // this.test()
 
         cc.eventManager.addCustomListener(EVENT_TROOP_NAME.MOVE_BUILDING, this.handleMapChange.bind(this))
 
         this.addChild(this.troop);
+
+    },
+
+    initShadow: function () {
+        let shadow = new cc.Sprite(res_map.SPRITE.SHADOW.TROOP_SMALL);
+
+        shadow.setAnchorPoint(0.5,0.5);
+        shadow.setScale(0.5);
+        shadow.setOpacity(90)
+        shadow.setPosition(99,93);
+        this.troop.addChild(shadow,-1);
 
     },
 
@@ -93,15 +101,6 @@ var Troop = cc.Node.extend({
         return this._animations[action][direction];
     },
 
-
-    getLevel: function (cfgId) {
-        return 1;
-    },
-
-    loadFrameData: function () {
-
-    },
-
     handleMapChange: function () {
         cc.log("GRID MAP CHANGED!");
         const Algorithm = AlgorithmImplement.Instance();
@@ -109,7 +108,7 @@ var Troop = cc.Node.extend({
     },
 
 
-    runAndMotionAction: function (isStay, direction= "up") {
+    runAndMotionAction: function (isStay, direction= "left") {
 
         let runAnim = cc.animate(this.runAnimation(direction, "run")).repeatForever();
         if (isStay) {
@@ -162,7 +161,7 @@ var Troop = cc.Node.extend({
                 return DIRECTIONS_STRING.UP_RIGHT;
             }
             default: {
-                return DIRECTIONS_STRING.UP;
+                return DIRECTIONS_STRING.DOWN_LEFT;
             }
 
         }
@@ -174,12 +173,15 @@ var Troop = cc.Node.extend({
         let mapLayer = cc.director.getRunningScene().getMapLayer();
         let start = mapLayer.getGridPosFromMapPos(origin);
         let end = mapLayer.getGridPosFromMapPos(target);
+        cc.log(JSON.stringify(end))
+
         const Algorithm = AlgorithmImplement.Instance();
 
         if (!Algorithm._gridMapAStar) {
             Algorithm.setGridMapStar(MapManager.Instance().mapGrid)
         }
-        let wayGrid = Algorithm.searchPathByAStar([start.x, start.y], [end.x, end.y]);
+        let wayGrid = Algorithm.searchPathByAStar([start.x, start.y], [end.x + Math.floor(Math.random() * 4) + 1, end.y + Math.floor(Math.random() * 4) + 1]);
+
         let wayActions = [];
         let res = []
         let i = 0;
@@ -193,7 +195,7 @@ var Troop = cc.Node.extend({
                 target.x += 100;
                 target.y += 100;
             }
-            let run = cc.moveTo(duration / 50, targetPos);
+            let run = cc.moveTo(duration / 25, targetPos);
             let direction = this.getDirection(index === 0 ? start : wayGrid[index - 1], path);
 
             let isStay = false;
@@ -201,11 +203,14 @@ var Troop = cc.Node.extend({
             parallel = cc.spawn(...this.runAndMotionAction(isStay, direction), run);
             wayActions.push(parallel);
         });
-
         wayActions.push(cc.spawn(...this.runAndMotionAction(true)));
         cc.log("RES ALGORITHM : \n" + (res))
         let moveAction = cc.sequence(wayActions);
         this.troop.runAction(moveAction)
+    },
+
+    stayInAMCAction : function () {
+
     },
 
 
