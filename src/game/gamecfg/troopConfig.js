@@ -92,9 +92,11 @@ const TroopConfig = {
             up: [24,29]
         }
     },
-
-
 }
+
+const SPEED_TIME  = 19;
+
+const AMC_SIZE = 5;
 
 const EVENT_TROOP_NAME = {
     MOVE_BUILDING: 'move_building'

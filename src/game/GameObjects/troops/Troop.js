@@ -4,7 +4,7 @@ var Troop = cc.Node.extend({
     _level: null,
     _animations: null,
     ctor: function (cfgId, level, barrackIndex, armyCampIndex) {
-        cc.log({barrackIndex, armyCampIndex})
+        cc.log({cfgId, level, barrackIndex, armyCampIndex})
 
         this._super();
         this._cfgId = cfgId;
@@ -16,18 +16,28 @@ var Troop = cc.Node.extend({
         this.troop.setAnchorPoint(0.5, 0.5);
         this.troop.setScale(TroopConfig[cfgId].scale);
 
-        let barrack = ArmyManager.Instance().getBarrackList()[barrackIndex];
         this.armyCamp = ArmyManager.Instance().getArmyCampList()[armyCampIndex];
         let mapLayer = cc.director.getRunningScene().getMapLayer();
 
-        let start = mapLayer.getLayerPositionFromGrid(barrack._posX, barrack._posY, true);
+        let start;
         let end = mapLayer.getLayerPositionFromGrid(this.armyCamp._posX, this.armyCamp._posY, true);
+        if (barrackIndex >= 0 && barrackIndex !== null) {
+            let barrack = ArmyManager.Instance().getBarrackList()[barrackIndex];
+            start = mapLayer.getLayerPositionFromGrid(barrack._posX, barrack._posY, true);
+            this.troop.setPosition(barrack.getPosition().x+ 23, barrack.getPosition().y- 25);
+        } else {
+            start = end;
+            this.troop.setPosition(this.armyCamp.getPosition().x, this.armyCamp.getPosition().y);
+        }
 
-        this.troop.setPosition(barrack.getPosition().x, barrack.getPosition().y);
         this.initShadow();
 
         this.initAnimation()
-        this.runTo(start, end);
+        if (barrackIndex >= 0) {
+            this.runToCamp(start, end);
+        } else {
+            this.stayInCamp();
+        }
         // this.test()
 
         cc.eventManager.addCustomListener(EVENT_TROOP_NAME.MOVE_BUILDING, this.handleMapChange.bind(this))
@@ -37,13 +47,14 @@ var Troop = cc.Node.extend({
     },
 
     initShadow: function () {
-        let shadow = new cc.Sprite(res_map.SPRITE.SHADOW.TROOP_SMALL);
+        let shadowUrl = this._cfgId === "ARM_4" ?  res_map.SPRITE.SHADOW.TROOP_BIG : res_map.SPRITE.SHADOW.TROOP_SMALL
+        let shadow = new cc.Sprite(shadowUrl);
 
-        shadow.setAnchorPoint(0.5,0.5);
+        shadow.setAnchorPoint(0.5, 0.5);
         shadow.setScale(0.5);
         shadow.setOpacity(90)
-        shadow.setPosition(99,93);
-        this.troop.addChild(shadow,-1);
+        shadow.setPosition(99, 93);
+        this.troop.addChild(shadow, -1);
 
     },
 
@@ -58,35 +69,12 @@ var Troop = cc.Node.extend({
                         let animation = new cc.Animation();
                         for (let i = TroopConfig[cfgId][action][direct][0]; i <= TroopConfig[cfgId][action][direct][1]; i++) {
                             let frameName = this._url + "/" + action + "/image" + NumberUltis.formatNumberTo4Digits(i) + ".png";
-                            // let frame = cc.SpriteFrameCache.getInstance().getSpriteFrame(frameName);
-                            // if(frame) {
-                            //     animation.addSpriteFrameWithFile(frame);
-                            // }
-                            // else {
                             animation.addSpriteFrameWithFile(frameName);
-                            //     cc.SpriteFrameCache.getInstance().addSpriteFrame(frameName, frameName);
-                            // }
                         }
                         animation.setDelayPerUnit(TroopConfig[cfgId][action].frame_time);
                         animation.setRestoreOriginalFrame(true);
                         this._animations[action][direct] = animation;
                     } else {
-                        // let oppositeDir = directions[directions.length - 1 - index];
-                        // cc.log(oppositeDir, action)
-                        // let animation = new cc.Animation();
-                        // for (let i = TroopConfig[cfgId][action][oppositeDir][0]; i <= TroopConfig[cfgId][action][oppositeDir][1]; i++) {
-                        //     let frame = (this._url + "/" + action + "/image" + NumberUltis.formatNumberTo4Digits(i) + ".png");
-                        //     cc.loader.load(frame, (err, texture) => {
-                        //         let spriteFrame = new cc.SpriteFrame(texture);
-                        //         spriteFrame.setFlipX(true);
-                        //         animation.addSpriteFrame(spriteFrame);
-                        //     })
-                        //
-                        // }
-                        // animation.setDelayPerUnit(TroopConfig[cfgId].frame_time);
-                        // animation.setRestoreOriginalFrame(true);
-                        // this._animations[action][direct] = animation;
-
                     }
 
                 })
@@ -96,11 +84,12 @@ var Troop = cc.Node.extend({
     },
 
     runAnimation: function (direction, action) {
+        cc.log(action)
         if (!this._animations[action][direction]) {
             let i = DIRECTIONS.indexOf(direction);
-            return this._animations[action][DIRECTIONS[DIRECTIONS.length - 1 - i]];
+            return {anim: this._animations[action][DIRECTIONS[DIRECTIONS.length - 1 - i]], flip: true};
         }
-        return this._animations[action][direction];
+        return {anim: this._animations[action][direction], flip: true};
     },
 
     handleMapChange: function () {
@@ -110,13 +99,16 @@ var Troop = cc.Node.extend({
     },
 
 
-    runAndMotionAction: function (isStay, direction= "left") {
-
-        let runAnim = cc.animate(this.runAnimation(direction, "run")).repeatForever();
-        if (isStay) {
-            runAnim = cc.animate(this.runAnimation(direction, "idle")).repeatForever();
+    runAndMotionAction: function (action = "run", direction = "left") {
+        let animation = this.runAnimation(direction, action);
+        let runAnim;
+        if (animation.flip) {
+            runAnim = cc.animate(animation.anim).repeatForever();
+        } else {
+            runAnim = cc.animate(animation.anim).repeatForever();
         }
         runAnim.retain();
+
         if (!runAnim) {
             cc.log("DONT HANVE ::: " + direction)
         }
@@ -135,82 +127,73 @@ var Troop = cc.Node.extend({
         return [stopPreviousAction, runCurrentAction]
     },
 
-    getDegree: function (origin, target) {
+    getDirection: function (origin, target) {
         const deltaX = target.x - origin.x;
         const deltaY = target.y - origin.y;
 
-        const radians = Math.atan2(deltaY, deltaX);
-        const degrees = radians * (180 / Math.PI);
-
-        return degrees;
+        if(deltaX > 0 && deltaY === 0) return DIRECTIONS_STRING.UP_RIGHT;
+        if(deltaX < 0 && deltaY === 0) return DIRECTIONS_STRING.DOWN_LEFT;
+        if(deltaX === 0 && deltaY >0 ) return DIRECTIONS_STRING.UP_LEFT;
+        if(deltaX === 0 && deltaY <0 ) return DIRECTIONS_STRING.DOWN_RIGHT;
+        if(deltaX > 0 && deltaY >0 ) return DIRECTIONS_STRING.UP;
+        if(deltaX < 0 && deltaY <0 ) return DIRECTIONS_STRING.DOWN;
     },
 
-    getDirection: function (origin, target) {
-        let angle = this.getDegree(origin, target);
-        angle = (angle + 360) % 360;
-
-        switch (angle) {
-            case 180: {
-                return DIRECTIONS_STRING.DOWN_LEFT;
-            }
-            case 135: {
-                return DIRECTIONS_STRING.UP_LEFT;
-            }
-            case 225: {
-                return DIRECTIONS_STRING.DOWN;
-            }
-            case 270: {
-                return DIRECTIONS_STRING.UP_RIGHT;
-            }
-            default: {
-                return DIRECTIONS_STRING.DOWN_LEFT;
-            }
-
-        }
-
-    },
-
-
-    runTo: function (origin, target) {
+    findWayToCamp: function (origin, target) {
         let mapLayer = cc.director.getRunningScene().getMapLayer();
 
         let start = mapLayer.getGridFromLayerPosition(origin);
         let end = mapLayer.getGridFromLayerPosition(target);
-        const Algorithm = AlgorithmImplement.Instance();
+        this._campOrigin = end;
 
+        const Algorithm = AlgorithmImplement.Instance();
         if (!Algorithm._gridMapAStar) {
             Algorithm.setGridMapStar(MapManager.Instance().mapGrid)
         }
-        let wayGrid = Algorithm.searchPathByAStar([start.x, start.y], [end.x + Math.floor(Math.random() * 4) + 1, end.y + Math.floor(Math.random() * 4) + 1]);
+        end.x += Math.floor(Math.random() * AMC_SIZE);
+        end.y += Math.floor(Math.random() * AMC_SIZE);
 
+        let wayGrid = Algorithm.searchPathByAStar([start.x, start.y], [end.x, end.y]);
+        wayGrid.push({x:end.x, y: end.y});
+        return wayGrid;
+    },
+
+    createRunSequence: function (origin, target) {
+        let mapLayer = cc.director.getRunningScene().getMapLayer();
         let wayActions = [];
-        let res = []
-        let i = 0;
-        wayGrid.map((path, index) => {
-            res.push(path);
-            // run action
-            let targetPos = mapLayer.getLayerPositionFromGrid(path.x, path.y, true);
-            let distance = cc.pDistance(this.troop.getPosition(), target);
-            let duration = distance / this._moveSpeed;
-            if (index === wayActions.length - 1) {
-                target.x += 100;
-                target.y += 100;
-            }
-            let run = cc.moveTo(duration / 25, targetPos);
-            let direction = this.getDirection(index === 0 ? start : wayGrid[index - 1], path);
+        let start = mapLayer.getGridFromLayerPosition(origin);
+        let wayGrid = this.findWayToCamp(origin, target);
 
-            let isStay = false;
+        wayGrid.map((path, index) => {
+            let targetPos = mapLayer.getLayerPositionFromGrid(path.x, path.y, true);
+            let run = cc.moveTo( this._moveSpeed / SPEED_TIME, targetPos);
+            let direction = this.getDirection(index === 0 ? start : wayGrid[index - 1], path);
             let parallel;
-            parallel = cc.spawn(...this.runAndMotionAction(isStay, direction), run);
+            parallel = cc.spawn(...this.runAndMotionAction("run", direction), run);
             wayActions.push(parallel);
         });
-        wayActions.push(cc.spawn(...this.runAndMotionAction(true)));
-        cc.log("RES ALGORITHM : \n" + (res))
+        return wayActions;
+    },
+
+    runToCamp: function (origin, target) {
+
+        let wayActions = this.createRunSequence(origin, target);
+        wayActions.push(cc.spawn(...this.runAndMotionAction("idle")));
         let moveAction = cc.sequence(wayActions);
         this.troop.runAction(moveAction)
     },
 
-    stayInAMCAction : function () {
+    stayInCamp: function () {
+
+        let runAction = this.createRunSequence(this.troop.getPosition(), this.armyCamp.getPosition());
+        let idleAnimate = this.runAndMotionAction("idle");
+
+        let stayAction =
+            cc.sequence(
+                cc.sequence(runAction), ...idleAnimate, cc.delayTime(3000)
+            ).repeatForever();
+
+        this.troop.runAction(stayAction);
 
     },
 
@@ -226,7 +209,6 @@ var Troop = cc.Node.extend({
         animation.setRestoreOriginalFrame(true);
 
         this.troop.runAction(cc.repeatForever(cc.animate(animation)))
-        // res/Troops/ARM_1_1/ARM_1_1/run/image0069.png
     },
 
 

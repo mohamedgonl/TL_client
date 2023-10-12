@@ -82,7 +82,8 @@ var LoginView = cc.Scene.extend({
 
     onReceiveArmyInfo: function (armyInfo) {
         // MapManager.Instance().loadFromServer(armyInfo.listTroops);
-        cc.log(JSON.stringify(armyInfo.listTroops))
+        cc.log("NHAN THONG TIN VE LINH : "+JSON.stringify(armyInfo.listTroops))
+        ArmyManager.Instance().setArmyAmount(armyInfo.listTroops);
         this.loadingBar.setPercent(this.loadingBar.getPercent() + 20);
         testnetwork.connector.sendGetMapInfo();
     },

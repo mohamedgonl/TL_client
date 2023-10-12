@@ -12,7 +12,6 @@ var TrainTroopPage = cc.Node.extend({
         this._troopListItem = [];
 
         this._curPage = curPage;
-        cc.log("Tao 1 train troop moi voi id : " + curPage + " 0000000000000000000000000000000000000")
         this._curBarrack = ArmyManager.Instance().getBarrackList()[this._curPage];
 
         // lưu các sprite nằm trong training container

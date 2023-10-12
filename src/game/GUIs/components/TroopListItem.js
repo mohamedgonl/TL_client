@@ -20,7 +20,7 @@ var TroopListItem = cc.Node.extend({
     },
 
     checkAvailable: function (i) {
-        // this._available = TROOPS_LIST[i].available && (TROOP_BASE[this._troopCfgId]["barracksLevelRequired"] <= this._curBarrack._level);
+        this._available = TROOPS_LIST[i].available && (TROOP_BASE[this._troopCfgId]["barracksLevelRequired"] >= this._curBarrack._level);
         if(this._available) {
             let item = this;
             // cc.eventManager.addListener(clickEventListener(item.handleTrainTroop.bind(item)).clone(), item._nodeButton);
