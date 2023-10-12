@@ -56,7 +56,7 @@ var LoginView = cc.Scene.extend({
         testnetwork.connector.sendGetUserInfo();
 
         const interval = 0.2;
-        const repeat = 6;
+        const repeat = 5;
         const delay = 0;
         this.schedule(function() {
             this.loadingBar.setPercent(this.loadingBar.getPercent() + 10);
@@ -76,6 +76,13 @@ var LoginView = cc.Scene.extend({
             gem: userInfo.gem,
         });
 
+        this.loadingBar.setPercent(this.loadingBar.getPercent() + 20);
+        testnetwork.connector.sendGetArmyInfo();
+    },
+
+    onReceiveArmyInfo: function (armyInfo) {
+        // MapManager.Instance().loadFromServer(armyInfo.listTroops);
+        cc.log(JSON.stringify(armyInfo.listTroops))
         this.loadingBar.setPercent(this.loadingBar.getPercent() + 20);
         testnetwork.connector.sendGetMapInfo();
     },

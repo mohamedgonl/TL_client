@@ -28,6 +28,9 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.MAP_INFO:
                 fr.getCurrentScreen().onReceiveMapInfo(packet);
                 break;
+            case gv.CMD.ARMY_INFO:
+                fr.getCurrentScreen().onReceiveArmyInfo(packet);
+                break;
             case gv.CMD.CHEAT_RESOURCE:
                 if (packet.error === 0)
                     PlayerInfoManager.Instance().setResource({
@@ -170,6 +173,12 @@ testnetwork.Connector = cc.Class.extend({
     sendGetMapInfo: function () {
         cc.log("sendGetMapInfo");
         var pk = this.gameClient.getOutPacket(CmdSendMapInfo);
+        pk.pack();
+        this.gameClient.sendPacket(pk);
+    },
+    sendGetArmyInfo: function () {
+        cc.log("sendGet army Info");
+        var pk = this.gameClient.getOutPacket(CmdSendArmyInfo);
         pk.pack();
         this.gameClient.sendPacket(pk);
     },
