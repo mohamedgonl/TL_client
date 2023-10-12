@@ -204,7 +204,7 @@ var TrainTroopPage = cc.Node.extend({
         if (trainingQueue.length > 0) {
             let curTroopTrainTime = TroopUltis.getTrainingTime(trainingQueue[0].cfgId);
 
-            this.updateCurrentTroopTimeInfo(curTroopTrainTime)
+            this.updateCurrentTroopTimeInfo(curTroopTrainTime);
 
             // update total time
             this._totalTime = this._totalTime - 1;
@@ -269,7 +269,7 @@ var TrainTroopPage = cc.Node.extend({
                 } else if (trainingQueue.length === 2) {
                     waitingTroop.setPosition(FIRST_WAITING_TRAINING_TROOP_POS.x, FIRST_WAITING_TRAINING_TROOP_POS.y);
                 } else {
-                    let lastTroopWaiting = trainingQueue[trainingQueue.length - 1];
+                    let lastTroopWaiting = this._trainingItem[this._trainingItem.length - 1];
                     waitingTroop.setPosition(lastTroopWaiting.getPosition().x - TROOP_TRAIN_WAITING_SPACE - TROOP_TRAINING_ITEM_WIDTH, lastTroopWaiting.getPosition().y)
                 }
                 this._trainingItem.push(waitingTroop);
