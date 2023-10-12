@@ -1,0 +1,558 @@
+{
+  "ID": "b4bb503c-d91a-46b7-bec3-88fde127c00b",
+  "Version": "3.10.0.0",
+  "Name": "UpgradePopup",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 104,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/research troop/nen 1.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -1.3812,
+              "Y": 0.0001
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -370.8812,
+            "RightMargin": -368.1188,
+            "TopMargin": -238.0001,
+            "BottomMargin": -237.9999,
+            "Tag": 106,
+            "Children": [
+              {
+                "FontSize": 14,
+                "ButtonText": "",
+                "TextColor": {
+                  "R": 65,
+                  "G": 65,
+                  "B": 70
+                },
+                "DisabledFileData": {
+                  "Type": "Normal",
+                  "Path": "guis/pop_up/close.png",
+                  "Plist": ""
+                },
+                "PressedFileData": {
+                  "Type": "Normal",
+                  "Path": "guis/pop_up/close.png",
+                  "Plist": ""
+                },
+                "NormalFileData": {
+                  "Type": "Normal",
+                  "Path": "guis/pop_up/close.png",
+                  "Plist": ""
+                },
+                "Scale9Enable": true,
+                "Scale9OriginX": 15,
+                "Scale9OriginY": 11,
+                "Scale9Width": 17,
+                "Scale9Height": 25,
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "TouchEnable": true,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 700.9011,
+                  "Y": 447.8215
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.9484,
+                  "Y": 0.9408
+                },
+                "PreSize": {
+                  "X": 0.0636,
+                  "Y": 0.0987
+                },
+                "LeftMargin": 677.4011,
+                "RightMargin": 14.5989,
+                "TopMargin": 4.6785,
+                "BottomMargin": 424.3215,
+                "Tag": 116,
+                "ActionTag": 1349145979,
+                "Size": {
+                  "X": 47.0,
+                  "Y": 47.0
+                },
+                "Name": "close_btn",
+                "ctype": "ButtonObjectData"
+              },
+              {
+                "LabelText": "",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_24.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 368.0063,
+                  "Y": 449.0547
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.498,
+                  "Y": 0.9434
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 368.0063,
+                "RightMargin": 370.9937,
+                "TopMargin": 26.9453,
+                "BottomMargin": 449.0547,
+                "Tag": 117,
+                "ActionTag": 1763806342,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "text",
+                "ctype": "TextBMFontObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "guis/research troop/mieng trang.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 370.7074,
+                  "Y": 125.1185
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.5522
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.5016,
+                  "Y": 0.2629
+                },
+                "PreSize": {
+                  "X": 0.9229,
+                  "Y": 0.2416
+                },
+                "LeftMargin": 29.7074,
+                "RightMargin": 27.2926,
+                "TopMargin": 293.3815,
+                "BottomMargin": 67.6185,
+                "Tag": 119,
+                "ActionTag": -2045657232,
+                "Size": {
+                  "X": 682.0,
+                  "Y": 115.0
+                },
+                "Name": "white_container",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 158.3466,
+                  "Y": 322.9145
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": true,
+                "PrePosition": {
+                  "X": 0.2143,
+                  "Y": 0.6784
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 158.3466,
+                "RightMargin": 580.6534,
+                "TopMargin": 153.0855,
+                "BottomMargin": 322.9145,
+                "Tag": 120,
+                "ActionTag": -399173111,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "node_building",
+                "ctype": "SingleNodeObjectData"
+              },
+              {
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 488.5511,
+                  "Y": 325.7437
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": true,
+                "PrePosition": {
+                  "X": 0.6611,
+                  "Y": 0.6843
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 488.5511,
+                "RightMargin": 250.4489,
+                "TopMargin": 150.2563,
+                "BottomMargin": 325.7437,
+                "Tag": 121,
+                "ActionTag": -1485816508,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "node_infor",
+                "ctype": "SingleNodeObjectData"
+              },
+              {
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 369.6472,
+                  "Y": 151.9067
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": true,
+                "PrePosition": {
+                  "X": 0.5002,
+                  "Y": 0.3191
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 369.6472,
+                "RightMargin": 369.3528,
+                "TopMargin": 324.0933,
+                "BottomMargin": 151.9067,
+                "Tag": 126,
+                "ActionTag": -155888219,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "node_text",
+                "ctype": "SingleNodeObjectData"
+              },
+              {
+                "FontSize": 14,
+                "ButtonText": "",
+                "TextColor": {
+                  "R": 65,
+                  "G": 65,
+                  "B": 70
+                },
+                "DisabledFileData": {
+                  "Type": "Normal",
+                  "Path": "guis/research troop/button.png",
+                  "Plist": ""
+                },
+                "PressedFileData": {
+                  "Type": "Normal",
+                  "Path": "guis/research troop/button.png",
+                  "Plist": ""
+                },
+                "NormalFileData": {
+                  "Type": "Normal",
+                  "Path": "guis/research troop/button.png",
+                  "Plist": ""
+                },
+                "Scale9Enable": true,
+                "Scale9OriginX": 15,
+                "Scale9OriginY": 11,
+                "Scale9Width": 91,
+                "Scale9Height": 26,
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "TouchEnable": true,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 371.3629,
+                  "Y": 67.8725
+                },
+                "Scale": {
+                  "ScaleX": 1.2,
+                  "ScaleY": 1.2
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.5025,
+                  "Y": 0.1426
+                },
+                "PreSize": {
+                  "X": 0.1637,
+                  "Y": 0.1008
+                },
+                "LeftMargin": 310.8629,
+                "RightMargin": 307.1371,
+                "TopMargin": 384.1275,
+                "BottomMargin": 43.8725,
+                "Tag": 127,
+                "Children": [
+                  {
+                    "LabelText": "",
+                    "LabelBMFontFile_CNB": {
+                      "Type": "Normal",
+                      "Path": "fonts/soji_16.fnt",
+                      "Plist": ""
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.6,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": 56.3813,
+                      "Y": 23.2436
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.466,
+                      "Y": 0.4842
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": 56.3813,
+                    "RightMargin": 64.6187,
+                    "TopMargin": 24.7564,
+                    "BottomMargin": 23.2436,
+                    "Tag": 130,
+                    "ActionTag": 2021188923,
+                    "Size": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Name": "text",
+                    "ctype": "TextBMFontObjectData"
+                  },
+                  {
+                    "FileData": {
+                      "Type": "Normal",
+                      "Path": "guis/shop_gui/elixir.png",
+                      "Plist": ""
+                    },
+                    "BlendFunc": {
+                      "Src": 1,
+                      "Dst": 771
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": 99.812,
+                      "Y": 24.8787
+                    },
+                    "Scale": {
+                      "ScaleX": 0.8,
+                      "ScaleY": 0.8
+                    },
+                    "CColor": {},
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.8249,
+                      "Y": 0.5183
+                    },
+                    "PreSize": {
+                      "X": 0.2231,
+                      "Y": 0.75
+                    },
+                    "LeftMargin": 86.312,
+                    "RightMargin": 7.688,
+                    "TopMargin": 5.1213,
+                    "BottomMargin": 6.8787,
+                    "Tag": 139,
+                    "ActionTag": 837601324,
+                    "Size": {
+                      "X": 27.0,
+                      "Y": 36.0
+                    },
+                    "Name": "elixir_icon",
+                    "ctype": "SpriteObjectData"
+                  },
+                  {
+                    "FileData": {
+                      "Type": "Normal",
+                      "Path": "guis/shop_gui/gold.png",
+                      "Plist": ""
+                    },
+                    "BlendFunc": {
+                      "Src": 1,
+                      "Dst": 771
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": 99.81,
+                      "Y": 24.88
+                    },
+                    "Scale": {
+                      "ScaleX": 0.8,
+                      "ScaleY": 0.8
+                    },
+                    "CColor": {},
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.8249,
+                      "Y": 0.5183
+                    },
+                    "PreSize": {
+                      "X": 0.2314,
+                      "Y": 0.625
+                    },
+                    "LeftMargin": 85.81,
+                    "RightMargin": 7.19,
+                    "TopMargin": 8.12,
+                    "BottomMargin": 9.88,
+                    "Tag": 141,
+                    "ActionTag": 2132276158,
+                    "Size": {
+                      "X": 28.0,
+                      "Y": 30.0
+                    },
+                    "Name": "gold_icon",
+                    "ctype": "SpriteObjectData"
+                  }
+                ],
+                "ActionTag": -325682616,
+                "Size": {
+                  "X": 121.0,
+                  "Y": 48.0
+                },
+                "Name": "btn_upgrade",
+                "ctype": "ButtonObjectData"
+              }
+            ],
+            "ActionTag": -1407817613,
+            "Size": {
+              "X": 739.0,
+              "Y": 476.0
+            },
+            "Name": "upgrade_container",
+            "ctype": "SpriteObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "fonts/soji_16.fnt",
+        "fonts/soji_16.png",
+        "fonts/soji_24.fnt",
+        "fonts/soji_24.png",
+        "guis/pop_up/close.png",
+        "guis/research troop/button.png",
+        "guis/research troop/mieng trang.png",
+        "guis/research troop/nen 1.png",
+        "guis/shop_gui/elixir.png",
+        "guis/shop_gui/gold.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

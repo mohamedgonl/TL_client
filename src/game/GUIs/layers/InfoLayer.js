@@ -7,7 +7,6 @@ var InfoLayer = cc.Layer.extend({
         this.init();
 
 
-
     },
 
     //init UI, add to layer, init attributes, load resources
@@ -72,9 +71,8 @@ var InfoLayer = cc.Layer.extend({
 
     },
 
-    // add button to menu button_containerm, status = 0: normal, status = 1: disable
-    addButtonToMenu: function (text, sprite, status, callback, target, textGold, textElixir) {
-
+    // add button to menu button_containerm, status = 0: normal, status = 1: disable, 2 show but text is red
+    addButtonToMenu: function (text, sprite, status, callback, textResource, typeResource) {
         //button
         // Tạo sprite cho trạng thái bình thường
         var normalSprite = new cc.Sprite(sprite);
@@ -82,21 +80,50 @@ var InfoLayer = cc.Layer.extend({
         let spriteWidth = normalSprite.getContentSize().width;
         let spriteHeight = normalSprite.getContentSize().height;
 
-        var selectedSprite = new cc.Sprite(sprite,
-            cc.rect(-spriteWidth / 20, -spriteHeight / 20, spriteWidth + spriteWidth / 10, spriteHeight + spriteHeight / 10));
-        selectedSprite.setScale(20 / 22)
+        //let selectedSprite is a sprite with 110% size of normalSprite
+        var selectedSprite = new cc.Sprite(sprite);
+        selectedSprite.setScale(1.1);
+
         var disabledSprite = new cc.Sprite(sprite);
         disabledSprite.setOpacity(100);
 
         var button = new cc.MenuItemSprite(normalSprite, selectedSprite, disabledSprite, callback, this);
-        // if(status === 1){
-        //     button.setEnabled(false);
-        // }
-        // let label = new cc.LabelBMFont(text, res.FONT.SOJI[16],null,cc.TEXT_ALIGNMENT_CENTER);
-        // //label hien o giua duoi cua button
-        // label.setPosition(spriteWidth/2,spriteHeight/11);
-        // label.setAnchorPoint(0.5,0);
-        // button.addChild(label);
+        if(status === 1) {
+            button.setEnabled(false);
+        }
+
+        let labelText = new cc.LabelBMFont(text, res.FONT.SOJI[16], null, cc.TEXT_ALIGNMENT_CENTER);
+        //label hien o giua duoi cua button
+        labelText.setPosition(spriteWidth / 2, spriteHeight / 11);
+        labelText.setAnchorPoint(0.5, 0);
+        button.addChild(labelText);
+
+        if (textResource != null) {
+            let labelResource = new cc.LabelBMFont(textResource, res.FONT.SOJI[16], null, cc.TEXT_ALIGNMENT_CENTER);
+            //label hien o giua tren cua button
+            labelResource.setPosition(spriteWidth * 0.6, spriteHeight / 11 * 10);
+            labelResource.setAnchorPoint(0.8, 1);
+            button.addChild(labelResource);
+
+            //icon cua resource
+            if (typeResource != null) {
+                let iconSprite = new cc.Sprite();
+                switch (typeResource) {
+                    case "gold":
+                        iconSprite.setTexture(res.ICON.GOLD);
+                        break;
+                    case "elixir":
+                        iconSprite.setTexture(res.ICON.ELIXIR);
+                        break;
+                }
+                iconSprite.setScale(0.6)
+                button.addChild(iconSprite);
+                //set position for icon in top right of button
+                iconSprite.setPosition(spriteWidth * 0.8, spriteHeight / 10 * 8);
+            }
+        }
+
+
         this.menu.addChild(button);
         this.menu.alignItemsHorizontallyWithPadding(10);
     },
@@ -111,11 +138,17 @@ var InfoLayer = cc.Layer.extend({
         var maxResource = PlayerInfoManager.Instance().maxResource;
         var builder = PlayerInfoManager.Instance().builder;
         var info = PlayerInfoManager.Instance().info;
-            let armyCurrent = ArmyManager.Instance().getCurrentSpace();
-            let armyMax = ArmyManager.Instance().getMaxSpace();
+        let armyCurrent = ArmyManager.Instance().getCurrentSpace();
+        let armyMax = ArmyManager.Instance().getMaxSpace();
         // var army = PlayerInfoManager.Instance().army;
         //update UI
-            this.updateUI({resource: resource, maxResource: maxResource, builder: builder, info: info,army:{current:armyCurrent,max:armyMax}});
+        this.updateUI({
+            resource: resource,
+            maxResource: maxResource,
+            builder: builder,
+            info: info,
+            army: {current: armyCurrent, max: armyMax}
+        });
     },
 
 //add event listener to button
@@ -165,44 +198,44 @@ var InfoLayer = cc.Layer.extend({
         if (data == null) return;
 
         //resource
-            if (data.resource != null) {
+        if (data.resource != null) {
             let res = data.resource;
-                if (res.gold != null) {
+            if (res.gold != null) {
                 this.gold_container.getChildByName("text").setString(res.gold);
             }
-                if (res.elixir != null) {
+            if (res.elixir != null) {
                 this.elixir_container.text.setString(res.elixir);
             }
-                if (res.gem != null ) {
+            if (res.gem != null) {
                 this.g_container.text.setString(res.gem);
             }
         }
 
         //info
-            if (data.info!= null) {
-                if (data.info.name!= null) {
+        if (data.info != null) {
+            if (data.info.name != null) {
                 this.username_container.username.setString(data.info.name);
             }
         }
 
         //max resource
-            if (data.maxResource!= null) {
-                if(data.maxResource.gold!= null){
+        if (data.maxResource != null) {
+            if (data.maxResource.gold != null) {
                 this.gold_container.text_max.setString("Tối đa:" + data.maxResource.gold);
             }
-                if(data.maxResource.elixir!= null){
+            if (data.maxResource.elixir != null) {
                 this.elixir_container.text_max.setString("Tối đa:" + data.maxResource.elixir);
             }
         }
-            if(data.builder!= null){
+        if (data.builder != null) {
             //set text builder = available/total
             this.builder_container.text.setString(data.builder.current + "/" + data.builder.max);
         }
-            //army
-            if(data.army != null){
-                //set text army = available/total
-                this.army_container.text.setString(data.army.current + "/" + data.army.max);
-            }
+        //army
+        if (data.army != null) {
+            //set text army = available/total
+            this.army_container.text.setString(data.army.current + "/" + data.army.max);
+        }
     },
 
     onSelectBuilding: function (event) {
@@ -218,7 +251,7 @@ var InfoLayer = cc.Layer.extend({
     },
     onUnselectBuilding: function (event) {
         this.button_container.setVisible(false);
-            this.removeAllButtonInMenu();
+        this.removeAllButtonInMenu();
     },
 
 });

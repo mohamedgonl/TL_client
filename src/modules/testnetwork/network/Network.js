@@ -94,9 +94,13 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log("CANCEL_BUILD", packet);
                 this.onReceivedCancelBuild(packet);
                 break;
-            case gv.CMD.MOVE:
-                cc.log("MOVE:", packet.x, packet.y);
-                // fr.getCurrentScreen().updateMove(packet.x, packet.y);
+            case gv.CMD.CANCEL_UPGRADE:
+                cc.log("CANCEL_UPGRADE", packet);
+                this.onReceivedCancelUpgrade(packet);
+                break;
+            case gv.CMD.QUICK_FINISH:
+                cc.log("QUICK_FINISH", packet);
+                this.onReceivedQuickFinish(packet);
                 break;
         }
     },
@@ -204,11 +208,11 @@ testnetwork.Connector = cc.Class.extend({
             //log all packet
             cc.log("packet: ", JSON.stringify(packet, null, 2));
             let mapLayer = cc.director.getRunningScene().mapLayer;
-
-            mapLayer.exitModeBuyBuilding();
             let building = getBuildingFromType(packet.type, 1, packet.id, packet.posX, packet.posY,packet.status,packet.startTime,packet.endTime);
             MapManager.Instance().addBuilding(building);
-            mapLayer.addBuildingToLayer(building);
+            mapLayer.addBuildingToLayer(building,null);
+            mapLayer.exitModeBuyBuilding();
+            if(0 === packet.status) return;
             building.startBuild(packet.startTime, packet.endTime);
             //bat lai info
         }
@@ -307,9 +311,21 @@ testnetwork.Connector = cc.Class.extend({
         }
     },
 
+    onReceivedQuickFinish: function (packet) {
+        if(packet.error !==0){
+            cc.log("QUICK FINISH ERROR with code ::::::::: ", packet.error);
+        }
+        else
+        {
+            cc.log("QUICK FINISH SUCCESS ::::::::: ");
+            let building = cc.director.getRunningScene().mapLayer.chosenBuilding;
 
-
-
+            let gem = packet.gem;
+            //set resource gem to gem
+            PlayerInfoManager.Instance().setResource({gem: gem});
+            building.quickFinish();
+        }
+    },
     sendGetUserInfo: function () {
         cc.log("sendGetUserInfo");
         var pk = this.gameClient.getOutPacket(CmdSendUserInfo);
@@ -439,13 +455,13 @@ testnetwork.Connector = cc.Class.extend({
         var pk = this.gameClient.getOutPacket(CmdSendCancelUpgrade);
         pk.pack({id});
         this.gameClient.sendPacket(pk);
+    },
+    sendQuickFinish: function (id) {
+        cc.log("SEND quick finish request");
+        var pk = this.gameClient.getOutPacket(CmdSendQuickFinish);
+        pk.pack({id});
+        this.gameClient.sendPacket(pk);
     }
-    // sendQuickFinish: function (id) {
-    //     cc.log("SEND quick finish request");
-    //     var pk = this.gameClient.getOutPacket(CmdSendQuickFinish);
-    //     pk.pack({id});
-    //     this.gameClient.sendPacket(pk);
-    // }
 
 });
 

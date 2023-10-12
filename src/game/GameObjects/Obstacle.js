@@ -106,10 +106,22 @@ var Obstacle = GameObject.extend({
 
     loadButton: function(){
         let infoLayer = cc.director.getRunningScene().infoLayer;
+        infoLayer.removeAllButtonInMenu();
         if(this._state ===0)
-            infoLayer.addButtonToMenu("Dọn dẹp",res.BUTTON.REMOVE_BUTTON,0,this.onClickRemove.bind(this),this);
+        {
+            let priceGold = LoadManager.Instance().getConfig(this._type,this._level,"gold");
+            let priceElixir = LoadManager.Instance().getConfig(this._type,this._level,"elixir");
+            if(priceGold > 0)
+            {
+                infoLayer.addButtonToMenu("Dọn dẹp",res.BUTTON.REMOVE_BUTTON,0,this.onClickRemove.bind(this),priceGold,"gold");
+            }
+            else
+            {
+                infoLayer.addButtonToMenu("Dọn dẹp",res.BUTTON.REMOVE_BUTTON,0,this.onClickRemove.bind(this),priceElixir, "elixir");
+            }
+        }
         else
-            infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this),this);
+            infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this));
     },
     onSelected: function(){
         this.loadButton();
@@ -168,24 +180,23 @@ var Obstacle = GameObject.extend({
         this._state = 1;
         this._startTime = startTime;
         this._endTime = endTime;
-
+        this.loadButton();
 
         let playerInfoManager = PlayerInfoManager.Instance();
         let priceGold = LoadManager.Instance().getConfig(this._type,this._level,"gold");
         let priceElixir = LoadManager.Instance().getConfig(this._type,this._level,"elixir");
-        playerInfoManager.changeResource("gold",-priceGold);
-        playerInfoManager.changeResource("elixir",-priceElixir);
+        playerInfoManager.addResource({gold:-priceGold,elixir:-priceElixir});
         playerInfoManager.changeBuilder("current",-1);
     },
     completeRemove: function () {
         this._state = 0;
         this._startTime = null;
         this._endTime = null;
-
+        this.loadButton();
         //xoa khoi map
         MapManager.Instance().removeBuilding(this)
         //xoa obstacle khoi layer
-        cc.director.getRunningScene().mapLayer.removeObstacle(this);
+        cc.director.getRunningScene().mapLayer.removeBuilding(this);
 
         //tra ve builder
         let playerInfoManager = PlayerInfoManager.Instance();
@@ -231,6 +242,8 @@ var Obstacle = GameObject.extend({
     onClickQuickFinish: function () {
         cc.log("onClickQuickFinish");
         testnetwork.connector.sendQuickFinish(this._id);
+    },
+    quickFinish: function (){
+        this.completeRemove();
     }
-
 });

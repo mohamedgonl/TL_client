@@ -13,11 +13,6 @@ var Building = GameObject.extend({
     _height: null,
     _arrow_move: null,
 
-
-    _shadow: null,
-    _grass: null,
-    _body: null,
-
     //  example: building = new Townhall(type, level,id, posX, posY);
     ctor: function (level =1 ,id,posX,posY,status,startTime,endTime) {
 
@@ -29,8 +24,16 @@ var Building = GameObject.extend({
         this._state = status;
         this._startTime = startTime;
         this._endTime = endTime;
-        //log all properties, 1 line 1 property
+        // shadow, grass, body, upper is new cc sprite with nothing
+        this._shadow = new cc.Sprite();
+        this._grass = new cc.Sprite();
+        this._body = new cc.Sprite();
+        this._upper = new cc.Sprite();
 
+        this.addChild(this._grass,ZORDER_BUILDING_GRASS);
+        this.addChild(this._body,ZORDER_BUILDING_BODY);
+        this.addChild(this._shadow,ZORDER_BUILDING_SHADOW);
+        this.addChild(this._upper,ZORDER_BUILDING_UPPER);
 
         let config = LoadManager.Instance().getConfig(this._type,level);
         this._width = config.width;
@@ -40,6 +43,7 @@ var Building = GameObject.extend({
         this.setAnchorPoint(0.5,0.5);
 
         this.loadSpriteByLevel(level);
+
         this.loadSubSprite();
         this.initState();
     },
@@ -49,21 +53,26 @@ var Building = GameObject.extend({
     loadSprite: function (bodySprite, upperSprite, shadow_type, isUpperAnimation) {
 
         var size = this._width;
-        //body and grass
-        this._body = new cc.Sprite(bodySprite);
-        this._grass = new cc.Sprite(res_map.SPRITE.GRASS.BUILDING[size]);
+        //body
+        this._body.setTexture(bodySprite)
         this._body.setAnchorPoint(0.5,0.5);
-        this._grass.setAnchorPoint(0.5,0.5);
-
         this._body.setScale(SCALE_BUILDING_BODY);
+
+
+        //grass
+        this._grass.setTexture(res_map.SPRITE.GRASS.BUILDING[size]);
+        this._grass.setAnchorPoint(0.5,0.5);
 
         //shadow
         if(shadow_type === 1){
-            this._shadow = new cc.Sprite(res_map.SPRITE.SHADOW[size]);
+            //this._shadow = new cc.Sprite(res_map.SPRITE.SHADOW[size]);
+            this._shadow.setTexture(res_map.SPRITE.SHADOW[size])
+
             this._shadow.setAnchorPoint(0.5,0.5);
         }
         else if(shadow_type === 2){
-            this._shadow = new cc.Sprite(res_map.SPRITE.SHADOW.CIRCLE);
+            //this._shadow = new cc.Sprite(res_map.SPRITE.SHADOW.CIRCLE);
+            this._shadow.setTexture(res_map.SPRITE.SHADOW.CIRCLE)
            this._shadow.setAnchorPoint(0.5,0.5);
         }
 
@@ -71,7 +80,10 @@ var Building = GameObject.extend({
         if(upperSprite != null){
             if(isUpperAnimation){
 
-                this._upper = new cc.Sprite(upperSprite[0]);
+                //this._upper = new cc.Sprite(upperSprite[0]);
+                //set texture for first frame and remove old action
+                this._upper.setTexture(upperSprite[0]);
+                this._upper.stopAllActions();
 
 
                 var animation = new cc.Animation();
@@ -93,21 +105,17 @@ var Building = GameObject.extend({
 
             }
             else {
-                this._upper = new cc.Sprite(upperSprite);
+
+                // this._upper = new cc.Sprite(upperSprite);
+                this._upper.setTexture(upperSprite)
                 this._upper.setAnchorPoint(0.5, 0.5);
                 this._upper.setScale(SCALE_BUILDING_BODY);
             }
         }
 
 
-        if(this._grass.getParent() === null)
-            this.addChild(this._grass,ZORDER_BUILDING_GRASS);
-        if(this._body.getParent() === null)
-            this.addChild(this._body,ZORDER_BUILDING_BODY);
-        if(shadow_type !== 0 && this._shadow.getParent() === null)
-            this.addChild(this._shadow,ZORDER_BUILDING_SHADOW);
-        if(upperSprite != null && this._upper.getParent() === null)
-            this.addChild(this._upper,ZORDER_BUILDING_UPPER);
+
+
     },
     loadSubSprite: function(){
         //arrow move
@@ -185,11 +193,34 @@ var Building = GameObject.extend({
 
     //load button for building, reload when select building, upgrade, build, cancel
     loadButton: function(){
+        cc.log("load button")
         let infoLayer = cc.director.getRunningScene().infoLayer;
         //xoa het button cu
         infoLayer.removeAllButtonInMenu();
-        infoLayer.addButtonToMenu("Thông tin",res.BUTTON.INFO_BUTTON,0,this.onClickInfo.bind(this),this);
-        if(this._state !==0) infoLayer.addButtonToMenu("Hủy",res.BUTTON.CANCEL_BUTTON,0,this.onClickStop.bind(this),this);
+        infoLayer.addButtonToMenu("Thông tin",res.BUTTON.INFO_BUTTON,0,this.onClickInfo.bind(this));
+        if(this._state === 0){
+            //upgrade button
+            let status = this.getStateUpgradeButton();
+            //2 is state max level, not show upgrade button  ; 1 is not enough resource, show upgrade button but red text, 0 is normal
+            if(status !== 2 )
+            {
+                let priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
+                let priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
+                if(priceGold)
+                {
+                    infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,status,this.onClickUpgrade.bind(this),priceGold,"gold");
+                }
+                else{
+                    infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,status,this.onClickUpgrade.bind(this),priceElixir,"elixir");
+                }
+            }
+
+
+        }
+        if(this._state !==0) {
+            infoLayer.addButtonToMenu("Hủy",res.BUTTON.CANCEL_BUTTON,0,this.onClickStop.bind(this));
+            infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this));
+        }
     },
 
     onSelected: function(){
@@ -270,23 +301,28 @@ var Building = GameObject.extend({
         if(this._state === 1 || this._state === 2){
             this.updateProgress();
         }
+        else{
+            this.unschedule(this.update);
+        }
     },
 
     startProcess: function () {
+        this.loadButton();
         //if state = 1, get price
         let priceGold = LoadManager.Instance().getConfig(this._type, this._level, "gold") || 0;
         let priceElixir = LoadManager.Instance().getConfig(this._type, this._level, "elixir") || 0;
+        let priceGem = LoadManager.Instance().getConfig(this._type, this._level, "coin") || 0;
         if(this._state === 2){
             priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
             priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
+            priceGem = LoadManager.Instance().getConfig(this._type, this._level+1, "coin") || 0;
         }
-
-        PlayerInfoManager.Instance().changeResource("gold", -priceGold);
-        PlayerInfoManager.Instance().changeResource("elixir", -priceElixir);
+        PlayerInfoManager.Instance().addResource({gold:-priceGold,elixir:-priceElixir,gem:-priceGem})
         PlayerInfoManager.Instance().changeBuilder("current", -1);
         //enable progress bar
         this._progressBar.setVisible(true);
-        // this.update();
+
+        this.loadButton();
         this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
     },
     startBuild: function (startTime,endTime) {
@@ -313,6 +349,7 @@ var Building = GameObject.extend({
         this._progressBar.setVisible(false);
         PlayerInfoManager.Instance().changeBuilder("current", 1);
         //unschedule update
+        this.loadButton();
         this.unschedule(this.update);
     },
     completeBuild: function () {
@@ -358,7 +395,8 @@ var Building = GameObject.extend({
         this.cancelProcess();
 
         //remove from layer
-        this.removeFromParent(true);
+        let mapLayer = cc.director.getRunningScene().mapLayer;
+        mapLayer.removeBuilding(this);
 
         //remove from mapManager
         MapManager.Instance().removeBuilding(this._id);
@@ -422,5 +460,38 @@ var Building = GameObject.extend({
                 break;
         }
     },
+    onClickQuickFinish: function () {
+        cc.log("onClickQuickFinish");
+        testnetwork.connector.sendQuickFinish(this._id);
+    },
+    quickFinish: function (){
+        switch (this._state){
+            case 1:
+                this.completeBuild();
+                break;
+            case 2:
+                this.completeUpgrade();
+                break;
+        }
+    },
 
+    //return 0 if can show upgrade button, 1 if not enough resource, 2 if max level
+    getStateUpgradeButton:function(){
+        let max_level = BuildingInfo[this._type].max_level;
+        let townHall = MapManager.Instance().getTownHall();
+
+        if(this._level === max_level || this._type == "BDH_1"){
+            return 2;
+        }
+        let priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
+        let priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
+        if(!PlayerInfoManager.Instance().checkEnoughResource(priceGold, priceElixir)){
+            return 1;
+        }
+        return 0;
+    },
+
+    getLevel: function () {
+        return this._level;
+    }
 });

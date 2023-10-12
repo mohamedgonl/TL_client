@@ -22,14 +22,15 @@ var ElixirMine = Building.extend({
     loadButton: function () {
         this._super();
         let infoLayer = cc.director.getRunningScene().infoLayer;
-        if(this._state ===0) infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,0,this.onClickUpgrade.bind(this),this);
+
+        //button thu hoach
         if(this._state ===0) {
-            let timeNow = TimeManager.Instance().getCurrentTime();
+            let timeNow = TimeManager.Instance().getCurrentTimeInSecond();
             //delay 5s between 2 harvest
             if(timeNow - this._lastCollectTime > 5)
-                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_ELIXIR_BUTTON,0,this.onClickHarvest.bind(this),this);
+                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_ELIXIR_BUTTON,0,this.onClickHarvest.bind(this));
             else
-                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_ELIXIR_BUTTON,1,this.onClickHarvest.bind(this),this);
+                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_ELIXIR_BUTTON,1,this.onClickHarvest.bind(this));
         }
     },
 
@@ -40,6 +41,7 @@ var ElixirMine = Building.extend({
     harvest: function (lastCollectTime,gold,elixir) {
         this._lastCollectTime = lastCollectTime;
         PlayerInfoManager.Instance().setResource({elixir:elixir});
+        this.loadButton();
     }
 
 });

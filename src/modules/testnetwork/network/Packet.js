@@ -28,6 +28,7 @@ gv.CMD.COLLECT_RESOURCE = 2007;
 gv.CMD.MOVE_BUILDING = 2008;
 gv.CMD.BUY_BUILDING = 2001;
 gv.CMD.REMOVE_OBSTACLE_SUCCESS = 2010;
+gv.CMD.QUICK_FINISH = 2013;
 //quyet----------------------
 
 
@@ -345,6 +346,19 @@ CmdSendCancelUpgrade = fr.OutPacket.extend(
             this._super();
             this.initData(100);
             this.setCmdId(gv.CMD.CANCEL_UPGRADE);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.id);
+            this.updateSize();
+        }
+    });
+CmdSendQuickFinish = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.QUICK_FINISH);
         },
         pack: function (data) {
             this.packHeader();
@@ -690,6 +704,19 @@ testnetwork.packetMap[gv.CMD.CANCEL_UPGRADE] = fr.InPacket.extend(
             this.error = this.getError();
             if(this.error === 0) {
                 this.id = this.getInt();
+            }
+        }
+    });
+
+testnetwork.packetMap[gv.CMD.QUICK_FINISH] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.error = this.getError();
+            if(this.error === 0) {
+                this.gem = this.getInt();
             }
         }
     });
