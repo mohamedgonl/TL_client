@@ -123,7 +123,8 @@ var Building = GameObject.extend({
         this._arrow_move.setAnchorPoint(0.5,0.5);
         this._arrow_move.setScale(SCALE_BUILDING_BODY);
         this._arrow_move.setVisible(false);
-        this.addChild(this._arrow_move);
+        this._arrow_move.setGlobalZOrder(99999999999999999)
+        this.addChild(this._arrow_move,ZORDER_BUILDING_EFFECT);
 
         //green square
         this._green_square = new cc.Sprite(res_map.SPRITE.GREEN_SQUARE[this._width]);

@@ -20,10 +20,10 @@ var Troop = cc.Node.extend({
         let mapLayer = cc.director.getRunningScene().getMapLayer();
 
         let start;
-        let end = mapLayer.getLayerPositionFromGrid(this.armyCamp._posX, this.armyCamp._posY, true);
+        let end = mapLayer.getMapPosFromGridPos({x:this.armyCamp._posX, y:this.armyCamp._posY}, true);
         if (barrackIndex >= 0 && barrackIndex !== null) {
             let barrack = ArmyManager.Instance().getBarrackList()[barrackIndex];
-            start = mapLayer.getLayerPositionFromGrid(barrack._posX, barrack._posY, true);
+            start = mapLayer.getMapPosFromGridPos({x:barrack._posX,y: barrack._posY}, true);
             this.troop.setPosition(barrack.getPosition().x+ 23, barrack.getPosition().y- 25);
         } else {
             start = end;
@@ -142,8 +142,8 @@ var Troop = cc.Node.extend({
     findWayToCamp: function (origin, target) {
         let mapLayer = cc.director.getRunningScene().getMapLayer();
 
-        let start = mapLayer.getGridFromLayerPosition(origin);
-        let end = mapLayer.getGridFromLayerPosition(target);
+        let start = mapLayer.getGridPosFromMapPos(origin);
+        let end = mapLayer.getGridPosFromMapPos(target);
         this._campOrigin = end;
 
         const Algorithm = AlgorithmImplement.Instance();
@@ -161,11 +161,11 @@ var Troop = cc.Node.extend({
     createRunSequence: function (origin, target) {
         let mapLayer = cc.director.getRunningScene().getMapLayer();
         let wayActions = [];
-        let start = mapLayer.getGridFromLayerPosition(origin);
+        let start = mapLayer.getGridPosFromMapPos(origin);
         let wayGrid = this.findWayToCamp(origin, target);
 
         wayGrid.map((path, index) => {
-            let targetPos = mapLayer.getLayerPositionFromGrid(path.x, path.y, true);
+            let targetPos = mapLayer.getMapPosFromGridPos({x:path.x, y:path.y}, true);
             let run = cc.moveTo( this._moveSpeed / SPEED_TIME, targetPos);
             let direction = this.getDirection(index === 0 ? start : wayGrid[index - 1], path);
             let parallel;
@@ -210,6 +210,5 @@ var Troop = cc.Node.extend({
 
         this.troop.runAction(cc.repeatForever(cc.animate(animation)))
     },
-
 
 })
