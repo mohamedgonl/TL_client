@@ -11,13 +11,16 @@ var ElixirMine = Building.extend({
         // this.loadSprite(res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level],upper_sprite,1);
     },
     onAddIntoMapManager: function () {
+        this._super();
         let mapManager = MapManager.Instance();
         mapManager.addToListMine(this);
     },
 
     loadSpriteByLevel: function (level) {
-        var upper_sprite = res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level] + "/image0000.png";
-        this.loadSprite(res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level],upper_sprite,1);
+        // var upper_sprite = res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level] + "/image0000.png";
+        // this.loadSprite(res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level],upper_sprite,1);
+        this.loadSprite(res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level],
+            res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level],1,1);
     },
     loadButton: function () {
         this._super();

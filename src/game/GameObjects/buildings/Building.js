@@ -45,7 +45,7 @@ var Building = GameObject.extend({
         this.loadSpriteByLevel(level);
 
         this.loadSubSprite();
-        this.initState();
+        //this.initState();
     },
 
     //load sprite with size,
@@ -176,19 +176,7 @@ var Building = GameObject.extend({
         this._progressBar.addChild(this._timeLabel,ZORDER_BUILDING_EFFECT);
     },
     initState: function () {
-        switch (this._state){
-            case 0:
-                this._arrow_move.setVisible(false);
-                this._nameLabel.setVisible(false);
-                this._levelLabel.setVisible(false);
-                break;
-            case 1:
-            case 2:
-                this._progressBar.setVisible(true);
-                // this.update();
-                this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
-                break;
-        }
+
     },
 
     //load button for building, reload when select building, upgrade, build, cancel
@@ -318,7 +306,6 @@ var Building = GameObject.extend({
             priceGem = LoadManager.Instance().getConfig(this._type, this._level+1, "coin") || 0;
         }
         PlayerInfoManager.Instance().addResource({gold:-priceGold,elixir:-priceElixir,gem:-priceGem})
-        PlayerInfoManager.Instance().changeBuilder("current", -1);
         //enable progress bar
         this._progressBar.setVisible(true);
 
@@ -332,14 +319,16 @@ var Building = GameObject.extend({
         this._endTime = endTime;
 
         this.startProcess();
-    },
+
+
+        },
     startUpgrade: function (startTime,endTime) {
 
         this._state = 2;
         this._startTime = startTime;
         this._endTime = endTime;
-
         this.startProcess();
+        PlayerInfoManager.Instance().changeBuilder("current", -1);
     },
 
     completeProcess: function () {
@@ -354,14 +343,13 @@ var Building = GameObject.extend({
     },
     completeBuild: function () {
         this.completeProcess();
-        cc.log("level: " + this._level);
     },
     completeUpgrade: function () {
-        this.completeProcess();
         this._level += 1;
         //set sprite for new level and update level label
         this._levelLabel.setString("Cấp " + this._level);
         this.loadSpriteByLevel(this._level)
+        this.completeProcess();
     },
 
     cancelProcess: function () {
@@ -408,7 +396,22 @@ var Building = GameObject.extend({
     },
 
     onAddIntoMapManager: function () {
-
+        cc.log("onAddIntoMapManager",this._type,this._state);
+        switch (this._state){
+            case 0:
+                this._arrow_move.setVisible(false);
+                this._nameLabel.setVisible(false);
+                this._levelLabel.setVisible(false);
+                break;
+            case 1:
+            case 2:
+                this._progressBar.setVisible(true);
+                // -1 builder
+                PlayerInfoManager.Instance().changeBuilder("current", -1);
+                this.update();
+                this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
+                break;
+        }
     },
 
     onClickInfo: function () {

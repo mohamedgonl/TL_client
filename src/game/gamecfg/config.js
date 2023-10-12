@@ -54,7 +54,7 @@ const EVENT_UNSELECT_BUILDING = "event_unselect_building";
 
 //ANIMATION
 
-const COUNT_FRAME_GOLD_MINE_EFFECT = 10;
+const COUNT_FRAME_MINE_EFFECT = 10;
 
 //UI
 const SCALE_BUTTON_BUY_BUILDING = 0.4;

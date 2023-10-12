@@ -13,6 +13,6 @@ var Wall = Building.extend({
         this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
     },
     loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.WALL[level],null,0);
+        this.loadSprite(res_map.SPRITE.BODY.WALL[level][0],null,0);
     },
 });

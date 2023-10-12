@@ -7,12 +7,14 @@ var GoldMine = Building.extend({
         this._canHarvest = true;
     },
     onAddIntoMapManager: function () {
+        this._super();
         let mapManager = MapManager.Instance();
         mapManager.addToListMine(this);
     },
     loadSpriteByLevel: function (level) {
         var upper_sprite = res_map.SPRITE.BODY.GOLD_MINE.UPPER[level];
-        this.loadSprite(res_map.SPRITE.BODY.GOLD_MINE.BOTTOM[level],upper_sprite,1,1);
+        this.loadSprite(res_map.SPRITE.BODY.GOLD_MINE.BOTTOM[level],
+            upper_sprite,1,1);
     },
     loadButton: function () {
         this._super();

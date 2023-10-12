@@ -42,10 +42,7 @@ function findDistanceFromPointToLine(posA, posB, posC) {
 //getBuildingFromType(data.type, 1, data.id, data.posX, data.posY,data.status,data.startTime,data.endTime);
 function getBuildingFromType(type, level, id, posX, posY,status,startTime,endTime) {
     var building = null;
-    //log all param
-    // cc.log("type: " + type + " level: " + level +
-    //     " posX: " + posX + " posY: " + posY + " id: " + id +
-    //     " status: " + status + " startTime: " + startTime + " endTime: " + endTime);
+
 
 
     //obstacle
@@ -88,8 +85,6 @@ function getBuildingFromType(type, level, id, posX, posY,status,startTime,endTim
         case 'WAL_1':
             building = new Wall( level,id, posX, posY, status, startTime,endTime);
             break;
-        case 'CLC_1':
-            building = new ClanCastle( level,id, posX, posY, status, startTime,endTime);
     }
     building.setType(type);
     return building;

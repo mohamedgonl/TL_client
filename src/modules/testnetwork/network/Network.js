@@ -30,6 +30,7 @@ testnetwork.Connector = cc.Class.extend({
                 break;
             case gv.CMD.CHEAT_RESOURCE:
                 if (packet.error === 0)
+                    cc.log("CHEAT RESOURCE SUCCESS",JSON.stringify(packet, null, 2));
                     PlayerInfoManager.Instance().setResource({
                         gold: packet.gold,
                         elixir: packet.elixir,
@@ -205,7 +206,9 @@ testnetwork.Connector = cc.Class.extend({
             let building = getBuildingFromType(packet.type, 1, packet.id, packet.posX, packet.posY,packet.status,packet.startTime,packet.endTime);
             MapManager.Instance().addBuilding(building);
             mapLayer.addBuildingToLayer(building,null);
+            // cc.log("----------------------------------------");
             mapLayer.exitModeBuyBuilding();
+            // cc.log("++++++++++++++++++++++++++++++++++++++++");
             if(0 === packet.status) return;
             building.startBuild(packet.startTime, packet.endTime);
             //bat lai info

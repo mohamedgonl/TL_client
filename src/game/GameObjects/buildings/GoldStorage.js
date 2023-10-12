@@ -11,7 +11,7 @@ var GoldStorage = Building.extend({
         this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
     },
     loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.GOLD_STORAGE[level],null,1);
+        this.loadSprite(res_map.SPRITE.BODY.GOLD_STORAGE[level][0],null,1);
     },
     loadButton: function () {
         this._super();
@@ -19,12 +19,19 @@ var GoldStorage = Building.extend({
         infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,0,this.onClickUpgrade.bind(this));
     },
     onAddIntoMapManager: function () {
+        this._super();
         let mapManager = MapManager.Instance();
         let playerInfoManager = PlayerInfoManager.Instance();
 
         mapManager.addToListStorage(this);
         let capacity = LoadManager.Instance().getConfig(this._type,this._level,"capacity");
         playerInfoManager.changeMaxResource("gold",capacity);
+    },
+    completeUpgrade: function () {
+        this._super();
+        let playerInfoManager = PlayerInfoManager.Instance();
+        let capacity = LoadManager.Instance().getConfig(this._type,this._level,"capacity");
+        playerInfoManager.setMaxResource({gold:capacity});
     }
 
 

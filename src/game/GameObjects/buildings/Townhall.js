@@ -22,6 +22,7 @@ var Townhall = Building.extend({
         this.capacityElixir = config.capacityElixir;
     },
     onAddIntoMapManager: function () {
+        this._super();
         let mapManager = MapManager.Instance();
         let playerInfoManager = PlayerInfoManager.Instance();
         mapManager.townHall = this;
@@ -33,6 +34,13 @@ var Townhall = Building.extend({
     checkCanUpgrade: function () {
         return true;
     },
+    completeProcess: function () {
+        this._super();
+        let playerInfoManager = PlayerInfoManager.Instance();
+        let capacityGold = LoadManager.Instance().getConfig(this._type,this._level,"capacityGold");
+        let capacityElixir = LoadManager.Instance().getConfig(this._type,this._level,"capacityElixir");
+        playerInfoManager.setMaxResource({gold:capacityGold,elixir:capacityElixir});
+    }
 
 });
 

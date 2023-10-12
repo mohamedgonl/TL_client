@@ -251,12 +251,7 @@ var res_map = {
                 1:"res/Buildings/elixir storage/STO_2_1/idle/image0000.png",
             },
             CANNON:{
-                BOTTOM:{
-                    1: "res/Buildings/defense_base/DEF_1_1_Shadow.png"
-                },
-                UPPER:{
-                    1:"res/Buildings/cannon/canon_1/idle/image0000.png"
-                }
+                1:"res/Buildings/cannon/canon_1/idle/image0000.png"
             },
             BARRACK:{
                 1:"res/Buildings/barrack/BAR_1_1/idle/image0000.png"

@@ -11,6 +11,7 @@ var BuilderHut = Building.extend({
         this.loadSprite(res_map.SPRITE.BODY.BUILDER_HUT[level],null,1);
     },
     onAddIntoMapManager: function () {
+        this._super();
         let mapManager = MapManager.Instance();
         let playerInfoManager = PlayerInfoManager.Instance();
         mapManager.addToListBuilderHut(this);

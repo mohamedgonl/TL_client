@@ -150,7 +150,7 @@
       "type": "gold",
       "productivity": 3000,
       "hitpoints": 750,
-      "townHallLevelRequired": 7,
+      "townHallLevelRequired": 5,
       "width": 3,
       "height": 3
     }

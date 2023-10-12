@@ -18,7 +18,6 @@ var Obstacle = GameObject.extend({
        this._startTime = startTime;
        this._endTime = endTime;
        //log all
-         cc.log("type: " + this._type + " posX: " + this._posX + " posY: " + this._posY + " id: " + this._id + " status: " + this._state + " startTime: " + this._startTime + " endTime: " + this._endTime);
        this.init();
 
    },
