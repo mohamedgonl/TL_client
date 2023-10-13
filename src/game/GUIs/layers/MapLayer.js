@@ -117,7 +117,8 @@ var MapLayer = cc.Layer.extend({
                     });
                 }
                 if (keyCode === cc.KEY.c) {
-
+                    //dịch map sang trái 30 pĩel
+                    this.setPositionX(this.getPositionX() - 30);
                 }
                 if (keyCode === cc.KEY.z) {
                 }
@@ -475,7 +476,10 @@ var MapLayer = cc.Layer.extend({
         var posC = cc.pLerp(CORNER_LEFT, CORNER_TOP, gridPos.x / GRID_SIZE);
         var posD = cc.pLerp(CORNER_RIGHT, CORNER_TOP, gridPos.y / GRID_SIZE);
         return cc.pIntersectPoint(posA, posC, posB, posD);
-
+    },
+    getScreenPosFromMapPos: function (posInMap) {
+        var posInMap = cc.pSub(posInMap,cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
+        return cc.pMult(posInMap, this.getScale());
     },
 
     //use it to add, calculate position to add child in map layer
@@ -488,6 +492,7 @@ var MapLayer = cc.Layer.extend({
     },
     //------------------------------------------------------------------------------------------------------------------
     moveView: function (delta) {
+        cc.log(JSON.stringify(delta,null,2));
         var currentPos = this.getPosition();
         var newPos = cc.pAdd(currentPos, delta);
         this.setPosition(newPos);
@@ -496,11 +501,16 @@ var MapLayer = cc.Layer.extend({
 
     //use config zoom max, min, zoom step to zoom by scroll
     zoom: function (event) {
+        let location = event.getLocation();
+        let mapPos = this.getMapPosFromScreenPos(location);
 
         var delta = event.getScrollY();
         var scale = this.getScale();
 
-        //if scroll up, zoom in, else zoom out
+        // Tính toán tâm zoom dựa trên vị trí chuột
+        var zoomCenter = cc.p(0,0);
+
+        // Nếu cuộn chuột lên, zoom vào; ngược lại, zoom ra
         if (delta < 0) {
             scale += ZOOM_STEP;
             if (scale > ZOOM_MAX) {
@@ -513,8 +523,14 @@ var MapLayer = cc.Layer.extend({
             }
         }
 
+        // Áp dụng tỷ lệ zoom mới
         this.setScale(scale);
-       this.limitBorder();
+
+        // Tính toán lại vị trí của layer dựa trên tâm zoom
+        var newPosition = cc.pSub(mapPos, cc.pMult(zoomCenter, scale));
+        this.setPosition(newPosition);
+
+        // this.limitBorder();
     },
 
     //if moveView or Zoom out of map, move back
@@ -590,6 +606,6 @@ var MapLayer = cc.Layer.extend({
     },
     getChosenBuilding: function () {
         return this.chosenBuilding;
-    }
+    },
 });
 
