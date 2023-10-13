@@ -5,6 +5,12 @@ var GoldMine = Building.extend({
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
         this._canHarvest = true;
+
+        let config = LoadManager.Instance().getConfig(this._type,this._level);
+        this._currentGold = 0;
+        this._capacityGold = config.capacity;
+        this._productionGold = config.productivity;
+
     },
     onAddIntoMapManager: function () {
         this._super();

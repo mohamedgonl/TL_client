@@ -57,6 +57,7 @@ var res = {
         TROOP_CAPACITY: 'res/guis/upgrade_building_gui/small/TroopCapacity_Icon.png',
         SPELL_CAPACITY: 'res/guis/upgrade_building_gui/small/Spell_Capacity_Icon.png',
         DAMAGE: 'res/guis/upgrade_building_gui/small/Damage_Icon.png',
+        ARMY: 'res/guis/upgrade_building_gui/small/Speed_Icon.png'
 
     },
     BACKGROUND: {
@@ -67,10 +68,6 @@ var res = {
         SLOT_CATEGORY: 'res/guis/shopping/slot_catalogy.png',
         SHOP: 'res/guis/shopping/nen2.png'
     },
-
-
-
-
 };
 
 var g_resources = [
@@ -138,7 +135,9 @@ var res_ui = {
     TROOPS_TRAINING_ITEM: "TroopTrainingItem.json",
     NOTI_POPUP: "NotiPopup.json",
     CHEAT_POPUP: "CheatPopup.json",
-    INFO_LAYER: "InfoLayer1.json"
+    INFO_LAYER: "InfoLayer1.json",
+    UPGRADE_POPUP: "UpgradePopup.json",
+    INFO_POPUP: "InfoPopup.json",
 }
 
 var res_shop = {

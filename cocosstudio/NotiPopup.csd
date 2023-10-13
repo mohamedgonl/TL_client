@@ -63,13 +63,13 @@
           <AbstractNodeData Name="button_ok" ActionTag="-2051986735" Tag="38" IconVisible="False" LeftMargin="20.2082" RightMargin="-157.2082" TopMargin="55.0000" BottomMargin="-115.0000" ctype="SpriteObjectData">
             <Size X="137.0000" Y="60.0000" />
             <Children>
-              <AbstractNodeData Name="ok_string" ActionTag="1506949770" Tag="45" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="68.5000" RightMargin="68.5000" TopMargin="30.0000" BottomMargin="30.0000" LabelText="" ctype="TextBMFontObjectData">
+              <AbstractNodeData Name="ok_string" ActionTag="1506949770" Tag="45" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="69.5754" RightMargin="67.4246" TopMargin="29.2543" BottomMargin="30.7457" LabelText="" ctype="TextBMFontObjectData">
                 <Size X="0.0000" Y="0.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="68.5000" Y="30.0000" />
+                <AnchorPoint ScaleX="0.6869" ScaleY="0.5233" />
+                <Position X="69.5754" Y="30.7457" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.5000" />
+                <PrePosition X="0.5078" Y="0.5124" />
                 <PreSize X="0.0000" Y="0.0000" />
                 <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
               </AbstractNodeData>
@@ -97,14 +97,14 @@
           <AbstractNodeData Name="button_cancle" ActionTag="675037721" Tag="39" IconVisible="False" LeftMargin="-154.6863" RightMargin="13.6863" TopMargin="55.0000" BottomMargin="-115.0000" ctype="SpriteObjectData">
             <Size X="141.0000" Y="60.0000" />
             <Children>
-              <AbstractNodeData Name="cancle_string" ActionTag="-798891540" Tag="43" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="70.5000" RightMargin="70.5000" TopMargin="30.0000" BottomMargin="30.0000" LabelText="" ctype="TextBMFontObjectData">
-                <Size X="0.0000" Y="0.0000" />
+              <AbstractNodeData Name="cancle_string" ActionTag="-798891540" Tag="43" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="31.5000" RightMargin="31.5000" TopMargin="17.5000" BottomMargin="17.5000" LabelText="HỦY BỎ" ctype="TextBMFontObjectData">
+                <Size X="78.0000" Y="25.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="70.5000" Y="30.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.5000" />
-                <PreSize X="0.0000" Y="0.0000" />
+                <PreSize X="0.5532" Y="0.4167" />
                 <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
               </AbstractNodeData>
             </Children>

@@ -5,10 +5,10 @@ var ElixirMine = Building.extend({
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
 
-
-
-        // var upper_sprite = res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level] + "/image0000.png";
-        // this.loadSprite(res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level],upper_sprite,1);
+        let config = LoadManager.Instance().getConfig(this._type,this._level);
+        this._currentElixir = 0;
+        this._capacityElixir = config.capacity;
+        this._productionElixir = config.productivity;
     },
     onAddIntoMapManager: function () {
         this._super();

@@ -123,7 +123,8 @@ var Building = GameObject.extend({
         this._arrow_move.setAnchorPoint(0.5,0.5);
         this._arrow_move.setScale(SCALE_BUILDING_BODY);
         this._arrow_move.setVisible(false);
-        this.addChild(this._arrow_move);
+        // this._arrow_move.setGlobalZOrder(MAP_ZORDER_BUILDING+1)
+        this.addChild(this._arrow_move,ZORDER_BUILDING_EFFECT);
 
         //green square
         this._green_square = new cc.Sprite(res_map.SPRITE.GREEN_SQUARE[this._width]);
@@ -139,7 +140,7 @@ var Building = GameObject.extend({
 
 
         //name label
-        this._nameLabel = new cc.LabelBMFont(this._type, res.FONT.SOJI[FONT_SIZE_NAME_LABEL], 350, cc.TEXT_ALIGNMENT_CENTER);
+        this._nameLabel = new cc.LabelBMFont(BuildingInfo[this._type].name, res.FONT.SOJI[FONT_SIZE_NAME_LABEL], 350, cc.TEXT_ALIGNMENT_CENTER);
         this._nameLabel.setAnchorPoint(0.5,0.5);
         this._nameLabel.setPosition(0,80);
         this._nameLabel.setColor(new cc.Color(255, 255, 0));
@@ -196,10 +197,10 @@ var Building = GameObject.extend({
                 let priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
                 if(priceGold)
                 {
-                    infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,status,this.onClickUpgrade.bind(this),priceGold,"gold");
+                    infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,status,this.showPopupUpgrade.bind(this),priceGold,"gold");
                 }
                 else{
-                    infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,status,this.onClickUpgrade.bind(this),priceElixir,"elixir");
+                    infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,status,this.showPopupUpgrade.bind(this),priceElixir,"elixir");
                 }
             }
 
@@ -338,7 +339,9 @@ var Building = GameObject.extend({
         this._progressBar.setVisible(false);
         PlayerInfoManager.Instance().changeBuilder("current", 1);
         //unschedule update
-        this.loadButton();
+        let chosenBuilding = cc.director.getRunningScene().getMapLayer().getChosenBuilding();
+        if(chosenBuilding === this._id)
+                this.loadButton();
         this.unschedule(this.update);
     },
     completeBuild: function () {
@@ -348,7 +351,7 @@ var Building = GameObject.extend({
         this._level += 1;
         //set sprite for new level and update level label
         this._levelLabel.setString("Cấp " + this._level);
-        this.loadSpriteByLevel(this._level)
+        // this.loadSpriteByLevel(this._level)
         this.completeProcess();
     },
 
@@ -422,7 +425,7 @@ var Building = GameObject.extend({
     },
 
     onClickInfo: function () {
-        cc.log("onClickInfo " + this._id);
+        InfoPopup.appear(this);
     },
     //if valid, send to server
     onClickUpgrade: function () {
@@ -430,6 +433,20 @@ var Building = GameObject.extend({
         let priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
         if(!PlayerInfoManager.Instance().checkEnoughResource(priceGold, priceElixir)){
             cc.log("not enough resource");
+
+            //declare price, type is resource not enough
+            let priceCount;
+            let type;
+            if(priceGold)
+            {
+                priceCount = priceGold- PlayerInfoManager.Instance().getResource("gold");
+                type = "gold";
+            }
+            else{
+                priceCount = priceElixir - PlayerInfoManager.Instance().getResource("elixir");
+                type = "elixir";
+            }
+            NotEnoughResourcePopup.appear(priceCount, type);
             return;
         }
         if(!PlayerInfoManager.Instance().getBuilder().current){
@@ -438,7 +455,12 @@ var Building = GameObject.extend({
         }
         //send to server
         cc.log("send to server");
+
         testnetwork.connector.sendUpgradeBuilding(this._id);
+    },
+
+    onCheckResource: function () {
+
     },
 
     //on cancel, request to server
@@ -475,6 +497,7 @@ var Building = GameObject.extend({
         testnetwork.connector.sendQuickFinish(this._id);
     },
     quickFinish: function (){
+        cc.log("quick finish", this._id)
         switch (this._state){
             case 1:
                 this.completeBuild();
@@ -503,5 +526,29 @@ var Building = GameObject.extend({
 
     getLevel: function () {
         return this._level;
+    },
+    showPopupUpgrade: function () {
+        let popup = new UpgradePopup(this);
+        var popupLayer = cc.director.getRunningScene().popUpLayer;
+        popupLayer.setVisible(true);
+        popupLayer.addChild(popup);
+        popup.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
+    },
+    getState: function () {
+        return this._state;
+    },
+    getTimeLeft: function () {
+        if(this._state!= null)
+        {
+            return this._endTime - TimeManager.Instance().getCurrentTimeInSecond();
+        }
+        return null;
+    },
+
+    onReceivedQuickFinishOfAnother: function (packet) {
+        this.onClickUpgrade();
+    },
+    onReceivedBuyResourceByGem: function (packet) {
+        this.onClickUpgrade();
     }
 });
