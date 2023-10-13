@@ -29,7 +29,7 @@ var TrainTroopPopup = cc.Layer.extend({
         let popUp = this;
         PopupEffect.disappear(this, () => {
             popUp.setVisible(false);
-            popUp._trainPages[this._curPage].setVisible(false);
+            if(this._curPage) popUp._trainPages[this._curPage].setVisible(false);
             popUp.getParent().setVisible(false);
         })
     },

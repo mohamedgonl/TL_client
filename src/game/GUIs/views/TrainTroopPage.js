@@ -30,16 +30,17 @@ var TrainTroopPage = cc.Node.extend({
         prevButton.addClickEventListener(this.handleChangePage.bind(this, -1));
         nextButton.addClickEventListener(this.handleChangePage.bind(this, 1));
         closeButton.addClickEventListener(this.handleClosePopup.bind(this));
+        doneNowButton.addClickEventListener(this.handleClickDoneNow.bind(this));
 
         cc.eventManager.addCustomListener(TRAINING_EVENTS.TRAIN + this._curPage, this.handleTrainTroop.bind(this));
         cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE + this._curPage, this.handleCancleTroopTraining.bind(this));
-        cc.eventManager.addListener(clickEventListener(this.handleClickDoneNow.bind(this)), doneNowButton);
         cc.eventManager.addCustomListener(TRAINING_EVENTS.UPDATE_SPACE + this._curPage, this.updateSpace.bind(this));
+
 
 
         this.initListTroops();
         this.updateTrainingPopupTitle();
-
+        this._doneNowButton = doneNowButton;
         this.initTotalTrainingTime();
         this.addChild(node);
     },
@@ -59,10 +60,12 @@ var TrainTroopPage = cc.Node.extend({
         this.onCanCreateTrain(events);
     },
 
-    updateUI: function (time) {
+    updateUI: function (time, doNow = false) {
+
         if (this.checkAvailable()) {
             if (time) this._interval = time;
             this._isActive = true;
+            if(doNow) this.updateTrainTime();
             this.schedule(this.updateTrainTime, this._interval);
         }
     },
@@ -78,6 +81,7 @@ var TrainTroopPage = cc.Node.extend({
     },
 
     initListTroops: function () {
+        this._troopListItem = [];
         for (let i = 0; i < TROOPS_LIST.length; i++) {
             let troopCfgId = TROOPS_LIST[i].troopCfgId;
             let troopItem = new TroopListItem(troopCfgId, this._curPage, i);
@@ -87,7 +91,7 @@ var TrainTroopPage = cc.Node.extend({
                 ? LIST_TROOP_START_POS.y - TROOP_ITEM_SIZE - TROOP_ITEM_SPACING
                 : LIST_TROOP_START_POS.y
             troopItem.setPosition(posX, posY);
-            this._troopListItem.push()
+            this._troopListItem.push(troopItem)
             this._trainPopup.addChild(troopItem);
         }
     },
@@ -119,7 +123,9 @@ var TrainTroopPage = cc.Node.extend({
         let currentSpace = ArmyManager.Instance().getCurrentSpace();
         let maxSpace = ArmyManager.Instance().getMaxSpace();
         let barrackCurrentSpace = this._curBarrack.getTrainingSpace();
-        title.setString("Tổng số quân sau khi huấn luyện: " + (currentSpace + barrackCurrentSpace) + "/" + maxSpace);
+        let curCount =  (currentSpace + barrackCurrentSpace);
+        title.setString("Tổng số quân sau khi huấn luyện: " + curCount + "/" + maxSpace);
+        this.updateDoneNowButton(curCount <= maxSpace)
     },
 
     updateTrainingPopupTitle: function () {
@@ -132,13 +138,17 @@ var TrainTroopPage = cc.Node.extend({
     updateDoneNowPrice: function () {
         // update done now price
         let doneNowPrice = Math.ceil(this._totalTime / 60);
-        let buttonDoneNowString = this._trainContainer.getChildByName("button_done_now").getChildByName("done_now_cost");
+        let buttonDoneNowString = this._trainContainer.getChildByName("done_now_text").getChildByName("done_now_cost");
         buttonDoneNowString.setString(doneNowPrice);
     },
 
     updateTotalTimeString: function () {
         let totalTimeString = this._trainContainer.getChildByName("total_time_string");
         totalTimeString.setString(this._totalTime + "s");
+    },
+
+    updateDoneNowButton: function (available) {
+        this._doneNowButton.setEnabled(available);
     },
 
     initTotalTrainingTime: function () {
@@ -189,6 +199,7 @@ var TrainTroopPage = cc.Node.extend({
 
         let timeLeft = this._curBarrack.getLastTrainingTime() + curTroopTrainTime - TimeManager.Instance().getCurrentTimeInSecond();
         timeString.setString(timeLeft + "s");
+        this._timeLeft = timeLeft;
 
         let processBarPercent = (TimeManager.Instance().getCurrentTimeInSecond() - this._curBarrack.getLastTrainingTime()) / curTroopTrainTime * 100;
         processBar.setPercent(processBarPercent);
@@ -196,7 +207,7 @@ var TrainTroopPage = cc.Node.extend({
     },
 
     updateTrainTime: function () {
-
+        cc.log("DOING")
         let trainingQueue = this._curBarrack.getTrainingList();
         if (trainingQueue.length > 0) {
             let curTroopTrainTime = TroopUltis.getTrainingTime(trainingQueue[0].cfgId);
@@ -260,7 +271,6 @@ var TrainTroopPage = cc.Node.extend({
 
     onCanCreateTrain: function (events) {
         cc.log("ON CAN CREATE TRAIN ::::::::::::::::::::::::::" + JSON.stringify(events));
-
         events.map(event => {
 
             let troopCfgId = event.data.cfgId;
@@ -275,9 +285,12 @@ var TrainTroopPage = cc.Node.extend({
             if (!found) {
                 this.createNewItemInTrainingList(event)
             } else {
-                let item = this._trainingItems.find(e => e.getCfgId() === event.data.cfgId);
-                item.increaseCount(1);
+                let itemTraining = this._trainingItems.find(e => e.getCfgId() === event.data.cfgId);
+                itemTraining.increaseCount(1);
             }
+
+            let itemTroop = this._troopListItem.find(e => e._troopCfgId === event.data.cfgId);
+            itemTroop.increaseCount(1);
 
             this._totalTime = this._totalTime + TroopUltis.getTrainingTime(troopCfgId);
 
@@ -321,6 +334,7 @@ var TrainTroopPage = cc.Node.extend({
     },
 
     onDoneNowSuccess: function (data) {
+        cc.log("ON DONE NOW "+ JSON.stringify(data))
         this.stopUpdateUI();
         this._trainContainer.setVisible(false);
         ArmyManager.Instance().updateArmyAmount(this._curBarrack.getTrainingList(), this._curPage);
@@ -333,13 +347,15 @@ var TrainTroopPage = cc.Node.extend({
         this.cleanUI();
         this.updateTrainingPopupTitle();
         PlayerInfoManager.Instance().setResource({gem: data.gem});
+        let event = new cc.EventCustom(TRAINING_EVENTS.DONE_NOW + this._curPage);
+        cc.eventManager.dispatchEvent(event);
     },
 
     updateTrainingListItems: function (removedIndex) {
         this._trainingItems[removedIndex].increaseCount( - 1);
         if ( this._trainingItems[removedIndex].getCount() === 0) {
             // sắp xếp lại wait queue
-            for (let j = this._trainingItems.length - 1; j > i; j--) {
+            for (let j = this._trainingItems.length - 1; j > removedIndex; j--) {
                 this._trainingItems[j].setPositionX(this._trainingItems[j - 1].getPosition().x);
             }
             this._trainingItems[removedIndex].removeFromParent();
@@ -354,6 +370,7 @@ var TrainTroopPage = cc.Node.extend({
     onCancelTrainTroopSuccess: function (event) {
 
         let troopCfgId = event.data.cfgId;
+        let timeLeftBefore = this._timeLeft;
         this._curBarrack.removeFromTrainingList({
             cfgId: troopCfgId,
             count: 1,
@@ -367,9 +384,17 @@ var TrainTroopPage = cc.Node.extend({
                 this.updateTrainingListItems(i);
                 this.updateTrainingPopupTitle();
                 this.updateSpaceAfterTrainLabel();
-                this._totalTime = this._totalTime - TroopUltis.getTrainingTime(troopCfgId);
-                this.updateTotalTimeString();
 
+                let trainingTime = TroopUltis.getTrainingTime(troopCfgId);
+                if(i === 0) {
+                    this.updateCurrentTroopTimeInfo(trainingTime);
+                    let timeLeftAfter = this._timeLeft;
+                    this._totalTime -= timeLeftBefore || timeLeftAfter;
+                }
+                else {
+                    this._totalTime -= trainingTime;
+                }
+                this.updateTotalTimeString();
                 this.updateUI(1);
                 return;
             }

@@ -1326,6 +1326,7 @@
             <Image Name="close.png" />
             <Image Name="forward.png" />
             <Image Name="g_icon.png" />
+            <Image Name="gray_button.png" />
             <Image Name="icon_elixir.png" />
             <Image Name="info.png" />
             <Image Name="previous.png" />

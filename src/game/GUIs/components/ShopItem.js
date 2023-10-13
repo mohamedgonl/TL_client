@@ -185,40 +185,39 @@ var ShopItem = cc.Node.extend({
 
     handleTouchBuyButton: function (sender, type) {
         cc.log("CLICK BUY :::: ");
-        this._itemNode.setScale(1);
-        if (this._available === true) {
-            let gameScene = cc.director.getRunningScene();
-            let popUpLayer = gameScene.getPopUpLayer();
-            if (this._category === "category_ngankho") {
-                popUpLayer.disappear("shop", {closePopupLayer: true});
 
-                // create content in popup
-                let label = new cc.LabelBMFont("Bạn có muốn mua số tài nguyên còn thiếu?", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
-                label.setColor(new cc.Color(150, 78, 3));
-                let price = new cc.LabelBMFont(this._data.price, res.FONT.SOJI["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
-                price.setPositionY(-label.getContentSize().height);
-                let content = new cc.Node();
-                content.addChild(label);
-                content.addChild(price);
+        let gameScene = cc.director.getRunningScene();
+        let popUpLayer = gameScene.getPopUpLayer();
+        if (this._available === true && this._category === "category_ngankho") {
+            popUpLayer.disappear("shop", false);
 
-                let buyResPopup = new NotiPopup({
-                    title: "MUA TÀI NGUYÊN", acceptCallBack: () => {
-                        testnetwork.connector.sendBuyResourceRequest(this._data);
-                        popUpLayer.setVisible(false);
-                    }, content: content, cancleCallBack: () => {
-                        popUpLayer.setVisible(false);
-                        buyResPopup.removeFromParent(true)
-                    }
-                })
-                popUpLayer.addChild(buyResPopup)
-            } else {
-                var mapLayer = cc.director.getRunningScene().mapLayer;
-                popUpLayer.disappear("shop");
-                mapLayer.enterModeBuyBuilding(this._data.cfgId);
+            // create content in popup
+            let label = new cc.LabelBMFont("Bạn có muốn mua số tài nguyên còn thiếu?", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
+            label.setColor(new cc.Color(150, 78, 3));
+            let price = new cc.LabelBMFont(this._data.price, res.FONT.SOJI["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
+            price.setPositionY(-label.getContentSize().height);
+            let content = new cc.Node();
+            content.addChild(label);
+            content.addChild(price);
 
-            }
-        } else {
-            cc.log("CANT BUY :::: ");
+            let buyResPopup = new NotiPopup({
+                title: "MUA TÀI NGUYÊN", acceptCallBack: () => {
+                    testnetwork.connector.sendBuyResourceRequest(this._data);
+                    popUpLayer.setVisible(false);
+                }, content: content, cancleCallBack: () => {
+                    popUpLayer.setVisible(false);
+                    buyResPopup.removeFromParent(true)
+                }
+            })
+
+            popUpLayer.addChild(buyResPopup)
+
+        }
+
+        if (this._category !== "category_ngankho") {
+            var mapLayer = cc.director.getRunningScene().mapLayer;
+            popUpLayer.disappear("shop");
+            mapLayer.enterModeBuyBuilding(this._data.cfgId);
         }
 
     },

@@ -174,10 +174,12 @@ var InfoLayer = cc.Layer.extend({
     onTouchArmyAdd: function (sender, type) {
         if (type === 2) {
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
-            if (popUpLayer.isVisible()) {
-                popUpLayer.disappear();
-            } else {
-                popUpLayer.appear("train", {page: 0});
+            if(ArmyManager.Instance().getBarrackList().length){
+                if (popUpLayer.isVisible()) {
+                    popUpLayer.disappear("train");
+                } else {
+                    popUpLayer.appear("train", {page: 0});
+                }
             }
         }
     },

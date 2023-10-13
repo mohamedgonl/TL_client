@@ -49,11 +49,34 @@ var Troop = cc.Node.extend({
     initShadow: function () {
         let shadowUrl = this._cfgId === "ARM_4" ?  res_map.SPRITE.SHADOW.TROOP_BIG : res_map.SPRITE.SHADOW.TROOP_SMALL
         let shadow = new cc.Sprite(shadowUrl);
-
         shadow.setAnchorPoint(0.5, 0.5);
-        shadow.setScale(0.5);
         shadow.setOpacity(90)
-        shadow.setPosition(99, 93);
+
+        switch (this._cfgId) {
+            case "ARM_1":  {
+                shadow.setScale(0.7);
+                shadow.setPosition(99, 93);
+                break;
+            }
+            case "ARM_2" : {
+                shadow.setScale(0.5);
+                shadow.setPosition(67, 67);
+                break;
+            }
+            case "ARM_3": {
+                shadow.setScale(0.5);
+                shadow.setPosition(67, 67);
+                break;
+            }
+            case "ARM_4": {
+                shadow.setPosition(167, 160);
+                break;
+            }
+            default: {
+                cc.log("INIT SHADOW NOT FOUND :  " +this._cfgId)
+            }
+        }
+
         this.troop.addChild(shadow, -1);
 
     },
@@ -166,7 +189,9 @@ var Troop = cc.Node.extend({
 
         wayGrid.map((path, index) => {
             let targetPos = mapLayer.getLayerPositionFromGrid(path.x, path.y, true);
-            let run = cc.moveTo( this._moveSpeed / SPEED_TIME, targetPos);
+            let curPos = this.troop.getPosition();
+            let distance = cc.pDistance(curPos,targetPos);
+            let run = cc.moveTo( distance/(this._moveSpeed*10), targetPos);
             let direction = this.getDirection(index === 0 ? start : wayGrid[index - 1], path);
             let parallel;
             parallel = cc.spawn(...this.runAndMotionAction("run", direction), run);

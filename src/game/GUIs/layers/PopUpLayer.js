@@ -33,27 +33,22 @@ let PopupLayer = cc.Layer.extend({
                 this._trainTroopPopup.open(data.page);
                 break;
             }
-            case "pop_up" :  {
-
-            }
         }
-
-        // cc.log("TRAIN POPUP: ::::::::::::::::", this._trainTroopPopup.isVisible());
 
         popupScreen.setVisible(true);
         PopupEffect.appear(popupScreen);
 
     },
 
-    disappear: function (popUpId, data ={}) {
+    disappear: function (popUpId, closePopupLayer = true) {
         cc.log(this.isVisible())
         switch (popUpId) {
             case "shop": {
-                this._shopPopup.handleClickClose(data.closePopupLayer );
+                this._shopPopup.handleClickClose(closePopupLayer);
                 break;
             }
             case "train": {
-                // this._trainTroopPopup.close();
+                this._trainTroopPopup.close();
                 break;
             }
         }
