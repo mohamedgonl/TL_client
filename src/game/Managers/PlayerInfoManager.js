@@ -163,12 +163,16 @@ var PlayerInfoManager = cc.Layer.extend({
         let buildingList = MapManager.Instance().getAllBuilding();
         let minTime = null,
             minBuilding = null;
+
+        //get building complete soonest
         for (let i = 0; i < buildingList.length; i++) {
             let building = buildingList[i];
             if (building._state >0) {
-                let time = building._endTime - TimeManager.Instance().getCurrentTimeInSecond();
-                if (minTime == null || time < minTime) {
-                    minTime = time;
+                let timeLeft = building.getTimeLeft();
+                if(timeLeft == null) continue;
+
+                if (minTime == null || timeLeft < minTime) {
+                    minTime = timeLeft;
                     minBuilding = building;
                 }
             }

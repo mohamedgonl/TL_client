@@ -58,6 +58,7 @@
         "src/game/gamecfg/trainningConfig.js",
         "src/game/gamecfg/troopConfig.js",
         "src/game/gamecfg/infoConfig.js",
+        "src/game/GUIs/views/NotEnoughResourcePopup.js",
 
         "src/game/Managers/LoadManager.js",
         "src/game/Managers/TimeManager.js",
@@ -91,10 +92,10 @@
         "src/game/GUIs/views/TrainTroopPage.js",
         "src/game/GUIs/components/TroopListItem.js",
         "src/game/GUIs/components/TroopTrainingItem.js",
-        "src/game/GUIs/components/SelectedBuildingContainer.js",
         "src/game/GUIs/views/UpgradePopup.js",
         "src/game/GUIs/views/NotiPopup.js",
         "src/game/GUIs/views/CheatPopup.js",
+        "src/game/GUIs/views/InfoPopup.js",
 
         "src/game/GUIs/layers/InfoLayer.js",
         "src/game/GUIs/layers/PopUpLayer.js",

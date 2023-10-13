@@ -110,28 +110,16 @@ var MapLayer = cc.Layer.extend({
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
             onKeyPressed: function (keyCode) {
-                let building1 =  getBuildingFromType("BDH_1", 1, 1, 0, 0, 0, 0, 0);
-                let building2 =  getBuildingFromType("BDH_1", 1, 1, 0, 0, 0, 0, 0);
-                let building3 =  getBuildingFromType("BDH_1", 1, 1, 0, 0, 0, 0, 0);
-                let building4 =  getBuildingFromType("BDH_1", 1, 1, 0, 0, 0, 0, 0);
-                if (keyCode === cc.KEY.space) {
-                    //test upgrade popup
-                    var upgradePopup = new UpgradePopup(this.chosenBuilding);
-                    //add to info layer
-                    var popupLayer = cc.director.getRunningScene().popUpLayer;
-                    popupLayer.setVisible(true);
-                    popupLayer.addChild(upgradePopup);
-                    upgradePopup.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
-                }
-                if (keyCode === cc.KEY.x) {
 
-                    cc.log(JSON.stringify(this.getMapPosFromGridPos(cc.p(this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y))))
+                if (keyCode === cc.KEY.x) {
+                    NotEnoughResourcePopup.appear(1000, "gold", () => {
+                        cc.log("buy resource success");
+                    });
                 }
                 if (keyCode === cc.KEY.c) {
-                    this.addGameObjectToMapLayer(building3, 10, 10, 9999);
+
                 }
                 if (keyCode === cc.KEY.z) {
-                    this.addGameObjectToMapLayer(building4, 15, 15, 9999);
                 }
 
             }.bind(this)
@@ -146,12 +134,11 @@ var MapLayer = cc.Layer.extend({
             this.unSelectBuilding();
         }
         building.removeFromParent(true);
-
     },
 
     exitModeBuyBuilding: function () {
         if(this.chosenBuilding)
-            this.chosenBuilding.removeFromParent();
+            this.chosenBuilding.removeFromParent(true);
         this.chosenBuilding = null;
         this.onModeBuyBuilding = false;
         this.tempPosChosenBuilding = null;
@@ -162,7 +149,7 @@ var MapLayer = cc.Layer.extend({
 
     //check client, if valid, send to server to recheck
     acceptBuyBuilding: function () {
-        //check valid put building
+        //check valid put building   OK
         if (!MapManager.Instance().checkValidPutBuilding(this.chosenBuilding, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y)) {
             cc.log("invalid put building");
             return;
@@ -187,25 +174,7 @@ var MapLayer = cc.Layer.extend({
         cc.log("send buy building request",this.chosenBuilding._type,this.tempPosChosenBuilding.x,this.tempPosChosenBuilding.y)
         testnetwork.connector.sendBuyBuilding(this.chosenBuilding._type, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y);
 
-        // let error = 0;
-        // //get min id in list building
-        // let listBuilding = MapManager.Instance().getAllBuilding();
-        //
-        // let id = 1;
-        // for (let i = 0; i < listBuilding.length; i++) {
-        //     if (listBuilding[i]._id === id) {
-        //         id++;
-        //     } else break;
-        // }
-        //
-        // let type = this.chosenBuilding._type;
-        // let posX = this.tempPosChosenBuilding.x;
-        // let posY = this.tempPosChosenBuilding.y;
-        // let status = 1;
-        // let startTime = Date.now();
-        // let endTime = LoadManager.Instance().getConfig(type, 1, "buildTime") * 1000 + startTime || 0;
-        // this.onReceivedCheckBuyBuilding({error: error,id: id,type: type,posX: posX,posY: posY,
-        //                                         status: status,startTime: startTime,endTime: endTime});
+
     },
 
     //+ api buyBuilding: 2001
@@ -618,7 +587,9 @@ var MapLayer = cc.Layer.extend({
 
         //set chosen building
         this.selectBuilding(this.chosenBuilding);
-
     },
+    getChosenBuilding: function () {
+        return this.chosenBuilding;
+    }
 });
 

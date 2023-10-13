@@ -746,6 +746,8 @@ testnetwork.packetMap[gv.CMD.BUY_RESOURCE_BY_GEM] = fr.InPacket.extend(
             this.error = this.getError();
             if(this.error === 0) {
                 this.gem = this.getInt();
+                this.gold= this.getInt();
+                this.elixir = this.getInt();
             }
         }
     });

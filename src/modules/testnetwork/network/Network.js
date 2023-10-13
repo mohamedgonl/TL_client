@@ -330,13 +330,17 @@ testnetwork.Connector = cc.Class.extend({
         {
             cc.log("QUICK FINISH SUCCESS ::::::::: ");
 
-
             let id = packet.id;
             let gem = packet.gem;
             let building = MapManager.Instance().getBuildingById(id);
             //set resource gem to gem
             PlayerInfoManager.Instance().setResource({gem: gem});
             building.quickFinish();
+            //if chosenbuilding right now != building, call onReceivedQuickFinish of chosenbuilding
+            let chosenBuilding = cc.director.getRunningScene().getMapLayer().chosenBuilding;
+            if(chosenBuilding && chosenBuilding.id !== id) {
+                chosenBuilding.onReceivedQuickFinishOfAnother();
+            }
         }
     },
     onReceivedBuyResourceByGem: function (packet) {
@@ -347,8 +351,16 @@ testnetwork.Connector = cc.Class.extend({
         {
             cc.log("BUY RESOURCE BY GEM SUCCESS ::::::::: ");
             let gem = packet.gem;
-            PlayerInfoManager.Instance().setResource({gem: gem});
-            this.sendGetUserInfo();
+            let gold = packet.gold;
+            let elixir = packet.elixir;
+            PlayerInfoManager.Instance().setResource({gem: gem, gold: gold, elixir: elixir});
+            // this.sendGetUserInfo();
+            //get chosen building
+            let building = cc.director.getRunningScene().getMapLayer().chosenBuilding;
+
+            if(!building) return;
+            cc.log("building: ", building._type)
+            building.onReceivedBuyResourceByGem();
         }
     },
     sendGetUserInfo: function () {
@@ -490,13 +502,10 @@ testnetwork.Connector = cc.Class.extend({
     sendBuyResourceByGem: function (gold, elixir) {
         cc.log("SEND get resource");
         var pk = this.gameClient.getOutPacket(CmdSendBuyResourceByGem);
-        this.tempGold = gold;
-        this.tempElixir = elixir;
         pk.pack({gold, elixir});
         this.gameClient.sendPacket(pk);
     },
-    tempGold: null,
-    tempElixir: null,
+
 });
 
 

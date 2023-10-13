@@ -28,22 +28,5 @@
         <EnableHTML5Advanced Value="False" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="UpgradePopup.csd" />
-          <FilePathData Path="Layer1.csd" />
-          <FilePathData Path="LoginScene.csd" />
-          <FilePathData Path="ProcessBar.csd" />
-          <FilePathData Path="ShopPopUpLayer.csd" />
-          <FilePathData Path="CheatPopup.csd" />
-          <FilePathData Path="TroopListItem.csd" />
-          <FilePathData Path="TroopTrainPopup.csd" />
-          <FilePathData Path="InfoLayer1.csd" />
-          <FilePathData Path="NotiPopup.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="NotiPopup.csd" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>

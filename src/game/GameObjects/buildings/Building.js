@@ -140,7 +140,7 @@ var Building = GameObject.extend({
 
 
         //name label
-        this._nameLabel = new cc.LabelBMFont(this._type, res.FONT.SOJI[FONT_SIZE_NAME_LABEL], 350, cc.TEXT_ALIGNMENT_CENTER);
+        this._nameLabel = new cc.LabelBMFont(BuildingInfo[this._type].name, res.FONT.SOJI[FONT_SIZE_NAME_LABEL], 350, cc.TEXT_ALIGNMENT_CENTER);
         this._nameLabel.setAnchorPoint(0.5,0.5);
         this._nameLabel.setPosition(0,80);
         this._nameLabel.setColor(new cc.Color(255, 255, 0));
@@ -339,7 +339,9 @@ var Building = GameObject.extend({
         this._progressBar.setVisible(false);
         PlayerInfoManager.Instance().changeBuilder("current", 1);
         //unschedule update
-        this.loadButton();
+        let chosenBuilding = cc.director.getRunningScene().getMapLayer().getChosenBuilding();
+        if(chosenBuilding === this._id)
+                this.loadButton();
         this.unschedule(this.update);
     },
     completeBuild: function () {
@@ -349,7 +351,7 @@ var Building = GameObject.extend({
         this._level += 1;
         //set sprite for new level and update level label
         this._levelLabel.setString("Cấp " + this._level);
-        this.loadSpriteByLevel(this._level)
+        // this.loadSpriteByLevel(this._level)
         this.completeProcess();
     },
 
@@ -362,7 +364,7 @@ var Building = GameObject.extend({
             priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
             priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
         }
-
+        
         let returnGold = Math.floor(priceGold/2);
         let returnElixir = Math.floor(priceElixir/2);
         PlayerInfoManager.Instance().changeResource("gold", returnGold);
@@ -423,7 +425,7 @@ var Building = GameObject.extend({
     },
 
     onClickInfo: function () {
-        cc.log("onClickInfo " + this._id);
+        InfoPopup.appear(this);
     },
     //if valid, send to server
     onClickUpgrade: function () {
@@ -483,11 +485,11 @@ var Building = GameObject.extend({
         }
         if(!PlayerInfoManager.Instance().getBuilder().current){
             cc.log("not enough builder");
-
             return;
         }
         //send to server
         cc.log("send to server");
+
         testnetwork.connector.sendUpgradeBuilding(this._id);
     },
 
@@ -529,6 +531,7 @@ var Building = GameObject.extend({
         testnetwork.connector.sendQuickFinish(this._id);
     },
     quickFinish: function (){
+        cc.log("quick finish", this._id)
         switch (this._state){
             case 1:
                 this.completeBuild();
@@ -564,5 +567,22 @@ var Building = GameObject.extend({
         popupLayer.setVisible(true);
         popupLayer.addChild(popup);
         popup.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
+    },
+    getState: function () {
+        return this._state;
+    },
+    getTimeLeft: function () {
+        if(this._state!= null)
+        {
+            return this._endTime - TimeManager.Instance().getCurrentTimeInSecond();
+        }
+        return null;
+    },
+
+    onReceivedQuickFinishOfAnother: function (packet) {
+        this.onClickUpgrade();
+    },
+    onReceivedBuyResourceByGem: function (packet) {
+        this.onClickUpgrade();
     }
 });

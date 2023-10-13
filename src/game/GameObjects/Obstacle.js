@@ -212,7 +212,6 @@ var Obstacle = GameObject.extend({
         let priceElixir = LoadManager.Instance().getConfig(this._type,this._level,"elixir");
         if(playerInfoManager.getResource("gold") < priceGold || playerInfoManager.getResource("elixir") < priceElixir)
         {
-
             cc.log("not enough resource");
             //declare price, type is resource not enough
             let priceCount;
@@ -248,18 +247,12 @@ var Obstacle = GameObject.extend({
                 title: "THIẾU TÀI NGUYÊN",
                 acceptCallBack: () => {
                     //remove popup
-                    buyResPopup.removeFromParent(true);
+
+                    popUpLayer.setVisible(false);
                     if(type === "gold")
                         testnetwork.connector.sendBuyResourceByGem(priceCount,0);
                     else
                         testnetwork.connector.sendBuyResourceByGem(0,priceCount);
-
-                    //after 0.5s, check again
-                    setTimeout(()=>{
-                        popUpLayer.setVisible(false);
-                        this.onClickRemove();
-                    },500)
-
                 },
                 content: content,
                 cancleCallBack: () => {
@@ -290,12 +283,8 @@ var Obstacle = GameObject.extend({
                 acceptCallBack: () => {
                     //remove popup
                     popUpLayer.setVisible(false);
-                    buyResPopup.removeFromParent(true);
                     PlayerInfoManager.Instance().freeBuilderByGem();
-                    //after 0.5s, check again
-                    setTimeout(()=>{
-                        this.onClickRemove();
-                    },500)
+                    buyResPopup.removeFromParent(true);
                 },
                 content: content,
                 cancleCallBack: () => {
@@ -325,7 +314,10 @@ var Obstacle = GameObject.extend({
         }
     },
     onAddIntoMapManager: function () {
+    },
+    onReceivedBuyResourceByGem: function (packet) {
 
+      this.onClickRemove();
     },
     onClickQuickFinish: function () {
         cc.log("onClickQuickFinish:",this._id);
@@ -333,5 +325,18 @@ var Obstacle = GameObject.extend({
     },
     quickFinish: function (){
         this.completeRemove();
+    },
+    getState: function () {
+        return this._state;
+    },
+    getTimeLeft: function () {
+        if(this._state!= null)
+        {
+            return this._endTime - TimeManager.Instance().getCurrentTimeInSecond();
+        }
+        return null;
+    },
+    onReceivedQuickFinishOfAnother: function (packet) {
+        this.onClickRemove();
     }
 });
