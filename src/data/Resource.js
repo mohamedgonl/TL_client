@@ -138,7 +138,8 @@ var res_ui = {
     TROOPS_TRAINING_ITEM: "TroopTrainingItem.json",
     NOTI_POPUP: "NotiPopup.json",
     CHEAT_POPUP: "CheatPopup.json",
-    INFO_LAYER: "InfoLayer1.json"
+    INFO_LAYER: "InfoLayer1.json",
+    UPGRADE_POPUP: "UpgradePopup.json",
 }
 
 var res_shop = {

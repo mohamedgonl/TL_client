@@ -5,7 +5,8 @@ var InfoLayer = cc.Layer.extend({
     ctor: function () {
         this._super();
         this.init();
-
+        //size
+        cc.log("InfoLayer ctor:::::::::::::::",JSON.stringify(this.getContentSize()));
 
     },
 
@@ -22,6 +23,14 @@ var InfoLayer = cc.Layer.extend({
                 this[i.getName()] [j.getName()] = j;
             })
         })
+        //scale by width
+        node.setScaleX(cc.winSize.width/node.getContentSize().width);
+        node.setScaleY(cc.winSize.height/node.getContentSize().height);
+
+        // node.width = cc.winSize.width;
+        // node.height = cc.winSize.height;
+
+        // cc.log("================",JSON.stringify(node.getContentSize()));
         this.addChild(node);
         this.loadResources();
         this.addEventListener();
@@ -88,9 +97,6 @@ var InfoLayer = cc.Layer.extend({
         disabledSprite.setOpacity(100);
 
         var button = new cc.MenuItemSprite(normalSprite, selectedSprite, disabledSprite, callback, this);
-        if(status === 1) {
-            button.setEnabled(false);
-        }
 
         let labelText = new cc.LabelBMFont(text, res.FONT.SOJI[16], null, cc.TEXT_ALIGNMENT_CENTER);
         //label hien o giua duoi cua button
@@ -121,6 +127,11 @@ var InfoLayer = cc.Layer.extend({
                 //set position for icon in top right of button
                 iconSprite.setPosition(spriteWidth * 0.8, spriteHeight / 10 * 8);
             }
+            if(status === 1) {
+                //change color of text to red
+                labelResource.setColor(cc.color.RED);
+            }
+
         }
 
 

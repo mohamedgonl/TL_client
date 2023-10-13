@@ -29,6 +29,7 @@ gv.CMD.MOVE_BUILDING = 2008;
 gv.CMD.BUY_BUILDING = 2001;
 gv.CMD.REMOVE_OBSTACLE_SUCCESS = 2010;
 gv.CMD.QUICK_FINISH = 2013;
+gv.CMD.BUY_RESOURCE_BY_GEM = 4002;
 //quyet----------------------
 
 
@@ -366,6 +367,20 @@ CmdSendQuickFinish = fr.OutPacket.extend(
             this.updateSize();
         }
     });
+CmdSendBuyResourceByGem = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.BUY_RESOURCE_BY_GEM);
+        },
+        pack: function (data) {
+            this.packHeader();
+            this.putInt(data.gold);
+            this.putInt(data.elixir);
+            this.updateSize();
+        }
+    })
 
 
 
@@ -717,6 +732,19 @@ testnetwork.packetMap[gv.CMD.QUICK_FINISH] = fr.InPacket.extend(
             this.error = this.getError();
             if(this.error === 0) {
                 this.id = this.getInt();
+                this.gem = this.getInt();
+            }
+        }
+    });
+testnetwork.packetMap[gv.CMD.BUY_RESOURCE_BY_GEM] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        //gem
+        readData: function () {
+            this.error = this.getError();
+            if(this.error === 0) {
                 this.gem = this.getInt();
             }
         }

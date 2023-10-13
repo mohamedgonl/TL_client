@@ -155,6 +155,31 @@ var PlayerInfoManager = cc.Layer.extend({
         if (InfoLayer == null) return;
         InfoLayer.updateUI(data);
     },
+    // buyResourceByGem: function (gold, elixir, callback) {
+    //     callback();
+    // }
+    freeBuilderByGem: function (callback) {
+        //for all building in Map Manager, if building is complete soonest, free it
+        let buildingList = MapManager.Instance().getAllBuilding();
+        let minTime = null,
+            minBuilding = null;
+        for (let i = 0; i < buildingList.length; i++) {
+            let building = buildingList[i];
+            if (building._state >0) {
+                let time = building._endTime - TimeManager.Instance().getCurrentTimeInSecond();
+                if (minTime == null || time < minTime) {
+                    minTime = time;
+                    minBuilding = building;
+                }
+            }
+        }
+        cc.log("minTime: " + minTime);
+        if (minBuilding) {
+            minBuilding.onClickQuickFinish();
+        }
+        // if(callback)
+        // callback();
+    }
 })
 
 PlayerInfoManager.Instance = function () {

@@ -15,6 +15,61 @@
         "Tag": 104,
         "Children": [
           {
+            "ClipAble": false,
+            "ComboBoxIndex": 1,
+            "SingleColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "FirstColor": {
+              "R": 150,
+              "G": 200
+            },
+            "EndColor": {},
+            "ColorVector": {
+              "ScaleY": 1.0
+            },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 10.0,
+              "ScaleY": 10.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -100.0,
+            "RightMargin": -100.0,
+            "TopMargin": -100.0,
+            "BottomMargin": -100.0,
+            "Tag": 142,
+            "ActionTag": -214936337,
+            "Size": {
+              "X": 200.0,
+              "Y": 200.0
+            },
+            "Alpha": 76,
+            "Name": "Panel_1",
+            "ctype": "PanelObjectData"
+          },
+          {
             "FileData": {
               "Type": "Normal",
               "Path": "guis/research troop/nen 1.png",
@@ -128,7 +183,7 @@
                 "ctype": "ButtonObjectData"
               },
               {
-                "LabelText": "",
+                "LabelText": "13213132",
                 "LabelBMFontFile_CNB": {
                   "Type": "Normal",
                   "Path": "fonts/soji_24.fnt",
@@ -153,18 +208,18 @@
                   "Y": 0.9434
                 },
                 "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
+                  "X": 0.1854,
+                  "Y": 0.0798
                 },
-                "LeftMargin": 368.0063,
-                "RightMargin": 370.9937,
-                "TopMargin": 26.9453,
-                "BottomMargin": 449.0547,
+                "LeftMargin": 299.5063,
+                "RightMargin": 302.4937,
+                "TopMargin": 7.9453,
+                "BottomMargin": 430.0547,
                 "Tag": 117,
                 "ActionTag": 1763806342,
                 "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
+                  "X": 137.0,
+                  "Y": 38.0
                 },
                 "Name": "text",
                 "ctype": "TextBMFontObjectData"
@@ -213,6 +268,39 @@
                 },
                 "Name": "white_container",
                 "ctype": "SpriteObjectData"
+              },
+              {
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 369.6472,
+                  "Y": 151.9067
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": true,
+                "PrePosition": {
+                  "X": 0.5002,
+                  "Y": 0.3191
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 369.6472,
+                "RightMargin": 369.3528,
+                "TopMargin": 324.0933,
+                "BottomMargin": 151.9067,
+                "Tag": 126,
+                "ActionTag": -155888219,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "node_text",
+                "ctype": "SingleNodeObjectData"
               },
               {
                 "AnchorPoint": {},
@@ -278,39 +366,6 @@
                   "Y": 0.0
                 },
                 "Name": "node_infor",
-                "ctype": "SingleNodeObjectData"
-              },
-              {
-                "AnchorPoint": {},
-                "Position": {
-                  "X": 369.6472,
-                  "Y": 151.9067
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PrePosition": {
-                  "X": 0.5002,
-                  "Y": 0.3191
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": 369.6472,
-                "RightMargin": 369.3528,
-                "TopMargin": 324.0933,
-                "BottomMargin": 151.9067,
-                "Tag": 126,
-                "ActionTag": -155888219,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "node_text",
                 "ctype": "SingleNodeObjectData"
               },
               {
@@ -521,6 +576,48 @@
                 },
                 "Name": "btn_upgrade",
                 "ctype": "ButtonObjectData"
+              },
+              {
+                "LabelText": "Thời gian: 33d4m",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_16.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 159.9637,
+                  "Y": 226.5356
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.2165,
+                  "Y": 0.4759
+                },
+                "PreSize": {
+                  "X": 0.2287,
+                  "Y": 0.0525
+                },
+                "LeftMargin": 75.4637,
+                "RightMargin": 494.5363,
+                "TopMargin": 236.9644,
+                "BottomMargin": 214.0356,
+                "Tag": 133,
+                "ActionTag": -617701655,
+                "Size": {
+                  "X": 169.0,
+                  "Y": 25.0
+                },
+                "Name": "text_time",
+                "ctype": "TextBMFontObjectData"
               }
             ],
             "ActionTag": -1407817613,

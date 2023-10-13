@@ -123,7 +123,7 @@ var Building = GameObject.extend({
         this._arrow_move.setAnchorPoint(0.5,0.5);
         this._arrow_move.setScale(SCALE_BUILDING_BODY);
         this._arrow_move.setVisible(false);
-        this._arrow_move.setGlobalZOrder(99999999999999999)
+        // this._arrow_move.setGlobalZOrder(MAP_ZORDER_BUILDING+1)
         this.addChild(this._arrow_move,ZORDER_BUILDING_EFFECT);
 
         //green square
@@ -197,10 +197,10 @@ var Building = GameObject.extend({
                 let priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
                 if(priceGold)
                 {
-                    infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,status,this.onClickUpgrade.bind(this),priceGold,"gold");
+                    infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,status,this.showPopupUpgrade.bind(this),priceGold,"gold");
                 }
                 else{
-                    infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,status,this.onClickUpgrade.bind(this),priceElixir,"elixir");
+                    infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,status,this.showPopupUpgrade.bind(this),priceElixir,"elixir");
                 }
             }
 
@@ -431,15 +431,68 @@ var Building = GameObject.extend({
         let priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
         if(!PlayerInfoManager.Instance().checkEnoughResource(priceGold, priceElixir)){
             cc.log("not enough resource");
+
+            //declare price, type is resource not enough
+            let priceCount;
+            let type;
+            if(priceGold)
+            {
+                priceCount = priceGold- PlayerInfoManager.Instance().getResource("gold");
+                type = "gold";
+            }
+            else{
+                priceCount = priceElixir - PlayerInfoManager.Instance().getResource("elixir");
+                type = "elixir";
+            }
+
+            // create content in popup
+            let label = new cc.LabelBMFont("Bạn có muốn mua số tài nguyên còn thiếu?", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
+            label.setColor(new cc.Color(150, 78, 3));
+            let price = new cc.LabelBMFont(priceCount, res.FONT.SOJI["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
+            price.setPositionY(-label.getContentSize().height);
+            //gold thi chu vang, elixir thi chu hong
+            if(type === "gold")
+            {
+                price.setColor(cc.color.YELLOW);
+            }
+            else{
+                price.setColor(cc.color(255, 0, 255));
+            }
+            let content = new cc.Node();
+            content.addChild(label);
+            content.addChild(price);
+            let buyResPopup = new NotiPopup({
+                title: "THIẾU TÀI NGUYÊN",
+                acceptCallBack: () => {
+                    if(type === "gold")
+                    testnetwork.connector.sendBuyResourceByGem(priceCount,0);
+                    else
+                        testnetwork.connector.sendBuyResourceByGem(0,priceCount);
+                    popUpLayer.setVisible(false);
+                    this.onClickUpgrade();
+                },
+                content: content,
+                cancleCallBack: () => {
+                    popUpLayer.setVisible(false);
+                    buyResPopup.removeFromParent(true)
+                }
+            });
+            var popUpLayer = cc.director.getRunningScene().popUpLayer;
+            popUpLayer.addChild(buyResPopup)
             return;
         }
         if(!PlayerInfoManager.Instance().getBuilder().current){
             cc.log("not enough builder");
+
             return;
         }
         //send to server
         cc.log("send to server");
         testnetwork.connector.sendUpgradeBuilding(this._id);
+    },
+
+    onCheckResource: function () {
+
     },
 
     //on cancel, request to server
@@ -504,5 +557,12 @@ var Building = GameObject.extend({
 
     getLevel: function () {
         return this._level;
+    },
+    showPopupUpgrade: function () {
+        let popup = new UpgradePopup(this);
+        var popupLayer = cc.director.getRunningScene().popUpLayer;
+        popupLayer.setVisible(true);
+        popupLayer.addChild(popup);
+        popup.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
     }
 });

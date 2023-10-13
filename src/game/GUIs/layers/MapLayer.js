@@ -11,13 +11,15 @@ var MapLayer = cc.Layer.extend({
         //cc.log("+++++++++++++++++++++",JSON.stringify(this.getPosition(),null,2));
         this.setAnchorPoint(0,0);
         //create label hello world at 0,0
-        this.setPosition(cc.winSize.width/2,cc.winSize.height/2)
+        this.setPosition(cc.winSize.width/2,cc.winSize.height/2);
         this.tempPosChosenBuilding = {
             x: 0,
             y: 0
         }
         this.init();
-        // cc.log("init map layer",JSON.stringify(this.getPositionInMapLayer(40,0)) )
+
+
+
     },
     //init map layer with scale, add event, load background, load building
     init: function () {
@@ -113,10 +115,17 @@ var MapLayer = cc.Layer.extend({
                 let building3 =  getBuildingFromType("BDH_1", 1, 1, 0, 0, 0, 0, 0);
                 let building4 =  getBuildingFromType("BDH_1", 1, 1, 0, 0, 0, 0, 0);
                 if (keyCode === cc.KEY.space) {
-                    this.addGameObjectToMapLayer(building1, 1, 1, 9999);
+                    //test upgrade popup
+                    var upgradePopup = new UpgradePopup(this.chosenBuilding);
+                    //add to info layer
+                    var popupLayer = cc.director.getRunningScene().popUpLayer;
+                    popupLayer.setVisible(true);
+                    popupLayer.addChild(upgradePopup);
+                    upgradePopup.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
                 }
                 if (keyCode === cc.KEY.x) {
-                    this.addGameObjectToMapLayer(building2, 5, 5, 9999);
+
+                    cc.log(JSON.stringify(this.getMapPosFromGridPos(cc.p(this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y))))
                 }
                 if (keyCode === cc.KEY.c) {
                     this.addGameObjectToMapLayer(building3, 10, 10, 9999);
@@ -598,8 +607,10 @@ var MapLayer = cc.Layer.extend({
         this.chosenBuilding.setGridPosition(validPosition.x, validPosition.y);
         this.tempPosChosenBuilding = cc.p(validPosition.x, validPosition.y);
 
-        // this.setPosition(this.getScreenPosFromGridPos(validPosition));
-
+        //move screen to see building
+        let currentPos = this.getPosition();
+        let newPos = this.getMapPosFromGridPos(validPosition);
+        this.setPosition(cc.pSub(currentPos,newPos));
         this.limitBorder();
 
         //add building to layer to display

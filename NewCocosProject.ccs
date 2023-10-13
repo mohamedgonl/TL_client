@@ -1711,6 +1711,7 @@
         <Folder Name="ui-json" />
         <TmxFile Name="42x42map.tmx" />
         <Project Name="CheatPopup.csd" Type="Node" />
+        <Project Name="InfoLayer1.csd" Type="Layer" />
         <Project Name="ItemInfoPopup.csd" Type="Node" />
         <Project Name="Layer1.csd" Type="Layer" />
         <Project Name="LoginScene.csd" Type="Scene" />

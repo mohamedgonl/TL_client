@@ -92,6 +92,7 @@
         "src/game/GUIs/components/TroopListItem.js",
         "src/game/GUIs/components/TroopTrainingItem.js",
         "src/game/GUIs/components/SelectedBuildingContainer.js",
+        "src/game/GUIs/views/UpgradePopup.js",
         "src/game/GUIs/views/NotiPopup.js",
         "src/game/GUIs/views/CheatPopup.js",
 

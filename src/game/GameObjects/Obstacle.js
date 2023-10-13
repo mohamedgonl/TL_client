@@ -72,6 +72,7 @@ var Obstacle = GameObject.extend({
         this._arrowMove.setScale(SCALE_BUILDING_BODY);
         this._arrowMove.setAnchorPoint(0.5,0.5);
         this._arrowMove.setVisible(false);
+        this._arrowMove.setGlobalZOrder(MAP_ZORDER_GUI);
         this.addChild(this._arrowMove);
 
         //progress bar
@@ -211,12 +212,100 @@ var Obstacle = GameObject.extend({
         let priceElixir = LoadManager.Instance().getConfig(this._type,this._level,"elixir");
         if(playerInfoManager.getResource("gold") < priceGold || playerInfoManager.getResource("elixir") < priceElixir)
         {
+
             cc.log("not enough resource");
+            //declare price, type is resource not enough
+            let priceCount;
+            let type;
+            if(priceGold)
+            {
+                priceCount = priceGold- PlayerInfoManager.Instance().getResource("gold");
+                type = "gold";
+            }
+            else{
+                priceCount = priceElixir - PlayerInfoManager.Instance().getResource("elixir");
+                type = "elixir";
+            }
+
+            // create content in popup
+            let label = new cc.LabelBMFont("Bạn có muốn mua số tài nguyên còn thiếu?", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
+            label.setColor(new cc.Color(150, 78, 3));
+            let price = new cc.LabelBMFont(priceCount, res.FONT.SOJI["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
+            price.setPositionY(-label.getContentSize().height);
+            //gold thi chu vang, elixir thi chu hong
+            if(type === "gold")
+            {
+                price.setColor(cc.color.YELLOW);
+            }
+            else{
+                price.setColor(cc.color(255, 0, 255));
+            }
+            let content = new cc.Node();
+            content.addChild(label);
+            content.addChild(price);
+
+            let buyResPopup = new NotiPopup({
+                title: "THIẾU TÀI NGUYÊN",
+                acceptCallBack: () => {
+                    //remove popup
+                    buyResPopup.removeFromParent(true);
+                    if(type === "gold")
+                        testnetwork.connector.sendBuyResourceByGem(priceCount,0);
+                    else
+                        testnetwork.connector.sendBuyResourceByGem(0,priceCount);
+
+                    //after 0.5s, check again
+                    setTimeout(()=>{
+                        popUpLayer.setVisible(false);
+                        this.onClickRemove();
+                    },500)
+
+                },
+                content: content,
+                cancleCallBack: () => {
+                    popUpLayer.setVisible(false);
+                    buyResPopup.removeFromParent(true)
+                }
+            });
+            var popUpLayer = cc.director.getRunningScene().popUpLayer;
+            popUpLayer.addChild(buyResPopup)
+            popUpLayer.setVisible(true);
             return;
         }
+
         if(playerInfoManager.getBuilder().current <= 0)
         {
-            cc.log("not enough builder");
+            // create content in popup
+            let label = new cc.LabelBMFont("Bạn có muốn giải phóng thợ xây", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
+            label.setColor(new cc.Color(150, 78, 3));
+            // let price = new cc.LabelBMFont(priceCount, res.FONT.SOJI["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
+            // price.setPositionY(-label.getContentSize().height);
+            // //price mau xanh la
+            // price.setColor(cc.color(0, 255, 0));
+            let content = new cc.Node();
+            content.addChild(label);
+            // content.addChild(price);
+            let buyResPopup = new NotiPopup({
+                title: "THỢ XÂY BẬN HẾT",
+                acceptCallBack: () => {
+                    //remove popup
+                    popUpLayer.setVisible(false);
+                    buyResPopup.removeFromParent(true);
+                    PlayerInfoManager.Instance().freeBuilderByGem();
+                    //after 0.5s, check again
+                    setTimeout(()=>{
+                        this.onClickRemove();
+                    },500)
+                },
+                content: content,
+                cancleCallBack: () => {
+                    popUpLayer.setVisible(false);
+                    buyResPopup.removeFromParent(true)
+                }
+            });
+            var popUpLayer = cc.director.getRunningScene().popUpLayer;
+            popUpLayer.addChild(buyResPopup)
+            popUpLayer.setVisible(true);
             return;
         }
 
@@ -239,7 +328,7 @@ var Obstacle = GameObject.extend({
 
     },
     onClickQuickFinish: function () {
-        cc.log("onClickQuickFinish");
+        cc.log("onClickQuickFinish:",this._id);
         testnetwork.connector.sendQuickFinish(this._id);
     },
     quickFinish: function (){

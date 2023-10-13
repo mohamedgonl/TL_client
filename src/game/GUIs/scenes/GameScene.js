@@ -46,6 +46,23 @@ var GameScene = cc.Scene.extend({
     getMapLayer : function () {
         return this.mapLayer;
     },
+    getInfoLayer : function () {
+        return this.infoLayer;
+    },
+    onReceiveUserInfo: function (userInfo) {
+        cc.log("ON RECEIVE USER INFO ++++++++++++++++++++++ GAMESCENE")
+        PlayerInfoManager.Instance().setPlayerInfo({
+            name: userInfo.name,
+            avatar: userInfo.avatar,
+            level: userInfo.level,
+            rank: userInfo.rank
+        });
+        PlayerInfoManager.Instance().setResource({
+            gold: userInfo.gold,
+            elixir: userInfo.elixir,
+            gem: userInfo.gem,
+        });
+    },
 
 
 
