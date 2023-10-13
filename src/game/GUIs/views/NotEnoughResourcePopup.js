@@ -31,8 +31,8 @@ var NotEnoughResourcePopup = cc.Node.extend({
                     testnetwork.connector.sendBuyResourceByGem(0,amount);
                 popUpLayer.setVisible(false);
 
-                callback();
-
+                if(callback != null)
+                    callback();
             },
             content: content,
             cancleCallBack: () => {

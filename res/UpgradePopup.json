@@ -336,39 +336,6 @@
                 "ctype": "SingleNodeObjectData"
               },
               {
-                "AnchorPoint": {},
-                "Position": {
-                  "X": 488.5511,
-                  "Y": 325.7437
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": true,
-                "PrePosition": {
-                  "X": 0.6611,
-                  "Y": 0.6843
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": 488.5511,
-                "RightMargin": 250.4489,
-                "TopMargin": 150.2563,
-                "BottomMargin": 325.7437,
-                "Tag": 121,
-                "ActionTag": -1485816508,
-                "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Name": "node_infor",
-                "ctype": "SingleNodeObjectData"
-              },
-              {
                 "FontSize": 14,
                 "ButtonText": "",
                 "TextColor": {
@@ -627,6 +594,533 @@
             },
             "Name": "upgrade_container",
             "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/upgrade_building_gui/info_bar.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 140.0,
+              "Y": 129.5309
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -15.5,
+            "RightMargin": -295.5,
+            "TopMargin": -147.5309,
+            "BottomMargin": 111.5309,
+            "Tag": 167,
+            "Children": [
+              {
+                "ProgressInfo": 58,
+                "ImageFileData": {
+                  "Type": "Normal",
+                  "Path": "guis/upgrade_building_gui/info_bar_nextlv_BG.png",
+                  "Plist": ""
+                },
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 1.0,
+                  "Y": 1.0
+                },
+                "Tag": 171,
+                "ActionTag": -1926773720,
+                "Size": {
+                  "X": 311.0,
+                  "Y": 36.0
+                },
+                "Name": "bar_0",
+                "ctype": "LoadingBarObjectData"
+              },
+              {
+                "ProgressInfo": 45,
+                "ImageFileData": {
+                  "Type": "Normal",
+                  "Path": "guis/upgrade_building_gui/info_bar_BG.png",
+                  "Plist": ""
+                },
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 1.0,
+                  "Y": 1.0
+                },
+                "Tag": 168,
+                "ActionTag": 1085122669,
+                "Size": {
+                  "X": 311.0,
+                  "Y": 36.0
+                },
+                "Name": "bar",
+                "ctype": "LoadingBarObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "guis/upgrade_building_gui/small/Elixir_Capacity_Icon.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5
+                },
+                "Position": {
+                  "X": -15.0,
+                  "Y": 0.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": -0.0482,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.1125,
+                  "Y": 1.1389
+                },
+                "LeftMargin": -32.5,
+                "RightMargin": 308.5,
+                "TopMargin": -5.0,
+                "Tag": 169,
+                "ActionTag": -877883930,
+                "Size": {
+                  "X": 35.0,
+                  "Y": 41.0
+                },
+                "Name": "icon",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "LabelText": "Sức chứa: 18.000/50000",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_12.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 40.7352,
+                  "Y": 22.4956
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.131,
+                  "Y": 0.6249
+                },
+                "PreSize": {
+                  "X": 0.6367,
+                  "Y": 0.5278
+                },
+                "LeftMargin": 40.7352,
+                "RightMargin": 72.2648,
+                "TopMargin": -5.4956,
+                "BottomMargin": 22.4956,
+                "Tag": 170,
+                "ActionTag": -1827211405,
+                "Size": {
+                  "X": 198.0,
+                  "Y": 19.0
+                },
+                "Name": "text",
+                "ctype": "TextBMFontObjectData"
+              }
+            ],
+            "ActionTag": 978176125,
+            "Size": {
+              "X": 311.0,
+              "Y": 36.0
+            },
+            "Name": "progress1",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/upgrade_building_gui/info_bar.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 140.0,
+              "Y": 75.6196
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -15.5,
+            "RightMargin": -295.5,
+            "TopMargin": -93.6196,
+            "BottomMargin": 57.6196,
+            "Tag": 163,
+            "Children": [
+              {
+                "ProgressInfo": 100,
+                "ImageFileData": {
+                  "Type": "Normal",
+                  "Path": "guis/upgrade_building_gui/info_bar_BG.png",
+                  "Plist": ""
+                },
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 1.0,
+                  "Y": 1.0
+                },
+                "Tag": 164,
+                "ActionTag": -2127178493,
+                "Size": {
+                  "X": 311.0,
+                  "Y": 36.0
+                },
+                "Name": "bar",
+                "ctype": "LoadingBarObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "guis/upgrade_building_gui/small/Elixir_ProductionRate_Icon.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5
+                },
+                "Position": {
+                  "X": -15.0,
+                  "Y": 0.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": -0.0482,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0868,
+                  "Y": 0.9444
+                },
+                "LeftMargin": -28.5,
+                "RightMargin": 312.5,
+                "TopMargin": 2.0,
+                "Tag": 165,
+                "ActionTag": -514118926,
+                "Size": {
+                  "X": 27.0,
+                  "Y": 34.0
+                },
+                "Name": "icon",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "LabelText": "Sức chứa: 18.000/50000",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_12.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 41.7469,
+                  "Y": 23.0074
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.1342,
+                  "Y": 0.6391
+                },
+                "PreSize": {
+                  "X": 0.6367,
+                  "Y": 0.5278
+                },
+                "LeftMargin": 41.7469,
+                "RightMargin": 71.2531,
+                "TopMargin": -6.0074,
+                "BottomMargin": 23.0074,
+                "Tag": 166,
+                "ActionTag": -61813749,
+                "Size": {
+                  "X": 198.0,
+                  "Y": 19.0
+                },
+                "Name": "text",
+                "ctype": "TextBMFontObjectData"
+              }
+            ],
+            "ActionTag": 1247363917,
+            "Size": {
+              "X": 311.0,
+              "Y": 36.0
+            },
+            "Name": "progress2",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/upgrade_building_gui/info_bar.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 140.0,
+              "Y": 27.3174
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -15.5,
+            "RightMargin": -295.5,
+            "TopMargin": -45.3174,
+            "BottomMargin": 9.3174,
+            "Tag": 159,
+            "Children": [
+              {
+                "ProgressInfo": 100,
+                "ImageFileData": {
+                  "Type": "Normal",
+                  "Path": "guis/upgrade_building_gui/info_bar_BG.png",
+                  "Plist": ""
+                },
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 1.0,
+                  "Y": 1.0
+                },
+                "Tag": 160,
+                "ActionTag": 545986114,
+                "Size": {
+                  "X": 311.0,
+                  "Y": 36.0
+                },
+                "Name": "bar",
+                "ctype": "LoadingBarObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "guis/upgrade_building_gui/small/Heal_Icon.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5
+                },
+                "Position": {
+                  "X": -15.0,
+                  "Y": 0.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": -0.0482,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0997,
+                  "Y": 0.8611
+                },
+                "LeftMargin": -30.5,
+                "RightMargin": 310.5,
+                "TopMargin": 5.0,
+                "Tag": 161,
+                "ActionTag": -1478217581,
+                "Size": {
+                  "X": 31.0,
+                  "Y": 31.0
+                },
+                "Name": "icon",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "LabelText": "Sức chứa: 18.000/50000",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_12.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 40.2281,
+                  "Y": 21.4228
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.1294,
+                  "Y": 0.5951
+                },
+                "PreSize": {
+                  "X": 0.6367,
+                  "Y": 0.5278
+                },
+                "LeftMargin": 40.2281,
+                "RightMargin": 72.7719,
+                "TopMargin": -4.4228,
+                "BottomMargin": 21.4228,
+                "Tag": 162,
+                "ActionTag": -1183684028,
+                "Size": {
+                  "X": 198.0,
+                  "Y": 19.0
+                },
+                "Name": "text",
+                "ctype": "TextBMFontObjectData"
+              }
+            ],
+            "ActionTag": 856981804,
+            "Size": {
+              "X": 311.0,
+              "Y": 36.0
+            },
+            "Name": "progress3",
+            "ctype": "SpriteObjectData"
           }
         ],
         "Size": {
@@ -637,6 +1131,8 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
+        "fonts/soji_12.fnt",
+        "fonts/soji_12.png",
         "fonts/soji_16.fnt",
         "fonts/soji_16.png",
         "fonts/soji_24.fnt",
@@ -646,7 +1142,13 @@
         "guis/research troop/mieng trang.png",
         "guis/research troop/nen 1.png",
         "guis/shop_gui/elixir.png",
-        "guis/shop_gui/gold.png"
+        "guis/shop_gui/gold.png",
+        "guis/upgrade_building_gui/info_bar.png",
+        "guis/upgrade_building_gui/info_bar_BG.png",
+        "guis/upgrade_building_gui/info_bar_nextlv_BG.png",
+        "guis/upgrade_building_gui/small/Elixir_Capacity_Icon.png",
+        "guis/upgrade_building_gui/small/Elixir_ProductionRate_Icon.png",
+        "guis/upgrade_building_gui/small/Heal_Icon.png"
       ],
       "ctype": "GameFileData"
     }

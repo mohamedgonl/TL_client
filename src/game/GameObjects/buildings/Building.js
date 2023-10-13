@@ -364,7 +364,7 @@ var Building = GameObject.extend({
             priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
             priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
         }
-        
+
         let returnGold = Math.floor(priceGold/2);
         let returnElixir = Math.floor(priceElixir/2);
         PlayerInfoManager.Instance().changeResource("gold", returnGold);
@@ -446,41 +446,7 @@ var Building = GameObject.extend({
                 priceCount = priceElixir - PlayerInfoManager.Instance().getResource("elixir");
                 type = "elixir";
             }
-
-            // create content in popup
-            let label = new cc.LabelBMFont("Bạn có muốn mua số tài nguyên còn thiếu?", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
-            label.setColor(new cc.Color(150, 78, 3));
-            let price = new cc.LabelBMFont(priceCount, res.FONT.SOJI["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
-            price.setPositionY(-label.getContentSize().height);
-            //gold thi chu vang, elixir thi chu hong
-            if(type === "gold")
-            {
-                price.setColor(cc.color.YELLOW);
-            }
-            else{
-                price.setColor(cc.color(255, 0, 255));
-            }
-            let content = new cc.Node();
-            content.addChild(label);
-            content.addChild(price);
-            let buyResPopup = new NotiPopup({
-                title: "THIẾU TÀI NGUYÊN",
-                acceptCallBack: () => {
-                    if(type === "gold")
-                    testnetwork.connector.sendBuyResourceByGem(priceCount,0);
-                    else
-                        testnetwork.connector.sendBuyResourceByGem(0,priceCount);
-                    popUpLayer.setVisible(false);
-                    this.onClickUpgrade();
-                },
-                content: content,
-                cancleCallBack: () => {
-                    popUpLayer.setVisible(false);
-                    buyResPopup.removeFromParent(true)
-                }
-            });
-            var popUpLayer = cc.director.getRunningScene().popUpLayer;
-            popUpLayer.addChild(buyResPopup)
+            NotEnoughResourcePopup.appear(priceCount, type);
             return;
         }
         if(!PlayerInfoManager.Instance().getBuilder().current){
