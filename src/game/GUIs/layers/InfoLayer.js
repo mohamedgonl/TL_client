@@ -12,7 +12,15 @@ var InfoLayer = cc.Layer.extend({
 
     //init UI, add to layer, init attributes, load resources
     init: function () {
+        // var json = ccs.load(res_v2.studio.json.zcsd.game.player_info.LayerPlayerInfoInGame, res.ZCSD_ROOT);
+        // this._rootNode = json.node;
+        // this._rootNode.setContentSize(cc.winSize);
+        // ccui.helper.doLayout(this._rootNode);
+        // this.addChild(this._rootNode);
+
         var node = CCSUlties.parseUIFile(res_ui.INFO_LAYER);
+        node.setContentSize(cc.winSize);
+        ccui.helper.doLayout(node);
         //for all child in node, add to layer
         let children = node.getChildren();
         //add to attribute
@@ -24,8 +32,8 @@ var InfoLayer = cc.Layer.extend({
             })
         })
         //scale by width
-        node.setScaleX(cc.winSize.width/node.getContentSize().width);
-        node.setScaleY(cc.winSize.height/node.getContentSize().height);
+        // node.setScaleX(cc.winSize.width/node.getContentSize().width);
+        // node.setScaleY(cc.winSize.height/node.getContentSize().height);
 
         // node.width = cc.winSize.width;
         // node.height = cc.winSize.height;
@@ -49,14 +57,16 @@ var InfoLayer = cc.Layer.extend({
         this.addChild(this.menu, 9999999999);
         this.menu.alignItemsHorizontallyWithPadding(10);
 
-        //cheat btn
-        const btnCheat = new ccui.Button();
-        btnCheat.setTitleText("CHEAT");
-        btnCheat.setTitleFontSize(24);
-        btnCheat.setPosition(1030, 460);
+        // //cheat btn
+        // const btnCheat = new ccui.Button();
+        // btnCheat.setTitleText("CHEAT");
+        // btnCheat.setTitleFontSize(24);
+        // btnCheat.setPosition(1030, 460);
+        //
+        // btnCheat.addTouchEventListener(this.onClickBtnCheat, this);
+        // this.addChild(btnCheat);
 
-        btnCheat.addTouchEventListener(this.onClickBtnCheat, this);
-        this.addChild(btnCheat);
+        this.btn_setting.addTouchEventListener(this.onClickBtnCheat, this);
     },
 
     onClickBtnCheat: function (sender, type) {

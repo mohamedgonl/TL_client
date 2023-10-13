@@ -1725,6 +1725,7 @@
         <Project Name="TroopTrainPopup.csd" Type="Node" />
         <Project Name="UpgradePopup.csd" Type="Node" />
         <Project Name="InfoPopup.csd" Type="Node" />
+        <Project Name="Layer1.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>
