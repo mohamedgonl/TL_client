@@ -1,5 +1,5 @@
 {
-  "ID": "b735fbad-142b-469a-b39a-8c4bb16500db",
+  "ID": "734bfd62-2fcf-40e2-a039-574e289494ac",
   "Version": "3.10.0.0",
   "Name": "Layer1",
   "Content": {
@@ -12,9 +12,9 @@
       },
       "AnimationList": [],
       "ObjectData": {
-        "Tag": 116,
+        "Tag": 172,
         "Size": {
-          "X": 960.0,
+          "X": 1136.0,
           "Y": 640.0
         },
         "Name": "Layer",

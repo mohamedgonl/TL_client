@@ -5,13 +5,22 @@ var InfoLayer = cc.Layer.extend({
     ctor: function () {
         this._super();
         this.init();
-
+        //size
+        cc.log("InfoLayer ctor:::::::::::::::",JSON.stringify(this.getContentSize()));
 
     },
 
     //init UI, add to layer, init attributes, load resources
     init: function () {
+        // var json = ccs.load(res_v2.studio.json.zcsd.game.player_info.LayerPlayerInfoInGame, res.ZCSD_ROOT);
+        // this._rootNode = json.node;
+        // this._rootNode.setContentSize(cc.winSize);
+        // ccui.helper.doLayout(this._rootNode);
+        // this.addChild(this._rootNode);
+
         var node = CCSUlties.parseUIFile(res_ui.INFO_LAYER);
+        node.setContentSize(cc.winSize);
+        ccui.helper.doLayout(node);
         //for all child in node, add to layer
         let children = node.getChildren();
         //add to attribute
@@ -22,6 +31,14 @@ var InfoLayer = cc.Layer.extend({
                 this[i.getName()] [j.getName()] = j;
             })
         })
+        //scale by width
+        // node.setScaleX(cc.winSize.width/node.getContentSize().width);
+        // node.setScaleY(cc.winSize.height/node.getContentSize().height);
+
+        // node.width = cc.winSize.width;
+        // node.height = cc.winSize.height;
+
+        // cc.log("================",JSON.stringify(node.getContentSize()));
         this.addChild(node);
         this.loadResources();
         this.addEventListener();
@@ -40,14 +57,16 @@ var InfoLayer = cc.Layer.extend({
         this.addChild(this.menu, 9999999999);
         this.menu.alignItemsHorizontallyWithPadding(10);
 
-        //cheat btn
-        const btnCheat = new ccui.Button();
-        btnCheat.setTitleText("CHEAT");
-        btnCheat.setTitleFontSize(24);
-        btnCheat.setPosition(1030, 460);
+        // //cheat btn
+        // const btnCheat = new ccui.Button();
+        // btnCheat.setTitleText("CHEAT");
+        // btnCheat.setTitleFontSize(24);
+        // btnCheat.setPosition(1030, 460);
+        //
+        // btnCheat.addTouchEventListener(this.onClickBtnCheat, this);
+        // this.addChild(btnCheat);
 
-        btnCheat.addTouchEventListener(this.onClickBtnCheat, this);
-        this.addChild(btnCheat);
+        this.btn_setting.addTouchEventListener(this.onClickBtnCheat, this);
     },
 
     onClickBtnCheat: function (sender, type) {
@@ -88,9 +107,6 @@ var InfoLayer = cc.Layer.extend({
         disabledSprite.setOpacity(100);
 
         var button = new cc.MenuItemSprite(normalSprite, selectedSprite, disabledSprite, callback, this);
-        if(status === 1) {
-            button.setEnabled(false);
-        }
 
         let labelText = new cc.LabelBMFont(text, res.FONT.SOJI[16], null, cc.TEXT_ALIGNMENT_CENTER);
         //label hien o giua duoi cua button
@@ -121,6 +137,11 @@ var InfoLayer = cc.Layer.extend({
                 //set position for icon in top right of button
                 iconSprite.setPosition(spriteWidth * 0.8, spriteHeight / 10 * 8);
             }
+            if(status === 1) {
+                //change color of text to red
+                labelResource.setColor(cc.color.RED);
+            }
+
         }
 
 

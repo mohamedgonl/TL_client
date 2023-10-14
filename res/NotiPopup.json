@@ -278,12 +278,12 @@
                   "Plist": ""
                 },
                 "AnchorPoint": {
-                  "ScaleX": 0.5,
-                  "ScaleY": 0.5
+                  "ScaleX": 0.6869,
+                  "ScaleY": 0.5233
                 },
                 "Position": {
-                  "X": 68.5,
-                  "Y": 30.0
+                  "X": 69.5754,
+                  "Y": 30.7457
                 },
                 "Scale": {
                   "ScaleX": 1.0,
@@ -294,17 +294,17 @@
                 "PositionPercentXEnabled": true,
                 "PositionPercentYEnabled": true,
                 "PrePosition": {
-                  "X": 0.5,
-                  "Y": 0.5
+                  "X": 0.5078,
+                  "Y": 0.5124
                 },
                 "PreSize": {
                   "X": 0.0,
                   "Y": 0.0
                 },
-                "LeftMargin": 68.5,
-                "RightMargin": 68.5,
-                "TopMargin": 30.0,
-                "BottomMargin": 30.0,
+                "LeftMargin": 69.5754,
+                "RightMargin": 67.4246,
+                "TopMargin": 29.2543,
+                "BottomMargin": 30.7457,
                 "Tag": 45,
                 "ActionTag": 1506949770,
                 "Size": {
@@ -409,7 +409,7 @@
             "Tag": 39,
             "Children": [
               {
-                "LabelText": "",
+                "LabelText": "HỦY BỎ",
                 "LabelBMFontFile_CNB": {
                   "Type": "Normal",
                   "Path": "fonts/soji_16.fnt",
@@ -436,18 +436,18 @@
                   "Y": 0.5
                 },
                 "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
+                  "X": 0.5532,
+                  "Y": 0.4167
                 },
-                "LeftMargin": 70.5,
-                "RightMargin": 70.5,
-                "TopMargin": 30.0,
-                "BottomMargin": 30.0,
+                "LeftMargin": 31.5,
+                "RightMargin": 31.5,
+                "TopMargin": 17.5,
+                "BottomMargin": 17.5,
                 "Tag": 43,
                 "ActionTag": -798891540,
                 "Size": {
-                  "X": 0.0,
-                  "Y": 0.0
+                  "X": 78.0,
+                  "Y": 25.0
                 },
                 "Name": "cancle_string",
                 "ctype": "TextBMFontObjectData"

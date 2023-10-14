@@ -8,8 +8,12 @@ var LoginView = cc.Scene.extend({
         const size = cc.director.getVisibleSize();
         const node = CCSUlties.parseUIFile(res_ui.LOGIN_SCENE);
 
+
         node.setAnchorPoint(0, 0);
         node.setPosition(0, 0);
+
+        //set scale by width height
+        node.setScale(size.width / node.width, size.height / node.height);
 
         const loginButton = node.getChildByName("button-login");
         loginButton.addTouchEventListener(this.handleClickLogin, this);

@@ -1,8 +1,4 @@
 var Townhall = Building.extend({
-    gold: null,
-    elixir: null,
-    capacityGold: null,
-    capacityElixir: null,
     _type: "TOW_1",
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
@@ -16,10 +12,10 @@ var Townhall = Building.extend({
     init: function () {
         let config = LoadManager.Instance().getConfig(this._type,this._level);
         //chua lam gold va elixir
-        this.gold = 0;
-        this.elixir = 0;
-        this.capacityGold = config.capacityGold;
-        this.capacityElixir = config.capacityElixir;
+        this._currentGold = 0;
+        this._currentElixir = 0;
+        this._capacityGold = config.capacityGold;
+        this._capacityElixir = config.capacityElixir;
     },
     onAddIntoMapManager: function () {
         this._super();

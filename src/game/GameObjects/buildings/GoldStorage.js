@@ -9,6 +9,10 @@ var GoldStorage = Building.extend({
         // this.loadSubSprite();
         this.update();
         this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
+        let config = LoadManager.Instance().getConfig(this._type,this._level);
+        this._currentGold = 0;
+        this._capacityGold = config.capacity;
+
     },
     loadSpriteByLevel: function (level) {
         this.loadSprite(res_map.SPRITE.BODY.GOLD_STORAGE[level][0],null,1);

@@ -14,9 +14,7 @@ var ShopItem = cc.Node.extend({
         this._category = category;
         this.setItemInfo(data, category);
         this.checkValid();
-
         this.addChild(node);
-
     },
 
     checkValid: function () {

@@ -23,7 +23,12 @@ testnetwork.Connector = cc.Class.extend({
                 fr.getCurrentScreen().onFinishLogin();
                 break;
             case gv.CMD.USER_INFO:
+                // neu this khong co onReceiveUserInfo thi se goi cua fr.getCurrentScreen()
+                if(fr.getCurrentScreen() == null)
+                    cc.director.getRunningScene().onReceiveUserInfo(packet);
+                else
                 fr.getCurrentScreen().onReceiveUserInfo(packet);
+
                 break;
             case gv.CMD.MAP_INFO:
                 fr.getCurrentScreen().onReceiveMapInfo(packet);
@@ -103,9 +108,12 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log("QUICK_FINISH", packet);
                 this.onReceivedQuickFinish(packet);
                 break;
+            case gv.CMD.BUY_RESOURCE_BY_GEM:
+                cc.log("BUY_RESOURCE_BY_GEM", JSON.stringify(packet, null, 2));
+                this.onReceivedBuyResourceByGem(packet);
+                break;
         }
     },
-
     onReceiveTrainTroopSuccess: function(packet) {
         if(packet.getError() !== ErrorCode.SUCCESS) {
             cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
@@ -211,7 +219,7 @@ testnetwork.Connector = cc.Class.extend({
             let mapLayer = cc.director.getRunningScene().mapLayer;
             let building = getBuildingFromType(packet.type, 1, packet.id, packet.posX, packet.posY,packet.status,packet.startTime,packet.endTime);
             MapManager.Instance().addBuilding(building);
-            mapLayer.addBuildingToLayer(building,null);
+            mapLayer.addBuildingToLayer(building);
             // cc.log("----------------------------------------");
             mapLayer.exitModeBuyBuilding();
             // cc.log("++++++++++++++++++++++++++++++++++++++++");
@@ -321,12 +329,38 @@ testnetwork.Connector = cc.Class.extend({
         else
         {
             cc.log("QUICK FINISH SUCCESS ::::::::: ");
-            let building = cc.director.getRunningScene().mapLayer.chosenBuilding;
 
+            let id = packet.id;
             let gem = packet.gem;
+            let building = MapManager.Instance().getBuildingById(id);
             //set resource gem to gem
             PlayerInfoManager.Instance().setResource({gem: gem});
             building.quickFinish();
+            //if chosenbuilding right now != building, call onReceivedQuickFinish of chosenbuilding
+            let chosenBuilding = cc.director.getRunningScene().getMapLayer().chosenBuilding;
+            if(chosenBuilding && chosenBuilding.id !== id) {
+                chosenBuilding.onReceivedQuickFinishOfAnother();
+            }
+        }
+    },
+    onReceivedBuyResourceByGem: function (packet) {
+        if(packet.error !==0){
+            cc.log("BUY RESOURCE BY GEM ERROR with code ::::::::: ", packet.error);
+        }
+        else
+        {
+            cc.log("BUY RESOURCE BY GEM SUCCESS ::::::::: ");
+            let gem = packet.gem;
+            let gold = packet.gold;
+            let elixir = packet.elixir;
+            PlayerInfoManager.Instance().setResource({gem: gem, gold: gold, elixir: elixir});
+            // this.sendGetUserInfo();
+            //get chosen building
+            let building = cc.director.getRunningScene().getMapLayer().chosenBuilding;
+
+            if(!building) return;
+            cc.log("building: ", building._type)
+            building.onReceivedBuyResourceByGem();
         }
     },
     sendGetUserInfo: function () {
@@ -461,11 +495,17 @@ testnetwork.Connector = cc.Class.extend({
         this.gameClient.sendPacket(pk);
     },
     sendQuickFinish: function (id) {
-        cc.log("SEND quick finish request");
+        cc.log("SEND quick finish");
         var pk = this.gameClient.getOutPacket(CmdSendQuickFinish);
         pk.pack({id});
         this.gameClient.sendPacket(pk);
-    }
+    },
+    sendBuyResourceByGem: function (gold, elixir) {
+        cc.log("SEND get resource");
+        var pk = this.gameClient.getOutPacket(CmdSendBuyResourceByGem);
+        pk.pack({gold, elixir});
+        this.gameClient.sendPacket(pk);
+    },
 
 });
 
