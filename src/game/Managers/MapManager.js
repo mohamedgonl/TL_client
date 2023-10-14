@@ -76,7 +76,7 @@ var MapManager = cc.Layer.extend({
     },
 
     //add building to list and to grid
-    addBuilding: function (building) {
+    addBuilding: function (building, isBuy = false) {
         // cc.log("building  ", JSON.stringify(building, null, 2));
         let posX = building._posX;
         let posY = building._posY;
@@ -120,6 +120,13 @@ var MapManager = cc.Layer.extend({
 
         }
 
+        if(isBuy === true) {
+            const Algorithm = AlgorithmImplement.Instance();
+            Algorithm.setGridMapStar(MapManager.Instance().mapGrid);
+            cc.eventManager.dispatchCustomEvent(EVENT_NAMES.NEW_BUILDING_ADDED, {type: typeBuilding});
+
+        }
+
     },
     moveBuilding: function (building,newPosX,newPosY) {
 
@@ -138,6 +145,10 @@ var MapManager = cc.Layer.extend({
         //dat lai vi tri cua building va updateUI
         building._posX = newPosX;
         building._posY = newPosY;
+
+        cc.eventManager.dispatchCustomEvent(EVENT_TROOP_NAME.MOVE_BUILDING, {buildingId: building.getId()});
+        const Algorithm = AlgorithmImplement.Instance();
+        Algorithm.setGridMapStar(MapManager.Instance().mapGrid);
     },
     getAllBuilding: function () {
         return Array.from(this.listBuildings.values());

@@ -6,12 +6,25 @@ var TrainTroopPopup = cc.Layer.extend({
         this.initPages();
         this.updateBarracks();
         this.setVisible(false);
+
+        cc.eventManager.addCustomListener(EVENT_NAMES.NEW_BUILDING_ADDED, this.createNewPage.bind(this))
+
     },
 
     initPages: function () {
         let barracks = ArmyManager.Instance().getBarrackList();
         for(let i = 0; i< barracks.length; i++){
             let trainPage = new TrainTroopPage(i);
+            trainPage.setVisible(false);
+            this._trainPages.push(trainPage);
+            this.addChild(trainPage);
+        }
+    },
+
+    createNewPage : function (event) {
+        cc.log("NEW _______________________________________________________________________________________")
+        if(event.getUserData().type === "BAR") {
+            let trainPage = new TrainTroopPage(this._trainPages.length);
             trainPage.setVisible(false);
             this._trainPages.push(trainPage);
             this.addChild(trainPage);

@@ -96,14 +96,14 @@ const TroopConfig = {
 
 const SPEED_TIME  = 19;
 
-const AMC_SIZE = 5;
+const AMC_SIZE = 4;
 
 const EVENT_TROOP_NAME = {
     MOVE_BUILDING: 'move_building'
 }
 
 const ANIMAS = ["run", "idle", "attack01", "dead"];
-const DIRECTIONS = ["down", "left", "down_left", "down_right", "up_left", "up_right", "right", "up"];
+const DIRECTIONS = ["down", "left", "down_left", "up_left", "up_right","down_right", "right", "up"];
 
 const DIRECTIONS_STRING = {
     DOWN: "down",
@@ -115,3 +115,5 @@ const DIRECTIONS_STRING = {
     RIGHT: "right",
     UP: "up"
 }
+
+const TROOP_ANIMS_LIST = ["ARM_1", "ARM_2", "ARM_3", "ARM_4"]

@@ -495,7 +495,7 @@ var Building = GameObject.extend({
     },
     onClickQuickFinish: function () {
         cc.log("onClickQuickFinish");
-        Popup
+
         testnetwork.connector.sendQuickFinish(this._id);
     },
     quickFinish: function (){

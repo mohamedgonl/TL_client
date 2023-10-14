@@ -279,7 +279,8 @@ var InfoLayer = cc.Layer.extend({
             else
                 this.button_container.nameBuilding.setString("Cây cối");
         }
-        this.button_container.nameBuilding.setString(building._type);
+        else
+            this.button_container.nameBuilding.setString(BuildingInfo[building._type].name);
         this.button_container.setVisible(true);
         //test
 
