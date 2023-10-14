@@ -132,7 +132,7 @@ var TroopListItem = cc.Node.extend({
         this.setCount(this._count);
     },
 
-    handleTrainTroop: function (isHold = false) {
+    handleTrainTroop: function () {
         cc.log("CREATE TROOP ::: " + this._troopCfgId + " PAGE :" + this._curPage)
 
         if (this._available) {
@@ -142,7 +142,7 @@ var TroopListItem = cc.Node.extend({
             if (currentSpace + TROOP_BASE[this._troopCfgId]["housingSpace"] <= maxSpace) {
                 let event = new cc.EventCustom(TRAINING_EVENTS.TRAIN + this._curPage);
                 let cfgId = this._troopCfgId;
-                event.data = {cfgId: cfgId, count: 1, hold: isHold};
+                event.data = {cfgId: cfgId, count: 1};
                 cc.eventManager.dispatchEvent(event);
             }
         }

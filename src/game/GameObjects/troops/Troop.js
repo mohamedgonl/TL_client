@@ -96,7 +96,7 @@ var Troop = cc.Node.extend({
                         }
                         animation.setDelayPerUnit(TroopConfig[cfgId][action].frame_time);
                         animation.setRestoreOriginalFrame(true);
-                        this._animations[action][direct] = animation;
+                        this._animations[action][direct] = cc.animate(animation).repeatForever();
                     } else {
                     }
 
@@ -107,47 +107,51 @@ var Troop = cc.Node.extend({
     },
 
     runAnimation: function (direction, action) {
-        cc.log(action)
+        cc.log(direction)
         if (!this._animations[action][direction]) {
             let i = DIRECTIONS.indexOf(direction);
+            cc.log("FLIP ::::: " + DIRECTIONS[DIRECTIONS.length - 1 - i])
             return {anim: this._animations[action][DIRECTIONS[DIRECTIONS.length - 1 - i]], flip: true};
         }
-        return {anim: this._animations[action][direction], flip: true};
+        return {anim: this._animations[action][direction], flip: false};
     },
 
-    handleMapChange: function () {
-        cc.log("GRID MAP CHANGED!");
+    handleMapChange: function (event) {
+        cc.log("GRID MAP CHANGED!" + JSON.stringify(event));
+
         const Algorithm = AlgorithmImplement.Instance();
-        Algorithm.setGridMapStar(MapManager.Instance().mapGrid)
+        Algorithm.setGridMapStar(MapManager.Instance().mapGrid);
+        cc.log(Algorithm._gridMapAStar.toString())
+        if(event.getUserData().buildingId === this.armyCamp.getId()) {
+            this.troop.stopAllActions();
+            let start = this.troop.getPosition();
+            let end = this.armyCamp.getPosition();
+            cc.log(JSON.stringify(end))
+            this.runToCamp(start, end);
+        }
+
     },
 
 
     runAndMotionAction: function (action = "run", direction = "left") {
         let animation = this.runAnimation(direction, action);
-        let runAnim;
-        if (animation.flip) {
-            runAnim = cc.animate(animation.anim).repeatForever();
-        } else {
-            runAnim = cc.animate(animation.anim).repeatForever();
-        }
+        let runAnim= animation.anim.clone();
         runAnim.retain();
-
-        if (!runAnim) {
-            cc.log("DONT HANVE ::: " + direction)
-        }
 
         let stopPreviousAction = cc.callFunc(() => {
             if (this.previousAction) {
                 this.troop.stopAction(this.previousAction);
+                this.troop.setFlippedX(false);
             }
             this.previousAction = runAnim;
         }, this);
 
         let runCurrentAction = cc.callFunc(() => {
             this.troop.runAction(runAnim);
+            this.troop.setFlippedX(animation.flip)
         }, this);
 
-        return [stopPreviousAction, runCurrentAction]
+        return [stopPreviousAction , runCurrentAction]
     },
 
     getDirection: function (origin, target) {
@@ -167,15 +171,15 @@ var Troop = cc.Node.extend({
 
         let start = mapLayer.getGridPosFromMapPos(origin);
         let end = mapLayer.getGridPosFromMapPos(target);
-        this._campOrigin = end;
 
         const Algorithm = AlgorithmImplement.Instance();
         if (!Algorithm._gridMapAStar) {
             Algorithm.setGridMapStar(MapManager.Instance().mapGrid)
         }
-        end.x += Math.floor(Math.random() * AMC_SIZE);
-        end.y += Math.floor(Math.random() * AMC_SIZE);
+        end.x +=( Math.random() >= 0.5 ? 1 : -1) * Math.floor(Math.random() * AMC_SIZE/2);
+        end.y += ( Math.random() >= 0.5 ? 1 : -1) * Math.floor(Math.random() * AMC_SIZE/2);
 
+        cc.log(JSON.stringify({x : end.x, y: end.y}))
         let wayGrid = Algorithm.searchPathByAStar([start.x, start.y], [end.x, end.y]);
         wayGrid.push({x:end.x, y: end.y});
         return wayGrid;
@@ -201,7 +205,7 @@ var Troop = cc.Node.extend({
     },
 
     runToCamp: function (origin, target) {
-
+        this.initAnimation()
         let wayActions = this.createRunSequence(origin, target);
         wayActions.push(cc.spawn(...this.runAndMotionAction("idle")));
         let moveAction = cc.sequence(wayActions);
@@ -215,7 +219,10 @@ var Troop = cc.Node.extend({
 
         let stayAction =
             cc.sequence(
-                cc.sequence(runAction), ...idleAnimate, cc.delayTime(3000)
+                cc.sequence(runAction), ...idleAnimate, cc.delayTime(1),
+                cc.callFunc(()=>{
+                    cc.log("CALL")
+                })
             ).repeatForever();
 
         this.troop.runAction(stayAction);

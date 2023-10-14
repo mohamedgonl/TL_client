@@ -12,6 +12,7 @@ var AlgorithmImplement = cc.Class.extend({
     },
 
     setGridMapStar: function (gridMapGame) {
+
         let barracks = ArmyManager.Instance().getBarrackList();
         let barrackIds = barracks.map(e => e.getId());
         let armyCamps = ArmyManager.Instance().getArmyCampList();

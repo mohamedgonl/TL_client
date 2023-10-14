@@ -553,5 +553,6 @@ const BUTTON_TOUCH_SCALE_SMALL = 0.9;
 const SHOP_ITEM_SCALE = 2;
 
 const EVENT_NAMES = {
-    RESOURCE_CHANGED: "res_changed"
+    RESOURCE_CHANGED: "res_changed",
+    NEW_BUILDING_ADDED: "new_building"
 }
