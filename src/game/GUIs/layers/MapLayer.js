@@ -316,9 +316,10 @@ var MapLayer = cc.Layer.extend({
         this.unSelectBuilding(this.chosenBuilding);
         this.tempPosChosenBuilding = cc.p(building._posX, building._posY);
         // building.setLocalZOrder(MAP_ZORDER_BUILDING+1);
-        building.onSelected();
+
         this.chosenBuilding = building;
         this.tempPosChosenBuilding = cc.p(this.chosenBuilding._posX, this.chosenBuilding._posY);
+        building.onSelected();
     },
 
     unSelectBuilding: function () {

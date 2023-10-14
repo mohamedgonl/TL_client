@@ -20,7 +20,6 @@ var GoldStorage = Building.extend({
     loadButton: function () {
         this._super();
         let infoLayer = cc.director.getRunningScene().infoLayer;
-        infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,0,this.onClickUpgrade.bind(this));
     },
     onAddIntoMapManager: function () {
         this._super();

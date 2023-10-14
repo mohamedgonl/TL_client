@@ -182,10 +182,13 @@ var Building = GameObject.extend({
 
     //load button for building, reload when select building, upgrade, build, cancel
     loadButton: function(){
-        cc.log("load button")
+
+        let chosenBuilding = cc.director.getRunningScene().getMapLayer().getChosenBuilding();
         let infoLayer = cc.director.getRunningScene().infoLayer;
-        //xoa het button cu
+
         infoLayer.removeAllButtonInMenu();
+        if(chosenBuilding !== this) return;
+
         infoLayer.addButtonToMenu("Thông tin",res.BUTTON.INFO_BUTTON,0,this.onClickInfo.bind(this));
         if(this._state === 0){
             //upgrade button
@@ -203,8 +206,6 @@ var Building = GameObject.extend({
                     infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,status,this.showPopupUpgrade.bind(this),priceElixir,"elixir");
                 }
             }
-
-
         }
         if(this._state !==0) {
             infoLayer.addButtonToMenu("Hủy",res.BUTTON.CANCEL_BUTTON,0,this.onClickStop.bind(this));
@@ -220,6 +221,9 @@ var Building = GameObject.extend({
         cc.eventManager.dispatchCustomEvent(EVENT_SELECT_BUILDING, this._id);
     },
     onUnselected: function(){
+        let infoLayer = cc.director.getRunningScene().infoLayer;
+        //xoa het button cu
+        infoLayer.removeAllButtonInMenu();
         this._arrow_move.setVisible(false);
         this._nameLabel.setVisible(false);
         this._levelLabel.setVisible(false);
@@ -296,7 +300,6 @@ var Building = GameObject.extend({
     },
 
     startProcess: function () {
-        this.loadButton();
         //if state = 1, get price
         let priceGold = LoadManager.Instance().getConfig(this._type, this._level, "gold") || 0;
         let priceElixir = LoadManager.Instance().getConfig(this._type, this._level, "elixir") || 0;
@@ -318,10 +321,7 @@ var Building = GameObject.extend({
         this._state = 1;
         this._startTime = startTime;
         this._endTime = endTime;
-
         this.startProcess();
-
-
         },
     startUpgrade: function (startTime,endTime) {
 
@@ -340,7 +340,8 @@ var Building = GameObject.extend({
         PlayerInfoManager.Instance().changeBuilder("current", 1);
         //unschedule update
         let chosenBuilding = cc.director.getRunningScene().getMapLayer().getChosenBuilding();
-        if(chosenBuilding === this._id)
+        cc.log("chosen building", chosenBuilding)
+        if(chosenBuilding === this)
                 this.loadButton();
         this.unschedule(this.update);
     },
@@ -494,6 +495,7 @@ var Building = GameObject.extend({
     },
     onClickQuickFinish: function () {
         cc.log("onClickQuickFinish");
+        Popup
         testnetwork.connector.sendQuickFinish(this._id);
     },
     quickFinish: function (){
