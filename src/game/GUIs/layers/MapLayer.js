@@ -73,28 +73,33 @@ var MapLayer = cc.Layer.extend({
     addEventListener: function () {
 
         //add touch
-        cc.eventManager.addListener({
-            event: cc.EventListener.TOUCH_ONE_BY_ONE,
-            swallowTouches: true,
-
-            onTouchBegan: function (event) {
-                this.onTouchBegan(event);
-                return true;
-            }.bind(this),
-
-            onTouchEnded: function (event) {
-                this.onTouchEnded(event);
-                return true;
-            }.bind(this),
-
-            onTouchMoved: function (event) {
-                this.handMoved = true;
-                //cc.log("move event :" + JSON.stringify(event,null,2));
-                this.onDrag(event);
-                return true;
-            }.bind(this)
-
-        }, this);
+        // cc.eventManager.addListener({
+        //     event: cc.EventListener.TOUCH_ONE_BY_ONE,
+        //     swallowTouches: true,
+        //
+        //     onTouchBegan: function (event) {
+        //         cc.log("label")
+        //         let label = new cc.LabelTTF("began", "Arial", 30);
+        //         this.addChild(label);
+        //         label.
+        //         label.setPosition(cc.winSize.width/2,cc.winSize.height/2);
+        //         this.onTouchBegan(event);
+        //         return true;
+        //     }.bind(this),
+        //
+        //     onTouchEnded: function (event) {
+        //         this.onTouchEnded(event);
+        //         return true;
+        //     }.bind(this),
+        //
+        //     onTouchMoved: function (event) {
+        //         this.handMoved = true;
+        //         //cc.log("move event :" + JSON.stringify(event,null,2));
+        //         this.onDrag(event);
+        //         return true;
+        //     }.bind(this)
+        //
+        // }, this);
 
         //scale by scroll
         cc.eventManager.addListener({
@@ -123,22 +128,29 @@ var MapLayer = cc.Layer.extend({
             }.bind(this)
 
         }, this);
-        // //listen to multi touch to zoom
-        // cc.eventManager.addListener({
-        //     event: cc.EventListener.TOUCH_ALL_AT_ONCE,
-        //     onTouchesBegan: function (touches, event) {
-        //         //cc.log("touch all at once");
-        //         this.handMoved = false;
-        //     },
-        //     onTouchesMoved: function (touches, event) {
-        //         //cc.log("touch all at once move");
-        //         this.handMoved = true;
-        //     },
-        //     onTouchesEnded: function (touches, event) {
-        //         //cc.log("touch all at once end");
-        //
-        //     }
-        // })
+        //listen to multi touch to zoom
+        cc.eventManager.addListener({
+            event: cc.EventListener.TOUCH_ALL_AT_ONCE,
+            onTouchesBegan: function (touches, event) {
+                //add label "began" random position in screen
+                cc.log("touches began")
+                var label = new cc.LabelTTF("began", "Arial", 30);
+                label.setPosition((Math.random()-0.5) * cc.winSize.width, (Math.random()-0.5) * cc.winSize.height);
+                this.addChild(label);
+            }.bind(this),
+            onTouchesMoved: function (touches, event) {
+                cc.log("touches began")
+                var label = new cc.LabelTTF("moved", "Arial", 30);
+                label.setPosition((Math.random()-0.5) * cc.winSize.width, (Math.random()-0.5) * cc.winSize.height);
+                this.addChild(label);
+            }.bind(this),
+            onTouchesEnded: function (touches, event) {
+                cc.log("touches began")
+                var label = new cc.LabelTTF("ended", "Arial", 30);
+                label.setPosition((Math.random()-0.5) * cc.winSize.width, (Math.random()-0.5) * cc.winSize.height);
+                this.addChild(label);
+            }.bind(this)
+        }, this);
 
     },
 
@@ -247,8 +259,6 @@ var MapLayer = cc.Layer.extend({
     },
 
     onTouchBegan: function (touch) {
-        cc.log("location:",JSON.stringify(this.getPosition(),null,2));
-        cc.log("mapPos:",JSON.stringify(this.getMapPosFromScreenPos(touch.getLocation()),null,2));
         this.positionTouchBegan = touch.getLocation();
         if (this.chosenBuilding == null) return;
 
