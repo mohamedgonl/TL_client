@@ -140,9 +140,6 @@ var MapLayer = cc.Layer.extend({
             }.bind(this),
             onTouchesMoved: function (touches, event) {
                 cc.log("touches began")
-                var label = new cc.LabelTTF("moved", "Arial", 30);
-                label.setPosition((Math.random()-0.5) * cc.winSize.width, (Math.random()-0.5) * cc.winSize.height);
-                this.addChild(label);
             }.bind(this),
             onTouchesEnded: function (touches, event) {
                 cc.log("touches began")
