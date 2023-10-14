@@ -36,8 +36,6 @@ var TrainTroopPage = cc.Node.extend({
         cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE + this._curPage, this.handleCancleTroopTraining.bind(this));
         cc.eventManager.addCustomListener(TRAINING_EVENTS.UPDATE_SPACE + this._curPage, this.updateSpace.bind(this));
 
-
-
         this.initListTroops();
         this.updateTrainingPopupTitle();
         this._doneNowButton = doneNowButton;

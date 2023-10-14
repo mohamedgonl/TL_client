@@ -116,4 +116,6 @@ const DIRECTIONS_STRING = {
     UP: "up"
 }
 
-const TROOP_ANIMS_LIST = ["ARM_1", "ARM_2", "ARM_3", "ARM_4"]
+const TROOP_ANIMS_LIST = ["ARM_1", "ARM_2", "ARM_3", "ARM_4"];
+
+const TROOP_STAY_TIME = 15;

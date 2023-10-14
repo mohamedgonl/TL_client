@@ -271,6 +271,7 @@ testnetwork.Connector = cc.Class.extend({
             cc.log("UPGRADE BUILDING SUCCESS SUCCESS ::::::::: ");
             let building = MapManager.Instance().getBuildingById(packet.id);
             building.completeUpgrade();
+            cc.eventManager.dispatchCustomEvent(EVENT_NAMES.BUILDING_UPDATED, {id: packet.id})
         }
     },
     onReceivedBuildBuildingSuccess: function (packet) {

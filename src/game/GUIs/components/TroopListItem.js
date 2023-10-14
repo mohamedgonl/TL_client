@@ -41,6 +41,12 @@ var TroopListItem = cc.Node.extend({
         cc.eventManager.addCustomListener(EVENT_NAMES.RESOURCE_CHANGED, (e) => {
             this.recheck();
         })
+
+        cc.eventManager.addCustomListener(EVENT_NAMES.BUILDING_UPDATED, (e) => {
+            if(this._curBarrack.getId() === e.getUserData().id) {
+                this.recheck();
+            }
+        });
         this.recheck();
         this.addChild(node);
     },
@@ -51,16 +57,14 @@ var TroopListItem = cc.Node.extend({
     },
 
     checkAvailable: function () {
-
-        this._available = TROOPS_LIST[this._i].available && (this._barrackRequired >= this._curBarrack._level);
+        cc.log("GGGGGGGGGGGGGGGGG ", this._curBarrack._level)
+        this._available = TROOPS_LIST[this._i].available && (this._barrackRequired <= this._curBarrack._level);
 
         let price = TROOP[this._troopCfgId][1]["trainingElixir"];
         if (!this._available) {
-            // this._node.getParent().replaceChild(this._nodeShadow, this._node);
-            // this._troopImage.getParent().replaceChild(this._troopImageShadow, this._troopImage);
-            ColorUlties.setGrayObjects([this._node, this._troopImage])
+            this._nodeButton.setOpacity(90);
         } else {
-            // this._troopImage, this._node
+            this._nodeButton.setOpacity(255);
         }
         if (PlayerInfoManager.Instance().getResource("elixir") < price) {
             this._available = false;
@@ -76,6 +80,7 @@ var TroopListItem = cc.Node.extend({
     setCostDisplay: function () {
         let costContainer = this._node.getChildByName("cost_container")
         if (this._barrackRequired <= this._curBarrack._level) {
+            if(this.label) this.label.removeFromParent(true);
             let costString = costContainer.getChildByName("cost");
             costString.setString(this._cost);
         } else {
@@ -86,6 +91,7 @@ var TroopListItem = cc.Node.extend({
             let label = new cc.LabelBMFont("Yêu cầu\nNhà lính cấp " + this._barrackRequired, res.FONT.FISTA["16"], 120, cc.TEXT_ALIGNMENT_CENTER);
             label.setColor(cc.color(181, 26, 0))
             barRqString.addChild(label);
+            this.label = label;
         }
     },
 

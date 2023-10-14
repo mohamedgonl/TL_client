@@ -4,7 +4,6 @@ var Troop = cc.Node.extend({
     _level: null,
     _animations: null,
     ctor: function (cfgId, level, barrackIndex, armyCampIndex) {
-        cc.log({cfgId, level, barrackIndex, armyCampIndex})
 
         this._super();
         this._cfgId = cfgId;
@@ -107,10 +106,8 @@ var Troop = cc.Node.extend({
     },
 
     runAnimation: function (direction, action) {
-        cc.log(direction)
         if (!this._animations[action][direction]) {
             let i = DIRECTIONS.indexOf(direction);
-            cc.log("FLIP ::::: " + DIRECTIONS[DIRECTIONS.length - 1 - i])
             return {anim: this._animations[action][DIRECTIONS[DIRECTIONS.length - 1 - i]], flip: true};
         }
         return {anim: this._animations[action][direction], flip: false};
@@ -121,12 +118,10 @@ var Troop = cc.Node.extend({
 
         const Algorithm = AlgorithmImplement.Instance();
         Algorithm.setGridMapStar(MapManager.Instance().mapGrid);
-        cc.log(Algorithm._gridMapAStar.toString())
         if(event.getUserData().buildingId === this.armyCamp.getId()) {
             this.troop.stopAllActions();
             let start = this.troop.getPosition();
             let end = this.armyCamp.getPosition();
-            cc.log(JSON.stringify(end))
             this.runToCamp(start, end);
         }
 
@@ -134,7 +129,12 @@ var Troop = cc.Node.extend({
 
 
     runAndMotionAction: function (action = "run", direction = "left") {
-        let animation = this.runAnimation(direction, action);
+        let dir = direction;
+        if(action === "idle") {
+            let i = Math.floor(Math.random() * 8);
+            dir = DIRECTIONS[i];
+        }
+        let animation = this.runAnimation(dir, action);
         let runAnim= animation.anim.clone();
         runAnim.retain();
 
@@ -179,7 +179,6 @@ var Troop = cc.Node.extend({
         end.x += Math.floor(Math.random() * (AMC_SIZE - 1));
         end.y +=  Math.floor(Math.random() * (AMC_SIZE - 1));
 
-        cc.log(JSON.stringify({x : end.x, y: end.y}))
         let wayGrid = Algorithm.searchPathByAStar([start.x, start.y], [end.x, end.y]);
         wayGrid.push({x:end.x, y: end.y});
         return wayGrid;
@@ -208,25 +207,42 @@ var Troop = cc.Node.extend({
         this.initAnimation()
         let wayActions = this.createRunSequence(origin, target);
         wayActions.push(cc.spawn(...this.runAndMotionAction("idle")));
-        let moveAction = cc.sequence(wayActions);
+        wayActions.push(cc.callFunc(()=>{
+            this.stayInCamp();
+        }))
+        let moveAction = cc.sequence(...wayActions);
         this.troop.runAction(moveAction)
+
     },
 
     stayInCamp: function () {
+        let mapLayer = cc.director.getRunningScene().getMapLayer();
 
-        let runAction = this.createRunSequence(this.troop.getPosition(), this.armyCamp.getPosition());
-        let idleAnimate = this.runAndMotionAction("idle");
+        this.troop.runAction(cc.repeatForever(cc.sequence(cc.delayTime(TROOP_STAY_TIME), cc.callFunc(()=>{
 
-        let stayAction =
-            cc.sequence(
-                cc.sequence(runAction), ...idleAnimate, cc.delayTime(1),
-                cc.callFunc(()=>{
-                    cc.log("CALL")
-                })
-            ).repeatForever();
+            let origin = this.troop.getPosition();
+            let target =  this.armyCamp.getPosition();
 
-        this.troop.runAction(stayAction);
+            let targetGrid = mapLayer.getGridPosFromMapPos(target)
 
+            let x = Math.floor(Math.random() * (AMC_SIZE - 1));
+            let y =  Math.floor(Math.random() * (AMC_SIZE - 1));
+
+            let targetPos = mapLayer.getMapPosFromGridPos({x:targetGrid.x+x, y:targetGrid.y+y}, true);
+            let originPos = mapLayer.getMapPosFromGridPos({x: origin.x, y: origin.y},true);
+
+            let distance = cc.pDistance(origin,targetPos);
+
+            let run = cc.moveTo( distance/(this._moveSpeed*10), targetPos);
+
+
+
+            // let direction = this.getDirection(originPos, targetPos);
+            //
+            // let parallel = cc.spawn(...this.runAndMotionAction("run", direction), run);
+
+            this.troop.runAction(run)
+        }))))
     },
 
 

@@ -74,7 +74,7 @@ var ShopItem = cc.Node.extend({
                 price_type.setTexture(res.ICON.ELIXIR);
                 if (data.price > PlayerInfoManager.Instance().getResource().elixir) {
                     price_string.setColor(COLOR_SHOP_RED);
-                    this._available = false;
+                    // this._available = false;
                 }
                 break;
             }
@@ -82,7 +82,7 @@ var ShopItem = cc.Node.extend({
                 price_type.setTexture(res.ICON.GOLD);
                 if (data.price > PlayerInfoManager.Instance().getResource().gold) {
                     price_string.setColor(COLOR_SHOP_RED);
-                    this._available = false;
+                    // this._available = false;
                 }
                 break;
             }
@@ -90,7 +90,7 @@ var ShopItem = cc.Node.extend({
                 price_type.setTexture(res.ICON.GEM);
                 if (data.price > PlayerInfoManager.Instance().getResource().gem) {
                     price_string.setColor(COLOR_SHOP_RED);
-                    this._available = false;
+                    // this._available = false;
                 }
                 break;
             }

@@ -465,11 +465,18 @@ var MapLayer = cc.Layer.extend({
         return this.getGridPosFromMapPos(posInMap);
     },
 
-    getMapPosFromGridPos: function (gridPos,isCenter=false) {
+    getMapPosFromGridPos: function (gridPos,isCenter=false,random=false) {
 
         if(isCenter===true)
         {
             gridPos = cc.p(gridPos.x + 0.5, gridPos.y + 0.5);
+        }
+        if(random===true)
+        {
+            //rand 0 to 1
+            let randX = Math.random();
+            let randY = Math.random();
+            gridPos = cc.p(gridPos.x + randX, gridPos.y + randY);
         }
         var posA = cc.pLerp(CORNER_BOTTOM, CORNER_RIGHT, gridPos.x / GRID_SIZE);
         var posB = cc.pLerp(CORNER_BOTTOM, CORNER_LEFT, gridPos.y / GRID_SIZE);

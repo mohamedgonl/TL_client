@@ -554,5 +554,6 @@ const SHOP_ITEM_SCALE = 2;
 
 const EVENT_NAMES = {
     RESOURCE_CHANGED: "res_changed",
-    NEW_BUILDING_ADDED: "new_building"
+    NEW_BUILDING_ADDED: "new_building",
+    BUILDING_UPDATED: "building_updated"
 }
