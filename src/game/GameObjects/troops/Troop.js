@@ -176,8 +176,8 @@ var Troop = cc.Node.extend({
         if (!Algorithm._gridMapAStar) {
             Algorithm.setGridMapStar(MapManager.Instance().mapGrid)
         }
-        end.x +=( Math.random() >= 0.5 ? 1 : -1) * Math.floor(Math.random() * AMC_SIZE/2);
-        end.y += ( Math.random() >= 0.5 ? 1 : -1) * Math.floor(Math.random() * AMC_SIZE/2);
+        end.x +=( Math.random() >= 0.5 ? 1 : -1) * Math.floor(Math.random() * AMC_SIZE/2 - 1);
+        end.y += ( Math.random() >= 0.5 ? 1 : -1) * Math.floor(Math.random() * AMC_SIZE/2 - 1);
 
         cc.log(JSON.stringify({x : end.x, y: end.y}))
         let wayGrid = Algorithm.searchPathByAStar([start.x, start.y], [end.x, end.y]);
