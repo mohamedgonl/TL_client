@@ -48,7 +48,7 @@ var InfoLayer = cc.Layer.extend({
         this.addChild(this.button_container, 99999999);
         this.button_container.setPosition(cc.winSize.width / 2, 0);
         this.button_container.setVisible(false);
-        this.button_container.nameBuilding = new cc.LabelBMFont("Obstacle", res.FONT.SOJI[20], null, cc.TEXT_ALIGNMENT_CENTER);
+        this.button_container.nameBuilding = new cc.LabelBMFont("", res.FONT.SOJI[20], null, cc.TEXT_ALIGNMENT_CENTER);
         this.button_container.nameBuilding.setPosition(0, 140);
         this.button_container.addChild(this.button_container.nameBuilding);
 
@@ -267,7 +267,20 @@ var InfoLayer = cc.Layer.extend({
         let building = MapManager.Instance().getBuildingById(id);
 
         //rename nameBuilding
-        this.button_container.nameBuilding.setString(building._type);
+        //if building is start with OBS
+        if (building._type.startsWith("OBS")) {
+            //get gold and elixir of building
+            let priceGold = LoadManager.Instance().getConfig(building._type, building._level, "gold");
+            let priceElixir = LoadManager.Instance().getConfig(building._type, building._level, "elixir");
+            if(priceGold !=null)
+            {
+                this.button_container.nameBuilding.setString("Vật cản");
+            }
+            else
+                this.button_container.nameBuilding.setString("Cây cối");
+        }
+        else
+            this.button_container.nameBuilding.setString(BuildingInfo[building._type].name);
         this.button_container.setVisible(true);
         //test
 

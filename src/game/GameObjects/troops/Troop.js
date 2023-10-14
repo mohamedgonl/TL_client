@@ -19,7 +19,7 @@ var Troop = cc.Node.extend({
         let mapLayer = cc.director.getRunningScene().getMapLayer();
 
         let start;
-        let end = mapLayer.getMapPosFromGridPos({x:this.armyCamp._posX, y:this.armyCamp._posY}, true);
+        let end = mapLayer.getMapPosFromGridPos({x:this.armyCamp._posX, y:this.armyCamp._posY}, false, true);
         if (barrackIndex >= 0 && barrackIndex !== null) {
             let barrack = ArmyManager.Instance().getBarrackList()[barrackIndex];
             start = mapLayer.getMapPosFromGridPos({x:barrack._posX,y: barrack._posY}, true);
@@ -191,7 +191,7 @@ var Troop = cc.Node.extend({
         let wayGrid = this.findWayToCamp(origin, target);
 
         wayGrid.map((path, index) => {
-            let targetPos = mapLayer.getMapPosFromGridPos({x:path.x, y:path.y}, true);
+            let targetPos = mapLayer.getMapPosFromGridPos({x:path.x, y:path.y}, false, true);
             let curPos = this.troop.getPosition();
             let distance = cc.pDistance(curPos,targetPos);
             let run = cc.moveTo( distance/(this._moveSpeed*10), targetPos);

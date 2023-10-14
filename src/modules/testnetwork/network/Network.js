@@ -222,6 +222,7 @@ testnetwork.Connector = cc.Class.extend({
             mapLayer.addBuildingToLayer(building);
             // cc.log("----------------------------------------");
             mapLayer.exitModeBuyBuilding();
+            mapLayer.selectBuilding(building);
             // cc.log("++++++++++++++++++++++++++++++++++++++++");
             if(0 === packet.status) return;
             building.startBuild(packet.startTime, packet.endTime);
