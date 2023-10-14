@@ -13,6 +13,534 @@
       "AnimationList": [],
       "ObjectData": {
         "Tag": 172,
+        "Children": [
+          {
+            "FontSize": 14,
+            "ButtonText": "",
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
+            "DisabledFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Disable.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Normal",
+              "Path": "guis/pop_up/close.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "guis/pop_up/close.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 11,
+            "Scale9Width": 17,
+            "Scale9Height": 25,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 154.5611,
+              "Y": 113.7626
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.1361,
+              "Y": 0.1778
+            },
+            "PreSize": {
+              "X": 0.0414,
+              "Y": 0.0734
+            },
+            "LeftMargin": 131.0611,
+            "RightMargin": 957.9389,
+            "TopMargin": 502.7374,
+            "BottomMargin": 90.2626,
+            "UserData": "-press_action",
+            "Tag": 102,
+            "ActionTag": 1071754790,
+            "Size": {
+              "X": 47.0,
+              "Y": 47.0
+            },
+            "VisibleForFrame": false,
+            "Name": "button_close",
+            "ctype": "ButtonObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/pop_up/button2.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -84.1863,
+              "Y": -85.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": -0.0741,
+              "Y": -0.1328
+            },
+            "PreSize": {
+              "X": 0.1241,
+              "Y": 0.0938
+            },
+            "LeftMargin": -154.6863,
+            "RightMargin": 1149.6863,
+            "TopMargin": 695.0,
+            "BottomMargin": -115.0,
+            "Tag": 103,
+            "Children": [
+              {
+                "LabelText": "HỦY BỎ",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_16.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 70.5,
+                  "Y": 30.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.5
+                },
+                "PreSize": {
+                  "X": 0.5532,
+                  "Y": 0.4167
+                },
+                "LeftMargin": 31.5,
+                "RightMargin": 31.5,
+                "TopMargin": 17.5,
+                "BottomMargin": 17.5,
+                "Tag": 104,
+                "ActionTag": -1799896556,
+                "Size": {
+                  "X": 78.0,
+                  "Y": 25.0
+                },
+                "Name": "cancle_string",
+                "ctype": "TextBMFontObjectData"
+              }
+            ],
+            "ActionTag": -1016821035,
+            "Size": {
+              "X": 141.0,
+              "Y": 60.0
+            },
+            "Name": "button_cancle",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/pop_up/button.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 88.7082,
+              "Y": -85.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0781,
+              "Y": -0.1328
+            },
+            "PreSize": {
+              "X": 0.1206,
+              "Y": 0.0938
+            },
+            "LeftMargin": 20.2082,
+            "RightMargin": 978.7918,
+            "TopMargin": 695.0,
+            "BottomMargin": -115.0,
+            "Tag": 105,
+            "Children": [
+              {
+                "LabelText": "",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_20.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.6869,
+                  "ScaleY": 0.5233
+                },
+                "Position": {
+                  "X": 69.5686,
+                  "Y": 30.744
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5078,
+                  "Y": 0.5124
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 69.5686,
+                "RightMargin": 67.4314,
+                "TopMargin": 29.256,
+                "BottomMargin": 30.744,
+                "Tag": 106,
+                "ActionTag": -1322973370,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "ok_string",
+                "ctype": "TextBMFontObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "guis/train_troop_gui/g_icon.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 109.9995,
+                  "Y": 30.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.8029,
+                  "Y": 0.5
+                },
+                "PreSize": {
+                  "X": 0.2336,
+                  "Y": 0.4833
+                },
+                "LeftMargin": 93.9995,
+                "RightMargin": 11.0005,
+                "TopMargin": 15.5,
+                "BottomMargin": 15.5,
+                "Tag": 107,
+                "ActionTag": -1762487954,
+                "Size": {
+                  "X": 32.0,
+                  "Y": 29.0
+                },
+                "VisibleForFrame": false,
+                "Name": "icon",
+                "ctype": "SpriteObjectData"
+              }
+            ],
+            "ActionTag": -611793530,
+            "Size": {
+              "X": 137.0,
+              "Y": 60.0
+            },
+            "Name": "button_ok",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "AnchorPoint": {},
+            "Position": {
+              "X": 0.0,
+              "Y": 55.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0859
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "RightMargin": 1136.0,
+            "TopMargin": 585.0,
+            "BottomMargin": 55.0,
+            "Tag": 108,
+            "ActionTag": 1465876522,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "content",
+            "ctype": "SingleNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/research troop/mieng trang.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 23.0
+            },
+            "Scale": {
+              "ScaleX": 0.5,
+              "ScaleY": 1.1
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0359
+            },
+            "PreSize": {
+              "X": 0.6004,
+              "Y": 0.1797
+            },
+            "LeftMargin": -341.0,
+            "RightMargin": 795.0,
+            "TopMargin": 559.5,
+            "BottomMargin": -34.5,
+            "Tag": 109,
+            "ActionTag": 1785182073,
+            "Size": {
+              "X": 682.0,
+              "Y": 115.0
+            },
+            "Name": "content_bg",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "LabelText": "",
+            "LabelBMFontFile_CNB": {
+              "Type": "Normal",
+              "Path": "fonts/soji_20.fnt",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 112.12
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.1752
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "RightMargin": 1136.0,
+            "TopMargin": 527.88,
+            "BottomMargin": 112.12,
+            "Tag": 110,
+            "ActionTag": -81691953,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "popup_title",
+            "ctype": "TextBMFontObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/train_troop_gui/background.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.3442,
+              "Y": 0.4266
+            },
+            "LeftMargin": -195.5,
+            "RightMargin": 940.5,
+            "TopMargin": 503.5,
+            "BottomMargin": -136.5,
+            "Tag": 111,
+            "ActionTag": -699265439,
+            "Size": {
+              "X": 391.0,
+              "Y": 273.0
+            },
+            "Name": "bg",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "ClipAble": false,
+            "BackColorAlpha": 102,
+            "ComboBoxIndex": 1,
+            "SingleColor": {
+              "R": 80,
+              "G": 80,
+              "B": 80
+            },
+            "FirstColor": {
+              "R": 150,
+              "G": 200
+            },
+            "EndColor": {},
+            "ColorVector": {
+              "ScaleY": 1.0
+            },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PositionPercentXEnabled": true,
+            "PositionPercentYEnabled": true,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 1.0,
+              "Y": 1.0
+            },
+            "LeftMargin": -568.0,
+            "RightMargin": 568.0,
+            "TopMargin": 320.0,
+            "BottomMargin": -320.0,
+            "Tag": 112,
+            "ActionTag": 1476039177,
+            "Size": {
+              "X": 1136.0,
+              "Y": 640.0
+            },
+            "Name": "pnel",
+            "ctype": "PanelObjectData"
+          }
+        ],
         "Size": {
           "X": 1136.0,
           "Y": 640.0
@@ -20,7 +548,19 @@
         "Name": "Layer",
         "ctype": "LayerObjectData"
       },
-      "UsedResources": [],
+      "UsedResources": [
+        "Default/Button_Disable.png",
+        "fonts/soji_16.fnt",
+        "fonts/soji_16.png",
+        "fonts/soji_20.fnt",
+        "fonts/soji_20.png",
+        "guis/pop_up/button.png",
+        "guis/pop_up/button2.png",
+        "guis/pop_up/close.png",
+        "guis/research troop/mieng trang.png",
+        "guis/train_troop_gui/background.png",
+        "guis/train_troop_gui/g_icon.png"
+      ],
       "ctype": "GameFileData"
     }
   },

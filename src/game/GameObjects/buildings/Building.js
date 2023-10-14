@@ -208,7 +208,9 @@ var Building = GameObject.extend({
         }
         if(this._state !==0) {
             infoLayer.addButtonToMenu("Hủy",res.BUTTON.CANCEL_BUTTON,0,this.onClickStop.bind(this));
-            infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this));
+            //priceGem = 1 gem per 15m, floor upper, count from now to end time
+            let priceGem = Math.ceil((this._endTime - TimeManager.Instance().getCurrentTimeInSecond())/900);
+            infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this),priceGem,"gem");
         }
     },
 
@@ -340,7 +342,8 @@ var Building = GameObject.extend({
         PlayerInfoManager.Instance().changeBuilder("current", 1);
         //unschedule update
         let chosenBuilding = cc.director.getRunningScene().getMapLayer().getChosenBuilding();
-        if(chosenBuilding === this._id)
+
+        if(chosenBuilding === this)
                 this.loadButton();
         this.unschedule(this.update);
     },
@@ -400,7 +403,6 @@ var Building = GameObject.extend({
 
     onAddIntoMapManager: function () {
         let mapManager = MapManager.Instance();
-        cc.log("------",this._type,"-------",JSON.stringify(mapManager.buildingAmount,null,2));
         if(!mapManager.buildingAmount[this._type]){
             mapManager.buildingAmount[this._type] = 1;
         }
@@ -548,7 +550,7 @@ var Building = GameObject.extend({
     onReceivedQuickFinishOfAnother: function (packet) {
         this.onClickUpgrade();
     },
-    onReceivedBuyResourceByGem: function (packet) {
+    onReceivedBuyResourceByGemSuccess: function (packet) {
         this.onClickUpgrade();
     }
 });

@@ -9,6 +9,7 @@ var ElixirMine = Building.extend({
         this._currentElixir = 0;
         this._capacityElixir = config.capacity;
         this._productionElixir = config.productivity;
+
     },
     onAddIntoMapManager: function () {
         this._super();
@@ -45,6 +46,7 @@ var ElixirMine = Building.extend({
         this._lastCollectTime = lastCollectTime;
         PlayerInfoManager.Instance().setResource({elixir:elixir});
         this.loadButton();
-    }
+    },
+
 
 });

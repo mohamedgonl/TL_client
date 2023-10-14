@@ -23,6 +23,7 @@ testnetwork.Connector = cc.Class.extend({
                 fr.getCurrentScreen().onFinishLogin();
                 break;
             case gv.CMD.USER_INFO:
+
                 // neu this khong co onReceiveUserInfo thi se goi cua fr.getCurrentScreen()
                 if(fr.getCurrentScreen() == null)
                     cc.director.getRunningScene().onReceiveUserInfo(packet);
@@ -213,6 +214,7 @@ testnetwork.Connector = cc.Class.extend({
             cc.log("BUY BUILDING ERROR with code ::::::::: ", packet.error);
         }
         else {
+            this.sendGetUserInfo();
             cc.log("BUY BUILDING SUCCESS ::::::::: ");
             //log all packet
             cc.log("packet: ", JSON.stringify(packet, null, 2));
@@ -226,6 +228,7 @@ testnetwork.Connector = cc.Class.extend({
             if(0 === packet.status) return;
             building.startBuild(packet.startTime, packet.endTime);
             //bat lai info
+
         }
     },
     onReceivedRemoveObstacle: function (packet) {
@@ -338,7 +341,7 @@ testnetwork.Connector = cc.Class.extend({
             building.quickFinish();
             //if chosenbuilding right now != building, call onReceivedQuickFinish of chosenbuilding
             let chosenBuilding = cc.director.getRunningScene().getMapLayer().chosenBuilding;
-            if(chosenBuilding && chosenBuilding.id !== id) {
+            if(chosenBuilding && chosenBuilding._id !== id) {
                 chosenBuilding.onReceivedQuickFinishOfAnother();
             }
         }
@@ -360,7 +363,7 @@ testnetwork.Connector = cc.Class.extend({
 
             if(!building) return;
             cc.log("building: ", building._type)
-            building.onReceivedBuyResourceByGem();
+            building.onReceivedBuyResourceByGemSuccess();
         }
     },
     sendGetUserInfo: function () {

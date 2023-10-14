@@ -1227,7 +1227,6 @@
             <Image Name="icon_elixir_bar.png" />
             <Image Name="icon_g_bar.png" />
             <Image Name="icon_gold_bar.png" />
-            <Image Name="image0000.png" />
             <Image Name="info.png" />
             <Image Name="item_background.png" />
             <Image Name="nen2.png" />
@@ -1710,9 +1709,12 @@
         </Folder>
         <Folder Name="ui-json" />
         <TmxFile Name="42x42map.tmx" />
+        <Project Name="BasicPopup.csd" Type="Node" />
         <Project Name="CheatPopup.csd" Type="Node" />
         <Project Name="InfoLayer1.csd" Type="Layer" />
+        <Project Name="InfoPopup.csd" Type="Node" />
         <Project Name="ItemInfoPopup.csd" Type="Node" />
+        <Project Name="Layer1.csd" Type="Layer" />
         <Project Name="LoginScene.csd" Type="Scene" />
         <Project Name="NotiPopup.csd" Type="Node" />
         <Project Name="ProcessBar.csd" Type="Node" />
@@ -1724,8 +1726,8 @@
         <Project Name="TroopTrainingItem.csd" Type="Node" />
         <Project Name="TroopTrainPopup.csd" Type="Node" />
         <Project Name="UpgradePopup.csd" Type="Node" />
-        <Project Name="InfoPopup.csd" Type="Node" />
-        <Project Name="Layer1.csd" Type="Layer" />
+        <Project Name="ButtonOfBuilding.csd" Type="Node" />
+        <Project Name="IconHarvest.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>
