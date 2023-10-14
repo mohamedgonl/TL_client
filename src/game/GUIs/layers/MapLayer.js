@@ -123,6 +123,7 @@ var MapLayer = cc.Layer.extend({
             }.bind(this)
 
         }, this);
+
     },
 
     removeBuilding: function (building) {
