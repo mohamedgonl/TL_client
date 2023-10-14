@@ -30,7 +30,6 @@ cc.game.onStart = function () {
         //socket
         gv.gameClient = new GameClient();
         gv.poolObjects = new PoolObject();
-
         // cc.director.runScene(new GameScene());
 
         //modules
