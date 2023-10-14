@@ -3,8 +3,6 @@ var ArmyManager = cc.Class.extend({
     _barrackList: [],
     _armyCampList: [],
     _armyAmount: {},
-    _maxTotalSpace: 0,
-    _currentSpace: 0,
 
     ctor: function () {
         this.init();
@@ -23,7 +21,6 @@ var ArmyManager = cc.Class.extend({
 
     pushArmyCamp: function (armyCamp) {
         this._armyCampList.push(armyCamp);
-        this._maxTotalSpace += AMC["AMC_1"][armyCamp._level]["capacity"];
     },
 
     setArmyAmount: function (armyAmount) {
@@ -44,22 +41,23 @@ var ArmyManager = cc.Class.extend({
         this.updateArmyAmount(troops, null, true)
     },
 
-    updateMaxTotalSpace: function (space) {
-        this._maxTotalSpace = space;
-        let event = new cc.EventCustom(TRAINING_EVENTS.UPDATE_SPACE);
-        event.data = {
-            space: space
-        };
-        cc.eventManager.dispatchEvent(event);
-
-    },
-
     getCurrentSpace: function () {
-        return this._currentSpace;
+        let currentSpace = 0;
+        for (let key in this._armyAmount) {
+            if (this._armyAmount.hasOwnProperty(key)) {
+                const value = this._armyAmount[key];
+                currentSpace += TROOP_BASE[key]["housingSpace"] *value;
+            }
+        }
+        return currentSpace;
     },
 
     getMaxSpace: function () {
-        return this._maxTotalSpace;
+        let maxTotalSpace = 0;
+        this._armyCampList.map(armyCamp => {
+            maxTotalSpace += AMC["AMC_1"][armyCamp._level]["capacity"];
+        })
+        return maxTotalSpace;
     },
 
     getBarrackList: function () {
@@ -70,10 +68,10 @@ var ArmyManager = cc.Class.extend({
 
     },
 
-    updateArmyAmount: function (troops, curPage ,isInit = false) {
+    updateArmyAmount: function (troops, curPage, isInit = false) {
 
         troops.map(e => {
-            if(!isInit) {
+            if (!isInit) {
                 if (!this._armyAmount[e.cfgId]) {
                     this._armyAmount[e.cfgId] = e.count;
                 } else {
@@ -96,8 +94,8 @@ var ArmyManager = cc.Class.extend({
 
         cc.director.getRunningScene().infoLayer.updateUI({
             army: {
-                current: this._currentSpace,
-                max: this._maxTotalSpace
+                current: this.getCurrentSpace(),
+                max: this.getMaxSpace()
             }
         });
 

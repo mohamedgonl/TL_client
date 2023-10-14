@@ -59,7 +59,10 @@ var PlayerInfoManager = cc.Layer.extend({
         if (gem >= 0) {
             this.resource.gem = gem;
         }
-        this.setUI({resource: this.resource})
+        this.setUI({resource: this.resource});
+        cc.log("UPDATE :: " +JSON.stringify(this.resource))
+        cc.eventManager.dispatchCustomEvent(EVENT_NAMES.RESOURCE_CHANGED)
+
     },
 
     addResource: function ({gold, elixir, gem}) {
@@ -74,6 +77,7 @@ var PlayerInfoManager = cc.Layer.extend({
         }
 
         this.setUI({resource: this.resource});
+        cc.eventManager.dispatchCustomEvent(EVENT_NAMES.RESOURCE_CHANGED)
     },
 
     setId: function (id) {
@@ -115,6 +119,7 @@ var PlayerInfoManager = cc.Layer.extend({
             this.resource.elixir += value;
         } else return;
         this.setUI({resource: this.resource});
+        cc.eventManager.dispatchCustomEvent(EVENT_NAMES.RESOURCE_CHANGED)
     },
     changeMaxResource: function (type, value) {
         if (type === "gold") {

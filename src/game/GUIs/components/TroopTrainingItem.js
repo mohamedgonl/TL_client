@@ -34,17 +34,17 @@ var TroopTrainingItem = cc.Node.extend({
     },
 
     setCount : function (count) {
-        cc.log("SET LẠI COUNT "+ count);
         let countString = this._node.getChildByName("count_string");
         countString.setString("x"+count);
         this._count = count;
+    },
+    increaseCount : function (count) {
+        this._count += count;
+        this.setCount(this._count);
     },
 
     getCfgId:  function () {
         return this._troopCfgId;
     },
-
-
-
 
 })

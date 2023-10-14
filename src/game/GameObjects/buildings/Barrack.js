@@ -44,7 +44,8 @@ var Barrack = Building.extend({
         return false;
     },
 
-    removeFromTrainingQueue: function ({cfgId, count, currentTime}) {
+    removeFromTrainingList: function ({cfgId, count, currentTime}) {
+        cc.log("REMOVE : "+  JSON.stringify({cfgId, count, currentTime}))
         this._lastTrainingTime = currentTime;
         for (let i = 0; i < this._trainingQueue.length; i++) {
             if(this._trainingQueue[i].cfgId === cfgId) {

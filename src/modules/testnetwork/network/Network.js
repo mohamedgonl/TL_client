@@ -123,7 +123,7 @@ testnetwork.Connector = cc.Class.extend({
             trainingPopup.getPage({barackId: packet.barrackId}).updateUI(1);
         }
         else {
-            cc.log("TRAIN TROOP DONE REQUEST SUCCESS ::::::::: ");
+            cc.log("TRAIN TROOP DONE REQUEST SUCCESS ::::::::: " + JSON.stringify(packet));
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
             let trainingPage = trainingPopup.getPage({barackId: packet.barrackId});
@@ -202,7 +202,7 @@ testnetwork.Connector = cc.Class.extend({
             }
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
-            PlayerInfoManager.Instance().addResource({elixir: event.data.additionElixir});
+            PlayerInfoManager.Instance().addResource({elixir: packet.additionElixir});
             trainingPopup.getPage({barackId: packet.barrackId}).onCancelTrainTroopSuccess(event);
 
         }
@@ -421,6 +421,7 @@ testnetwork.Connector = cc.Class.extend({
     },
 
     sendRequestTrainingSuccess: function (data) {
+        cc.log("SEND REQUEST TRAIN SUCCESS \n" + JSON.stringify(data))
         var pk = this.gameClient.getOutPacket(CmdSendTrainTroopSuccess);
         pk.pack(data);
         this.gameClient.sendPacket(pk);

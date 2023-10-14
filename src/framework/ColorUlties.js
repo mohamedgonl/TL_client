@@ -7,6 +7,7 @@ ColorUlties.setGrayObjects = function (objs) {
             obj.setShaderProgram(cc.shaderCache.getProgram("ShaderUIGrayScale"));
         }
     } else {
-        objs.setShaderProgram(cc.shaderCache.getProgram("ShaderUIGrayScale"));
+        objs.setShaderProgram(cc.shaderCache.getProgram("ShaderUIGrayScale1"));
     }
 }
+
