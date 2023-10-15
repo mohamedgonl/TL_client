@@ -109,13 +109,11 @@ var MapLayer = cc.Layer.extend({
             onKeyPressed: function (keyCode) {
 
                 if (keyCode === cc.KEY.x) {
-                    // this.setScale(3)
-                    // this.x += 2*(this.x - cc.winSize.width / 2);
-                    // this.y += 2*(this.y - cc.winSize.height / 2);
+                    BasicPopup.appear("THIẾU TÀI NGUYÊN", "gold");
 
                 }
                 if (keyCode === cc.KEY.c) {
-
+                    NotEnoughResourcePopup.appear(1000, "gold");
                 }
                 if (keyCode === cc.KEY.z) {
                 }
@@ -251,6 +249,8 @@ var MapLayer = cc.Layer.extend({
     },
 
     onTouchBegan: function (touch) {
+        cc.log("location:",JSON.stringify(this.getPosition(),null,2));
+        cc.log("mapPos:",JSON.stringify(this.getMapPosFromScreenPos(touch.getLocation()),null,2));
         this.positionTouchBegan = touch.getLocation();
         if (this.chosenBuilding == null) return;
 
@@ -301,6 +301,11 @@ var MapLayer = cc.Layer.extend({
 
         if (this.onModeBuyBuilding) return;
         let building = this.getBuildingFromTouch(locationInScreen);
+        if(building !=null && building._type.startsWith("RES") && building._state === 0 && building._showIconHarvest)
+        {
+            building.harvest();
+            return;
+        }
         //click building first time or click another building
 
         //if click nothing -> building = null
@@ -333,11 +338,10 @@ var MapLayer = cc.Layer.extend({
         //if have chosen building, unselect it
         this.unSelectBuilding(this.chosenBuilding);
         this.tempPosChosenBuilding = cc.p(building._posX, building._posY);
-        // building.setLocalZOrder(MAP_ZORDER_BUILDING+1);
-
+        building.setLocalZOrder(MAP_ZORDER_BUILDING+1);
+        building.onSelected();
         this.chosenBuilding = building;
         this.tempPosChosenBuilding = cc.p(this.chosenBuilding._posX, this.chosenBuilding._posY);
-        building.onSelected();
     },
 
     unSelectBuilding: function () {

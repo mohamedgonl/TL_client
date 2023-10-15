@@ -6,7 +6,7 @@ var InfoLayer = cc.Layer.extend({
         this._super();
         this.init();
         //size
-        cc.log("InfoLayer ctor:::::::::::::::",JSON.stringify(this.getContentSize()));
+        cc.log("InfoLayer ctor:::::::::::::::", JSON.stringify(this.getContentSize()));
 
     },
 
@@ -29,6 +29,10 @@ var InfoLayer = cc.Layer.extend({
             let childrenOfChildren = i.getChildren();
             childrenOfChildren.map(j => {
                 this[i.getName()] [j.getName()] = j;
+                let childrenOfChildrenOfChildren = j.getChildren();
+                childrenOfChildrenOfChildren.map(k => {
+                    this[i.getName()] [j.getName()] [k.getName()] = k;
+                })
             })
         })
         //scale by width
@@ -91,58 +95,111 @@ var InfoLayer = cc.Layer.extend({
     },
 
     // add button to menu button_containerm, status = 0: normal, status = 1: disable, 2 show but text is red
-    addButtonToMenu: function (text, sprite, status, callback, textResource, typeResource) {
+    addButtonToMenu: function (text, sprite, status, callback, amount, type) {
         //button
         // Tạo sprite cho trạng thái bình thường
-        var normalSprite = new cc.Sprite(sprite);
-        // selected = sprite cho nhỏ đi bằng 90% nhưng tâm vẫn ở vị trí cũ
-        let spriteWidth = normalSprite.getContentSize().width;
-        let spriteHeight = normalSprite.getContentSize().height;
+        let node1 = CCSUlties.parseUIFile(res_ui.BUTTON_OF_BUILDING);
+        let node2 = CCSUlties.parseUIFile(res_ui.BUTTON_OF_BUILDING);
+        let node3 = CCSUlties.parseUIFile(res_ui.BUTTON_OF_BUILDING);
 
-        //let selectedSprite is a sprite with 110% size of normalSprite
-        var selectedSprite = new cc.Sprite(sprite);
-        selectedSprite.setScale(1.1);
+        for (let i = 0; i < 3; i++) {
+            let node;
+            if (i === 0)
+                node = node1;
+            else if (i === 1)
+                node = node2;
+            else
+                node = node3;
 
-        var disabledSprite = new cc.Sprite(sprite);
-        disabledSprite.setOpacity(100);
+            let children = node.getChildren();
+            //add to attribute
+            children.map(i => {
+                node[i.getName()] = i;
+                let childrenOfChildren = i.getChildren();
+                childrenOfChildren.map(j => {
+                    node[i.getName()] [j.getName()] = j;
+                    let childrenOfChildrenOfChildren = j.getChildren();
+                    childrenOfChildrenOfChildren.map(k => {
+                        node[i.getName()] [j.getName()] [k.getName()] = k;
+                    })
+                })
+            });
 
-        var button = new cc.MenuItemSprite(normalSprite, selectedSprite, disabledSprite, callback, this);
+            node.sprite.setVisible(false);
+            //set text
+            node.text.setString(text);
 
-        let labelText = new cc.LabelBMFont(text, res.FONT.SOJI[16], null, cc.TEXT_ALIGNMENT_CENTER);
-        //label hien o giua duoi cua button
-        labelText.setPosition(spriteWidth / 2, spriteHeight / 11);
-        labelText.setAnchorPoint(0.5, 0);
-        button.addChild(labelText);
+            //set amount
+            if (amount != null)
+                node.amount.setString(amount);
+            else
+                node.amount.setVisible(false);
 
-        if (textResource != null) {
-            let labelResource = new cc.LabelBMFont(textResource, res.FONT.SOJI[16], null, cc.TEXT_ALIGNMENT_CENTER);
-            //label hien o giua tren cua button
-            labelResource.setPosition(spriteWidth * 0.6, spriteHeight / 11 * 10);
-            labelResource.setAnchorPoint(0.8, 1);
-            button.addChild(labelResource);
+            //set type
+            if (type != null) {
+                if (type === "elixir")
+                    node.type.setTexture(res.ICON.ELIXIR);
+                else if(type === "gold")
+                    node.type.setTexture(res.ICON.GOLD);
+                else
+                    node.type.setTexture(res.ICON.GEM)
 
-            //icon cua resource
-            if (typeResource != null) {
-                let iconSprite = new cc.Sprite();
-                switch (typeResource) {
-                    case "gold":
-                        iconSprite.setTexture(res.ICON.GOLD);
-                        break;
-                    case "elixir":
-                        iconSprite.setTexture(res.ICON.ELIXIR);
-                        break;
-                }
-                iconSprite.setScale(0.6)
-                button.addChild(iconSprite);
-                //set position for icon in top right of button
-                iconSprite.setPosition(spriteWidth * 0.8, spriteHeight / 10 * 8);
-            }
-            if(status === 1) {
-                //change color of text to red
-                labelResource.setColor(cc.color.RED);
-            }
+            } else
+                node.type.setVisible(false);
 
         }
+
+
+        let image = new cc.Sprite(sprite);
+        image.addChild(node1);
+        // Tạo sprite cho trạng thái nhấn
+        let imagePressed = new cc.Sprite(sprite);
+        imagePressed.setColor(cc.color.GRAY);
+        imagePressed.addChild(node2);
+        //phong to 1.1
+        imagePressed.setScale(1.1);
+        imagePressed.setAnchorPoint(0.5, 0.5);
+
+        let imageDisabled = new cc.Sprite(sprite);
+        imageDisabled.setColor(cc.color.GRAY);
+        imageDisabled.addChild(node3);
+
+        var button = new cc.MenuItemSprite(image, imagePressed, imageDisabled, callback, this);
+
+        // let labelText = new cc.LabelBMFont(text, res.FONT.SOJI[16], null, cc.TEXT_ALIGNMENT_CENTER);
+        // //label hien o giua duoi cua button
+        // labelText.setPosition(spriteWidth / 2, spriteHeight / 11);
+        // labelText.setAnchorPoint(0.5, 0);
+        // button.addChild(labelText);
+        //
+        // if (textResource != null) {
+        //     let labelResource = new cc.LabelBMFont(textResource, res.FONT.SOJI[16], null, cc.TEXT_ALIGNMENT_CENTER);
+        //     //label hien o giua tren cua button
+        //     labelResource.setPosition(spriteWidth * 0.6, spriteHeight / 11 * 10);
+        //     labelResource.setAnchorPoint(0.8, 1);
+        //     button.addChild(labelResource);
+        //
+        //     //icon cua resource
+        //     if (typeResource != null) {
+        //         let iconSprite = new cc.Sprite();
+        //         switch (typeResource) {
+        //             case "gold":
+        //                 iconSprite.setTexture(res.ICON.GOLD);
+        //                 break;
+        //             case "elixir":
+        //                 iconSprite.setTexture(res.ICON.ELIXIR);
+        //                 break;
+        //         }
+        //         iconSprite.setScale(0.6)
+        //         button.addChild(iconSprite);
+        //         //set position for icon in top right of button
+        //         iconSprite.setPosition(spriteWidth * 0.8, spriteHeight / 10 * 8);
+        //     }
+        //     if(status === 1) {
+        //         //change color of text to red
+        //         labelResource.setColor(cc.color.RED);
+        //     }
+        // }
 
 
         this.menu.addChild(button);
@@ -225,9 +282,13 @@ var InfoLayer = cc.Layer.extend({
             let res = data.resource;
             if (res.gold != null) {
                 this.gold_container.getChildByName("text").setString(res.gold);
+                let barPercent = res.gold / PlayerInfoManager.Instance().getMaxResource().gold;
+                this.gold_container.bar_bg.bar.setPercent(barPercent * 100);
             }
             if (res.elixir != null) {
                 this.elixir_container.text.setString(res.elixir);
+                let barPercent = res.elixir / PlayerInfoManager.Instance().getMaxResource().elixir;
+                this.elixir_container.bar_bg.bar.setPercent(barPercent * 100);
             }
             if (res.gem != null) {
                 this.g_container.text.setString(res.gem);
@@ -245,9 +306,13 @@ var InfoLayer = cc.Layer.extend({
         if (data.maxResource != null) {
             if (data.maxResource.gold != null) {
                 this.gold_container.text_max.setString("Tối đa:" + data.maxResource.gold);
+                let barPercent = PlayerInfoManager.Instance().getResource().gold / data.maxResource.gold;
+                this.gold_container.bar_bg.bar.setPercent(barPercent * 100);
             }
             if (data.maxResource.elixir != null) {
                 this.elixir_container.text_max.setString("Tối đa:" + data.maxResource.elixir);
+                let barPercent = PlayerInfoManager.Instance().getResource().elixir / data.maxResource.elixir;
+                this.elixir_container.bar_bg.bar.setPercent(barPercent * 100);
             }
         }
         if (data.builder != null) {

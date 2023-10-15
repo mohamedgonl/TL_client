@@ -206,10 +206,14 @@ var Building = GameObject.extend({
                     infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,status,this.showPopupUpgrade.bind(this),priceElixir,"elixir");
                 }
             }
+
+
         }
         if(this._state !==0) {
             infoLayer.addButtonToMenu("Hủy",res.BUTTON.CANCEL_BUTTON,0,this.onClickStop.bind(this));
-            infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this));
+            //priceGem = 1 gem per 15m, floor upper, count from now to end time
+            let priceGem = Math.ceil((this._endTime - TimeManager.Instance().getCurrentTimeInSecond())/900);
+            infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this),priceGem,"gem");
         }
     },
 
@@ -321,7 +325,10 @@ var Building = GameObject.extend({
         this._state = 1;
         this._startTime = startTime;
         this._endTime = endTime;
+
         this.startProcess();
+
+
         },
     startUpgrade: function (startTime,endTime) {
 
@@ -495,7 +502,6 @@ var Building = GameObject.extend({
     },
     onClickQuickFinish: function () {
         cc.log("onClickQuickFinish");
-
         testnetwork.connector.sendQuickFinish(this._id);
     },
     quickFinish: function (){
@@ -550,7 +556,7 @@ var Building = GameObject.extend({
     onReceivedQuickFinishOfAnother: function (packet) {
         this.onClickUpgrade();
     },
-    onReceivedBuyResourceByGem: function (packet) {
+    onReceivedBuyResourceByGemSuccess: function (packet) {
         this.onClickUpgrade();
     }
 });

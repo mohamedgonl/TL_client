@@ -29,6 +29,8 @@ var MapManager = cc.Layer.extend({
     //load from server
     //chua lam status
     loadFromServer: function (buildings){
+        cc.log("load from server");
+        cc.log(JSON.stringify(buildings,null,2));
         for(let index in buildings){
 
             let construct = buildings[index];
