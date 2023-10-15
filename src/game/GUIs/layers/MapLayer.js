@@ -609,29 +609,53 @@ var MapLayer = cc.Layer.extend({
         let oldScale = this.getScale();
         let distance = cc.pDistance(location1, location2);
         let delta = distance - this.distance;
+
+        // Tính toán giá trị mới của scale
         let scale = this.getScale();
         if (delta < 0) {
-            scale += ZOOM_STEP*3;
-            if (scale > ZOOM_MAX) {
-                scale = ZOOM_MAX;
-            }
-
+            scale += ZOOM_STEP * 3;
+            scale = Math.min(scale, ZOOM_MAX);
         } else {
-            scale -= ZOOM_STEP*3;
-            if (scale < ZOOM_MIN) {
-                scale = ZOOM_MIN;
-            }
+            scale -= ZOOM_STEP * 3;
+            scale = Math.max(scale, ZOOM_MIN);
         }
-        let ratio = scale / oldScale;git
-        this.x -= mapPos.x * (ratio - 1);
-        this.y -= mapPos.y * (ratio - 1);
 
-        this.setScale(scale);
+        // Tính toán tỷ lệ giữa scale mới và scale cũ
+        let ratio = scale / oldScale;
 
-        this.limitBorder();
+        // Tính toán vị trí mới và scale mượt hơn
+        let targetX = this.x - mapPos.x * (ratio - 1);
+        let targetY = this.y - mapPos.y * (ratio - 1);
+        let targetScale = scale;
+
+        // Sử dụng requestAnimationFrame để cập nhật mượt mà
+        let startTime = null;
+        let duration = 200; // Thời gian cập nhật (ms)
+        const animate = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const elapsed = timestamp - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Áp dụng hiệu ứng trung gian
+            const easedProgress = Math.sin(progress * (Math.PI / 2));
+
+            // Cập nhật vị trí và scale
+            this.x = this.x + (targetX - this.x) * easedProgress;
+            this.y = this.y + (targetY - this.y) * easedProgress;
+            this.setScale(this.getScale() + (targetScale - this.getScale()) * easedProgress);
+
+            // Kiểm tra nếu chưa hoàn thành, tiếp tục cập nhật
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                this.limitBorder();
+            }
+        };
+
+        requestAnimationFrame(animate);
+
         this.distance = distance;
     },
-
     //if moveView or Zoom out of map, move back
     limitBorder: function () {
 
