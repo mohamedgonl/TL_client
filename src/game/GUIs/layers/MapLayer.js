@@ -611,18 +611,18 @@ var MapLayer = cc.Layer.extend({
         let delta = distance - this.distance;
         let scale = this.getScale();
         if (delta < 0) {
-            scale += ZOOM_STEP;
+            scale += ZOOM_STEP*3;
             if (scale > ZOOM_MAX) {
                 scale = ZOOM_MAX;
             }
 
         } else {
-            scale -= ZOOM_STEP;
+            scale -= ZOOM_STEP*3;
             if (scale < ZOOM_MIN) {
                 scale = ZOOM_MIN;
             }
         }
-        let ratio = scale / oldScale;
+        let ratio = scale / oldScale;git
         this.x -= mapPos.x * (ratio - 1);
         this.y -= mapPos.y * (ratio - 1);
 
