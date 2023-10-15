@@ -29,6 +29,8 @@ var MapManager = cc.Layer.extend({
     //load from server
     //chua lam status
     loadFromServer: function (buildings){
+        cc.log("load from server");
+        cc.log(JSON.stringify(buildings,null,2));
         for(let index in buildings){
 
             let construct = buildings[index];
@@ -159,6 +161,13 @@ var MapManager = cc.Layer.extend({
     },
     getBuildingById: function (id) {
             return this.listBuildings.get(id) || null;
+    },
+    getBuildingByGrid: function (x,y) {
+        //if x y null, return null
+        if(x === null || y === null)
+            return null;
+        cc.log("x y::::::::::::::::::::::::::::",x,y)
+        return this.listBuildings.get(this.mapGrid[x][y]) || null;
     },
 
     checkValidPutBuilding: function (building, newPosX, newPosY) {

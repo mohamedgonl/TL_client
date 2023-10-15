@@ -233,7 +233,7 @@
             <PrePosition X="0.3500" Y="1.0000" />
             <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="builder_container" ActionTag="2006540447" Tag="63" IconVisible="True" PositionPercentXEnabled="True" VerticalEdge="TopEdge" LeftMargin="568.0001" RightMargin="567.9999" TopMargin="1.5307" BottomMargin="638.4693" ctype="SingleNodeObjectData">
+          <AbstractNodeData Name="builder_container" ActionTag="2006540447" Tag="63" IconVisible="True" PositionPercentXEnabled="True" VerticalEdge="TopEdge" LeftMargin="568.0000" RightMargin="568.0000" TopMargin="1.5307" BottomMargin="638.4693" ctype="SingleNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <Children>
               <AbstractNodeData Name="bar_bg" ActionTag="1890922424" Tag="64" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="TopEdge" LeftMargin="-50.0000" RightMargin="-50.0000" TopMargin="20.0000" BottomMargin="-51.0000" ctype="SpriteObjectData">
@@ -285,7 +285,7 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint />
-            <Position X="568.0001" Y="638.4693" />
+            <Position X="568.0000" Y="638.4693" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.9976" />
@@ -354,6 +354,18 @@
             <Children>
               <AbstractNodeData Name="bar_bg" ActionTag="1309671654" Tag="74" IconVisible="False" LeftMargin="-169.4475" RightMargin="42.4475" TopMargin="69.1509" BottomMargin="-97.1509" ctype="SpriteObjectData">
                 <Size X="127.0000" Y="28.0000" />
+                <Children>
+                  <AbstractNodeData Name="bar" ActionTag="-1703536206" Tag="371" IconVisible="False" LeftMargin="1.0629" RightMargin="7.9371" TopMargin="1.2853" BottomMargin="6.7147" ProgressInfo="100" ProgressType="Right_To_Left" ctype="LoadingBarObjectData">
+                    <Size X="118.0000" Y="20.0000" />
+                    <AnchorPoint />
+                    <Position X="1.0629" Y="6.7147" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.0084" Y="0.2398" />
+                    <PreSize X="0.9291" Y="0.7143" />
+                    <ImageFileData Type="Normal" Path="guis/Main_Gui/elixir_bar.png" Plist="" />
+                  </AbstractNodeData>
+                </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="-105.9475" Y="-83.1509" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -361,17 +373,6 @@
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
                 <FileData Type="Normal" Path="guis/Main_Gui/bg_bar_2.png" Plist="" />
-                <BlendFunc Src="1" Dst="771" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="bar" ActionTag="-1345838159" Tag="75" IconVisible="False" LeftMargin="-168.6888" RightMargin="50.6888" TopMargin="70.2665" BottomMargin="-90.2665" ctype="SpriteObjectData">
-                <Size X="118.0000" Y="20.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="-109.6888" Y="-80.2665" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition />
-                <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="guis/Main_Gui/elixir_bar.png" Plist="" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="icon" ActionTag="1989552664" Tag="76" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="-44.3094" RightMargin="17.3094" TopMargin="64.6763" BottomMargin="-96.6763" ctype="SpriteObjectData">
@@ -418,6 +419,18 @@
             <Children>
               <AbstractNodeData Name="bar_bg" ActionTag="-1086463520" Tag="80" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="-169.7252" RightMargin="42.7252" TopMargin="22.3287" BottomMargin="-50.3287" ctype="SpriteObjectData">
                 <Size X="127.0000" Y="28.0000" />
+                <Children>
+                  <AbstractNodeData Name="bar" ActionTag="1713554583" Tag="372" IconVisible="False" LeftMargin="1.1600" RightMargin="7.8400" TopMargin="1.2900" BottomMargin="6.7100" ProgressType="Right_To_Left" ctype="LoadingBarObjectData">
+                    <Size X="118.0000" Y="20.0000" />
+                    <AnchorPoint />
+                    <Position X="1.1600" Y="6.7100" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.0091" Y="0.2396" />
+                    <PreSize X="0.9291" Y="0.7143" />
+                    <ImageFileData Type="Normal" Path="guis/Main_Gui/gold_bar.png" Plist="" />
+                  </AbstractNodeData>
+                </Children>
                 <AnchorPoint ScaleX="1.0000" ScaleY="1.0000" />
                 <Position X="-42.7252" Y="-22.3287" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -425,17 +438,6 @@
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
                 <FileData Type="Normal" Path="guis/Main_Gui/bg_bar_2.png" Plist="" />
-                <BlendFunc Src="1" Dst="771" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="bar" ActionTag="2129743966" Tag="81" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="-168.7898" RightMargin="50.7898" TopMargin="23.3585" BottomMargin="-43.3585" ctype="SpriteObjectData">
-                <Size X="118.0000" Y="20.0000" />
-                <AnchorPoint ScaleX="1.0000" ScaleY="1.0000" />
-                <Position X="-50.7898" Y="-23.3585" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition />
-                <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="guis/Main_Gui/gold_bar.png" Plist="" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="icon" ActionTag="1193962006" Tag="82" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="-46.8595" RightMargin="18.8595" TopMargin="19.3663" BottomMargin="-48.3663" ctype="SpriteObjectData">

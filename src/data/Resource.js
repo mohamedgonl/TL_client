@@ -138,6 +138,9 @@ var res_ui = {
     INFO_LAYER: "InfoLayer1.json",
     UPGRADE_POPUP: "UpgradePopup.json",
     INFO_POPUP: "InfoPopup.json",
+    BASIC_POPUP:"BasicPopup.json",
+    BUTTON_OF_BUILDING: "ButtonOfBuilding.json",
+    ICON_HARVEST: "IconHarvest.json",
 }
 
 var res_shop = {

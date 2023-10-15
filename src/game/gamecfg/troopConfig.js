@@ -143,4 +143,4 @@ const DIRECTIONS_STRING = {
 
 const TROOP_ANIMS_LIST = ["ARM_1", "ARM_2", "ARM_3", "ARM_4"];
 
-const TROOP_STAY_TIME = 2;
+const TROOP_STAY_TIME = 10;

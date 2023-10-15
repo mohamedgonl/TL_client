@@ -991,7 +991,7 @@
           {
             "AnchorPoint": {},
             "Position": {
-              "X": 568.0001,
+              "X": 568.0,
               "Y": 638.4693
             },
             "Scale": {
@@ -1010,8 +1010,8 @@
               "Y": 0.0
             },
             "VerticalEdge": "TopEdge",
-            "LeftMargin": 568.0001,
-            "RightMargin": 567.9999,
+            "LeftMargin": 568.0,
+            "RightMargin": 568.0,
             "TopMargin": 1.5307,
             "BottomMargin": 638.4693,
             "Tag": 63,
@@ -1542,57 +1542,54 @@
                 "TopMargin": 69.1509,
                 "BottomMargin": -97.1509,
                 "Tag": 74,
+                "Children": [
+                  {
+                    "ProgressInfo": 100,
+                    "ProgressType": "Right_To_Left",
+                    "ImageFileData": {
+                      "Type": "Normal",
+                      "Path": "guis/Main_Gui/elixir_bar.png",
+                      "Plist": ""
+                    },
+                    "AnchorPoint": {},
+                    "Position": {
+                      "X": 1.0629,
+                      "Y": 6.7147
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.0084,
+                      "Y": 0.2398
+                    },
+                    "PreSize": {
+                      "X": 0.9291,
+                      "Y": 0.7143
+                    },
+                    "LeftMargin": 1.0629,
+                    "RightMargin": 7.9371,
+                    "TopMargin": 1.2853,
+                    "BottomMargin": 6.7147,
+                    "Tag": 371,
+                    "ActionTag": -1703536206,
+                    "Size": {
+                      "X": 118.0,
+                      "Y": 20.0
+                    },
+                    "Name": "bar",
+                    "ctype": "LoadingBarObjectData"
+                  }
+                ],
                 "ActionTag": 1309671654,
                 "Size": {
                   "X": 127.0,
                   "Y": 28.0
                 },
                 "Name": "bar_bg",
-                "ctype": "SpriteObjectData"
-              },
-              {
-                "FileData": {
-                  "Type": "Normal",
-                  "Path": "guis/Main_Gui/elixir_bar.png",
-                  "Plist": ""
-                },
-                "BlendFunc": {
-                  "Src": 1,
-                  "Dst": 771
-                },
-                "AnchorPoint": {
-                  "ScaleX": 0.5,
-                  "ScaleY": 0.5
-                },
-                "Position": {
-                  "X": -109.6888,
-                  "Y": -80.2665
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": false,
-                "PrePosition": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": -168.6888,
-                "RightMargin": 50.6888,
-                "TopMargin": 70.2665,
-                "BottomMargin": -90.2665,
-                "Tag": 75,
-                "ActionTag": -1345838159,
-                "Size": {
-                  "X": 118.0,
-                  "Y": 20.0
-                },
-                "Name": "bar",
                 "ctype": "SpriteObjectData"
               },
               {
@@ -1799,59 +1796,53 @@
                 "TopMargin": 22.3287,
                 "BottomMargin": -50.3287,
                 "Tag": 80,
+                "Children": [
+                  {
+                    "ProgressType": "Right_To_Left",
+                    "ImageFileData": {
+                      "Type": "Normal",
+                      "Path": "guis/Main_Gui/gold_bar.png",
+                      "Plist": ""
+                    },
+                    "AnchorPoint": {},
+                    "Position": {
+                      "X": 1.16,
+                      "Y": 6.71
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.0091,
+                      "Y": 0.2396
+                    },
+                    "PreSize": {
+                      "X": 0.9291,
+                      "Y": 0.7143
+                    },
+                    "LeftMargin": 1.16,
+                    "RightMargin": 7.84,
+                    "TopMargin": 1.29,
+                    "BottomMargin": 6.71,
+                    "Tag": 372,
+                    "ActionTag": 1713554583,
+                    "Size": {
+                      "X": 118.0,
+                      "Y": 20.0
+                    },
+                    "Name": "bar",
+                    "ctype": "LoadingBarObjectData"
+                  }
+                ],
                 "ActionTag": -1086463520,
                 "Size": {
                   "X": 127.0,
                   "Y": 28.0
                 },
                 "Name": "bar_bg",
-                "ctype": "SpriteObjectData"
-              },
-              {
-                "FileData": {
-                  "Type": "Normal",
-                  "Path": "guis/Main_Gui/gold_bar.png",
-                  "Plist": ""
-                },
-                "BlendFunc": {
-                  "Src": 1,
-                  "Dst": 771
-                },
-                "AnchorPoint": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "Position": {
-                  "X": -50.7898,
-                  "Y": -23.3585
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": false,
-                "PrePosition": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "HorizontalEdge": "RightEdge",
-                "VerticalEdge": "TopEdge",
-                "LeftMargin": -168.7898,
-                "RightMargin": 50.7898,
-                "TopMargin": 23.3585,
-                "BottomMargin": -43.3585,
-                "Tag": 81,
-                "ActionTag": 2129743966,
-                "Size": {
-                  "X": 118.0,
-                  "Y": 20.0
-                },
-                "Name": "bar",
                 "ctype": "SpriteObjectData"
               },
               {

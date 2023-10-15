@@ -72,8 +72,7 @@ var Obstacle = GameObject.extend({
         this._arrowMove.setScale(SCALE_BUILDING_BODY);
         this._arrowMove.setAnchorPoint(0.5,0.5);
         this._arrowMove.setVisible(false);
-        this._arrowMove.setGlobalZOrder(MAP_ZORDER_GUI);
-        this.addChild(this._arrowMove);
+        this.addChild(this._arrowMove,ZORDER_BUILDING_EFFECT);
 
         //progress bar
         this._progressBar = new ccui.Slider();
@@ -121,7 +120,12 @@ var Obstacle = GameObject.extend({
             }
         }
         else
-            infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this));
+        {
+            //priceGem = 1 gem per 15m, floor upper, count from now to end time
+            let priceGem = Math.ceil((this._endTime - TimeManager.Instance().getCurrentTimeInSecond())/900);
+            infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this),priceGem,"gem");
+        }
+
     },
     onSelected: function(){
         this.loadButton();
@@ -205,7 +209,6 @@ var Obstacle = GameObject.extend({
     },
     //check to client, if valid then send packet to server
     onClickRemove: function(){
-        cc.log("onClickRemove");
         //check client
         let playerInfoManager = PlayerInfoManager.Instance();
         let priceGold = LoadManager.Instance().getConfig(this._type,this._level,"gold");
@@ -225,44 +228,7 @@ var Obstacle = GameObject.extend({
                 priceCount = priceElixir - PlayerInfoManager.Instance().getResource("elixir");
                 type = "elixir";
             }
-
-            // create content in popup
-            let label = new cc.LabelBMFont("Bạn có muốn mua số tài nguyên còn thiếu?", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
-            label.setColor(new cc.Color(150, 78, 3));
-            let price = new cc.LabelBMFont(priceCount, res.FONT.SOJI["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
-            price.setPositionY(-label.getContentSize().height);
-            //gold thi chu vang, elixir thi chu hong
-            if(type === "gold")
-            {
-                price.setColor(cc.color.YELLOW);
-            }
-            else{
-                price.setColor(cc.color(255, 0, 255));
-            }
-            let content = new cc.Node();
-            content.addChild(label);
-            content.addChild(price);
-
-            let buyResPopup = new NotiPopup({
-                title: "THIẾU TÀI NGUYÊN",
-                acceptCallBack: () => {
-                    //remove popup
-
-                    popUpLayer.setVisible(false);
-                    if(type === "gold")
-                        testnetwork.connector.sendBuyResourceByGem(priceCount,0);
-                    else
-                        testnetwork.connector.sendBuyResourceByGem(0,priceCount);
-                },
-                content: content,
-                cancleCallBack: () => {
-                    popUpLayer.setVisible(false);
-                    buyResPopup.removeFromParent(true)
-                }
-            });
-            var popUpLayer = cc.director.getRunningScene().popUpLayer;
-            popUpLayer.addChild(buyResPopup)
-            popUpLayer.setVisible(true);
+            NotEnoughResourcePopup.appear(priceCount,type);
             return;
         }
 
@@ -279,11 +245,11 @@ var Obstacle = GameObject.extend({
             content.addChild(label);
             // content.addChild(price);
             let buyResPopup = new NotiPopup({
-                title: "THỢ XÂY BẬN HẾT",
-                acceptCallBack: () => {
-                    //remove popup
-                    popUpLayer.setVisible(false);
-                    PlayerInfoManager.Instance().freeBuilderByGem();
+                    title: "THỢ XÂY BẬN HẾT",
+                    acceptCallBack: () => {
+                        //remove popup
+                        popUpLayer.setVisible(false);
+                          PlayerInfoManager.Instance().freeBuilderByGem();
                     buyResPopup.removeFromParent(true);
                 },
                 content: content,
@@ -315,8 +281,7 @@ var Obstacle = GameObject.extend({
     },
     onAddIntoMapManager: function () {
     },
-    onReceivedBuyResourceByGem: function (packet) {
-
+    onReceivedBuyResourceByGemSuccess: function (packet) {
       this.onClickRemove();
     },
     onClickQuickFinish: function () {

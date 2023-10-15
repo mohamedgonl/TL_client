@@ -9,6 +9,7 @@ var ElixirMine = Building.extend({
         this._currentElixir = 0;
         this._capacityElixir = config.capacity;
         this._productionElixir = config.productivity;
+
     },
     onAddIntoMapManager: function () {
         this._super();
@@ -23,7 +24,7 @@ var ElixirMine = Building.extend({
             res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level],1,1);
     },
     loadButton: function () {
-        this._super();
+        if(this._super() === -1) return;
         let infoLayer = cc.director.getRunningScene().infoLayer;
 
         //button thu hoach
@@ -45,6 +46,7 @@ var ElixirMine = Building.extend({
         this._lastCollectTime = lastCollectTime;
         PlayerInfoManager.Instance().setResource({elixir:elixir});
         this.loadButton();
-    }
+    },
+
 
 });

@@ -23,6 +23,7 @@ testnetwork.Connector = cc.Class.extend({
                 fr.getCurrentScreen().onFinishLogin();
                 break;
             case gv.CMD.USER_INFO:
+
                 // neu this khong co onReceiveUserInfo thi se goi cua fr.getCurrentScreen()
                 if(fr.getCurrentScreen() == null)
                     cc.director.getRunningScene().onReceiveUserInfo(packet);
@@ -213,6 +214,7 @@ testnetwork.Connector = cc.Class.extend({
             cc.log("BUY BUILDING ERROR with code ::::::::: ", packet.error);
         }
         else {
+            this.sendGetUserInfo();
             cc.log("BUY BUILDING SUCCESS ::::::::: ");
             //log all packet
             cc.log("packet: ", JSON.stringify(packet, null, 2));
@@ -224,9 +226,10 @@ testnetwork.Connector = cc.Class.extend({
             mapLayer.exitModeBuyBuilding();
             mapLayer.selectBuilding(building);
             // cc.log("++++++++++++++++++++++++++++++++++++++++");
-            if(0 === packet.status) return;
+            if(packet.status === 0) return;
             building.startBuild(packet.startTime, packet.endTime);
             //bat lai info
+
         }
     },
     onReceivedRemoveObstacle: function (packet) {
@@ -261,11 +264,23 @@ testnetwork.Connector = cc.Class.extend({
             cc.log("UPGRADE BUILDING SUCCESS ::::::::: ");
             let building = MapManager.Instance().getBuildingById(packet.id);
             building.startUpgrade(packet.startTime, packet.endTime);
+            if(packet.status === 0) building.completeUpgrade();
         }
     },
     onReceivedUpgradeBuildingSuccess: function (packet) {
         if(packet.error !==0){
             cc.log("UPGRADE BUILDING SUCCESS ERROR with code ::::::::: ", packet.error);
+        }
+        if(packet.error === 26) {
+            //get chosenbuilding
+            let building = cc.director.getRunningScene().getMapLayer().chosenBuilding;
+            if(!building) {
+                //log bug
+                cc.log("UPGRADE BUILDING SUCCESS ERROR::::::::: ", packet.error);
+            }
+            building.completeUpgrade();
+            cc.eventManager.dispatchCustomEvent(EVENT_NAMES.BUILDING_UPDATED, {id: packet.id})
+
         }
         else
         {
@@ -340,7 +355,7 @@ testnetwork.Connector = cc.Class.extend({
             building.quickFinish();
             //if chosenbuilding right now != building, call onReceivedQuickFinish of chosenbuilding
             let chosenBuilding = cc.director.getRunningScene().getMapLayer().chosenBuilding;
-            if(chosenBuilding && chosenBuilding.id !== id) {
+            if(chosenBuilding && chosenBuilding._id !== id) {
                 chosenBuilding.onReceivedQuickFinishOfAnother();
             }
         }
@@ -359,10 +374,9 @@ testnetwork.Connector = cc.Class.extend({
             // this.sendGetUserInfo();
             //get chosen building
             let building = cc.director.getRunningScene().getMapLayer().chosenBuilding;
-
             if(!building) return;
             cc.log("building: ", building._type)
-            building.onReceivedBuyResourceByGem();
+            building.onReceivedBuyResourceByGemSuccess();
         }
     },
     sendGetUserInfo: function () {

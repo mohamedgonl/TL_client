@@ -36,6 +36,13 @@ var LoadManager = cc.Class.extend({
         if(key == null)
             return this[type][level];
        return this[type][level][key];
+
+       if(type == "BDH_1")
+       {
+           let bdhCount = MapManager.Instance().buildingAmount["BDH_1"];
+           cc.log("bdhCount:::::::::::::::::::::::::::",bdhCount);
+            return this[type][bdhCount+1][key];
+       }
     },
 
     loadResource : function () {
