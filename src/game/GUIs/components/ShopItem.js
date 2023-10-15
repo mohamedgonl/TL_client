@@ -212,7 +212,7 @@ var ShopItem = cc.Node.extend({
 
         }
 
-        if (this._category !== "category_ngankho") {
+        if (this._category !== "category_ngankho" && this._available === true) {
             var mapLayer = cc.director.getRunningScene().mapLayer;
             popUpLayer.disappear("shop");
             mapLayer.enterModeBuyBuilding(this._data.cfgId);

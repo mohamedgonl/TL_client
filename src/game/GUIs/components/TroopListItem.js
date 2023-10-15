@@ -57,7 +57,7 @@ var TroopListItem = cc.Node.extend({
     },
 
     checkAvailable: function () {
-        cc.log("GGGGGGGGGGGGGGGGG ", this._curBarrack._level)
+
         this._available = TROOPS_LIST[this._i].available && (this._barrackRequired <= this._curBarrack._level);
 
         let price = TROOP[this._troopCfgId][1]["trainingElixir"];
@@ -80,7 +80,12 @@ var TroopListItem = cc.Node.extend({
     setCostDisplay: function () {
         let costContainer = this._node.getChildByName("cost_container")
         if (this._barrackRequired <= this._curBarrack._level) {
-            if(this.label) this.label.removeFromParent(true);
+            if(this.label) {
+                let barRequired = this._node.getChildByName("bar_required");
+                barRequired.setVisible(false);
+                costContainer.setVisible(true);
+                this.label.removeFromParent(true);
+            }
             let costString = costContainer.getChildByName("cost");
             costString.setString(this._cost);
         } else {
