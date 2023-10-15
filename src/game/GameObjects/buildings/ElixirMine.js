@@ -24,7 +24,7 @@ var ElixirMine = Building.extend({
             res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level],1,1);
     },
     loadButton: function () {
-        this._super();
+        if(this._super() === -1) return;
         let infoLayer = cc.director.getRunningScene().infoLayer;
 
         //button thu hoach

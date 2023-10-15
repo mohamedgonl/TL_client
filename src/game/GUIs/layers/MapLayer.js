@@ -171,10 +171,36 @@ var MapLayer = cc.Layer.extend({
             cc.log("invalid put building");
             return;
         }
-
         //check have builder
         if (PlayerInfoManager.Instance().builder.current <= 0) {
             cc.log("not enough builder");
+            // create content in popup
+            let label = new cc.LabelBMFont("Bạn có muốn giải phóng thợ xây", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
+            label.setColor(new cc.Color(150, 78, 3));
+            // let price = new cc.LabelBMFont(priceCount, res.FONT.SOJI["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
+            // price.setPositionY(-label.getContentSize().height);
+            // //price mau xanh la
+            // price.setColor(cc.color(0, 255, 0));
+            let content = new cc.Node();
+            content.addChild(label);
+            // content.addChild(price);
+            let buyResPopup = new NotiPopup({
+                title: "THỢ XÂY BẬN HẾT",
+                acceptCallBack: () => {
+                    //remove popup
+                    popUpLayer.setVisible(false);
+                    PlayerInfoManager.Instance().freeBuilderByGem();
+                    buyResPopup.removeFromParent(true);
+                },
+                content: content,
+                cancleCallBack: () => {
+                    popUpLayer.setVisible(false);
+                    buyResPopup.removeFromParent(true)
+                }
+            });
+            var popUpLayer = cc.director.getRunningScene().popUpLayer;
+            popUpLayer.addChild(buyResPopup)
+            popUpLayer.setVisible(true);
             return;
         }
 
@@ -183,7 +209,20 @@ var MapLayer = cc.Layer.extend({
         let priceElixir = LoadManager.Instance().getConfig(this.chosenBuilding._type, 1, "elixir") || 0;
         if (PlayerInfoManager.Instance().checkEnoughResource(priceGold, priceElixir) === false)
         {
-            cc.log("not enough resource");
+            let price;
+            let type ;
+            if(priceGold > 0)
+            {
+                //price is amout need to enough
+                price = priceGold - PlayerInfoManager.Instance().getResource().gold;
+                type = "gold";
+            }
+            else {
+                price = priceElixir - PlayerInfoManager.Instance().getResource().elixir;
+                type = "elixir";
+            }
+
+            NotEnoughResourcePopup.appear(price,type);
             return;
         }
 
@@ -192,6 +231,9 @@ var MapLayer = cc.Layer.extend({
         testnetwork.connector.sendBuyBuilding(this.chosenBuilding._type, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y);
 
 
+    },
+    onReceivedQuickFinishOfAnother: function (packet) {
+       this.acceptBuyBuilding();
     },
 
     //+ api buyBuilding: 2001
@@ -339,9 +381,10 @@ var MapLayer = cc.Layer.extend({
         this.unSelectBuilding(this.chosenBuilding);
         this.tempPosChosenBuilding = cc.p(building._posX, building._posY);
         building.setLocalZOrder(MAP_ZORDER_BUILDING+1);
-        building.onSelected();
+
         this.chosenBuilding = building;
         this.tempPosChosenBuilding = cc.p(this.chosenBuilding._posX, this.chosenBuilding._posY);
+        building.onSelected();
     },
 
     unSelectBuilding: function () {

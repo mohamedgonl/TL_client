@@ -54,7 +54,7 @@ var Building = GameObject.extend({
 
         var size = this._width;
         //body
-        this._body.setTexture(bodySprite)
+        this._body.setTexture(bodySprite);
         this._body.setAnchorPoint(0.5,0.5);
         this._body.setScale(SCALE_BUILDING_BODY);
 
@@ -187,7 +187,8 @@ var Building = GameObject.extend({
         let infoLayer = cc.director.getRunningScene().infoLayer;
 
         infoLayer.removeAllButtonInMenu();
-        if(chosenBuilding !== this) return;
+
+        if(chosenBuilding !== this) return -1;
 
         infoLayer.addButtonToMenu("Thông tin",res.BUTTON.INFO_BUTTON,0,this.onClickInfo.bind(this));
         if(this._state === 0){
@@ -325,10 +326,10 @@ var Building = GameObject.extend({
         this._state = 1;
         this._startTime = startTime;
         this._endTime = endTime;
-
+        cc.log("start build");
+        cc.log("start time: " + this._startTime);
+        cc.log("end time: " + this._endTime);
         this.startProcess();
-
-
         },
     startUpgrade: function (startTime,endTime) {
 
@@ -359,7 +360,7 @@ var Building = GameObject.extend({
         this._level += 1;
         //set sprite for new level and update level label
         this._levelLabel.setString("Cấp " + this._level);
-        // this.loadSpriteByLevel(this._level)
+        this.loadSpriteByLevel(this._level)
         this.completeProcess();
     },
 
@@ -459,6 +460,35 @@ var Building = GameObject.extend({
         }
         if(!PlayerInfoManager.Instance().getBuilder().current){
             cc.log("not enough builder");
+            cc.log("not enough builder");
+            // create content in popup
+            let label = new cc.LabelBMFont("Bạn có muốn giải phóng thợ xây", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
+            label.setColor(new cc.Color(150, 78, 3));
+            // let price = new cc.LabelBMFont(priceCount, res.FONT.SOJI["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
+            // price.setPositionY(-label.getContentSize().height);
+            // //price mau xanh la
+            // price.setColor(cc.color(0, 255, 0));
+            let content = new cc.Node();
+            content.addChild(label);
+            // content.addChild(price);
+            let buyResPopup = new NotiPopup({
+                title: "THỢ XÂY BẬN HẾT",
+                acceptCallBack: () => {
+                    //remove popup
+                    popUpLayer.setVisible(false);
+                    PlayerInfoManager.Instance().freeBuilderByGem();
+                    buyResPopup.removeFromParent(true);
+                },
+                content: content,
+                cancleCallBack: () => {
+                    popUpLayer.setVisible(false);
+                    buyResPopup.removeFromParent(true)
+                }
+            });
+            var popUpLayer = cc.director.getRunningScene().popUpLayer;
+            popUpLayer.addChild(buyResPopup)
+            popUpLayer.setVisible(true);
+            return;
             return;
         }
         //send to server
@@ -557,6 +587,12 @@ var Building = GameObject.extend({
         this.onClickUpgrade();
     },
     onReceivedBuyResourceByGemSuccess: function (packet) {
+        let mapLayer = cc.director.getRunningScene().mapLayer;
+        let chosenBuilding = mapLayer.getChosenBuilding();
+        let modeBuyBuilding = mapLayer.onModeBuyBuilding;
+        if(chosenBuilding === this && modeBuyBuilding===true){
+            mapLayer.acceptBuyBuilding();
+        }
         this.onClickUpgrade();
     }
 });

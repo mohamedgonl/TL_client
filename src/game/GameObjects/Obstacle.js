@@ -245,11 +245,11 @@ var Obstacle = GameObject.extend({
             content.addChild(label);
             // content.addChild(price);
             let buyResPopup = new NotiPopup({
-                title: "THỢ XÂY BẬN HẾT",
-                acceptCallBack: () => {
-                    //remove popup
-                    popUpLayer.setVisible(false);
-                    PlayerInfoManager.Instance().freeBuilderByGem();
+                    title: "THỢ XÂY BẬN HẾT",
+                    acceptCallBack: () => {
+                        //remove popup
+                        popUpLayer.setVisible(false);
+                          PlayerInfoManager.Instance().freeBuilderByGem();
                     buyResPopup.removeFromParent(true);
                 },
                 content: content,

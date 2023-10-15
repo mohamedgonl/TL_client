@@ -162,6 +162,13 @@ var MapManager = cc.Layer.extend({
     getBuildingById: function (id) {
             return this.listBuildings.get(id) || null;
     },
+    getBuildingByGrid: function (x,y) {
+        //if x y null, return null
+        if(x === null || y === null)
+            return null;
+        cc.log("x y::::::::::::::::::::::::::::",x,y)
+        return this.listBuildings.get(this.mapGrid[x][y]) || null;
+    },
 
     checkValidPutBuilding: function (building, newPosX, newPosY) {
         var id = building._id;

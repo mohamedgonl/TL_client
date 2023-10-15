@@ -4,15 +4,35 @@ var Wall = Building.extend({
 
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
-
-
-
-        this.loadSprite(res_map.SPRITE.BODY.WALL[level],null,0);
-        this.loadSubSprite();
-        this.update();
-        this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
     },
     loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.WALL[level][0],null,0);
+
+        // this.reloadSprite();
+        let wallState =0;
+        if(this._posX && this._posY ){
+            let RightBuilding = MapManager.Instance().getBuildingByGrid(this._posX+1,this._posY);
+            let UpperBuilding = MapManager.Instance().getBuildingByGrid(this._posX,this._posY+1);
+            if(RightBuilding && RightBuilding._type === "WAL_1")
+            {
+                if(UpperBuilding && UpperBuilding._type === "WAL_1")
+                {
+                    wallState = 3;
+                }
+                else
+                {
+                    wallState = 1;
+                }
+            }
+            else if(UpperBuilding && UpperBuilding._type === "WAL_1")
+                wallState = 2;
+            else wallState = 0;
+        }
+        this.loadSprite(res_map.SPRITE.BODY.WALL[level][wallState],null,0);
     },
+    reloadSprite:function ()
+    {
+
+        this.loadSprite(res_map.SPRITE.BODY.WALL[this._level][wallState],null,0);
+    }
+
 });

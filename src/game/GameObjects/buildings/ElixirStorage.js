@@ -18,18 +18,25 @@ var ElixirStorage = Building.extend({
         this._super();
         let mapManager = MapManager.Instance();
         let playerInfoManager = PlayerInfoManager.Instance();
-
         mapManager.addToListStorage(this);
-        let capacity = LoadManager.Instance().getConfig(this._type,this._level,"capacity");
-        playerInfoManager.changeMaxResource("elixir",capacity);
+        switch (this._state){
+            case 0:
+            case 2:
+                let capacity = LoadManager.Instance().getConfig(this._type,this._level,"capacity");
+                playerInfoManager.changeMaxResource("elixir",capacity);
+                break;
+            case 1:
+                break;
+        }
     },
-    completeUpgrade: function () {
+    completeProcess: function () {
         this._super();
         let playerInfoManager = PlayerInfoManager.Instance();
-        let capacity = LoadManager.Instance().getConfig(this._type,this._level,"capacity");
-        playerInfoManager.setMaxResource({elixir:capacity});
-    }
 
+        let amountBefore = LoadManager.Instance().getConfig(this._type,this._level - 1,"capacity")|| 0;
+        let amountIncrease = LoadManager.Instance().getConfig(this._type,this._level,"capacity") - amountBefore;
+        playerInfoManager.changeMaxResource("elixir",amountIncrease);
+    }
 
 
 

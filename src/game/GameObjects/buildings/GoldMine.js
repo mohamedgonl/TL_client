@@ -12,8 +12,8 @@ var GoldMine = Building.extend({
         this._currentGold = 0;
         this._capacityGold = config.capacity;
         this._productionGold = config.productivity;
-        this.checkShowHarvestIcon();
-        this.schedule(this.checkShowHarvestIcon,10,cc.REPEAT_FOREVER,0);
+        // this.checkShowHarvestIcon();
+        // this.schedule(this.checkShowHarvestIcon,10,cc.REPEAT_FOREVER,0);
     },
     onAddIntoMapManager: function () {
         this._super();
@@ -38,7 +38,7 @@ var GoldMine = Building.extend({
             upper_sprite,1,1);
     },
     loadButton: function () {
-        this._super();
+        if(this._super() === -1) return;
         let infoLayer = cc.director.getRunningScene().infoLayer;
         if(this._state ===0) {
             if(this._canHarvest)
@@ -78,9 +78,12 @@ var GoldMine = Building.extend({
         this._capacityGold = capacity.capacity;
         this._productionGold = capacity.productivity;
     },
+
     checkShowHarvestIcon: function () {
         //if can harvest >= 1% of capacity , show icon
         let timeNow = TimeManager.Instance().getCurrentTimeInSecond();
+        cc.log("timeNow::::::::::::::::::::::::::: " + timeNow)
+        cc.log("this._lastCollectTime::::::::::::::::::::::::::: " + this._lastCollectTime)
         let time = timeNow - this._lastCollectTime;
         cc.log("time::::::::::::::::::::::::::: " + time);
         let capacity = LoadManager.Instance().getConfig(this._type,this._level,"capacity");
@@ -97,6 +100,5 @@ var GoldMine = Building.extend({
             this._showIconHarvest = false;
             this._iconHarvest.setVisible(false);
         }
-
     }
 });
