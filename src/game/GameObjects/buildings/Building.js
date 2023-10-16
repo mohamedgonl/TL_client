@@ -592,6 +592,7 @@ var Building = GameObject.extend({
         let modeBuyBuilding = mapLayer.onModeBuyBuilding;
         if(chosenBuilding === this && modeBuyBuilding===true){
             mapLayer.acceptBuyBuilding();
+            return;
         }
         this.onClickUpgrade();
     }

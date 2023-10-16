@@ -4,6 +4,8 @@ var NotEnoughResourcePopup = cc.Node.extend({
         this.type = type;
         this.amount = amount;
         this.callback = callback;
+        cc.log("amount:::::::::::::::::::::", amount);
+        cc.log("type:::::::::::::::::::::", type);
 
         // create content in popup
         let label = new cc.LabelBMFont("Bạn có muốn mua số tài nguyên còn thiếu?", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);

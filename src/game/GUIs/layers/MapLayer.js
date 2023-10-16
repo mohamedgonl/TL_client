@@ -105,13 +105,12 @@ var MapLayer = cc.Layer.extend({
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
             onKeyPressed: function (keyCode) {
-
+                if(keyCode === cc.KEY.space) {
+                    console.log("==================================================================")
+                }
                 if (keyCode === cc.KEY.x) {
-                    BasicPopup.appear("THIẾU TÀI NGUYÊN", "gold");
-
                 }
                 if (keyCode === cc.KEY.c) {
-                    NotEnoughResourcePopup.appear(1000, "gold");
                 }
                 if (keyCode === cc.KEY.z) {
                 }
@@ -225,7 +224,6 @@ var MapLayer = cc.Layer.extend({
                 price = priceElixir - PlayerInfoManager.Instance().getResource().elixir;
                 type = "elixir";
             }
-
             NotEnoughResourcePopup.appear(price, type);
             return;
         }
