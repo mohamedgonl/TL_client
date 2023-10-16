@@ -611,10 +611,10 @@ var MapLayer = cc.Layer.extend({
         // Tính toán giá trị mới của scale
         let scale = this.getScale();
         if (delta > 0) {
-            scale += ZOOM_STEP;
+            scale += ZOOM_STEP/2;
             scale = Math.min(scale, ZOOM_MAX);
         } else {
-            scale -= ZOOM_STEP;
+            scale -= ZOOM_STEP/2;
             scale = Math.max(scale, ZOOM_MIN);
         }
 
