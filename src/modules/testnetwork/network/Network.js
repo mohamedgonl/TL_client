@@ -113,6 +113,14 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log("BUY_RESOURCE_BY_GEM", JSON.stringify(packet, null, 2));
                 this.onReceivedBuyResourceByGem(packet);
                 break;
+            case gv.CMD.GET_TIME_SERVER:
+                cc.log("GET_TIME_SERVER", JSON.stringify(packet, null, 2));
+                if(packet.error === 0)
+                    fr.getCurrentScreen().onReceiveTimeServer(packet.time);
+                else
+                cc.log("GET_TIME_SERVER ERROR");
+                break;
+
         }
     },
     onReceiveTrainTroopSuccess: function(packet) {
@@ -522,6 +530,12 @@ testnetwork.Connector = cc.Class.extend({
         pk.pack({gold, elixir});
         this.gameClient.sendPacket(pk);
     },
+    sendGetTimeServer: function () {
+        cc.log("SEND get time server");
+        var pk = this.gameClient.getOutPacket(CmdSendGetTimeServer);
+        pk.pack();
+        this.gameClient.sendPacket(pk);
+    }
 
 });
 

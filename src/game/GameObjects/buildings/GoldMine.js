@@ -6,14 +6,11 @@ var GoldMine = Building.extend({
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
 
-
         this._canHarvest = true;
         let config = LoadManager.Instance().getConfig(this._type,this._level);
         this._currentGold = 0;
         this._capacityGold = config.capacity;
         this._productionGold = config.productivity;
-        // this.checkShowHarvestIcon();
-        // this.schedule(this.checkShowHarvestIcon,10,cc.REPEAT_FOREVER,0);
     },
     onAddIntoMapManager: function () {
         this._super();
@@ -46,6 +43,11 @@ var GoldMine = Building.extend({
             else
                 infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_GOLD_BUTTON,3,this.onClickHarvest.bind(this));
         }
+    },
+    setLastCollectTimeAndIconHarvest: function (lastCollectTime) {
+        this._lastCollectTime = lastCollectTime;
+        this.checkShowHarvestIcon();
+        this.schedule(this.checkShowHarvestIcon,10,cc.REPEAT_FOREVER,0);
     },
 
     //send to server
@@ -92,7 +94,6 @@ var GoldMine = Building.extend({
         this._capacityGold = capacity.capacity;
         this._productionGold = capacity.productivity;
     },
-
     checkShowHarvestIcon: function () {
         //if can harvest >= 1% of capacity , show icon
         let timeNow = TimeManager.Instance().getCurrentTimeInSecond();

@@ -1,10 +1,10 @@
 //call when init game, get config and load resource to res
-var LoadManager = cc.Class.extend({
+var LoadManager = cc.Node.extend({
 
     instance: null,
     obstacle: null,
     ctor: function () {
-
+        this._super();
 
         this['TOW_1'] = cc.loader.getRes(res_map.JSON.TOWNHALL)['TOW_1'];
         this['STO_1'] = cc.loader.getRes(res_map.JSON.STORAGE)['STO_1'];
@@ -173,6 +173,7 @@ var LoadManager = cc.Class.extend({
 LoadManager.Instance = function () {
     if (LoadManager.instance == null) {
         LoadManager.instance = new LoadManager();
+        LoadManager.instance.retain();
 
     }
     return LoadManager.instance;

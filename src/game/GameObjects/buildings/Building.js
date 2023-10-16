@@ -242,10 +242,6 @@ var Building = GameObject.extend({
     getType: function () {
         return this._type;
     },
-    setLastCollectTime: function (lastCollectTime) {
-        this._lastCollectTime = lastCollectTime;
-    },
-
     getGridPosition: function (){
         return cc.p(this._posX, this._posY);
     },
@@ -326,9 +322,6 @@ var Building = GameObject.extend({
         this._state = 1;
         this._startTime = startTime;
         this._endTime = endTime;
-        cc.log("start build");
-        cc.log("start time: " + this._startTime);
-        cc.log("end time: " + this._endTime);
         this.startProcess();
         },
     startUpgrade: function (startTime,endTime) {
@@ -348,7 +341,7 @@ var Building = GameObject.extend({
         PlayerInfoManager.Instance().changeBuilder("current", 1);
         //unschedule update
         let chosenBuilding = cc.director.getRunningScene().getMapLayer().getChosenBuilding();
-        cc.log("chosen building", chosenBuilding)
+
         if(chosenBuilding === this)
                 this.loadButton();
         this.unschedule(this.update);
@@ -583,7 +576,7 @@ var Building = GameObject.extend({
         return null;
     },
 
-    //receive form server when free 1 builder 
+    //receive form server when free 1 builder
     onReceivedQuickFinishOfAnother: function (packet) {
         this.onClickUpgrade();
     },

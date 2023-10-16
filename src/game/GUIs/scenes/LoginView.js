@@ -96,6 +96,11 @@ var LoginView = cc.Scene.extend({
     onReceiveMapInfo: function (mapInfo) {
         MapManager.Instance().loadFromServer(mapInfo.listBuildings);
         this.loadingBar.setPercent(100);
+        testnetwork.connector.sendGetTimeServer();
+        this.onReceiveAllData();
+    },
+    onReceiveTimeServer: function (time) {
+        TimeManager.Instance().setDeltaTimeClientServer(time);
         this.onReceiveAllData();
     },
 

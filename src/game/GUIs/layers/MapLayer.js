@@ -1,3 +1,5 @@
+LoadManager.Instance();
+
 var MapLayer = cc.Layer.extend({
 
     chosenBuilding: null,
@@ -109,6 +111,7 @@ var MapLayer = cc.Layer.extend({
                     console.log("==================================================================")
                 }
                 if (keyCode === cc.KEY.x) {
+
                 }
                 if (keyCode === cc.KEY.c) {
                 }
@@ -327,7 +330,7 @@ var MapLayer = cc.Layer.extend({
     },
 
     onTouchEnded: function (event) {
-        cc.log(JSON.stringify(event, null, 2));
+
         var locationInScreen = event.getLocation();
         var distance = cc.pDistance(locationInScreen, this.positionTouchBegan);
         this.canDragBuilding = false;
@@ -347,7 +350,7 @@ var MapLayer = cc.Layer.extend({
         if (this.onModeBuyBuilding) return;
         let building = this.getBuildingFromTouch(locationInScreen);
         if (building != null && building._type.startsWith("RES") && building._state === 0 && building._showIconHarvest) {
-            building.harvest();
+            building.onClickHarvest();
             return;
         }
         //click building first time or click another building
@@ -428,7 +431,7 @@ var MapLayer = cc.Layer.extend({
     //exit mode move building, send to server to recheck if valid, else move back to old pos
     exitModeMoveBuilding: function () {
 
-        this.chosenBuilding.setLocalZOrder(this.getZOrderBuilding(this.chosenBuilding._posX, this.chosenBuilding._posY));
+        // this.chosenBuilding.setLocalZOrder(this.getZOrderBuilding(this.chosenBuilding._posX, this.chosenBuilding._posY));
         this.canDragBuilding = false;
         this.onModeMovingBuilding = false;
         var infoLayer = cc.director.getRunningScene().infoLayer;
@@ -575,8 +578,6 @@ var MapLayer = cc.Layer.extend({
         var delta = event.getScrollY();
         var scale = this.getScale();
         let oldScale = this.getScale();
-        // Tính toán tâm zoom dựa trên vị trí chuột
-        var zoomCenter = cc.p(0, 0);
 
         // Nếu cuộn chuột lên, zoom vào; ngược lại, zoom ra
         if (delta < 0) {
@@ -596,7 +597,6 @@ var MapLayer = cc.Layer.extend({
         this.y -= mapPos.y * (ratio - 1);
 
         this.setScale(scale);
-
         this.limitBorder();
     },
     zoomMultiTouch: function (touch1, touch2) {

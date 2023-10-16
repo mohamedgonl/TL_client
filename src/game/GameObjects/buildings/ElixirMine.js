@@ -1,46 +1,38 @@
-var ElixirMine = Building.extend({
+var ElixirMine = Mine.extend({
     _upper: null,
     _lastCollectTime: null,
     _type: "RES_2",
-
+    _showIconHarvest: false,
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
 
-        let config = LoadManager.Instance().getConfig(this._type,this._level);
-        this._currentElixir = 0;
-        this._capacityElixir = config.capacity;
-        this._productionElixir = config.productivity;
-        this._canHarvest = true;
-
     },
-    onAddIntoMapManager: function () {
-        this._super();
-        let mapManager = MapManager.Instance();
-        mapManager.addToListMine(this);
-    },
-
     loadSpriteByLevel: function (level) {
-        // var upper_sprite = res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level] + "/image0000.png";
-        // this.loadSprite(res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level],upper_sprite,1);
         this.loadSprite(res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level],
             res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level],1,1);
     },
+
+    loadSprite: function (bodySprite, upperSprite, shadow_type, isUpperAnimation) {
+        this._super(bodySprite, upperSprite, shadow_type, isUpperAnimation);
+        let icon = this._iconHarvest.getChildByName("icon");
+        icon.setTexture(res.ICON.ELIXIR);
+    },
+
     loadButton: function () {
+
         if(this._super() === -1) return;
+
         let infoLayer = cc.director.getRunningScene().infoLayer;
         if(this._state ===0) {
             if(this._canHarvest)
-                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_GOLD_BUTTON,0,this.onClickHarvest.bind(this));
+                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_ELIXIR_BUTTON,0,this.onClickHarvest.bind(this));
             else
-                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_GOLD_BUTTON,3,this.onClickHarvest.bind(this));
+                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_ELIXIR_BUTTON,3,this.onClickHarvest.bind(this));
         }
     },
 
-    //send to server
-    onClickHarvest: function () {
-        testnetwork.connector.sendHarvest(this._id);
-    },
     harvest: function (lastCollectTime,gold,elixir) {
+
         this._lastCollectTime = lastCollectTime;
         let oldElixir = PlayerInfoManager.Instance().getResource().elixir;
         PlayerInfoManager.Instance().setResource({elixir:elixir});
@@ -60,6 +52,7 @@ var ElixirMine = Building.extend({
 
         //sau 5s moi duoc nhan 1 lan
         this._canHarvest = false;
+        this._iconHarvest.setVisible(false);
         this._showIconHarvest = false;
 
         this.loadButton();
@@ -68,7 +61,6 @@ var ElixirMine = Building.extend({
             this._canHarvest = true;
             this.loadButton();
         }.bind(this),5);
-    },
-
+    }
 
 });

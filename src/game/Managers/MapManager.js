@@ -1,4 +1,3 @@
-LoadManager.Instance();
 
 var MapManager = cc.Layer.extend({
     instance: null,
@@ -43,13 +42,12 @@ var MapManager = cc.Layer.extend({
             let startTime = construct.startTime;
             let endTime = construct.endTime;
 
-
             let building = getBuildingFromType(type, level,id, posX, posY,status,startTime,endTime);
 
             if(type.startsWith("RES"))
             {
                 let lastCollectTime = construct.lastCollectTime;
-                building.setLastCollectTime(lastCollectTime);
+                building.setLastCollectTimeAndIconHarvest(lastCollectTime);
             }
 
 

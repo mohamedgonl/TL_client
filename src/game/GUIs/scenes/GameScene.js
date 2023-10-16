@@ -16,8 +16,6 @@ var GameScene = cc.Scene.extend({
         this.armyManager= ArmyManager.Instance();
 
 
-        TimeManager.Instance().setDeltaTimeClientServer();
-
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
             onKeyPressed: function (keyCode) {

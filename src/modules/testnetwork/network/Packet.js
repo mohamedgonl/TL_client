@@ -30,6 +30,7 @@ gv.CMD.BUY_BUILDING = 2001;
 gv.CMD.REMOVE_OBSTACLE_SUCCESS = 2010;
 gv.CMD.QUICK_FINISH = 2013;
 gv.CMD.BUY_RESOURCE_BY_GEM = 4002;
+gv.CMD.GET_TIME_SERVER = 1003;
 //quyet----------------------
 
 
@@ -378,6 +379,18 @@ CmdSendBuyResourceByGem = fr.OutPacket.extend(
             this.packHeader();
             this.putInt(data.gold);
             this.putInt(data.elixir);
+            this.updateSize();
+        }
+    })
+CmdSendGetTimeServer = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.GET_TIME_SERVER);
+        },
+        pack: function () {
+            this.packHeader();
             this.updateSize();
         }
     })
@@ -748,6 +761,20 @@ testnetwork.packetMap[gv.CMD.BUY_RESOURCE_BY_GEM] = fr.InPacket.extend(
                 this.gem = this.getInt();
                 this.gold= this.getInt();
                 this.elixir = this.getInt();
+            }
+        }
+    });
+
+testnetwork.packetMap[gv.CMD.GET_TIME_SERVER] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        //error,time
+        readData: function () {
+            this.error = this.getError();
+            if(this.error === 0) {
+                this.time = this.getInt();
             }
         }
     });
