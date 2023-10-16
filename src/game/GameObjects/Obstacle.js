@@ -86,7 +86,7 @@ var Obstacle = GameObject.extend({
 
         //name label
         //nameLabel Cay Coi size 20 dont arial cc.Text
-        this._nameLabel = new cc.LabelBMFont(this._type, res.FONT.SOJI[FONT_SIZE_NAME_LABEL], 350, cc.TEXT_ALIGNMENT_CENTER);
+        this._nameLabel = new cc.LabelBMFont("Vật cản", res.FONT.SOJI[FONT_SIZE_NAME_LABEL], 350, cc.TEXT_ALIGNMENT_CENTER);
         this._nameLabel.setAnchorPoint(0.5,0.5);
         this._nameLabel.setPosition(0,50);
         this._nameLabel.setColor(new cc.Color(255, 255, 0));

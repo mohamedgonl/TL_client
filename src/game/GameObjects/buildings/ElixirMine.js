@@ -2,6 +2,7 @@ var ElixirMine = Building.extend({
     _upper: null,
     _lastCollectTime: null,
     _type: "RES_2",
+
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
 
@@ -9,6 +10,7 @@ var ElixirMine = Building.extend({
         this._currentElixir = 0;
         this._capacityElixir = config.capacity;
         this._productionElixir = config.productivity;
+        this._canHarvest = true;
 
     },
     onAddIntoMapManager: function () {
@@ -26,15 +28,11 @@ var ElixirMine = Building.extend({
     loadButton: function () {
         if(this._super() === -1) return;
         let infoLayer = cc.director.getRunningScene().infoLayer;
-
-        //button thu hoach
         if(this._state ===0) {
-            let timeNow = TimeManager.Instance().getCurrentTimeInSecond();
-            //delay 5s between 2 harvest
-            if(timeNow - this._lastCollectTime > 5)
-                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_ELIXIR_BUTTON,0,this.onClickHarvest.bind(this));
+            if(this._canHarvest)
+                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_GOLD_BUTTON,0,this.onClickHarvest.bind(this));
             else
-                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_ELIXIR_BUTTON,1,this.onClickHarvest.bind(this));
+                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_GOLD_BUTTON,3,this.onClickHarvest.bind(this));
         }
     },
 
@@ -44,8 +42,32 @@ var ElixirMine = Building.extend({
     },
     harvest: function (lastCollectTime,gold,elixir) {
         this._lastCollectTime = lastCollectTime;
+        let oldElixir = PlayerInfoManager.Instance().getResource().elixir;
         PlayerInfoManager.Instance().setResource({elixir:elixir});
+
+        let changes = elixir - oldElixir;
+
+        //init a TMP label to show changes in pos 0 0 of this building and hide after 1s
+        let label = new cc.LabelBMFont("+" + changes,res.FONT.SOJI[20]);
+        label.setPosition(0,0);
+        //color pink
+        label.setColor(cc.color(255,0,255));
+        this.addChild(label,ZORDER_BUILDING_EFFECT);
+        label.runAction(cc.sequence(cc.moveBy(1,0,50),cc.callFunc(function () {
+                label.removeFromParent(true);
+            }
+        )));
+
+        //sau 5s moi duoc nhan 1 lan
+        this._canHarvest = false;
+        this._showIconHarvest = false;
+
         this.loadButton();
+
+        this.scheduleOnce(function () {
+            this._canHarvest = true;
+            this.loadButton();
+        }.bind(this),5);
     },
 
 

@@ -94,7 +94,8 @@ var InfoLayer = cc.Layer.extend({
 
     },
 
-    // add button to menu button_containerm, status = 0: normal, status = 1: disable, 2 show but text is red
+    // add button to menu button_containerm, status = 0: normal, status =  1 show but text is red
+    // 3 is disable, 2 is not add to menu
     addButtonToMenu: function (text, sprite, status, callback, amount, type) {
         //button
         // Tạo sprite cho trạng thái bình thường
@@ -147,6 +148,13 @@ var InfoLayer = cc.Layer.extend({
             } else
                 node.type.setVisible(false);
 
+            //status
+
+            if(status ===1 )
+            {
+                node.amount.setColor(cc.color.RED);
+            }
+
         }
 
 
@@ -165,6 +173,13 @@ var InfoLayer = cc.Layer.extend({
         imageDisabled.addChild(node3);
 
         var button = new cc.MenuItemSprite(image, imagePressed, imageDisabled, callback, this);
+        if(status ===3)
+        {
+            //disable
+            button.setEnabled(false);
+            //set to gray
+            // button.setDisabledColor(cc.color.GRAY);
+        }
 
         // let labelText = new cc.LabelBMFont(text, res.FONT.SOJI[16], null, cc.TEXT_ALIGNMENT_CENTER);
         // //label hien o giua duoi cua button

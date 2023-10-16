@@ -44,7 +44,7 @@ var GoldMine = Building.extend({
             if(this._canHarvest)
                 infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_GOLD_BUTTON,0,this.onClickHarvest.bind(this));
             else
-                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_GOLD_BUTTON,1,this.onClickHarvest.bind(this));
+                infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_GOLD_BUTTON,3,this.onClickHarvest.bind(this));
         }
     },
 
@@ -57,7 +57,21 @@ var GoldMine = Building.extend({
 
     harvest: function (lastCollectTime,gold,elixir) {
         this._lastCollectTime = lastCollectTime;
+        let oldGold = PlayerInfoManager.Instance().getResource().gold;
         PlayerInfoManager.Instance().setResource({gold:gold});
+
+        let changes = gold - oldGold;
+
+        //init a TMP label to show changes in pos 0 0 of this building and hide after 1s
+        let label = new cc.LabelBMFont("+" + changes,res.FONT.SOJI[20]);
+        label.setPosition(0,0);
+        //yellow
+        label.setColor(cc.color(255,255,0));
+        this.addChild(label,ZORDER_BUILDING_EFFECT);
+        label.runAction(cc.sequence(cc.moveBy(1,0,50),cc.callFunc(function () {
+            label.removeFromParent(true);
+        }
+        )));
 
         //sau 5s moi duoc nhan 1 lan
         this._canHarvest = false;
