@@ -282,7 +282,7 @@ var InfoLayer = cc.Layer.extend({
             let popUplayer = cc.director.getRunningScene().getPopUpLayer();
             if (popUplayer.isVisible()) {
                 cc.log("onTouchShop:::::::::::::::::::::::::::");
-                popUplayer.disappear("shop");
+                // popUplayer.disappear("shop");
             } else {
                 popUplayer.appear("shop");
             }

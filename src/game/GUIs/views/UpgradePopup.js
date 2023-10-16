@@ -118,10 +118,12 @@ var UpgradePopup = cc.Node.extend({
         this.removeFromParent(true);
         //turn on infolayer
         cc.director.getRunningScene().infoLayer.setVisible(true);
+        cc.director.getRunningScene().popUpLayer.setVisible(false);
     },
     onClickUpgrade: function () {
-        this.building.onClickUpgrade();
         this.onClose();
+        this.building.onClickUpgrade();
+
     }
 
 });

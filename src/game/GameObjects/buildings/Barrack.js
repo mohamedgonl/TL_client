@@ -14,11 +14,32 @@ var Barrack = Building.extend({
     loadSpriteByLevel: function (level) {
         this.loadSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
     },
+    loadButton: function () {
+        if(this._super() === -1) return;
+        let infoLayer = cc.director.getRunningScene().infoLayer;
+        if(this._state ===0) {
+            infoLayer.addButtonToMenu("Huấn luyện",res.BUTTON.TRAIN_BUTTON,0,this.onClickTraining.bind(this));
+        }
+    },
+    onClickTraining: function () {
+        //get popup layer
+        let popUpLayer = cc.director.getRunningScene().popUpLayer;
+        //list barrack
+        let barrackList = ArmyManager.Instance().getBarrackList();
+        //for building in barrack list, get number of this building
+        for(let i = 0; i < barrackList.length; i++) {
+            if(barrackList[i]._id === this._id) {
+                cc.log("Barrack " + i + " is clicked")
+                popUpLayer.appear("train",{page: i});
+                return;
+            }
+        }
+
+    },
 
     getLastTrainingTime: function () {
         return this._lastTrainingTime;
     },
-
     setLastTrainingTime: function (time) {
         this._lastTrainingTime = time;
     },
@@ -67,6 +88,10 @@ var Barrack = Building.extend({
     getMaxSpace: function () {
         return BAR["BAR_1"][this._level]["queueLength"];
     },
+    completeBuild: function () {
+        this._super();
+        cc.eventManager.dispatchCustomEvent(EVENT_NAMES.NEW_BUILDING_ADDED, {type: "BAR"});
+    }
 
 
     

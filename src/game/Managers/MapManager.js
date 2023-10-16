@@ -125,7 +125,7 @@ var MapManager = cc.Layer.extend({
         if(isBuy === true) {
             const Algorithm = AlgorithmImplement.Instance();
             Algorithm.setGridMapStar(MapManager.Instance().mapGrid);
-            cc.eventManager.dispatchCustomEvent(EVENT_NAMES.NEW_BUILDING_ADDED, {type: typeBuilding});
+            // cc.eventManager.dispatchCustomEvent(EVENT_NAMES.NEW_BUILDING_ADDED, {type: typeBuilding});
 
         }
 

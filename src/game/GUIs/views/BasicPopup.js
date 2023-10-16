@@ -1,6 +1,9 @@
 var BasicPopup = cc.Node.extend({
     ctor: function (name, string, callback) {
         this._super();
+        //get popup layer
+        let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
+        popUpLayer.setVisible(true);
         let node = CCSUlties.parseUIFile(res_ui.BASIC_POPUP);
         //for all child in node, add to layer
         let children = node.getChildren();

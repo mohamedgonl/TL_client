@@ -30,6 +30,7 @@ var NotEnoughResourcePopup = cc.Node.extend({
         let buyResPopup = new NotiPopup({
             title: "THIẾU TÀI NGUYÊN",
             acceptCallBack: () => {
+                popUpLayer.setVisible(false);
                 //check kho chứa, nếu amount + kho chứa > max thì ko cho mua
                 let maxAmount = PlayerInfoManager.Instance().getMaxResource()[type];
                 let currentAmount = PlayerInfoManager.Instance().getResource(type);
@@ -48,7 +49,7 @@ var NotEnoughResourcePopup = cc.Node.extend({
                     testnetwork.connector.sendBuyResourceByGem(amount,0);
                 else
                     testnetwork.connector.sendBuyResourceByGem(0,amount);
-                popUpLayer.setVisible(false);
+
 
                 if(callback != null)
                     callback();
