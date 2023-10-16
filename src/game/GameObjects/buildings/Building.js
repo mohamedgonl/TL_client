@@ -583,17 +583,22 @@ var Building = GameObject.extend({
         return null;
     },
 
+    //receive form server when free 1 builder 
     onReceivedQuickFinishOfAnother: function (packet) {
         this.onClickUpgrade();
     },
+
+    //receive from server when buy gem success
     onReceivedBuyResourceByGemSuccess: function (packet) {
         let mapLayer = cc.director.getRunningScene().mapLayer;
         let chosenBuilding = mapLayer.getChosenBuilding();
         let modeBuyBuilding = mapLayer.onModeBuyBuilding;
+
         if(chosenBuilding === this && modeBuyBuilding===true){
             mapLayer.acceptBuyBuilding();
             return;
         }
+
         this.onClickUpgrade();
     }
 });
