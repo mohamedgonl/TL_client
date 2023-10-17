@@ -21,6 +21,10 @@ var LoginView = cc.Scene.extend({
 
         const textFieldUID = node.getChildByName("textfield-uid");
         textFieldUID.addTouchEventListener(this.textFieldEvent, this);
+        const cachedUID = cc.sys.localStorage.getItem("UID");
+        if (cachedUID){
+            textFieldUID.setString(cachedUID);
+        }
         this.textFieldUID = textFieldUID;
 
         const loadingBar = node.getChildByName("loading-bar");
@@ -90,6 +94,12 @@ var LoginView = cc.Scene.extend({
         cc.log("NHAN THONG TIN VE LINH : "+JSON.stringify(armyInfo.listTroops))
         ArmyManager.Instance().setArmyAmount(armyInfo.listTroops);
         this.loadingBar.setPercent(this.loadingBar.getPercent() + 20);
+        testnetwork.connector.sendGetTimeServer();
+    },
+
+    onReceiveTimeServer: function (time) {
+        TimeManager.Instance().setDeltaTimeClientServer(time);
+        this.loadingBar.setPercent(this.loadingBar.getPercent() + 10);
         testnetwork.connector.sendGetMapInfo();
     },
 
@@ -99,12 +109,9 @@ var LoginView = cc.Scene.extend({
         testnetwork.connector.sendGetTimeServer();
         this.onReceiveAllData();
     },
-    onReceiveTimeServer: function (time) {
-        TimeManager.Instance().setDeltaTimeClientServer(time);
-        this.onReceiveAllData();
-    },
 
     onReceiveAllData: function () {
+        cc.sys.localStorage.setItem("UID", PlayerInfoManager.Instance().id);
         cc.director.runScene(new GameScene());
     },
 
