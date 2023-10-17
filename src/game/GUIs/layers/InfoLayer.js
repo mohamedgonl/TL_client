@@ -279,10 +279,10 @@ var InfoLayer = cc.Layer.extend({
 
     onTouchShop: function (sender, type) {
         if (type === 2) {
+            cc.log("onTouchShop:::::::::::::::::::::::::::");
             let popUplayer = cc.director.getRunningScene().getPopUpLayer();
             if (popUplayer.isVisible()) {
-                cc.log("onTouchShop:::::::::::::::::::::::::::");
-                // popUplayer.disappear("shop");
+                popUplayer.disappear("shop");
             } else {
                 popUplayer.appear("shop");
             }

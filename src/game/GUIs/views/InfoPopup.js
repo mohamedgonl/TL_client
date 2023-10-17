@@ -90,6 +90,8 @@ var InfoPopup = cc.Node.extend({
         this.removeFromParent(true);
         //turn on infolayer
         cc.director.getRunningScene().infoLayer.setVisible(true);
+        var popupLayer = cc.director.getRunningScene().popUpLayer;
+        popupLayer.setVisible(false);
     },
     onClickUpgrade: function () {
         this.building.onClickUpgrade();
