@@ -39,6 +39,7 @@ var AlgorithmImplement = cc.Class.extend({
     searchPathByAStar: function (start, end) {
         let key = start.toString() + end.toString();
         if (this._results[key]) {
+            cc.log("OLD SEARCH")
             return this._results[key];
         } else {
             cc.log("NEW SEARCH")

@@ -119,7 +119,12 @@ var MapManager = cc.Layer.extend({
             case 'BDH':
 
         }
-
+        // if(this.buildingAmount[typeBuilding]) {
+        //     this.buildingAmount[typeBuilding]++;
+        // }
+        // else {
+        //     this.buildingAmount[typeBuilding] = 1;
+        // }
         if(isBuy === true) {
             const Algorithm = AlgorithmImplement.Instance();
             Algorithm.setGridMapStar(MapManager.Instance().mapGrid);

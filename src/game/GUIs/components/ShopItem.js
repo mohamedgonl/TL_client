@@ -65,7 +65,14 @@ var ShopItem = cc.Node.extend({
         }
 
         let price_string = this._itemNode.getChildByName("item_price");
-        price_string.setString(data.price === 0 ? "Miễn phí" : data.price);
+        if (category === "category_tainguyen" && data.cfgId === "BDH_1") {
+            let bdhCount = MapManager.Instance().getBuildingCountByType("BDH_1");
+            if(bdhCount === 0) this.removeFromParent(true);
+            let price = BDH["BDH_1"][bdhCount+1]["coin"];
+            price_string.setString(price);
+        } else {
+            price_string.setString(data.price === 0 ? "Miễn phí" : data.price);
+        }
 
 
         let item_img = this._itemNode.getChildByName("item_image");

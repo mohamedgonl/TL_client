@@ -15,14 +15,6 @@ var ItemInfoPopup = cc.Layer.extend({
         this.addChild(node);
         PopupEffect.appear(this._node);
 
-        cc.eventManager.addListener({
-            event: cc.EventListener.TOUCH_ONE_BY_ONE,
-            swallowTouches: true,
-            onTouchEnded: function (touch, event) {
-                return true;
-            }
-        }, this);
-
     },
 
     handleClose : function (sender, type) {
