@@ -1,0 +1,1180 @@
+{
+  "ID": "455ccc2d-9c65-4f74-8666-b3523efef474",
+  "Version": "3.10.0.0",
+  "Name": "TroopInfoPopup",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 36,
+        "Children": [
+          {
+            "ClipAble": false,
+            "BackColorAlpha": 102,
+            "ComboBoxIndex": 1,
+            "SingleColor": {
+              "R": 80,
+              "G": 80,
+              "B": 80
+            },
+            "FirstColor": {
+              "R": 150,
+              "G": 200
+            },
+            "EndColor": {},
+            "ColorVector": {
+              "ScaleY": 1.0
+            },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -568.0,
+            "RightMargin": -568.0,
+            "TopMargin": -320.0,
+            "BottomMargin": -320.0,
+            "Tag": 273,
+            "ActionTag": -1345303157,
+            "Size": {
+              "X": 1136.0,
+              "Y": 640.0
+            },
+            "Name": "Panel_1",
+            "ctype": "PanelObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/research troop/nen 1.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 243,
+            "Scale9OriginY": 157,
+            "Scale9Width": 253,
+            "Scale9Height": 162,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -325.0,
+            "RightMargin": -325.0,
+            "TopMargin": -238.0,
+            "BottomMargin": -238.0,
+            "Tag": 276,
+            "Children": [
+              {
+                "LabelText": "",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_16.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 325.0,
+                  "Y": 447.44
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.94
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 325.0,
+                "RightMargin": 325.0,
+                "TopMargin": 28.56,
+                "BottomMargin": 447.44,
+                "Tag": 277,
+                "ActionTag": -2079339379,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "title",
+                "ctype": "TextBMFontObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "guis/research troop/mieng trang.png",
+                  "Plist": ""
+                },
+                "Scale9OriginX": 225,
+                "Scale9OriginY": 37,
+                "Scale9Width": 232,
+                "Scale9Height": 41,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 325.0,
+                  "Y": 280.84
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.59
+                },
+                "PreSize": {
+                  "X": 0.9292,
+                  "Y": 0.5924
+                },
+                "LeftMargin": 23.0,
+                "RightMargin": 23.0,
+                "TopMargin": 54.16,
+                "BottomMargin": 139.84,
+                "Tag": 278,
+                "ActionTag": 2123624361,
+                "Size": {
+                  "X": 604.0,
+                  "Y": 282.0
+                },
+                "Name": "white_bg",
+                "ctype": "ImageViewObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Default",
+                  "Path": "Default/ImageFile.png",
+                  "Plist": ""
+                },
+                "Scale9Width": 46,
+                "Scale9Height": 46,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 124.055,
+                  "Y": 309.0644
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.1909,
+                  "Y": 0.6493
+                },
+                "PreSize": {
+                  "X": 0.2462,
+                  "Y": 0.3361
+                },
+                "LeftMargin": 44.055,
+                "RightMargin": 445.945,
+                "TopMargin": 86.9356,
+                "BottomMargin": 229.0644,
+                "Tag": 293,
+                "ActionTag": 1576189071,
+                "Size": {
+                  "X": 160.0,
+                  "Y": 160.0
+                },
+                "Name": "troop_image",
+                "ctype": "ImageViewObjectData"
+              },
+              {
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 449.6968,
+                  "Y": 347.7006
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": true,
+                "PrePosition": {
+                  "X": 0.6918,
+                  "Y": 0.7305
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 449.6968,
+                "RightMargin": 200.3032,
+                "TopMargin": 128.2994,
+                "BottomMargin": 347.7006,
+                "Tag": 420,
+                "Children": [
+                  {
+                    "FileData": {
+                      "Type": "Normal",
+                      "Path": "ProcessBar.json",
+                      "Plist": ""
+                    },
+                    "StretchWidthEnable": false,
+                    "StretchHeightEnable": false,
+                    "InnerActionSpeed": 1.0,
+                    "AnchorPoint": {},
+                    "Position": {
+                      "X": 0.9278,
+                      "Y": 41.4771
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": true,
+                    "PrePosition": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": 0.9278,
+                    "RightMargin": -0.9278,
+                    "TopMargin": -41.4771,
+                    "BottomMargin": 41.4771,
+                    "Tag": 370,
+                    "ActionTag": -1270528836,
+                    "Size": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Name": "FileNode_1",
+                    "ctype": "ProjectNodeObjectData"
+                  },
+                  {
+                    "FileData": {
+                      "Type": "Normal",
+                      "Path": "ProcessBar.json",
+                      "Plist": ""
+                    },
+                    "StretchWidthEnable": false,
+                    "StretchHeightEnable": false,
+                    "InnerActionSpeed": 1.0,
+                    "AnchorPoint": {},
+                    "Position": {
+                      "X": 0.9278,
+                      "Y": -0.7028
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": true,
+                    "PrePosition": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": 0.9278,
+                    "RightMargin": -0.9278,
+                    "TopMargin": 0.7028,
+                    "BottomMargin": -0.7028,
+                    "Tag": 393,
+                    "ActionTag": -1123340576,
+                    "Size": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Name": "FileNode_2",
+                    "ctype": "ProjectNodeObjectData"
+                  },
+                  {
+                    "FileData": {
+                      "Type": "Normal",
+                      "Path": "ProcessBar.json",
+                      "Plist": ""
+                    },
+                    "StretchWidthEnable": false,
+                    "StretchHeightEnable": false,
+                    "InnerActionSpeed": 1.0,
+                    "AnchorPoint": {},
+                    "Position": {
+                      "X": 0.9278,
+                      "Y": -42.8825
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": true,
+                    "PrePosition": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": 0.9278,
+                    "RightMargin": -0.9278,
+                    "TopMargin": 42.8825,
+                    "BottomMargin": -42.8825,
+                    "Tag": 399,
+                    "ActionTag": -1341149198,
+                    "Size": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Name": "FileNode_3",
+                    "ctype": "ProjectNodeObjectData"
+                  }
+                ],
+                "ActionTag": 374591708,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "progress_bar",
+                "ctype": "SingleNodeObjectData"
+              },
+              {
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 330.64,
+                  "Y": 217.908
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": true,
+                "PrePosition": {
+                  "X": 0.5087,
+                  "Y": 0.4578
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 330.64,
+                "RightMargin": 319.36,
+                "TopMargin": 258.092,
+                "BottomMargin": 217.908,
+                "Tag": 414,
+                "Children": [
+                  {
+                    "LabelText": "Mục tiêu ưa thích: ",
+                    "LabelBMFontFile_CNB": {
+                      "Type": "Normal",
+                      "Path": "fonts/fista_16_non.fnt",
+                      "Plist": ""
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": 8.9546,
+                      "Y": 48.6359
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {
+                      "R": 180,
+                      "G": 91,
+                      "B": 33
+                    },
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": -57.5454,
+                    "RightMargin": -75.4546,
+                    "TopMargin": -57.1359,
+                    "BottomMargin": 40.1359,
+                    "Tag": 405,
+                    "ActionTag": 1222597347,
+                    "Size": {
+                      "X": 133.0,
+                      "Y": 17.0
+                    },
+                    "Name": "BitmapFontLabel_26",
+                    "ctype": "TextBMFontObjectData"
+                  },
+                  {
+                    "LabelText": "Hình thức tấn công:",
+                    "LabelBMFontFile_CNB": {
+                      "Type": "Normal",
+                      "Path": "fonts/fista_16_non.fnt",
+                      "Plist": ""
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": 4.4533,
+                      "Y": 28.1532
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {
+                      "R": 180,
+                      "G": 91,
+                      "B": 33
+                    },
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": -66.5467,
+                    "RightMargin": -75.4533,
+                    "TopMargin": -36.6532,
+                    "BottomMargin": 19.6532,
+                    "Tag": 407,
+                    "ActionTag": -1307542609,
+                    "Size": {
+                      "X": 142.0,
+                      "Y": 17.0
+                    },
+                    "Name": "BitmapFontLabel_26_0",
+                    "ctype": "TextBMFontObjectData"
+                  },
+                  {
+                    "LabelText": "Mục tiêu: ",
+                    "LabelBMFontFile_CNB": {
+                      "Type": "Normal",
+                      "Path": "fonts/fista_16_non.fnt",
+                      "Plist": ""
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": 41.4541,
+                      "Y": 7.6704
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {
+                      "R": 180,
+                      "G": 91,
+                      "B": 33
+                    },
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": 7.4541,
+                    "RightMargin": -75.4541,
+                    "TopMargin": -16.1704,
+                    "BottomMargin": -0.8296,
+                    "Tag": 408,
+                    "ActionTag": -1416003457,
+                    "Size": {
+                      "X": 68.0,
+                      "Y": 17.0
+                    },
+                    "Name": "BitmapFontLabel_26_1",
+                    "ctype": "TextBMFontObjectData"
+                  },
+                  {
+                    "LabelText": "Tốc độ di chuyển:",
+                    "LabelBMFontFile_CNB": {
+                      "Type": "Normal",
+                      "Path": "fonts/fista_16_non.fnt",
+                      "Plist": ""
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": 12.4511,
+                      "Y": -12.8125
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {
+                      "R": 180,
+                      "G": 91,
+                      "B": 33
+                    },
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": -50.5489,
+                    "RightMargin": -75.4511,
+                    "TopMargin": 4.3125,
+                    "BottomMargin": -21.3125,
+                    "Tag": 409,
+                    "ActionTag": -1114533641,
+                    "Size": {
+                      "X": 126.0,
+                      "Y": 17.0
+                    },
+                    "Name": "BitmapFontLabel_26_1_0",
+                    "ctype": "TextBMFontObjectData"
+                  },
+                  {
+                    "LabelText": "Thời gian huấn luyện: ",
+                    "LabelBMFontFile_CNB": {
+                      "Type": "Normal",
+                      "Path": "fonts/fista_16_non.fnt",
+                      "Plist": ""
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": -2.0481,
+                      "Y": -33.2953
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {
+                      "R": 180,
+                      "G": 91,
+                      "B": 33
+                    },
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": -79.5481,
+                    "RightMargin": -75.4519,
+                    "TopMargin": 24.7953,
+                    "BottomMargin": -41.7953,
+                    "Tag": 410,
+                    "ActionTag": -427474899,
+                    "Size": {
+                      "X": 155.0,
+                      "Y": 17.0
+                    },
+                    "Name": "BitmapFontLabel_26_1_1",
+                    "ctype": "TextBMFontObjectData"
+                  },
+                  {
+                    "LabelText": "Chỗ ở: ",
+                    "LabelBMFontFile_CNB": {
+                      "Type": "Normal",
+                      "Path": "fonts/fista_16_non.fnt",
+                      "Plist": ""
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": 52.9551,
+                      "Y": -53.7779
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {
+                      "R": 180,
+                      "G": 91,
+                      "B": 33
+                    },
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": 30.4551,
+                    "RightMargin": -75.4551,
+                    "TopMargin": 45.2779,
+                    "BottomMargin": -62.2779,
+                    "Tag": 411,
+                    "ActionTag": 687745136,
+                    "Size": {
+                      "X": 45.0,
+                      "Y": 17.0
+                    },
+                    "Name": "BitmapFontLabel_26_1_1_0",
+                    "ctype": "TextBMFontObjectData"
+                  }
+                ],
+                "ActionTag": -1161364186,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "info_left",
+                "ctype": "SingleNodeObjectData"
+              },
+              {
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 523.2709,
+                  "Y": 219.0638
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": true,
+                "PrePosition": {
+                  "X": 0.805,
+                  "Y": 0.4602
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 523.2709,
+                "RightMargin": 126.7291,
+                "TopMargin": 256.9362,
+                "BottomMargin": 219.0638,
+                "Tag": 413,
+                "Children": [
+                  {
+                    "LabelText": "",
+                    "LabelBMFontFile_CNB": {
+                      "Type": "Normal",
+                      "Path": "fonts/fista_16_non.fnt",
+                      "Plist": ""
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": -24.1957,
+                      "Y": 47.5386
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {
+                      "R": 12,
+                      "G": 104,
+                      "B": 209
+                    },
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": -24.1957,
+                    "RightMargin": 24.1957,
+                    "TopMargin": -47.5386,
+                    "BottomMargin": 47.5386,
+                    "Tag": 412,
+                    "ActionTag": -1734711755,
+                    "Size": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Name": "BitmapFontLabel_33",
+                    "ctype": "TextBMFontObjectData"
+                  },
+                  {
+                    "LabelText": "",
+                    "LabelBMFontFile_CNB": {
+                      "Type": "Normal",
+                      "Path": "fonts/fista_16_non.fnt",
+                      "Plist": ""
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": 6.3043,
+                      "Y": 27.3514
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {
+                      "R": 12,
+                      "G": 104,
+                      "B": 209
+                    },
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": 6.3043,
+                    "RightMargin": -6.3043,
+                    "TopMargin": -27.3514,
+                    "BottomMargin": 27.3514,
+                    "Tag": 415,
+                    "ActionTag": -994456636,
+                    "Size": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Name": "BitmapFontLabel_33_0",
+                    "ctype": "TextBMFontObjectData"
+                  },
+                  {
+                    "LabelText": "",
+                    "LabelBMFontFile_CNB": {
+                      "Type": "Normal",
+                      "Path": "fonts/fista_16_non.fnt",
+                      "Plist": ""
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": -15.1957,
+                      "Y": 7.1643
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {
+                      "R": 12,
+                      "G": 104,
+                      "B": 209
+                    },
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": -15.1957,
+                    "RightMargin": 15.1957,
+                    "TopMargin": -7.1643,
+                    "BottomMargin": 7.1643,
+                    "Tag": 416,
+                    "ActionTag": 1863773815,
+                    "Size": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Name": "BitmapFontLabel_33_1",
+                    "ctype": "TextBMFontObjectData"
+                  },
+                  {
+                    "LabelText": "",
+                    "LabelBMFontFile_CNB": {
+                      "Type": "Normal",
+                      "Path": "fonts/fista_16_non.fnt",
+                      "Plist": ""
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": -38.6957,
+                      "Y": -13.0229
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {
+                      "R": 12,
+                      "G": 104,
+                      "B": 209
+                    },
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": -38.6957,
+                    "RightMargin": 38.6957,
+                    "TopMargin": 13.0229,
+                    "BottomMargin": -13.0229,
+                    "Tag": 417,
+                    "ActionTag": 500874884,
+                    "Size": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Name": "BitmapFontLabel_33_2",
+                    "ctype": "TextBMFontObjectData"
+                  },
+                  {
+                    "LabelText": "",
+                    "LabelBMFontFile_CNB": {
+                      "Type": "Normal",
+                      "Path": "fonts/fista_16_non.fnt",
+                      "Plist": ""
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": -29.1957,
+                      "Y": -33.2101
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {
+                      "R": 12,
+                      "G": 104,
+                      "B": 209
+                    },
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": -29.1957,
+                    "RightMargin": 29.1957,
+                    "TopMargin": 33.2101,
+                    "BottomMargin": -33.2101,
+                    "Tag": 418,
+                    "ActionTag": 301200373,
+                    "Size": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Name": "BitmapFontLabel_33_3",
+                    "ctype": "TextBMFontObjectData"
+                  },
+                  {
+                    "LabelText": "",
+                    "LabelBMFontFile_CNB": {
+                      "Type": "Normal",
+                      "Path": "fonts/fista_16_non.fnt",
+                      "Plist": ""
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": -37.6957,
+                      "Y": -53.3973
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {
+                      "R": 12,
+                      "G": 104,
+                      "B": 209
+                    },
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": -37.6957,
+                    "RightMargin": 37.6957,
+                    "TopMargin": 53.3973,
+                    "BottomMargin": -53.3973,
+                    "Tag": 419,
+                    "ActionTag": -697478347,
+                    "Size": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Name": "BitmapFontLabel_33_4",
+                    "ctype": "TextBMFontObjectData"
+                  }
+                ],
+                "ActionTag": -1147858558,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "info_right",
+                "ctype": "SingleNodeObjectData"
+              },
+              {
+                "LabelText": "",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/fista_16_non.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 325.0,
+                  "Y": 92.2556
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {
+                  "R": 147,
+                  "G": 97,
+                  "B": 44
+                },
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.1938
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 325.0,
+                "RightMargin": 325.0,
+                "TopMargin": 383.7444,
+                "BottomMargin": 92.2556,
+                "Tag": 421,
+                "ActionTag": 563859892,
+                "Size": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Name": "content",
+                "ctype": "TextBMFontObjectData"
+              },
+              {
+                "FontSize": 14,
+                "ButtonText": "",
+                "TextColor": {
+                  "R": 65,
+                  "G": 65,
+                  "B": 70
+                },
+                "DisabledFileData": {
+                  "Type": "Default",
+                  "Path": "Default/Button_Disable.png",
+                  "Plist": ""
+                },
+                "PressedFileData": {
+                  "Type": "Normal",
+                  "Path": "guis/train_troop_gui/close.png",
+                  "Plist": ""
+                },
+                "NormalFileData": {
+                  "Type": "Normal",
+                  "Path": "guis/train_troop_gui/close.png",
+                  "Plist": ""
+                },
+                "Scale9Enable": true,
+                "Scale9OriginX": 15,
+                "Scale9OriginY": 11,
+                "Scale9Width": 17,
+                "Scale9Height": 25,
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "TouchEnable": true,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 619.5424,
+                  "Y": 448.4484
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.9531,
+                  "Y": 0.9421
+                },
+                "PreSize": {
+                  "X": 0.0723,
+                  "Y": 0.0987
+                },
+                "LeftMargin": 596.0424,
+                "RightMargin": 6.9576,
+                "TopMargin": 4.0516,
+                "BottomMargin": 424.9484,
+                "UserData": "-press_action",
+                "Tag": 423,
+                "ActionTag": 1968891397,
+                "Size": {
+                  "X": 47.0,
+                  "Y": 47.0
+                },
+                "Name": "button_close",
+                "ctype": "ButtonObjectData"
+              }
+            ],
+            "ActionTag": 1636111723,
+            "Size": {
+              "X": 650.0,
+              "Y": 476.0
+            },
+            "Name": "troop_info",
+            "ctype": "ImageViewObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "Default/Button_Disable.png",
+        "Default/ImageFile.png",
+        "fonts/fista_16_non.fnt",
+        "fonts/fista_16_non.png",
+        "fonts/soji_16.fnt",
+        "fonts/soji_16.png",
+        "guis/research troop/mieng trang.png",
+        "guis/research troop/nen 1.png",
+        "guis/train_troop_gui/close.png",
+        "ProcessBar.json"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

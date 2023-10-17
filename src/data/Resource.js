@@ -141,6 +141,7 @@ var res_ui = {
     BASIC_POPUP:"BasicPopup.json",
     BUTTON_OF_BUILDING: "ButtonOfBuilding.json",
     ICON_HARVEST: "IconHarvest.json",
+    TROOP_INFO: "TroopInfoPopup.json"
 }
 
 var res_shop = {

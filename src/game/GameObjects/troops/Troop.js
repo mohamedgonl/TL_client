@@ -20,6 +20,7 @@ var Troop = cc.Node.extend({
 
         let start;
         let end = mapLayer.getMapPosFromGridPos({x: this.armyCamp._posX, y: this.armyCamp._posY}, true, false);
+        cc.log("INIT END ::: " + JSON.stringify(end) + " ARMY ::: " + JSON.stringify({x: this.armyCamp._posX, y: this.armyCamp._posY}))
         if (barrackIndex >= 0 && barrackIndex !== null) {
             let barrack = ArmyManager.Instance().getBarrackList()[barrackIndex];
             start = mapLayer.getMapPosFromGridPos({x: barrack._posX, y: barrack._posY}, true);
@@ -118,10 +119,11 @@ var Troop = cc.Node.extend({
 
         const Algorithm = AlgorithmImplement.Instance();
         Algorithm.setGridMapStar(MapManager.Instance().mapGrid);
+        let mapLayer = cc.director.getRunningScene().getMapLayer();
         if (event.getUserData().buildingId === this.armyCamp.getId()) {
             this.troop.stopAllActions();
-            let start = this.troop.getPosition();
-            let end = this.armyCamp.getPosition();
+            let end =  mapLayer.getMapPosFromGridPos({x: this.armyCamp._posX, y: this.armyCamp._posY}, true, false);
+            let start = this.troop.getPosition()
             this.runToCamp(start, end);
         }
 
@@ -186,7 +188,6 @@ var Troop = cc.Node.extend({
         }
         while (randomX === 2 && randomY === 2);
 
-        cc.log("RANDOM ::: ", randomX, randomX)
         end.x += randomX;
         end.y += randomY;
 

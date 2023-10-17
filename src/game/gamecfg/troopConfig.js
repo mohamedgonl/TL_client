@@ -120,7 +120,7 @@ const TroopConfig = {
 }
 
 
-const AMC_SIZE = 4;
+const AMC_SIZE = 5;
 
 const EVENT_TROOP_NAME = {
     MOVE_BUILDING: 'move_building'
@@ -143,3 +143,95 @@ const DIRECTIONS_STRING = {
 const TROOP_ANIMS_LIST = ["ARM_1", "ARM_2", "ARM_3", "ARM_4"];
 
 const TROOP_STAY_TIME = 3;
+
+
+const TROOPS_INFO  = {
+    "ARM_1" : {
+        name: "Chiến binh",
+        info: [
+            {
+                icon: res.ICON.DAMAGE,
+                bar_percent: 0.2,
+                title: "Sát thương: 8"
+            },
+            {
+                icon: res.ICON.HEART,
+                bar_percent: 0.3,
+                title: "Máu: 45"
+            },
+            {
+                icon: res.ICON.ELIXIR,
+                bar_percent: 0.08,
+                title: "Giá: 25"
+            }
+        ],
+        data: ["Tất cả", "Một mục tiêu", "Dưới đất", "16", "2s", "1"],
+        description: "Là những kẻ không hề biết sợ. Chiến binh cấp 1 sử dụng sức mạnh cơ bắp của mình cùng với thanh kiếm càn quét thành lũy quân thù mang vinh quang về cho vương quốc."
+    },
+    "ARM_2" : {
+        name: "Cung thủ",
+        info: [
+            {
+                icon: res.ICON.DAMAGE,
+                bar_percent: 0.2,
+                title: "Sát thương: 7"
+            },
+            {
+                icon: res.ICON.HEART,
+                bar_percent: 0.3,
+                title: "Máu: 20"
+            },
+            {
+                icon: res.ICON.ELIXIR,
+                bar_percent: 0.08,
+                title: "Giá: 50"
+            }
+        ],
+        data: ["Tất cả", "Một mục tiêu", "Dưới đất & Trên không", "24", "2s", "1"],
+        description: "Là những thiện xã của vương quốc. Cung thủ cấp 1 luôn biết cách giữ khoảng cách an toàn cho bản thân và hạ gục mọi thành lũy nơi quân đoàn mình đặt chân đến"
+    },
+    "ARM_3" : {
+        name: "Đạo tặc",
+        info: [
+            {
+                icon: res.ICON.DAMAGE,
+                bar_percent: 0.2,
+                title: "Sát thương: 11"
+            },
+            {
+                icon: res.ICON.HEART,
+                bar_percent: 0.3,
+                title: "Máu: 25"
+            },
+            {
+                icon: res.ICON.ELIXIR,
+                bar_percent: 0.08,
+                title: "Giá: 25"
+            }
+        ],
+        data: ["Tài nguyên (Tấn công x2)", "Một mục tiêu", "Dưới đất", "32", "2s", "1"],
+        description: "Nơi nào có Vàng/Dầu, nơi đó có Đạo tặc cấp 1. Chúng là những kẻ nhanh nhẹn nhất trên mặt đất, là mũi tiên phong trong những cuộc chinh phạt các thành trình giàu có."
+    },
+    "ARM_4" : {
+        name: "Gã khổng lồ",
+        info: [
+            {
+                icon: res.ICON.DAMAGE,
+                bar_percent: 0.2,
+                title: "Sát thương: 22"
+            },
+            {
+                icon: res.ICON.HEART,
+                bar_percent: 0.3,
+                title: "Máu: 300"
+            },
+            {
+                icon: res.ICON.ELIXIR,
+                bar_percent: 0.08,
+                title: "Giá: 500"
+            }
+        ],
+        data: ["Công trình phòng thủ", "Một mục tiêu", "Dưới đất", "12", "7s", "5"],
+        description: "To lớn và chậm chạp, nhưng những Gã khổng lồ cấp 1 chính là những đối thủ khó chịu nhất của công trình phòng thủ. Không hề quan tm đến vàng hay dầu, mục tiêu duy nhất của chúng là những khẩu pháo, các loại chòi đang xả đạn vào đồng đội của mình."
+    }
+}

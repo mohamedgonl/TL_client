@@ -15,7 +15,6 @@ var TroopListItem = cc.Node.extend({
         this._cost = TROOP[this._troopCfgId][this._level]["trainingElixir"];
         this._curBarrack = ArmyManager.Instance().getBarrackList()[curPage];
         this._barrackRequired = TROOP_BASE[this._troopCfgId]["barracksLevelRequired"];
-        this._troopImage = this._node.getChildByName("troop_image");
 
         // this._nodeShadow =   CCSUlties.parseUIFile(res_ui.TROOPS_LIST_ITEM).getChildByName("troop_item_button").getChildByName("troop_item");
         // this._troopImageShadow =   CCSUlties.parseUIFile(res_ui.TROOPS_LIST_ITEM).getChildByName("troop_item_button").getChildByName("troop_item");
@@ -117,7 +116,13 @@ var TroopListItem = cc.Node.extend({
     },
 
     handleClickTroopInfo: function () {
-        cc.log("CLICK TROOP INFO")
+        cc.log("CLICK TROOP INFO");
+        if(TROOP_ANIMS_LIST.indexOf(this._troopCfgId) !== -1) {
+            let itemInfoLayer = new TroopInfoPopup(this._troopCfgId);
+            let gameScene = cc.director.getRunningScene();
+            let popUpLayer = gameScene.getPopUpLayer();
+            popUpLayer.addChild(itemInfoLayer);
+        }
 
     },
 

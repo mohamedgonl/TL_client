@@ -102,6 +102,7 @@
         "src/game/GUIs/views/InfoPopup.js",
         "src/game/GUIs/views/BasicPopup.js",
         "src/game/GUIs/views/ButtonOfBuilding.js",
+        "src/game/GUIs/views/TroopInfoPopup.js",
 
         "src/game/GUIs/layers/InfoLayer.js",
         "src/game/GUIs/layers/PopUpLayer.js",
