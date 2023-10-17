@@ -7,7 +7,8 @@ const RESOURCE_TYPE = {
 }
 
 const COLOR_SHOP_RED = cc.color(255,0,0)
-const COLOR_SHOP_WHITE =  cc.color(255,255,255)
+const COLOR_SHOP_WHITE =  cc.color(255,255,255);
+const COLOR_REQUIRED_TROOP = cc.color(181, 26, 0);
 
 const ShopItemsData = {
     'category_ngankho' : [

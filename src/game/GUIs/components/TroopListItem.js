@@ -3,10 +3,10 @@ var TroopListItem = cc.Node.extend({
     _level: 1,
     _space: null,
     _count: 0,
-    ctor: function (troopCfgId, curPage, i) {
+    ctor: function (troopCfgId, curPage, index) {
 
         this._super();
-        this._i = i;
+        this._index = index;
         this._troopCfgId = troopCfgId;
         this._curPage = curPage;
         let node = CCSUlties.parseUIFile(res_ui.TROOPS_LIST_ITEM);
@@ -44,22 +44,24 @@ var TroopListItem = cc.Node.extend({
 
         cc.eventManager.addCustomListener(EVENT_NAMES.BUILDING_UPDATED, (e) => {
             if(this._curBarrack.getId() === e.getUserData().id) {
+                cc.log("BUILDING UPDATED :::: ")
                 this.recheck();
             }
         });
         this.recheck();
         this.addChild(node);
+
     },
 
     recheck: function () {
-        this.checkAvailable();
         this.setCostDisplay()
+        this.checkAvailable();
     },
 
     checkAvailable: function () {
 
-        this._available = TROOPS_LIST[this._i].available && (this._barrackRequired <= this._curBarrack._level);
-
+        this._available = TROOPS_LIST[this._index].available && (this._barrackRequired <= this._curBarrack._level);
+        cc.log(this._available)
         let price = TROOP[this._troopCfgId][1]["trainingElixir"];
         if (!this._available) {
             this._nodeButton.setOpacity(90);
@@ -69,7 +71,7 @@ var TroopListItem = cc.Node.extend({
         if (PlayerInfoManager.Instance().getResource("elixir") < price) {
             this._available = false;
             let costContainer = this._node.getChildByName("cost_container");
-            costContainer.getChildByName("cost").setColor(COLOR_SHOP_RED);
+            costContainer.getChildByName("cost").setColor(COLOR_REQUIRED_TROOP);
         } else {
             let costContainer = this._node.getChildByName("cost_container");
             costContainer.getChildByName("cost").setColor(COLOR_SHOP_WHITE);
@@ -94,7 +96,7 @@ var TroopListItem = cc.Node.extend({
             barRequired.setVisible(true);
             let barRqString = barRequired.getChildByName("bar_rq_string");
             let label = new cc.LabelBMFont("Yêu cầu\nNhà lính cấp " + this._barrackRequired, res.FONT.FISTA["16"], 120, cc.TEXT_ALIGNMENT_CENTER);
-            label.setColor(cc.color(181, 26, 0))
+            label.setColor(COLOR_REQUIRED_TROOP)
             barRqString.addChild(label);
             this.label = label;
         }

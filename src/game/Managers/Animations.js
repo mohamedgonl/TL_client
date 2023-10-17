@@ -7,6 +7,7 @@ var Animations = cc.Layer.extend ({
     },
     initAnimation: function (cfgId) {
         this._animations[cfgId] = {};
+
         ANIMAS.map(action => {
             this._animations[cfgId][action] = {};
             if (TroopConfig[cfgId][action]) {

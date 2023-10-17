@@ -21,6 +21,7 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.USER_LOGIN:
                 // this.sendGetUserInfo();
                 fr.getCurrentScreen().onFinishLogin();
+               // cc.director.getRunningScene().getChildByName("screen").onFinishLogin();
                 break;
             case gv.CMD.USER_INFO:
 
@@ -287,7 +288,6 @@ testnetwork.Connector = cc.Class.extend({
                 cc.log("UPGRADE BUILDING SUCCESS ERROR::::::::: ", packet.error);
             }
             building.completeUpgrade();
-            cc.eventManager.dispatchCustomEvent(EVENT_NAMES.BUILDING_UPDATED, {id: packet.id})
 
         }
         else
@@ -366,6 +366,7 @@ testnetwork.Connector = cc.Class.extend({
             if(chosenBuilding && chosenBuilding._id !== id) {
                 chosenBuilding.onReceivedQuickFinishOfAnother();
             }
+            cc.eventManager.dispatchCustomEvent(EVENT_NAMES.BUILDING_UPDATED, {id: packet.id})
         }
     },
     onReceivedBuyResourceByGem: function (packet) {

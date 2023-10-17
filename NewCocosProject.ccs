@@ -1714,7 +1714,9 @@
         <Project Name="CheatPopup.csd" Type="Node" />
         <Project Name="InfoLayer1.csd" Type="Layer" />
         <Project Name="InfoPopup.csd" Type="Node" />
+        <Project Name="InfoPopup.csd" Type="Node" />
         <Project Name="ItemInfoPopup.csd" Type="Node" />
+        <Project Name="Layer1.csd" Type="Layer" />
         <Project Name="Layer1.csd" Type="Layer" />
         <Project Name="LoginScene.csd" Type="Scene" />
         <Project Name="NotiPopup.csd" Type="Node" />
@@ -1727,8 +1729,7 @@
         <Project Name="TroopTrainingItem.csd" Type="Node" />
         <Project Name="TroopTrainPopup.csd" Type="Node" />
         <Project Name="UpgradePopup.csd" Type="Node" />
-        <Project Name="InfoPopup.csd" Type="Node" />
-        <Project Name="Layer1.csd" Type="Layer" />
+        <Project Name="TroopInfoPopup.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

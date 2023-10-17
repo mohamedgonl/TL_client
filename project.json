@@ -35,6 +35,7 @@
         "src/framework/UserData.js",
         "src/framework/utils/utils.js",
         "src/framework/NumberUltis.js",
+        "src/framework/RandomUltils.js",
 
         "src/base/network/GameClient.js",
         "src/base/network/GameClientListener.js",

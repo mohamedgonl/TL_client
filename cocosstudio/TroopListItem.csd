@@ -12,7 +12,7 @@
               <AbstractNodeData Name="troop_item" ActionTag="650000912" Tag="157" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-9.5000" RightMargin="-9.5000" TopMargin="-8.0000" BottomMargin="-8.0000" ctype="SpriteObjectData">
                 <Size X="112.0000" Y="111.0000" />
                 <Children>
-                  <AbstractNodeData Name="troop_image" ActionTag="-1410123317" Tag="40" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="33.0000" RightMargin="33.0000" TopMargin="30.2800" BottomMargin="34.7200" ctype="SpriteObjectData">
+                  <AbstractNodeData Name="troop_image" ActionTag="-1410123317" UserData="-press_action" Tag="40" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="33.0000" RightMargin="33.0000" TopMargin="30.2800" BottomMargin="34.7200" ctype="SpriteObjectData">
                     <Size X="46.0000" Y="46.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="56.0000" Y="57.7200" />

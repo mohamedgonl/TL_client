@@ -392,7 +392,7 @@ var Building = GameObject.extend({
         mapLayer.removeBuilding(this);
 
         //remove from mapManager
-        MapManager.Instance().removeBuilding(this._id);
+        MapManager.Instance().removeBuilding(this);
 
     },
 

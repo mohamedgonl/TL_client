@@ -21,9 +21,14 @@ var AlgorithmImplement = cc.Class.extend({
         let gridMap = JSON.parse(JSON.stringify(gridMapGame)) ;
         for (let i = 0; i < gridMap.length; i++) {
             for (let j = 0; j < gridMap[i].length; j++) {
-                if (gridMap[i][j] === 0 || barrackIds.indexOf(gridMap[i][j]) !== -1|| armyCampIds.indexOf(gridMap[i][j]) !== -1) {
+                if (gridMap[i][j] === 0 || armyCampIds.indexOf(gridMap[i][j]) !== -1) {
                     gridMap[i][j] = 1;
-                } else {
+                }
+                else if ( (gridMap[i][j] !== 0 && (gridMap[i+1] ? gridMap[i+1][j] : 0.1) !== gridMap[i][j])
+                || (gridMap[i][j] !== 0 && gridMap[i][j+1] !== gridMap[i][j]) ) {
+                    gridMap[i][j] = 1;
+                }
+                else {
                     gridMap[i][j] = 0;
                 }
             }

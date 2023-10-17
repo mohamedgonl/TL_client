@@ -22,6 +22,10 @@ var ShopItem = cc.Node.extend({
             let objs = this.getElements(["item_bg", "shop_bg", "price_type", "item_image"])
             ColorUlties.setGrayObjects(objs)
         }
+        // else {
+        //     let objs = this.getElements(["item_bg", "shop_bg", "price_type", "item_image"])
+        //     ColorUlties.setColorObject(objs)
+        // }
     },
 
     getElements: function (names) {

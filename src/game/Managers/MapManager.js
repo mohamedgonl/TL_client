@@ -201,6 +201,8 @@ var MapManager = cc.Layer.extend({
         return null;
     },
     removeBuilding: function (building){
+        // remove from building count
+        this.buildingAmount[building._type] = Math.max(this.buildingAmount[building._type] - 1, 0) ;
         //remove from list
         this.listBuildings.delete(building._id);
         //remove from mapGrid

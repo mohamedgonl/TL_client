@@ -37,7 +37,7 @@ const TroopConfig = {
         },
         scale: 0.5,
         run: {
-            frame_time: 0.07,
+            frame_time: 0.05,
             down: [0, 15],
             down_left: [16, 31],
             left: [32, 47],
@@ -119,7 +119,6 @@ const TroopConfig = {
     },
 }
 
-const SPEED_TIME  = 19;
 
 const AMC_SIZE = 4;
 
@@ -143,4 +142,4 @@ const DIRECTIONS_STRING = {
 
 const TROOP_ANIMS_LIST = ["ARM_1", "ARM_2", "ARM_3", "ARM_4"];
 
-const TROOP_STAY_TIME = 10;
+const TROOP_STAY_TIME = 3;
