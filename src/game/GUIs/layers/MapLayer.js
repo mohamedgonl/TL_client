@@ -259,7 +259,6 @@ var MapLayer = cc.Layer.extend({
         cc.log("send buy building request", this.chosenBuilding._type, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y)
         testnetwork.connector.sendBuyBuilding(this.chosenBuilding._type, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y);
 
-
     },
     onReceivedQuickFinishOfAnother: function (packet) {
         this.acceptBuyBuilding();
@@ -689,7 +688,7 @@ var MapLayer = cc.Layer.extend({
 
     },
 
-    enterModeBuyBuilding: function (buildingType) {
+    enterModeBuyBuilding: function (buildingType,posX,posY) {
         if (this.onModeBuyBuilding) {
 
             this.exitModeBuyBuilding();
@@ -708,8 +707,14 @@ var MapLayer = cc.Layer.extend({
         var buttonCancel = createButton(res.BUTTON.CANCEL, SCALE_BUTTON_BUY_BUILDING, cc.p(-OFFSET_BUTTON_BUY_BUILDING.x, OFFSET_BUTTON_BUY_BUILDING.y), this.exitModeBuyBuilding, this);
         this.chosenBuilding.addChild(buttonCancel, MAP_ZORDER_GUI);
 
+
+
         //set position of building
         let validPosition = MapManager.Instance().getEmptyPositionPutBuilding(this.chosenBuilding);
+
+        if(posX && posY) {
+            validPosition = cc.p(posX,posY);
+        }
 
         //if not valid position, set to center of map and square to red, else set to valid position and square to green, move screen to see building
         if (validPosition == null) {
