@@ -74,7 +74,6 @@ var MapManager = cc.Node.extend({
     addToListBuilderHut: function (building) {
         this.listBuilderHut.push(building);
     },
-
     //add building to list and to grid
     addBuilding: function (building, isBuy = false) {
         // cc.log("building  ", JSON.stringify(building, null, 2));
@@ -167,6 +166,9 @@ var MapManager = cc.Node.extend({
             return null;
         cc.log("x y::::::::::::::::::::::::::::",x,y)
         return this.listBuildings.get(this.mapGrid[x][y]) || null;
+    },
+    getListBuilderHut: function () {
+        return this.listBuilderHut;
     },
 
     checkValidPutBuilding: function (building, newPosX, newPosY) {

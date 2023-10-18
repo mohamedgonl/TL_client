@@ -45,7 +45,11 @@ var Building = GameObject.extend({
         this.loadSpriteByLevel(level);
 
         this.loadSubSprite();
-        //this.initState();
+
+        // this._grass.setGlobalZOrder(10);
+        // this._shadow.setGlobalZOrder(20);
+        // this._body.setGlobalZOrder(30);
+        // this._upper.setGlobalZOrder(40);
     },
 
     //load sprite with size,
@@ -175,6 +179,30 @@ var Building = GameObject.extend({
             this._progressBar.getBoundingBox().height + 10);
 
         this._progressBar.addChild(this._timeLabel,ZORDER_BUILDING_EFFECT);
+
+        //effect fence when build upgrade
+        this._fence = new cc.Sprite(res_map.SPRITE.FENCE);
+        this._fence.setAnchorPoint(0.5,0);
+        this.addChild(this._fence,ZORDER_BUILDING_EFFECT);
+        //set pos below 0 0 of building = height grass/2 + offset
+        this._fence.setPosition(0,-this._grass.getBoundingBox().height/2 +5);
+        this._fence.setVisible(false);
+
+
+        // this._arrow_move.setGlobalZOrder(45);
+        // this._green_square.setGlobalZOrder(15);
+        // this._red_square.setGlobalZOrder(15);
+        // this._nameLabel.setGlobalZOrder(47);
+        // this._levelLabel.setGlobalZOrder(47);
+        // this._progressBar.setGlobalZOrder(48);
+        // this._timeLabel.setGlobalZOrder(49);
+        // this._fence.setGlobalZOrder(42);
+        //
+        //
+        // this._grass.setGlobalZOrder(10);
+        // this._shadow.setGlobalZOrder(20);
+        // this._body.setGlobalZOrder(30);
+        // this._upper.setGlobalZOrder(40);
     },
     initState: function () {
 
@@ -313,6 +341,8 @@ var Building = GameObject.extend({
         PlayerInfoManager.Instance().addResource({gold:-priceGold,elixir:-priceElixir,gem:-priceGem})
         //enable progress bar
         this._progressBar.setVisible(true);
+        //show fence
+        this._fence.setVisible(true);
 
         this.loadButton();
         this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
@@ -338,6 +368,7 @@ var Building = GameObject.extend({
         this._startTime = null;
         this._endTime = null;
         this._progressBar.setVisible(false);
+        this._fence.setVisible(false);
         PlayerInfoManager.Instance().changeBuilder("current", 1);
         //unschedule update
         let chosenBuilding = cc.director.getRunningScene().getMapLayer().getChosenBuilding();
@@ -418,6 +449,7 @@ var Building = GameObject.extend({
             case 1:
             case 2:
                 this._progressBar.setVisible(true);
+                this._fence.setVisible(true);
                 // -1 builder
                 PlayerInfoManager.Instance().changeBuilder("current", -1);
                 this.update();

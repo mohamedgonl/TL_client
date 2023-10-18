@@ -35,6 +35,16 @@ var Townhall = Building.extend({
         let playerInfoManager = PlayerInfoManager.Instance();
         let capacityGold = LoadManager.Instance().getConfig(this._type, this._level, "capacityGold");
         let capacityElixir = LoadManager.Instance().getConfig(this._type, this._level, "capacityElixir");
+
+        let capacityGoldBefore = LoadManager.Instance().getConfig(this._type, this._level - 1, "capacityGold") || 0;
+        let capacityElixirBefore = LoadManager.Instance().getConfig(this._type, this._level - 1, "capacityElixir") || 0;
+
+        let amountIncreaseGold = capacityGold - capacityGoldBefore;
+        let amountIncreaseElixir = capacityElixir - capacityElixirBefore;
+
+        playerInfoManager.changeMaxResource("gold", amountIncreaseGold);
+        playerInfoManager.changeMaxResource("elixir", amountIncreaseElixir);
+
         testnetwork.connector.sendGetMapInfo();
     },
     completeUpgrade: function () {

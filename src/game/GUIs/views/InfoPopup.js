@@ -25,6 +25,8 @@ var InfoPopup = cc.Node.extend({
         this._super();
 
         this.building = building;
+        cc.log("building: " + building._type)
+        cc.log("building: " + building._productivityGold)
         this.building = cc.director.getRunningScene().getMapLayer().chosenBuilding;
 
         var node = CCSUlties.parseUIFile(res_ui.INFO_POPUP);
@@ -120,12 +122,12 @@ var InfoPopup = cc.Node.extend({
             case "productionGold":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.GOLD_PD_RATE);
-                text.setString("Sản lượng:" + this.building._productionGold);
+                text.setString("Sản lượng:" + this.building._productivityGold);
                 break;
             case "productionElixir":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.ELIXIR_PD_RATE);
-                text.setString("Sản lượng:" + this.building._productionElixir);
+                text.setString("Sản lượng:" + this.building._productivityElixir);
                 break;
             case "damage":
                 bar.setPercent(100);

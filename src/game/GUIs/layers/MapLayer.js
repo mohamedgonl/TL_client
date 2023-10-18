@@ -111,6 +111,12 @@ var MapLayer = cc.Layer.extend({
                     console.log("==================================================================")
                 }
                 if (keyCode === cc.KEY.x) {
+                    let builder = new Builder();
+
+
+
+
+                    this.addChild(builder,9999999);
 
                 }
                 if (keyCode === cc.KEY.c) {
@@ -545,14 +551,20 @@ var MapLayer = cc.Layer.extend({
     getMapPosFromGridPos: function (gridPos, isCenter = false, random = false) {
 
         if (isCenter === true) {
+            //floor x y
+            gridPos.x = Math.floor(gridPos.x);
+            gridPos.y = Math.floor(gridPos.y);
             gridPos = cc.p(gridPos.x + 0.5, gridPos.y + 0.5);
         }
         if (random === true) {
             //rand 0 to 1
             let randX = Math.random();
             let randY = Math.random();
+            gridPos.x = Math.floor(gridPos.x);
+            gridPos.y = Math.floor(gridPos.y);
             gridPos = cc.p(gridPos.x + randX, gridPos.y + randY);
         }
+
         var posA = cc.pLerp(CORNER_BOTTOM, CORNER_RIGHT, gridPos.x / GRID_SIZE);
         var posB = cc.pLerp(CORNER_BOTTOM, CORNER_LEFT, gridPos.y / GRID_SIZE);
         var posC = cc.pLerp(CORNER_LEFT, CORNER_TOP, gridPos.x / GRID_SIZE);
