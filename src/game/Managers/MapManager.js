@@ -1,5 +1,5 @@
 
-var MapManager = cc.Layer.extend({
+var MapManager = cc.Node.extend({
     instance: null,
     listBuildings: new Map(),
     townHall: null,
