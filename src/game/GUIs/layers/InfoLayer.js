@@ -269,9 +269,9 @@ var InfoLayer = cc.Layer.extend({
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             if(ArmyManager.Instance().getBarrackList().length){
                 if (popUpLayer.isVisible()) {
-                    popUpLayer.disappear("train");
+                    popUpLayer.disappear(POPUP_IDS.TRAIN);
                 } else {
-                    popUpLayer.appear("train", {page: 0});
+                    popUpLayer.appear(POPUP_IDS.TRAIN, {page: 0});
                 }
             }
         }
@@ -282,9 +282,9 @@ var InfoLayer = cc.Layer.extend({
             cc.log("onTouchShop:::::::::::::::::::::::::::");
             let popUplayer = cc.director.getRunningScene().getPopUpLayer();
             if (popUplayer.isVisible()) {
-                popUplayer.disappear("shop");
+                popUplayer.disappear(POPUP_IDS.SHOP);
             } else {
-                popUplayer.appear("shop");
+                popUplayer.appear(POPUP_IDS.SHOP);
             }
         }
     },

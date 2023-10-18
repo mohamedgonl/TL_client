@@ -60,7 +60,6 @@ var TroopListItem = cc.Node.extend({
     checkAvailable: function () {
 
         this._available = TROOPS_LIST[this._index].available && (this._barrackRequired <= this._curBarrack._level);
-        cc.log(this._available)
         let price = TROOP[this._troopCfgId][1]["trainingElixir"];
         if (!this._available) {
             this._nodeButton.setOpacity(90);
@@ -134,7 +133,6 @@ var TroopListItem = cc.Node.extend({
     },
 
     setCount: function (count) {
-        cc.log("SETCOUNT ", this._count)
         this._count = count;
         let countString = this._node.getChildByName("count_string");
         if (count > 0) {

@@ -138,9 +138,13 @@ var TrainTroopPage = cc.Node.extend({
         let doneNowPrice = Math.ceil(this._totalTime / 60);
         let buttonDoneNowString = this._trainContainer.getChildByName("done_now_text").getChildByName("done_now_cost");
         buttonDoneNowString.setString(doneNowPrice);
+        let doneNowButton = this._trainContainer.getChildByName("button_done_now");
+        let gem = PlayerInfoManager.Instance().getResource().gem;
+        doneNowButton.setEnabled(doneNowPrice !== 0 && doneNowPrice <= gem)
     },
 
     updateTotalTimeString: function () {
+        cc.log("UPDATE TOTAL TIME ::: " + this._totalTime)
         let totalTimeString = this._trainContainer.getChildByName("total_time_string");
         totalTimeString.setString(this._totalTime + "s");
     },
@@ -190,13 +194,15 @@ var TrainTroopPage = cc.Node.extend({
     },
 
     updateCurrentTroopTimeInfo: function (curTroopTrainTime) {
-
+        cc.log("UPDATE CURRENT TROOP TIME ::: " +curTroopTrainTime)
         let curTroopTime = this._trainContainer.getChildByName("current");
         let processBar = curTroopTime.getChildByName("current_process");
         let timeString = curTroopTime.getChildByName("current_time_string");
 
         let timeLeft = this._curBarrack.getLastTrainingTime() + curTroopTrainTime - TimeManager.Instance().getCurrentTimeInSecond();
         timeString.setString(timeLeft + "s");
+        cc.log("UPDATE CURRENT TIME ::: " + timeLeft)
+        cc.log("LAST TRAIN ::: " + this._curBarrack.getLastTrainingTime() + " CURRENT :: " + TimeManager.Instance().getCurrentTimeInSecond())
         this._timeLeft = timeLeft;
 
         let processBarPercent = (TimeManager.Instance().getCurrentTimeInSecond() - this._curBarrack.getLastTrainingTime()) / curTroopTrainTime * 100;
@@ -281,6 +287,7 @@ var TrainTroopPage = cc.Node.extend({
             if (!event.data.isInit) found = this._curBarrack.addToTrainingQueue({cfgId: troopCfgId, count: count});
 
             if (!found) {
+                cc.log("CREATE NEW ITEM")
                 this.createNewItemInTrainingList(event)
             } else {
                 let itemTraining = this._trainingItems.find(e => e.getCfgId() === event.data.cfgId);

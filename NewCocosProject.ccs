@@ -1725,11 +1725,11 @@
         <Project Name="ShopPopUpLayer.csd" Type="Layer" />
         <Project Name="ShopPopUpSprite.csd" Type="Node" />
         <Project Name="Skeleton.csd" Type="Skeleton" />
+        <Project Name="TroopInfoPopup.csd" Type="Node" />
         <Project Name="TroopListItem.csd" Type="Node" />
         <Project Name="TroopTrainingItem.csd" Type="Node" />
         <Project Name="TroopTrainPopup.csd" Type="Node" />
         <Project Name="UpgradePopup.csd" Type="Node" />
-        <Project Name="TroopInfoPopup.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

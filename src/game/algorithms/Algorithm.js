@@ -42,7 +42,6 @@ var AlgorithmImplement = cc.Class.extend({
             cc.log("OLD SEARCH")
             return this._results[key];
         } else {
-            cc.log("NEW SEARCH")
             let _start = this._gridMapAStar.grid[start[0]][start[1]];
             let _end = this._gridMapAStar.grid[end[0]][end[1]];
             let result = a_star.search(this._gridMapAStar, _start, _end, {closest: true});

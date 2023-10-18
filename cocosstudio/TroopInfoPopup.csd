@@ -164,33 +164,33 @@
                 <PrePosition X="0.5087" Y="0.4578" />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="info_right" ActionTag="-1147858558" Tag="413" IconVisible="True" LeftMargin="523.2709" RightMargin="126.7291" TopMargin="256.9362" BottomMargin="219.0638" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="info_right" ActionTag="-1147858558" Tag="413" IconVisible="True" LeftMargin="533.2700" RightMargin="116.7300" TopMargin="256.9400" BottomMargin="219.0600" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
-                  <AbstractNodeData Name="BitmapFontLabel_33" ActionTag="-1734711755" Tag="412" IconVisible="False" LeftMargin="-24.1957" RightMargin="24.1957" TopMargin="-47.5386" BottomMargin="47.5386" LabelText="" ctype="TextBMFontObjectData">
+                  <AbstractNodeData Name="BitmapFontLabel_33" ActionTag="-1734711755" Tag="412" IconVisible="False" LeftMargin="-38.6957" RightMargin="38.6957" TopMargin="-47.5386" BottomMargin="47.5386" LabelText="" ctype="TextBMFontObjectData">
                     <Size X="0.0000" Y="0.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="-24.1957" Y="47.5386" />
+                    <Position X="-38.6957" Y="47.5386" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="12" G="104" B="209" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <LabelBMFontFile_CNB Type="Normal" Path="fonts/fista_16_non.fnt" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="BitmapFontLabel_33_0" ActionTag="-994456636" Tag="415" IconVisible="False" LeftMargin="6.3043" RightMargin="-6.3043" TopMargin="-27.3514" BottomMargin="27.3514" LabelText="" ctype="TextBMFontObjectData">
+                  <AbstractNodeData Name="BitmapFontLabel_33_0" ActionTag="-994456636" Tag="415" IconVisible="False" LeftMargin="-38.6957" RightMargin="38.6957" TopMargin="-27.3514" BottomMargin="27.3514" LabelText="" ctype="TextBMFontObjectData">
                     <Size X="0.0000" Y="0.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="6.3043" Y="27.3514" />
+                    <Position X="-38.6957" Y="27.3514" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="12" G="104" B="209" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <LabelBMFontFile_CNB Type="Normal" Path="fonts/fista_16_non.fnt" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="BitmapFontLabel_33_1" ActionTag="1863773815" Tag="416" IconVisible="False" LeftMargin="-15.1957" RightMargin="15.1957" TopMargin="-7.1643" BottomMargin="7.1643" LabelText="" ctype="TextBMFontObjectData">
+                  <AbstractNodeData Name="BitmapFontLabel_33_1" ActionTag="1863773815" Tag="416" IconVisible="False" LeftMargin="-38.6957" RightMargin="38.6957" TopMargin="-7.1643" BottomMargin="7.1643" LabelText="" ctype="TextBMFontObjectData">
                     <Size X="0.0000" Y="0.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="-15.1957" Y="7.1643" />
+                    <Position X="-38.6957" Y="7.1643" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="12" G="104" B="209" />
                     <PrePosition />
@@ -207,20 +207,20 @@
                     <PreSize X="0.0000" Y="0.0000" />
                     <LabelBMFontFile_CNB Type="Normal" Path="fonts/fista_16_non.fnt" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="BitmapFontLabel_33_3" ActionTag="301200373" Tag="418" IconVisible="False" LeftMargin="-29.1957" RightMargin="29.1957" TopMargin="33.2101" BottomMargin="-33.2101" LabelText="" ctype="TextBMFontObjectData">
+                  <AbstractNodeData Name="BitmapFontLabel_33_3" ActionTag="301200373" Tag="418" IconVisible="False" LeftMargin="-38.6957" RightMargin="38.6957" TopMargin="33.2101" BottomMargin="-33.2101" LabelText="" ctype="TextBMFontObjectData">
                     <Size X="0.0000" Y="0.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="-29.1957" Y="-33.2101" />
+                    <Position X="-38.6957" Y="-33.2101" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="12" G="104" B="209" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <LabelBMFontFile_CNB Type="Normal" Path="fonts/fista_16_non.fnt" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="BitmapFontLabel_33_4" ActionTag="-697478347" Tag="419" IconVisible="False" LeftMargin="-37.6957" RightMargin="37.6957" TopMargin="53.3973" BottomMargin="-53.3973" LabelText="" ctype="TextBMFontObjectData">
+                  <AbstractNodeData Name="BitmapFontLabel_33_4" ActionTag="-697478347" Tag="419" IconVisible="False" LeftMargin="-38.6957" RightMargin="38.6957" TopMargin="53.3973" BottomMargin="-53.3973" LabelText="" ctype="TextBMFontObjectData">
                     <Size X="0.0000" Y="0.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="-37.6957" Y="-53.3973" />
+                    <Position X="-38.6957" Y="-53.3973" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="12" G="104" B="209" />
                     <PrePosition />
@@ -229,10 +229,10 @@
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint />
-                <Position X="523.2709" Y="219.0638" />
+                <Position X="533.2700" Y="219.0600" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.8050" Y="0.4602" />
+                <PrePosition X="0.8204" Y="0.4602" />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
               <AbstractNodeData Name="content" ActionTag="563859892" Tag="421" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="325.0000" RightMargin="325.0000" TopMargin="383.7444" BottomMargin="92.2556" LabelText="" ctype="TextBMFontObjectData">

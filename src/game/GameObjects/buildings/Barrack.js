@@ -30,7 +30,7 @@ var Barrack = Building.extend({
         for(let i = 0; i < barrackList.length; i++) {
             if(barrackList[i]._id === this._id) {
                 cc.log("Barrack " + i + " is clicked")
-                popUpLayer.appear("train",{page: i});
+                popUpLayer.appear(POPUP_IDS.TRAIN,{page: i});
                 return;
             }
         }
@@ -55,6 +55,7 @@ var Barrack = Building.extend({
 
     //return true when this type of troop already exist
     addToTrainingQueue: function ({cfgId, count}) {
+        cc.log("ADD TO TRAINING QUEUE")
         for (let i = 0; i < this._trainingQueue.length; i++) {
             if(this._trainingQueue[i].cfgId === cfgId) {
                 this._trainingQueue[i].count += count;

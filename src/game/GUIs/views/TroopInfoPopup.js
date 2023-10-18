@@ -54,13 +54,15 @@ var TroopInfoPopup = cc.Layer.extend({
         let rightInfo = this._node.getChildByName("info_right");
         let infoLabels = rightInfo.getChildren();
         infoLabels.map((e, index) => {
-            e.setString(data.data[index]);
+            let label = new cc.LabelBMFont(data.data[index], res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_LEFT);
+            label.setColor(COLOR_TROOP_ATTACK_INFO);
+            e.addChild(label);
         })
 
         // adding description
         let content = this._node.getChildByName("content");
         let label = new cc.LabelBMFont(data.description, res.FONT.FISTA["16"], 600, cc.TEXT_ALIGNMENT_CENTER);
-        label.setColor(cc.color(155, 75, 10))
+        label.setColor(COLOR_TROOP_DESCRIPTION)
         content.addChild(label);
 
 

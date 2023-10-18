@@ -97,15 +97,14 @@ var GoldMine = Building.extend({
     checkShowHarvestIcon: function () {
         //if can harvest >= 1% of capacity , show icon
         let timeNow = TimeManager.Instance().getCurrentTimeInSecond();
-        cc.log("timeNow::::::::::::::::::::::::::: " + timeNow)
-        cc.log("this._lastCollectTime::::::::::::::::::::::::::: " + this._lastCollectTime)
+        // cc.log("timeNow::::::::::::::::::::::::::: " + timeNow)
+        // cc.log("this._lastCollectTime::::::::::::::::::::::::::: " + this._lastCollectTime)
         let time = timeNow - this._lastCollectTime;
-        cc.log("time::::::::::::::::::::::::::: " + time);
+        // cc.log("time::::::::::::::::::::::::::: " + time);
         let capacity = LoadManager.Instance().getConfig(this._type,this._level,"capacity");
 
         let harvestAmount = Math.floor(time*this._productionGold/3600);
 
-        cc.log("harvestAmount: " + harvestAmount)
         if(harvestAmount >= capacity/100) {
             this._showIconHarvest = true;
             this._iconHarvest.setVisible(true);

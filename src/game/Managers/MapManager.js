@@ -89,7 +89,7 @@ var MapManager = cc.Layer.extend({
         for(let column = posX; column < posX + width; column++)
             for(let row = posY; row < posY + height; row++)
                 this.mapGrid[column][row] = id;
-
+        cc.log("ADD NEW BUILDING : : " + JSON.stringify(building))
         building.onAddIntoMapManager();
 
         // add to list building {building._id: building}
@@ -98,7 +98,7 @@ var MapManager = cc.Layer.extend({
 
         //update list storage, list mine, list builder hut
 
-
+        cc.log("ADD NEW BUILDING" + JSON.stringify(building))
         switch (typeBuilding.substring(0,3)){
             case 'TOW':
 
@@ -117,14 +117,10 @@ var MapManager = cc.Layer.extend({
                 ArmyManager.Instance().pushArmyCamp(building);
                 break;
             case 'BDH':
+                break;
+            default : break;
 
         }
-        // if(this.buildingAmount[typeBuilding]) {
-        //     this.buildingAmount[typeBuilding]++;
-        // }
-        // else {
-        //     this.buildingAmount[typeBuilding] = 1;
-        // }
         if(isBuy === true) {
             const Algorithm = AlgorithmImplement.Instance();
             Algorithm.setGridMapStar(MapManager.Instance().mapGrid);

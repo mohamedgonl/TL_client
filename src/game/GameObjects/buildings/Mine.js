@@ -47,13 +47,12 @@ var Mine = Building.extend({
     checkShowHarvestIcon: function () {
         //if can harvest >= 1% of capacity , show icon
         let timeNow = TimeManager.Instance().getCurrentTimeInSecond();
-        cc.log("timeNow::::::::::::::::::::::::::: " + timeNow)
-        cc.log("this._lastCollectTime::::::::::::::::::::::::::: " + this._lastCollectTime)
+        // cc.log("timeNow::::::::::::::::::::::::::: " + timeNow)
+        // cc.log("this._lastCollectTime::::::::::::::::::::::::::: " + this._lastCollectTime)
         let time = timeNow - this._lastCollectTime;
-        cc.log("time::::::::::::::::::::::::::: " + time);
+        // cc.log("time::::::::::::::::::::::::::: " + time);
         let harvestAmount = Math.floor(time * this._productivity / 3600);
 
-        cc.log("harvestAmount: " + harvestAmount)
 
         if (harvestAmount >= this._capacity / 100) {
             this._showIconHarvest = true;

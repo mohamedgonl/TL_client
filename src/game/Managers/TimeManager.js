@@ -3,6 +3,11 @@ var TimeManager = cc.Node.extend({
     deltaTimeClientServer: 0,
     ctor: function () {
         this._super();
+        this.schedule(this.getTime, 2);
+    },
+
+    getTime: function () {
+        testnetwork.connector.sendGetTimeServer();
     },
 
     getCurrentTimeInSecond: function () {

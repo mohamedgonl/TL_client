@@ -65,11 +65,18 @@ var ShopItem = cc.Node.extend({
         }
 
         let price_string = this._itemNode.getChildByName("item_price");
+
         if (category === "category_tainguyen" && data.cfgId === "BDH_1") {
             let bdhCount = MapManager.Instance().getBuildingCountByType("BDH_1");
-            if(bdhCount === 0) this.removeFromParent(true);
-            let price = BDH["BDH_1"][bdhCount+1]["coin"];
-            price_string.setString(price);
+            let price;
+            if(bdhCount === 5) {
+                price = BDH["BDH_1"][bdhCount]["coin"] * 2;
+                this._available = false;
+            }
+            else {
+                price = BDH["BDH_1"][bdhCount+1]["coin"];
+            }
+                price_string.setString(price);
         } else {
             price_string.setString(data.price === 0 ? "Miễn phí" : data.price);
         }
@@ -160,7 +167,6 @@ var ShopItem = cc.Node.extend({
 
     getBuildMaxCount: function () {
         let townHallLevel = MapManager.Instance().getTownHall()._level;
-        cc.log(townHallLevel)
 
         let maxCount = TOW["TOW_1"][townHallLevel][this._data.cfgId];
 
@@ -198,7 +204,7 @@ var ShopItem = cc.Node.extend({
         let gameScene = cc.director.getRunningScene();
         let popUpLayer = gameScene.getPopUpLayer();
         if (this._available === true && this._category === "category_ngankho") {
-            popUpLayer.disappear("shop", false);
+            popUpLayer.disappear(POPUP_IDS.SHOP, false);
 
             // create content in popup
             let label = new cc.LabelBMFont("Bạn có muốn mua số tài nguyên còn thiếu?", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
@@ -225,7 +231,7 @@ var ShopItem = cc.Node.extend({
 
         if (this._category !== "category_ngankho" && this._available === true) {
             var mapLayer = cc.director.getRunningScene().mapLayer;
-            popUpLayer.disappear("shop");
+            popUpLayer.disappear(POPUP_IDS.SHOP);
             mapLayer.enterModeBuyBuilding(this._data.cfgId);
         }
 

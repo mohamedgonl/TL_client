@@ -235,3 +235,6 @@ const TROOPS_INFO  = {
         description: "To lớn và chậm chạp, nhưng những Gã khổng lồ cấp 1 chính là những đối thủ khó chịu nhất của công trình phòng thủ. Không hề quan tm đến vàng hay dầu, mục tiêu duy nhất của chúng là những khẩu pháo, các loại chòi đang xả đạn vào đồng đội của mình."
     }
 }
+const COLOR_REQUIRED_TROOP = cc.color(181, 26, 0);
+const COLOR_TROOP_ATTACK_INFO = cc.color(12, 104, 209);
+const COLOR_TROOP_DESCRIPTION = cc.color(147, 97, 44);
