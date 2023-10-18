@@ -80,6 +80,7 @@
         "src/game/GameObjects/buildings/Cannon.js",
         "src/game/GameObjects/Obstacle.js",
         "src/game/GameObjects/troops/Troop.js",
+        "src/game/GameObjects/Builder.js",
 
 
         "src/game/Managers/MapManager.js",

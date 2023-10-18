@@ -137,6 +137,69 @@ var LoadManager = cc.Node.extend({
             }
             res_map.SPRITE.BODY.WALL[i] = res;
         }
+
+        //builder
+        // res/builder/run/image0000.png
+
+        //BUILDER:{
+        //             LINK: "res/builder/run/image",
+        //             DOWN:{//res/builder/run/image0000.png
+        //                  //0000 -> 0007
+        //             },
+        //             UP:{
+        //                 //0032 -> 0039
+        //             },
+        //             LEFT:{
+        //                 //0016 -> 0023
+        //             },
+        //             DOWN_LEFT:{
+        //                 //0008 -> 0015
+        //             },
+        //             UP_LEFT:{
+        //                 //0024 -> 0031
+        //             }
+        //         }
+
+        //add to BUILDER.DOWN
+        let builderDown = {};
+        for(let i = 0; i < 8; i++){
+            let res = "res/builder/run/image000" + i + ".png";
+            builderDown[i] = res;
+        }
+        res_map.SPRITE.BUILDER.DOWN = builderDown;
+
+        //add to BUILDER.UP
+        let builderUp = {};
+        for(let i = 32; i < 40; i++){
+            let res = "res/builder/run/image00" + i + ".png";
+            builderUp[i-32] = res;
+        }
+        res_map.SPRITE.BUILDER.UP = builderUp;
+
+        //add to BUILDER.LEFT
+        let builderLeft = {};
+        for(let i = 16; i < 24; i++){
+            let res = "res/builder/run/image00" + i + ".png";
+            builderLeft[i-16] = res;
+        }
+        res_map.SPRITE.BUILDER.LEFT = builderLeft;
+
+        //add to BUILDER.DOWN_LEFT
+        let builderDownLeft = {};
+        for(let i = 8; i < 16; i++){
+            let res = "res/builder/run/image00" + i + ".png";
+            builderDownLeft[i-8] = res;
+        }
+        res_map.SPRITE.BUILDER.DOWN_LEFT = builderDownLeft;
+
+        //add to BUILDER.UP_LEFT
+        let builderUpLeft = {};
+        for(let i = 24; i < 32; i++){
+            let res = "res/builder/run/image00" + i + ".png";
+            builderUpLeft[i-24] = res;
+        }
+        res_map.SPRITE.BUILDER.UP_LEFT = builderUpLeft;
+
     },
 
     loadSpriteToRes: function (res_address, prefix, suffix, count) {

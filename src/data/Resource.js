@@ -312,6 +312,25 @@ var res_map = {
         },
         PROGRESS_BAR: "res/guis/upgrade_building_gui/building_time_bar.png",
         PROGRESS_BAR_BG: "res/guis/upgrade_building_gui/building_time_bg.png",
+        FENCE: "res/Map/map_obj_bg/upgrading.png",
+        BUILDER:{
+            LINK: "res/builder/run/image",
+            DOWN:{//res/builder/run/image0000.png
+                 //0000 -> 0007
+            },
+            UP:{
+                //0032 -> 0039
+            },
+            LEFT:{
+                //0016 -> 0023
+            },
+            DOWN_LEFT:{
+                //0008 -> 0015
+            },
+            UP_LEFT:{
+                //0024 -> 0031
+            }
+        }
     },
     JSON:{
         OBSTACLE: "res/configs/Obstacle.json",

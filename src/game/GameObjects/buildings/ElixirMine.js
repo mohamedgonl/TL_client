@@ -31,36 +31,4 @@ var ElixirMine = Mine.extend({
         }
     },
 
-    harvest: function (lastCollectTime,gold,elixir) {
-
-        this._lastCollectTime = lastCollectTime;
-        let oldElixir = PlayerInfoManager.Instance().getResource().elixir;
-        PlayerInfoManager.Instance().setResource({elixir:elixir});
-
-        let changes = elixir - oldElixir;
-
-        //init a TMP label to show changes in pos 0 0 of this building and hide after 1s
-        let label = new cc.LabelBMFont("+" + changes,res.FONT.SOJI[20]);
-        label.setPosition(0,0);
-        //color pink
-        label.setColor(cc.color(255,0,255));
-        this.addChild(label,ZORDER_BUILDING_EFFECT);
-        label.runAction(cc.sequence(cc.moveBy(1,0,50),cc.callFunc(function () {
-                label.removeFromParent(true);
-            }
-        )));
-
-        //sau 5s moi duoc nhan 1 lan
-        this._canHarvest = false;
-        this._iconHarvest.setVisible(false);
-        this._showIconHarvest = false;
-
-        this.loadButton();
-
-        this.scheduleOnce(function () {
-            this._canHarvest = true;
-            this.loadButton();
-        }.bind(this),5);
-    }
-
 });

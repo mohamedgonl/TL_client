@@ -1,13 +1,15 @@
 var Mine = Building.extend({
     _upper: null,
     _lastCollectTime: null,
-    _type: "RES_1",
     _showIconHarvest: false,
     _canHarvest: true,
     _capacity: null,
     _productivity: null,
     ctor: function (level, id, posX, posY, status, startTime, endTime) {
         this._super(level, id, posX, posY, status, startTime, endTime);
+        let capacity = LoadManager.Instance().getConfig(this._type, this._level)
+        this._capacity = capacity.capacity;
+        this._productivity = capacity.productivity;
     },
     onAddIntoMapManager: function () {
         this._super();
@@ -45,6 +47,13 @@ var Mine = Building.extend({
     },
 
     checkShowHarvestIcon: function () {
+
+        if(this._state !== 0)
+        {
+            this._iconHarvest.setVisible(false);
+            return;
+        }
+
         //if can harvest >= 1% of capacity , show icon
         let timeNow = TimeManager.Instance().getCurrentTimeInSecond();
         cc.log("timeNow::::::::::::::::::::::::::: " + timeNow)
@@ -54,7 +63,7 @@ var Mine = Building.extend({
         let harvestAmount = Math.floor(time * this._productivity / 3600);
 
         cc.log("harvestAmount: " + harvestAmount)
-
+        cc.log("this._capacity: " + this._capacity)
         if (harvestAmount >= this._capacity / 100) {
             this._showIconHarvest = true;
             this._iconHarvest.setVisible(true);
@@ -74,6 +83,9 @@ var Mine = Building.extend({
         PlayerInfoManager.Instance().setResource({gold:gold});
         let changesGold = gold - oldGold;
 
+        //log changes
+        cc.log("changesGold: " + changesGold);
+        cc.log("changesElixir: " + changesElixir);
         let color;
         let changes = 0;
         if(changesGold > 0)
