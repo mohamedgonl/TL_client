@@ -26,6 +26,7 @@ var MapLayer = cc.Layer.extend({
         this.addEventListener();
         this.initBackground();
         this.loadBuilding();
+        this.loadBuilder();
     },
     onEnter: function () {
         this._super();
@@ -37,6 +38,18 @@ var MapLayer = cc.Layer.extend({
         for (var i = 0; i < listBuilding.length; i++) {
             var building = listBuilding[i];
             this.addBuildingToLayer(building);
+        }
+    },
+
+    loadBuilder: function () {
+        var listBuilding = MapManager.Instance().getAllBuilding();
+        for (var i = 0; i < listBuilding.length; i++) {
+            var building = listBuilding[i];
+            if(building._state !== 0) {
+                let builder = new Builder("isBuilding",building);
+                builder.setPosition(this.getMapPosFromGridPos(cc.p(building._posX,building._posY),true));
+                this.addChild(builder,MAP_ZORDER_TROOP);
+            }
         }
     },
 
@@ -111,13 +124,8 @@ var MapLayer = cc.Layer.extend({
                     console.log("==================================================================")
                 }
                 if (keyCode === cc.KEY.x) {
-                    let builder = new Builder();
-
-
-
-
-                    this.addChild(builder,9999999);
-
+                    // let townhall = MapManager.Instance().getTownHall();
+                    // MapManager.Instance().callBuilderToBuilding(townhall,"isBuilding");
                 }
                 if (keyCode === cc.KEY.c) {
                 }

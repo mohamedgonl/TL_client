@@ -64,6 +64,8 @@ var MapManager = cc.Node.extend({
             }
         }
         cc.log(JSON.stringify(this.buildingAmount,null,2));
+        const Algorithm = AlgorithmImplement.Instance();
+        Algorithm.setGridMapStar(MapManager.Instance().mapGrid);
     },
     addToListMine: function (building) {
         this.listMine.push(building);
@@ -221,8 +223,12 @@ var MapManager = cc.Node.extend({
         else {
             return this.buildingAmount[type];
         }
+    },
+    callBuilderToBuilding: function (building,state = "init") {
+        let builder = new Builder(state,building);
+        let mapLayer = cc.director.getRunningScene().mapLayer;
+        mapLayer.addChild(builder,MAP_ZORDER_TROOP);
     }
-
 
 });
 

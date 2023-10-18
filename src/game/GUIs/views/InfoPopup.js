@@ -26,7 +26,7 @@ var InfoPopup = cc.Node.extend({
 
         this.building = building;
         cc.log("building: " + building._type)
-        cc.log("building: " + building._productivityGold)
+        cc.log("building: " + building._capacityElixir)
         this.building = cc.director.getRunningScene().getMapLayer().chosenBuilding;
 
         var node = CCSUlties.parseUIFile(res_ui.INFO_POPUP);
@@ -76,9 +76,14 @@ var InfoPopup = cc.Node.extend({
         //text color
         descriptionLabel.setColor(cc.color(204, 102, 0));
         content.addChild(descriptionLabel);
+
+        //invisible 3 progress
+        this.progress1.setVisible(false);
+        this.progress2.setVisible(false);
+        this.progress3.setVisible(false);
+
         //set progress
         let dataInfo = BuildingInfo[this.building._type].dataInfo;
-
         //for in dataInfo
         for (let i = 1; i <= dataInfo.length; i++) {
             let progress = this["progress" + i];
@@ -122,12 +127,12 @@ var InfoPopup = cc.Node.extend({
             case "productionGold":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.GOLD_PD_RATE);
-                text.setString("Sản lượng:" + this.building._productivityGold);
+                text.setString("Sản lượng:" + this.building._productivityGold + "/h");
                 break;
             case "productionElixir":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.ELIXIR_PD_RATE);
-                text.setString("Sản lượng:" + this.building._productivityElixir);
+                text.setString("Sản lượng:" + this.building._productivityElixir + "/h");
                 break;
             case "damage":
                 bar.setPercent(100);
@@ -137,7 +142,9 @@ var InfoPopup = cc.Node.extend({
             case "army":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.ARMY);
-                // text.setString("Quân lính:" + this.building._army);
+                let armyTotal = ArmyManager.Instance().getMaxSpace();
+                let armyCurrent = ArmyManager.Instance().getCurrentSpace();
+                text.setString("Quân lính:" + armyCurrent + "/" + armyTotal);
                 break;
         }
     }

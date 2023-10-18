@@ -35,6 +35,9 @@ var ElixirStorage = Building.extend({
         let amountBefore = LoadManager.Instance().getConfig(this._type,this._level - 1,"capacity")|| 0;
         let amountIncrease = LoadManager.Instance().getConfig(this._type,this._level,"capacity") - amountBefore;
         playerInfoManager.changeMaxResource("elixir",amountIncrease);
+
+        this._capacityElixir = LoadManager.Instance().getConfig(this._type,this._level,"capacity");
+        cc.log("capacity elixir: " + this._capacityElixir);
     }
 
 

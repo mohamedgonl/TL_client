@@ -191,6 +191,7 @@ var Obstacle = GameObject.extend({
         let priceElixir = LoadManager.Instance().getConfig(this._type,this._level,"elixir");
         playerInfoManager.addResource({gold:-priceGold,elixir:-priceElixir});
         playerInfoManager.changeBuilder("current",-1);
+        MapManager.Instance().callBuilderToBuilding(this);
     },
     completeRemove: function () {
         this._state = 0;
@@ -205,7 +206,10 @@ var Obstacle = GameObject.extend({
         //tra ve builder
         let playerInfoManager = PlayerInfoManager.Instance();
         playerInfoManager.changeBuilder("current",1);
+        cc.eventManager.dispatchCustomEvent(EVENT_FINISH_BUILDING, this._id);
 
+        let infoLayer = cc.director.getRunningScene().infoLayer;
+        infoLayer.removeAllButtonInMenu();
     },
     //check to client, if valid then send packet to server
     onClickRemove: function(){
@@ -303,5 +307,8 @@ var Obstacle = GameObject.extend({
     },
     onReceivedQuickFinishOfAnother: function (packet) {
         this.onClickRemove();
+    },
+    getGridPosition: function () {
+        return cc.p(this._posX,this._posY);
     }
 });

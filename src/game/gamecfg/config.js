@@ -45,6 +45,7 @@ const FONT_SIZE_LEVEL_LABEL = 12;
 const EVENT_PLAYER_INFO_CHANGED = "event_player_info_changed";
 const EVENT_SELECT_BUILDING = "event_select_building";
 const EVENT_UNSELECT_BUILDING = "event_unselect_building";
+const EVENT_FINISH_BUILDING = "event_finish_building";
 
 
 

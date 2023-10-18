@@ -252,6 +252,13 @@ var Building = GameObject.extend({
         this._nameLabel.setVisible(true);
         this._levelLabel.setVisible(true);
         cc.eventManager.dispatchCustomEvent(EVENT_SELECT_BUILDING, this._id);
+        // opacity to 80 to 100 to 80 repeat forever
+        var action = cc.sequence(cc.fadeTo(0.8, 150), cc.fadeTo(0.8, 255));
+        this._body.runAction(cc.repeatForever(action));
+        if(this._upper != null)
+        {
+            this._upper.runAction(cc.repeatForever(action.clone()));
+        }
     },
     onUnselected: function(){
         let infoLayer = cc.director.getRunningScene().infoLayer;
@@ -261,6 +268,18 @@ var Building = GameObject.extend({
         this._nameLabel.setVisible(false);
         this._levelLabel.setVisible(false);
         cc.eventManager.dispatchCustomEvent(EVENT_UNSELECT_BUILDING);
+        //stop nhấp nháy
+        this._body.stopAllActions();
+        if(this._upper != null)
+        {
+            this._upper.stopAllActions();
+        }
+        //opacity to 255
+        this._body.setOpacity(255);
+        if(this._upper != null)
+        {
+            this._upper.setOpacity(255);
+        }
     },
 
     setType: function (type) {
@@ -346,6 +365,7 @@ var Building = GameObject.extend({
 
         this.loadButton();
         this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
+        MapManager.Instance().callBuilderToBuilding(this);
     },
     startBuild: function (startTime,endTime) {
 
@@ -376,6 +396,9 @@ var Building = GameObject.extend({
         if(chosenBuilding === this)
                 this.loadButton();
         this.unschedule(this.update);
+
+
+        cc.eventManager.dispatchCustomEvent(EVENT_FINISH_BUILDING, this._id);
     },
     completeBuild: function () {
         this.completeProcess();

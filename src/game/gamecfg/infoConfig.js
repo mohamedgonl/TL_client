@@ -50,7 +50,7 @@ const BuildingInfo = {
     },
     "STO_2":{
         name: "Kho dầu",
-        dataInfo: ["capacityGold","hitpoints"],
+        dataInfo: ["capacityElixir","hitpoints"],
         description: "Cùng với Kho vàng, Kho dầu lưu trữ ky: nguyên quan trọng thứ 2 của vương " +
             "quốc\n" +
             "Hãy nâng cấp Kho dầu liên tục để trữ nhiều hơn những dòng Dầu sóng sánh do " +

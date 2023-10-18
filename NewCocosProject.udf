@@ -28,13 +28,5 @@
         <EnableHTML5Advanced Value="False" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="TroopInfoPopup.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="TroopInfoPopup.csd" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>

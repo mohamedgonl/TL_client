@@ -318,18 +318,30 @@ var res_map = {
             LINK: "res/builder/run/image",
             DOWN:{//res/builder/run/image0000.png
                  //0000 -> 0007
+                1: "res/builder/run/image0000.png",
             },
             UP:{
                 //0032 -> 0039
+                1:"res/builder/run/image0032.png",
             },
             LEFT:{
                 //0016 -> 0023
+                1:"res/builder/run/image0016.png",
             },
             DOWN_LEFT:{
                 //0008 -> 0015
+                1:"res/builder/run/image0008.png",
             },
             UP_LEFT:{
                 //0024 -> 0031
+                1:"res/builder/run/image0024.png",
+            },
+            BUILD:{
+                UP:{
+                    //32 -> 39
+                    //
+                    1:"res/builder/attack01/image0032.png"
+                }
             }
         }
     },

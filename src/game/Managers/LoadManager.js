@@ -191,7 +191,12 @@ var LoadManager = cc.Node.extend({
         //add to BUILDER.DOWN_LEFT
         let builderDownLeft = {};
         for(let i = 8; i < 16; i++){
-            let res = "res/builder/run/image00" + i + ".png";
+            let res;
+            if(i < 10)
+                res = "res/builder/run/image000" + i + ".png";
+            else
+                res = "res/builder/run/image00" + i + ".png";
+
             builderDownLeft[i-8] = res;
         }
         res_map.SPRITE.BUILDER.DOWN_LEFT = builderDownLeft;
@@ -204,6 +209,15 @@ var LoadManager = cc.Node.extend({
         }
         res_map.SPRITE.BUILDER.UP_LEFT = builderUpLeft;
 
+        //add to BUILDER.BUILD.UP
+        // 1:"res/builder/attack01/image0032.png"
+        //32 -> 39
+        let builderBuildUp = {};
+        for(let i = 0; i < 8; i++){
+            let res = "res/builder/attack01/image00" + (32 + i) + ".png";
+            builderBuildUp[i] = res;
+        }
+        res_map.SPRITE.BUILDER.BUILD.UP = builderBuildUp;
     },
 
     loadSpriteToRes: function (res_address, prefix, suffix, count) {

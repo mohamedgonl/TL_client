@@ -145,7 +145,7 @@
             <FileData Type="Normal" Path="guis/research troop/nen 1.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="progress1" ActionTag="978176125" Tag="167" IconVisible="False" LeftMargin="-15.5000" RightMargin="-295.5000" TopMargin="-147.5309" BottomMargin="111.5309" ctype="SpriteObjectData">
+          <AbstractNodeData Name="progress1" Visible="False" ActionTag="978176125" Tag="167" IconVisible="False" LeftMargin="-15.5000" RightMargin="-295.5000" TopMargin="-147.5309" BottomMargin="111.5309" ctype="SpriteObjectData">
             <Size X="311.0000" Y="36.0000" />
             <Children>
               <AbstractNodeData Name="bar_0" ActionTag="-1926773720" Tag="171" IconVisible="False" ProgressInfo="58" ctype="LoadingBarObjectData">
@@ -199,7 +199,7 @@
             <FileData Type="Normal" Path="guis/upgrade_building_gui/info_bar.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="progress2" ActionTag="1247363917" Tag="163" IconVisible="False" LeftMargin="-15.5000" RightMargin="-295.5000" TopMargin="-93.6196" BottomMargin="57.6196" ctype="SpriteObjectData">
+          <AbstractNodeData Name="progress2" Visible="False" ActionTag="1247363917" Tag="163" IconVisible="False" LeftMargin="-15.5000" RightMargin="-295.5000" TopMargin="-93.6196" BottomMargin="57.6196" ctype="SpriteObjectData">
             <Size X="311.0000" Y="36.0000" />
             <Children>
               <AbstractNodeData Name="bar" ActionTag="-2127178493" Tag="164" IconVisible="False" ProgressInfo="100" ctype="LoadingBarObjectData">
@@ -243,7 +243,7 @@
             <FileData Type="Normal" Path="guis/upgrade_building_gui/info_bar.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="progress3" ActionTag="856981804" Tag="159" IconVisible="False" LeftMargin="-15.5000" RightMargin="-295.5000" TopMargin="-45.3174" BottomMargin="9.3174" ctype="SpriteObjectData">
+          <AbstractNodeData Name="progress3" Visible="False" ActionTag="856981804" Tag="159" IconVisible="False" LeftMargin="-15.5000" RightMargin="-295.5000" TopMargin="-45.3174" BottomMargin="9.3174" ctype="SpriteObjectData">
             <Size X="311.0000" Y="36.0000" />
             <Children>
               <AbstractNodeData Name="bar" ActionTag="545986114" Tag="160" IconVisible="False" ProgressInfo="100" ctype="LoadingBarObjectData">

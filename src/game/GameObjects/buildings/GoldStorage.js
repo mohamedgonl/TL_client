@@ -34,6 +34,9 @@ var GoldStorage = Building.extend({
         let amountBefore = LoadManager.Instance().getConfig(this._type,this._level - 1,"capacity")|| 0;
         let amountIncrease = LoadManager.Instance().getConfig(this._type,this._level,"capacity") - amountBefore;
         playerInfoManager.changeMaxResource("gold",amountIncrease);
+
+        let config = LoadManager.Instance().getConfig(this._type,this._level);
+        this._capacityGold = config.capacity;
     }
 
 
