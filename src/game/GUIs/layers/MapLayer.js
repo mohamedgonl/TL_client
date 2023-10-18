@@ -216,6 +216,16 @@ var MapLayer = cc.Layer.extend({
         //price gold, if null -> 0
         let priceGold = LoadManager.Instance().getConfig(this.chosenBuilding._type, 1, "gold") || 0;
         let priceElixir = LoadManager.Instance().getConfig(this.chosenBuilding._type, 1, "elixir") || 0;
+        let priceGem = LoadManager.Instance().getConfig(this.chosenBuilding._type, 1, "coin") || 0;
+        cc.log("priceGold: " + priceGold + " priceElixir: " + priceElixir + " priceGem: " + priceGem);
+        if(priceGem > 0){
+            if(PlayerInfoManager.Instance().getResource("gem") < priceGem)
+            {
+                BasicPopup.appear("THIẾU TÀI NGUYÊN","Bạn không đủ G")
+                return;
+            }
+        }
+
         if (PlayerInfoManager.Instance().checkEnoughResource(priceGold, priceElixir) === false) {
             let price;
             let type;

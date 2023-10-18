@@ -27,7 +27,10 @@ testnetwork.Connector = cc.Class.extend({
 
                 // neu this khong co onReceiveUserInfo thi se goi cua fr.getCurrentScreen()
                 if(fr.getCurrentScreen() == null)
+                {
                     cc.director.getRunningScene().onReceiveUserInfo(packet);
+                    cc.log("onReceiveUserInfo")
+                }
                 else
                 fr.getCurrentScreen().onReceiveUserInfo(packet);
 

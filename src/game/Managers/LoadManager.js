@@ -33,16 +33,18 @@ var LoadManager = cc.Node.extend({
     //get config from json
     // example {type: TOW_1, level: 1, key: posX}
     getConfig: function (type, level=1, key) {
+        if(type == "BDH_1"&&key=="coin")
+        {
+            let bdhCount = MapManager.Instance().buildingAmount["BDH_1"];
+            cc.log("bdhCount:::::::::::::::::::::::::::",bdhCount);
+            return this[type][bdhCount+1][key];
+        }
+
         if(key == null)
             return this[type][level];
-       return this[type][level][key];
+        return this[type][level][key];
 
-       if(type == "BDH_1")
-       {
-           let bdhCount = MapManager.Instance().buildingAmount["BDH_1"];
-           cc.log("bdhCount:::::::::::::::::::::::::::",bdhCount);
-            return this[type][bdhCount+1][key];
-       }
+
     },
 
     loadResource : function () {
