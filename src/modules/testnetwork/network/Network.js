@@ -178,15 +178,15 @@ testnetwork.Connector = cc.Class.extend({
             ArmyManager.Instance();
         }
         else {
-            cc.log("GET TRAINING LIST SUCCESS :::::::::::");
+            cc.log("GET TRAINING LIST SUCCESS ::::::::::: " + JSON.stringify(packet) +" CURRENT TIME :" + TimeManager.Instance().getCurrentTimeInSecond());
             let barracks = ArmyManager.Instance().getBarrackList();
             for (let i = 0; i < barracks.length; i++) {
                 if(barracks[i].getId() === packet.barrackId) {
+                    cc.log("BARRACK ID :: " +packet.barrackId + " TRAIN LIST::: " + JSON.stringify(packet.trainingList))
                     barracks[i].setTrainingList(packet.trainingList);
                     barracks[i].setLastTrainingTime(packet.lastTrainingTime);
                     let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
                     let trainingPopup = popUpLayer.getTrainingPopup();
-                    cc.log("TRAIN : " + trainingPopup._trainPages)
                     trainingPopup.getPage({barackId: packet.barrackId}).initTrainingList();
                     return;
                 }

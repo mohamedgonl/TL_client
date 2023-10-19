@@ -55,6 +55,7 @@ var TrainTroopPage = cc.Node.extend({
             }
             events.push(event);
         });
+        cc.log("EVENTS TROOP _____________________________________________________ \n" +JSON.stringify(events));
         this.onCanCreateTrain(events);
     },
 
@@ -201,8 +202,6 @@ var TrainTroopPage = cc.Node.extend({
 
         let timeLeft = this._curBarrack.getLastTrainingTime() + curTroopTrainTime - TimeManager.Instance().getCurrentTimeInSecond();
         timeString.setString(timeLeft + "s");
-        cc.log("UPDATE CURRENT TIME ::: " + timeLeft)
-        cc.log("LAST TRAIN ::: " + this._curBarrack.getLastTrainingTime() + " CURRENT :: " + TimeManager.Instance().getCurrentTimeInSecond())
         this._timeLeft = timeLeft;
 
         let processBarPercent = (TimeManager.Instance().getCurrentTimeInSecond() - this._curBarrack.getLastTrainingTime()) / curTroopTrainTime * 100;
@@ -239,8 +238,9 @@ var TrainTroopPage = cc.Node.extend({
     },
 
     createNewItemInTrainingList:function (event) {
-
+        cc.log("CREATE NEW ITEM " + JSON.stringify(event))
         let waitingTroop = new TroopTrainingItem(event.data.cfgId, this._curPage);
+        waitingTroop.setCount(event.data.count);
         if (this._trainingItems.length === 0) {
             if (!event.data.isInit) this._curBarrack.setLastTrainingTime(event.data.lastTrainingTime);
             this._trainContainer.setVisible(true);
@@ -291,13 +291,13 @@ var TrainTroopPage = cc.Node.extend({
                 this.createNewItemInTrainingList(event)
             } else {
                 let itemTraining = this._trainingItems.find(e => e.getCfgId() === event.data.cfgId);
-                itemTraining.increaseCount(1);
+                itemTraining.increaseCount(count);
             }
 
             let itemTroop = this._troopListItem.find(e => e._troopCfgId === event.data.cfgId);
-            itemTroop.increaseCount(1);
+            itemTroop.increaseCount(count);
 
-            this._totalTime = this._totalTime + TroopUltis.getTrainingTime(troopCfgId);
+            this._totalTime = this._totalTime + TroopUltis.getTrainingTime(troopCfgId) * count;
 
             this.updateTotalTimeString();
             this.updateTrainingPopupTitle();

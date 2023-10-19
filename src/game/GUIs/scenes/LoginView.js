@@ -94,12 +94,6 @@ var LoginView = cc.Scene.extend({
         cc.log("NHAN THONG TIN VE LINH : "+JSON.stringify(armyInfo.listTroops))
         ArmyManager.Instance().setArmyAmount(armyInfo.listTroops);
         this.loadingBar.setPercent(this.loadingBar.getPercent() + 20);
-        testnetwork.connector.sendGetTimeServer();
-    },
-
-    onReceiveTimeServer: function (time) {
-        TimeManager.Instance().setDeltaTimeClientServer(time);
-        this.loadingBar.setPercent(this.loadingBar.getPercent() + 10);
         testnetwork.connector.sendGetMapInfo();
     },
 
@@ -107,6 +101,10 @@ var LoginView = cc.Scene.extend({
         MapManager.Instance().loadFromServer(mapInfo.listBuildings);
         this.loadingBar.setPercent(100);
         testnetwork.connector.sendGetTimeServer();
+        this.onReceiveAllData();
+    },
+    onReceiveTimeServer: function (time) {
+        TimeManager.Instance().setDeltaTimeClientServer(time);
         this.onReceiveAllData();
     },
 

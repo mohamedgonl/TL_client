@@ -38,6 +38,7 @@ var TroopListItem = cc.Node.extend({
         });
 
         cc.eventManager.addCustomListener(EVENT_NAMES.RESOURCE_CHANGED, (e) => {
+            cc.log("RESOURCE UPDATED :::: ")
             this.recheck();
         })
 
