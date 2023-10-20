@@ -1,18 +1,18 @@
 
-var MapManager = cc.Node.extend({
-    instance: null,
-    listBuildings: new Map(),
-    townHall: null,
-    listStorage: [],
-    listMine:[],
-    listBuilderHut: [],
-    buildingAmount : {},
-    //mapGrid is [][]
-    mapGrid: [],
-    gameScene : null,
+var MapManager = cc.Class.extend({
+
     ctor: function () {
 
-        this._super();
+
+        this.listBuildings = new Map();
+        this.listStorage = [];
+        this.listMine = [];
+        this.listBuilderHut = [];
+        this.buildingAmount = {};
+        this.mapGrid = [];
+        this.gameScene = null;
+        this.townHall = null;
+
 
         //init map grid
         for(var i = 0; i < 40; i++){
@@ -23,13 +23,8 @@ var MapManager = cc.Node.extend({
 
     },
 
-
-
-    //load from server
-    //chua lam status
+    //load from server to addBuildingToGameManager
     loadFromServer: function (buildings){
-        cc.log("load from server");
-        cc.log(JSON.stringify(buildings,null,2));
         for(let index in buildings){
 
             let construct = buildings[index];
@@ -63,7 +58,7 @@ var MapManager = cc.Node.extend({
 
             }
         }
-        cc.log(JSON.stringify(this.buildingAmount,null,2));
+
         const Algorithm = AlgorithmImplement.Instance();
         Algorithm.setGridMapStar(MapManager.Instance().mapGrid);
     },
@@ -90,7 +85,7 @@ var MapManager = cc.Node.extend({
         for(let column = posX; column < posX + width; column++)
             for(let row = posY; row < posY + height; row++)
                 this.mapGrid[column][row] = id;
-        cc.log("ADD NEW BUILDING : : " + JSON.stringify(building))
+
         building.onAddIntoMapManager();
 
         // add to list building {building._id: building}
@@ -99,7 +94,7 @@ var MapManager = cc.Node.extend({
 
         //update list storage, list mine, list builder hut
 
-        cc.log("ADD NEW BUILDING" + JSON.stringify(building))
+
         switch (typeBuilding.substring(0,3)){
             case 'TOW':
 
@@ -173,6 +168,11 @@ var MapManager = cc.Node.extend({
         return this.listBuilderHut;
     },
 
+    //listStorage included townhall, gold storage, elixir storage
+    getListStorage: function () {
+        return this.listStorage;
+    },
+
     checkValidPutBuilding: function (building, newPosX, newPosY) {
         var id = building._id;
         var width = building._width;
@@ -236,7 +236,6 @@ var MapManager = cc.Node.extend({
 MapManager.Instance = function () {
     if (MapManager.instance == null) {
         MapManager.instance = new MapManager();
-        MapManager.instance.retain();
     }
     return MapManager.instance;
 }

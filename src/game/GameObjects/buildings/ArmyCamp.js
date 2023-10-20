@@ -1,6 +1,4 @@
 var ArmyCamp = Building.extend({
-    _width: null,
-    _height: null,
     _type: "AMC_1",
     ctor: function (level,id, posX, posY,status,startTime,endTime) {
         this._super(level,id, posX, posY,status,startTime,endTime);

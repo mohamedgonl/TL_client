@@ -215,7 +215,7 @@ testnetwork.Connector = cc.Class.extend({
             }
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
-            PlayerInfoManager.Instance().addResource({elixir: packet.additionElixir});
+            PlayerInfoManager.Instance().changeResource({elixir: packet.additionElixir});
             trainingPopup.getPage({barackId: packet.barrackId}).onCancelTrainTroopSuccess(event);
 
         }

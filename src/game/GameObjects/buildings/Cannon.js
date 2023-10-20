@@ -1,5 +1,4 @@
 var Cannon = Building.extend({
-    _upper: null,
     _type: "DEF_1",
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);

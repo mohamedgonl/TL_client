@@ -26,7 +26,7 @@ var MapLayer = cc.Layer.extend({
         this.addEventListener();
         this.initBackground();
         this.loadBuilding();
-        this.loadBuilder();
+        this.loadState();
     },
     onEnter: function () {
         this._super();
@@ -41,7 +41,8 @@ var MapLayer = cc.Layer.extend({
         }
     },
 
-    loadBuilder: function () {
+    //load builder, load sprite of storage
+    loadState: function () {
         var listBuilding = MapManager.Instance().getAllBuilding();
         for (var i = 0; i < listBuilding.length; i++) {
             var building = listBuilding[i];
@@ -51,6 +52,9 @@ var MapLayer = cc.Layer.extend({
                 this.addChild(builder,MAP_ZORDER_TROOP);
             }
         }
+
+        GameUtilities.updateCurrentCapacityAllBuilding();
+
     },
 
     //add building to layer with gridPos of it
@@ -536,10 +540,10 @@ var MapLayer = cc.Layer.extend({
     getGridPosFromMapPos: function (posInMap) {
         // posInMap = cc.pSub(posInMap,cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
         //calculate distance by distance formula from point to line
-        var distanceFromBottomLeft = findDistanceFromPointToLine(posInMap, CORNER_BOTTOM, CORNER_LEFT);
-        var distanceFromBottomRight = findDistanceFromPointToLine(posInMap, CORNER_RIGHT, CORNER_BOTTOM);
+        var distanceFromBottomLeft = Utils.findDistanceFromPointToLine(posInMap, CORNER_BOTTOM, CORNER_LEFT);
+        var distanceFromBottomRight = Utils.findDistanceFromPointToLine(posInMap, CORNER_RIGHT, CORNER_BOTTOM);
 
-        var grid_width = findDistanceFromPointToLine(CORNER_BOTTOM, CORNER_TOP, CORNER_RIGHT);
+        var grid_width = Utils.findDistanceFromPointToLine(CORNER_BOTTOM, CORNER_TOP, CORNER_RIGHT);
 
         var gridX = Math.floor(distanceFromBottomLeft / grid_width * GRID_SIZE);
         var gridY = Math.floor(distanceFromBottomRight / grid_width * GRID_SIZE);
@@ -702,9 +706,9 @@ var MapLayer = cc.Layer.extend({
         this.chosenBuilding = getBuildingFromType(buildingType, 1)
 
         //add button accept and cancel to building
-        var buttonAccept = createButton(res.BUTTON.ACCEPT, SCALE_BUTTON_BUY_BUILDING, OFFSET_BUTTON_BUY_BUILDING, this.acceptBuyBuilding, this);
+        var buttonAccept = Utils.createButton(res.BUTTON.ACCEPT, SCALE_BUTTON_BUY_BUILDING, OFFSET_BUTTON_BUY_BUILDING, this.acceptBuyBuilding, this);
         this.chosenBuilding.addChild(buttonAccept, MAP_ZORDER_GUI);
-        var buttonCancel = createButton(res.BUTTON.CANCEL, SCALE_BUTTON_BUY_BUILDING, cc.p(-OFFSET_BUTTON_BUY_BUILDING.x, OFFSET_BUTTON_BUY_BUILDING.y), this.exitModeBuyBuilding, this);
+        var buttonCancel = Utils.createButton(res.BUTTON.CANCEL, SCALE_BUTTON_BUY_BUILDING, cc.p(-OFFSET_BUTTON_BUY_BUILDING.x, OFFSET_BUTTON_BUY_BUILDING.y), this.exitModeBuyBuilding, this);
         this.chosenBuilding.addChild(buttonCancel, MAP_ZORDER_GUI);
 
 

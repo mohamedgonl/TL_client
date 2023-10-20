@@ -1,8 +1,5 @@
-var GoldMine = Mine.extend({
-    _upper: null,
-    _lastCollectTime: null,
+var GoldMine = BaseMine.extend({
     _type: "RES_1",
-    _showIconHarvest: false,
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
         let capacity = LoadManager.Instance().getConfig(this._type, this._level)
@@ -38,6 +35,21 @@ var GoldMine = Mine.extend({
         let capacity = LoadManager.Instance().getConfig(this._type, this._level)
         this._capacityGold = capacity.capacity;
         this._productivityGold = capacity.productivity;
+    },
+    getCurrentAmount: function () {
+        //calculate current amount by lastCollectTime
+        let timeNow = TimeManager.Instance().getCurrentTimeInSecond();
+        let duration = timeNow - this._lastCollectTime;
+        let productivity = LoadManager.Instance().getConfig(this._type, this._level, "productivity");
+        let harvestAmount = Math.floor(duration * productivity / 3600);
+
+        let capacity = LoadManager.Instance().getConfig(this._type, this._level, "capacity");
+
+        let currentAmount = Math.min(harvestAmount, capacity);
+        return {
+            gold: currentAmount,
+            elixir: 0
+        }
     },
 
 

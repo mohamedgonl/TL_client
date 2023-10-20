@@ -1,7 +1,5 @@
 var Wall = Building.extend({
-    _upper: null,
     _type: "WAL_1",
-
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
         //schedule load sprite

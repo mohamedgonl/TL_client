@@ -1,5 +1,4 @@
 var Builder = cc.Sprite.extend({
-
     ctor: function(state, target)
     {
         this._super();

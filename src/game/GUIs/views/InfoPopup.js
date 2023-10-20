@@ -110,14 +110,18 @@ var InfoPopup = cc.Node.extend({
         switch (typeRes)
         {
             case "capacityGold":
-                bar.setPercent(100);
                 icon.setTexture(res.ICON.GOLD_CAPACITY);
-                text.setString("Sức chứa:" + this.building._capacityGold);
+                let current = this.building.getCurrentAmount().gold;
+                let capacity = this.building._capacityGold;
+                text.setString("Sức chứa:" + Utils.numberToText(current) + "/" + Utils.numberToText(capacity));
+                bar.setPercent(current/capacity*100)
                 break;
             case "capacityElixir":
-                bar.setPercent(100);
                 icon.setTexture(res.ICON.ELIXIR_CAPACITY);
-                text.setString("Sức chứa:" + this.building._capacityElixir);
+                let currentElixir = this.building.getCurrentAmount().elixir;
+                let capacityElixir = this.building._capacityElixir;
+                text.setString("Sức chứa:" + Utils.numberToText(currentElixir) + "/" + Utils.numberToText(capacityElixir));
+                bar.setPercent(currentElixir/capacityElixir*100)
                 break;
             case "hitpoints":
                 bar.setPercent(100);

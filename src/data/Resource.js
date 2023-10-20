@@ -141,7 +141,9 @@ var res_ui = {
     BASIC_POPUP:"BasicPopup.json",
     BUTTON_OF_BUILDING: "ButtonOfBuilding.json",
     ICON_HARVEST: "IconHarvest.json",
-    TROOP_INFO: "TroopInfoPopup.json"
+    TROOP_INFO: "TroopInfoPopup.json",
+    CLOUD_1:"res/guis/map/cloud_1.png",
+    CLOUD_2:"res/guis/map/cloud_2.png",
 }
 
 var res_shop = {

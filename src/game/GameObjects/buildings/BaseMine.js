@@ -1,12 +1,14 @@
-var Mine = Building.extend({
-    _upper: null,
-    _lastCollectTime: null,
-    _showIconHarvest: false,
-    _canHarvest: true,
-    _capacity: null,
+const OFFSET_HARVEST = 1;
+var BaseMine = Building.extend({
     ctor: function (level, id, posX, posY, status, startTime, endTime) {
         this._super(level, id, posX, posY, status, startTime, endTime);
-
+        this._lastCollectTime = null;
+        this._showIconHarvest = false;
+        this._canHarvest = true;
+        this._capacityGold = 0;
+        this._capacityElixir = 0;
+        this._currentGold = 0;
+        this._currentElixir = 0;
     },
     onAddIntoMapManager: function () {
         this._super();
@@ -34,7 +36,6 @@ var Mine = Building.extend({
     onClickHarvest: function () {
         testnetwork.connector.sendHarvest(this._id);
     },
-
 
 
     checkShowHarvestIcon: function () {
@@ -78,7 +79,7 @@ var Mine = Building.extend({
         
         let color;
         let changes = 0;
-        if(this._type == "RES_1")
+        if(this._type === "RES_1")
         {
             color = cc.color(255,255,0);
             changes = changesGold;
@@ -97,6 +98,14 @@ var Mine = Building.extend({
                 label.removeFromParent(true);
             }
         )));
+
+        //if storage is full, harvest a part. If timeNow - lastCollectTime > offsetTime, harvest a part
+        let timeNow = TimeManager.Instance().getCurrentTimeInSecond();
+        if(timeNow - this._lastCollectTime > OFFSET_HARVEST)
+        {
+
+        }
+
 
         //sau 5s moi duoc nhan 1 lan
         this._canHarvest = false;

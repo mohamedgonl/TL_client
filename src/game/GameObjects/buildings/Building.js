@@ -4,19 +4,11 @@
 //  posX: position x of building
 //  posY: position y of building
 var Building = GameObject.extend({
-    _hitpoints: null,
-    _level: null,
-    _state:null,
-    _yesButton: null,
-    _noButton: null,
-    _width: null,
-    _height: null,
-    _arrow_move: null,
-
     //  example: building = new Townhall(type, level,id, posX, posY);
     ctor: function (level =1 ,id,posX,posY,status,startTime,endTime) {
 
         this._super();
+
         this._level = level;
         this._posX = posX;
         this._posY = posY;
@@ -240,8 +232,8 @@ var Building = GameObject.extend({
         }
         if(this._state !==0) {
             infoLayer.addButtonToMenu("Hủy",res.BUTTON.CANCEL_BUTTON,0,this.onClickStop.bind(this));
-            //priceGem = 1 gem per 15m, floor upper, count from now to end time
-            let priceGem = Math.ceil((this._endTime - TimeManager.Instance().getCurrentTimeInSecond())/900);
+            //priceGem = 1 gem per 4m, floor upper, count from now to end time
+            let priceGem = Math.ceil((this._endTime - TimeManager.Instance().getCurrentTimeInSecond())/240);
             infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this),priceGem,"gem");
         }
     },
@@ -324,7 +316,7 @@ var Building = GameObject.extend({
         this._progressBar.setPercent(percent);
         //set time label = end time - current time in 1d2h3m40s format, if 0d -> 2h3m40s, if 0d0h -> 3m40s
         let time = this._endTime - currentTime;
-        this._timeLabel.setString(getTimeString(time));
+        this._timeLabel.setString(Utils.getTimeString(time));
 
         //send to server tp check
         if(currentTime >= this._endTime){
@@ -357,7 +349,7 @@ var Building = GameObject.extend({
             priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
             priceGem = LoadManager.Instance().getConfig(this._type, this._level+1, "coin") || 0;
         }
-        PlayerInfoManager.Instance().addResource({gold:-priceGold,elixir:-priceElixir,gem:-priceGem})
+        PlayerInfoManager.Instance().changeResource({gold:-priceGold,elixir:-priceElixir,gem:-priceGem})
         //enable progress bar
         this._progressBar.setVisible(true);
         //show fence
@@ -392,12 +384,9 @@ var Building = GameObject.extend({
         PlayerInfoManager.Instance().changeBuilder("current", 1);
         //unschedule update
         let chosenBuilding = cc.director.getRunningScene().getMapLayer().getChosenBuilding();
-
         if(chosenBuilding === this)
                 this.loadButton();
         this.unschedule(this.update);
-
-
         cc.eventManager.dispatchCustomEvent(EVENT_FINISH_BUILDING, this._id);
     },
     completeBuild: function () {
@@ -423,8 +412,8 @@ var Building = GameObject.extend({
 
         let returnGold = Math.floor(priceGold/2);
         let returnElixir = Math.floor(priceElixir/2);
-        PlayerInfoManager.Instance().changeResource("gold", returnGold);
-        PlayerInfoManager.Instance().changeResource("elixir", returnElixir);
+        // PlayerInfoManager.Instance().changeResource("gold", returnGold);
+        PlayerInfoManager.Instance().changeResource({gold: returnGold, elixir: returnElixir})
         PlayerInfoManager.Instance().changeBuilder("current", 1);
         //return state
         this._state = 0;
@@ -560,12 +549,10 @@ var Building = GameObject.extend({
         let returnElixir = Math.floor(priceElixir/2);
         let maxResource = PlayerInfoManager.Instance().getMaxResource();
 
-        if(PlayerInfoManager.Instance().getResource().gold + returnGold > maxResource.gold){
-            cc.log("kho đã đầy, không thể hủy");
-            return
-        }
-        if(PlayerInfoManager.Instance().getResource().elixir + returnElixir > maxResource.elixir){
-            cc.log("kho đã đầy, không thể hủy");
+        if(PlayerInfoManager.Instance().getResource().gold + returnGold > maxResource.gold ||
+            PlayerInfoManager.Instance().getResource().elixir + returnElixir > maxResource.elixir)
+        {
+            BasicPopup.appear("HỦY XÂY NHÀ", "Kho đã đầy, không thể hủy")
             return
         }
 

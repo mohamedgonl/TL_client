@@ -1,12 +1,5 @@
 var Obstacle = GameObject.extend({
-    _type: null,
-    _posX: null,
-    _posY: null,
-    _width: null,
-    _height: null,
-    _arrowMove: null,
-    _buttons: {},
-    _level : 1,
+
     //status = 0: normal, 1: removing
    ctor: function(type,id,posX,posY,status=0,startTime,endTime){
        this._super();
@@ -17,7 +10,8 @@ var Obstacle = GameObject.extend({
        this._state = status;
        this._startTime = startTime;
        this._endTime = endTime;
-       //log all
+       this._level = 1;
+
        this.init();
 
    },
@@ -32,6 +26,7 @@ var Obstacle = GameObject.extend({
         this.loadMainSprite();
         this.loadSubSprite();
         this.initState();
+
         //schedule update 1s 1 time
         this.update()
         this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0)
@@ -121,8 +116,8 @@ var Obstacle = GameObject.extend({
         }
         else
         {
-            //priceGem = 1 gem per 15m, floor upper, count from now to end time
-            let priceGem = Math.ceil((this._endTime - TimeManager.Instance().getCurrentTimeInSecond())/900);
+            //priceGem = 1 gem per 4m, floor upper, count from now to end time
+            let priceGem = Math.ceil((this._endTime - TimeManager.Instance().getCurrentTimeInSecond())/240);
             infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this),priceGem,"gem");
         }
 
@@ -162,7 +157,7 @@ var Obstacle = GameObject.extend({
 
         //update time left
         let time = this._endTime - currentTime;
-        this._timeLabel.setString(getTimeString(time));
+        this._timeLabel.setString(Utils.getTimeString(time));
         if(currentTime >= this._endTime){
             //send to server to check
             testnetwork.connector.sendRemoveObstacleSuccess(this._id);
@@ -189,7 +184,7 @@ var Obstacle = GameObject.extend({
         let playerInfoManager = PlayerInfoManager.Instance();
         let priceGold = LoadManager.Instance().getConfig(this._type,this._level,"gold");
         let priceElixir = LoadManager.Instance().getConfig(this._type,this._level,"elixir");
-        playerInfoManager.addResource({gold:-priceGold,elixir:-priceElixir});
+        playerInfoManager.changeResource({gold:-priceGold,elixir:-priceElixir});
         playerInfoManager.changeBuilder("current",-1);
         MapManager.Instance().callBuilderToBuilding(this);
     },
