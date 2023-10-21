@@ -186,6 +186,7 @@ testnetwork.Connector = cc.Class.extend({
         else {
             cc.log("GET TRAINING LIST SUCCESS ::::::::::: " + JSON.stringify(packet) +" CURRENT TIME :" + TimeManager.Instance().getCurrentTimeInSecond());
             let barracks = ArmyManager.Instance().getBarrackList();
+            ArmyManager.Instance().updateArmyAmount(packet.doneList, this._curPage)
             for (let i = 0; i < barracks.length; i++) {
                 if(barracks[i].getId() === packet.barrackId) {
                     cc.log("BARRACK ID :: " +packet.barrackId + " TRAIN LIST::: " + JSON.stringify(packet.trainingList))

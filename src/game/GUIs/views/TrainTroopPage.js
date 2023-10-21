@@ -57,10 +57,10 @@ var TrainTroopPage = cc.Node.extend({
             events.push(event);
         });
         cc.log("EVENTS TROOP _____________________________________________________ \n" + JSON.stringify(events));
-        // if (events.length > 0) {
-        //     this.updateCurrentTroopTimeInfo(true, events[0].data.cfgId)
-        // }
-        // this.onCanCreateTrain(events);
+        if (events.length > 0) {
+            this.updateCurrentTroopTimeInfo(true, events[0].data.cfgId)
+        }
+        this.onCanCreateTrain(events);
     },
 
     updateUI: function (time, doNow = false) {

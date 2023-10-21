@@ -69,6 +69,7 @@ var TroopListItem = cc.Node.extend({
         } else {
             this._nodeButton.setOpacity(255);
         }
+        cc.log(this._troopCfgId + " " + PlayerInfoManager.Instance().getResource("elixir")+ " " + price)
         if (PlayerInfoManager.Instance().getResource("elixir") < price) {
             this._available = false;
             let costContainer = this._node.getChildByName("cost_container");
@@ -87,7 +88,7 @@ var TroopListItem = cc.Node.extend({
                 let barRequired = this._node.getChildByName("bar_required");
                 barRequired.setVisible(false);
                 costContainer.setVisible(true);
-                this.label.removeFromParent(true);
+                this.label.setVisible(false);
             }
             let costString = costContainer.getChildByName("cost");
             costString.setString(this._cost);

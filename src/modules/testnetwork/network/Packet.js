@@ -549,6 +549,18 @@ testnetwork.packetMap[gv.CMD.GET_TRAINING_LIST] = fr.InPacket.extend(
                 item.count = this.getInt();
                 _trainingList.push(item);
             }
+            let _doneList = []
+            let doneListSize = this.getInt();
+            cc.log("DONE LIST SIZE ::: ", doneListSize)
+            for (let i = 0; i < doneListSize; i++) {
+                let item = {};
+                item.cfgId = this.getString();
+                item.count = this.getInt();
+                _doneList.push(item);
+            }
+            this.doneList = _doneList;
+
+            cc.log("NHẬN DONE ::::::::::::::::::::::::" + JSON.stringify(_doneList));
             cc.log("NHẬN QUEUE ::::::::::::::::::::::::" + JSON.stringify(_trainingList));
             this.trainingList = _trainingList;
 
