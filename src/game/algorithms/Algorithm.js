@@ -4,7 +4,7 @@ var AlgorithmImplement = cc.Class.extend({
     _results: {},
     _amcSize: 5,
     ctor: function () {
-
+        this
     },
 
     getGridMapStar : function () {

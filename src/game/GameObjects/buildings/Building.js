@@ -4,19 +4,11 @@
 //  posX: position x of building
 //  posY: position y of building
 var Building = GameObject.extend({
-    _hitpoints: null,
-    _level: null,
-    _state:null,
-    _yesButton: null,
-    _noButton: null,
-    _width: null,
-    _height: null,
-    _arrow_move: null,
-
     //  example: building = new Townhall(type, level,id, posX, posY);
     ctor: function (level =1 ,id,posX,posY,status,startTime,endTime) {
 
         this._super();
+
         this._level = level;
         this._posX = posX;
         this._posY = posY;
@@ -45,7 +37,11 @@ var Building = GameObject.extend({
         this.loadSpriteByLevel(level);
 
         this.loadSubSprite();
-        //this.initState();
+
+        // this._grass.setGlobalZOrder(10);
+        // this._shadow.setGlobalZOrder(20);
+        // this._body.setGlobalZOrder(30);
+        // this._upper.setGlobalZOrder(40);
     },
 
     //load sprite with size,
@@ -175,6 +171,30 @@ var Building = GameObject.extend({
             this._progressBar.getBoundingBox().height + 10);
 
         this._progressBar.addChild(this._timeLabel,ZORDER_BUILDING_EFFECT);
+
+        //effect fence when build upgrade
+        this._fence = new cc.Sprite(res_map.SPRITE.FENCE);
+        this._fence.setAnchorPoint(0.5,0);
+        this.addChild(this._fence,ZORDER_BUILDING_EFFECT);
+        //set pos below 0 0 of building = height grass/2 + offset
+        this._fence.setPosition(0,-this._grass.getBoundingBox().height/2 +5);
+        this._fence.setVisible(false);
+
+
+        // this._arrow_move.setGlobalZOrder(45);
+        // this._green_square.setGlobalZOrder(15);
+        // this._red_square.setGlobalZOrder(15);
+        // this._nameLabel.setGlobalZOrder(47);
+        // this._levelLabel.setGlobalZOrder(47);
+        // this._progressBar.setGlobalZOrder(48);
+        // this._timeLabel.setGlobalZOrder(49);
+        // this._fence.setGlobalZOrder(42);
+        //
+        //
+        // this._grass.setGlobalZOrder(10);
+        // this._shadow.setGlobalZOrder(20);
+        // this._body.setGlobalZOrder(30);
+        // this._upper.setGlobalZOrder(40);
     },
     initState: function () {
 
@@ -212,8 +232,8 @@ var Building = GameObject.extend({
         }
         if(this._state !==0) {
             infoLayer.addButtonToMenu("Hủy",res.BUTTON.CANCEL_BUTTON,0,this.onClickStop.bind(this));
-            //priceGem = 1 gem per 15m, floor upper, count from now to end time
-            let priceGem = Math.ceil((this._endTime - TimeManager.Instance().getCurrentTimeInSecond())/900);
+            //priceGem = 1 gem per 4m, floor upper, count from now to end time
+            let priceGem = Math.ceil((this._endTime - TimeManager.Instance().getCurrentTimeInSecond())/240);
             infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this),priceGem,"gem");
         }
     },
@@ -224,6 +244,13 @@ var Building = GameObject.extend({
         this._nameLabel.setVisible(true);
         this._levelLabel.setVisible(true);
         cc.eventManager.dispatchCustomEvent(EVENT_SELECT_BUILDING, this._id);
+        // opacity to 80 to 100 to 80 repeat forever
+        var action = cc.sequence(cc.fadeTo(0.8, 150), cc.fadeTo(0.8, 255));
+        this._body.runAction(cc.repeatForever(action));
+        if(this._upper != null)
+        {
+            this._upper.runAction(cc.repeatForever(action.clone()));
+        }
     },
     onUnselected: function(){
         let infoLayer = cc.director.getRunningScene().infoLayer;
@@ -233,6 +260,18 @@ var Building = GameObject.extend({
         this._nameLabel.setVisible(false);
         this._levelLabel.setVisible(false);
         cc.eventManager.dispatchCustomEvent(EVENT_UNSELECT_BUILDING);
+        //stop nhấp nháy
+        this._body.stopAllActions();
+        if(this._upper != null)
+        {
+            this._upper.stopAllActions();
+        }
+        //opacity to 255
+        this._body.setOpacity(255);
+        if(this._upper != null)
+        {
+            this._upper.setOpacity(255);
+        }
     },
 
     setType: function (type) {
@@ -277,7 +316,7 @@ var Building = GameObject.extend({
         this._progressBar.setPercent(percent);
         //set time label = end time - current time in 1d2h3m40s format, if 0d -> 2h3m40s, if 0d0h -> 3m40s
         let time = this._endTime - currentTime;
-        this._timeLabel.setString(getTimeString(time));
+        this._timeLabel.setString(Utils.getTimeString(time));
 
         //send to server tp check
         if(currentTime >= this._endTime){
@@ -310,12 +349,15 @@ var Building = GameObject.extend({
             priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
             priceGem = LoadManager.Instance().getConfig(this._type, this._level+1, "coin") || 0;
         }
-        PlayerInfoManager.Instance().addResource({gold:-priceGold,elixir:-priceElixir,gem:-priceGem})
+        PlayerInfoManager.Instance().changeResource({gold:-priceGold,elixir:-priceElixir,gem:-priceGem})
         //enable progress bar
         this._progressBar.setVisible(true);
+        //show fence
+        this._fence.setVisible(true);
 
         this.loadButton();
         this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
+        MapManager.Instance().callBuilderToBuilding(this);
     },
     startBuild: function (startTime,endTime) {
 
@@ -338,13 +380,14 @@ var Building = GameObject.extend({
         this._startTime = null;
         this._endTime = null;
         this._progressBar.setVisible(false);
+        this._fence.setVisible(false);
         PlayerInfoManager.Instance().changeBuilder("current", 1);
         //unschedule update
         let chosenBuilding = cc.director.getRunningScene().getMapLayer().getChosenBuilding();
-
         if(chosenBuilding === this)
                 this.loadButton();
         this.unschedule(this.update);
+        cc.eventManager.dispatchCustomEvent(EVENT_FINISH_BUILDING, this._id);
     },
     completeBuild: function () {
         this.completeProcess();
@@ -369,8 +412,8 @@ var Building = GameObject.extend({
 
         let returnGold = Math.floor(priceGold/2);
         let returnElixir = Math.floor(priceElixir/2);
-        PlayerInfoManager.Instance().changeResource("gold", returnGold);
-        PlayerInfoManager.Instance().changeResource("elixir", returnElixir);
+        // PlayerInfoManager.Instance().changeResource("gold", returnGold);
+        PlayerInfoManager.Instance().changeResource({gold: returnGold, elixir: returnElixir})
         PlayerInfoManager.Instance().changeBuilder("current", 1);
         //return state
         this._state = 0;
@@ -418,6 +461,7 @@ var Building = GameObject.extend({
             case 1:
             case 2:
                 this._progressBar.setVisible(true);
+                this._fence.setVisible(true);
                 // -1 builder
                 PlayerInfoManager.Instance().changeBuilder("current", -1);
                 this.update();
@@ -505,12 +549,10 @@ var Building = GameObject.extend({
         let returnElixir = Math.floor(priceElixir/2);
         let maxResource = PlayerInfoManager.Instance().getMaxResource();
 
-        if(PlayerInfoManager.Instance().getResource().gold + returnGold > maxResource.gold){
-            cc.log("kho đã đầy, không thể hủy");
-            return
-        }
-        if(PlayerInfoManager.Instance().getResource().elixir + returnElixir > maxResource.elixir){
-            cc.log("kho đã đầy, không thể hủy");
+        if(PlayerInfoManager.Instance().getResource().gold + returnGold > maxResource.gold ||
+            PlayerInfoManager.Instance().getResource().elixir + returnElixir > maxResource.elixir)
+        {
+            BasicPopup.appear("HỦY XÂY NHÀ", "Kho đã đầy, không thể hủy")
             return
         }
 

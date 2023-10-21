@@ -1,44 +1,38 @@
-var GoldStorage = Building.extend({
-    _upper: null,
+var GoldStorage = BaseStorage.extend({
     _type: "STO_1",
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
-        let config = LoadManager.Instance().getConfig(this._type,this._level);
-        this._currentGold = 0;
-        this._capacityGold = config.capacity;
-
     },
-    loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.GOLD_STORAGE[level][0],null,1);
+    //load sprite by level , type = 0, 1 , 2, 3 (0->25%,26->50%,51->75%,76->100%)
+    loadSpriteByLevel: function (level,type =0) {
+        this.loadSprite(res_map.SPRITE.BODY.GOLD_STORAGE[level][type],null,1);
     },
-    onAddIntoMapManager: function () {
-        this._super();
-        let mapManager = MapManager.Instance();
-        let playerInfoManager = PlayerInfoManager.Instance();
 
-        mapManager.addToListStorage(this);
-        switch (this._state){
-            case 0:
-            case 2:
-                let capacity = LoadManager.Instance().getConfig(this._type,this._level,"capacity");
-                playerInfoManager.changeMaxResource("gold",capacity);
-                break;
-            case 1:
-                break;
+    //update current amount and change sprite
+    setCurrentAmount: function(value){
+        this._currentGold = value;
+        this.updateSprite();
+    },
+    setCapacity: function (value) {
+        this._capacityGold = value;
+        this.updateSprite();
+    },
+    updateSprite: function () {
+
+        let type;
+        let percent = this._currentGold / this._capacityGold;
+        if(percent <= 0.25){
+            type = 0;
         }
-    },
-    completeProcess: function () {
-        this._super();
-        let playerInfoManager = PlayerInfoManager.Instance();
-
-        let amountBefore = LoadManager.Instance().getConfig(this._type,this._level - 1,"capacity")|| 0;
-        let amountIncrease = LoadManager.Instance().getConfig(this._type,this._level,"capacity") - amountBefore;
-        playerInfoManager.changeMaxResource("gold",amountIncrease);
+        else if(percent <= 0.5){
+            type = 1;
+        }
+        else if(percent <= 0.75){
+            type = 2;
+        }
+        else{
+            type = 3;
+        }
+        this.loadSpriteByLevel(this._level,type);
     }
-
-
-
-
-
-
 });

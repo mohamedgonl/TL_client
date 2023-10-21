@@ -141,7 +141,9 @@ var res_ui = {
     BASIC_POPUP:"BasicPopup.json",
     BUTTON_OF_BUILDING: "ButtonOfBuilding.json",
     ICON_HARVEST: "IconHarvest.json",
-    TROOP_INFO: "TroopInfoPopup.json"
+    TROOP_INFO: "TroopInfoPopup.json",
+    CLOUD_1:"res/guis/map/cloud_1.png",
+    CLOUD_2:"res/guis/map/cloud_2.png",
 }
 
 var res_shop = {
@@ -313,6 +315,37 @@ var res_map = {
         },
         PROGRESS_BAR: "res/guis/upgrade_building_gui/building_time_bar.png",
         PROGRESS_BAR_BG: "res/guis/upgrade_building_gui/building_time_bg.png",
+        FENCE: "res/Map/map_obj_bg/upgrading.png",
+        BUILDER:{
+            LINK: "res/builder/run/image",
+            DOWN:{//res/builder/run/image0000.png
+                 //0000 -> 0007
+                1: "res/builder/run/image0000.png",
+            },
+            UP:{
+                //0032 -> 0039
+                1:"res/builder/run/image0032.png",
+            },
+            LEFT:{
+                //0016 -> 0023
+                1:"res/builder/run/image0016.png",
+            },
+            DOWN_LEFT:{
+                //0008 -> 0015
+                1:"res/builder/run/image0008.png",
+            },
+            UP_LEFT:{
+                //0024 -> 0031
+                1:"res/builder/run/image0024.png",
+            },
+            BUILD:{
+                UP:{
+                    //32 -> 39
+                    //
+                    1:"res/builder/attack01/image0032.png"
+                }
+            }
+        }
     },
     JSON:{
         OBSTACLE: "res/configs/Obstacle.json",

@@ -1,13 +1,14 @@
 var Wall = Building.extend({
-    _upper: null,
     _type: "WAL_1",
-
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
+        //schedule load sprite
+        // this.schedule(this.loadSpriteByLevel, 5);
     },
     loadSpriteByLevel: function (level) {
+        if(level == null)
+            level = this._level;
 
-        // this.reloadSprite();
         let wallState =0;
         if(this._posX && this._posY ){
             let RightBuilding = MapManager.Instance().getBuildingByGrid(this._posX+1,this._posY);
@@ -31,7 +32,6 @@ var Wall = Building.extend({
     },
     reloadSprite:function ()
     {
-
         this.loadSprite(res_map.SPRITE.BODY.WALL[this._level][wallState],null,0);
     }
 

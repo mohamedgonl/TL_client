@@ -116,7 +116,6 @@ var Troop = cc.Node.extend({
 
     handleMapChange: function (event) {
         cc.log("GRID MAP CHANGED!" + JSON.stringify(event));
-
         const Algorithm = AlgorithmImplement.Instance();
         Algorithm.setGridMapStar(MapManager.Instance().mapGrid);
         let mapLayer = cc.director.getRunningScene().getMapLayer();
@@ -126,7 +125,6 @@ var Troop = cc.Node.extend({
             let start = this.troop.getPosition()
             this.runToCamp(start, end);
         }
-
     },
 
 

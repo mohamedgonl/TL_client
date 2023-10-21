@@ -26,6 +26,7 @@ var MapLayer = cc.Layer.extend({
         this.addEventListener();
         this.initBackground();
         this.loadBuilding();
+        this.loadState();
     },
     onEnter: function () {
         this._super();
@@ -38,6 +39,22 @@ var MapLayer = cc.Layer.extend({
             var building = listBuilding[i];
             this.addBuildingToLayer(building);
         }
+    },
+
+    //load builder, load sprite of storage
+    loadState: function () {
+        var listBuilding = MapManager.Instance().getAllBuilding();
+        for (var i = 0; i < listBuilding.length; i++) {
+            var building = listBuilding[i];
+            if(building._state !== 0) {
+                let builder = new Builder("isBuilding",building);
+                builder.setPosition(this.getMapPosFromGridPos(cc.p(building._posX,building._posY),true));
+                this.addChild(builder,MAP_ZORDER_TROOP);
+            }
+        }
+
+        GameUtilities.updateCurrentCapacityAllBuilding();
+
     },
 
     //add building to layer with gridPos of it
@@ -111,7 +128,8 @@ var MapLayer = cc.Layer.extend({
                     console.log("==================================================================")
                 }
                 if (keyCode === cc.KEY.x) {
-
+                    // let townhall = MapManager.Instance().getTownHall();
+                    // MapManager.Instance().callBuilderToBuilding(townhall,"isBuilding");
                 }
                 if (keyCode === cc.KEY.c) {
                 }
@@ -181,7 +199,7 @@ var MapLayer = cc.Layer.extend({
             return;
         }
         //check have builder
-        if (PlayerInfoManager.Instance().builder.current <= 0) {
+        if (PlayerInfoManager.Instance().builder.current <= 0 && this.chosenBuilding._type != "BDH_1") {
             cc.log("not enough builder");
             // create content in popup
             let label = new cc.LabelBMFont("Bạn có muốn giải phóng thợ xây", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
@@ -216,6 +234,16 @@ var MapLayer = cc.Layer.extend({
         //price gold, if null -> 0
         let priceGold = LoadManager.Instance().getConfig(this.chosenBuilding._type, 1, "gold") || 0;
         let priceElixir = LoadManager.Instance().getConfig(this.chosenBuilding._type, 1, "elixir") || 0;
+        let priceGem = LoadManager.Instance().getConfig(this.chosenBuilding._type, 1, "coin") || 0;
+        cc.log("priceGold: " + priceGold + " priceElixir: " + priceElixir + " priceGem: " + priceGem);
+        if(priceGem > 0){
+            if(PlayerInfoManager.Instance().getResource("gem") < priceGem)
+            {
+                BasicPopup.appear("THIẾU TÀI NGUYÊN","Bạn không đủ G")
+                return;
+            }
+        }
+
         if (PlayerInfoManager.Instance().checkEnoughResource(priceGold, priceElixir) === false) {
             let price;
             let type;
@@ -234,7 +262,6 @@ var MapLayer = cc.Layer.extend({
         //gui cho server
         cc.log("send buy building request", this.chosenBuilding._type, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y)
         testnetwork.connector.sendBuyBuilding(this.chosenBuilding._type, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y);
-
 
     },
     onReceivedQuickFinishOfAnother: function (packet) {
@@ -513,10 +540,10 @@ var MapLayer = cc.Layer.extend({
     getGridPosFromMapPos: function (posInMap) {
         // posInMap = cc.pSub(posInMap,cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
         //calculate distance by distance formula from point to line
-        var distanceFromBottomLeft = findDistanceFromPointToLine(posInMap, CORNER_BOTTOM, CORNER_LEFT);
-        var distanceFromBottomRight = findDistanceFromPointToLine(posInMap, CORNER_RIGHT, CORNER_BOTTOM);
+        var distanceFromBottomLeft = Utils.findDistanceFromPointToLine(posInMap, CORNER_BOTTOM, CORNER_LEFT);
+        var distanceFromBottomRight = Utils.findDistanceFromPointToLine(posInMap, CORNER_RIGHT, CORNER_BOTTOM);
 
-        var grid_width = findDistanceFromPointToLine(CORNER_BOTTOM, CORNER_TOP, CORNER_RIGHT);
+        var grid_width = Utils.findDistanceFromPointToLine(CORNER_BOTTOM, CORNER_TOP, CORNER_RIGHT);
 
         var gridX = Math.floor(distanceFromBottomLeft / grid_width * GRID_SIZE);
         var gridY = Math.floor(distanceFromBottomRight / grid_width * GRID_SIZE);
@@ -535,14 +562,20 @@ var MapLayer = cc.Layer.extend({
     getMapPosFromGridPos: function (gridPos, isCenter = false, random = false) {
 
         if (isCenter === true) {
+            //floor x y
+            gridPos.x = Math.floor(gridPos.x);
+            gridPos.y = Math.floor(gridPos.y);
             gridPos = cc.p(gridPos.x + 0.5, gridPos.y + 0.5);
         }
         if (random === true) {
             //rand 0 to 1
             let randX = Math.random();
             let randY = Math.random();
+            gridPos.x = Math.floor(gridPos.x);
+            gridPos.y = Math.floor(gridPos.y);
             gridPos = cc.p(gridPos.x + randX, gridPos.y + randY);
         }
+
         var posA = cc.pLerp(CORNER_BOTTOM, CORNER_RIGHT, gridPos.x / GRID_SIZE);
         var posB = cc.pLerp(CORNER_BOTTOM, CORNER_LEFT, gridPos.y / GRID_SIZE);
         var posC = cc.pLerp(CORNER_LEFT, CORNER_TOP, gridPos.x / GRID_SIZE);
@@ -659,7 +692,7 @@ var MapLayer = cc.Layer.extend({
 
     },
 
-    enterModeBuyBuilding: function (buildingType) {
+    enterModeBuyBuilding: function (buildingType,posX,posY) {
         if (this.onModeBuyBuilding) {
 
             this.exitModeBuyBuilding();
@@ -673,13 +706,19 @@ var MapLayer = cc.Layer.extend({
         this.chosenBuilding = getBuildingFromType(buildingType, 1)
 
         //add button accept and cancel to building
-        var buttonAccept = createButton(res.BUTTON.ACCEPT, SCALE_BUTTON_BUY_BUILDING, OFFSET_BUTTON_BUY_BUILDING, this.acceptBuyBuilding, this);
+        var buttonAccept = Utils.createButton(res.BUTTON.ACCEPT, SCALE_BUTTON_BUY_BUILDING, OFFSET_BUTTON_BUY_BUILDING, this.acceptBuyBuilding, this);
         this.chosenBuilding.addChild(buttonAccept, MAP_ZORDER_GUI);
-        var buttonCancel = createButton(res.BUTTON.CANCEL, SCALE_BUTTON_BUY_BUILDING, cc.p(-OFFSET_BUTTON_BUY_BUILDING.x, OFFSET_BUTTON_BUY_BUILDING.y), this.exitModeBuyBuilding, this);
+        var buttonCancel = Utils.createButton(res.BUTTON.CANCEL, SCALE_BUTTON_BUY_BUILDING, cc.p(-OFFSET_BUTTON_BUY_BUILDING.x, OFFSET_BUTTON_BUY_BUILDING.y), this.exitModeBuyBuilding, this);
         this.chosenBuilding.addChild(buttonCancel, MAP_ZORDER_GUI);
+
+
 
         //set position of building
         let validPosition = MapManager.Instance().getEmptyPositionPutBuilding(this.chosenBuilding);
+
+        if(posX && posY) {
+            validPosition = cc.p(posX,posY);
+        }
 
         //if not valid position, set to center of map and square to red, else set to valid position and square to green, move screen to see building
         if (validPosition == null) {

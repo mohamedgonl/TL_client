@@ -27,7 +27,10 @@ testnetwork.Connector = cc.Class.extend({
 
                 // neu this khong co onReceiveUserInfo thi se goi cua fr.getCurrentScreen()
                 if(fr.getCurrentScreen() == null)
+                {
                     cc.director.getRunningScene().onReceiveUserInfo(packet);
+                    cc.log("onReceiveUserInfo")
+                }
                 else
                 fr.getCurrentScreen().onReceiveUserInfo(packet);
 
@@ -219,7 +222,7 @@ testnetwork.Connector = cc.Class.extend({
             }
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
-            PlayerInfoManager.Instance().addResource({elixir: packet.additionElixir});
+            PlayerInfoManager.Instance().changeResource({elixir: packet.additionElixir});
             trainingPopup.getPage({barackId: packet.barrackId}).onCancelTrainTroopSuccess(event);
 
         }
@@ -235,13 +238,17 @@ testnetwork.Connector = cc.Class.extend({
             //log all packet
             cc.log("packet: ", JSON.stringify(packet, null, 2));
             let mapLayer = cc.director.getRunningScene().mapLayer;
-            let building = getBuildingFromType(packet.type, 1, packet.id, packet.posX, packet.posY,packet.status,packet.startTime,packet.endTime);
+            let building = getBuildingFromType(packet.type, 1, packet.id, packet.posX, packet.posY, packet.status, packet.startTime, packet.endTime);
             MapManager.Instance().addBuilding(building, true);
             mapLayer.addBuildingToLayer(building);
-            // cc.log("----------------------------------------");
             mapLayer.exitModeBuyBuilding();
             mapLayer.selectBuilding(building);
+            if (packet.type == "WAL_1")
+            {
+                mapLayer.enterModeBuyBuilding("WAL_1",packet.posX,packet.posY-1);
+            }
             // cc.log("++++++++++++++++++++++++++++++++++++++++");
+
             if(packet.status === 0) return;
             building.startBuild(packet.startTime, packet.endTime);
             //bat lai info

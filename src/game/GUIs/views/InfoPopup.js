@@ -25,6 +25,8 @@ var InfoPopup = cc.Node.extend({
         this._super();
 
         this.building = building;
+        cc.log("building: " + building._type)
+        cc.log("building: " + building._capacityElixir)
         this.building = cc.director.getRunningScene().getMapLayer().chosenBuilding;
 
         var node = CCSUlties.parseUIFile(res_ui.INFO_POPUP);
@@ -74,9 +76,14 @@ var InfoPopup = cc.Node.extend({
         //text color
         descriptionLabel.setColor(cc.color(204, 102, 0));
         content.addChild(descriptionLabel);
+
+        //invisible 3 progress
+        this.progress1.setVisible(false);
+        this.progress2.setVisible(false);
+        this.progress3.setVisible(false);
+
         //set progress
         let dataInfo = BuildingInfo[this.building._type].dataInfo;
-
         //for in dataInfo
         for (let i = 1; i <= dataInfo.length; i++) {
             let progress = this["progress" + i];
@@ -103,14 +110,18 @@ var InfoPopup = cc.Node.extend({
         switch (typeRes)
         {
             case "capacityGold":
-                bar.setPercent(100);
                 icon.setTexture(res.ICON.GOLD_CAPACITY);
-                text.setString("Sức chứa:" + this.building._capacityGold);
+                let current = this.building.getCurrentAmount().gold;
+                let capacity = this.building._capacityGold;
+                text.setString("Sức chứa:" + Utils.numberToText(current) + "/" + Utils.numberToText(capacity));
+                bar.setPercent(current/capacity*100)
                 break;
             case "capacityElixir":
-                bar.setPercent(100);
                 icon.setTexture(res.ICON.ELIXIR_CAPACITY);
-                text.setString("Sức chứa:" + this.building._capacityElixir);
+                let currentElixir = this.building.getCurrentAmount().elixir;
+                let capacityElixir = this.building._capacityElixir;
+                text.setString("Sức chứa:" + Utils.numberToText(currentElixir) + "/" + Utils.numberToText(capacityElixir));
+                bar.setPercent(currentElixir/capacityElixir*100)
                 break;
             case "hitpoints":
                 bar.setPercent(100);
@@ -120,12 +131,12 @@ var InfoPopup = cc.Node.extend({
             case "productionGold":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.GOLD_PD_RATE);
-                text.setString("Sản lượng:" + this.building._productionGold);
+                text.setString("Sản lượng:" + this.building._productivityGold + "/h");
                 break;
             case "productionElixir":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.ELIXIR_PD_RATE);
-                text.setString("Sản lượng:" + this.building._productionElixir);
+                text.setString("Sản lượng:" + this.building._productivityElixir + "/h");
                 break;
             case "damage":
                 bar.setPercent(100);
@@ -135,7 +146,9 @@ var InfoPopup = cc.Node.extend({
             case "army":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.ARMY);
-                // text.setString("Quân lính:" + this.building._army);
+                let armyTotal = ArmyManager.Instance().getMaxSpace();
+                let armyCurrent = ArmyManager.Instance().getCurrentSpace();
+                text.setString("Quân lính:" + armyCurrent + "/" + armyTotal);
                 break;
         }
     }

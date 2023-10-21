@@ -1,49 +1,57 @@
-var Townhall = Building.extend({
+var Townhall = BaseStorage.extend({
     _type: "TOW_1",
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
-        this.init();
 
-    },
-    loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.TOWNHALL[level],null,1);
-    },
-    //init all properties
-    init: function () {
         let config = LoadManager.Instance().getConfig(this._type,this._level);
-        //chua lam gold va elixir
         this._currentGold = 0;
         this._currentElixir = 0;
         this._capacityGold = config.capacityGold;
         this._capacityElixir = config.capacityElixir;
     },
+    loadSpriteByLevel: function (level) {
+        this.loadSprite(res_map.SPRITE.BODY.TOWNHALL[level],null,1);
+    },
+
     onAddIntoMapManager: function () {
         this._super();
         let mapManager = MapManager.Instance();
-        let playerInfoManager = PlayerInfoManager.Instance();
         mapManager.townHall = this;
-        let capacityGold = LoadManager.Instance().getConfig(this._type,this._level,"capacityGold");
-        let capacityElixir = LoadManager.Instance().getConfig(this._type,this._level,"capacityElixir");
-        playerInfoManager.changeMaxResource("gold",capacityGold);
-        playerInfoManager.changeMaxResource("elixir",capacityElixir);
     },
-    checkCanUpgrade: function () {
-        return true;
-    },
+
     completeProcess: function () {
         this._super();
         let playerInfoManager = PlayerInfoManager.Instance();
-        let capacityGold = LoadManager.Instance().getConfig(this._type, this._level, "capacityGold");
-        let capacityElixir = LoadManager.Instance().getConfig(this._type, this._level, "capacityElixir");
-        testnetwork.connector.sendGetMapInfo();
+
+        //before set new capacity
+        let amountBefore = this.getCapacity();
+
+        let configCapacityGold = LoadManager.Instance().getConfig(this._type,this._level,"capacityGold");
+        let configCapacityElixir = LoadManager.Instance().getConfig(this._type,this._level,"capacityElixir");
+
+        this.setCapacity({gold: configCapacityGold, elixir: configCapacityElixir});
+
+        let amountAfter = this.getCapacity();
+
+
+        let amountIncrease = {
+            gold: amountAfter.gold - amountBefore.gold,
+            elixir: amountAfter.elixir - amountBefore.elixir
+        }
+        playerInfoManager.changeMaxResource(amountIncrease);
     },
-    completeUpgrade: function () {
-        this._super();
-        this._capacityGold  = LoadManager.Instance().getConfig(this._type,this._level,"capacityGold");
-        this._capacityElixir  = LoadManager.Instance().getConfig(this._type,this._level,"capacityElixir");
-
+    setCapacity: function({gold,elixir}){
+        this._capacityGold = gold;
+        this._capacityElixir = elixir;
+    },
+    setCurrentAmount: function(value,type){
+        if(type === "gold"){
+            this._currentGold = value;
+        }
+        else if(type === "elixir"){
+            this._currentElixir = value;
+        }
     }
-
 });
 
 

@@ -32,8 +32,14 @@
       <Value ctype="TabsInfo">
         <OpenedDocuments>
           <FilePathData Path="TroopInfoPopup.csd" />
+          <FilePathData Path="InfoPopup.csd" />
+          <FilePathData Path="ItemInfoPopup.csd" />
+          <FilePathData Path="NotiPopup.csd" />
+          <FilePathData Path="InfoLayer1.csd" />
+          <FilePathData Path="Layer1.csd" />
+          <FilePathData Path="UpgradePopup.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="TroopInfoPopup.csd" />
+        <ActiveDocument Path="InfoPopup.csd" />
       </Value>
     </Item>
   </Properties>

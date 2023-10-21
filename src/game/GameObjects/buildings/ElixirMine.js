@@ -1,11 +1,10 @@
-var ElixirMine = Mine.extend({
-    _upper: null,
-    _lastCollectTime: null,
+var ElixirMine = BaseMine.extend({
     _type: "RES_2",
-    _showIconHarvest: false,
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
-
+        let capacity = LoadManager.Instance().getConfig(this._type, this._level)
+        this._capacityElixir = capacity.capacity;
+        this._productivityElixir = capacity.productivity;
     },
     loadSpriteByLevel: function (level) {
         this.loadSprite(res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level],
@@ -30,37 +29,26 @@ var ElixirMine = Mine.extend({
                 infoLayer.addButtonToMenu("Thu hoạch",res.BUTTON.HARVEST_ELIXIR_BUTTON,3,this.onClickHarvest.bind(this));
         }
     },
+    completeProcess: function () {
+        this._super();
+        let playerInfoManager = PlayerInfoManager.Instance();
+        let capacity = LoadManager.Instance().getConfig(this._type, this._level)
+        this._capacityElixir = capacity.capacity;
+        this._productivityElixir = capacity.productivity;
+    },
+    getCurrentAmount: function () {
+        //calculate current amount by lastCollectTime
+        let timeNow = TimeManager.Instance().getCurrentTimeInSecond();
+        let duration = timeNow - this._lastCollectTime;
+        let productivity = LoadManager.Instance().getConfig(this._type, this._level, "productivity");
+        let harvestAmount = Math.floor(duration * productivity / 3600);
 
-    harvest: function (lastCollectTime,gold,elixir) {
+        let capacity = LoadManager.Instance().getConfig(this._type, this._level, "capacity");
 
-        this._lastCollectTime = lastCollectTime;
-        let oldElixir = PlayerInfoManager.Instance().getResource().elixir;
-        PlayerInfoManager.Instance().setResource({elixir:elixir});
-
-        let changes = elixir - oldElixir;
-
-        //init a TMP label to show changes in pos 0 0 of this building and hide after 1s
-        let label = new cc.LabelBMFont("+" + changes,res.FONT.SOJI[20]);
-        label.setPosition(0,0);
-        //color pink
-        label.setColor(cc.color(255,0,255));
-        this.addChild(label,ZORDER_BUILDING_EFFECT);
-        label.runAction(cc.sequence(cc.moveBy(1,0,50),cc.callFunc(function () {
-                label.removeFromParent(true);
-            }
-        )));
-
-        //sau 5s moi duoc nhan 1 lan
-        this._canHarvest = false;
-        this._iconHarvest.setVisible(false);
-        this._showIconHarvest = false;
-
-        this.loadButton();
-
-        this.scheduleOnce(function () {
-            this._canHarvest = true;
-            this.loadButton();
-        }.bind(this),5);
-    }
-
+        let currentAmount = Math.min(harvestAmount, capacity);
+        return {
+            gold: 0,
+            elixir: currentAmount
+        }
+    },
 });

@@ -1,13 +1,14 @@
-var Mine = Building.extend({
-    _upper: null,
-    _lastCollectTime: null,
-    _type: "RES_1",
-    _showIconHarvest: false,
-    _canHarvest: true,
-    _capacity: null,
-    _productivity: null,
+const OFFSET_HARVEST = 1;
+var BaseMine = Building.extend({
     ctor: function (level, id, posX, posY, status, startTime, endTime) {
         this._super(level, id, posX, posY, status, startTime, endTime);
+        this._lastCollectTime = null;
+        this._showIconHarvest = false;
+        this._canHarvest = true;
+        this._capacityGold = 0;
+        this._capacityElixir = 0;
+        this._currentGold = 0;
+        this._currentElixir = 0;
     },
     onAddIntoMapManager: function () {
         this._super();
@@ -36,25 +37,26 @@ var Mine = Building.extend({
         testnetwork.connector.sendHarvest(this._id);
     },
 
-    completeProcess: function () {
-        this._super();
-        let playerInfoManager = PlayerInfoManager.Instance();
-        let capacity = LoadManager.Instance().getConfig(this._type, this._level)
-        this._capacity = capacity.capacity;
-        this._productivity = capacity.productivity;
-    },
 
     checkShowHarvestIcon: function () {
+
+        if(this._state !== 0)
+        {
+            this._iconHarvest.setVisible(false);
+            return;
+        }
+
         //if can harvest >= 1% of capacity , show icon
         let timeNow = TimeManager.Instance().getCurrentTimeInSecond();
-        // cc.log("timeNow::::::::::::::::::::::::::: " + timeNow)
-        // cc.log("this._lastCollectTime::::::::::::::::::::::::::: " + this._lastCollectTime)
+
         let time = timeNow - this._lastCollectTime;
-        // cc.log("time::::::::::::::::::::::::::: " + time);
-        let harvestAmount = Math.floor(time * this._productivity / 3600);
 
+        let productivity = LoadManager.Instance().getConfig(this._type, this._level, "productivity");
 
-        if (harvestAmount >= this._capacity / 100) {
+        let harvestAmount = Math.floor(time * productivity / 3600);
+
+        let capacity = LoadManager.Instance().getConfig(this._type, this._level, "capacity");
+        if (harvestAmount >= capacity / 50) {
             this._showIconHarvest = true;
             this._iconHarvest.setVisible(true);
         } else {
@@ -73,9 +75,11 @@ var Mine = Building.extend({
         PlayerInfoManager.Instance().setResource({gold:gold});
         let changesGold = gold - oldGold;
 
+
+        
         let color;
         let changes = 0;
-        if(changesGold > 0)
+        if(this._type === "RES_1")
         {
             color = cc.color(255,255,0);
             changes = changesGold;
@@ -94,6 +98,14 @@ var Mine = Building.extend({
                 label.removeFromParent(true);
             }
         )));
+
+        //if storage is full, harvest a part. If timeNow - lastCollectTime > offsetTime, harvest a part
+        let timeNow = TimeManager.Instance().getCurrentTimeInSecond();
+        if(timeNow - this._lastCollectTime > OFFSET_HARVEST)
+        {
+
+        }
+
 
         //sau 5s moi duoc nhan 1 lan
         this._canHarvest = false;

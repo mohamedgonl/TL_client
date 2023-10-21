@@ -68,18 +68,24 @@
 
         "src/game/GameObjects/buildings/Building.js",
         "src/game/GameObjects/buildings/BuilderHut.js",
-        "src/game/GameObjects/buildings/Townhall.js",
+
         "src/game/GameObjects/buildings/ArmyCamp.js",
-        "src/game/GameObjects/buildings/Mine.js",
+
+        "src/game/GameObjects/buildings/BaseMine.js",
         "src/game/GameObjects/buildings/GoldMine.js",
         "src/game/GameObjects/buildings/ElixirMine.js",
+
+        "src/game/GameObjects/buildings/BaseStorage.js",
+        "src/game/GameObjects/buildings/Townhall.js",
         "src/game/GameObjects/buildings/GoldStorage.js",
         "src/game/GameObjects/buildings/ElixirStorage.js",
+
         "src/game/GameObjects/buildings/Wall.js",
         "src/game/GameObjects/buildings/Barrack.js",
         "src/game/GameObjects/buildings/Cannon.js",
         "src/game/GameObjects/Obstacle.js",
         "src/game/GameObjects/troops/Troop.js",
+        "src/game/GameObjects/Builder.js",
 
 
         "src/game/Managers/MapManager.js",

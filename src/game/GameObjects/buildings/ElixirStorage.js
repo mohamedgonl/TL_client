@@ -1,45 +1,39 @@
-var ElixirStorage = Building.extend({
-    _upper: null,
+var ElixirStorage = BaseStorage.extend({
     _type: "STO_2",
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
-
-
-        // this.loadSprite(res_map.SPRITE.BODY.ELIXIR_STORAGE[level],null,1);
-        // this.loadSubSprite();
-        let config = LoadManager.Instance().getConfig(this._type,this._level);
-        this._currentElixir = 0;
-        this._capacityElixir = config.capacity;
     },
-    loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.ELIXIR_STORAGE[level][0], null,1);
+    //load sprite by level , type = 0, 1 , 2, 3 (0->25%,26->50%,51->75%,76->100%)
+    loadSpriteByLevel: function (level,type =0) {
+        this.loadSprite(res_map.SPRITE.BODY.ELIXIR_STORAGE[level][type],null,1);
     },
-    onAddIntoMapManager: function () {
-        this._super();
-        let mapManager = MapManager.Instance();
-        let playerInfoManager = PlayerInfoManager.Instance();
-        mapManager.addToListStorage(this);
-        switch (this._state){
-            case 0:
-            case 2:
-                let capacity = LoadManager.Instance().getConfig(this._type,this._level,"capacity");
-                playerInfoManager.changeMaxResource("elixir",capacity);
-                break;
-            case 1:
-                break;
+
+    //update current amount and change sprite
+    setCurrentAmount: function(value){
+        this._currentElixir = value;
+        this.updateSprite();
+    },
+    setCapacity: function (value) {
+        this._capacityElixir = value;
+        this.updateSprite();
+    },
+    updateSprite: function () {
+
+        let type;
+        let percent = this._currentElixir / this._capacityElixir;
+        if(percent <= 0.25){
+            type = 0;
         }
-    },
-    completeProcess: function () {
-        this._super();
-        let playerInfoManager = PlayerInfoManager.Instance();
-
-        let amountBefore = LoadManager.Instance().getConfig(this._type,this._level - 1,"capacity")|| 0;
-        let amountIncrease = LoadManager.Instance().getConfig(this._type,this._level,"capacity") - amountBefore;
-        playerInfoManager.changeMaxResource("elixir",amountIncrease);
+        else if(percent <= 0.5){
+            type = 1;
+        }
+        else if(percent <= 0.75){
+            type = 2;
+        }
+        else{
+            type = 3;
+        }
+        this.loadSpriteByLevel(this._level,type);
     }
-
-
-
-
 
 });

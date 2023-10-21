@@ -111,7 +111,7 @@ var UpgradePopup = cc.Node.extend({
 
         //set text time
         let time = LoadManager.Instance().getConfig(building._type, building._level + 1,"buildTime");
-        let stringTime = getTimeString(time);
+        let stringTime = Utils.getTimeString(time);
         container.text_time.setString(stringTime);
     },
     onClose: function () {

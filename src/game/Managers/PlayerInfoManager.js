@@ -29,7 +29,6 @@ var PlayerInfoManager = cc.Layer.extend({
     getMaxResource: function () {
         return this.maxResource;
     },
-
     getResource: function (type) {
         if(type)
         {
@@ -60,26 +59,9 @@ var PlayerInfoManager = cc.Layer.extend({
             this.resource.gem = gem;
         }
         this.setUI({resource: this.resource});
-        cc.log("UPDATE :: " +JSON.stringify(this.resource))
         cc.eventManager.dispatchCustomEvent(EVENT_NAMES.RESOURCE_CHANGED)
 
     },
-
-    addResource: function ({gold, elixir, gem}) {
-        if (gold) {
-            this.resource.gold += gold;
-        }
-        if (elixir) {
-            this.resource.elixir += elixir;
-        }
-        if (gem) {
-            this.resource.gem += gem;
-        }
-
-        this.setUI({resource: this.resource});
-        cc.eventManager.dispatchCustomEvent(EVENT_NAMES.RESOURCE_CHANGED)
-    },
-
     setId: function (id) {
         this.id = id;
     },
@@ -112,22 +94,25 @@ var PlayerInfoManager = cc.Layer.extend({
         }
         this.setUI({maxResource: this.maxResource});
     },
-    changeResource: function (type, value) {
-        if (type === "gold") {
-            this.resource.gold += value;
-        } else if (type === "elixir") {
-            this.resource.elixir += value;
-        } else return;
+    changeResource : function({gold,elixir,gem}){
+        if(gold!=null)
+            this.resource.gold += gold;
+        if(elixir!=null)
+            this.resource.elixir += elixir;
+        if(gem!=null)
+            this.resource.gem += gem;
         this.setUI({resource: this.resource});
         cc.eventManager.dispatchCustomEvent(EVENT_NAMES.RESOURCE_CHANGED)
     },
-    changeMaxResource: function (type, value) {
-        if (type === "gold") {
-            this.maxResource.gold += value;
-        } else if (type === "elixir") {
-            this.maxResource.elixir += value;
-        } else return;
+    changeMaxResource : function({gold,elixir,gem}){
+        if(gold!=null)
+            this.maxResource.gold += gold;
+        if(elixir!=null)
+            this.maxResource.elixir += elixir;
+        if(gem!=null)
+            this.maxResource.gem += gem;
         this.setUI({maxResource: this.maxResource});
+        cc.eventManager.dispatchCustomEvent(EVENT_NAMES.MAX_RESOURCE_CHANGED)
     },
     changeBuilder: function (type, value) {
         if (type === "current") {
@@ -158,6 +143,14 @@ var PlayerInfoManager = cc.Layer.extend({
     setUI: function (data) {
         let InfoLayer = cc.director.getRunningScene().infoLayer;
         if (InfoLayer == null) return;
+
+        if(data.resource)
+        {
+            cc.log(JSON.stringify(data.resource));
+            cc.log("SET UI RESOURCE------------------------------------------------------------------------")
+            GameUtilities.updateCurrentCapacityAllBuilding();
+        }
+
         InfoLayer.updateUI(data);
     },
     // buyResourceByGem: function (gold, elixir, callback) {
