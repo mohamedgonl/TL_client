@@ -284,7 +284,13 @@ var Obstacle = GameObject.extend({
       this.onClickRemove();
     },
     onClickQuickFinish: function () {
-        cc.log("onClickQuickFinish:",this._id);
+        let priceGem = Utils.calculateGBuyTime(this._endTime - TimeManager.Instance().getCurrentTimeInSecond());
+        let currentGem = PlayerInfoManager.Instance().getResource("gem");
+        if(currentGem < priceGem)
+        {
+            BasicPopup.appear("THIẾU TÀI NGUYÊN", "Bạn không đủ G")
+            return;
+        }
         testnetwork.connector.sendQuickFinish(this._id);
     },
     quickFinish: function (){

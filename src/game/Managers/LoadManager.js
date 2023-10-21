@@ -38,7 +38,6 @@ var LoadManager = cc.Node.extend({
         if(type === "BDH_1" && key==="coin")
         {
             let bdhCount = MapManager.Instance().buildingAmount["BDH_1"];
-            cc.log("bdhCount:::::::::::::::::::::::::::",bdhCount);
             return this[type][bdhCount+1][key];
         }
 

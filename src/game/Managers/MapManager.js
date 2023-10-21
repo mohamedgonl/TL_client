@@ -53,7 +53,6 @@ var MapManager = cc.Class.extend({
             }
             else
             {
-                //cc.log("building Add------------------------------------------",type);
                 this.addBuilding(building);
 
             }
@@ -106,7 +105,6 @@ var MapManager = cc.Class.extend({
 
                 break;
             case 'BAR':
-                //cc.log("hanve barrack+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
                 ArmyManager.Instance().pushBarrack(building);
                 break;
             case 'AMC':
@@ -161,7 +159,6 @@ var MapManager = cc.Class.extend({
         //if x y null, return null
         if(x === null || y === null)
             return null;
-        cc.log("x y::::::::::::::::::::::::::::",x,y)
         return this.listBuildings.get(this.mapGrid[x][y]) || null;
     },
     getListBuilderHut: function () {
@@ -195,7 +192,6 @@ var MapManager = cc.Class.extend({
     getEmptyPositionPutBuilding: function (building) {
         let width = building._width;
         let height = building._height;
-        cc.log("width: " + width + " height: " + height)
 
         //find empty rect to place building in mapGrid
         for(let column = 0; column < 40; column++)

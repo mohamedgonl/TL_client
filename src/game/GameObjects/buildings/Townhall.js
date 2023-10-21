@@ -20,7 +20,6 @@ var Townhall = BaseStorage.extend({
     },
 
     completeProcess: function () {
-        this._super();
         let playerInfoManager = PlayerInfoManager.Instance();
 
         //before set new capacity

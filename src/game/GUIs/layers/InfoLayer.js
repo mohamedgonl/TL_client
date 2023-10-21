@@ -5,8 +5,6 @@ var InfoLayer = cc.Layer.extend({
     ctor: function () {
         this._super();
         this.init();
-        //size
-        cc.log("InfoLayer ctor:::::::::::::::", JSON.stringify(this.getContentSize()));
 
     },
 
@@ -35,14 +33,7 @@ var InfoLayer = cc.Layer.extend({
                 })
             })
         })
-        //scale by width
-        // node.setScaleX(cc.winSize.width/node.getContentSize().width);
-        // node.setScaleY(cc.winSize.height/node.getContentSize().height);
 
-        // node.width = cc.winSize.width;
-        // node.height = cc.winSize.height;
-
-        // cc.log("================",JSON.stringify(node.getContentSize()));
         this.addChild(node);
         this.loadResources();
         this.addEventListener();
@@ -77,7 +68,6 @@ var InfoLayer = cc.Layer.extend({
         if (type === ccui.Widget.TOUCH_ENDED) {
             let gameScene = cc.director.getRunningScene();
             let popUpLayer = gameScene.getPopUpLayer();
-            cc.log("aaa")
             let cheatPopup = new CheatPopup({
                 acceptCallBack: (data) => {
                     testnetwork.connector.sendCheatResource(data);

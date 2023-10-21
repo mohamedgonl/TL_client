@@ -10,7 +10,6 @@ var MapLayer = cc.Layer.extend({
     ctor: function () {
 
         this._super();
-        //cc.log("+++++++++++++++++++++",JSON.stringify(this.getPosition(),null,2));
         this.setAnchorPoint(0, 0);
         //create label hello world at 0,0
         this.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
@@ -60,7 +59,6 @@ var MapLayer = cc.Layer.extend({
     //add building to layer with gridPos of it
     addBuildingToLayer: function (building, zOrder) {
         if (building == null) {
-            cc.log("ERORR::::::::add building to layer null");
             return;
         }
 
@@ -88,30 +86,6 @@ var MapLayer = cc.Layer.extend({
 
     //add event listener for map
     addEventListener: function () {
-
-        //add touch
-        // cc.eventManager.addListener({
-        //     event: cc.EventListener.TOUCH_ONE_BY_ONE,
-        //     swallowTouches: true,
-        //
-        //     onTouchBegan: function (event) {
-        //         this.onTouchBegan(event);
-        //         return true;
-        //     }.bind(this),
-        //
-        //     onTouchEnded: function (event) {
-        //         this.onTouchEnded(event);
-        //         return true;
-        //     }.bind(this),
-        //
-        //     onTouchMoved: function (event) {
-        //         this.handMoved = true;
-        //         //cc.log("move event :" + JSON.stringify(event,null,2));
-        //         this.onDrag(event);
-        //         return true;
-        //     }.bind(this)
-        //
-        // }, this);
 
         //scale by scroll
         cc.eventManager.addListener({
@@ -235,7 +209,6 @@ var MapLayer = cc.Layer.extend({
         let priceGold = LoadManager.Instance().getConfig(this.chosenBuilding._type, 1, "gold") || 0;
         let priceElixir = LoadManager.Instance().getConfig(this.chosenBuilding._type, 1, "elixir") || 0;
         let priceGem = LoadManager.Instance().getConfig(this.chosenBuilding._type, 1, "coin") || 0;
-        cc.log("priceGold: " + priceGold + " priceElixir: " + priceElixir + " priceGem: " + priceGem);
         if(priceGem > 0){
             if(PlayerInfoManager.Instance().getResource("gem") < priceGem)
             {
@@ -260,7 +233,6 @@ var MapLayer = cc.Layer.extend({
         }
 
         //gui cho server
-        cc.log("send buy building request", this.chosenBuilding._type, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y)
         testnetwork.connector.sendBuyBuilding(this.chosenBuilding._type, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y);
 
     },
@@ -323,8 +295,6 @@ var MapLayer = cc.Layer.extend({
     },
 
     onTouchBegan: function (touch) {
-        cc.log("location:", JSON.stringify(this.getPosition(), null, 2));
-        cc.log("mapPos:", JSON.stringify(this.getMapPosFromScreenPos(touch.getLocation()), null, 2));
         this.positionTouchBegan = touch.getLocation();
         if (this.chosenBuilding == null) return;
 
@@ -504,7 +474,6 @@ var MapLayer = cc.Layer.extend({
     },
 
     getBuildingFromTouch: function (locationInScreen) {
-        //cc.log("+++++++++++++++++++getBuildingFromTouch",JSON.stringify(locationInScreen,null,2));
         let chosenGrid = this.getGridPosFromScreenPos(locationInScreen);
         if (chosenGrid == null) return null;
         if (this.chosenBuilding != null) {
@@ -530,7 +499,6 @@ var MapLayer = cc.Layer.extend({
         var posInMap = cc.pSub(posInScreen, this.getPosition());
         let x = posInMap.x / this.getScale();
         let y = posInMap.y / this.getScale();
-        //cc.log("+++++++++++++++++++getMapPosFromScreenPos",JSON.stringify(posInMap,null,2));
         return cc.p(x, y);
     },
 

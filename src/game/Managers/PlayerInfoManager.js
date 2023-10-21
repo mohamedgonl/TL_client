@@ -95,6 +95,7 @@ var PlayerInfoManager = cc.Layer.extend({
         this.setUI({maxResource: this.maxResource});
     },
     changeResource : function({gold,elixir,gem}){
+        cc.log("changeResource:::::::::::::::::::::::::::")
         if(gold!=null)
             this.resource.gold += gold;
         if(elixir!=null)
@@ -105,6 +106,8 @@ var PlayerInfoManager = cc.Layer.extend({
         cc.eventManager.dispatchCustomEvent(EVENT_NAMES.RESOURCE_CHANGED)
     },
     changeMaxResource : function({gold,elixir,gem}){
+        cc.log("changeMaxResource:::::::::::::::::::::::::::")
+        cc.log(JSON.stringify({gold,elixir,gem}))
         if(gold!=null)
             this.maxResource.gold += gold;
         if(elixir!=null)
@@ -147,7 +150,6 @@ var PlayerInfoManager = cc.Layer.extend({
         if(data.resource)
         {
             cc.log(JSON.stringify(data.resource));
-            cc.log("SET UI RESOURCE------------------------------------------------------------------------")
             GameUtilities.updateCurrentCapacityAllBuilding();
         }
 
@@ -175,7 +177,7 @@ var PlayerInfoManager = cc.Layer.extend({
                 }
             }
         }
-        cc.log("minTime: " + minTime);
+
         if (minBuilding) {
             minBuilding.onClickQuickFinish();
         }

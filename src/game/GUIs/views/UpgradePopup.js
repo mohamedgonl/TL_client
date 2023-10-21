@@ -69,7 +69,6 @@ var UpgradePopup = cc.Node.extend({
         let building = this.building;
         let priceGold = LoadManager.Instance().getConfig(building._type, building._level + 1).gold;
         let priceElixir = LoadManager.Instance().getConfig(building._type, building._level + 1).elixir;
-        cc.log("upgrade popup: gold:" + priceGold + "elixir: " + priceElixir);
         if(priceGold)
         {
             goldIcon.setVisible(true);
