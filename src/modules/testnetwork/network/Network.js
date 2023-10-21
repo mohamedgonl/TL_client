@@ -165,7 +165,13 @@ testnetwork.Connector = cc.Class.extend({
             }
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
-            trainingPopup.getPage({barackId: packet.barrackId}).onCanCreateTrain([event]);
+            // if not long press
+            if(packet.count === 1) {
+                trainingPopup.getPage({barackId: packet.barrackId}).onCanCreateTrain([event]);
+            }
+            else {
+                trainingPopup.getPage({barackId: packet.barrackId}).updateUI(1,false)
+            }
 
             PlayerInfoManager.Instance().setResource({elixir: packet.newElixir})
 

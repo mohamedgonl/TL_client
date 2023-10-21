@@ -238,3 +238,4 @@ const TROOPS_INFO  = {
 const COLOR_REQUIRED_TROOP = cc.color(181, 26, 0);
 const COLOR_TROOP_ATTACK_INFO = cc.color(12, 104, 209);
 const COLOR_TROOP_DESCRIPTION = cc.color(147, 97, 44);
+const LONG_PRESS_THRESHOLD = 0.2;
