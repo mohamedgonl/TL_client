@@ -53,6 +53,7 @@ var Barrack = Building.extend({
     },
 
 
+
     //return true when this type of troop already exist
     addToTrainingQueue: function ({cfgId, count}) {
         cc.log("ADD TO TRAINING QUEUE")

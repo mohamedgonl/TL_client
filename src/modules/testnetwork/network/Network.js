@@ -168,7 +168,13 @@ testnetwork.Connector = cc.Class.extend({
             }
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
-            trainingPopup.getPage({barackId: packet.barrackId}).onCanCreateTrain([event]);
+            // if not long press
+            if(packet.count === 1) {
+                trainingPopup.getPage({barackId: packet.barrackId}).onCanCreateTrain([event]);
+            }
+            else {
+                trainingPopup.getPage({barackId: packet.barrackId}).updateUI(1,false)
+            }
 
             PlayerInfoManager.Instance().setResource({elixir: packet.newElixir})
 
@@ -181,15 +187,16 @@ testnetwork.Connector = cc.Class.extend({
             ArmyManager.Instance();
         }
         else {
-            cc.log("GET TRAINING LIST SUCCESS :::::::::::");
+            cc.log("GET TRAINING LIST SUCCESS ::::::::::: " + JSON.stringify(packet) +" CURRENT TIME :" + TimeManager.Instance().getCurrentTimeInSecond());
             let barracks = ArmyManager.Instance().getBarrackList();
+            ArmyManager.Instance().updateArmyAmount(packet.doneList, this._curPage)
             for (let i = 0; i < barracks.length; i++) {
                 if(barracks[i].getId() === packet.barrackId) {
+                    cc.log("BARRACK ID :: " +packet.barrackId + " TRAIN LIST::: " + JSON.stringify(packet.trainingList))
                     barracks[i].setTrainingList(packet.trainingList);
                     barracks[i].setLastTrainingTime(packet.lastTrainingTime);
                     let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
                     let trainingPopup = popUpLayer.getTrainingPopup();
-                    cc.log("TRAIN : " + trainingPopup._trainPages)
                     trainingPopup.getPage({barackId: packet.barrackId}).initTrainingList();
                     return;
                 }

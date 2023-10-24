@@ -3,6 +3,8 @@ var TroopListItem = cc.Node.extend({
     _level: 1,
     _space: null,
     _count: 0,
+    _tempCount: 0,
+    _isLongPress: false,
     ctor: function (troopCfgId, curPage, index) {
 
         this._super();
@@ -24,7 +26,7 @@ var TroopListItem = cc.Node.extend({
 
         let item = this;
         // cc.eventManager.addListener(clickEventListener(item.handleTrainTroop.bind(item)).clone(), item._nodeButton);
-        this._nodeButton.addClickEventListener(this.handleTrainTroop.bind(this))
+        this._nodeButton.addTouchEventListener(this.handleTrainTroop.bind(this))
         cc.eventManager.addCustomListener(TRAINING_EVENTS.CANCLE + this._curPage, this.handleCancleTroopTraining.bind(this));
         cc.eventManager.addCustomListener(TRAINING_EVENTS.TRAIN_SUCCESS + this._curPage, (event) => {
             let count = event.data.count;
@@ -38,11 +40,12 @@ var TroopListItem = cc.Node.extend({
         });
 
         cc.eventManager.addCustomListener(EVENT_NAMES.RESOURCE_CHANGED, (e) => {
+            cc.log("RESOURCE UPDATED :::: ")
             this.recheck();
         })
 
         cc.eventManager.addCustomListener(EVENT_NAMES.BUILDING_UPDATED, (e) => {
-            if(this._curBarrack.getId() === e.getUserData().id) {
+            if (this._curBarrack.getId() === e.getUserData().id) {
                 cc.log("BUILDING UPDATED :::: ")
                 this.recheck();
             }
@@ -66,6 +69,7 @@ var TroopListItem = cc.Node.extend({
         } else {
             this._nodeButton.setOpacity(255);
         }
+        cc.log(this._troopCfgId + " " + PlayerInfoManager.Instance().getResource("elixir")+ " " + price)
         if (PlayerInfoManager.Instance().getResource("elixir") < price) {
             this._available = false;
             let costContainer = this._node.getChildByName("cost_container");
@@ -80,11 +84,11 @@ var TroopListItem = cc.Node.extend({
     setCostDisplay: function () {
         let costContainer = this._node.getChildByName("cost_container")
         if (this._barrackRequired <= this._curBarrack._level) {
-            if(this.label) {
+            if (this.label) {
                 let barRequired = this._node.getChildByName("bar_required");
                 barRequired.setVisible(false);
                 costContainer.setVisible(true);
-                this.label.removeFromParent(true);
+                this.label.setVisible(false);
             }
             let costString = costContainer.getChildByName("cost");
             costString.setString(this._cost);
@@ -116,7 +120,7 @@ var TroopListItem = cc.Node.extend({
 
     handleClickTroopInfo: function () {
         cc.log("CLICK TROOP INFO");
-        if(TROOP_ANIMS_LIST.indexOf(this._troopCfgId) !== -1) {
+        if (TROOP_ANIMS_LIST.indexOf(this._troopCfgId) !== -1) {
             let itemInfoLayer = new TroopInfoPopup(this._troopCfgId);
             let gameScene = cc.director.getRunningScene();
             let popUpLayer = gameScene.getPopUpLayer();
@@ -148,21 +152,51 @@ var TroopListItem = cc.Node.extend({
         this.setCount(this._count);
     },
 
-    handleTrainTroop: function () {
+    handleTrainTroop: function (sender, type) {
         cc.log("CREATE TROOP ::: " + this._troopCfgId + " PAGE :" + this._curPage)
+        if (type === ccui.Widget.TOUCH_BEGAN) {
+            this.setScale(BUTTON_TOUCH_SCALE_BIG);
+            this.schedule(this.handleLongPress, LONG_PRESS_THRESHOLD);
+        }
+        if (type === ccui.Widget.TOUCH_ENDED) {
+            this.setScale(1);
+            this.unschedule(this.handleLongPress);
 
+            this.dispatchTrainEvent(this._isLongPress ? this._tempCount : 1, false, true);
+
+            this._tempCount = 0;
+            this._isLongPress = false;
+        }
+    },
+
+    handleLongPress: function () {
         if (this._available) {
             let barList = ArmyManager.Instance().getBarrackList();
             let currentSpace = barList[this._curPage].getTrainingSpace();
             let maxSpace = barList[this._curPage].getMaxSpace();
             if (currentSpace + TROOP_BASE[this._troopCfgId]["housingSpace"] <= maxSpace) {
-                let event = new cc.EventCustom(TRAINING_EVENTS.TRAIN + this._curPage);
-                let cfgId = this._troopCfgId;
-                event.data = {cfgId: cfgId, count: 1};
-                cc.eventManager.dispatchEvent(event);
+                let action = cc.sequence(cc.scaleTo(LONG_PRESS_THRESHOLD / 2, BUTTON_TOUCH_SCALE_BIG), cc.scaleTo(LONG_PRESS_THRESHOLD, 1))
+                this.runAction(action);
+                this._tempCount++;
+                this._isLongPress = true;
+                this.updateResource();
+                this.dispatchTrainEvent(1, true, false);
             }
         }
     },
+
+    dispatchTrainEvent: function (count, longPressRunning, longPressEnd) {
+        let event = new cc.EventCustom(TRAINING_EVENTS.TRAIN + this._curPage);
+        let cfgId = this._troopCfgId;
+        event.data = {cfgId: cfgId, count: count, longPressRunning: longPressRunning, longPressEnd: longPressEnd};
+        cc.eventManager.dispatchEvent(event);
+    },
+
+    updateResource:  function () {
+        let trainCost = TROOP[this._troopCfgId][this._level]["trainingElixir"];
+        PlayerInfoManager.Instance().changeResource("elixir", -trainCost);
+    }
+
 
 
 })
