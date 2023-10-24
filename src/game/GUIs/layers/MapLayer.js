@@ -62,6 +62,10 @@ var MapLayer = cc.Layer.extend({
             return;
         }
 
+        building.onAddIntoMapLayer();
+        if(building._type.startsWith("RES"))
+            building.setLastCollectTimeAndIconHarvest(this._lastCollectTime);
+
         let sizeX = building._width;
         let sizeY = building._height;
         let gridPosX = building._posX;
@@ -76,6 +80,7 @@ var MapLayer = cc.Layer.extend({
             buildingCenterX = Math.floor(buildingCenterX);
             buildingCenterY = Math.floor(buildingCenterY);
             this.addGameObjectToMapLayer(building, buildingCenterX, buildingCenterY, zOrderValue, true);
+
         }
         //add vào góc trái dưới của ô trung tâm
         else {

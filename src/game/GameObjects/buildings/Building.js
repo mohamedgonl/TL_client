@@ -16,6 +16,17 @@ var Building = GameObject.extend({
         this._state = status;
         this._startTime = startTime;
         this._endTime = endTime;
+
+
+        let config = LoadManager.Instance().getConfig(this._type,level);
+        this._width = config.width;
+        this._height = config.height;
+        this._hitpoints = config.hitpoints;
+
+        this.setAnchorPoint(0.5,0.5);
+    },
+
+    onAddIntoMapLayer: function () {
         // shadow, grass, body, upper is new cc sprite with nothing
         this._shadow = new cc.Sprite();
         this._grass = new cc.Sprite();
@@ -27,23 +38,25 @@ var Building = GameObject.extend({
         this.addChild(this._shadow,ZORDER_BUILDING_SHADOW);
         this.addChild(this._upper,ZORDER_BUILDING_UPPER);
 
-        let config = LoadManager.Instance().getConfig(this._type,level);
-        this._width = config.width;
-        this._height = config.height;
-        this._hitpoints = config.hitpoints;
 
-        this.setAnchorPoint(0.5,0.5);
-
-        this.loadSpriteByLevel(level);
-
+        this.loadSpriteByLevel(this._level);
         this.loadSubSprite();
 
-        // this._grass.setGlobalZOrder(10);
-        // this._shadow.setGlobalZOrder(20);
-        // this._body.setGlobalZOrder(30);
-        // this._upper.setGlobalZOrder(40);
-    },
 
+        switch (this._state){
+            case 0:
+                this._arrow_move.setVisible(false);
+                this._nameLabel.setVisible(false);
+                this._levelLabel.setVisible(false);
+                break;
+            case 1:
+            case 2:
+                this._progressBar.setVisible(true);
+                this._fence.setVisible(true);
+                break;
+        }
+
+    },
     //load sprite with size,
     //shadow_type = 1 for quare, 2 for circle, 0 for no shadow
     loadSprite: function (bodySprite, upperSprite, shadow_type, isUpperAnimation) {
@@ -194,9 +207,6 @@ var Building = GameObject.extend({
         // this._shadow.setGlobalZOrder(20);
         // this._body.setGlobalZOrder(30);
         // this._upper.setGlobalZOrder(40);
-    },
-    initState: function () {
-
     },
 
     //load button for building, reload when select building, upgrade, build, cancel
@@ -452,18 +462,11 @@ var Building = GameObject.extend({
         }
         switch (this._state){
             case 0:
-                this._arrow_move.setVisible(false);
-                this._nameLabel.setVisible(false);
-                this._levelLabel.setVisible(false);
                 break;
             case 1:
             case 2:
-                this._progressBar.setVisible(true);
-                this._fence.setVisible(true);
                 // -1 builder
                 PlayerInfoManager.Instance().changeBuilder("current", -1);
-                this.update();
-                this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
                 break;
         }
     },
@@ -528,10 +531,6 @@ var Building = GameObject.extend({
         //send to server
 
         testnetwork.connector.sendUpgradeBuilding(this._id);
-    },
-
-    onCheckResource: function () {
-
     },
 
     //on cancel, request to server

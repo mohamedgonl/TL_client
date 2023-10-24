@@ -42,7 +42,7 @@ var MapManager = cc.Class.extend({
             if(type.startsWith("RES"))
             {
                 let lastCollectTime = construct.lastCollectTime;
-                building.setLastCollectTimeAndIconHarvest(lastCollectTime);
+
             }
 
 
