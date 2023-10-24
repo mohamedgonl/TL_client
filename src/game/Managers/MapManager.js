@@ -170,37 +170,7 @@ var MapManager = cc.Class.extend({
         return this.listStorage;
     },
 
-    checkValidPutBuilding: function (building, newPosX, newPosY) {
-        var id = building._id;
-        var width = building._width;
-        var height = building._height;
 
-
-        //check out of map
-        if(newPosX < 0 || newPosX + width > 40 || newPosY < 0 || newPosY + height > 40)
-            return false;
-
-        //check overlap
-        for(var column = newPosX; column < newPosX + width; column++)
-            for(var row = newPosY; row < newPosY + height; row++)
-                if(this.mapGrid[column][row] != 0 && this.mapGrid[column][row] != id)
-                    return false;
-
-        return true;
-    },
-
-    getEmptyPositionPutBuilding: function (building) {
-        let width = building._width;
-        let height = building._height;
-
-        //find empty rect to place building in mapGrid
-        for(let column = 0; column < 40; column++)
-            for(let row = 0; row < 40; row++)
-                if(this.checkValidPutBuilding(building, column, row))
-                    return {x: column, y: row};
-
-        return null;
-    },
     removeBuilding: function (building){
         // remove from building count
         this.buildingAmount[building._type] = Math.max(this.buildingAmount[building._type] - 1, 0) ;

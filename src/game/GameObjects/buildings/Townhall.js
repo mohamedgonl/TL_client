@@ -19,7 +19,9 @@ var Townhall = BaseStorage.extend({
         mapManager.townHall = this;
     },
 
+
     completeProcess: function () {
+        this._super();
         let playerInfoManager = PlayerInfoManager.Instance();
 
         //before set new capacity
