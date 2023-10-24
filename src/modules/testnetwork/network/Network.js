@@ -550,7 +550,14 @@ testnetwork.Connector = cc.Class.extend({
         var pk = this.gameClient.getOutPacket(CmdSendGetTimeServer);
         pk.pack();
         this.gameClient.sendPacket(pk);
-    }
+    },
+
+    sendBattleMatching : function () {
+        cc.log("SEND get time server");
+        var pk = this.gameClient.getOutPacket(CmdSendBattleMatching);
+        pk.pack();
+        this.gameClient.sendPacket(pk);
+    },
 
 });
 

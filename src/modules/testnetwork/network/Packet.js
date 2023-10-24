@@ -33,6 +33,7 @@ gv.CMD.BUY_RESOURCE_BY_GEM = 4002;
 gv.CMD.GET_TIME_SERVER = 1003;
 //quyet----------------------
 
+gv.CMD.BATTLE_MATCHING = 6001;
 
 testnetwork = testnetwork || {};
 testnetwork.packetMap = {};
@@ -395,6 +396,18 @@ CmdSendGetTimeServer = fr.OutPacket.extend(
         }
     })
 
+CmdSendBattleMatching = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.BATTLE_MATCHING);
+        },
+        pack: function () {
+            this.packHeader();
+            this.updateSize();
+        }
+    })
 
 
 /**
