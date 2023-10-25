@@ -79,6 +79,7 @@ var ScreenNetwork = cc.Layer.extend({
     },
     onSelectBack:function(sender)
     {
+        cc.log("=-=-=-=-=-=-=-=-=-=-=-")
         fr.view(ScreenMenu);
     },
     onSelectLogin:function(sender)

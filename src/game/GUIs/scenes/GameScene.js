@@ -31,6 +31,8 @@ var GameScene = cc.Scene.extend({
         this.addChild(this.mapLayer);
         this.addChild(this.infoLayer);
         this.addChild(this.popUpLayer)
+
+        // this.setVisible(false);
     },
 
     getPopUpLayer: function () {
@@ -43,6 +45,11 @@ var GameScene = cc.Scene.extend({
     getInfoLayer: function () {
         return this.infoLayer;
     },
+
+    onBuyResourceSuccess: function (data) {
+        PlayerInfoManager.Instance().setResource(data);
+    },
+
     onReceiveUserInfo: function (userInfo) {
         PlayerInfoManager.Instance().setPlayerInfo({
             name: userInfo.name,
@@ -55,10 +62,29 @@ var GameScene = cc.Scene.extend({
             elixir: userInfo.elixir,
             gem: userInfo.gem,
         });
+
+        testnetwork.connector.sendGetArmyInfo();
     },
 
-    onBuyResourceSuccess: function (data) {
-        PlayerInfoManager.Instance().setResource(data);
-    }
+    onReceiveArmyInfo: function (armyInfo) {
+        // MapManager.Instance().loadFromServer(armyInfo.listTroops);
+        // cc.log("NHAN THONG TIN VE LINH : "+JSON.stringify(armyInfo.listTroops))
+        ArmyManager.Instance().setArmyAmount(armyInfo.listTroops);
+        testnetwork.connector.sendGetMapInfo();
+    },
+
+    onReceiveMapInfo: function (mapInfo) {
+        MapManager.Instance().loadFromServer(mapInfo.listBuildings);
+        testnetwork.connector.sendGetTimeServer();
+    },
+    onReceiveTimeServer: function (time) {
+        TimeManager.Instance().setDeltaTimeClientServer(time);
+        this.onReceiveAllData();
+    },
+
+    onReceiveAllData: function () {
+        cc.log("onReceiveAllData");
+        this.setVisible(true);
+    },
 
 });

@@ -20,26 +20,26 @@ testnetwork.Connector = cc.Class.extend({
                 break;
             case gv.CMD.USER_LOGIN:
                 // this.sendGetUserInfo();
-                fr.getCurrentScreen().onFinishLogin();
+                cc.director.getRunningScene().onFinishLogin();
                // cc.director.getRunningScene().getChildByName("screen").onFinishLogin();
                 break;
             case gv.CMD.USER_INFO:
 
-                // neu this khong co onReceiveUserInfo thi se goi cua fr.getCurrentScreen()
-                if(fr.getCurrentScreen() == null)
+                // neu this khong co onReceiveUserInfo thi se goi cua cc.director.getRunningScene()
+                if(cc.director.getRunningScene() == null)
                 {
                     cc.director.getRunningScene().onReceiveUserInfo(packet);
                     cc.log("onReceiveUserInfo")
                 }
                 else
-                fr.getCurrentScreen().onReceiveUserInfo(packet);
+                cc.director.getRunningScene().onReceiveUserInfo(packet);
 
                 break;
             case gv.CMD.MAP_INFO:
-                fr.getCurrentScreen().onReceiveMapInfo(packet);
+                cc.director.getRunningScene().onReceiveMapInfo(packet);
                 break;
             case gv.CMD.ARMY_INFO:
-                fr.getCurrentScreen().onReceiveArmyInfo(packet);
+                cc.director.getRunningScene().onReceiveArmyInfo(packet);
                 break;
             case gv.CMD.CHEAT_RESOURCE:
                 if (packet.error === 0)
@@ -67,7 +67,7 @@ testnetwork.Connector = cc.Class.extend({
                 break;
             case gv.CMD.MOVE:
                 cc.log("MOVE:", packet.x, packet.y);
-                fr.getCurrentScreen().updateMove(packet.x, packet.y);
+                cc.director.getRunningScene().updateMove(packet.x, packet.y);
                 break;
             case gv.CMD.MOVE_BUILDING:
                 cc.log("MOVE_BUILDING", packet);
@@ -120,7 +120,7 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.GET_TIME_SERVER:
                 cc.log("GET_TIME_SERVER", JSON.stringify(packet, null, 2));
                 if(packet.error === 0)
-                    fr.getCurrentScreen().onReceiveTimeServer(packet.time);
+                    cc.director.getRunningScene().onReceiveTimeServer(packet.time);
                 else
                 cc.log("GET_TIME_SERVER ERROR");
                 break;

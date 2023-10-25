@@ -34,11 +34,12 @@ var ScreenMenu = cc.Layer.extend({
     },
     onSelectNetwork:function(sender)
     {
-        fr.view(ScreenNetwork);
+        cc.director.runScene(new ScreenNetwork);
     },
     onSelectShop:function(sender)
     {
-        fr.view(PopupLayer);
+        // fr.view(PopupLayer);
+        cc.director.runScene(new PopupLayer);
     },
     onSelectMap:function(sender)
     {
