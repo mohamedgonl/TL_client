@@ -17,7 +17,6 @@ var Building = GameObject.extend({
         this._startTime = startTime;
         this._endTime = endTime;
 
-
         let config = LoadManager.Instance().getConfig(this._type,level);
         this._width = config.width;
         this._height = config.height;
@@ -26,76 +25,47 @@ var Building = GameObject.extend({
         this.setAnchorPoint(0.5,0.5);
     },
 
-    onAddIntoPopup: function () {
-        this._shadow = new cc.Sprite();
-        this._grass = new cc.Sprite();
-        this._body = new cc.Sprite();
-        this._upper = new cc.Sprite();
-
-        this.addChild(this._grass,ZORDER_BUILDING_GRASS);
-        this.addChild(this._body,ZORDER_BUILDING_BODY);
-        this.addChild(this._shadow,ZORDER_BUILDING_SHADOW);
-        this.addChild(this._upper,ZORDER_BUILDING_UPPER);
-
-        this.loadSpriteByLevel(this._level);
-        this.loadSubSprite();
-    },
-
     onAddIntoMapLayer: function () {
-        // shadow, grass, body, upper is new cc sprite with nothing
-        this._shadow = new cc.Sprite();
-        this._grass = new cc.Sprite();
-        this._body = new cc.Sprite();
-        this._upper = new cc.Sprite();
+        this.loadBottomSprite();
+        this.loadEffectSprite();
+        this.loadMainSprite();
+        this.addChild(this._bottom);
+        this.addChild(this._mainSprite);
+        this.addChild(this._effect);
+    },
+    onAddWithGrass: function () {
+        this.loadBottomSprite();
+        this.loadEffectSprite();
+        this.loadMainSprite();
+        this.addChild(this._bottom);
+        this.addChild(this._mainSprite);
+        this.addChild(this._effect);
+    },
+    onMoveInLayer: function () {
 
-
-        this.addChild(this._body,ZORDER_BUILDING_BODY);
-
-        this._body.addChild(this._upper,ZORDER_BUILDING_UPPER);
-
-        //bottom add truc tiep vao Maplayer voi ZORDER_BUILDING_BOTTOM;
-        this._bottom = new cc.Node();
-        this._bottom.addChild(this._shadow,ZORDER_BUILDING_SHADOW);
-        this._bottom.addChild(this._grass,ZORDER_BUILDING_GRASS);
-
-
-
-        this.loadSpriteByLevel(this._level);
-        this.loadSubSprite();
-
-
-        switch (this._state){
-            case 0:
-                this._arrow_move.setVisible(false);
-                this._nameLabel.setVisible(false);
-                this._levelLabel.setVisible(false);
-                break;
-            case 1:
-            case 2:
-                this._progressBar.setVisible(true);
-                this._fence.setVisible(true);
-                break;
-        }
 
     },
+    loadBottomSprite: function () {
+        let size = this._width;
 
+        //green square
+        this._green_square = new cc.Sprite(res_map.SPRITE.GREEN_SQUARE[this._width]);
+        this._green_square.setAnchorPoint(0.5,0.5);
+        this._green_square.setVisible(false);
 
-    //load sprite with size,
-    //shadow_type = 1 for quare, 2 for circle, 0 for no shadow
-    loadSprite: function (bodySprite, upperSprite, shadow_type, isUpperAnimation) {
-
-        var size = this._width;
-        //body
-        this._body.setTexture(bodySprite);
-        this._body.setAnchorPoint(0.5,0.5);
-        this._body.setScale(SCALE_BUILDING_BODY);
-
+        //red square
+        this._red_square = new cc.Sprite(res_map.SPRITE.RED_SQUARE[this._width]);
+        this._red_square.setAnchorPoint(0.5,0.5);
+        this._red_square.setVisible(false);
 
         //grass
+        this._grass = new cc.Sprite();
         this._grass.setTexture(res_map.SPRITE.GRASS.BUILDING[size]);
         this._grass.setAnchorPoint(0.5,0.5);
 
         //shadow
+        let shadow_type = this._shadowType;
+        this._shadow = new cc.Sprite();
         if(shadow_type === 1){
             //this._shadow = new cc.Sprite(res_map.SPRITE.SHADOW[size]);
             this._shadow.setTexture(res_map.SPRITE.SHADOW[size])
@@ -105,66 +75,22 @@ var Building = GameObject.extend({
         else if(shadow_type === 2){
             //this._shadow = new cc.Sprite(res_map.SPRITE.SHADOW.CIRCLE);
             this._shadow.setTexture(res_map.SPRITE.SHADOW.CIRCLE)
-           this._shadow.setAnchorPoint(0.5,0.5);
+            this._shadow.setAnchorPoint(0.5,0.5);
         }
 
-        //upper
-        if(upperSprite != null){
-            this._upper.setPosition(this._body.getBoundingBox().width,this._body.getBoundingBox().height);
-            if(isUpperAnimation){
-
-                //this._upper = new cc.Sprite(upperSprite[0]);
-                //set texture for first frame and remove old action
-                this._upper.setTexture(upperSprite[0]);
-                this._upper.stopAllActions();
-
-
-                var animation = new cc.Animation();
-                var countFrame = Object.keys(upperSprite).length;
-
-
-                for (var i = 0; i < countFrame; i++) {
-                    animation.addSpriteFrameWithFile(upperSprite[i]);
-                }
-                animation.setDelayPerUnit(0.3);
-                animation.setRestoreOriginalFrame(true);
-                var action = cc.animate(animation);
-
-                this._upper.runAction(cc.repeatForever(action))
-
-
-
-            }
-            else {
-                this._upper.setTexture(upperSprite)
-            }
-        }
-
-
-
-
+        this._bottom = new cc.Node();
+        this._bottom.addChild(this._grass);
+        this._bottom.addChild(this._shadow);
+        this._bottom.addChild(this._green_square);
+        this._bottom.addChild(this._red_square);
     },
-    loadSubSprite: function(){
-        //arrow move
-        this._arrow_move = new cc.Sprite(res_map.SPRITE.ARROW_MOVE[this._width]);
-        this._arrow_move.setAnchorPoint(0.5,0.5);
-        this._arrow_move.setScale(SCALE_BUILDING_BODY);
-        this._arrow_move.setVisible(false);
-        // this._arrow_move.setGlobalZOrder(MAP_ZORDER_BUILDING+1)
-        this.addChild(this._arrow_move,ZORDER_BUILDING_EFFECT);
 
-        //green square
-        this._green_square = new cc.Sprite(res_map.SPRITE.GREEN_SQUARE[this._width]);
-        this._green_square.setAnchorPoint(0.5,0.5);
-        this.addChild(this._green_square,ZORDER_BUILDING_SQUARE);
-        this._green_square.setVisible(false);
-
-        //red square
-        this._red_square = new cc.Sprite(res_map.SPRITE.RED_SQUARE[this._width]);
-        this._red_square.setAnchorPoint(0.5,0.5);
-        this.addChild(this._red_square,ZORDER_BUILDING_SQUARE);
-        this._red_square.setVisible(false);
-
+    loadEffectSprite: function () {
+        //arrow
+        this._arrow = new cc.Sprite(res_map.SPRITE.ARROW_MOVE[this._width]);
+        this._arrow.setAnchorPoint(0.5,0.5);
+        this._arrow.setScale(SCALE_BUILDING_BODY);
+        this._arrow.setVisible(false);
 
         //name label
         this._nameLabel = new cc.LabelBMFont(BuildingInfo[this._type].name, res.FONT.SOJI[FONT_SIZE_NAME_LABEL], 350, cc.TEXT_ALIGNMENT_CENTER);
@@ -172,8 +98,6 @@ var Building = GameObject.extend({
         this._nameLabel.setPosition(0,80);
         this._nameLabel.setColor(new cc.Color(255, 255, 0));
         this._nameLabel.setVisible(false);
-        this.addChild(this._nameLabel,ZORDER_BUILDING_EFFECT);
-
 
         //progress bar
         this._progressBar = new ccui.Slider();
@@ -183,20 +107,16 @@ var Building = GameObject.extend({
         this._progressBar.setAnchorPoint(0.5, 1);
         this._progressBar.setPosition(0,30);
         this._progressBar.setVisible(false);
-        this.addChild(this._progressBar,ZORDER_BUILDING_EFFECT);
 
         //level label
         this._levelLabel = new cc.LabelBMFont("Cấp " + this._level, res.FONT.SOJI[FONT_SIZE_LEVEL_LABEL], 350, cc.TEXT_ALIGNMENT_CENTER);
         this._levelLabel.setAnchorPoint(0.5,0.5);
         this._levelLabel.setPosition(0,50);
         this._levelLabel.setVisible(false);
-        this.addChild(this._levelLabel,ZORDER_BUILDING_EFFECT);
 
         //time label
         this._timeLabel = new cc.LabelBMFont("", res.FONT.SOJI[12], 350, cc.TEXT_ALIGNMENT_CENTER);
         this._timeLabel.setAnchorPoint(0.5,0);
-        //x = progress bar witdh /2 , y = progress bar height + 10
-
         this._timeLabel.setPosition(
             this._progressBar.getBoundingBox().width,
             this._progressBar.getBoundingBox().height + 10);
@@ -206,11 +126,68 @@ var Building = GameObject.extend({
         //effect fence when build upgrade
         this._fence = new cc.Sprite(res_map.SPRITE.FENCE);
         this._fence.setAnchorPoint(0.5,0);
-        this.addChild(this._fence,ZORDER_BUILDING_EFFECT);
+
         //set pos below 0 0 of building = height grass/2 + offset
         this._fence.setPosition(0,-this._grass.getBoundingBox().height/2 +5);
         this._fence.setVisible(false);
 
+        this._effect = new cc.Node();
+        this._effect.addChild(this._arrow);
+        this._effect.addChild(this._nameLabel);
+        this._effect.addChild(this._progressBar);
+        this._effect.addChild(this._levelLabel);
+        this._effect.addChild(this._fence);
+    },
+
+
+    //load sprite with size,
+    loadMainSprite: function () {
+        let bodySprite = this._bodySprite;
+        let upperSprite = this._upperSprite;
+        let isUpperAnimation = this._isUpperAnimate;
+        let size = this._width;
+        //body
+        this._body = new cc.Sprite();
+        this._body.setTexture(bodySprite);
+        this._body.setAnchorPoint(0.5,0.5);
+        this._body.setScale(SCALE_BUILDING_BODY);
+
+
+        //upper
+        this._upper = new cc.Sprite();
+        if(upperSprite != null){
+            // this._upper.setPosition(this._body.getBoundingBox().width,this._body.getBoundingBox().height);
+
+            this._upper.setAnchorPoint(0.5,0.5);
+            this._upper.setScale(SCALE_BUILDING_BODY);
+            if(isUpperAnimation){
+
+                //this._upper = new cc.Sprite(upperSprite[0]);
+                //set texture for first frame and remove old action
+                this._upper.setTexture(upperSprite[0]);
+                this._upper.stopAllActions();
+
+
+                let animation = new cc.Animation();
+                let countFrame = Object.keys(upperSprite).length;
+
+
+                for (let i = 0; i < countFrame; i++) {
+                    animation.addSpriteFrameWithFile(upperSprite[i]);
+                }
+                animation.setDelayPerUnit(0.3);
+                animation.setRestoreOriginalFrame(true);
+                let action = cc.animate(animation);
+                this._upper.runAction(cc.repeatForever(action))
+
+            }
+            else {
+                this._upper.setTexture(upperSprite)
+            }
+        }
+        this._mainSprite = new cc.Node();
+        this._mainSprite.addChild(this._body);
+        this._mainSprite.addChild(this._upper);
     },
 
     //load button for building, reload when select building, upgrade, build, cancel
@@ -253,9 +230,6 @@ var Building = GameObject.extend({
 
     onSelected: function(){
         this.loadButton();
-        this._arrow_move.setVisible(true);
-        this._nameLabel.setVisible(true);
-        this._levelLabel.setVisible(true);
         cc.eventManager.dispatchCustomEvent(EVENT_SELECT_BUILDING, this._id);
         // opacity to 80 to 100 to 80 repeat forever
         var action = cc.sequence(cc.fadeTo(0.8, 150), cc.fadeTo(0.8, 255));
@@ -269,7 +243,7 @@ var Building = GameObject.extend({
         let infoLayer = cc.director.getRunningScene().infoLayer;
         //xoa het button cu
         infoLayer.removeAllButtonInMenu();
-        this._arrow_move.setVisible(false);
+        // this._arrow_move.setVisible(false);
         this._nameLabel.setVisible(false);
         this._levelLabel.setVisible(false);
         cc.eventManager.dispatchCustomEvent(EVENT_UNSELECT_BUILDING);
@@ -392,8 +366,8 @@ var Building = GameObject.extend({
         this._state = 0;
         this._startTime = null;
         this._endTime = null;
-        this._progressBar.setVisible(false);
-        this._fence.setVisible(false);
+        // this._progressBar.setVisible(false);
+        // this._fence.setVisible(false);
         PlayerInfoManager.Instance().changeBuilder("current", 1);
         //unschedule update
         let chosenBuilding = cc.director.getRunningScene().getMapLayer().getChosenBuilding();
@@ -409,7 +383,7 @@ var Building = GameObject.extend({
         this._level += 1;
         //set sprite for new level and update level label
         this._levelLabel.setString("Cấp " + this._level);
-        this.loadSpriteByLevel(this._level)
+        // this.loadSpriteByLevel(this._level)
         this.completeProcess();
     },
 

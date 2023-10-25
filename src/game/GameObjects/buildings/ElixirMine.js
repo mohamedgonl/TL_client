@@ -5,6 +5,11 @@ var ElixirMine = BaseMine.extend({
         let capacity = LoadManager.Instance().getConfig(this._type, this._level)
         this._capacityElixir = capacity.capacity;
         this._productivityElixir = capacity.productivity;
+
+        this._bodySprite = res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level];
+        this._upperSprite = res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level];
+        this._shadowType = 1;
+        this._isUpperAnimate = true;
     },
     loadSpriteByLevel: function (level) {
         this.loadSprite(res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level],

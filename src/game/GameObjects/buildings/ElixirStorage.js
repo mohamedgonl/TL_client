@@ -2,6 +2,11 @@ var ElixirStorage = BaseStorage.extend({
     _type: "STO_2",
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
+
+        this._bodySprite = res_map.SPRITE.BODY.ELIXIR_STORAGE[level][0];
+        this._upperSprite = null;
+        this._shadowType = 1;
+        this._isUpperAnimate = false;
     },
     //load sprite by level , type = 0, 1 , 2, 3 (0->25%,26->50%,51->75%,76->100%)
     loadSpriteByLevel: function (level,type =0) {
@@ -33,7 +38,7 @@ var ElixirStorage = BaseStorage.extend({
         else{
             type = 3;
         }
-        this.loadSpriteByLevel(this._level,type);
+        // this.loadSpriteByLevel(this._level,type);
     }
 
 });

@@ -8,22 +8,24 @@ var BaseMine = Building.extend({
         this._capacityGold = 0;
         this._capacityElixir = 0;
         this._currentGold = 0;
-        this._currentElixir = 0;
+        this._currentElixir = 0;    // this._iconHarvest have bg, and bg.icon is sprite of harvest icon
+        let node = CCSUlties.parseUIFile(res_ui.ICON_HARVEST);
+
+        this._iconHarvest = node;
+        this.addChild(this._iconHarvest, ZORDER_BUILDING_EFFECT);
+        this._iconHarvest.setVisible(false);
+
+
     },
     onAddIntoMapManager: function () {
         this._super();
         let mapManager = MapManager.Instance();
         mapManager.addToListMine(this);
     },
-    loadSprite: function (bodySprite, upperSprite, shadow_type, isUpperAnimation) {
-        this._super(bodySprite, upperSprite, shadow_type, isUpperAnimation);
+    loadSprite: function () {
+        this._super();
 
-        // this._iconHarvest have bg, and bg.icon is sprite of harvest icon
-        let node = CCSUlties.parseUIFile(res_ui.ICON_HARVEST);
 
-        this._iconHarvest = node;
-        this.addChild(this._iconHarvest, ZORDER_BUILDING_EFFECT);
-        this._iconHarvest.setVisible(false);
     },
 
     setLastCollectTimeAndIconHarvest: function (lastCollectTime) {

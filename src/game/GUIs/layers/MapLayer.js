@@ -571,16 +571,11 @@ var MapLayer = cc.Layer.extend({
         this.addChild(gameObject, zOrder);
         gameObject.setPosition(posToAdd);
 
-        //gameobject._bottom
-        if(gameObject._bottom == null) return;
-        this.addChild(gameObject._bottom, ZORDER_BUILDING_GRASS);
-        gameObject._bottom.setPosition(posToAdd);
+
     },
     moveGameObjectInMapLayer: function (gameObject, gridPosX, gridPosY, isCenter = false) {
         let posToAdd = this.getMapPosFromGridPos({x: gridPosX, y: gridPosY}, isCenter);
         gameObject.setPosition(posToAdd);
-        if(gameObject._bottom == null) return;
-        gameObject._bottom.setPosition(posToAdd);
     },
     //------------------------------------------------------------------------------------------------------------------
     moveView: function (delta) {
@@ -690,7 +685,7 @@ var MapLayer = cc.Layer.extend({
         this.onModeBuyBuilding = true;
 
         //init building and set it to chosen building
-        this.chosenBuilding = getBuildingFromType(buildingType, 1)
+        this.chosenBuilding = getBuildingFromType(buildingType, 1);
         this.chosenBuilding.onAddIntoMapLayer();
 
         //add button accept and cancel to building

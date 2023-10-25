@@ -2,6 +2,11 @@ var GoldStorage = BaseStorage.extend({
     _type: "STO_1",
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
+
+        this._bodySprite = res_map.SPRITE.BODY.GOLD_STORAGE[level][0];
+        this._upperSprite = null;
+        this._shadowType = 1;
+        this._isUpperAnimate = false;
     },
     //load sprite by level , type = 0, 1 , 2, 3 (0->25%,26->50%,51->75%,76->100%)
     loadSpriteByLevel: function (level,type =0) {
@@ -32,6 +37,6 @@ var GoldStorage = BaseStorage.extend({
         else{
             type = 3;
         }
-        this.loadSpriteByLevel(this._level,type);
+        // this.loadSpriteByLevel(this._level,type);
     }
 });

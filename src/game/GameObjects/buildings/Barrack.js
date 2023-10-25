@@ -7,8 +7,16 @@ var Barrack = Building.extend({
     _type: "BAR_1",
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
+
+        this._bodySprite = res_map.SPRITE.BODY.BARRACK[level];
+        this._upperSprite = null;
+        this._shadowType = 1;
+        this._isUpperAnimate = false;
+
         this._trainingQueue = [];
         this.lastTrainingTime = 0;
+
+
 
     },
     loadSpriteByLevel: function (level) {

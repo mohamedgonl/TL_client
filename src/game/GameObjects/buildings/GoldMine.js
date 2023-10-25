@@ -5,6 +5,11 @@ var GoldMine = BaseMine.extend({
         let capacity = LoadManager.Instance().getConfig(this._type, this._level)
         this._capacityGold = capacity.capacity;
         this._productivityGold = capacity.productivity;
+
+        this._bodySprite = res_map.SPRITE.BODY.GOLD_MINE.BOTTOM[level];
+        this._upperSprite = res_map.SPRITE.BODY.GOLD_MINE.UPPER[level];
+        this._shadowType = 1;
+        this._isUpperAnimate = true;
     },
     loadSpriteByLevel: function (level) {
         this.loadSprite(res_map.SPRITE.BODY.GOLD_MINE.BOTTOM[level],
