@@ -8,10 +8,22 @@ var BaseStorage = Building.extend({
         this._currentElixir = 0;
 
         //set capacity
-        this._capacityGold = 0;
-        this._capacityElixir = 0;
-        let config = LoadManager.Instance().getConfig(this._type,this._level);
-        this.setCapacity(config.capacity);
+
+
+        //if in build, capacity = 0
+
+        if(level == 1 && status == 1)
+        {
+            this._capacityGold = 0;
+            this._capacityElixir = 0;
+        }
+        else
+        {
+            let config = LoadManager.Instance().getConfig(this._type,this._level);
+            this.setCapacity(config.capacity);
+        }
+
+
 
         //listen event EVENT_NAMES.RESOURCE_CHANGED to update sprite
         cc.eventManager.addListener({
@@ -50,15 +62,15 @@ var BaseStorage = Building.extend({
             }
         }
         return {
-            gold: this._capacityGold,
-            elixir: this._capacityElixir
+            gold: this._capacityGold||0,
+            elixir: this._capacityElixir||0
         }
     },
 
     getCurrentAmount: function () {
         return {
-            gold: this._currentGold,
-            elixir: this._currentElixir
+            gold: this._currentGold||0,
+            elixir: this._currentElixir||0
         }
     },
 
@@ -68,6 +80,7 @@ var BaseStorage = Building.extend({
 
         //before set new capacity
         let amountBefore = this.getCapacity();
+
 
         let configCapacity = LoadManager.Instance().getConfig(this._type,this._level,"capacity");
 
@@ -80,8 +93,10 @@ var BaseStorage = Building.extend({
             gold: amountAfter.gold - amountBefore.gold,
             elixir: amountAfter.elixir - amountBefore.elixir
         }
+
         playerInfoManager.changeMaxResource(amountIncrease);
     },
+
     updateSprite: function () {
 
     }

@@ -154,6 +154,8 @@ testnetwork.Connector = cc.Class.extend({
             cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
+            let buildings = ArmyManager.Instance().getBarrackList();
+            cc.log("LIST BUILDING ::: " +JSON.stringify(buildings))
             cc.log(packet.barrackId)
             trainingPopup.getPage({barackId: packet.barrackId}).updateUI(1);
         }

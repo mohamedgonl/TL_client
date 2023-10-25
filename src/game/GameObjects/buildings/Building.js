@@ -89,7 +89,6 @@ var Building = GameObject.extend({
                 for (var i = 0; i < countFrame; i++) {
                     animation.addSpriteFrameWithFile(upperSprite[i]);
                 }
-                cc.log(animation.getFrames().length);
                 animation.setDelayPerUnit(0.3);
                 animation.setRestoreOriginalFrame(true);
                 var action = cc.animate(animation);
@@ -445,7 +444,6 @@ var Building = GameObject.extend({
 
     onAddIntoMapManager: function () {
         let mapManager = MapManager.Instance();
-        cc.log("------",this._type,"-------",JSON.stringify(mapManager.buildingAmount,null,2));
         if(!mapManager.buildingAmount[this._type]){
             mapManager.buildingAmount[this._type] = 1;
         }
@@ -497,7 +495,6 @@ var Building = GameObject.extend({
         }
         if(!PlayerInfoManager.Instance().getBuilder().current){
             cc.log("not enough builder");
-            cc.log("not enough builder");
             // create content in popup
             let label = new cc.LabelBMFont("Bạn có muốn giải phóng thợ xây", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
             label.setColor(new cc.Color(150, 78, 3));
@@ -529,7 +526,6 @@ var Building = GameObject.extend({
             return;
         }
         //send to server
-        cc.log("send to server");
 
         testnetwork.connector.sendUpgradeBuilding(this._id);
     },
@@ -566,11 +562,16 @@ var Building = GameObject.extend({
         }
     },
     onClickQuickFinish: function () {
-        cc.log("onClickQuickFinish");
+        let priceGem = Utils.calculateGBuyTime(this._endTime - TimeManager.Instance().getCurrentTimeInSecond());
+        let currentGem = PlayerInfoManager.Instance().getResource("gem");
+        if(currentGem < priceGem)
+        {
+            BasicPopup.appear("THIẾU TÀI NGUYÊN", "Bạn không đủ G")
+            return;
+        }
         testnetwork.connector.sendQuickFinish(this._id);
     },
     quickFinish: function (){
-        cc.log("quick finish", this._id)
         switch (this._state){
             case 1:
                 this.completeBuild();

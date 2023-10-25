@@ -127,6 +127,13 @@ var Utils = {
     button.setPosition(position);
     button.addClickEventListener(callback.bind(target));
     return button;
+    },
+    calculateGBuyRes: function (gold, elixir) {
+        return Math.ceil(gold / G_BUY_GOLD) + Math.ceil(elixir / G_BUY_ELIXIR);
+    },
+    calculateGBuyTime: function (time) {
+        //G BUY SECOND = 900
+        return Math.ceil(time / G_BUY_SECOND);
     }
 }
 var GameUtilities ={
@@ -159,7 +166,9 @@ var GameUtilities ={
             let capacity = storage._capacityGold;
             if(goldCurrent/(length - i )> capacity)
             {
+                storage.setCurrentAmount(capacity,"gold");
                 goldCurrent -= capacity;
+
             }
             else
             {
@@ -179,6 +188,7 @@ var GameUtilities ={
             let capacity = storage._capacityElixir;
             if(elixirCurrent/(length - i )> capacity)
             {
+                storage.setCurrentAmount(capacity,"elixir");
                 elixirCurrent -= capacity;
             }
             else

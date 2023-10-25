@@ -10,11 +10,9 @@ var BasicPopup = cc.Node.extend({
         //add to attribute
         children.map(i => {
             this[i.getName()] = i;
-            cc.log(i.getName())
             let childrenOfChildren = i.getChildren();
             childrenOfChildren.map(j => {
                 this[i.getName()] [j.getName()] = j;
-                cc.log(".    ", j.getName())
             })
         })
 

@@ -7,39 +7,13 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
-    <Item Key="PackageParamsKey">
-      <Value ctype="PackageParams">
-        <LuaIsEncrypt Value="False" />
-        <LuaEncryptKey Value="" />
-        <LuaEncryptSign Value="" />
-        <Android_PackageName Value="org.cocos.NewCocosProject" />
-        <AndroidkeyStore Value="" />
-        <AndroidVersion Value="" />
-        <iOS_Target Value="NewCocosProject-mobile" />
-        <iOS_BundleID Value="" />
-        <Platform Value="None" />
-        <RunPlatform Value="Windows" />
-        <FrameworkVersion Value="cocos2d-x-3.10" />
-        <IsDebugKeystore Value="True" />
-        <KeystorePassword Value="" />
-        <KeystoreAliasName Value="" />
-        <KeystoreAliasPassword Value="" />
-        <EnableSourceMap Value="False" />
-        <EnableHTML5Advanced Value="False" />
-      </Value>
-    </Item>
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
         <OpenedDocuments>
-          <FilePathData Path="TroopInfoPopup.csd" />
-          <FilePathData Path="InfoPopup.csd" />
-          <FilePathData Path="ItemInfoPopup.csd" />
-          <FilePathData Path="NotiPopup.csd" />
           <FilePathData Path="InfoLayer1.csd" />
-          <FilePathData Path="Layer1.csd" />
-          <FilePathData Path="UpgradePopup.csd" />
+          <FilePathData Path="BattleGUI.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="InfoPopup.csd" />
+        <ActiveDocument Path="BattleGUI.csd" />
       </Value>
     </Item>
   </Properties>

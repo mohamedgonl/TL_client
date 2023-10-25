@@ -72,7 +72,6 @@ var LoginView = cc.Scene.extend({
     },
 
     onReceiveUserInfo: function (userInfo) {
-        cc.log("ON RECEIVE USER INFO ++++++++++++++++++++++")
         PlayerInfoManager.Instance().setPlayerInfo({
             name: userInfo.name,
             avatar: userInfo.avatar,

@@ -48,7 +48,6 @@ var GameScene = cc.Scene.extend({
         return this.infoLayer;
     },
     onReceiveUserInfo: function (userInfo) {
-        cc.log("ON RECEIVE USER INFO ++++++++++++++++++++++ GAMESCENE")
         PlayerInfoManager.Instance().setPlayerInfo({
             name: userInfo.name,
             avatar: userInfo.avatar,
@@ -62,10 +61,7 @@ var GameScene = cc.Scene.extend({
         });
     },
 
-
-
     onBuyResourceSuccess: function (data) {
-        cc.log("ON BUY SUCCESS  ++++++++++++++++++++++")
         PlayerInfoManager.Instance().setResource(data);
     }
 

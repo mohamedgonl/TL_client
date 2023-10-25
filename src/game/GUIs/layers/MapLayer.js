@@ -10,7 +10,6 @@ var MapLayer = cc.Layer.extend({
     ctor: function () {
 
         this._super();
-        //cc.log("+++++++++++++++++++++",JSON.stringify(this.getPosition(),null,2));
         this.setAnchorPoint(0, 0);
         //create label hello world at 0,0
         this.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
@@ -60,7 +59,6 @@ var MapLayer = cc.Layer.extend({
     //add building to layer with gridPos of it
     addBuildingToLayer: function (building, zOrder) {
         if (building == null) {
-            cc.log("ERORR::::::::add building to layer null");
             return;
         }
 
@@ -88,30 +86,6 @@ var MapLayer = cc.Layer.extend({
 
     //add event listener for map
     addEventListener: function () {
-
-        //add touch
-        // cc.eventManager.addListener({
-        //     event: cc.EventListener.TOUCH_ONE_BY_ONE,
-        //     swallowTouches: true,
-        //
-        //     onTouchBegan: function (event) {
-        //         this.onTouchBegan(event);
-        //         return true;
-        //     }.bind(this),
-        //
-        //     onTouchEnded: function (event) {
-        //         this.onTouchEnded(event);
-        //         return true;
-        //     }.bind(this),
-        //
-        //     onTouchMoved: function (event) {
-        //         this.handMoved = true;
-        //         //cc.log("move event :" + JSON.stringify(event,null,2));
-        //         this.onDrag(event);
-        //         return true;
-        //     }.bind(this)
-        //
-        // }, this);
 
         //scale by scroll
         cc.eventManager.addListener({
@@ -194,7 +168,7 @@ var MapLayer = cc.Layer.extend({
     //check client, if valid, send to server to recheck
     acceptBuyBuilding: function () {
         //check valid put building   OK
-        if (!MapManager.Instance().checkValidPutBuilding(this.chosenBuilding, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y)) {
+        if (!this.checkValidPutBuilding(this.chosenBuilding, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y)) {
             cc.log("invalid put building");
             return;
         }
@@ -235,7 +209,6 @@ var MapLayer = cc.Layer.extend({
         let priceGold = LoadManager.Instance().getConfig(this.chosenBuilding._type, 1, "gold") || 0;
         let priceElixir = LoadManager.Instance().getConfig(this.chosenBuilding._type, 1, "elixir") || 0;
         let priceGem = LoadManager.Instance().getConfig(this.chosenBuilding._type, 1, "coin") || 0;
-        cc.log("priceGold: " + priceGold + " priceElixir: " + priceElixir + " priceGem: " + priceGem);
         if(priceGem > 0){
             if(PlayerInfoManager.Instance().getResource("gem") < priceGem)
             {
@@ -260,7 +233,6 @@ var MapLayer = cc.Layer.extend({
         }
 
         //gui cho server
-        cc.log("send buy building request", this.chosenBuilding._type, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y)
         testnetwork.connector.sendBuyBuilding(this.chosenBuilding._type, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y);
 
     },
@@ -323,8 +295,6 @@ var MapLayer = cc.Layer.extend({
     },
 
     onTouchBegan: function (touch) {
-        cc.log("location:", JSON.stringify(this.getPosition(), null, 2));
-        cc.log("mapPos:", JSON.stringify(this.getMapPosFromScreenPos(touch.getLocation()), null, 2));
         this.positionTouchBegan = touch.getLocation();
         if (this.chosenBuilding == null) return;
 
@@ -368,7 +338,7 @@ var MapLayer = cc.Layer.extend({
         //if onModeMoveBuilding and current pos of chosenBuilding is valid, send to server to recheck
         if (this.onModeMovingBuilding) {
 
-            if (MapManager.Instance().checkValidPutBuilding(this.chosenBuilding, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y))
+            if (this.checkValidPutBuilding(this.chosenBuilding, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y))
                 this.exitModeMoveBuilding();
         }
     },
@@ -441,13 +411,14 @@ var MapLayer = cc.Layer.extend({
         }
     },
 
+
     enterModeMoveBuilding: function () {
         this.chosenBuilding.setLocalZOrder(MAP_ZORDER_BUILDING + 1);
         this.canDragBuilding = true;
         this.onModeMovingBuilding = true;
         var infoLayer = cc.director.getRunningScene().infoLayer;
         //if chosen building can put in new pos, set green square, else set red square
-        if (MapManager.Instance().checkValidPutBuilding(this.chosenBuilding, this.chosenBuilding._posX, this.chosenBuilding._posY)) {
+        if (this.checkValidPutBuilding(this.chosenBuilding, this.chosenBuilding._posX, this.chosenBuilding._posY)) {
             this.chosenBuilding.setSquare(1);
         } else {
             this.chosenBuilding.setSquare(2);
@@ -464,9 +435,8 @@ var MapLayer = cc.Layer.extend({
         var infoLayer = cc.director.getRunningScene().infoLayer;
         var newPosX = this.tempPosChosenBuilding.x;
         var newPosY = this.tempPosChosenBuilding.y;
-        var mapManager = MapManager.Instance();
 
-        if (mapManager.checkValidPutBuilding(this.chosenBuilding, newPosX, newPosY)) {
+        if (this.checkValidPutBuilding(this.chosenBuilding, newPosX, newPosY)) {
             testnetwork.connector.sendMoveBuilding(this.chosenBuilding._id, newPosX, newPosY);
         } else {
             //move back to old pos
@@ -483,7 +453,7 @@ var MapLayer = cc.Layer.extend({
 
         this.tempPosChosenBuilding = {x: newPosX, y: newPosY};
         //change color of square
-        if (MapManager.Instance().checkValidPutBuilding(building, newPosX, newPosY)) {
+        if (this.checkValidPutBuilding(building, newPosX, newPosY)) {
             building.setSquare(1);
         } else {
             building.setSquare(2);
@@ -504,7 +474,6 @@ var MapLayer = cc.Layer.extend({
     },
 
     getBuildingFromTouch: function (locationInScreen) {
-        //cc.log("+++++++++++++++++++getBuildingFromTouch",JSON.stringify(locationInScreen,null,2));
         let chosenGrid = this.getGridPosFromScreenPos(locationInScreen);
         if (chosenGrid == null) return null;
         if (this.chosenBuilding != null) {
@@ -530,7 +499,6 @@ var MapLayer = cc.Layer.extend({
         var posInMap = cc.pSub(posInScreen, this.getPosition());
         let x = posInMap.x / this.getScale();
         let y = posInMap.y / this.getScale();
-        //cc.log("+++++++++++++++++++getMapPosFromScreenPos",JSON.stringify(posInMap,null,2));
         return cc.p(x, y);
     },
 
@@ -714,7 +682,7 @@ var MapLayer = cc.Layer.extend({
 
 
         //set position of building
-        let validPosition = MapManager.Instance().getEmptyPositionPutBuilding(this.chosenBuilding);
+        let validPosition = this.getEmptyPositionPutBuilding(this.chosenBuilding);
 
         if(posX && posY) {
             validPosition = cc.p(posX,posY);
@@ -744,6 +712,38 @@ var MapLayer = cc.Layer.extend({
     },
     getChosenBuilding: function () {
         return this.chosenBuilding;
+    },
+    checkValidPutBuilding: function (building, newPosX, newPosY) {
+        var id = building._id;
+        var width = building._width;
+        var height = building._height;
+        let mapGrid = MapManager.Instance().mapGrid;
+
+
+        //check out of map
+        if(newPosX < 0 || newPosX + width > 40 || newPosY < 0 || newPosY + height > 40)
+            return false;
+
+        //check overlap
+        for(var column = newPosX; column < newPosX + width; column++)
+            for(var row = newPosY; row < newPosY + height; row++)
+                if(mapGrid[column][row] != 0 && mapGrid[column][row] != id)
+                    return false;
+
+        return true;
+    },
+
+    getEmptyPositionPutBuilding: function (building) {
+        let width = building._width;
+        let height = building._height;
+
+        //find empty rect to place building in mapGrid
+        for(let column = 0; column < 40; column++)
+            for(let row = 0; row < 40; row++)
+                if(this.checkValidPutBuilding(building, column, row))
+                    return {x: column, y: row};
+
+        return null;
     },
 });
 

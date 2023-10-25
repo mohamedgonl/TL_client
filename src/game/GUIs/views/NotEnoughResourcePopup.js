@@ -4,8 +4,14 @@ var NotEnoughResourcePopup = cc.Node.extend({
         this.type = type;
         this.amount = amount;
         this.callback = callback;
-        cc.log("amount:::::::::::::::::::::", amount);
-        cc.log("type:::::::::::::::::::::", type);
+
+        //note: gemCost = (int) Math.ceil((double) gold / 400) + (int) Math.ceil((double) elixir / 500);
+        let gemCost;
+        let currentG = PlayerInfoManager.Instance().getResource("gem");
+        if(type === "gold")
+            gemCost = Utils.calculateGBuyRes(amount, 0);
+        else
+            gemCost = Utils.calculateGBuyRes(0, amount);
 
         // create content in popup
         let label = new cc.LabelBMFont("Bạn có muốn mua số tài nguyên còn thiếu?", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
@@ -23,9 +29,22 @@ var NotEnoughResourcePopup = cc.Node.extend({
         icon.setAnchorPoint(cc.p(0, 0)  );
         price.addChild(icon);
 
+        //thêm vào content 1 dòng: gemCost + icon gem
+        let gemCostLabel = new cc.LabelBMFont("Giá: "+ gemCost, res.FONT.SOJI[20], 350, cc.TEXT_ALIGNMENT_CENTER);
+        gemCostLabel.setAnchorPoint(cc.p(0.7, 1));
+        gemCostLabel.setPositionY(-label.getContentSize().height - price.getContentSize().height);
+        let gemIcon = new cc.Sprite(res.ICON.GEM);
+        gemIcon.setPositionX(gemCostLabel.getContentSize().width  );
+        gemIcon.setPositionY(label.getContentSize().height/2);
+        gemIcon.setAnchorPoint(cc.p(0, 0)  );
+        gemCostLabel.addChild(gemIcon);
+
+
+
         let content = new cc.Node();
         content.addChild(label);
         content.addChild(price);
+        content.addChild(gemCostLabel);
 
         let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
 
@@ -33,11 +52,12 @@ var NotEnoughResourcePopup = cc.Node.extend({
             title: "THIẾU TÀI NGUYÊN",
             acceptCallBack: () => {
                 popUpLayer.setVisible(false);
+
+                //nếu tiền cần tiêu > tổng kho
                 //check kho chứa, nếu amount + kho chứa > max thì ko cho mua
                 let maxAmount = PlayerInfoManager.Instance().getMaxResource()[type];
                 let currentAmount = PlayerInfoManager.Instance().getResource(type);
-                cc.log("maxAmount", maxAmount);
-                cc.log("currentAmount", currentAmount);
+
                 if(amount + currentAmount > maxAmount){
                     let str ="";
                     if(type === "gold")
@@ -47,6 +67,14 @@ var NotEnoughResourcePopup = cc.Node.extend({
                     BasicPopup.appear("THIẾU TÀI NGUYÊN", "Bạn cần mở rộng kho "+str);
                     return;
                 }
+
+                //nếu không đủ G
+                if(gemCost > currentG){
+                    BasicPopup.appear("THIẾU TÀI NGUYÊN", "Bạn không đủ G");
+                    return;
+                }
+
+                //nếu ok , gửi cho server
                 if(type === "gold")
                     testnetwork.connector.sendBuyResourceByGem(amount,0);
                 else
