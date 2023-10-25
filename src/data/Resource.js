@@ -144,6 +144,7 @@ var res_ui = {
     TROOP_INFO: "TroopInfoPopup.json",
     CLOUD_1:"res/guis/map/cloud_1.png",
     CLOUD_2:"res/guis/map/cloud_2.png",
+    BATTLE_GUI: "BattleGUI.json",
 }
 
 var res_shop = {

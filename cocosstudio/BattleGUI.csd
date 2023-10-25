@@ -383,7 +383,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="btn_end" ActionTag="1642749513" Tag="82" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="13.8977" RightMargin="981.1024" TopMargin="421.7253" BottomMargin="158.2747" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="111" Scale9Height="38" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="btn_end" ActionTag="1642749513" Tag="82" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="13.8977" RightMargin="981.1023" TopMargin="421.7253" BottomMargin="158.2747" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="111" Scale9Height="38" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="141.0000" Y="60.0000" />
             <Children>
               <AbstractNodeData Name="BitmapFontLabel_13" ActionTag="-618450076" Tag="83" IconVisible="False" LeftMargin="22.0800" RightMargin="22.9200" TopMargin="18.0661" BottomMargin="16.9339" LabelText="KẾT THÚC" ctype="TextBMFontObjectData">
@@ -410,8 +410,838 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="troop_container" ActionTag="15983339" Tag="91" IconVisible="False" PositionPercentXEnabled="True" PercentWidthEnable="True" PercentHeightEnable="True" PercentWidthEnabled="True" PercentHeightEnabled="True" VerticalEdge="BottomEdge" LeftMargin="12.6096" RightMargin="214.5905" TopMargin="498.1326" BottomMargin="13.8674" LeftEage="256" RightEage="256" TopEage="31" BottomEage="31" Scale9OriginX="256" Scale9OriginY="31" Scale9Width="266" Scale9Height="34" ctype="ImageViewObjectData">
-            <Size X="908.7999" Y="128.0000" />
+          <AbstractNodeData Name="troop_container" ActionTag="15983339" Tag="91" IconVisible="False" PositionPercentXEnabled="True" PercentWidthEnable="True" PercentHeightEnable="True" PercentWidthEnabled="True" PercentHeightEnabled="True" VerticalEdge="BottomEdge" LeftMargin="12.6096" RightMargin="214.5904" TopMargin="498.1326" BottomMargin="13.8674" LeftEage="256" RightEage="256" TopEage="31" BottomEage="31" Scale9OriginX="256" Scale9OriginY="31" Scale9Width="266" Scale9Height="34" ctype="ImageViewObjectData">
+            <Size X="908.8000" Y="128.0000" />
+            <Children>
+              <AbstractNodeData Name="slot" ActionTag="622832864" Tag="83" IconVisible="True" LeftMargin="55.8012" RightMargin="852.9988" TopMargin="66.0000" BottomMargin="62.0000" ctype="SingleNodeObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <Children>
+                  <AbstractNodeData Name="button" ActionTag="1559685535" Tag="84" IconVisible="False" LeftMargin="-36.0000" RightMargin="-36.0000" TopMargin="-42.0000" BottomMargin="-42.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="42" Scale9Height="62" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                    <Size X="72.0000" Y="84.0000" />
+                    <Children>
+                      <AbstractNodeData Name="troop_sprite" ActionTag="29271982" Tag="85" IconVisible="False" LeftMargin="6.7200" RightMargin="6.2800" TopMargin="4.5683" BottomMargin="6.4317" ctype="SpriteObjectData">
+                        <Size X="59.0000" Y="73.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="36.2200" Y="42.9317" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.5031" Y="0.5111" />
+                        <PreSize X="0.8194" Y="0.8690" />
+                        <FileData Type="Normal" Path="guis/icons/ARM_10_Battle.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="selected_sprite" ActionTag="-1441984628" Tag="86" IconVisible="False" LeftMargin="-2.0780" RightMargin="-1.9220" TopMargin="-4.2953" BottomMargin="-1.7047" ctype="SpriteObjectData">
+                        <Size X="76.0000" Y="90.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.9220" Y="43.2953" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4989" Y="0.5154" />
+                        <PreSize X="1.0556" Y="1.0714" />
+                        <FileData Type="Normal" Path="guis/icons/select_troop.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="star_icon" ActionTag="1856627744" Tag="128" IconVisible="False" LeftMargin="-9.0568" RightMargin="37.0568" TopMargin="48.7267" BottomMargin="-9.7267" ctype="SpriteObjectData">
+                        <Size X="44.0000" Y="45.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="12.9432" Y="12.7733" />
+                        <Scale ScaleX="0.6500" ScaleY="0.6500" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1798" Y="0.1521" />
+                        <PreSize X="0.6111" Y="0.5357" />
+                        <FileData Type="Normal" Path="guis/Main_Gui/exp_icon.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="level" ActionTag="2073280268" Tag="129" IconVisible="False" LeftMargin="3.5811" RightMargin="49.4189" TopMargin="60.9548" BottomMargin="4.0452" LabelText="1" ctype="TextBMFontObjectData">
+                        <Size X="19.0000" Y="19.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="13.0811" Y="13.5452" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1817" Y="0.1613" />
+                        <PreSize X="0.2639" Y="0.2262" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="count" ActionTag="-464459371" Tag="130" IconVisible="False" LeftMargin="2.2807" RightMargin="3.7193" TopMargin="1.7114" BottomMargin="50.2886" LabelText="x555" ctype="TextBMFontObjectData">
+                        <Size X="66.0000" Y="32.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.2807" Y="66.2886" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PreSize X="0.9167" Y="0.3810" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
+                      </AbstractNodeData>
+                    </Children>
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <TextColor A="255" R="65" G="65" B="70" />
+                    <DisabledFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <PressedFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <NormalFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="empty_slot" ActionTag="787015953" Tag="87" IconVisible="False" LeftMargin="-35.5000" RightMargin="-35.5000" TopMargin="-42.5000" BottomMargin="-42.5000" ctype="SpriteObjectData">
+                    <Size X="71.0000" Y="85.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="Normal" Path="guis/icons/slot_empty.png" Plist="" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="55.8012" Y="62.0000" />
+                <Scale ScaleX="1.2500" ScaleY="1.2500" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.0614" Y="0.4844" />
+                <PreSize X="0.0000" Y="0.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="slot1" ActionTag="1691599820" Tag="131" IconVisible="True" LeftMargin="150.2473" RightMargin="758.5527" TopMargin="66.0000" BottomMargin="62.0000" ctype="SingleNodeObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <Children>
+                  <AbstractNodeData Name="button" ActionTag="-1531674376" Tag="132" IconVisible="False" LeftMargin="-36.0000" RightMargin="-36.0000" TopMargin="-42.0000" BottomMargin="-42.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="42" Scale9Height="62" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                    <Size X="72.0000" Y="84.0000" />
+                    <Children>
+                      <AbstractNodeData Name="troop_sprite" ActionTag="389405214" Tag="133" IconVisible="False" LeftMargin="6.7200" RightMargin="6.2800" TopMargin="4.5683" BottomMargin="6.4317" ctype="SpriteObjectData">
+                        <Size X="59.0000" Y="73.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="36.2200" Y="42.9317" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.5031" Y="0.5111" />
+                        <PreSize X="0.8194" Y="0.8690" />
+                        <FileData Type="Normal" Path="guis/icons/ARM_10_Battle.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="selected_sprite" ActionTag="279239916" Tag="134" IconVisible="False" LeftMargin="-2.0780" RightMargin="-1.9220" TopMargin="-4.2953" BottomMargin="-1.7047" ctype="SpriteObjectData">
+                        <Size X="76.0000" Y="90.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.9220" Y="43.2953" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4989" Y="0.5154" />
+                        <PreSize X="1.0556" Y="1.0714" />
+                        <FileData Type="Normal" Path="guis/icons/select_troop.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="star_icon" ActionTag="-670348361" Tag="135" IconVisible="False" LeftMargin="-9.0568" RightMargin="37.0568" TopMargin="48.7267" BottomMargin="-9.7267" ctype="SpriteObjectData">
+                        <Size X="44.0000" Y="45.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="12.9432" Y="12.7733" />
+                        <Scale ScaleX="0.6500" ScaleY="0.6500" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1798" Y="0.1521" />
+                        <PreSize X="0.6111" Y="0.5357" />
+                        <FileData Type="Normal" Path="guis/Main_Gui/exp_icon.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="level" ActionTag="-303382637" Tag="136" IconVisible="False" LeftMargin="3.5811" RightMargin="49.4189" TopMargin="60.9548" BottomMargin="4.0452" LabelText="1" ctype="TextBMFontObjectData">
+                        <Size X="19.0000" Y="19.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="13.0811" Y="13.5452" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1817" Y="0.1613" />
+                        <PreSize X="0.2639" Y="0.2262" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="count" ActionTag="756256849" Tag="137" IconVisible="False" LeftMargin="2.2807" RightMargin="3.7193" TopMargin="1.7114" BottomMargin="50.2886" LabelText="x555" ctype="TextBMFontObjectData">
+                        <Size X="66.0000" Y="32.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.2807" Y="66.2886" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PreSize X="0.9167" Y="0.3810" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
+                      </AbstractNodeData>
+                    </Children>
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <TextColor A="255" R="65" G="65" B="70" />
+                    <DisabledFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <PressedFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <NormalFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="empty_slot" ActionTag="-1224952370" Tag="138" IconVisible="False" LeftMargin="-35.5000" RightMargin="-35.5000" TopMargin="-42.5000" BottomMargin="-42.5000" ctype="SpriteObjectData">
+                    <Size X="71.0000" Y="85.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="Normal" Path="guis/icons/slot_empty.png" Plist="" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="150.2473" Y="62.0000" />
+                <Scale ScaleX="1.2500" ScaleY="1.2500" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.1653" Y="0.4844" />
+                <PreSize X="0.0000" Y="0.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="slot2" ActionTag="500869567" Tag="139" IconVisible="True" LeftMargin="245.0786" RightMargin="663.7214" TopMargin="66.0000" BottomMargin="62.0000" ctype="SingleNodeObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <Children>
+                  <AbstractNodeData Name="button" ActionTag="-524479559" Tag="140" IconVisible="False" LeftMargin="-36.0000" RightMargin="-36.0000" TopMargin="-42.0000" BottomMargin="-42.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="42" Scale9Height="62" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                    <Size X="72.0000" Y="84.0000" />
+                    <Children>
+                      <AbstractNodeData Name="troop_sprite" ActionTag="-265560681" Tag="141" IconVisible="False" LeftMargin="6.7200" RightMargin="6.2800" TopMargin="4.5683" BottomMargin="6.4317" ctype="SpriteObjectData">
+                        <Size X="59.0000" Y="73.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="36.2200" Y="42.9317" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.5031" Y="0.5111" />
+                        <PreSize X="0.8194" Y="0.8690" />
+                        <FileData Type="Normal" Path="guis/icons/ARM_10_Battle.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="selected_sprite" ActionTag="1801921036" Tag="142" IconVisible="False" LeftMargin="-2.0780" RightMargin="-1.9220" TopMargin="-4.2953" BottomMargin="-1.7047" ctype="SpriteObjectData">
+                        <Size X="76.0000" Y="90.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.9220" Y="43.2953" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4989" Y="0.5154" />
+                        <PreSize X="1.0556" Y="1.0714" />
+                        <FileData Type="Normal" Path="guis/icons/select_troop.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="star_icon" ActionTag="-1651823525" Tag="143" IconVisible="False" LeftMargin="-9.0568" RightMargin="37.0568" TopMargin="48.7267" BottomMargin="-9.7267" ctype="SpriteObjectData">
+                        <Size X="44.0000" Y="45.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="12.9432" Y="12.7733" />
+                        <Scale ScaleX="0.6500" ScaleY="0.6500" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1798" Y="0.1521" />
+                        <PreSize X="0.6111" Y="0.5357" />
+                        <FileData Type="Normal" Path="guis/Main_Gui/exp_icon.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="level" ActionTag="1678380617" Tag="144" IconVisible="False" LeftMargin="3.5811" RightMargin="49.4189" TopMargin="60.9548" BottomMargin="4.0452" LabelText="1" ctype="TextBMFontObjectData">
+                        <Size X="19.0000" Y="19.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="13.0811" Y="13.5452" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1817" Y="0.1613" />
+                        <PreSize X="0.2639" Y="0.2262" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="count" ActionTag="1641249794" Tag="145" IconVisible="False" LeftMargin="2.2807" RightMargin="3.7193" TopMargin="1.7114" BottomMargin="50.2886" LabelText="x555" ctype="TextBMFontObjectData">
+                        <Size X="66.0000" Y="32.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.2807" Y="66.2886" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PreSize X="0.9167" Y="0.3810" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
+                      </AbstractNodeData>
+                    </Children>
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <TextColor A="255" R="65" G="65" B="70" />
+                    <DisabledFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <PressedFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <NormalFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="empty_slot" ActionTag="734364233" Tag="146" IconVisible="False" LeftMargin="-35.5000" RightMargin="-35.5000" TopMargin="-42.5000" BottomMargin="-42.5000" ctype="SpriteObjectData">
+                    <Size X="71.0000" Y="85.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="Normal" Path="guis/icons/slot_empty.png" Plist="" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="245.0786" Y="62.0000" />
+                <Scale ScaleX="1.2500" ScaleY="1.2500" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.2697" Y="0.4844" />
+                <PreSize X="0.0000" Y="0.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="slot3" ActionTag="1703962753" Tag="147" IconVisible="True" LeftMargin="340.4154" RightMargin="568.3846" TopMargin="66.0000" BottomMargin="62.0000" ctype="SingleNodeObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <Children>
+                  <AbstractNodeData Name="button" ActionTag="1968613086" Tag="148" IconVisible="False" LeftMargin="-36.0000" RightMargin="-36.0000" TopMargin="-42.0000" BottomMargin="-42.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="42" Scale9Height="62" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                    <Size X="72.0000" Y="84.0000" />
+                    <Children>
+                      <AbstractNodeData Name="troop_sprite" ActionTag="825087372" Tag="149" IconVisible="False" LeftMargin="6.7200" RightMargin="6.2800" TopMargin="4.5683" BottomMargin="6.4317" ctype="SpriteObjectData">
+                        <Size X="59.0000" Y="73.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="36.2200" Y="42.9317" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.5031" Y="0.5111" />
+                        <PreSize X="0.8194" Y="0.8690" />
+                        <FileData Type="Normal" Path="guis/icons/ARM_10_Battle.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="selected_sprite" ActionTag="115959628" Tag="150" IconVisible="False" LeftMargin="-2.0780" RightMargin="-1.9220" TopMargin="-4.2953" BottomMargin="-1.7047" ctype="SpriteObjectData">
+                        <Size X="76.0000" Y="90.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.9220" Y="43.2953" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4989" Y="0.5154" />
+                        <PreSize X="1.0556" Y="1.0714" />
+                        <FileData Type="Normal" Path="guis/icons/select_troop.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="star_icon" ActionTag="1558270647" Tag="151" IconVisible="False" LeftMargin="-9.0568" RightMargin="37.0568" TopMargin="48.7267" BottomMargin="-9.7267" ctype="SpriteObjectData">
+                        <Size X="44.0000" Y="45.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="12.9432" Y="12.7733" />
+                        <Scale ScaleX="0.6500" ScaleY="0.6500" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1798" Y="0.1521" />
+                        <PreSize X="0.6111" Y="0.5357" />
+                        <FileData Type="Normal" Path="guis/Main_Gui/exp_icon.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="level" ActionTag="-1084388532" Tag="152" IconVisible="False" LeftMargin="3.5811" RightMargin="49.4189" TopMargin="60.9548" BottomMargin="4.0452" LabelText="1" ctype="TextBMFontObjectData">
+                        <Size X="19.0000" Y="19.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="13.0811" Y="13.5452" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1817" Y="0.1613" />
+                        <PreSize X="0.2639" Y="0.2262" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="count" ActionTag="-343657134" Tag="153" IconVisible="False" LeftMargin="2.2807" RightMargin="3.7193" TopMargin="1.7114" BottomMargin="50.2886" LabelText="x555" ctype="TextBMFontObjectData">
+                        <Size X="66.0000" Y="32.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.2807" Y="66.2886" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PreSize X="0.9167" Y="0.3810" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
+                      </AbstractNodeData>
+                    </Children>
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <TextColor A="255" R="65" G="65" B="70" />
+                    <DisabledFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <PressedFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <NormalFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="empty_slot" ActionTag="-638041275" Tag="154" IconVisible="False" LeftMargin="-35.5000" RightMargin="-35.5000" TopMargin="-42.5000" BottomMargin="-42.5000" ctype="SpriteObjectData">
+                    <Size X="71.0000" Y="85.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="Normal" Path="guis/icons/slot_empty.png" Plist="" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="340.4154" Y="62.0000" />
+                <Scale ScaleX="1.2500" ScaleY="1.2500" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.3746" Y="0.4844" />
+                <PreSize X="0.0000" Y="0.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="slot4" ActionTag="1923669004" Tag="155" IconVisible="True" LeftMargin="435.8878" RightMargin="472.9121" TopMargin="66.0000" BottomMargin="62.0000" ctype="SingleNodeObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <Children>
+                  <AbstractNodeData Name="button" ActionTag="-1795899168" Tag="156" IconVisible="False" LeftMargin="-36.0000" RightMargin="-36.0000" TopMargin="-42.0000" BottomMargin="-42.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="42" Scale9Height="62" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                    <Size X="72.0000" Y="84.0000" />
+                    <Children>
+                      <AbstractNodeData Name="troop_sprite" ActionTag="-969987409" Tag="157" IconVisible="False" LeftMargin="6.7200" RightMargin="6.2800" TopMargin="4.5683" BottomMargin="6.4317" ctype="SpriteObjectData">
+                        <Size X="59.0000" Y="73.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="36.2200" Y="42.9317" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.5031" Y="0.5111" />
+                        <PreSize X="0.8194" Y="0.8690" />
+                        <FileData Type="Normal" Path="guis/icons/ARM_10_Battle.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="selected_sprite" ActionTag="-53600551" Tag="158" IconVisible="False" LeftMargin="-2.0780" RightMargin="-1.9220" TopMargin="-4.2953" BottomMargin="-1.7047" ctype="SpriteObjectData">
+                        <Size X="76.0000" Y="90.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.9220" Y="43.2953" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4989" Y="0.5154" />
+                        <PreSize X="1.0556" Y="1.0714" />
+                        <FileData Type="Normal" Path="guis/icons/select_troop.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="star_icon" ActionTag="-81965860" Tag="159" IconVisible="False" LeftMargin="-9.0568" RightMargin="37.0568" TopMargin="48.7267" BottomMargin="-9.7267" ctype="SpriteObjectData">
+                        <Size X="44.0000" Y="45.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="12.9432" Y="12.7733" />
+                        <Scale ScaleX="0.6500" ScaleY="0.6500" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1798" Y="0.1521" />
+                        <PreSize X="0.6111" Y="0.5357" />
+                        <FileData Type="Normal" Path="guis/Main_Gui/exp_icon.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="level" ActionTag="244154572" Tag="160" IconVisible="False" LeftMargin="3.5811" RightMargin="49.4189" TopMargin="60.9548" BottomMargin="4.0452" LabelText="1" ctype="TextBMFontObjectData">
+                        <Size X="19.0000" Y="19.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="13.0811" Y="13.5452" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1817" Y="0.1613" />
+                        <PreSize X="0.2639" Y="0.2262" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="count" ActionTag="1661630469" Tag="161" IconVisible="False" LeftMargin="2.2807" RightMargin="3.7193" TopMargin="1.7114" BottomMargin="50.2886" LabelText="x555" ctype="TextBMFontObjectData">
+                        <Size X="66.0000" Y="32.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.2807" Y="66.2886" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PreSize X="0.9167" Y="0.3810" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
+                      </AbstractNodeData>
+                    </Children>
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <TextColor A="255" R="65" G="65" B="70" />
+                    <DisabledFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <PressedFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <NormalFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="empty_slot" ActionTag="-1142940031" Tag="162" IconVisible="False" LeftMargin="-35.5000" RightMargin="-35.5000" TopMargin="-42.5000" BottomMargin="-42.5000" ctype="SpriteObjectData">
+                    <Size X="71.0000" Y="85.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="Normal" Path="guis/icons/slot_empty.png" Plist="" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="435.8878" Y="62.0000" />
+                <Scale ScaleX="1.2500" ScaleY="1.2500" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.4796" Y="0.4844" />
+                <PreSize X="0.0000" Y="0.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="slot5" ActionTag="-810675082" Tag="163" IconVisible="True" LeftMargin="531.5463" RightMargin="377.2537" TopMargin="66.0000" BottomMargin="62.0000" ctype="SingleNodeObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <Children>
+                  <AbstractNodeData Name="button" ActionTag="-1855233512" Tag="164" IconVisible="False" LeftMargin="-36.0000" RightMargin="-36.0000" TopMargin="-42.0000" BottomMargin="-42.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="42" Scale9Height="62" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                    <Size X="72.0000" Y="84.0000" />
+                    <Children>
+                      <AbstractNodeData Name="troop_sprite" ActionTag="-1202593840" Tag="165" IconVisible="False" LeftMargin="6.7200" RightMargin="6.2800" TopMargin="4.5683" BottomMargin="6.4317" ctype="SpriteObjectData">
+                        <Size X="59.0000" Y="73.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="36.2200" Y="42.9317" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.5031" Y="0.5111" />
+                        <PreSize X="0.8194" Y="0.8690" />
+                        <FileData Type="Normal" Path="guis/icons/ARM_10_Battle.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="selected_sprite" ActionTag="1080057851" Tag="166" IconVisible="False" LeftMargin="-2.0780" RightMargin="-1.9220" TopMargin="-4.2953" BottomMargin="-1.7047" ctype="SpriteObjectData">
+                        <Size X="76.0000" Y="90.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.9220" Y="43.2953" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4989" Y="0.5154" />
+                        <PreSize X="1.0556" Y="1.0714" />
+                        <FileData Type="Normal" Path="guis/icons/select_troop.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="star_icon" ActionTag="-1903169342" Tag="167" IconVisible="False" LeftMargin="-9.0568" RightMargin="37.0568" TopMargin="48.7267" BottomMargin="-9.7267" ctype="SpriteObjectData">
+                        <Size X="44.0000" Y="45.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="12.9432" Y="12.7733" />
+                        <Scale ScaleX="0.6500" ScaleY="0.6500" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1798" Y="0.1521" />
+                        <PreSize X="0.6111" Y="0.5357" />
+                        <FileData Type="Normal" Path="guis/Main_Gui/exp_icon.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="level" ActionTag="-515124704" Tag="168" IconVisible="False" LeftMargin="3.5811" RightMargin="49.4189" TopMargin="60.9548" BottomMargin="4.0452" LabelText="1" ctype="TextBMFontObjectData">
+                        <Size X="19.0000" Y="19.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="13.0811" Y="13.5452" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1817" Y="0.1613" />
+                        <PreSize X="0.2639" Y="0.2262" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="count" ActionTag="-1912352121" Tag="169" IconVisible="False" LeftMargin="2.2807" RightMargin="3.7193" TopMargin="1.7114" BottomMargin="50.2886" LabelText="x555" ctype="TextBMFontObjectData">
+                        <Size X="66.0000" Y="32.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.2807" Y="66.2886" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PreSize X="0.9167" Y="0.3810" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
+                      </AbstractNodeData>
+                    </Children>
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <TextColor A="255" R="65" G="65" B="70" />
+                    <DisabledFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <PressedFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <NormalFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="empty_slot" ActionTag="1481000644" Tag="170" IconVisible="False" LeftMargin="-35.5000" RightMargin="-35.5000" TopMargin="-42.5000" BottomMargin="-42.5000" ctype="SpriteObjectData">
+                    <Size X="71.0000" Y="85.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="Normal" Path="guis/icons/slot_empty.png" Plist="" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="531.5463" Y="62.0000" />
+                <Scale ScaleX="1.2500" ScaleY="1.2500" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5849" Y="0.4844" />
+                <PreSize X="0.0000" Y="0.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="slot6" ActionTag="157484027" Tag="171" IconVisible="True" LeftMargin="627.2051" RightMargin="281.5949" TopMargin="66.0000" BottomMargin="62.0000" ctype="SingleNodeObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <Children>
+                  <AbstractNodeData Name="button" ActionTag="-1650382913" Tag="172" IconVisible="False" LeftMargin="-36.0000" RightMargin="-36.0000" TopMargin="-42.0000" BottomMargin="-42.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="42" Scale9Height="62" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                    <Size X="72.0000" Y="84.0000" />
+                    <Children>
+                      <AbstractNodeData Name="troop_sprite" ActionTag="-1268461184" Tag="173" IconVisible="False" LeftMargin="6.7200" RightMargin="6.2800" TopMargin="4.5683" BottomMargin="6.4317" ctype="SpriteObjectData">
+                        <Size X="59.0000" Y="73.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="36.2200" Y="42.9317" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.5031" Y="0.5111" />
+                        <PreSize X="0.8194" Y="0.8690" />
+                        <FileData Type="Normal" Path="guis/icons/ARM_10_Battle.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="selected_sprite" ActionTag="858765469" Tag="174" IconVisible="False" LeftMargin="-2.0780" RightMargin="-1.9220" TopMargin="-4.2953" BottomMargin="-1.7047" ctype="SpriteObjectData">
+                        <Size X="76.0000" Y="90.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.9220" Y="43.2953" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4989" Y="0.5154" />
+                        <PreSize X="1.0556" Y="1.0714" />
+                        <FileData Type="Normal" Path="guis/icons/select_troop.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="star_icon" ActionTag="736864110" Tag="175" IconVisible="False" LeftMargin="-9.0568" RightMargin="37.0568" TopMargin="48.7267" BottomMargin="-9.7267" ctype="SpriteObjectData">
+                        <Size X="44.0000" Y="45.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="12.9432" Y="12.7733" />
+                        <Scale ScaleX="0.6500" ScaleY="0.6500" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1798" Y="0.1521" />
+                        <PreSize X="0.6111" Y="0.5357" />
+                        <FileData Type="Normal" Path="guis/Main_Gui/exp_icon.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="level" ActionTag="1151464119" Tag="176" IconVisible="False" LeftMargin="3.5811" RightMargin="49.4189" TopMargin="60.9548" BottomMargin="4.0452" LabelText="1" ctype="TextBMFontObjectData">
+                        <Size X="19.0000" Y="19.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="13.0811" Y="13.5452" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1817" Y="0.1613" />
+                        <PreSize X="0.2639" Y="0.2262" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="count" ActionTag="-975888625" Tag="177" IconVisible="False" LeftMargin="2.2807" RightMargin="3.7193" TopMargin="1.7114" BottomMargin="50.2886" LabelText="x555" ctype="TextBMFontObjectData">
+                        <Size X="66.0000" Y="32.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.2807" Y="66.2886" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PreSize X="0.9167" Y="0.3810" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
+                      </AbstractNodeData>
+                    </Children>
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <TextColor A="255" R="65" G="65" B="70" />
+                    <DisabledFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <PressedFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <NormalFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="empty_slot" ActionTag="1867446104" Tag="178" IconVisible="False" LeftMargin="-35.5000" RightMargin="-35.5000" TopMargin="-42.5000" BottomMargin="-42.5000" ctype="SpriteObjectData">
+                    <Size X="71.0000" Y="85.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="Normal" Path="guis/icons/slot_empty.png" Plist="" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="627.2051" Y="62.0000" />
+                <Scale ScaleX="1.2500" ScaleY="1.2500" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.6901" Y="0.4844" />
+                <PreSize X="0.0000" Y="0.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="slot7" ActionTag="-836084216" Tag="179" IconVisible="True" LeftMargin="723.3896" RightMargin="185.4103" TopMargin="66.0000" BottomMargin="62.0000" ctype="SingleNodeObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <Children>
+                  <AbstractNodeData Name="button" ActionTag="44773196" Tag="180" IconVisible="False" LeftMargin="-36.0000" RightMargin="-36.0000" TopMargin="-42.0000" BottomMargin="-42.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="42" Scale9Height="62" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                    <Size X="72.0000" Y="84.0000" />
+                    <Children>
+                      <AbstractNodeData Name="troop_sprite" ActionTag="901625101" Tag="181" IconVisible="False" LeftMargin="6.7200" RightMargin="6.2800" TopMargin="4.5683" BottomMargin="6.4317" ctype="SpriteObjectData">
+                        <Size X="59.0000" Y="73.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="36.2200" Y="42.9317" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.5031" Y="0.5111" />
+                        <PreSize X="0.8194" Y="0.8690" />
+                        <FileData Type="Normal" Path="guis/icons/ARM_10_Battle.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="selected_sprite" ActionTag="477202137" Tag="182" IconVisible="False" LeftMargin="-2.0780" RightMargin="-1.9220" TopMargin="-4.2953" BottomMargin="-1.7047" ctype="SpriteObjectData">
+                        <Size X="76.0000" Y="90.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.9220" Y="43.2953" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4989" Y="0.5154" />
+                        <PreSize X="1.0556" Y="1.0714" />
+                        <FileData Type="Normal" Path="guis/icons/select_troop.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="star_icon" ActionTag="-181425219" Tag="183" IconVisible="False" LeftMargin="-9.0568" RightMargin="37.0568" TopMargin="48.7267" BottomMargin="-9.7267" ctype="SpriteObjectData">
+                        <Size X="44.0000" Y="45.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="12.9432" Y="12.7733" />
+                        <Scale ScaleX="0.6500" ScaleY="0.6500" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1798" Y="0.1521" />
+                        <PreSize X="0.6111" Y="0.5357" />
+                        <FileData Type="Normal" Path="guis/Main_Gui/exp_icon.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="level" ActionTag="1104255412" Tag="184" IconVisible="False" LeftMargin="3.5811" RightMargin="49.4189" TopMargin="60.9548" BottomMargin="4.0452" LabelText="1" ctype="TextBMFontObjectData">
+                        <Size X="19.0000" Y="19.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="13.0811" Y="13.5452" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1817" Y="0.1613" />
+                        <PreSize X="0.2639" Y="0.2262" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="count" ActionTag="-1257411385" Tag="185" IconVisible="False" LeftMargin="2.2807" RightMargin="3.7193" TopMargin="1.7114" BottomMargin="50.2886" LabelText="x555" ctype="TextBMFontObjectData">
+                        <Size X="66.0000" Y="32.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.2807" Y="66.2886" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PreSize X="0.9167" Y="0.3810" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
+                      </AbstractNodeData>
+                    </Children>
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <TextColor A="255" R="65" G="65" B="70" />
+                    <DisabledFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <PressedFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <NormalFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="empty_slot" ActionTag="1477050245" Tag="186" IconVisible="False" LeftMargin="-35.5000" RightMargin="-35.5000" TopMargin="-42.5000" BottomMargin="-42.5000" ctype="SpriteObjectData">
+                    <Size X="71.0000" Y="85.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="Normal" Path="guis/icons/slot_empty.png" Plist="" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="723.3896" Y="62.0000" />
+                <Scale ScaleX="1.2500" ScaleY="1.2500" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.7960" Y="0.4844" />
+                <PreSize X="0.0000" Y="0.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="slot8" ActionTag="1416767395" Tag="187" IconVisible="True" LeftMargin="819.7673" RightMargin="89.0327" TopMargin="66.0000" BottomMargin="62.0000" ctype="SingleNodeObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <Children>
+                  <AbstractNodeData Name="button" ActionTag="-839778093" Tag="188" IconVisible="False" LeftMargin="-36.0000" RightMargin="-36.0000" TopMargin="-42.0000" BottomMargin="-42.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="42" Scale9Height="62" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                    <Size X="72.0000" Y="84.0000" />
+                    <Children>
+                      <AbstractNodeData Name="troop_sprite" ActionTag="541571712" Tag="189" IconVisible="False" LeftMargin="6.7200" RightMargin="6.2800" TopMargin="4.5683" BottomMargin="6.4317" ctype="SpriteObjectData">
+                        <Size X="59.0000" Y="73.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="36.2200" Y="42.9317" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.5031" Y="0.5111" />
+                        <PreSize X="0.8194" Y="0.8690" />
+                        <FileData Type="Normal" Path="guis/icons/ARM_10_Battle.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="selected_sprite" ActionTag="1801344971" Tag="190" IconVisible="False" LeftMargin="-2.0780" RightMargin="-1.9220" TopMargin="-4.2953" BottomMargin="-1.7047" ctype="SpriteObjectData">
+                        <Size X="76.0000" Y="90.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.9220" Y="43.2953" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4989" Y="0.5154" />
+                        <PreSize X="1.0556" Y="1.0714" />
+                        <FileData Type="Normal" Path="guis/icons/select_troop.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="star_icon" ActionTag="1657950465" Tag="191" IconVisible="False" LeftMargin="-9.0568" RightMargin="37.0568" TopMargin="48.7267" BottomMargin="-9.7267" ctype="SpriteObjectData">
+                        <Size X="44.0000" Y="45.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="12.9432" Y="12.7733" />
+                        <Scale ScaleX="0.6500" ScaleY="0.6500" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1798" Y="0.1521" />
+                        <PreSize X="0.6111" Y="0.5357" />
+                        <FileData Type="Normal" Path="guis/Main_Gui/exp_icon.png" Plist="" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="level" ActionTag="1036330434" Tag="192" IconVisible="False" LeftMargin="3.5811" RightMargin="49.4189" TopMargin="60.9548" BottomMargin="4.0452" LabelText="1" ctype="TextBMFontObjectData">
+                        <Size X="19.0000" Y="19.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="13.0811" Y="13.5452" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.1817" Y="0.1613" />
+                        <PreSize X="0.2639" Y="0.2262" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_12.fnt" Plist="" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="count" ActionTag="1805046268" Tag="193" IconVisible="False" LeftMargin="2.2807" RightMargin="3.7193" TopMargin="1.7114" BottomMargin="50.2886" LabelText="x555" ctype="TextBMFontObjectData">
+                        <Size X="66.0000" Y="32.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="35.2807" Y="66.2886" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PreSize X="0.9167" Y="0.3810" />
+                        <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
+                      </AbstractNodeData>
+                    </Children>
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <TextColor A="255" R="65" G="65" B="70" />
+                    <DisabledFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <PressedFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <NormalFileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="empty_slot" ActionTag="-989257751" Tag="194" IconVisible="False" LeftMargin="-35.5000" RightMargin="-35.5000" TopMargin="-42.5000" BottomMargin="-42.5000" ctype="SpriteObjectData">
+                    <Size X="71.0000" Y="85.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="Normal" Path="guis/icons/slot_empty.png" Plist="" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="819.7673" Y="62.0000" />
+                <Scale ScaleX="1.2500" ScaleY="1.2500" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.9020" Y="0.4844" />
+                <PreSize X="0.0000" Y="0.0000" />
+              </AbstractNodeData>
+            </Children>
             <AnchorPoint />
             <Position X="12.6096" Y="13.8674" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -419,17 +1249,6 @@
             <PrePosition X="0.0111" Y="0.0217" />
             <PreSize X="0.8000" Y="0.2000" />
             <FileData Type="Normal" Path="guis/icons/bg_troop_gui_battle.png" Plist="" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="slot_troop_battle_16" ActionTag="575283962" Tag="92" IconVisible="False" LeftMargin="31.7762" RightMargin="1032.2238" TopMargin="525.0530" BottomMargin="30.9470" ctype="SpriteObjectData">
-            <Size X="72.0000" Y="84.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="67.7762" Y="72.9470" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0597" Y="0.1140" />
-            <PreSize X="0.0634" Y="0.1312" />
-            <FileData Type="Normal" Path="guis/icons/slot_troop_battle.png" Plist="" />
-            <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

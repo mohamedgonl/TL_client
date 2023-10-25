@@ -26,6 +26,21 @@ var Building = GameObject.extend({
         this.setAnchorPoint(0.5,0.5);
     },
 
+    onAddIntoPopup: function () {
+        this._shadow = new cc.Sprite();
+        this._grass = new cc.Sprite();
+        this._body = new cc.Sprite();
+        this._upper = new cc.Sprite();
+
+        this.addChild(this._grass,ZORDER_BUILDING_GRASS);
+        this.addChild(this._body,ZORDER_BUILDING_BODY);
+        this.addChild(this._shadow,ZORDER_BUILDING_SHADOW);
+        this.addChild(this._upper,ZORDER_BUILDING_UPPER);
+
+        this.loadSpriteByLevel(this._level);
+        this.loadSubSprite();
+    },
+
     onAddIntoMapLayer: function () {
         // shadow, grass, body, upper is new cc sprite with nothing
         this._shadow = new cc.Sprite();
@@ -34,19 +49,14 @@ var Building = GameObject.extend({
         this._upper = new cc.Sprite();
 
 
-
-        // this.addChild(this._grass,ZORDER_BUILDING_GRASS);
         this.addChild(this._body,ZORDER_BUILDING_BODY);
-        // this.addChild(this._shadow,ZORDER_BUILDING_SHADOW);
-        // this.addChild(this._upper,ZORDER_BUILDING_UPPER);
-
 
         this._body.addChild(this._upper,ZORDER_BUILDING_UPPER);
 
         //bottom add truc tiep vao Maplayer voi ZORDER_BUILDING_BOTTOM;
         this._bottom = new cc.Node();
-        this._bottom.addChild(this._shadow,ZORDER_BUILDING_GRASS);
-        this._bottom.addChild(this._grass,ZORDER_BUILDING_SHADOW);
+        this._bottom.addChild(this._shadow,ZORDER_BUILDING_SHADOW);
+        this._bottom.addChild(this._grass,ZORDER_BUILDING_GRASS);
 
 
 
@@ -68,6 +78,8 @@ var Building = GameObject.extend({
         }
 
     },
+
+
     //load sprite with size,
     //shadow_type = 1 for quare, 2 for circle, 0 for no shadow
     loadSprite: function (bodySprite, upperSprite, shadow_type, isUpperAnimation) {
@@ -573,25 +585,6 @@ var Building = GameObject.extend({
         }
     },
 
-    //return 0 if can show upgrade button, 1 if not enough resource, 2 if max level
-    getStateUpgradeButton:function(){
-        let max_level = BuildingInfo[this._type].max_level;
-        let townHall = MapManager.Instance().getTownHall();
-
-        if(this._level === max_level || this._type == "BDH_1"){
-            return 2;
-        }
-        let priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
-        let priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
-        if(!PlayerInfoManager.Instance().checkEnoughResource(priceGold, priceElixir)){
-            return 1;
-        }
-        return 0;
-    },
-
-    getLevel: function () {
-        return this._level;
-    },
     showPopupUpgrade: function () {
         let popup = new UpgradePopup(this);
         var popupLayer = cc.director.getRunningScene().popUpLayer;
@@ -599,16 +592,7 @@ var Building = GameObject.extend({
         popupLayer.addChild(popup);
         popup.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
     },
-    getState: function () {
-        return this._state;
-    },
-    getTimeLeft: function () {
-        if(this._state!= null)
-        {
-            return this._endTime - TimeManager.Instance().getCurrentTimeInSecond();
-        }
-        return null;
-    },
+
 
     //receive form server when free 1 builder
     onReceivedQuickFinishOfAnother: function (packet) {
@@ -627,5 +611,33 @@ var Building = GameObject.extend({
         }
 
         this.onClickUpgrade();
-    }
+    },
+    getState: function () {
+        return this._state;
+    },
+    getTimeLeft: function () {
+        if(this._state!= null)
+        {
+            return this._endTime - TimeManager.Instance().getCurrentTimeInSecond();
+        }
+        return null;
+    },
+    getLevel: function () {
+        return this._level;
+    },
+    //return 0 if can show upgrade button, 1 if not enough resource, 2 if max level
+    getStateUpgradeButton:function(){
+        let max_level = BuildingInfo[this._type].max_level;
+        let townHall = MapManager.Instance().getTownHall();
+
+        if(this._level === max_level || this._type == "BDH_1"){
+            return 2;
+        }
+        let priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
+        let priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
+        if(!PlayerInfoManager.Instance().checkEnoughResource(priceGold, priceElixir)){
+            return 1;
+        }
+        return 0;
+    },
 });

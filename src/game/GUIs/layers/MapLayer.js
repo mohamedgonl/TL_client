@@ -691,6 +691,7 @@ var MapLayer = cc.Layer.extend({
 
         //init building and set it to chosen building
         this.chosenBuilding = getBuildingFromType(buildingType, 1)
+        this.chosenBuilding.onAddIntoMapLayer();
 
         //add button accept and cancel to building
         var buttonAccept = Utils.createButton(res.BUTTON.ACCEPT, SCALE_BUTTON_BUY_BUILDING, OFFSET_BUTTON_BUY_BUILDING, this.acceptBuyBuilding, this);

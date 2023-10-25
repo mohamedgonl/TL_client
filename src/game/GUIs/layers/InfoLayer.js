@@ -52,14 +52,6 @@ var InfoLayer = cc.Layer.extend({
         this.addChild(this.menu, 9999999999);
         this.menu.alignItemsHorizontallyWithPadding(10);
 
-        // //cheat btn
-        // const btnCheat = new ccui.Button();
-        // btnCheat.setTitleText("CHEAT");
-        // btnCheat.setTitleFontSize(24);
-        // btnCheat.setPosition(1030, 460);
-        //
-        // btnCheat.addTouchEventListener(this.onClickBtnCheat, this);
-        // this.addChild(btnCheat);
 
         this.btn_setting.addTouchEventListener(this.onClickBtnCheat, this);
     },
@@ -236,12 +228,10 @@ var InfoLayer = cc.Layer.extend({
 
 //add event listener to button
     addEventListener: function () {
-        this.addTouchEventForButton(this.btn_attack, this.onTouchArmyAdd);
+        this.addTouchEventForButton(this.btn_attack, this.onTouchAttack);
         this.addTouchEventForButton(this.btn_shop, this.onTouchShop);
         this.addTouchEventForButton(this.btn_setting, this.onTouchSetting);
-        this.addTouchEventForButton(this.g_container.btn_add, this.onTouchGAdd);
         this.addTouchEventForButton(this.army_container.btn_add, this.onTouchArmyAdd);
-        this.addTouchEventForButton(this.builder_container.btn_add, this.onTouchBuilderAdd);
 
         //listen to EVENT_SELECT_BUILDING with callback onSelectBuilding(id)
         cc.eventManager.addCustomListener(EVENT_SELECT_BUILDING, this.onSelectBuilding.bind(this));
@@ -277,6 +267,10 @@ var InfoLayer = cc.Layer.extend({
                 popUplayer.appear(POPUP_IDS.SHOP);
             }
         }
+    },
+    onTouchAttack: function (sender, type) {
+        let battleScene = new BattleScene();
+        cc.director.runScene(battleScene);
     },
 
     updateUI: function (data) {

@@ -25,12 +25,7 @@ var BaseStorage = Building.extend({
 
 
 
-        //listen event EVENT_NAMES.RESOURCE_CHANGED to update sprite
-        cc.eventManager.addListener({
-            event: cc.EventListener.CUSTOM,
-            eventName: EVENT_NAMES.RESOURCE_CHANGED,
-            callback: this.updateSprite.bind(this)
-        }, this);
+
 
     },
 
@@ -50,6 +45,17 @@ var BaseStorage = Building.extend({
             case 1:
                 break;
         }
+    },
+    onAddIntoMapLayer: function () {
+        this._super();
+        this.updateSprite();
+        //listen event EVENT_NAMES.RESOURCE_CHANGED to update sprite
+        cc.eventManager.addListener({
+            event: cc.EventListener.CUSTOM,
+            eventName: EVENT_NAMES.RESOURCE_CHANGED,
+            callback: this.updateSprite.bind(this)
+        }, this);
+
     },
 
     //get capacity , if building, return 0, if idle or upgrade, return capacity

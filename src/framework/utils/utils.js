@@ -3,7 +3,6 @@
 function getBuildingFromType(type, level, id, posX, posY, status, startTime, endTime) {
     var building = null;
 
-
     //obstacle
     if (type.substring(0, 3) === 'OBS') {
 
@@ -202,6 +201,14 @@ var GameUtilities ={
         }
 
     },
+
+
+    //create model building to use in popup, mode buy building
+    createModelBuilding: function (type, level) {
+        let building = getBuildingFromType(type, level);
+
+
+    }
 
 }
 

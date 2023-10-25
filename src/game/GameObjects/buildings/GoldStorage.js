@@ -15,7 +15,6 @@ var GoldStorage = BaseStorage.extend({
     },
     setCapacity: function (value) {
         this._capacityGold = value;
-        this.updateSprite();
     },
     updateSprite: function () {
 
