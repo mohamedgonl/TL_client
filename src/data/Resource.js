@@ -135,6 +135,7 @@ var res_ui = {
     TROOPS_TRAINING_ITEM: "TroopTrainingItem.json",
     NOTI_POPUP: "NotiPopup.json",
     CHEAT_POPUP: "CheatPopup.json",
+    FIGHT_POPUP: "FightLayer.json",
     INFO_LAYER: "InfoLayer1.json",
     UPGRADE_POPUP: "UpgradePopup.json",
     INFO_POPUP: "InfoPopup.json",
@@ -257,7 +258,8 @@ var res_map = {
                 1:"res/Buildings/elixir storage/STO_2_1/idle/image0000.png",
             },
             CANNON:{
-                1:"res/Buildings/cannon/canon_1/idle/image0000.png"
+                1:"res/Buildings/cannon/canon_1/idle/image0000.png",
+                BULLET:"res/battle/cannon_bullet.png",
             },
             BARRACK:{
                 1:"res/Buildings/barrack/BAR_1_1/idle/image0000.png"

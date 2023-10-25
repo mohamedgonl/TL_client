@@ -52,6 +52,14 @@ var InfoLayer = cc.Layer.extend({
         this.addChild(this.menu, 9999999999);
         this.menu.alignItemsHorizontallyWithPadding(10);
 
+        // //cheat btn
+        // const btnCheat = new ccui.Button();
+        // btnCheat.setTitleText("CHEAT");
+        // btnCheat.setTitleFontSize(24);
+        // btnCheat.setPosition(1030, 460);
+        //
+        // btnCheat.addTouchEventListener(this.onClickBtnCheat, this);
+        // this.addChild(btnCheat);
 
         this.btn_setting.addTouchEventListener(this.onClickBtnCheat, this);
     },
@@ -122,7 +130,7 @@ var InfoLayer = cc.Layer.extend({
             if (type != null) {
                 if (type === "elixir")
                     node.type.setTexture(res.ICON.ELIXIR);
-                else if(type === "gold")
+                else if (type === "gold")
                     node.type.setTexture(res.ICON.GOLD);
                 else
                     node.type.setTexture(res.ICON.GEM)
@@ -132,8 +140,7 @@ var InfoLayer = cc.Layer.extend({
 
             //status
 
-            if(status ===1 )
-            {
+            if (status === 1) {
                 node.amount.setColor(cc.color.RED);
             }
 
@@ -155,8 +162,7 @@ var InfoLayer = cc.Layer.extend({
         imageDisabled.addChild(node3);
 
         var button = new cc.MenuItemSprite(image, imagePressed, imageDisabled, callback, this);
-        if(status ===3)
-        {
+        if (status === 3) {
             //disable
             button.setEnabled(false);
             //set to gray
@@ -228,10 +234,12 @@ var InfoLayer = cc.Layer.extend({
 
 //add event listener to button
     addEventListener: function () {
-        this.addTouchEventForButton(this.btn_attack, this.onTouchAttack);
+        this.addTouchEventForButton(this.btn_attack, this.onTouchFight);
         this.addTouchEventForButton(this.btn_shop, this.onTouchShop);
         this.addTouchEventForButton(this.btn_setting, this.onTouchSetting);
+        this.addTouchEventForButton(this.g_container.btn_add, this.onTouchGAdd);
         this.addTouchEventForButton(this.army_container.btn_add, this.onTouchArmyAdd);
+        this.addTouchEventForButton(this.builder_container.btn_add, this.onTouchBuilderAdd);
 
         //listen to EVENT_SELECT_BUILDING with callback onSelectBuilding(id)
         cc.eventManager.addCustomListener(EVENT_SELECT_BUILDING, this.onSelectBuilding.bind(this));
@@ -247,7 +255,7 @@ var InfoLayer = cc.Layer.extend({
     onTouchArmyAdd: function (sender, type) {
         if (type === 2) {
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
-            if(ArmyManager.Instance().getBarrackList().length){
+            if (ArmyManager.Instance().getBarrackList().length) {
                 if (popUpLayer.isVisible()) {
                     popUpLayer.disappear(POPUP_IDS.TRAIN);
                 } else {
@@ -268,9 +276,16 @@ var InfoLayer = cc.Layer.extend({
             }
         }
     },
-    onTouchAttack: function (sender, type) {
-        let battleScene = new BattleScene();
-        cc.director.runScene(battleScene);
+
+    onTouchFight: function (sender, type) {
+        if (type === 2) {
+            let popUplayer = cc.director.getRunningScene().getPopUpLayer();
+            if (popUplayer.isVisible()) {
+                popUplayer.disappear(POPUP_IDS.FIGHT);
+            } else {
+                popUplayer.appear(POPUP_IDS.FIGHT);
+            }
+        }
     },
 
     updateUI: function (data) {
@@ -336,14 +351,11 @@ var InfoLayer = cc.Layer.extend({
             //get gold and elixir of building
             let priceGold = LoadManager.Instance().getConfig(building._type, building._level, "gold");
             let priceElixir = LoadManager.Instance().getConfig(building._type, building._level, "elixir");
-            if(priceGold !=null)
-            {
+            if (priceGold != null) {
                 this.button_container.nameBuilding.setString("Vật cản");
-            }
-            else
+            } else
                 this.button_container.nameBuilding.setString("Cây cối");
-        }
-        else
+        } else
             this.button_container.nameBuilding.setString(BuildingInfo[building._type].name);
         this.button_container.setVisible(true);
         //test
