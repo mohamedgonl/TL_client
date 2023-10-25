@@ -15,12 +15,14 @@ var BattleScene = cc.Scene.extend({
         // this.armyManager = ArmyManager.Instance();
 
         this.battleLayer = new BattleLayer();
+        this.battleUILayer = new BattleUILayer();
         // this.battleInfoLayer = new BattleInfoLayer();
         // this.infoLayer = new InfoLayer();
         // this.popUpLayer = new PopupLayer();
         // this.popUpLayer.setVisible(false);
 
         this.addChild(this.battleLayer);
+        this.addChild(this.battleUILayer);
         // this.addChild(this.battleInfoLayer);
         // this.addChild(this.infoLayer);
         // this.addChild(this.popUpLayer)
