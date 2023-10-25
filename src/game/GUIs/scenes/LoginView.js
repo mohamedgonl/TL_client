@@ -100,7 +100,7 @@ var LoginView = cc.Scene.extend({
         MapManager.Instance().loadFromServer(mapInfo.listBuildings);
         this.loadingBar.setPercent(100);
         testnetwork.connector.sendGetTimeServer();
-        this.onReceiveAllData();
+        // this.onReceiveAllData();
     },
     onReceiveTimeServer: function (time) {
         TimeManager.Instance().setDeltaTimeClientServer(time);

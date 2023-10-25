@@ -33,10 +33,21 @@ var Building = GameObject.extend({
         this._body = new cc.Sprite();
         this._upper = new cc.Sprite();
 
-        this.addChild(this._grass,ZORDER_BUILDING_GRASS);
+
+
+        // this.addChild(this._grass,ZORDER_BUILDING_GRASS);
         this.addChild(this._body,ZORDER_BUILDING_BODY);
-        this.addChild(this._shadow,ZORDER_BUILDING_SHADOW);
-        this.addChild(this._upper,ZORDER_BUILDING_UPPER);
+        // this.addChild(this._shadow,ZORDER_BUILDING_SHADOW);
+        // this.addChild(this._upper,ZORDER_BUILDING_UPPER);
+
+
+        this._body.addChild(this._upper,ZORDER_BUILDING_UPPER);
+
+        //bottom add truc tiep vao Maplayer voi ZORDER_BUILDING_BOTTOM;
+        this._bottom = new cc.Node();
+        this._bottom.addChild(this._shadow,ZORDER_BUILDING_GRASS);
+        this._bottom.addChild(this._grass,ZORDER_BUILDING_SHADOW);
+
 
 
         this.loadSpriteByLevel(this._level);
@@ -87,6 +98,7 @@ var Building = GameObject.extend({
 
         //upper
         if(upperSprite != null){
+            this._upper.setPosition(this._body.getBoundingBox().width,this._body.getBoundingBox().height);
             if(isUpperAnimation){
 
                 //this._upper = new cc.Sprite(upperSprite[0]);
@@ -108,16 +120,11 @@ var Building = GameObject.extend({
 
                 this._upper.runAction(cc.repeatForever(action))
 
-                this._upper.setAnchorPoint(0.5, 0.5);
-                this._upper.setScale(SCALE_BUILDING_BODY);
+
 
             }
             else {
-
-                // this._upper = new cc.Sprite(upperSprite);
                 this._upper.setTexture(upperSprite)
-                this._upper.setAnchorPoint(0.5, 0.5);
-                this._upper.setScale(SCALE_BUILDING_BODY);
             }
         }
 
@@ -192,21 +199,6 @@ var Building = GameObject.extend({
         this._fence.setPosition(0,-this._grass.getBoundingBox().height/2 +5);
         this._fence.setVisible(false);
 
-
-        // this._arrow_move.setGlobalZOrder(45);
-        // this._green_square.setGlobalZOrder(15);
-        // this._red_square.setGlobalZOrder(15);
-        // this._nameLabel.setGlobalZOrder(47);
-        // this._levelLabel.setGlobalZOrder(47);
-        // this._progressBar.setGlobalZOrder(48);
-        // this._timeLabel.setGlobalZOrder(49);
-        // this._fence.setGlobalZOrder(42);
-        //
-        //
-        // this._grass.setGlobalZOrder(10);
-        // this._shadow.setGlobalZOrder(20);
-        // this._body.setGlobalZOrder(30);
-        // this._upper.setGlobalZOrder(40);
     },
 
     //load button for building, reload when select building, upgrade, build, cancel

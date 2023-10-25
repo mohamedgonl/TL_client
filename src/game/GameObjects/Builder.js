@@ -102,6 +102,7 @@ var Builder = cc.Sprite.extend({
                 this._body.runAction(cc.animate(this._animationUp).repeatForever());
             }
             this._currentAnim = this._animationUp;
+            this._body.setScale(0.5,0.5);
         }
         else if(directX === 1 && directY === -1)
         {
@@ -125,6 +126,7 @@ var Builder = cc.Sprite.extend({
                 this._body.runAction(cc.animate(this._animationLeft).repeatForever());
             }
             this._currentAnim = this._animationLeft;
+            this._body.setScale(0.5,0.5);
         }
         else if(directX === -1 && directY === -1)
         {
@@ -135,6 +137,7 @@ var Builder = cc.Sprite.extend({
                 this._body.runAction(cc.animate(this._animationDown).repeatForever());
             }
             this._currentAnim = this._animationDown;
+            this._body.setScale(0.5,0.5);
         }
         else if(directX === -1 && directY === 0)
         {
@@ -145,6 +148,7 @@ var Builder = cc.Sprite.extend({
                 this._body.runAction(cc.animate(this._animationDownLeft).repeatForever());
             }
             this._currentAnim = this._animationDownLeft;
+            this._body.setScale(0.5,0.5);
         }
         else if(directX === 0 && directY === 1)
         {
@@ -155,6 +159,7 @@ var Builder = cc.Sprite.extend({
                 this._body.runAction(cc.animate(this._animationUpLeft).repeatForever());
             }
             this._currentAnim = this._animationUpLeft;
+            this._body.setScale(0.5,0.5);
         }
         else if(directX === 0 && directY === -1)
         {

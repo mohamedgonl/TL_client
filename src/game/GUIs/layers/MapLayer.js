@@ -62,7 +62,11 @@ var MapLayer = cc.Layer.extend({
             return;
         }
 
-        building.onAddIntoMapLayer();
+        if(!building._type.startsWith("OBS")){
+            building.onAddIntoMapLayer();
+        }
+
+
         if(building._type.startsWith("RES"))
             building.setLastCollectTimeAndIconHarvest(this._lastCollectTime);
 
@@ -470,11 +474,10 @@ var MapLayer = cc.Layer.extend({
         var buildingCenterX = newPosX + sizeX / 2;
         var buildingCenterY = newPosY + sizeY / 2;
 
-        // let middleScreen = cc.p(cc.winSize.width/2,cc.winSize.height/2);
-        // let newPosInMap = cc.pAdd(this.getMapPosFromGridPos(cc.p(buildingCenterX,buildingCenterY)),middleScreen);
 
         let newPosInMap = this.getMapPosFromGridPos(cc.p(buildingCenterX, buildingCenterY));
-        building.setPosition(newPosInMap);
+
+        this.moveGameObjectInMapLayer(building, buildingCenterX, buildingCenterY, false);
 
     },
 
@@ -567,6 +570,17 @@ var MapLayer = cc.Layer.extend({
         let posToAdd = this.getMapPosFromGridPos({x: gridPosX, y: gridPosY}, isCenter);
         this.addChild(gameObject, zOrder);
         gameObject.setPosition(posToAdd);
+
+        //gameobject._bottom
+        if(gameObject._bottom == null) return;
+        this.addChild(gameObject._bottom, ZORDER_BUILDING_GRASS);
+        gameObject._bottom.setPosition(posToAdd);
+    },
+    moveGameObjectInMapLayer: function (gameObject, gridPosX, gridPosY, isCenter = false) {
+        let posToAdd = this.getMapPosFromGridPos({x: gridPosX, y: gridPosY}, isCenter);
+        gameObject.setPosition(posToAdd);
+        if(gameObject._bottom == null) return;
+        gameObject._bottom.setPosition(posToAdd);
     },
     //------------------------------------------------------------------------------------------------------------------
     moveView: function (delta) {
@@ -715,9 +729,7 @@ var MapLayer = cc.Layer.extend({
         //set chosen building
         this.selectBuilding(this.chosenBuilding);
     },
-    getChosenBuilding: function () {
-        return this.chosenBuilding;
-    },
+
     checkValidPutBuilding: function (building, newPosX, newPosY) {
         var id = building._id;
         var width = building._width;
@@ -732,7 +744,7 @@ var MapLayer = cc.Layer.extend({
         //check overlap
         for(var column = newPosX; column < newPosX + width; column++)
             for(var row = newPosY; row < newPosY + height; row++)
-                if(mapGrid[column][row] != 0 && mapGrid[column][row] != id)
+                if(mapGrid[column][row] !== 0 && mapGrid[column][row] !== id)
                     return false;
 
         return true;
@@ -749,6 +761,10 @@ var MapLayer = cc.Layer.extend({
                     return {x: column, y: row};
 
         return null;
+    },
+
+    getChosenBuilding: function () {
+        return this.chosenBuilding;
     },
 });
 
