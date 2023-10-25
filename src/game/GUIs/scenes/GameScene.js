@@ -1,5 +1,3 @@
-
-
 var GameScene = cc.Scene.extend({
 
     mapLayer: null,
@@ -13,14 +11,12 @@ var GameScene = cc.Scene.extend({
     init: function () {
         //load config and resource
         LoadManager.Instance();
-        this.armyManager= ArmyManager.Instance();
-
+        this.armyManager = ArmyManager.Instance();
 
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
             onKeyPressed: function (keyCode) {
-                if(keyCode == cc.KEY.s)
-                {
+                if (keyCode == cc.KEY.s) {
                     //change visible of popup
                     this.popUpLayer.setVisible(!this.popUpLayer.isVisible());
                 }
@@ -41,10 +37,10 @@ var GameScene = cc.Scene.extend({
         return this.popUpLayer;
     },
 
-    getMapLayer : function () {
+    getMapLayer: function () {
         return this.mapLayer;
     },
-    getInfoLayer : function () {
+    getInfoLayer: function () {
         return this.infoLayer;
     },
     onReceiveUserInfo: function (userInfo) {
