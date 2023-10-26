@@ -23,10 +23,13 @@ var TimeManager = cc.Node.extend({
 });
 
 
-TimeManager.Instance = function () {
+TimeManager.getInstance = function () {
     if (TimeManager.instance == null) {
         TimeManager.instance = new TimeManager();
         TimeManager.instance.retain();
     }
     return TimeManager.instance;
+}
+TimeManager.releaseInstance = function () {
+        TimeManager.instance = null;
 }

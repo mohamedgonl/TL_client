@@ -3,7 +3,7 @@ var BattleTownhall = BattleBaseStorage.extend({
     ctor: function (level, id, posX, posY) {
         this._super(level, id, posX, posY);
 
-        let config = LoadManager.Instance().getConfig(this._type, this._level);
+        let config = LoadManager.getInstance().getConfig(this._type, this._level);
         this._currentGold = 0;
         this._currentElixir = 0;
         this._capacityGold = config.capacityGold;
@@ -15,7 +15,7 @@ var BattleTownhall = BattleBaseStorage.extend({
 
     onAddIntoMapManager: function () {
         this._super();
-        let mapManager = MapManager.Instance();
+        let mapManager = MapManager.getInstance();
         mapManager.townHall = this;
     },
 

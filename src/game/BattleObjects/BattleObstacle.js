@@ -12,7 +12,7 @@ var BattleObstacle = BattleGameObject.extend({
     init: function () {
 
         //load config
-        var configObstacle = LoadManager.Instance().getConfig(this._type, 1);
+        var configObstacle = LoadManager.getInstance().getConfig(this._type, 1);
         this._width = configObstacle.width;
         this._height = configObstacle.height;
 
@@ -29,7 +29,7 @@ var BattleObstacle = BattleGameObject.extend({
     initState: function () {
         if (this._state === 1) {
             //-1 tho xay
-            let playerInfoManager = PlayerInfoManager.Instance();
+            let playerInfoManager = PlayerInfoManager.getInstance();
             playerInfoManager.changeBuilder("current", -1);
             this._progressBar.setVisible(true);
         } else {

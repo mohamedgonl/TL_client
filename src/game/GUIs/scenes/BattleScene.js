@@ -4,15 +4,15 @@ var BattleScene = cc.Scene.extend({
 
     ctor: function () {
         this._super();
-        BattleManager.Instance().loadFromServer(MapManager.Instance().getAllBuilding());
+        BattleManager.getInstance().loadFromServer(MapManager.getInstance().getAllBuilding());
         this.init();
-        BattleManager.Instance().battleScene = this;
+        BattleManager.getInstance().battleScene = this;
     },
 
     init: function () {
         //load config and resource
-        LoadManager.Instance();
-        // this.armyManager = ArmyManager.Instance();
+        LoadManager.getInstance();
+        // this.armyManager = ArmyManager.getInstance();
 
         this.battleLayer = new BattleLayer();
         this.battleUILayer = new BattleUILayer();
@@ -28,13 +28,13 @@ var BattleScene = cc.Scene.extend({
     },
 
     onFindMatchSuccess: function (data) {
-        BattleManager.Instance().loadFromServer(data);
-        PlayerInfoManager.Instance().setResource({
+        BattleManager.getInstance().loadFromServer(data);
+        PlayerInfoManager.getInstance().setResource({
             gold: data.gold,
             elixir: data.elixir,
             gem: data.gem,
         });
-        PlayerInfoManager.Instance().setMaxResource({
+        PlayerInfoManager.getInstance().setMaxResource({
             gold: data.goldCapacity,
             elixir: data.elixirCapacity,
         });

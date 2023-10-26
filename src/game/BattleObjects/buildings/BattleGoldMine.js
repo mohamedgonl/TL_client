@@ -2,7 +2,7 @@ var BattleGoldMine = BattleBaseMine.extend({
     _type: "RES_1",
     ctor: function (level, id, posX, posY) {
         this._super(level, id, posX, posY);
-        let config = LoadManager.Instance().getConfig(this._type, this._level)
+        let config = LoadManager.getInstance().getConfig(this._type, this._level)
         this._capacityGold = config.capacity;
         this._productivityGold = config.productivity;
     },

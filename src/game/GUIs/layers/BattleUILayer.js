@@ -39,6 +39,7 @@ var BattleUILayer = cc.Layer.extend({
 
         //button
         this.btnFind = node.getChildByName("btn_find");
+        this.btnFind.getChildByName("price").setString("250")
         this.btnEnd = node.getChildByName("btn_end");
 
         //add button event
@@ -60,25 +61,45 @@ var BattleUILayer = cc.Layer.extend({
         this.test();
     },
     onLoadDataSuccess: function () {
-        this.userName.setString(BattleManager.Instance().enemyName);
-        this.goldText.setString(BattleManager.Instance().availableGold);
-        this.elixirText.setString(BattleManager.Instance().availableElixir);
-        this.eloTextWin.setString(BattleManager.Instance().winPoint);
-        this.eloTextLose.setString(BattleManager.Instance().losePoint);
-        this.goldCurrent.setString(PlayerInfoManager.Instance().getResource('gold'));
-        this.elixirCurrent.setString(PlayerInfoManager.Instance().getResource('elixir'));
-        this.goldMax.setString(PlayerInfoManager.Instance().getMaxResource().gold);
-        this.elixirMax.setString(PlayerInfoManager.Instance().getMaxResource().elixir);
+        this.userName.setString(BattleManager.getInstance().enemyName);
+        this.goldText.setString(BattleManager.getInstance().availableGold);
+        this.elixirText.setString(BattleManager.getInstance().availableElixir);
+        this.eloTextWin.setString(" + "+BattleManager.getInstance().winPoint);
+        this.eloTextLose.setString(" - "+BattleManager.getInstance().losePoint);
+        this.goldCurrent.setString(PlayerInfoManager.getInstance().getResource('gold'));
+        this.elixirCurrent.setString(PlayerInfoManager.getInstance().getResource('elixir'));
+        this.goldMax.setString(PlayerInfoManager.getInstance().getMaxResource().gold);
+        this.elixirMax.setString(PlayerInfoManager.getInstance().getMaxResource().elixir);
+
+        this.loadTroopSlots();
+    },
+    loadTroopSlots: function () {
+
+      let listTroops = BattleManager.getInstance().listTroops;
+
+
+      //reset all to empty
+      for(let i = 0; i < this.troopSlots.length; i++){
+          this.setStateSlot(i);
+      }
+
+      let index = 0;
+      for (let [key, value] of listTroops) {
+          let slot = this.troopSlots[index];
+          this.setStateSlot(index, key, value);
+      }
+
     },
     onTroopSlotClick: function (slotIndex) {
         //show troop list
         cc.log("onTroopSlotClick " + slotIndex);
     },
     onFindClick: function () {
-        BattleManager.Instance().onFindMatch();
+        BattleManager.getInstance().onFindMatch();
     },
     onEndClick: function () {
         cc.log("onEndClick");
+        cc.director.runScene(new GameScene());
     },
     test: function () {
         this.userName.setString("Nguyen Van A");
@@ -93,7 +114,28 @@ var BattleUILayer = cc.Layer.extend({
         this.goldMax.setString("1000");
         this.elixirMax.setString("1000");
     },
-    setStateSlot: function (slotIndex) {
+    setStateSlot: function (slotIndex, troopType = null, troopAmount= null) {
+        cc.log("setStateSlot " + slotIndex + " " + troopType + " " + troopAmount)
+        //empty case
+        if(troopType == null)
+        {
+            this.troopSlots[slotIndex].getChildByName("button").setVisible(false);
+            this.troopSlots[slotIndex].getChildByName("empty_slot").setVisible(true);
+            return;
+        }
+
+        //not empty case
+        let button = this.troopSlots[slotIndex].getChildByName("button");
+        let troopSprite = button.getChildByName("troop_sprite");
+        let selectedSprite = button.getChildByName("selected_sprite");
+        let count = button.getChildByName("count");
+
+
+        button.setVisible(true);
+        troopSprite.setTexture(res.TROOPS_BATTLE[troopType]);
+        selectedSprite.setVisible(false);
+        count.setString("x"+troopAmount);
+
     }
 });
 

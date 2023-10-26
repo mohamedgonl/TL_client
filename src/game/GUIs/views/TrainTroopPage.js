@@ -10,7 +10,7 @@ var TrainTroopPage = cc.Node.extend({
         this._super();
 
         this._curPage = curPage;
-        this._curBarrack = ArmyManager.Instance().getBarrackList()[this._curPage];
+        this._curBarrack = ArmyManager.getInstance().getBarrackList()[this._curPage];
 
         // lưu các sprite nằm trong training container
         this._trainingItems = [];
@@ -100,8 +100,8 @@ var TrainTroopPage = cc.Node.extend({
     },
 
     checkAvailable: function () {
-        let currentSpace = ArmyManager.Instance().getCurrentSpace();
-        let maxSpace = ArmyManager.Instance().getMaxSpace();
+        let currentSpace = ArmyManager.getInstance().getCurrentSpace();
+        let maxSpace = ArmyManager.getInstance().getMaxSpace();
         if (currentSpace >= maxSpace) {
             this._available = false;
         }
@@ -123,8 +123,8 @@ var TrainTroopPage = cc.Node.extend({
 
     updateSpaceAfterTrainLabel: function () {
         let title = this._trainContainer.getChildByName("total_troop_string");
-        let currentSpace = ArmyManager.Instance().getCurrentSpace();
-        let maxSpace = ArmyManager.Instance().getMaxSpace();
+        let currentSpace = ArmyManager.getInstance().getCurrentSpace();
+        let maxSpace = ArmyManager.getInstance().getMaxSpace();
         let barrackCurrentSpace = this._curBarrack.getTrainingSpace();
         let curCount = (currentSpace + barrackCurrentSpace);
         title.setString("Tổng số quân sau khi huấn luyện: " + curCount + "/" + maxSpace);
@@ -132,6 +132,8 @@ var TrainTroopPage = cc.Node.extend({
     },
 
     updateTrainingPopupTitle: function () {
+        cc.log("DEBUG ::: " + JSON.stringify(ArmyManager.getInstance()))
+        cc.log("_____LOG _________", this._curBarrack.getTrainingSpace());
         let count = this._curBarrack.getTrainingSpace();
         let max = this._curBarrack.getMaxSpace();
         let popUpTitle = this._trainPopup.getChildByName("title");
@@ -144,7 +146,7 @@ var TrainTroopPage = cc.Node.extend({
         let buttonDoneNowString = this._trainContainer.getChildByName("done_now_text").getChildByName("done_now_cost");
         buttonDoneNowString.setString(doneNowPrice);
         let doneNowButton = this._trainContainer.getChildByName("button_done_now");
-        let gem = PlayerInfoManager.Instance().getResource().gem;
+        let gem = PlayerInfoManager.getInstance().getResource().gem;
         doneNowButton.setEnabled(doneNowPrice !== 0 && doneNowPrice <= gem)
     },
 
@@ -221,7 +223,7 @@ var TrainTroopPage = cc.Node.extend({
         let processBar = curTroopTime.getChildByName("current_process");
         let timeString = curTroopTime.getChildByName("current_time_string");
 
-        // let timeLeft = this._curBarrack.getLastTrainingTime() + curTroopTrainTime - TimeManager.Instance().getCurrentTimeInSecond();
+        // let timeLeft = this._curBarrack.getLastTrainingTime() + curTroopTrainTime - TimeManager.getInstance().getCurrentTimeInSecond();
         timeString.setString(this._curTroopTimeLeft + "s");
 
         let curTroopTrainTime = Math.ceil(TROOP_BASE[troopCfgId]['trainingTime'] / 10);
@@ -252,7 +254,7 @@ var TrainTroopPage = cc.Node.extend({
                         isDoneNow: 0,
                         barrackId: this._curBarrack.getId()
                     });
-                }, ((lastTrainTime + curTroopTrainTime) - TimeManager.Instance().getCurrentTimeInSecond()) * 1000)
+                }, ((lastTrainTime + curTroopTrainTime) - TimeManager.getInstance().getCurrentTimeInSecond()) * 1000)
             }
         } else {
             this.cleanUI();
@@ -363,7 +365,7 @@ var TrainTroopPage = cc.Node.extend({
         event.data = {count: 1, cfgId: data.cfgId};
         cc.eventManager.dispatchEvent(event);
 
-        ArmyManager.Instance().updateArmyAmount([{cfgId: data.cfgId, count: 1}], this._curPage)
+        ArmyManager.getInstance().updateArmyAmount([{cfgId: data.cfgId, count: 1}], this._curPage)
         this.updateTrainingPopupTitle();
     },
 
@@ -371,7 +373,7 @@ var TrainTroopPage = cc.Node.extend({
         cc.log("ON DONE NOW " + JSON.stringify(data))
         this.stopUpdateUI();
         this._trainContainer.setVisible(false);
-        ArmyManager.Instance().updateArmyAmount(this._curBarrack.getTrainingList(), this._curPage);
+        ArmyManager.getInstance().updateArmyAmount(this._curBarrack.getTrainingList(), this._curPage);
         this._curBarrack.setTrainingList([]);
         this._curBarrack.setLastTrainingTime(data.lastTrainingTime);
         this._trainingItems.map(e => {
@@ -380,7 +382,7 @@ var TrainTroopPage = cc.Node.extend({
         this._trainingItems = [];
         this.cleanUI();
         this.updateTrainingPopupTitle();
-        PlayerInfoManager.Instance().setResource({gem: data.gem});
+        PlayerInfoManager.getInstance().setResource({gem: data.gem});
         let event = new cc.EventCustom(TRAINING_EVENTS.DONE_NOW + this._curPage);
         cc.eventManager.dispatchEvent(event);
     },

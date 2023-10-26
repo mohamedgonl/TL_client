@@ -2,7 +2,7 @@ var GoldMine = BaseMine.extend({
     _type: "RES_1",
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
-        let capacity = LoadManager.Instance().getConfig(this._type, this._level)
+        let capacity = LoadManager.getInstance().getConfig(this._type, this._level)
         this._capacityGold = capacity.capacity;
         this._productivityGold = capacity.productivity;
 
@@ -36,19 +36,19 @@ var GoldMine = BaseMine.extend({
     },
     completeProcess: function () {
         this._super();
-        let playerInfoManager = PlayerInfoManager.Instance();
-        let capacity = LoadManager.Instance().getConfig(this._type, this._level)
+        let playerInfoManager = PlayerInfoManager.getInstance();
+        let capacity = LoadManager.getInstance().getConfig(this._type, this._level)
         this._capacityGold = capacity.capacity;
         this._productivityGold = capacity.productivity;
     },
     getCurrentAmount: function () {
         //calculate current amount by lastCollectTime
-        let timeNow = TimeManager.Instance().getCurrentTimeInSecond();
+        let timeNow = TimeManager.getInstance().getCurrentTimeInSecond();
         let duration = timeNow - this._lastCollectTime;
-        let productivity = LoadManager.Instance().getConfig(this._type, this._level, "productivity");
+        let productivity = LoadManager.getInstance().getConfig(this._type, this._level, "productivity");
         let harvestAmount = Math.floor(duration * productivity / 3600);
 
-        let capacity = LoadManager.Instance().getConfig(this._type, this._level, "capacity");
+        let capacity = LoadManager.getInstance().getConfig(this._type, this._level, "capacity");
 
         let currentAmount = Math.min(harvestAmount, capacity);
         return {

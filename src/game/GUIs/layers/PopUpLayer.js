@@ -23,11 +23,13 @@ let PopupLayer = cc.Layer.extend({
                 popupScreen = this._shopPopu
                 break;
             }
+
             case POPUP_IDS.TRAIN: {
                 popupScreen = this._trainTroopPopup;
                 this._trainTroopPopup.open(data.page);
                 break;
             }
+
             case POPUP_IDS.FIGHT: {
                 if (!this._fightPopup) {
                     this._fightPopup = new FightPopup();

@@ -1,4 +1,4 @@
-LoadManager.Instance();
+LoadManager.getInstance();
 
 var MapLayer = cc.Layer.extend({
 
@@ -33,7 +33,7 @@ var MapLayer = cc.Layer.extend({
     },
     //load all building in map manager and add it to MapLayer
     loadBuilding: function () {
-        var listBuilding = MapManager.Instance().getAllBuilding();
+        var listBuilding = MapManager.getInstance().getAllBuilding();
         for (var i = 0; i < listBuilding.length; i++) {
             var building = listBuilding[i];
             this.addBuildingToLayer(building);
@@ -42,7 +42,7 @@ var MapLayer = cc.Layer.extend({
 
     //load builder, load sprite of storage
     loadState: function () {
-        var listBuilding = MapManager.Instance().getAllBuilding();
+        var listBuilding = MapManager.getInstance().getAllBuilding();
         for (var i = 0; i < listBuilding.length; i++) {
             var building = listBuilding[i];
             if(building._state !== 0) {
@@ -111,8 +111,8 @@ var MapLayer = cc.Layer.extend({
                     console.log("==================================================================")
                 }
                 if (keyCode === cc.KEY.x) {
-                    // let townhall = MapManager.Instance().getTownHall();
-                    // MapManager.Instance().callBuilderToBuilding(townhall,"isBuilding");
+                    // let townhall = MapManager.getInstance().getTownHall();
+                    // MapManager.getInstance().callBuilderToBuilding(townhall,"isBuilding");
                 }
                 if (keyCode === cc.KEY.c) {
                 }
@@ -182,7 +182,7 @@ var MapLayer = cc.Layer.extend({
             return;
         }
         //check have builder
-        if (PlayerInfoManager.Instance().builder.current <= 0 && this.chosenBuilding._type != "BDH_1") {
+        if (PlayerInfoManager.getInstance().builder.current <= 0 && this.chosenBuilding._type != "BDH_1") {
             cc.log("not enough builder");
             // create content in popup
             let label = new cc.LabelBMFont("Bạn có muốn giải phóng thợ xây", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
@@ -199,7 +199,7 @@ var MapLayer = cc.Layer.extend({
                 acceptCallBack: () => {
                     //remove popup
                     popUpLayer.setVisible(false);
-                    PlayerInfoManager.Instance().freeBuilderByGem();
+                    PlayerInfoManager.getInstance().freeBuilderByGem();
                     buyResPopup.removeFromParent(true);
                 },
                 content: content,
@@ -215,26 +215,26 @@ var MapLayer = cc.Layer.extend({
         }
 
         //price gold, if null -> 0
-        let priceGold = LoadManager.Instance().getConfig(this.chosenBuilding._type, 1, "gold") || 0;
-        let priceElixir = LoadManager.Instance().getConfig(this.chosenBuilding._type, 1, "elixir") || 0;
-        let priceGem = LoadManager.Instance().getConfig(this.chosenBuilding._type, 1, "coin") || 0;
+        let priceGold = LoadManager.getInstance().getConfig(this.chosenBuilding._type, 1, "gold") || 0;
+        let priceElixir = LoadManager.getInstance().getConfig(this.chosenBuilding._type, 1, "elixir") || 0;
+        let priceGem = LoadManager.getInstance().getConfig(this.chosenBuilding._type, 1, "coin") || 0;
         if(priceGem > 0){
-            if(PlayerInfoManager.Instance().getResource("gem") < priceGem)
+            if(PlayerInfoManager.getInstance().getResource("gem") < priceGem)
             {
                 BasicPopup.appear("THIẾU TÀI NGUYÊN","Bạn không đủ G")
                 return;
             }
         }
 
-        if (PlayerInfoManager.Instance().checkEnoughResource(priceGold, priceElixir) === false) {
+        if (PlayerInfoManager.getInstance().checkEnoughResource(priceGold, priceElixir) === false) {
             let price;
             let type;
             if (priceGold > 0) {
                 //price is amout need to enough
-                price = priceGold - PlayerInfoManager.Instance().getResource().gold;
+                price = priceGold - PlayerInfoManager.getInstance().getResource().gold;
                 type = "gold";
             } else {
-                price = priceElixir - PlayerInfoManager.Instance().getResource().elixir;
+                price = priceElixir - PlayerInfoManager.getInstance().getResource().elixir;
                 type = "elixir";
             }
             NotEnoughResourcePopup.appear(price, type);
@@ -413,7 +413,7 @@ var MapLayer = cc.Layer.extend({
     onReceivedCheckMoveBuilding: function (data) {
         //if valid move, move building in map manager
         if (data.error === 0) {
-            MapManager.Instance().moveBuilding(this.chosenBuilding, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y)
+            MapManager.getInstance().moveBuilding(this.chosenBuilding, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y)
         } else {
             //move back to old pos
             this.moveBuildingInLayer(this.chosenBuilding, this.chosenBuilding._posX, this.chosenBuilding._posY);
@@ -495,11 +495,11 @@ var MapLayer = cc.Layer.extend({
             }
         }
 
-        let mapGrid = MapManager.Instance().mapGrid;
+        let mapGrid = MapManager.getInstance().mapGrid;
         let buildingId = mapGrid[chosenGrid.x][chosenGrid.y];
         if (buildingId === 0) return null;
         if (this.chosenBuilding && buildingId === this.chosenBuilding._id) return null;
-        return MapManager.Instance().getBuildingById(buildingId);
+        return MapManager.getInstance().getBuildingById(buildingId);
     },
 
     getMapPosFromScreenPos: function (posInScreen) {
@@ -730,7 +730,7 @@ var MapLayer = cc.Layer.extend({
         var id = building._id;
         var width = building._width;
         var height = building._height;
-        let mapGrid = MapManager.Instance().mapGrid;
+        let mapGrid = MapManager.getInstance().mapGrid;
 
 
         //check out of map

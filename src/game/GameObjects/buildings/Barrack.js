@@ -33,7 +33,7 @@ var Barrack = Building.extend({
         //get popup layer
         let popUpLayer = cc.director.getRunningScene().popUpLayer;
         //list barrack
-        let barrackList = ArmyManager.Instance().getBarrackList();
+        let barrackList = ArmyManager.getInstance().getBarrackList();
         //for building in barrack list, get number of this building
         for(let i = 0; i < barrackList.length; i++) {
             if(barrackList[i]._id === this._id) {
@@ -90,6 +90,7 @@ var Barrack = Building.extend({
     },
     
     getTrainingSpace: function () {
+          if(this._trainingQueue.length === 0) return 0;
         return this._trainingQueue.reduce((sum,e) => {
             return sum+e.count * TROOP_BASE[e.cfgId]["housingSpace"];
         },0);

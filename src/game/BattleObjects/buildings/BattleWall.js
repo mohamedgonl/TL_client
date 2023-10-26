@@ -11,8 +11,8 @@ var BattleWall = BattleBuilding.extend({
 
         let wallState = 0;
         if (this._posX && this._posY) {
-            let RightBuilding = MapManager.Instance().getBuildingByGrid(this._posX + 1, this._posY);
-            let UpperBuilding = MapManager.Instance().getBuildingByGrid(this._posX, this._posY + 1);
+            let RightBuilding = MapManager.getInstance().getBuildingByGrid(this._posX + 1, this._posY);
+            let UpperBuilding = MapManager.getInstance().getBuildingByGrid(this._posX, this._posY + 1);
             if (RightBuilding && RightBuilding._type === "WAL_1") {
                 if (UpperBuilding && UpperBuilding._type === "WAL_1") {
                     wallState = 3;

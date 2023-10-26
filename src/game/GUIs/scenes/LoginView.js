@@ -52,7 +52,7 @@ var LoginView = cc.Scene.extend({
             // this.messageText.setString("login: " + uid);
             this.loginButton.enabled = false;
             this.textFieldUID.enabled = false;
-            PlayerInfoManager.Instance().setId(uid);
+            PlayerInfoManager.getInstance().setId(uid);
             gv.gameClient.connect();
         } else {
             this.messageText.setColor(cc.color(255, 0, 0));
@@ -66,10 +66,11 @@ var LoginView = cc.Scene.extend({
         const interval = 0.2;
         const repeat = 5;
         const delay = 0;
-        this.schedule(function () {
+        this.schedule(function() {
             this.loadingBar.setPercent(this.loadingBar.getPercent() + 10);
         }, interval, repeat, delay);
     },
+
 
 
     onFinishLogin: function (success) {
@@ -77,8 +78,7 @@ var LoginView = cc.Scene.extend({
         // this.fetchUserData();
         cc.log("------------------------------")
         //go to game scene
-        cc.sys.localStorage.setItem("UID", PlayerInfoManager.Instance().id);
-
+        cc.sys.localStorage.setItem("UID", PlayerInfoManager.getInstance().id);
         const loadingView = new Loading(Loading.START);
         this.addChild(loadingView);
         loadingView.startLoading(function () {

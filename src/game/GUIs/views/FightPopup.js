@@ -26,11 +26,11 @@ var FightPopup = cc.Layer.extend({
     },
 
     resetInitState: function () {
-        this.fameAmount.setString(PlayerInfoManager.Instance().getInfo().rank)
+        this.fameAmount.setString(PlayerInfoManager.getInstance().getInfo().rank)
     },
 
     handleClickFindMatch: function () {
-        MapManager.Instance().onFindMatch();
+        MapManager.getInstance().onFindMatch();
     },
 
     handleClickClose: function (closePopupLayer) {

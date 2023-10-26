@@ -10,7 +10,7 @@ var BattleBaseMine = BattleBuilding.extend({
     },
     onAddIntoMapManager: function () {
         this._super();
-        let mapManager = MapManager.Instance();
+        let mapManager = MapManager.getInstance();
         mapManager.addToListMine(this);
     },
     loadSprite: function (bodySprite, upperSprite, shadow_type, isUpperAnimation) {

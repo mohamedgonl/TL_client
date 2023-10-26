@@ -19,7 +19,7 @@ var BattleBuilding = BattleGameObject.extend({
         this.addChild(this._shadow, ZORDER_BUILDING_SHADOW);
         this.addChild(this._upper, ZORDER_BUILDING_UPPER);
 
-        let config = LoadManager.Instance().getConfig(this._type, level);
+        let config = LoadManager.getInstance().getConfig(this._type, level);
         this._width = config.width;
         this._height = config.height;
         this._hitpoints = config.hitpoints;
@@ -214,7 +214,7 @@ var BattleBuilding = BattleGameObject.extend({
 
 
     onAddIntoMapManager: function () {
-        let mapManager = MapManager.Instance();
+        let mapManager = MapManager.getInstance();
         if (!mapManager.buildingAmount[this._type]) {
             mapManager.buildingAmount[this._type] = 1;
         } else {
@@ -231,7 +231,7 @@ var BattleBuilding = BattleGameObject.extend({
                 this._progressBar.setVisible(true);
                 this._fence.setVisible(true);
                 // -1 builder
-                PlayerInfoManager.Instance().changeBuilder("current", -1);
+                PlayerInfoManager.getInstance().changeBuilder("current", -1);
                 this.update();
                 this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
                 break;

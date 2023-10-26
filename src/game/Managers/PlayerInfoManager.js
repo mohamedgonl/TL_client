@@ -1,42 +1,41 @@
-var PlayerInfoManager = cc.Layer.extend({
-    instance: null,
-    id: null,
+var PlayerInfoManager = cc.Class.extend({
 
-    info: {
-        name: "",
-        avatar: "",
-        level: 1,
-        rank: 1,
+    ctor: function () {
+        this.id = null;
+        this.info = {
+            name: "",
+            avatar: "",
+            level: 1,
+            rank: 1,
+        }
+        this.maxResource = {
+            gold: 0,
+            elixir: 0,
+        }
+        this.resource = {
+            gold: 0,
+            elixir: 0,
+            gem: 0
+        }
+        this.builder = {
+            current: 0,
+            max: 0,
+        }
+        this.army = {
+            current: 0,
+            max: 0,
+        }
     },
-    maxResource: {
-        gold: 0,
-        elixir: 0,
-    },
-    resource: {
-        gold: 0,
-        elixir: 0,
-        gem: 0
-    },
-    builder: {
-        current: 0,
-        max: 0,
-    },
-    army: {
-        current: 0,
-        max: 0,
-    },
-
     getMaxResource: function () {
         return this.maxResource;
     },
     getResource: function (type) {
-        if(type)
-        {
-            if(type === "gold")
+        if (type) {
+            if (type === "gold")
                 return this.resource.gold;
-            else if(type === "elixir")
+            else if (type === "elixir")
                 return this.resource.elixir;
-            else if(type === "gem")
+            else if (type === "gem")
                 return this.resource.gem;
             else return 0;
         }
@@ -94,25 +93,25 @@ var PlayerInfoManager = cc.Layer.extend({
         }
         this.setUI({maxResource: this.maxResource});
     },
-    changeResource : function({gold,elixir,gem}){
+    changeResource: function ({gold, elixir, gem}) {
         cc.log("changeResource:::::::::::::::::::::::::::")
-        if(gold!=null)
+        if (gold != null)
             this.resource.gold += gold;
-        if(elixir!=null)
+        if (elixir != null)
             this.resource.elixir += elixir;
-        if(gem!=null)
+        if (gem != null)
             this.resource.gem += gem;
         this.setUI({resource: this.resource});
         cc.eventManager.dispatchCustomEvent(EVENT_NAMES.RESOURCE_CHANGED)
     },
-    changeMaxResource : function({gold,elixir,gem}){
+    changeMaxResource: function ({gold, elixir, gem}) {
         cc.log("changeMaxResource:::::::::::::::::::::::::::")
-        cc.log(JSON.stringify({gold,elixir,gem}))
-        if(gold!=null)
+        cc.log(JSON.stringify({gold, elixir, gem}))
+        if (gold != null)
             this.maxResource.gold += gold;
-        if(elixir!=null)
+        if (elixir != null)
             this.maxResource.elixir += elixir;
-        if(gem!=null)
+        if (gem != null)
             this.maxResource.gem += gem;
         this.setUI({maxResource: this.maxResource});
         cc.eventManager.dispatchCustomEvent(EVENT_NAMES.MAX_RESOURCE_CHANGED)
@@ -147,8 +146,7 @@ var PlayerInfoManager = cc.Layer.extend({
         let InfoLayer = cc.director.getRunningScene().infoLayer;
         if (InfoLayer == null) return;
 
-        if(data.resource)
-        {
+        if (data.resource) {
             cc.log(JSON.stringify(data.resource));
             GameUtilities.updateCurrentCapacityAllBuilding();
         }
@@ -161,16 +159,16 @@ var PlayerInfoManager = cc.Layer.extend({
     // }
     freeBuilderByGem: function (callback) {
         //for all building in Map Manager, if building is complete soonest, free it
-        let buildingList = MapManager.Instance().getAllBuilding();
+        let buildingList = MapManager.getInstance().getAllBuilding();
         let minTime = null,
             minBuilding = null;
 
         //get building complete soonest
         for (let i = 0; i < buildingList.length; i++) {
             let building = buildingList[i];
-            if (building._state >0) {
+            if (building._state > 0) {
                 let timeLeft = building.getTimeLeft();
-                if(timeLeft == null) continue;
+                if (timeLeft == null) continue;
 
                 if (minTime == null || timeLeft < minTime) {
                     minTime = timeLeft;
@@ -184,16 +182,25 @@ var PlayerInfoManager = cc.Layer.extend({
         }
         // if(callback)
         // callback();
+    },
+
+    //
+    resetAllDataExceptId: function () {
+
     }
 })
 
-PlayerInfoManager.Instance = function () {
+PlayerInfoManager.getInstance = function () {
     if (PlayerInfoManager.instance == null) {
         PlayerInfoManager.instance = new PlayerInfoManager();
-        PlayerInfoManager.instance.retain();
     }
     return PlayerInfoManager.instance;
 }
+
+PlayerInfoManager.releaseInstance = function () {
+    PlayerInfoManager.instance = null;
+}
+
 
 
 
