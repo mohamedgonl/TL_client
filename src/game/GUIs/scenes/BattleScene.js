@@ -33,11 +33,22 @@ var BattleScene = cc.Scene.extend({
         return this.popUpLayer;
     },
 
-    getBattleLayer: function () {
-        return this.battleLayer;
+    onFindMatchSuccess: function (data) {
+        BattleManager.Instance().loadFromServer(data);
+        PlayerInfoManager.Instance().setResource({
+            gold: data.gold,
+            elixir: data.elixir,
+            gem: data.gem,
+        });
+        PlayerInfoManager.Instance().setMaxResource({
+            gold: data.goldCapacity,
+            elixir: data.elixirCapacity,
+        });
+        this.battleLayer.onLoadDataSuccess();
+        this.battleUILayer.onLoadDataSuccess();
     },
 
-    getInfoLayer: function () {
-        return this.infoLayer;
+    onFindMatchFail: function (errorCode) {
+        cc.log("Find match fail: " + errorCode);
     },
 });

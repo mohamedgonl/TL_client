@@ -59,12 +59,23 @@ var BattleUILayer = cc.Layer.extend({
         }
         this.test();
     },
+    onLoadDataSuccess: function () {
+        this.userName.setString(BattleManager.Instance().enemyName);
+        this.goldText.setString(BattleManager.Instance().availableGold);
+        this.elixirText.setString(BattleManager.Instance().availableElixir);
+        this.eloTextWin.setString(BattleManager.Instance().winPoint);
+        this.eloTextLose.setString(BattleManager.Instance().losePoint);
+        this.goldCurrent.setString(PlayerInfoManager.Instance().getResource('gold'));
+        this.elixirCurrent.setString(PlayerInfoManager.Instance().getResource('elixir'));
+        this.goldMax.setString(PlayerInfoManager.Instance().getMaxResource().gold);
+        this.elixirMax.setString(PlayerInfoManager.Instance().getMaxResource().elixir);
+    },
     onTroopSlotClick: function (slotIndex) {
         //show troop list
         cc.log("onTroopSlotClick " + slotIndex);
     },
     onFindClick: function () {
-        cc.log("onFindClick");
+        testnetwork.connector.sendFindMatch();
     },
     onEndClick: function () {
         cc.log("onEndClick");

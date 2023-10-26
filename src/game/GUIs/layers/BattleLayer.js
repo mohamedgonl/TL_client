@@ -1,8 +1,6 @@
 LoadManager.Instance();
 
 var BattleLayer = cc.Layer.extend({
-
-    chosenBuilding: null,
     onModeMovingBuilding: false,
     canDragBuilding: false,
     onModeBuyBuilding: false,
@@ -25,38 +23,36 @@ var BattleLayer = cc.Layer.extend({
         this.setScale(0.8);
         this.addEventListener();
         this.initBackground();
-        this.loadBuilding();
+        // this.loadBuilding();
         // this.loadState();
+    },
+
+    onLoadDataSuccess: function () {
+        this.resetState();
+        this.loadBuilding();
     },
 
     onEnter: function () {
         this._super();
-        ArmyManager.Instance().initTroopSprites();
+        // ArmyManager.Instance().initTroopSprites();
     },
 
     //load all building in map manager and add it to MapLayer
     loadBuilding: function () {
-        var listBuilding = BattleManager.Instance().getAllBuilding();
-        for (var i = 0; i < listBuilding.length; i++) {
-            var building = listBuilding[i];
+        this.listBuilding = BattleManager.Instance().getAllBuilding();
+        for (var i = 0; i < this.listBuilding.length; i++) {
+            var building = this.listBuilding[i];
             this.addBuildingToLayer(building);
         }
     },
 
-    //load builder, load sprite of storage
-    loadState: function () {
-        var listBuilding = BattleManager.Instance().getAllBuilding();
-        for (var i = 0; i < listBuilding.length; i++) {
-            var building = listBuilding[i];
-            if (building._state !== 0) {
-                let builder = new Builder("isBuilding", building);
-                builder.setPosition(this.getMapPosFromGridPos(cc.p(building._posX, building._posY), true));
-                this.addChild(builder, MAP_ZORDER_TROOP);
-            }
+    resetState: function () {
+        if (!this.listBuilding || !this.listBuilding.length)
+            return;
+        for (let index in this.listBuilding) {
+            cc.log(this.listBuilding[index]._id)
+            this.removeBuilding(this.listBuilding[index]);
         }
-
-        GameUtilities.updateCurrentCapacityAllBuilding();
-
     },
 
     //add building to layer with gridPos of it
@@ -177,9 +173,6 @@ var BattleLayer = cc.Layer.extend({
 
     removeBuilding: function (building) {
         //remove child from layer
-        if (building === this.chosenBuilding) {
-            this.unSelectBuilding();
-        }
         building.removeFromParent(true);
     },
 

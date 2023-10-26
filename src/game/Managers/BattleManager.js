@@ -2,6 +2,7 @@ var BattleManager = cc.Class.extend({
 
     ctor: function () {
         this.listBuildings = new Map();
+        this.listTroops = new Map();
         this.listStorage = [];
         this.listMine = [];
         this.listBuilderHut = [];
@@ -20,31 +21,42 @@ var BattleManager = cc.Class.extend({
     },
 
     //load from server to addBuildingToGameManager
-    loadFromServer: function (buildings) {
+    loadFromServer: function (data) {
+        const {matchId, enemyId, enemyName, availableGold, availableElixir, winPoint, losePoint, buildings, troops} = data;
+
+        //load info
+        this.matchId = matchId;
+        this.enemyId = enemyId;
+        this.enemyName = enemyName;
+        this.availableGold = availableGold;
+        this.availableElixir = availableElixir;
+        this.winPoint = winPoint;
+        this.losePoint = losePoint;
+
+        //load buildings
         for (let index in buildings) {
             let construct = buildings[index];
-            let id = construct._id;
-            let type = construct._type;
-            let posX = (construct._posX + 1) * 3;
-            let posY = (construct._posY + 1) * 3;
-            let level = construct._level;
+            let id = construct.id;
+            let type = construct.type;
+            let posX = construct.posX;
+            let posY = construct.posY;
+            let level = construct.level;
 
             let building = getBattleBuildingFromType(type, level, id, posX, posY);
+
             if (!building)
                 continue;
 
-            // if (type.startsWith("RES")) {
-            //     let lastCollectTime = construct.lastCollectTime;
-            //     building.setLastCollectTimeAndIconHarvest(lastCollectTime);
-            // }
-
-            //cc.log("building Add------------------------------------------",type);
             this.addBuilding(building);
-            // cc.log(JSON.stringify(building))
         }
-
         const Algorithm = AlgorithmImplement.Instance();
         Algorithm.setGridMapStar(BattleManager.Instance().mapGrid);
+
+        //load troops
+        for (let index in troops) {
+            let troop = troops[index];
+            this.listTroops.set(troop.type, troop.amount);
+        }
     },
     addToListMine: function (building) {
         this.listMine.push(building);

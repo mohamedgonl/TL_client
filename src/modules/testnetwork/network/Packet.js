@@ -16,6 +16,7 @@ gv.CMD.TRAIN_TROOP_CREATE = 5001;
 gv.CMD.TRAIN_TROOP_SUCCESS = 5002;
 gv.CMD.GET_TRAINING_LIST = 5003;
 gv.CMD.CANCLE_TRAINING = 5004;
+gv.CMD.FIND_MATCH = 6001;
 
 //quyet----------------------
 gv.CMD.REMOVE_OBSTACLE = 2009;
@@ -394,7 +395,18 @@ CmdSendGetTimeServer = fr.OutPacket.extend(
             this.updateSize();
         }
     })
-
+CmdSendFindMatch = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.FIND_MATCH);
+        },
+        pack: function () {
+            this.packHeader();
+            this.updateSize();
+        }
+    })
 
 
 /**
@@ -568,7 +580,6 @@ testnetwork.packetMap[gv.CMD.GET_TRAINING_LIST] = fr.InPacket.extend(
     }
 );
 
-
 testnetwork.packetMap[gv.CMD.MAP_INFO] = fr.InPacket.extend(
     {
         ctor: function () {
@@ -636,7 +647,7 @@ testnetwork.packetMap[gv.CMD.REMOVE_OBSTACLE] = fr.InPacket.extend(
         },
         readData: function () {
             this.error = this.getError();
-            if(this.error === 0) {
+            if (this.error === 0) {
                 this.id = this.getInt();
                 this.status = this.getShort();
                 this.startTime = this.getInt();
@@ -653,7 +664,7 @@ testnetwork.packetMap[gv.CMD.REMOVE_OBSTACLE_SUCCESS] = fr.InPacket.extend(
         },
         readData: function () {
             this.error = this.getError();
-            if(this.error === 0) {
+            if (this.error === 0) {
                 this.id = this.getInt();
             }
         }
@@ -668,7 +679,7 @@ testnetwork.packetMap[gv.CMD.UPGRADE_BUILDING] = fr.InPacket.extend(
         // output: error, id, status(short), startTime, endTime
         readData: function () {
             this.error = this.getError();
-            if(this.error === 0) {
+            if (this.error === 0) {
                 this.id = this.getInt();
                 this.status = this.getShort();
                 this.startTime = this.getInt();
@@ -685,7 +696,7 @@ testnetwork.packetMap[gv.CMD.BUILD_SUCCESS] = fr.InPacket.extend(
         },
         readData: function () {
             this.error = this.getError();
-            if(this.error === 0) {
+            if (this.error === 0) {
                 this.id = this.getInt();
             }
         }
@@ -698,7 +709,7 @@ testnetwork.packetMap[gv.CMD.UPGRADE_SUCCESS] = fr.InPacket.extend(
         },
         readData: function () {
             this.error = this.getError();
-            if(this.error === 0) {
+            if (this.error === 0) {
                 this.id = this.getInt();
             }
         }
@@ -710,7 +721,7 @@ testnetwork.packetMap[gv.CMD.COLLECT_RESOURCE] = fr.InPacket.extend(
         },
         readData: function () {
             this.error = this.getError();
-            if(this.error === 0) {
+            if (this.error === 0) {
                 this.id = this.getInt();
                 this.lastCollectTime = this.getInt();
                 this.gold = this.getInt();
@@ -728,7 +739,7 @@ testnetwork.packetMap[gv.CMD.CANCEL_BUILD] = fr.InPacket.extend(
         //error, id
         readData: function () {
             this.error = this.getError();
-            if(this.error === 0) {
+            if (this.error === 0) {
                 this.id = this.getInt();
             }
         }
@@ -742,7 +753,7 @@ testnetwork.packetMap[gv.CMD.CANCEL_UPGRADE] = fr.InPacket.extend(
         //error, id
         readData: function () {
             this.error = this.getError();
-            if(this.error === 0) {
+            if (this.error === 0) {
                 this.id = this.getInt();
             }
         }
@@ -755,7 +766,7 @@ testnetwork.packetMap[gv.CMD.QUICK_FINISH] = fr.InPacket.extend(
         },
         readData: function () {
             this.error = this.getError();
-            if(this.error === 0) {
+            if (this.error === 0) {
                 this.id = this.getInt();
                 this.gem = this.getInt();
             }
@@ -769,9 +780,9 @@ testnetwork.packetMap[gv.CMD.BUY_RESOURCE_BY_GEM] = fr.InPacket.extend(
         //gem
         readData: function () {
             this.error = this.getError();
-            if(this.error === 0) {
+            if (this.error === 0) {
                 this.gem = this.getInt();
-                this.gold= this.getInt();
+                this.gold = this.getInt();
                 this.elixir = this.getInt();
             }
         }
@@ -785,9 +796,55 @@ testnetwork.packetMap[gv.CMD.GET_TIME_SERVER] = fr.InPacket.extend(
         //error,time
         readData: function () {
             this.error = this.getError();
-            if(this.error === 0) {
+            if (this.error === 0) {
                 this.time = this.getInt();
             }
         }
     });
 
+testnetwork.packetMap[gv.CMD.FIND_MATCH] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.error = this.getError();
+            if (this.error === 0) {
+                this.matchId = this.getInt();
+                this.enemyId = this.getInt();
+                this.enemyName = this.getString();
+                this.availableGold = this.getInt();
+                this.availableElixir = this.getInt();
+
+                const buildingSize = this.getInt();
+                this.buildings = [];
+
+                for (let i = 0; i < buildingSize; i++) {
+                    let id = this.getInt();
+                    let type = this.getString();
+                    let level = this.getInt();
+                    let posX = this.getInt();
+                    let posY = this.getInt();
+                    this.buildings.push({id, type, level, posX, posY});
+                }
+
+                const troopSize = this.getInt();
+                this.troops = [];
+
+                for (let i = 0; i < troopSize; i++) {
+                    let type = this.getString();
+                    let amount = this.getInt();
+                    this.troops.push({type, amount});
+                }
+
+                this.winPoint = this.getInt();
+                this.losePoint = this.getInt();
+                this.gold = this.getInt();
+                this.goldCapacity = this.getInt();
+                this.elixir = this.getInt();
+                this.elixirCapacity = this.getInt();
+                this.gem = this.getInt();
+            }
+        }
+    }
+);

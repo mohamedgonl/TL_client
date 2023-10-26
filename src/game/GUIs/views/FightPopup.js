@@ -13,32 +13,33 @@ var FightPopup = cc.Layer.extend({
         // get child-nodes
         const findMatchButton = node.getChildByName("button-find-match");
         const closeButton = node.getChildByName("button-close");
-        const fameAmount = node.getChildByName("fame-amount");
+        this.fameAmount = node.getChildByName("fame-amount");
 
-        fameAmount.setString(PlayerInfoManager.Instance().getInfo().rank)
+        this.resetInitState();
 
         findMatchButton.addClickEventListener(this.handleClickFindMatch.bind(this))
         closeButton.addClickEventListener(this.handleClickClose.bind(this))
 
-        node.setPosition(cc.winSize.width/2, cc.winSize.height/2);
+        node.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
         node.setAnchorPoint(0.5, 0.5);
         this.addChild(node);
     },
 
-    resetInitState : function () {
-        // fameAmount.setString(PlayerInfoManager.Instance().getInfo().rank)
+    resetInitState: function () {
+        this.fameAmount.setString(PlayerInfoManager.Instance().getInfo().rank)
     },
 
-    handleClickFindMatch: function (){
+    handleClickFindMatch: function () {
         cc.director.runScene(new BattleScene());
+        testnetwork.connector.sendFindMatch();
     },
 
     handleClickClose: function (closePopupLayer) {
         let popUp = this;
-        PopupEffect.disappear(this, ()=>{
+        PopupEffect.disappear(this, () => {
             popUp.setVisible(false);
             popUp.resetInitState();
-            if(closePopupLayer) popUp.getParent().setVisible(false);
+            if (closePopupLayer) popUp.getParent().setVisible(false);
         });
         return true;
     },
