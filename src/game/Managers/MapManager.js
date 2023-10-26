@@ -58,8 +58,8 @@ var MapManager = cc.Class.extend({
             }
         }
 
-        const Algorithm = AlgorithmImplement.Instance();
-        Algorithm.setGridMapStar(MapManager.Instance().mapGrid);
+        const Algorithm = AlgorithmImplement.getInstance();
+        Algorithm.setGridMapStar(MapManager.getInstance().mapGrid);
     },
     addToListMine: function (building) {
         this.listMine.push(building);
@@ -105,10 +105,10 @@ var MapManager = cc.Class.extend({
 
                 break;
             case 'BAR':
-                ArmyManager.Instance().pushBarrack(building);
+                ArmyManager.getInstance().pushBarrack(building);
                 break;
             case 'AMC':
-                ArmyManager.Instance().pushArmyCamp(building);
+                ArmyManager.getInstance().pushArmyCamp(building);
                 break;
             case 'BDH':
                 break;
@@ -116,8 +116,8 @@ var MapManager = cc.Class.extend({
 
         }
         if(isBuy === true) {
-            const Algorithm = AlgorithmImplement.Instance();
-            Algorithm.setGridMapStar(MapManager.Instance().mapGrid);
+            const Algorithm = AlgorithmImplement.getInstance();
+            Algorithm.setGridMapStar(MapManager.getInstance().mapGrid);
             // cc.eventManager.dispatchCustomEvent(EVENT_NAMES.NEW_BUILDING_ADDED, {type: typeBuilding});
 
         }
@@ -142,8 +142,8 @@ var MapManager = cc.Class.extend({
         building._posY = newPosY;
 
         cc.eventManager.dispatchCustomEvent(EVENT_TROOP_NAME.MOVE_BUILDING, {buildingId: building.getId()});
-        const Algorithm = AlgorithmImplement.Instance();
-        Algorithm.setGridMapStar(MapManager.Instance().mapGrid);
+        const Algorithm = AlgorithmImplement.getInstance();
+        Algorithm.setGridMapStar(MapManager.getInstance().mapGrid);
     },
     getAllBuilding: function () {
         return Array.from(this.listBuildings.values());
@@ -194,14 +194,18 @@ var MapManager = cc.Class.extend({
         let builder = new Builder(state,building);
         let mapLayer = cc.director.getRunningScene().mapLayer;
         mapLayer.addChild(builder,MAP_ZORDER_TROOP);
-    }
-
+    },
 });
 
 
-MapManager.Instance = function () {
+MapManager.getInstance = function () {
     if (MapManager.instance == null) {
         MapManager.instance = new MapManager();
     }
     return MapManager.instance;
 }
+MapManager.releaseInstance = function () {
+    MapManager.instance = null;
+}
+
+

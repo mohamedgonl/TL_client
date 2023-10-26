@@ -19,7 +19,7 @@ var BaseStorage = Building.extend({
         }
         else
         {
-            let config = LoadManager.Instance().getConfig(this._type,this._level);
+            let config = LoadManager.getInstance().getConfig(this._type,this._level);
             this.setCapacity(config.capacity);
         }
 
@@ -31,8 +31,8 @@ var BaseStorage = Building.extend({
 
     onAddIntoMapManager: function () {
         this._super();
-        let mapManager = MapManager.Instance();
-        let playerInfoManager = PlayerInfoManager.Instance();
+        let mapManager = MapManager.getInstance();
+        let playerInfoManager = PlayerInfoManager.getInstance();
 
         mapManager.addToListStorage(this);
 
@@ -82,13 +82,13 @@ var BaseStorage = Building.extend({
 
     completeProcess: function () {
         this._super();
-        let playerInfoManager = PlayerInfoManager.Instance();
+        let playerInfoManager = PlayerInfoManager.getInstance();
 
         //before set new capacity
         let amountBefore = this.getCapacity();
 
 
-        let configCapacity = LoadManager.Instance().getConfig(this._type,this._level,"capacity");
+        let configCapacity = LoadManager.getInstance().getConfig(this._type,this._level,"capacity");
 
         this.setCapacity(configCapacity);
 

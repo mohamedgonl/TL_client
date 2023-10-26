@@ -16,7 +16,7 @@ testnetwork.Connector = cc.Class.extend({
 
         switch (cmd) {
             case gv.CMD.HAND_SHAKE:
-                this.sendLoginRequest(PlayerInfoManager.Instance().id);
+                this.sendLoginRequest(PlayerInfoManager.getInstance().id);
                 break;
             case gv.CMD.USER_LOGIN:
                 // this.sendGetUserInfo();
@@ -36,7 +36,7 @@ testnetwork.Connector = cc.Class.extend({
             case gv.CMD.CHEAT_RESOURCE:
                 if (packet.error === 0)
                     cc.log("CHEAT RESOURCE SUCCESS", JSON.stringify(packet, null, 2));
-                PlayerInfoManager.Instance().setResource({
+                PlayerInfoManager.getInstance().setResource({
                     gold: packet.gold,
                     elixir: packet.elixir,
                     gem: packet.gem,
@@ -151,7 +151,7 @@ testnetwork.Connector = cc.Class.extend({
             cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
-            let buildings = ArmyManager.Instance().getBarrackList();
+            let buildings = ArmyManager.getInstance().getBarrackList();
             cc.log("LIST BUILDING ::: " + JSON.stringify(buildings))
             cc.log(packet.barrackId)
             trainingPopup.getPage({barackId: packet.barrackId}).updateUI(1);
@@ -164,6 +164,7 @@ testnetwork.Connector = cc.Class.extend({
                 count: packet.count,
                 lastTrainingTime: packet.lastTrainingTime
             }
+
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
             // if not long press
@@ -173,7 +174,7 @@ testnetwork.Connector = cc.Class.extend({
                 trainingPopup.getPage({barackId: packet.barrackId}).updateUI(1, false)
             }
 
-            PlayerInfoManager.Instance().setResource({elixir: packet.newElixir})
+            PlayerInfoManager.getInstance().setResource({elixir: packet.newElixir})
 
         }
     },
@@ -181,11 +182,11 @@ testnetwork.Connector = cc.Class.extend({
     onReceiveGetTrainingList: function (packet) {
         if (packet.getError() !== ErrorCode.SUCCESS) {
             cc.log("GET TRAINING LIST ERROR :::::::::::", packet.getError());
-            ArmyManager.Instance();
+            ArmyManager.getInstance();
         } else {
-            cc.log("GET TRAINING LIST SUCCESS ::::::::::: " + JSON.stringify(packet) + " CURRENT TIME :" + TimeManager.Instance().getCurrentTimeInSecond());
-            let barracks = ArmyManager.Instance().getBarrackList();
-            ArmyManager.Instance().updateArmyAmount(packet.doneList, this._curPage)
+            cc.log("GET TRAINING LIST SUCCESS ::::::::::: " + JSON.stringify(packet) + " CURRENT TIME :" + TimeManager.getInstance().getCurrentTimeInSecond());
+            let barracks = ArmyManager.getInstance().getBarrackList();
+            ArmyManager.getInstance().updateArmyAmount(packet.doneList, this._curPage)
             for (let i = 0; i < barracks.length; i++) {
                 if (barracks[i].getId() === packet.barrackId) {
                     cc.log("BARRACK ID :: " + packet.barrackId + " TRAIN LIST::: " + JSON.stringify(packet.trainingList))
@@ -217,7 +218,7 @@ testnetwork.Connector = cc.Class.extend({
             }
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
-            PlayerInfoManager.Instance().changeResource({elixir: packet.additionElixir});
+            PlayerInfoManager.getInstance().changeResource({elixir: packet.additionElixir});
             trainingPopup.getPage({barackId: packet.barrackId}).onCancelTrainTroopSuccess(event);
 
         }
@@ -233,7 +234,7 @@ testnetwork.Connector = cc.Class.extend({
             cc.log("packet: ", JSON.stringify(packet, null, 2));
             let mapLayer = cc.director.getRunningScene().mapLayer;
             let building = getBuildingFromType(packet.type, 1, packet.id, packet.posX, packet.posY, packet.status, packet.startTime, packet.endTime);
-            MapManager.Instance().addBuilding(building, true);
+            MapManager.getInstance().addBuilding(building, true);
             mapLayer.addBuildingToLayer(building);
             mapLayer.exitModeBuyBuilding();
             mapLayer.selectBuilding(building);
@@ -248,35 +249,39 @@ testnetwork.Connector = cc.Class.extend({
 
         }
     },
+
     onReceivedRemoveObstacle: function (packet) {
         if (packet.error !== 0) {
             cc.log("REMOVE OBSTACLE ERROR with code ::::::::: ", packet.error);
         } else {
             cc.log("REMOVE OBSTACLE SUCCESS ::::::::: ");
-            let obstacle = MapManager.Instance().getBuildingById(packet.id);
+            let obstacle = MapManager.getInstance().getBuildingById(packet.id);
             obstacle.startRemove(packet.startTime, packet.endTime);
         }
     },
+
     onReceivedRemoveObstacleSuccess: function (packet) {
         if (packet.error !== 0) {
             cc.log("REMOVE OBSTACLE SUCCESS ERROR with code ::::::::: ", packet.error);
         } else {
             cc.log("REMOVE OBSTACLE SUCCESS SUCCESS ::::::::: ");
-            let obstacle = MapManager.Instance().getBuildingById(packet.id);
+            let obstacle = MapManager.getInstance().getBuildingById(packet.id);
             obstacle.completeRemove();
         }
     },
+
     onReceivedUpgradeBuilding: function (packet) {
         if (packet.error !== 0) {
             cc.log("UPGRADE BUILDING ERROR with code ::::::::: ", packet.error);
         } else {
             cc.log(JSON.stringify(packet, null, 2));
             cc.log("UPGRADE BUILDING SUCCESS ::::::::: ");
-            let building = MapManager.Instance().getBuildingById(packet.id);
+            let building = MapManager.getInstance().getBuildingById(packet.id);
             building.startUpgrade(packet.startTime, packet.endTime);
             if (packet.status === 0) building.completeUpgrade();
         }
     },
+
     onReceivedUpgradeBuildingSuccess: function (packet) {
         if (packet.error !== 0) {
             cc.log("UPGRADE BUILDING SUCCESS ERROR with code ::::::::: ", packet.error);
@@ -292,17 +297,18 @@ testnetwork.Connector = cc.Class.extend({
 
         } else {
             cc.log("UPGRADE BUILDING SUCCESS SUCCESS ::::::::: ");
-            let building = MapManager.Instance().getBuildingById(packet.id);
+            let building = MapManager.getInstance().getBuildingById(packet.id);
             building.completeUpgrade();
             cc.eventManager.dispatchCustomEvent(EVENT_NAMES.BUILDING_UPDATED, {id: packet.id})
         }
     },
+
     onReceivedBuildBuildingSuccess: function (packet) {
         if (packet.error !== 0) {
             cc.log("BUILD BUILDING SUCCESS ERROR with code ::::::::: ", packet.error);
         } else {
             cc.log("BUILD BUILDING SUCCESS SUCCESS ::::::::: ");
-            let building = MapManager.Instance().getBuildingById(packet.id);
+            let building = MapManager.getInstance().getBuildingById(packet.id);
             building.completeBuild();
         }
     },
@@ -314,17 +320,18 @@ testnetwork.Connector = cc.Class.extend({
             cc.log("HARVEST ERROR with code ::::::::: ", packet.error);
         } else {
             cc.log("HARVEST SUCCESS ::::::::: ");
-            let building = MapManager.Instance().getBuildingById(packet.id);
+            let building = MapManager.getInstance().getBuildingById(packet.id);
             building.harvest(packet.lastCollectTime, packet.gold, packet.elixir);
         }
 
     },
+
     onReceivedCancelBuild: function (packet) {
         if (packet.error !== 0) {
             cc.log("CANCEL BUILD ERROR with code ::::::::: ", packet.error);
         } else {
             cc.log("CANCEL BUILD SUCCESS ::::::::: ");
-            let building = MapManager.Instance().getBuildingById(packet.id);
+            let building = MapManager.getInstance().getBuildingById(packet.id);
             building.cancelBuild();
         }
     },
@@ -333,7 +340,7 @@ testnetwork.Connector = cc.Class.extend({
             cc.log("CANCEL UPGRADE ERROR with code ::::::::: ", packet.error);
         } else {
             cc.log("CANCEL UPGRADE SUCCESS ::::::::: ");
-            let building = MapManager.Instance().getBuildingById(packet.id);
+            let building = MapManager.getInstance().getBuildingById(packet.id);
             building.cancelUpgrade();
         }
     },
@@ -346,9 +353,9 @@ testnetwork.Connector = cc.Class.extend({
 
             let id = packet.id;
             let gem = packet.gem;
-            let building = MapManager.Instance().getBuildingById(id);
+            let building = MapManager.getInstance().getBuildingById(id);
             //set resource gem to gem
-            PlayerInfoManager.Instance().setResource({gem: gem});
+            PlayerInfoManager.getInstance().setResource({gem: gem});
             building.quickFinish();
             //if chosenbuilding right now != building, call onReceivedQuickFinish of chosenbuilding
             let chosenBuilding = cc.director.getRunningScene().getMapLayer().chosenBuilding;
@@ -366,7 +373,7 @@ testnetwork.Connector = cc.Class.extend({
             let gem = packet.gem;
             let gold = packet.gold;
             let elixir = packet.elixir;
-            PlayerInfoManager.Instance().setResource({gem: gem, gold: gold, elixir: elixir});
+            PlayerInfoManager.getInstance().setResource({gem: gem, gold: gold, elixir: elixir});
             // this.sendGetUserInfo();
             //get chosen building
             let building = cc.director.getRunningScene().getMapLayer().chosenBuilding;

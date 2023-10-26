@@ -4,13 +4,16 @@ var GameScene = cc.Scene.extend({
     popUpLayer: null,
     ctor: function () {
         this._super();
+
+        MapManager.getInstance().gameScene = this;
+
         this.init();
-        MapManager.Instance().gameScene = this;
     },
 
     init: function () {
+        cc.log("INIT GAME SCENE");
         //load config and resource
-        LoadManager.Instance();
+        LoadManager.getInstance();
 
 
         cc.eventManager.addListener({
@@ -49,17 +52,17 @@ var GameScene = cc.Scene.extend({
     },
 
     onBuyResourceSuccess: function (data) {
-        PlayerInfoManager.Instance().setResource(data);
+        PlayerInfoManager.getInstance().setResource(data);
     },
 
     onReceiveUserInfo: function (userInfo) {
-        PlayerInfoManager.Instance().setPlayerInfo({
+        PlayerInfoManager.getInstance().setPlayerInfo({
             name: userInfo.name,
             avatar: userInfo.avatar,
             level: userInfo.level,
             rank: userInfo.rank
         });
-        PlayerInfoManager.Instance().setResource({
+        PlayerInfoManager.getInstance().setResource({
             gold: userInfo.gold,
             elixir: userInfo.elixir,
             gem: userInfo.gem,
@@ -69,18 +72,18 @@ var GameScene = cc.Scene.extend({
     },
 
     onReceiveArmyInfo: function (armyInfo) {
-        // MapManager.Instance().loadFromServer(armyInfo.listTroops);
+        // MapManager.getInstance().loadFromServer(armyInfo.listTroops);
         // cc.log("NHAN THONG TIN VE LINH : "+JSON.stringify(armyInfo.listTroops))
-        ArmyManager.Instance().setArmyAmount(armyInfo.listTroops);
+        ArmyManager.getInstance().setArmyAmount(armyInfo.listTroops);
         testnetwork.connector.sendGetMapInfo();
     },
 
     onReceiveMapInfo: function (mapInfo) {
-        MapManager.Instance().loadFromServer(mapInfo.listBuildings);
+        MapManager.getInstance().loadFromServer(mapInfo.listBuildings);
         testnetwork.connector.sendGetTimeServer();
     },
     onReceiveTimeServer: function (time) {
-        TimeManager.Instance().setDeltaTimeClientServer(time);
+        TimeManager.getInstance().setDeltaTimeClientServer(time);
         this.onReceiveAllData();
     },
 
@@ -90,8 +93,7 @@ var GameScene = cc.Scene.extend({
         this.infoLayer.loadResources();
         this.popUpLayer.init();
         this.setVisible(true);
-        this.armyManager = ArmyManager.Instance();
-        ArmyManager.Instance().initTroopSprites();
+        ArmyManager.getInstance().initTroopSprites();
     },
 
 });

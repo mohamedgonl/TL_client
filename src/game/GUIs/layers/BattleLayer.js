@@ -1,4 +1,3 @@
-LoadManager.Instance();
 
 var BattleLayer = cc.Layer.extend({
     onModeMovingBuilding: false,
@@ -34,12 +33,12 @@ var BattleLayer = cc.Layer.extend({
 
     onEnter: function () {
         this._super();
-        // ArmyManager.Instance().initTroopSprites();
+        // ArmyManager.getInstance().initTroopSprites();
     },
 
     //load all building in map manager and add it to MapLayer
     loadBuilding: function () {
-        this.listBuilding = BattleManager.Instance().getAllBuilding();
+        this.listBuilding = BattleManager.getInstance().getAllBuilding();
         for (var i = 0; i < this.listBuilding.length; i++) {
             var building = this.listBuilding[i];
             this.addBuildingToLayer(building);
@@ -61,7 +60,7 @@ var BattleLayer = cc.Layer.extend({
             return;
         }
 
-        const buildingConfig = LoadManager.Instance().getConfig(building._type, building._level);
+        const buildingConfig = LoadManager.getInstance().getConfig(building._type, building._level);
         let sizeX = buildingConfig.width * 3;
         let sizeY = buildingConfig.height * 3;
 
@@ -127,8 +126,8 @@ var BattleLayer = cc.Layer.extend({
                     console.log("==================================================================")
                 }
                 if (keyCode === cc.KEY.x) {
-                    // let townhall = BattleManager.Instance().getTownHall();
-                    // BattleManager.Instance().callBuilderToBuilding(townhall,"isBuilding");
+                    // let townhall = BattleManager.getInstance().getTownHall();
+                    // BattleManager.getInstance().callBuilderToBuilding(townhall,"isBuilding");
                 }
                 if (keyCode === cc.KEY.c) {
                 }
@@ -266,7 +265,7 @@ var BattleLayer = cc.Layer.extend({
         //if onModeMoveBuilding and current pos of chosenBuilding is valid, send to server to recheck
         if (this.onModeMovingBuilding) {
 
-            if (BattleManager.Instance().checkValidPutBuilding(this.chosenBuilding, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y))
+            if (BattleManager.getInstance().checkValidPutBuilding(this.chosenBuilding, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y))
                 this.exitModeMoveBuilding();
         }
     },

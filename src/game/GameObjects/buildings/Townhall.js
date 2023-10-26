@@ -3,7 +3,7 @@ var Townhall = BaseStorage.extend({
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
 
-        let config = LoadManager.Instance().getConfig(this._type,this._level);
+        let config = LoadManager.getInstance().getConfig(this._type,this._level);
         this._currentGold = 0;
         this._currentElixir = 0;
         this._capacityGold = config.capacityGold;
@@ -20,20 +20,20 @@ var Townhall = BaseStorage.extend({
 
     onAddIntoMapManager: function () {
         this._super();
-        let mapManager = MapManager.Instance();
+        let mapManager = MapManager.getInstance();
         mapManager.townHall = this;
     },
 
 
     completeProcess: function () {
         this._super();
-        let playerInfoManager = PlayerInfoManager.Instance();
+        let playerInfoManager = PlayerInfoManager.getInstance();
 
         //before set new capacity
         let amountBefore = this.getCapacity();
 
-        let configCapacityGold = LoadManager.Instance().getConfig(this._type,this._level,"capacityGold");
-        let configCapacityElixir = LoadManager.Instance().getConfig(this._type,this._level,"capacityElixir");
+        let configCapacityGold = LoadManager.getInstance().getConfig(this._type,this._level,"capacityGold");
+        let configCapacityElixir = LoadManager.getInstance().getConfig(this._type,this._level,"capacityElixir");
 
         this.setCapacity({gold: configCapacityGold, elixir: configCapacityElixir});
 

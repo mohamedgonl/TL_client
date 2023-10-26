@@ -12,7 +12,7 @@ var TrainTroopPopup = cc.Layer.extend({
     },
 
     initPages: function () {
-        let barracks = ArmyManager.Instance().getBarrackList();
+        let barracks = ArmyManager.getInstance().getBarrackList();
         for(let i = 0; i< barracks.length; i++){
             let trainPage = new TrainTroopPage(i);
             trainPage.setVisible(false);
@@ -32,7 +32,7 @@ var TrainTroopPopup = cc.Layer.extend({
     },
 
     updateBarracks: function () {
-        let barracks = ArmyManager.Instance().getBarrackList();
+        let barracks = ArmyManager.getInstance().getBarrackList();
         barracks.map(e => {
             testnetwork.connector.sendGetTrainingList({barrackId: e.getId()});
         })

@@ -24,7 +24,7 @@ var TroopTrainingItem = cc.Node.extend({
     handleCancleTroopTraining: function () {
         let event = new cc.EventCustom(TRAINING_EVENTS.CANCLE+ this._curPage);
         let cfgId = this._troopCfgId;
-        let barrackId = ArmyManager.Instance().getBarrackList()[this._curPage].getId();
+        let barrackId = ArmyManager.getInstance().getBarrackList()[this._curPage].getId();
         event.data = {cfgId: cfgId, barrackId: barrackId};
         cc.eventManager.dispatchEvent(event);
     },

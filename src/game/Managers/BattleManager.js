@@ -49,8 +49,8 @@ var BattleManager = cc.Class.extend({
 
             this.addBuilding(building);
         }
-        const Algorithm = AlgorithmImplement.Instance();
-        Algorithm.setGridMapStar(BattleManager.Instance().mapGrid);
+        const Algorithm = AlgorithmImplement.getInstance();
+        Algorithm.setGridMapStar(BattleManager.getInstance().mapGrid);
 
         //load troops
         for (let index in troops) {
@@ -99,10 +99,10 @@ var BattleManager = cc.Class.extend({
                 break;
             case 'BAR':
                 //cc.log("hanve barrack+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-                ArmyManager.Instance().pushBarrack(building);
+                ArmyManager.getInstance().pushBarrack(building);
                 break;
             case 'AMC':
-                ArmyManager.Instance().pushArmyCamp(building);
+                ArmyManager.getInstance().pushArmyCamp(building);
                 break;
             case 'BDH':
                 break;
@@ -171,9 +171,12 @@ var BattleManager = cc.Class.extend({
 
 });
 
-BattleManager.Instance = function () {
+BattleManager.getInstance = function () {
     if (BattleManager.instance == null) {
         BattleManager.instance = new BattleManager();
     }
     return BattleManager.instance;
+}
+BattleManager.releaseInstance = function () {
+    BattleManager.instance = null;
 }

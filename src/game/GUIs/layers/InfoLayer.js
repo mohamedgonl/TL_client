@@ -215,12 +215,12 @@ var InfoLayer = cc.Layer.extend({
 
     //after init UI, get all resources to display
     loadResources: function () {
-        var resource = PlayerInfoManager.Instance().resource;
-        var maxResource = PlayerInfoManager.Instance().maxResource;
-        var builder = PlayerInfoManager.Instance().builder;
-        var info = PlayerInfoManager.Instance().info;
-        let armyCurrent = ArmyManager.Instance().getCurrentSpace();
-        let armyMax = ArmyManager.Instance().getMaxSpace();
+        var resource = PlayerInfoManager.getInstance().resource;
+        var maxResource = PlayerInfoManager.getInstance().maxResource;
+        var builder = PlayerInfoManager.getInstance().builder;
+        var info = PlayerInfoManager.getInstance().info;
+        let armyCurrent = ArmyManager.getInstance().getCurrentSpace();
+        let armyMax = ArmyManager.getInstance().getMaxSpace();
 
         //cc.log all above
         cc.log("resource: " + JSON.stringify(resource));
@@ -230,7 +230,7 @@ var InfoLayer = cc.Layer.extend({
         cc.log("army: " + JSON.stringify({current: armyCurrent, max: armyMax}));
 
 
-        // var army = PlayerInfoManager.Instance().army;
+        // var army = PlayerInfoManager.getInstance().army;
         //update UI
         this.updateUI({
             resource: resource,
@@ -264,7 +264,7 @@ var InfoLayer = cc.Layer.extend({
     onTouchArmyAdd: function (sender, type) {
         if (type === 2) {
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
-            if (ArmyManager.Instance().getBarrackList().length) {
+            if (ArmyManager.getInstance().getBarrackList().length) {
                 if (popUpLayer.isVisible()) {
                     popUpLayer.disappear(POPUP_IDS.TRAIN);
                 } else {
@@ -305,14 +305,14 @@ var InfoLayer = cc.Layer.extend({
             let res = data.resource;
             if (res.gold != null) {
                 this.gold_container.getChildByName("text").setString(res.gold);
-                let barPercent = res.gold / PlayerInfoManager.Instance().getMaxResource().gold;
+                let barPercent = res.gold / PlayerInfoManager.getInstance().getMaxResource().gold;
 
                 if(barPercent >=0 && barPercent <=1)
                     this.gold_container.bar_bg.bar.setPercent(barPercent * 100);
             }
             if (res.elixir != null) {
                 this.elixir_container.text.setString(res.elixir);
-                let barPercent = res.elixir / PlayerInfoManager.Instance().getMaxResource().elixir;
+                let barPercent = res.elixir / PlayerInfoManager.getInstance().getMaxResource().elixir;
 
                 if(barPercent >=0 && barPercent <=1)
                     this.elixir_container.bar_bg.bar.setPercent(barPercent * 100);
@@ -333,12 +333,12 @@ var InfoLayer = cc.Layer.extend({
         if (data.maxResource != null) {
             if (data.maxResource.gold != null) {
                 this.gold_container.text_max.setString("Tối đa:" + data.maxResource.gold);
-                let barPercent = PlayerInfoManager.Instance().getResource().gold / data.maxResource.gold;
+                let barPercent = PlayerInfoManager.getInstance().getResource().gold / data.maxResource.gold;
                 this.gold_container.bar_bg.bar.setPercent(barPercent * 100);
             }
             if (data.maxResource.elixir != null) {
                 this.elixir_container.text_max.setString("Tối đa:" + data.maxResource.elixir);
-                let barPercent = PlayerInfoManager.Instance().getResource().elixir / data.maxResource.elixir;
+                let barPercent = PlayerInfoManager.getInstance().getResource().elixir / data.maxResource.elixir;
                 this.elixir_container.bar_bg.bar.setPercent(barPercent * 100);
             }
         }
@@ -356,14 +356,14 @@ var InfoLayer = cc.Layer.extend({
     onSelectBuilding: function (event) {
         let id = event.getUserData();
         cc.log("onSelectBuilding::::::::::::::::" + id)
-        let building = MapManager.Instance().getBuildingById(id);
+        let building = MapManager.getInstance().getBuildingById(id);
 
         //rename nameBuilding
         //if building is start with OBS
         if (building._type.startsWith("OBS")) {
             //get gold and elixir of building
-            let priceGold = LoadManager.Instance().getConfig(building._type, building._level, "gold");
-            let priceElixir = LoadManager.Instance().getConfig(building._type, building._level, "elixir");
+            let priceGold = LoadManager.getInstance().getConfig(building._type, building._level, "gold");
+            let priceElixir = LoadManager.getInstance().getConfig(building._type, building._level, "elixir");
             if (priceGold != null) {
                 this.button_container.nameBuilding.setString("Vật cản");
             } else
@@ -381,13 +381,6 @@ var InfoLayer = cc.Layer.extend({
 
 });
 
-InfoLayer.Instance = function () {
-    if (!InfoLayer.instance) {
-        InfoLayer.instance = new InfoLayer();
-        InfoLayer.instance.retain();
-    }
-    return InfoLayer.instance;
-}
 
 /*
 gold_container

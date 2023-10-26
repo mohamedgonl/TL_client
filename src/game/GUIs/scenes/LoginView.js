@@ -52,7 +52,7 @@ var LoginView = cc.Scene.extend({
             // this.messageText.setString("login: " + uid);
             this.loginButton.enabled = false;
             this.textFieldUID.enabled = false;
-            PlayerInfoManager.Instance().setId(uid);
+            PlayerInfoManager.getInstance().setId(uid);
             gv.gameClient.connect();
         } else {
             this.messageText.setColor(cc.color(255, 0, 0));

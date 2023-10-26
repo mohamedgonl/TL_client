@@ -68,6 +68,15 @@ var res = {
         SLOT_CATEGORY: 'res/guis/shopping/slot_catalogy.png',
         SHOP: 'res/guis/shopping/nen2.png'
     },
+    TROOPS_BATTLE:{
+        ARM_1: "res/guis/icons/ARM_1_Battle.png",
+        ARM_2: "res/guis/icons/ARM_2_Battle.png",
+        ARM_3: "res/guis/icons/ARM_3_Battle.png",
+        ARM_4: "res/guis/icons/ARM_4_Battle.png",
+        ARM_5: "res/guis/icons/ARM_5_Battle.png",
+        ARM_6: "res/guis/icons/ARM_6_Battle.png",
+
+    }
 };
 
 var g_resources = [

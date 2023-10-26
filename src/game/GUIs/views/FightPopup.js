@@ -26,10 +26,16 @@ var FightPopup = cc.Layer.extend({
     },
 
     resetInitState: function () {
-        this.fameAmount.setString(PlayerInfoManager.Instance().getInfo().rank)
+        this.fameAmount.setString(PlayerInfoManager.getInstance().getInfo().rank)
     },
 
     handleClickFindMatch: function () {
+        PlayerInfoManager.releaseInstance();
+        MapManager.releaseInstance();
+        ArmyManager.releaseInstance();
+        TimeManager.releaseInstance();
+
+
         cc.director.runScene(new BattleScene());
         testnetwork.connector.sendFindMatch();
     },

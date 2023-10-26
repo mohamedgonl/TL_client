@@ -14,8 +14,8 @@ var BuilderHut = Building.extend({
     },
     onAddIntoMapManager: function () {
         this._super();
-        let mapManager = MapManager.Instance();
-        let playerInfoManager = PlayerInfoManager.Instance();
+        let mapManager = MapManager.getInstance();
+        let playerInfoManager = PlayerInfoManager.getInstance();
         mapManager.addToListBuilderHut(this);
         playerInfoManager.changeBuilder("max",1);
         playerInfoManager.changeBuilder("current",1);

@@ -17,7 +17,7 @@ var Building = GameObject.extend({
         this._startTime = startTime;
         this._endTime = endTime;
 
-        let config = LoadManager.Instance().getConfig(this._type,level);
+        let config = LoadManager.getInstance().getConfig(this._type,level);
         this._width = config.width;
         this._height = config.height;
         this._hitpoints = config.hitpoints;
@@ -207,8 +207,8 @@ var Building = GameObject.extend({
             //2 is state max level, not show upgrade button  ; 1 is not enough resource, show upgrade button but red text, 0 is normal
             if(status !== 2 )
             {
-                let priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
-                let priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
+                let priceGold = LoadManager.getInstance().getConfig(this._type, this._level+1, "gold") || 0;
+                let priceElixir = LoadManager.getInstance().getConfig(this._type, this._level+1, "elixir") || 0;
                 if(priceGold)
                 {
                     infoLayer.addButtonToMenu("Nâng cấp",res.BUTTON.UPGRADE_BUTTON,status,this.showPopupUpgrade.bind(this),priceGold,"gold");
@@ -223,7 +223,7 @@ var Building = GameObject.extend({
         if(this._state !==0) {
             infoLayer.addButtonToMenu("Hủy",res.BUTTON.CANCEL_BUTTON,0,this.onClickStop.bind(this));
             //priceGem = 1 gem per 4m, floor upper, count from now to end time
-            let priceGem = Math.ceil((this._endTime - TimeManager.Instance().getCurrentTimeInSecond())/240);
+            let priceGem = Math.ceil((this._endTime - TimeManager.getInstance().getCurrentTimeInSecond())/240);
             infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this),priceGem,"gem");
         }
     },
@@ -298,7 +298,7 @@ var Building = GameObject.extend({
     },
     updateProgress: function (){
         //log start time, end time, current time
-        let currentTime = TimeManager.Instance().getCurrentTimeInSecond();
+        let currentTime = TimeManager.getInstance().getCurrentTimeInSecond();
         let percent = (currentTime - this._startTime)/(this._endTime - this._startTime)*100;
         this._progressBar.setPercent(percent);
         //set time label = end time - current time in 1d2h3m40s format, if 0d -> 2h3m40s, if 0d0h -> 3m40s
@@ -328,15 +328,15 @@ var Building = GameObject.extend({
 
     startProcess: function () {
         //if state = 1, get price
-        let priceGold = LoadManager.Instance().getConfig(this._type, this._level, "gold") || 0;
-        let priceElixir = LoadManager.Instance().getConfig(this._type, this._level, "elixir") || 0;
-        let priceGem = LoadManager.Instance().getConfig(this._type, this._level, "coin") || 0;
+        let priceGold = LoadManager.getInstance().getConfig(this._type, this._level, "gold") || 0;
+        let priceElixir = LoadManager.getInstance().getConfig(this._type, this._level, "elixir") || 0;
+        let priceGem = LoadManager.getInstance().getConfig(this._type, this._level, "coin") || 0;
         if(this._state === 2){
-            priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
-            priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
-            priceGem = LoadManager.Instance().getConfig(this._type, this._level+1, "coin") || 0;
+            priceGold = LoadManager.getInstance().getConfig(this._type, this._level+1, "gold") || 0;
+            priceElixir = LoadManager.getInstance().getConfig(this._type, this._level+1, "elixir") || 0;
+            priceGem = LoadManager.getInstance().getConfig(this._type, this._level+1, "coin") || 0;
         }
-        PlayerInfoManager.Instance().changeResource({gold:-priceGold,elixir:-priceElixir,gem:-priceGem})
+        PlayerInfoManager.getInstance().changeResource({gold:-priceGold,elixir:-priceElixir,gem:-priceGem})
         //enable progress bar
         this._progressBar.setVisible(true);
         //show fence
@@ -344,7 +344,7 @@ var Building = GameObject.extend({
 
         this.loadButton();
         this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
-        MapManager.Instance().callBuilderToBuilding(this);
+        MapManager.getInstance().callBuilderToBuilding(this);
     },
     startBuild: function (startTime,endTime) {
 
@@ -359,7 +359,7 @@ var Building = GameObject.extend({
         this._startTime = startTime;
         this._endTime = endTime;
         this.startProcess();
-        PlayerInfoManager.Instance().changeBuilder("current", -1);
+        PlayerInfoManager.getInstance().changeBuilder("current", -1);
     },
 
     completeProcess: function () {
@@ -368,7 +368,7 @@ var Building = GameObject.extend({
         this._endTime = null;
         // this._progressBar.setVisible(false);
         // this._fence.setVisible(false);
-        PlayerInfoManager.Instance().changeBuilder("current", 1);
+        PlayerInfoManager.getInstance().changeBuilder("current", 1);
         //unschedule update
         let chosenBuilding = cc.director.getRunningScene().getMapLayer().getChosenBuilding();
         if(chosenBuilding === this)
@@ -390,18 +390,18 @@ var Building = GameObject.extend({
     cancelProcess: function () {
 
         //return 50% resource
-        let priceGold = LoadManager.Instance().getConfig(this._type, this._level, "gold") || 0;
-        let priceElixir = LoadManager.Instance().getConfig(this._type, this._level, "elixir") || 0;
+        let priceGold = LoadManager.getInstance().getConfig(this._type, this._level, "gold") || 0;
+        let priceElixir = LoadManager.getInstance().getConfig(this._type, this._level, "elixir") || 0;
         if(this._state === 2){
-            priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
-            priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
+            priceGold = LoadManager.getInstance().getConfig(this._type, this._level+1, "gold") || 0;
+            priceElixir = LoadManager.getInstance().getConfig(this._type, this._level+1, "elixir") || 0;
         }
 
         let returnGold = Math.floor(priceGold/2);
         let returnElixir = Math.floor(priceElixir/2);
-        // PlayerInfoManager.Instance().changeResource("gold", returnGold);
-        PlayerInfoManager.Instance().changeResource({gold: returnGold, elixir: returnElixir})
-        PlayerInfoManager.Instance().changeBuilder("current", 1);
+        // PlayerInfoManager.getInstance().changeResource("gold", returnGold);
+        PlayerInfoManager.getInstance().changeResource({gold: returnGold, elixir: returnElixir})
+        PlayerInfoManager.getInstance().changeBuilder("current", 1);
         //return state
         this._state = 0;
         this._startTime = null;
@@ -422,7 +422,7 @@ var Building = GameObject.extend({
         mapLayer.removeBuilding(this);
 
         //remove from mapManager
-        MapManager.Instance().removeBuilding(this);
+        MapManager.getInstance().removeBuilding(this);
 
     },
 
@@ -431,7 +431,7 @@ var Building = GameObject.extend({
     },
 
     onAddIntoMapManager: function () {
-        let mapManager = MapManager.Instance();
+        let mapManager = MapManager.getInstance();
         if(!mapManager.buildingAmount[this._type]){
             mapManager.buildingAmount[this._type] = 1;
         }
@@ -444,7 +444,7 @@ var Building = GameObject.extend({
             case 1:
             case 2:
                 // -1 builder
-                PlayerInfoManager.Instance().changeBuilder("current", -1);
+                PlayerInfoManager.getInstance().changeBuilder("current", -1);
                 break;
         }
     },
@@ -454,9 +454,9 @@ var Building = GameObject.extend({
     },
     //if valid, send to server
     onClickUpgrade: function () {
-        let priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
-        let priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
-        if(!PlayerInfoManager.Instance().checkEnoughResource(priceGold, priceElixir)){
+        let priceGold = LoadManager.getInstance().getConfig(this._type, this._level+1, "gold") || 0;
+        let priceElixir = LoadManager.getInstance().getConfig(this._type, this._level+1, "elixir") || 0;
+        if(!PlayerInfoManager.getInstance().checkEnoughResource(priceGold, priceElixir)){
             cc.log("not enough resource");
 
             //declare price, type is resource not enough
@@ -464,17 +464,17 @@ var Building = GameObject.extend({
             let type;
             if(priceGold)
             {
-                priceCount = priceGold- PlayerInfoManager.Instance().getResource("gold");
+                priceCount = priceGold- PlayerInfoManager.getInstance().getResource("gold");
                 type = "gold";
             }
             else{
-                priceCount = priceElixir - PlayerInfoManager.Instance().getResource("elixir");
+                priceCount = priceElixir - PlayerInfoManager.getInstance().getResource("elixir");
                 type = "elixir";
             }
             NotEnoughResourcePopup.appear(priceCount, type);
             return;
         }
-        if(!PlayerInfoManager.Instance().getBuilder().current){
+        if(!PlayerInfoManager.getInstance().getBuilder().current){
             cc.log("not enough builder");
             // create content in popup
             let label = new cc.LabelBMFont("Bạn có muốn giải phóng thợ xây", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
@@ -491,7 +491,7 @@ var Building = GameObject.extend({
                 acceptCallBack: () => {
                     //remove popup
                     popUpLayer.setVisible(false);
-                    PlayerInfoManager.Instance().freeBuilderByGem();
+                    PlayerInfoManager.getInstance().freeBuilderByGem();
                     buyResPopup.removeFromParent(true);
                 },
                 content: content,
@@ -516,14 +516,14 @@ var Building = GameObject.extend({
 
 
         //if cancel, return 50% resource, if current resource + return resource > max resource, cannot cancel
-        let priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
-        let priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
+        let priceGold = LoadManager.getInstance().getConfig(this._type, this._level+1, "gold") || 0;
+        let priceElixir = LoadManager.getInstance().getConfig(this._type, this._level+1, "elixir") || 0;
         let returnGold = Math.floor(priceGold/2);
         let returnElixir = Math.floor(priceElixir/2);
-        let maxResource = PlayerInfoManager.Instance().getMaxResource();
+        let maxResource = PlayerInfoManager.getInstance().getMaxResource();
 
-        if(PlayerInfoManager.Instance().getResource().gold + returnGold > maxResource.gold ||
-            PlayerInfoManager.Instance().getResource().elixir + returnElixir > maxResource.elixir)
+        if(PlayerInfoManager.getInstance().getResource().gold + returnGold > maxResource.gold ||
+            PlayerInfoManager.getInstance().getResource().elixir + returnElixir > maxResource.elixir)
         {
             BasicPopup.appear("HỦY XÂY NHÀ", "Kho đã đầy, không thể hủy")
             return
@@ -539,8 +539,8 @@ var Building = GameObject.extend({
         }
     },
     onClickQuickFinish: function () {
-        let priceGem = Utils.calculateGBuyTime(this._endTime - TimeManager.Instance().getCurrentTimeInSecond());
-        let currentGem = PlayerInfoManager.Instance().getResource("gem");
+        let priceGem = Utils.calculateGBuyTime(this._endTime - TimeManager.getInstance().getCurrentTimeInSecond());
+        let currentGem = PlayerInfoManager.getInstance().getResource("gem");
         if(currentGem < priceGem)
         {
             BasicPopup.appear("THIẾU TÀI NGUYÊN", "Bạn không đủ G")
@@ -592,7 +592,7 @@ var Building = GameObject.extend({
     getTimeLeft: function () {
         if(this._state!= null)
         {
-            return this._endTime - TimeManager.Instance().getCurrentTimeInSecond();
+            return this._endTime - TimeManager.getInstance().getCurrentTimeInSecond();
         }
         return null;
     },
@@ -602,14 +602,14 @@ var Building = GameObject.extend({
     //return 0 if can show upgrade button, 1 if not enough resource, 2 if max level
     getStateUpgradeButton:function(){
         let max_level = BuildingInfo[this._type].max_level;
-        let townHall = MapManager.Instance().getTownHall();
+        let townHall = MapManager.getInstance().getTownHall();
 
         if(this._level === max_level || this._type == "BDH_1"){
             return 2;
         }
-        let priceGold = LoadManager.Instance().getConfig(this._type, this._level+1, "gold") || 0;
-        let priceElixir = LoadManager.Instance().getConfig(this._type, this._level+1, "elixir") || 0;
-        if(!PlayerInfoManager.Instance().checkEnoughResource(priceGold, priceElixir)){
+        let priceGold = LoadManager.getInstance().getConfig(this._type, this._level+1, "gold") || 0;
+        let priceElixir = LoadManager.getInstance().getConfig(this._type, this._level+1, "elixir") || 0;
+        if(!PlayerInfoManager.getInstance().checkEnoughResource(priceGold, priceElixir)){
             return 1;
         }
         return 0;

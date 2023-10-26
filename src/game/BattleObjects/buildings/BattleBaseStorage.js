@@ -9,7 +9,7 @@ var BattleBaseStorage = BattleBuilding.extend({
         //set capacity
         this._capacityGold = 0;
         this._capacityElixir = 0;
-        let config = LoadManager.Instance().getConfig(this._type, this._level);
+        let config = LoadManager.getInstance().getConfig(this._type, this._level);
         this.setCapacity(config.capacity);
 
         //listen event EVENT_NAMES.RESOURCE_CHANGED to update sprite
@@ -23,8 +23,8 @@ var BattleBaseStorage = BattleBuilding.extend({
 
     onAddIntoMapManager: function () {
         this._super();
-        let mapManager = MapManager.Instance();
-        let playerInfoManager = PlayerInfoManager.Instance();
+        let mapManager = MapManager.getInstance();
+        let playerInfoManager = PlayerInfoManager.getInstance();
 
         mapManager.addToListStorage(this);
 

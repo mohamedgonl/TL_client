@@ -13,9 +13,9 @@ var AlgorithmImplement = cc.Class.extend({
 
     setGridMapStar: function (gridMapGame) {
 
-        let barracks = ArmyManager.Instance().getBarrackList();
+        let barracks = ArmyManager.getInstance().getBarrackList();
         let barrackIds = barracks.map(e => e.getId());
-        let armyCamps = ArmyManager.Instance().getArmyCampList();
+        let armyCamps = ArmyManager.getInstance().getArmyCampList();
         let armyCampIds = armyCamps.map(e => e.getId());
         this._results = {};
         let gridMap = JSON.parse(JSON.stringify(gridMapGame)) ;
@@ -60,7 +60,7 @@ var AlgorithmImplement = cc.Class.extend({
     }
 
 })
-AlgorithmImplement.Instance = function () {
+AlgorithmImplement.getInstance = function () {
     if (AlgorithmImplement.instance == null) {
         AlgorithmImplement.instance = new AlgorithmImplement();
     }

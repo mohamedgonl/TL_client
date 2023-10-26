@@ -182,10 +182,10 @@ var Utils = {
 }
 var GameUtilities = {
     updateCurrentCapacityAllBuilding: function () {
-        let listStorage = MapManager.Instance().getListStorage();
-        let townhall = MapManager.Instance().getTownHall();
-        let goldCurrent = PlayerInfoManager.Instance().getResource("gold")
-        let elixirCurrent = PlayerInfoManager.Instance().getResource("elixir")
+        let listStorage = MapManager.getInstance().getListStorage();
+        let townhall = MapManager.getInstance().getTownHall();
+        let goldCurrent = PlayerInfoManager.getInstance().getResource("gold")
+        let elixirCurrent = PlayerInfoManager.getInstance().getResource("elixir")
         let listGoldStorage = [];
         let listElixirStorage = [];
 

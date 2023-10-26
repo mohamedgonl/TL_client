@@ -1,11 +1,10 @@
 var ArmyManager = cc.Class.extend({
-    instance: null,
-    _barrackList: [],
-    _armyCampList: [],
-    _armyAmount: {},
 
     ctor: function () {
         this.init();
+        this._barrackList = [];
+        this._armyCampList = [];
+        this._armyAmount = {};
     },
     init: function () {
 
@@ -113,11 +112,15 @@ var ArmyManager = cc.Class.extend({
 
 
 })
-ArmyManager.Instance = function () {
+ArmyManager.getInstance = function () {
     if (ArmyManager.instance == null) {
         ArmyManager.instance = new ArmyManager();
     }
     return ArmyManager.instance;
+}
+ArmyManager.releaseInstance = function () {
+
+    ArmyManager.instance = null;
 }
 
 

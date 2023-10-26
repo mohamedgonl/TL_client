@@ -19,7 +19,7 @@ var BaseMine = Building.extend({
     },
     onAddIntoMapManager: function () {
         this._super();
-        let mapManager = MapManager.Instance();
+        let mapManager = MapManager.getInstance();
         mapManager.addToListMine(this);
     },
     loadSprite: function () {
@@ -49,15 +49,15 @@ var BaseMine = Building.extend({
         }
 
         //if can harvest >= 1% of capacity , show icon
-        let timeNow = TimeManager.Instance().getCurrentTimeInSecond();
+        let timeNow = TimeManager.getInstance().getCurrentTimeInSecond();
 
         let time = timeNow - this._lastCollectTime;
 
-        let productivity = LoadManager.Instance().getConfig(this._type, this._level, "productivity");
+        let productivity = LoadManager.getInstance().getConfig(this._type, this._level, "productivity");
 
         let harvestAmount = Math.floor(time * productivity / 3600);
 
-        let capacity = LoadManager.Instance().getConfig(this._type, this._level, "capacity");
+        let capacity = LoadManager.getInstance().getConfig(this._type, this._level, "capacity");
         if (harvestAmount >= capacity / 50) {
             this._showIconHarvest = true;
             this._iconHarvest.setVisible(true);
@@ -69,12 +69,12 @@ var BaseMine = Building.extend({
     harvest: function (lastCollectTime,gold,elixir) {
 
         this._lastCollectTime = lastCollectTime;
-        let oldElixir = PlayerInfoManager.Instance().getResource().elixir;
-        PlayerInfoManager.Instance().setResource({elixir:elixir});
+        let oldElixir = PlayerInfoManager.getInstance().getResource().elixir;
+        PlayerInfoManager.getInstance().setResource({elixir:elixir});
         let changesElixir = elixir - oldElixir;
 
-        let oldGold = PlayerInfoManager.Instance().getResource().gold;
-        PlayerInfoManager.Instance().setResource({gold:gold});
+        let oldGold = PlayerInfoManager.getInstance().getResource().gold;
+        PlayerInfoManager.getInstance().setResource({gold:gold});
         let changesGold = gold - oldGold;
 
 
@@ -102,7 +102,7 @@ var BaseMine = Building.extend({
         )));
 
         //if storage is full, harvest a part. If timeNow - lastCollectTime > offsetTime, harvest a part
-        let timeNow = TimeManager.Instance().getCurrentTimeInSecond();
+        let timeNow = TimeManager.getInstance().getCurrentTimeInSecond();
         if(timeNow - this._lastCollectTime > OFFSET_HARVEST)
         {
 

@@ -35,7 +35,7 @@ var Builder = cc.Sprite.extend({
         if(state === "init")
         {
             let mapLayer = cc.director.getRunningScene().getMapLayer();
-            let listBDH = MapManager.Instance().getListBuilderHut();
+            let listBDH = MapManager.getInstance().getListBuilderHut();
             this._builderHut = listBDH[0];
             let posStartInMap = mapLayer.getMapPosFromGridPos(cc.pAdd(this._builderHut.getGridPosition(), cc.p(1,0)));
             this.setPosition(posStartInMap.x,posStartInMap.y);
@@ -43,7 +43,7 @@ var Builder = cc.Sprite.extend({
             this._currentAnim = this._animationDown;
             this._target = target;
             this._indexMove = 0;
-            this._path = AlgorithmImplement.Instance().searchPathByAStar([this._gridPosition.x,this._gridPosition.y],[target.getGridPosition().x,target.getGridPosition().y]);
+            this._path = AlgorithmImplement.getInstance().searchPathByAStar([this._gridPosition.x,this._gridPosition.y],[target.getGridPosition().x,target.getGridPosition().y]);
             this.runToTarget();
         }
         else if(state === "isBuilding")
@@ -212,8 +212,8 @@ var Builder = cc.Sprite.extend({
     },
     handleMapChange: function (event) {
         cc.log("GRID MAP CHANGED!" + JSON.stringify(event));
-        const Algorithm = AlgorithmImplement.Instance();
-        Algorithm.setGridMapStar(MapManager.Instance().mapGrid);
+        const Algorithm = AlgorithmImplement.getInstance();
+        Algorithm.setGridMapStar(MapManager.getInstance().mapGrid);
         this._path = Algorithm.searchPathByAStar([this._gridPosition.x,this._gridPosition.y],[this._target.getGridPosition().x,this._target.getGridPosition().y]);
         this._indexMove = 0;
         this.runToTarget();
@@ -223,10 +223,10 @@ var Builder = cc.Sprite.extend({
         if(event.getUserData() !== this._target._id) return;
         this._body.stopAllActions();
         //runTo builder hut
-        let buiderHut = MapManager.Instance().getListBuilderHut()[0];
+        let buiderHut = MapManager.getInstance().getListBuilderHut()[0];
         let mapLayer = cc.director.getRunningScene().getMapLayer();
         this._target = buiderHut;
-        this._path = AlgorithmImplement.Instance().searchPathByAStar([this._gridPosition.x,this._gridPosition.y],[buiderHut.getGridPosition().x,buiderHut.getGridPosition().y]);
+        this._path = AlgorithmImplement.getInstance().searchPathByAStar([this._gridPosition.x,this._gridPosition.y],[buiderHut.getGridPosition().x,buiderHut.getGridPosition().y]);
         this._indexMove = 0;
         this.runToTarget();
     }

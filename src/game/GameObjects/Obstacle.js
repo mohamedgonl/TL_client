@@ -18,7 +18,7 @@ var Obstacle = GameObject.extend({
     init: function (){
 
         //load config
-        var configObstacle = LoadManager.Instance().getConfig(this._type,1);
+        var configObstacle = LoadManager.getInstance().getConfig(this._type,1);
         this._width = configObstacle.width;
         this._height = configObstacle.height;
 
@@ -35,7 +35,7 @@ var Obstacle = GameObject.extend({
     initState: function(){
         if(this._state === 1){
             //-1 tho xay
-            let playerInfoManager = PlayerInfoManager.Instance();
+            let playerInfoManager = PlayerInfoManager.getInstance();
             playerInfoManager.changeBuilder("current",-1);
             this._progressBar.setVisible(true);
         }
@@ -103,8 +103,8 @@ var Obstacle = GameObject.extend({
         infoLayer.removeAllButtonInMenu();
         if(this._state ===0)
         {
-            let priceGold = LoadManager.Instance().getConfig(this._type,this._level,"gold");
-            let priceElixir = LoadManager.Instance().getConfig(this._type,this._level,"elixir");
+            let priceGold = LoadManager.getInstance().getConfig(this._type,this._level,"gold");
+            let priceElixir = LoadManager.getInstance().getConfig(this._type,this._level,"elixir");
             if(priceGold > 0)
             {
                 infoLayer.addButtonToMenu("Dọn dẹp",res.BUTTON.REMOVE_BUTTON,0,this.onClickRemove.bind(this),priceGold,"gold");
@@ -117,7 +117,7 @@ var Obstacle = GameObject.extend({
         else
         {
             //priceGem = 1 gem per 4m, floor upper, count from now to end time
-            let priceGem = Math.ceil((this._endTime - TimeManager.Instance().getCurrentTimeInSecond())/240);
+            let priceGem = Math.ceil((this._endTime - TimeManager.getInstance().getCurrentTimeInSecond())/240);
             infoLayer.addButtonToMenu("Xong ngay",res.BUTTON.QUICK_FINISH_BUTTON,0,this.onClickQuickFinish.bind(this),priceGem,"gem");
         }
 
@@ -151,7 +151,7 @@ var Obstacle = GameObject.extend({
     },
     updateProgress: function (){
         //log start time, end time, current time
-        let currentTime = TimeManager.Instance().getCurrentTimeInSecond();
+        let currentTime = TimeManager.getInstance().getCurrentTimeInSecond();
         let percent = (currentTime - this._startTime)/(this._endTime - this._startTime)*100;
         this._progressBar.setPercent(percent);
 
@@ -181,12 +181,12 @@ var Obstacle = GameObject.extend({
         this._endTime = endTime;
         this.loadButton();
 
-        let playerInfoManager = PlayerInfoManager.Instance();
-        let priceGold = LoadManager.Instance().getConfig(this._type,this._level,"gold");
-        let priceElixir = LoadManager.Instance().getConfig(this._type,this._level,"elixir");
+        let playerInfoManager = PlayerInfoManager.getInstance();
+        let priceGold = LoadManager.getInstance().getConfig(this._type,this._level,"gold");
+        let priceElixir = LoadManager.getInstance().getConfig(this._type,this._level,"elixir");
         playerInfoManager.changeResource({gold:-priceGold,elixir:-priceElixir});
         playerInfoManager.changeBuilder("current",-1);
-        MapManager.Instance().callBuilderToBuilding(this);
+        MapManager.getInstance().callBuilderToBuilding(this);
     },
     completeRemove: function () {
         this._state = 0;
@@ -194,12 +194,12 @@ var Obstacle = GameObject.extend({
         this._endTime = null;
         this.loadButton();
         //xoa khoi map
-        MapManager.Instance().removeBuilding(this)
+        MapManager.getInstance().removeBuilding(this)
         //xoa obstacle khoi layer
         cc.director.getRunningScene().mapLayer.removeBuilding(this);
 
         //tra ve builder
-        let playerInfoManager = PlayerInfoManager.Instance();
+        let playerInfoManager = PlayerInfoManager.getInstance();
         playerInfoManager.changeBuilder("current",1);
         cc.eventManager.dispatchCustomEvent(EVENT_FINISH_BUILDING, this._id);
 
@@ -209,9 +209,9 @@ var Obstacle = GameObject.extend({
     //check to client, if valid then send packet to server
     onClickRemove: function(){
         //check client
-        let playerInfoManager = PlayerInfoManager.Instance();
-        let priceGold = LoadManager.Instance().getConfig(this._type,this._level,"gold");
-        let priceElixir = LoadManager.Instance().getConfig(this._type,this._level,"elixir");
+        let playerInfoManager = PlayerInfoManager.getInstance();
+        let priceGold = LoadManager.getInstance().getConfig(this._type,this._level,"gold");
+        let priceElixir = LoadManager.getInstance().getConfig(this._type,this._level,"elixir");
         if(playerInfoManager.getResource("gold") < priceGold || playerInfoManager.getResource("elixir") < priceElixir)
         {
             cc.log("not enough resource");
@@ -220,11 +220,11 @@ var Obstacle = GameObject.extend({
             let type;
             if(priceGold)
             {
-                priceCount = priceGold- PlayerInfoManager.Instance().getResource("gold");
+                priceCount = priceGold- PlayerInfoManager.getInstance().getResource("gold");
                 type = "gold";
             }
             else{
-                priceCount = priceElixir - PlayerInfoManager.Instance().getResource("elixir");
+                priceCount = priceElixir - PlayerInfoManager.getInstance().getResource("elixir");
                 type = "elixir";
             }
             NotEnoughResourcePopup.appear(priceCount,type);
@@ -248,7 +248,7 @@ var Obstacle = GameObject.extend({
                     acceptCallBack: () => {
                         //remove popup
                         popUpLayer.setVisible(false);
-                          PlayerInfoManager.Instance().freeBuilderByGem();
+                          PlayerInfoManager.getInstance().freeBuilderByGem();
                     buyResPopup.removeFromParent(true);
                 },
                 content: content,
@@ -284,8 +284,8 @@ var Obstacle = GameObject.extend({
       this.onClickRemove();
     },
     onClickQuickFinish: function () {
-        let priceGem = Utils.calculateGBuyTime(this._endTime - TimeManager.Instance().getCurrentTimeInSecond());
-        let currentGem = PlayerInfoManager.Instance().getResource("gem");
+        let priceGem = Utils.calculateGBuyTime(this._endTime - TimeManager.getInstance().getCurrentTimeInSecond());
+        let currentGem = PlayerInfoManager.getInstance().getResource("gem");
         if(currentGem < priceGem)
         {
             BasicPopup.appear("THIẾU TÀI NGUYÊN", "Bạn không đủ G")
@@ -302,7 +302,7 @@ var Obstacle = GameObject.extend({
     getTimeLeft: function () {
         if(this._state!= null)
         {
-            return this._endTime - TimeManager.Instance().getCurrentTimeInSecond();
+            return this._endTime - TimeManager.getInstance().getCurrentTimeInSecond();
         }
         return null;
     },

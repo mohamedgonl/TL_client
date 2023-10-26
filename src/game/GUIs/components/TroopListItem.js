@@ -15,7 +15,7 @@ var TroopListItem = cc.Node.extend({
         this._nodeButton = node.getChildByName("troop_item_button")
         this._node = this._nodeButton.getChildByName("troop_item");
         this._cost = TROOP[this._troopCfgId][this._level]["trainingElixir"];
-        this._curBarrack = ArmyManager.Instance().getBarrackList()[curPage];
+        this._curBarrack = ArmyManager.getInstance().getBarrackList()[curPage];
         this._barrackRequired = TROOP_BASE[this._troopCfgId]["barracksLevelRequired"];
 
         // this._nodeShadow =   CCSUlties.parseUIFile(res_ui.TROOPS_LIST_ITEM).getChildByName("troop_item_button").getChildByName("troop_item");
@@ -69,8 +69,8 @@ var TroopListItem = cc.Node.extend({
         } else {
             this._nodeButton.setOpacity(255);
         }
-        cc.log(this._troopCfgId + " " + PlayerInfoManager.Instance().getResource("elixir")+ " " + price)
-        if (PlayerInfoManager.Instance().getResource("elixir") < price) {
+        cc.log(this._troopCfgId + " " + PlayerInfoManager.getInstance().getResource("elixir")+ " " + price)
+        if (PlayerInfoManager.getInstance().getResource("elixir") < price) {
             this._available = false;
             let costContainer = this._node.getChildByName("cost_container");
             costContainer.getChildByName("cost").setColor(COLOR_REQUIRED_TROOP);
@@ -171,7 +171,7 @@ var TroopListItem = cc.Node.extend({
 
     handleLongPress: function () {
         if (this._available) {
-            let barList = ArmyManager.Instance().getBarrackList();
+            let barList = ArmyManager.getInstance().getBarrackList();
             let currentSpace = barList[this._curPage].getTrainingSpace();
             let maxSpace = barList[this._curPage].getMaxSpace();
             if (currentSpace + TROOP_BASE[this._troopCfgId]["housingSpace"] <= maxSpace) {
@@ -194,7 +194,7 @@ var TroopListItem = cc.Node.extend({
 
     updateResource:  function () {
         let trainCost = TROOP[this._troopCfgId][this._level]["trainingElixir"];
-        PlayerInfoManager.Instance().changeResource("elixir", -trainCost);
+        PlayerInfoManager.getInstance().changeResource("elixir", -trainCost);
     }
 
 

@@ -142,8 +142,8 @@ var InfoPopup = cc.Node.extend({
             case "army":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.ARMY);
-                let armyTotal = ArmyManager.Instance().getMaxSpace();
-                let armyCurrent = ArmyManager.Instance().getCurrentSpace();
+                let armyTotal = ArmyManager.getInstance().getMaxSpace();
+                let armyCurrent = ArmyManager.getInstance().getCurrentSpace();
                 text.setString("Quân lính:" + armyCurrent + "/" + armyTotal);
                 break;
         }

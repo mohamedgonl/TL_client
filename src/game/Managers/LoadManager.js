@@ -37,7 +37,7 @@ var LoadManager = cc.Node.extend({
 
         if(type === "BDH_1" && key==="coin")
         {
-            let bdhCount = MapManager.Instance().buildingAmount["BDH_1"];
+            let bdhCount = MapManager.getInstance().buildingAmount["BDH_1"];
             return this[type][bdhCount+1][key];
         }
 
@@ -250,7 +250,7 @@ var LoadManager = cc.Node.extend({
 
 });
 
-LoadManager.Instance = function () {
+LoadManager.getInstance = function () {
     if (LoadManager.instance == null) {
         LoadManager.instance = new LoadManager();
         LoadManager.instance.retain();

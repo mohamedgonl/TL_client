@@ -7,7 +7,7 @@ var NotEnoughResourcePopup = cc.Node.extend({
 
         //note: gemCost = (int) Math.ceil((double) gold / 400) + (int) Math.ceil((double) elixir / 500);
         let gemCost;
-        let currentG = PlayerInfoManager.Instance().getResource("gem");
+        let currentG = PlayerInfoManager.getInstance().getResource("gem");
         if(type === "gold")
             gemCost = Utils.calculateGBuyRes(amount, 0);
         else
@@ -55,8 +55,8 @@ var NotEnoughResourcePopup = cc.Node.extend({
 
                 //nếu tiền cần tiêu > tổng kho
                 //check kho chứa, nếu amount + kho chứa > max thì ko cho mua
-                let maxAmount = PlayerInfoManager.Instance().getMaxResource()[type];
-                let currentAmount = PlayerInfoManager.Instance().getResource(type);
+                let maxAmount = PlayerInfoManager.getInstance().getMaxResource()[type];
+                let currentAmount = PlayerInfoManager.getInstance().getResource(type);
 
                 if(amount + currentAmount > maxAmount){
                     let str ="";
