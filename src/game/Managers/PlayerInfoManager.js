@@ -152,6 +152,7 @@ var PlayerInfoManager = cc.Layer.extend({
             cc.log(JSON.stringify(data.resource));
             GameUtilities.updateCurrentCapacityAllBuilding();
         }
+        cc.log(data);
 
         InfoLayer.updateUI(data);
     },

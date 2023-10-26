@@ -35,7 +35,7 @@ var InfoLayer = cc.Layer.extend({
         })
 
         this.addChild(node);
-        this.loadResources();
+        // this.loadResources();
         this.addEventListener();
 
         //container for button when select building
@@ -221,6 +221,15 @@ var InfoLayer = cc.Layer.extend({
         var info = PlayerInfoManager.Instance().info;
         let armyCurrent = ArmyManager.Instance().getCurrentSpace();
         let armyMax = ArmyManager.Instance().getMaxSpace();
+
+        //cc.log all above
+        cc.log("resource: " + JSON.stringify(resource));
+        cc.log("maxResource: " + JSON.stringify(maxResource));
+        cc.log("builder: " + JSON.stringify(builder));
+        cc.log("info: " + JSON.stringify(info));
+        cc.log("army: " + JSON.stringify({current: armyCurrent, max: armyMax}));
+
+
         // var army = PlayerInfoManager.Instance().army;
         //update UI
         this.updateUI({
@@ -297,12 +306,16 @@ var InfoLayer = cc.Layer.extend({
             if (res.gold != null) {
                 this.gold_container.getChildByName("text").setString(res.gold);
                 let barPercent = res.gold / PlayerInfoManager.Instance().getMaxResource().gold;
-                this.gold_container.bar_bg.bar.setPercent(barPercent * 100);
+
+                if(barPercent >=0 && barPercent <=1)
+                    this.gold_container.bar_bg.bar.setPercent(barPercent * 100);
             }
             if (res.elixir != null) {
                 this.elixir_container.text.setString(res.elixir);
                 let barPercent = res.elixir / PlayerInfoManager.Instance().getMaxResource().elixir;
-                this.elixir_container.bar_bg.bar.setPercent(barPercent * 100);
+
+                if(barPercent >=0 && barPercent <=1)
+                    this.elixir_container.bar_bg.bar.setPercent(barPercent * 100);
             }
             if (res.gem != null) {
                 this.g_container.text.setString(res.gem);

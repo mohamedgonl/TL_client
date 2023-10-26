@@ -25,13 +25,7 @@ testnetwork.Connector = cc.Class.extend({
                 break;
             case gv.CMD.USER_INFO:
 
-                // neu this khong co onReceiveUserInfo thi se goi cua cc.director.getRunningScene()
-                if(cc.director.getRunningScene() == null)
-                {
-                    cc.director.getRunningScene().onReceiveUserInfo(packet);
-                    cc.log("onReceiveUserInfo")
-                }
-                else
+
                 cc.director.getRunningScene().onReceiveUserInfo(packet);
 
                 break;

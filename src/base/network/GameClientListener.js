@@ -68,9 +68,6 @@ var GameClientListener = cc.Class.extend(
                 case gv.CMD.HAND_SHAKE:
                     gv.gameClient.sendLoginRequest();
                     break;
-                case gv.CMD.USER_LOGIN:
-                    cc.director.getRunningScene().onFinishLogin();
-                    break;
                 case gv.CMD.BUY_RESOURCE:
                     cc.director.getRunningScene().onBuyResourceSuccess(packet);
             }

@@ -17,7 +17,7 @@ var MapLayer = cc.Layer.extend({
             x: 0,
             y: 0
         }
-        this.init();
+        // this.init();
     },
     //init map layer with scale, add event, load background, load building
     init: function () {

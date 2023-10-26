@@ -32,7 +32,9 @@ var GameScene = cc.Scene.extend({
         this.addChild(this.infoLayer);
         this.addChild(this.popUpLayer)
 
-        // this.setVisible(false);
+        this.setVisible(false);
+        //send request to server
+        testnetwork.connector.sendGetUserInfo();
     },
 
     getPopUpLayer: function () {
@@ -84,6 +86,9 @@ var GameScene = cc.Scene.extend({
 
     onReceiveAllData: function () {
         cc.log("onReceiveAllData");
+        this.mapLayer.init();
+        this.infoLayer.loadResources();
+
         this.setVisible(true);
     },
 
