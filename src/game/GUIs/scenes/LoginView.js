@@ -110,7 +110,7 @@ var LoginView = cc.Scene.extend({
 
     onReceiveAllData: function () {
         cc.sys.localStorage.setItem("UID", PlayerInfoManager.Instance().id);
-        cc.director.runScene(new GameScene());
+        cc.director.runScene(new TestScene());
     },
 
     onFinishLogin: function (success) {
