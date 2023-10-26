@@ -11,7 +11,7 @@ var GameScene = cc.Scene.extend({
     init: function () {
         //load config and resource
         LoadManager.Instance();
-        this.armyManager = ArmyManager.Instance();
+
 
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
@@ -90,6 +90,8 @@ var GameScene = cc.Scene.extend({
         this.infoLayer.loadResources();
         this.popUpLayer.init();
         this.setVisible(true);
+        this.armyManager = ArmyManager.Instance();
+        ArmyManager.Instance().initTroopSprites();
     },
 
 });
