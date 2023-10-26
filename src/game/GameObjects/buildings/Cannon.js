@@ -9,8 +9,8 @@ var Cannon = Building.extend({
         this._isUpperAnimate = false;
 
     },
-    loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.CANNON[level][0],null,2);
+    loadMainSpriteByLevel: function (level) {
+        this.loadMainSprite(res_map.SPRITE.BODY.CANNON[level][0],null,2);
     },
 
 

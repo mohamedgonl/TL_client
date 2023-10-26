@@ -186,7 +186,7 @@ var Obstacle = GameObject.extend({
         let priceElixir = LoadManager.getInstance().getConfig(this._type,this._level,"elixir");
         playerInfoManager.changeResource({gold:-priceGold,elixir:-priceElixir});
         playerInfoManager.changeBuilder("current",-1);
-        MapManager.getInstance().callBuilderToBuilding(this);
+        //MapManager.getInstance().callBuilderToBuilding(this);
     },
     completeRemove: function () {
         this._state = 0;

@@ -9,8 +9,8 @@ var BuilderHut = Building.extend({
         this._isUpperAnimate = false;
 
     },
-    loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.BUILDER_HUT[level],null,1);
+    loadMainSpriteByLevel: function (level) {
+        this.loadMainSprite(res_map.SPRITE.BODY.BUILDER_HUT[level],null,1);
     },
     onAddIntoMapManager: function () {
         this._super();

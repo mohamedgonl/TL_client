@@ -34,13 +34,13 @@ var GameScene = cc.Scene.extend({
         this.mapLayer = new MapLayer();
         this.infoLayer = new InfoLayer();
         this.popUpLayer = new PopupLayer();
-        this.loadingView = new Loading(Loading.STOP);
+        // this.loadingView = new Loading(Loading.STOP);
         this.popUpLayer.setVisible(false);
 
         this.addChild(this.mapLayer);
         this.addChild(this.infoLayer);
         this.addChild(this.popUpLayer);
-        this.addChild(this.loadingView);
+        // this.addChild(this.loadingView);
 
         // this.setVisible(false);
         //send request to server
@@ -101,7 +101,7 @@ var GameScene = cc.Scene.extend({
         this.popUpLayer.init();
         // this.setVisible(true);
         ArmyManager.getInstance().initTroopSprites();
-        this.loadingView.stopLoading();
+        // this.loadingView.stopLoading();
     },
 
 });

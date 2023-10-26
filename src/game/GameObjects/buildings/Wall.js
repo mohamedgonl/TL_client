@@ -9,5 +9,8 @@ var Wall = Building.extend({
         this._shadowType = 1;
         this._isUpperAnimate = false;
     },
+    loadMainSpriteByLevel: function (level) {
+        this.loadMainSprite(res_map.SPRITE.BODY.WALL[level][0],null,1);
+    }
 
 });

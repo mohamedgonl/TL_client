@@ -9,8 +9,8 @@ var ElixirStorage = BaseStorage.extend({
         this._isUpperAnimate = false;
     },
     //load sprite by level , type = 0, 1 , 2, 3 (0->25%,26->50%,51->75%,76->100%)
-    loadSpriteByLevel: function (level,type =0) {
-        this.loadSprite(res_map.SPRITE.BODY.ELIXIR_STORAGE[level][type],null,1);
+    loadMainSpriteByLevel: function (level,type =0) {
+        this.loadMainSprite(res_map.SPRITE.BODY.ELIXIR_STORAGE[level][type],null,1);
     },
 
     //update current amount and change sprite

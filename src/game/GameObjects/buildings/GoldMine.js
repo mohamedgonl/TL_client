@@ -11,8 +11,8 @@ var GoldMine = BaseMine.extend({
         this._shadowType = 1;
         this._isUpperAnimate = true;
     },
-    loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.GOLD_MINE.BOTTOM[level],
+    loadMainSpriteByLevel: function (level) {
+        this.loadMainSprite(res_map.SPRITE.BODY.GOLD_MINE.BOTTOM[level],
             res_map.SPRITE.BODY.GOLD_MINE.UPPER[level],1,1);
     },
 

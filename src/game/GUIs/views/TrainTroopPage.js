@@ -132,8 +132,6 @@ var TrainTroopPage = cc.Node.extend({
     },
 
     updateTrainingPopupTitle: function () {
-        cc.log("DEBUG ::: " + JSON.stringify(ArmyManager.getInstance()))
-        cc.log("_____LOG _________", this._curBarrack.getTrainingSpace());
         let count = this._curBarrack.getTrainingSpace();
         let max = this._curBarrack.getMaxSpace();
         let popUpTitle = this._trainPopup.getChildByName("title");

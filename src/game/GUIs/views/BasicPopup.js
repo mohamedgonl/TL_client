@@ -31,6 +31,8 @@ var BasicPopup = cc.Node.extend({
     },
     onClickCancel: function () {
         this.removeFromParent(true);
+        let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
+        popUpLayer.setVisible(false);
     }
 
 })

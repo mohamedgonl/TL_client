@@ -23,20 +23,68 @@ var Building = GameObject.extend({
         this._hitpoints = config.hitpoints;
 
         this.setAnchorPoint(0.5,0.5);
+
+
+
+
+        //
+        // this._grass.retain();
+        // this._shadow.retain();
+        // this._green_square.retain();
+        // this._red_square.retain();
+        // this._body.retain();
+        // this._upper.retain();
+        // this._arrow.retain();
+        // this._nameLabel.retain();
+        // this._progressBar.retain();
+        // this._levelLabel.retain();
+        // this._timeLabel.retain();
+        // this._fence.retain();
+        // this._mainSprite.retain();
+        // this._bottom.retain();
+        // this._effect.retain();
     },
 
     onAddIntoMapLayer: function () {
+        this._grass = new cc.Sprite();
+        this._shadow = new cc.Sprite();
+        this._green_square = new cc.Sprite();
+        this._red_square = new cc.Sprite();
+        this._body = new cc.Sprite();
+        this._upper = new cc.Sprite();
+        this._arrow = new cc.Sprite();
+        this._nameLabel = new cc.LabelBMFont();
+        this._progressBar = new ccui.Slider();
+        this._levelLabel = new cc.LabelBMFont();
+        this._timeLabel = new cc.LabelBMFont();
+        this._fence = new cc.Sprite();
+
+
+        this._progressBar.addChild(this._timeLabel,ZORDER_BUILDING_EFFECT);
+
+
+        this._bottom = new cc.Node();
+        this._bottom.addChild(this._grass);
+        this._bottom.addChild(this._shadow);
+        this._bottom.addChild(this._green_square);
+        this._bottom.addChild(this._red_square);
+
+        this._mainSprite = new cc.Node();
+        this._mainSprite.addChild(this._body);
+        this._mainSprite.addChild(this._upper);
+
+        this._effect = new cc.Node();
+        this._effect.addChild(this._arrow);
+        this._effect.addChild(this._nameLabel);
+        this._effect.addChild(this._progressBar);
+        this._effect.addChild(this._levelLabel);
+        this._effect.addChild(this._fence);
+
         this.loadBottomSprite();
         this.loadEffectSprite();
-        this.loadMainSprite();
-        this.addChild(this._bottom);
-        this.addChild(this._mainSprite);
-        this.addChild(this._effect);
-    },
-    onAddWithGrass: function () {
-        this.loadBottomSprite();
-        this.loadEffectSprite();
-        this.loadMainSprite();
+        this.loadMainSpriteByLevel(this._level);
+
+
         this.addChild(this._bottom);
         this.addChild(this._mainSprite);
         this.addChild(this._effect);
@@ -48,23 +96,25 @@ var Building = GameObject.extend({
         let size = this._width;
 
         //green square
-        this._green_square = new cc.Sprite(res_map.SPRITE.GREEN_SQUARE[this._width]);
+        // this._green_square = new cc.Sprite(res_map.SPRITE.GREEN_SQUARE[this._width]);
+        this._green_square.setTexture(res_map.SPRITE.GREEN_SQUARE[this._width]);
         this._green_square.setAnchorPoint(0.5,0.5);
         this._green_square.setVisible(false);
 
         //red square
-        this._red_square = new cc.Sprite(res_map.SPRITE.RED_SQUARE[this._width]);
+        // this._red_square = new cc.Sprite(res_map.SPRITE.RED_SQUARE[this._width]);
+        this._red_square.setTexture(res_map.SPRITE.RED_SQUARE[this._width]);
         this._red_square.setAnchorPoint(0.5,0.5);
         this._red_square.setVisible(false);
 
         //grass
-        this._grass = new cc.Sprite();
+        // this._grass = new cc.Sprite();
         this._grass.setTexture(res_map.SPRITE.GRASS.BUILDING[size]);
         this._grass.setAnchorPoint(0.5,0.5);
 
         //shadow
         let shadow_type = this._shadowType;
-        this._shadow = new cc.Sprite();
+        // this._shadow = new cc.Sprite();
         if(shadow_type === 1){
             //this._shadow = new cc.Sprite(res_map.SPRITE.SHADOW[size]);
             this._shadow.setTexture(res_map.SPRITE.SHADOW[size])
@@ -77,29 +127,32 @@ var Building = GameObject.extend({
             this._shadow.setAnchorPoint(0.5,0.5);
         }
 
-        this._bottom = new cc.Node();
-        this._bottom.addChild(this._grass);
-        this._bottom.addChild(this._shadow);
-        this._bottom.addChild(this._green_square);
-        this._bottom.addChild(this._red_square);
+
     },
 
     loadEffectSprite: function () {
         //arrow
-        this._arrow = new cc.Sprite(res_map.SPRITE.ARROW_MOVE[this._width]);
+        // this._arrow = new cc.Sprite(res_map.SPRITE.ARROW_MOVE[this._width]);
+        this._arrow.setTexture(res_map.SPRITE.ARROW_MOVE[this._width]);
         this._arrow.setAnchorPoint(0.5,0.5);
         this._arrow.setScale(SCALE_BUILDING_BODY);
         this._arrow.setVisible(false);
 
         //name label
-        this._nameLabel = new cc.LabelBMFont(BuildingInfo[this._type].name, res.FONT.SOJI[FONT_SIZE_NAME_LABEL], 350, cc.TEXT_ALIGNMENT_CENTER);
+        // this._nameLabel = new cc.LabelBMFont(BuildingInfo[this._type].name, res.FONT.SOJI[FONT_SIZE_NAME_LABEL], 350, cc.TEXT_ALIGNMENT_CENTER);
+        this._nameLabel.setString(BuildingInfo[this._type].name);
+        this._nameLabel.setFntFile(res.FONT.SOJI[FONT_SIZE_NAME_LABEL]);
+        this._nameLabel.setBoundingWidth(350);
+        this._nameLabel.setAlignment(cc.TEXT_ALIGNMENT_CENTER);
+
         this._nameLabel.setAnchorPoint(0.5,0.5);
         this._nameLabel.setPosition(0,80);
         this._nameLabel.setColor(new cc.Color(255, 255, 0));
         this._nameLabel.setVisible(false);
 
         //progress bar
-        this._progressBar = new ccui.Slider();
+        // this._progressBar = new ccui.Slider();
+
         this._progressBar.setScale(SCALE_BUILDING_BODY);
         this._progressBar.loadBarTexture(res_map.SPRITE.PROGRESS_BAR_BG);
         this._progressBar.loadProgressBarTexture(res_map.SPRITE.PROGRESS_BAR);
@@ -108,58 +161,60 @@ var Building = GameObject.extend({
         this._progressBar.setVisible(false);
 
         //level label
-        this._levelLabel = new cc.LabelBMFont("Cấp " + this._level, res.FONT.SOJI[FONT_SIZE_LEVEL_LABEL], 350, cc.TEXT_ALIGNMENT_CENTER);
+        // this._levelLabel = new cc.LabelBMFont("Cấp " + this._level, res.FONT.SOJI[FONT_SIZE_LEVEL_LABEL], 350, cc.TEXT_ALIGNMENT_CENTER);
+        this._levelLabel.setString("Cấp " + this._level);
+        this._levelLabel.setFntFile(res.FONT.SOJI[FONT_SIZE_LEVEL_LABEL]);
+        this._levelLabel.setBoundingWidth(350);
+        this._levelLabel.setAlignment(cc.TEXT_ALIGNMENT_CENTER);
+
         this._levelLabel.setAnchorPoint(0.5,0.5);
         this._levelLabel.setPosition(0,50);
         this._levelLabel.setVisible(false);
 
         //time label
-        this._timeLabel = new cc.LabelBMFont("", res.FONT.SOJI[12], 350, cc.TEXT_ALIGNMENT_CENTER);
+        // this._timeLabel = new cc.LabelBMFont("", res.FONT.SOJI[12], 350, cc.TEXT_ALIGNMENT_CENTER);
+        this._timeLabel.setString("");
+        this._timeLabel.setFntFile(res.FONT.SOJI[12]);
+        this._timeLabel.setBoundingWidth(350);
+        this._timeLabel.setAlignment(cc.TEXT_ALIGNMENT_CENTER);
+
         this._timeLabel.setAnchorPoint(0.5,0);
         this._timeLabel.setPosition(
             this._progressBar.getBoundingBox().width,
             this._progressBar.getBoundingBox().height + 10);
 
-        this._progressBar.addChild(this._timeLabel,ZORDER_BUILDING_EFFECT);
+
 
         //effect fence when build upgrade
-        this._fence = new cc.Sprite(res_map.SPRITE.FENCE);
+        // this._fence = new cc.Sprite(res_map.SPRITE.FENCE);
+        this._fence.setTexture(res_map.SPRITE.FENCE);
         this._fence.setAnchorPoint(0.5,0);
 
         //set pos below 0 0 of building = height grass/2 + offset
         this._fence.setPosition(0,-this._grass.getBoundingBox().height/2 +5);
         this._fence.setVisible(false);
 
-        this._effect = new cc.Node();
-        this._effect.addChild(this._arrow);
-        this._effect.addChild(this._nameLabel);
-        this._effect.addChild(this._progressBar);
-        this._effect.addChild(this._levelLabel);
-        this._effect.addChild(this._fence);
     },
 
 
     //load sprite with size,
-    loadMainSprite: function () {
-        let bodySprite = this._bodySprite;
-        let upperSprite = this._upperSprite;
-        let isUpperAnimation = this._isUpperAnimate;
+    loadMainSprite: function (bodySprite, upperSprite, isUpperAnimate) {
         let size = this._width;
         //body
-        this._body = new cc.Sprite();
+        // this._body = new cc.Sprite();
         this._body.setTexture(bodySprite);
         this._body.setAnchorPoint(0.5,0.5);
         this._body.setScale(SCALE_BUILDING_BODY);
 
 
         //upper
-        this._upper = new cc.Sprite();
+        // this._upper = new cc.Sprite();
         if(upperSprite != null){
             // this._upper.setPosition(this._body.getBoundingBox().width,this._body.getBoundingBox().height);
 
             this._upper.setAnchorPoint(0.5,0.5);
             this._upper.setScale(SCALE_BUILDING_BODY);
-            if(isUpperAnimation){
+            if(isUpperAnimate){
 
                 //this._upper = new cc.Sprite(upperSprite[0]);
                 //set texture for first frame and remove old action
@@ -184,9 +239,7 @@ var Building = GameObject.extend({
                 this._upper.setTexture(upperSprite)
             }
         }
-        this._mainSprite = new cc.Node();
-        this._mainSprite.addChild(this._body);
-        this._mainSprite.addChild(this._upper);
+
     },
 
     //load button for building, reload when select building, upgrade, build, cancel
@@ -228,6 +281,11 @@ var Building = GameObject.extend({
     },
 
     onSelected: function(){
+        //turn on arrow, name label, level label
+        this._arrow.setVisible(true);
+        this._nameLabel.setVisible(true);
+        this._levelLabel.setVisible(true);
+
         this.loadButton();
         cc.eventManager.dispatchCustomEvent(EVENT_SELECT_BUILDING, this._id);
         // opacity to 80 to 100 to 80 repeat forever
@@ -246,6 +304,12 @@ var Building = GameObject.extend({
         this._nameLabel.setVisible(false);
         this._levelLabel.setVisible(false);
         cc.eventManager.dispatchCustomEvent(EVENT_UNSELECT_BUILDING);
+
+        //turn off arrow, name label, level label
+        this._arrow.setVisible(false);
+        this._nameLabel.setVisible(false);
+        this._levelLabel.setVisible(false);
+
         //stop nhấp nháy
         this._body.stopAllActions();
         if(this._upper != null)
@@ -343,7 +407,7 @@ var Building = GameObject.extend({
 
         this.loadButton();
         this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
-        MapManager.getInstance().callBuilderToBuilding(this);
+        //MapManager.getInstance().callBuilderToBuilding(this);
     },
     startBuild: function (startTime,endTime) {
 
@@ -354,6 +418,7 @@ var Building = GameObject.extend({
         },
     startUpgrade: function (startTime,endTime) {
 
+
         this._state = 2;
         this._startTime = startTime;
         this._endTime = endTime;
@@ -362,25 +427,33 @@ var Building = GameObject.extend({
     },
 
     completeProcess: function () {
+        //properties
         this._state = 0;
         this._startTime = null;
         this._endTime = null;
-        // this._progressBar.setVisible(false);
-        // this._fence.setVisible(false);
         PlayerInfoManager.getInstance().changeBuilder("current", 1);
-        //unschedule update
+
+        //effect
+        this._progressBar.setVisible(false);
+        this._fence.setVisible(false);
+
+        //reload button
         let chosenBuilding = cc.director.getRunningScene().getMapLayer().getChosenBuilding();
         if(chosenBuilding === this)
-                this.loadButton();
+            this.loadButton();
+
+        //unschedule update
         this.unschedule(this.update);
         cc.eventManager.dispatchCustomEvent(EVENT_FINISH_BUILDING, this._id);
+
+        //reload main sprite to change level
+        this.loadMainSpriteByLevel(this._level);
     },
     completeBuild: function () {
         this.completeProcess();
     },
     completeUpgrade: function () {
         this._level += 1;
-        //set sprite for new level and update level label
         this._levelLabel.setString("Cấp " + this._level);
         // this.loadSpriteByLevel(this._level)
         this.completeProcess();

@@ -7,8 +7,8 @@ var ArmyCamp = Building.extend({
         this._shadowType = 0;
         this._isUpperAnimate = false;
     },
-    loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.ARMY_CAMP[level], null, 0);
+    loadMainSpriteByLevel: function (level) {
+        this.loadMainSprite(res_map.SPRITE.BODY.ARMY_CAMP[level], null, 0);
     }
 
 

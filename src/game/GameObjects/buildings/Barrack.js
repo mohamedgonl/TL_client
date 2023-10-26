@@ -19,8 +19,8 @@ var Barrack = Building.extend({
 
 
     },
-    loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
+    loadMainSpriteByLevel: function (level) {
+        this.loadMainSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
     },
     loadButton: function () {
         if(this._super() === -1) return;

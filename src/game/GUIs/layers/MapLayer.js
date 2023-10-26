@@ -25,14 +25,12 @@ var MapLayer = cc.Layer.extend({
         this.addEventListener();
         this.initBackground();
         this.loadBuilding();
-        this.loadState();
+        // this.loadState();
     },
-    onEnter: function () {
-        this._super();
 
-    },
     //load all building in map manager and add it to MapLayer
     loadBuilding: function () {
+        cc.log("LOAD BUILDING:::::::::::::::::::::::::::")
         var listBuilding = MapManager.getInstance().getAllBuilding();
         for (var i = 0; i < listBuilding.length; i++) {
             var building = listBuilding[i];
@@ -79,17 +77,7 @@ var MapLayer = cc.Layer.extend({
         let buildingCenterY = gridPosY + sizeY / 2;
         let zOrderValue = zOrder == null ? this.getZOrderBuilding(gridPosX, gridPosY) : zOrder;
 
-        //nếu buildingCenterX không phải là số nguyên, add vào giữa của ô trung tâm
-        if (buildingCenterX % 1 !== 0 || buildingCenterY % 1 !== 0) {
-            buildingCenterX = Math.floor(buildingCenterX);
-            buildingCenterY = Math.floor(buildingCenterY);
-            this.addGameObjectToMapLayer(building, buildingCenterX, buildingCenterY, zOrderValue, true);
-
-        }
-        //add vào góc trái dưới của ô trung tâm
-        else {
-            this.addGameObjectToMapLayer(building, buildingCenterX, buildingCenterY, zOrderValue)
-        }
+        this.addGameObjectToMapLayer(building, buildingCenterX, buildingCenterY, zOrderValue)
 
     },
 
@@ -111,8 +99,7 @@ var MapLayer = cc.Layer.extend({
                     console.log("==================================================================")
                 }
                 if (keyCode === cc.KEY.x) {
-                    // let townhall = MapManager.getInstance().getTownHall();
-                    // MapManager.getInstance().callBuilderToBuilding(townhall,"isBuilding");
+                   this.chosenBuilding.removeFromParent(true);
                 }
                 if (keyCode === cc.KEY.c) {
                 }
@@ -686,7 +673,6 @@ var MapLayer = cc.Layer.extend({
 
         //init building and set it to chosen building
         this.chosenBuilding = getBuildingFromType(buildingType, 1);
-        this.chosenBuilding.onAddIntoMapLayer();
 
         //add button accept and cancel to building
         var buttonAccept = Utils.createButton(res.BUTTON.ACCEPT, SCALE_BUTTON_BUY_BUILDING, OFFSET_BUTTON_BUY_BUILDING, this.acceptBuyBuilding, this);
@@ -706,21 +692,22 @@ var MapLayer = cc.Layer.extend({
         //if not valid position, set to center of map and square to red, else set to valid position and square to green, move screen to see building
         if (validPosition == null) {
             validPosition = cc.p(GRID_SIZE / 2, GRID_SIZE / 2)
-            this.chosenBuilding.setSquare(2);
+            // this.chosenBuilding.setSquare(2);
         } else {
-            this.chosenBuilding.setSquare(1);
+            // this.chosenBuilding.setSquare(1);
         }
         this.chosenBuilding.setGridPosition(validPosition.x, validPosition.y);
         this.tempPosChosenBuilding = cc.p(validPosition.x, validPosition.y);
 
         //move screen to see building
-        let currentPos = this.getPosition();
-        let newPos = this.getMapPosFromGridPos(validPosition);
-        this.setPosition(cc.pSub(currentPos, newPos));
-        this.limitBorder();
+        // let currentPos = this.getPosition();
+        // let newPos = this.getMapPosFromGridPos(validPosition);
+        // this.setPosition(cc.pSub(currentPos, newPos));
+        // this.limitBorder();
 
         //add building to layer to display
         this.addBuildingToLayer(this.chosenBuilding, MAP_ZORDER_BUILDING);
+
 
         //set chosen building
         this.selectBuilding(this.chosenBuilding);
