@@ -29,7 +29,7 @@ var MapLayer = cc.Layer.extend({
     },
     onEnter: function () {
         this._super();
-        ArmyManager.Instance().initTroopSprites();
+
     },
     //load all building in map manager and add it to MapLayer
     loadBuilding: function () {
