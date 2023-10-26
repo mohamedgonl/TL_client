@@ -78,6 +78,7 @@ var LoginView = cc.Scene.extend({
         // this.fetchUserData();
         cc.log("------------------------------")
         //go to game scene
+        cc.sys.localStorage.setItem("UID", PlayerInfoManager.Instance().id);
         cc.director.runScene(new GameScene());
         // this.messageText.setString("Đăng nhập thành công. Đang tải dữ liệu...");
     },
