@@ -169,6 +169,17 @@ var BattleManager = cc.Class.extend({
         }
     },
 
+    onFindMatch: function () {
+        const loadingView = new Loading(Loading.START);
+        const scene = this.battleScene;
+        scene.addChild(loadingView);
+        loadingView.startLoading(function () {
+            testnetwork.connector.sendFindMatch();
+            loadingView.removeFromParent(true);
+            scene.loadingView = new Loading(Loading.STOP);
+            scene.addChild(scene.loadingView);
+        })
+    }
 });
 
 BattleManager.Instance = function () {

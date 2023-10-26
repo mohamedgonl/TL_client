@@ -75,7 +75,7 @@ var BattleUILayer = cc.Layer.extend({
         cc.log("onTroopSlotClick " + slotIndex);
     },
     onFindClick: function () {
-        testnetwork.connector.sendFindMatch();
+        BattleManager.Instance().onFindMatch();
     },
     onEndClick: function () {
         cc.log("onEndClick");

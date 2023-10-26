@@ -194,8 +194,16 @@ var MapManager = cc.Class.extend({
         let builder = new Builder(state,building);
         let mapLayer = cc.director.getRunningScene().mapLayer;
         mapLayer.addChild(builder,MAP_ZORDER_TROOP);
-    }
+    },
 
+    onFindMatch: function (){
+        const loadingView = new Loading(Loading.START);
+        this.gameScene.addChild(loadingView);
+        loadingView.startLoading(function () {
+            cc.director.runScene(new BattleScene());
+            testnetwork.connector.sendFindMatch();
+        })
+    }
 });
 
 

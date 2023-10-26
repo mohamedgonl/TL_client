@@ -30,8 +30,7 @@ var FightPopup = cc.Layer.extend({
     },
 
     handleClickFindMatch: function () {
-        cc.director.runScene(new BattleScene());
-        testnetwork.connector.sendFindMatch();
+        MapManager.Instance().onFindMatch();
     },
 
     handleClickClose: function (closePopupLayer) {

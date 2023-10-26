@@ -146,6 +146,7 @@ var res_ui = {
     CLOUD_1:"res/guis/map/cloud_1.png",
     CLOUD_2:"res/guis/map/cloud_2.png",
     BATTLE_GUI: "BattleGUI.json",
+    LOADING_GUI: "Loading.json",
 }
 
 var res_shop = {

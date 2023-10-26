@@ -22,7 +22,7 @@ var LoginView = cc.Scene.extend({
         const textFieldUID = node.getChildByName("textfield-uid");
         textFieldUID.addTouchEventListener(this.textFieldEvent, this);
         const cachedUID = cc.sys.localStorage.getItem("UID");
-        if (cachedUID){
+        if (cachedUID) {
             textFieldUID.setString(cachedUID);
         }
         this.textFieldUID = textFieldUID;
@@ -66,11 +66,10 @@ var LoginView = cc.Scene.extend({
         const interval = 0.2;
         const repeat = 5;
         const delay = 0;
-        this.schedule(function() {
+        this.schedule(function () {
             this.loadingBar.setPercent(this.loadingBar.getPercent() + 10);
         }, interval, repeat, delay);
     },
-
 
 
     onFinishLogin: function (success) {
@@ -79,7 +78,12 @@ var LoginView = cc.Scene.extend({
         cc.log("------------------------------")
         //go to game scene
         cc.sys.localStorage.setItem("UID", PlayerInfoManager.Instance().id);
-        cc.director.runScene(new GameScene());
+
+        const loadingView = new Loading(Loading.START);
+        this.addChild(loadingView);
+        loadingView.startLoading(function () {
+            cc.director.runScene(new GameScene());
+        })
         // this.messageText.setString("Đăng nhập thành công. Đang tải dữ liệu...");
     },
 

@@ -26,13 +26,15 @@ var GameScene = cc.Scene.extend({
         this.mapLayer = new MapLayer();
         this.infoLayer = new InfoLayer();
         this.popUpLayer = new PopupLayer();
+        this.loadingView = new Loading(Loading.STOP);
         this.popUpLayer.setVisible(false);
 
         this.addChild(this.mapLayer);
         this.addChild(this.infoLayer);
-        this.addChild(this.popUpLayer)
+        this.addChild(this.popUpLayer);
+        this.addChild(this.loadingView);
 
-        this.setVisible(false);
+        // this.setVisible(false);
         //send request to server
         testnetwork.connector.sendGetUserInfo();
     },
@@ -89,9 +91,9 @@ var GameScene = cc.Scene.extend({
         this.mapLayer.init();
         this.infoLayer.loadResources();
         this.popUpLayer.init();
-        this.setVisible(true);
+        // this.setVisible(true);
         this.armyManager = ArmyManager.Instance();
         ArmyManager.Instance().initTroopSprites();
+        this.loadingView.stopLoading();
     },
-
 });

@@ -6,7 +6,7 @@ var BattleScene = cc.Scene.extend({
         this._super();
         BattleManager.Instance().loadFromServer(MapManager.Instance().getAllBuilding());
         this.init();
-        // BattleManager.Instance().gameScene = this;
+        BattleManager.Instance().battleScene = this;
     },
 
     init: function () {
@@ -16,17 +16,11 @@ var BattleScene = cc.Scene.extend({
 
         this.battleLayer = new BattleLayer();
         this.battleUILayer = new BattleUILayer();
-        // this.battleInfoLayer = new BattleInfoLayer();
-        // this.infoLayer = new InfoLayer();
-        // this.popUpLayer = new PopupLayer();
-        // this.popUpLayer.setVisible(false);
+        this.loadingView = new Loading(Loading.STOP);
 
         this.addChild(this.battleLayer);
         this.addChild(this.battleUILayer);
-        // this.addChild(this.battleInfoLayer);
-        // this.addChild(this.infoLayer);
-        // this.addChild(this.popUpLayer)
-
+        this.addChild(this.loadingView);
     },
 
     getPopUpLayer: function () {
@@ -46,6 +40,7 @@ var BattleScene = cc.Scene.extend({
         });
         this.battleLayer.onLoadDataSuccess();
         this.battleUILayer.onLoadDataSuccess();
+        this.loadingView.stopLoading();
     },
 
     onFindMatchFail: function (errorCode) {
