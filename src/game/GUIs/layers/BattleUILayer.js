@@ -1,9 +1,13 @@
 var BattleUILayer = cc.Layer.extend({
     ctor: function () {
         this._super();
+
+        this.chosenSlot = null;
+
         var node = CCSUlties.parseUIFile(res_ui.BATTLE_GUI);
         node.setContentSize(cc.winSize);
         ccui.helper.doLayout(node);
+        this.node = node;
         this.addChild(node);
 
         //log all children of children of children of children of node
@@ -61,6 +65,7 @@ var BattleUILayer = cc.Layer.extend({
         this.test();
     },
     onLoadDataSuccess: function () {
+        cc.log("onLoadDataSuccess::::::::::::::::::::::::::::")
         this.userName.setString(BattleManager.getInstance().enemyName);
         this.goldText.setString(BattleManager.getInstance().availableGold);
         this.elixirText.setString(BattleManager.getInstance().availableElixir);
@@ -71,6 +76,16 @@ var BattleUILayer = cc.Layer.extend({
         this.goldMax.setString(PlayerInfoManager.getInstance().getMaxResource().gold);
         this.elixirMax.setString(PlayerInfoManager.getInstance().getMaxResource().elixir);
 
+        //set bar percent
+        let goldPercent = PlayerInfoManager.getInstance().getResource('gold')/PlayerInfoManager.getInstance().getMaxResource().gold;
+        let elixirPercent = PlayerInfoManager.getInstance().getResource('elixir')/PlayerInfoManager.getInstance().getMaxResource().elixir;
+        this.goldBar = this.node.getChildByName("gold_container").getChildByName("bar_bg").getChildByName("bar");
+        this.elixirBar = this.node.getChildByName("elixir_container").getChildByName("bar_bg").getChildByName("bar");
+        cc.log(goldPercent + " " + elixirPercent)
+        this.goldBar.setPercent(goldPercent*100);
+        this.elixirBar.setPercent(elixirPercent*100);
+
+        //load state of troop
         this.loadTroopSlots();
     },
     loadTroopSlots: function () {
@@ -87,12 +102,31 @@ var BattleUILayer = cc.Layer.extend({
       for (let [key, value] of listTroops) {
           let slot = this.troopSlots[index];
           this.setStateSlot(index, key, value);
+            index++;
       }
 
     },
     onTroopSlotClick: function (slotIndex) {
         //show troop list
         cc.log("onTroopSlotClick " + slotIndex);
+        if(this.chosenSlot == null)
+        {
+            this.chosenSlot = slotIndex;
+            //turn on selected sprite
+            this.troopSlots[slotIndex].getChildByName("button").getChildByName("selected_sprite").setVisible(true);
+            return;
+        }
+
+        if(this.chosenSlot != slotIndex)
+        {
+            //turn off selected sprite old
+            this.troopSlots[this.chosenSlot].getChildByName("button").getChildByName("selected_sprite").setVisible(false);
+            //turn on selected sprite
+            this.troopSlots[slotIndex].getChildByName("button").getChildByName("selected_sprite").setVisible(true);
+
+            this.chosenSlot = slotIndex;
+            return;
+        }
     },
     onFindClick: function () {
         BattleManager.getInstance().onFindMatch();
@@ -129,12 +163,14 @@ var BattleUILayer = cc.Layer.extend({
         let troopSprite = button.getChildByName("troop_sprite");
         let selectedSprite = button.getChildByName("selected_sprite");
         let count = button.getChildByName("count");
+        let emptySlot = this.troopSlots[slotIndex].getChildByName("empty_slot");
 
 
         button.setVisible(true);
         troopSprite.setTexture(res.TROOPS_BATTLE[troopType]);
         selectedSprite.setVisible(false);
         count.setString("x"+troopAmount);
+        emptySlot.setVisible(false);
 
     }
 });

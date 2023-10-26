@@ -170,6 +170,12 @@ var BattleManager = cc.Class.extend({
     },
 
     onFindMatch: function () {
+        let currentGold = PlayerInfoManager.getInstance().getResource("gold");
+        if(currentGold <GOLD_FIND_MATCH)
+        {
+            BasicPopup.appear("THIẾU TÀI NGUYÊN", "Bạn không đủ vàng để tìm trận đấu!");
+            return;
+        }
         const loadingView = new Loading(Loading.START);
         const scene = this.battleScene;
         scene.addChild(loadingView);

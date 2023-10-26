@@ -20,7 +20,7 @@ let PopupLayer = cc.Layer.extend({
                     this._shopPopup = new ShopPopup();
                     this.addChild(this._shopPopup);
                 }
-                popupScreen = this._shopPopu
+                popupScreen = this._shopPopup;
                 break;
             }
 

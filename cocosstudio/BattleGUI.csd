@@ -168,7 +168,7 @@
               <AbstractNodeData Name="bar_bg" ActionTag="-936645087" Tag="62" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="-169.7252" RightMargin="42.7252" TopMargin="22.3287" BottomMargin="-50.3287" ctype="SpriteObjectData">
                 <Size X="127.0000" Y="28.0000" />
                 <Children>
-                  <AbstractNodeData Name="bar" ActionTag="437682415" Tag="63" IconVisible="False" LeftMargin="1.1600" RightMargin="7.8400" TopMargin="1.2900" BottomMargin="6.7100" ProgressType="Right_To_Left" ctype="LoadingBarObjectData">
+                  <AbstractNodeData Name="bar" ActionTag="437682415" Tag="63" IconVisible="False" LeftMargin="1.1600" RightMargin="7.8400" TopMargin="1.2900" BottomMargin="6.7100" ProgressInfo="100" ProgressType="Right_To_Left" ctype="LoadingBarObjectData">
                     <Size X="118.0000" Y="20.0000" />
                     <AnchorPoint />
                     <Position X="1.1600" Y="6.7100" />
@@ -468,7 +468,7 @@
                         <Position X="35.2807" Y="66.2886" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PrePosition X="0.4900" Y="0.7891" />
                         <PreSize X="0.9167" Y="0.3810" />
                         <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
                       </AbstractNodeData>
@@ -560,7 +560,7 @@
                         <Position X="35.2807" Y="66.2886" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PrePosition X="0.4900" Y="0.7891" />
                         <PreSize X="0.9167" Y="0.3810" />
                         <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
                       </AbstractNodeData>
@@ -652,7 +652,7 @@
                         <Position X="35.2807" Y="66.2886" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PrePosition X="0.4900" Y="0.7891" />
                         <PreSize X="0.9167" Y="0.3810" />
                         <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
                       </AbstractNodeData>
@@ -744,7 +744,7 @@
                         <Position X="35.2807" Y="66.2886" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PrePosition X="0.4900" Y="0.7891" />
                         <PreSize X="0.9167" Y="0.3810" />
                         <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
                       </AbstractNodeData>
@@ -781,7 +781,7 @@
                 <PrePosition X="0.3746" Y="0.4844" />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="slot4" ActionTag="1923669004" Tag="155" IconVisible="True" LeftMargin="435.8878" RightMargin="472.9121" TopMargin="66.0000" BottomMargin="62.0000" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="slot4" ActionTag="1923669004" Tag="155" IconVisible="True" LeftMargin="435.8878" RightMargin="472.9122" TopMargin="66.0000" BottomMargin="62.0000" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
                   <AbstractNodeData Name="button" ActionTag="-1795899168" Tag="156" IconVisible="False" LeftMargin="-36.0000" RightMargin="-36.0000" TopMargin="-42.0000" BottomMargin="-42.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="42" Scale9Height="62" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
@@ -836,7 +836,7 @@
                         <Position X="35.2807" Y="66.2886" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PrePosition X="0.4900" Y="0.7891" />
                         <PreSize X="0.9167" Y="0.3810" />
                         <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
                       </AbstractNodeData>
@@ -928,7 +928,7 @@
                         <Position X="35.2807" Y="66.2886" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PrePosition X="0.4900" Y="0.7891" />
                         <PreSize X="0.9167" Y="0.3810" />
                         <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
                       </AbstractNodeData>
@@ -1020,7 +1020,7 @@
                         <Position X="35.2807" Y="66.2886" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PrePosition X="0.4900" Y="0.7891" />
                         <PreSize X="0.9167" Y="0.3810" />
                         <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
                       </AbstractNodeData>
@@ -1057,7 +1057,7 @@
                 <PrePosition X="0.6901" Y="0.4844" />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="slot7" ActionTag="-836084216" Tag="179" IconVisible="True" LeftMargin="723.3896" RightMargin="185.4103" TopMargin="66.0000" BottomMargin="62.0000" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="slot7" ActionTag="-836084216" Tag="179" IconVisible="True" LeftMargin="723.3896" RightMargin="185.4104" TopMargin="66.0000" BottomMargin="62.0000" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
                   <AbstractNodeData Name="button" ActionTag="44773196" Tag="180" IconVisible="False" LeftMargin="-36.0000" RightMargin="-36.0000" TopMargin="-42.0000" BottomMargin="-42.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="42" Scale9Height="62" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
@@ -1112,7 +1112,7 @@
                         <Position X="35.2807" Y="66.2886" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PrePosition X="0.4900" Y="0.7891" />
                         <PreSize X="0.9167" Y="0.3810" />
                         <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
                       </AbstractNodeData>
@@ -1204,7 +1204,7 @@
                         <Position X="35.2807" Y="66.2886" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.4900" Y="0.7892" />
+                        <PrePosition X="0.4900" Y="0.7891" />
                         <PreSize X="0.9167" Y="0.3810" />
                         <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_20.fnt" Plist="" />
                       </AbstractNodeData>

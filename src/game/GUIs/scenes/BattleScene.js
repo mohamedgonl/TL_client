@@ -4,6 +4,11 @@ var BattleScene = cc.Scene.extend({
 
     ctor: function () {
         this._super();
+        PlayerInfoManager.releaseInstance();
+        MapManager.releaseInstance();
+        ArmyManager.releaseInstance();
+        TimeManager.releaseInstance();
+
         BattleManager.getInstance().loadFromServer(MapManager.getInstance().getAllBuilding());
         this.init();
         BattleManager.getInstance().battleScene = this;
@@ -17,10 +22,12 @@ var BattleScene = cc.Scene.extend({
         this.battleLayer = new BattleLayer();
         this.battleUILayer = new BattleUILayer();
         this.loadingView = new Loading(Loading.STOP);
+        this.popUpLayer = new PopupLayer();
 
         this.addChild(this.battleLayer);
         this.addChild(this.battleUILayer);
         this.addChild(this.loadingView);
+        this.addChild(this.popUpLayer);
     },
 
     getPopUpLayer: function () {
@@ -28,6 +35,7 @@ var BattleScene = cc.Scene.extend({
     },
 
     onFindMatchSuccess: function (data) {
+        cc.log("onLoadDataSuccess::::::::::::::::::::::::::::")
         BattleManager.getInstance().loadFromServer(data);
         PlayerInfoManager.getInstance().setResource({
             gold: data.gold,

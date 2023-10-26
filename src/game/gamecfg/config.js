@@ -66,3 +66,4 @@ const OFFSET_BUTTON_BUY_BUILDING = cc.p(30, 30);
 const G_BUY_SECOND = 240;
 const G_BUY_GOLD = 400;
 const G_BUY_ELIXIR = 500;
+const GOLD_FIND_MATCH = 250;

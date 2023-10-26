@@ -5,6 +5,12 @@ var GameScene = cc.Scene.extend({
 
     ctor: function () {
         this._super();
+
+        PlayerInfoManager.releaseInstance();
+        MapManager.releaseInstance();
+        ArmyManager.releaseInstance();
+        TimeManager.releaseInstance();
+
         const mapManager = MapManager.getInstance();
         mapManager.gameScene = this;
         cc.log(" ##############" + mapManager.gameScene)

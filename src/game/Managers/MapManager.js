@@ -194,13 +194,15 @@ var MapManager = cc.Class.extend({
     },
 
     onFindMatch: function (){
+        let currentGold = PlayerInfoManager.getInstance().getResource("gold");
+        if(currentGold <GOLD_FIND_MATCH)
+        {
+            BasicPopup.appear("THIẾU TÀI NGUYÊN", "Bạn không đủ vàng để tìm trận đấu!");
+            return;
+        }
+
         const loadingView = new Loading(Loading.START);
         this.gameScene.addChild(loadingView);
-
-        PlayerInfoManager.releaseInstance();
-        MapManager.releaseInstance();
-        ArmyManager.releaseInstance();
-        TimeManager.releaseInstance();
 
         loadingView.startLoading(function () {
             cc.director.runScene(new BattleScene());

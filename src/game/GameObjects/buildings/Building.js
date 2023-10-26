@@ -43,7 +43,6 @@ var Building = GameObject.extend({
     },
     onMoveInLayer: function () {
 
-
     },
     loadBottomSprite: function () {
         let size = this._width;
