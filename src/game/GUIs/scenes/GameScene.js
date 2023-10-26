@@ -88,7 +88,7 @@ var GameScene = cc.Scene.extend({
         cc.log("onReceiveAllData");
         this.mapLayer.init();
         this.infoLayer.loadResources();
-
+        this.popUpLayer.init();
         this.setVisible(true);
     },
 

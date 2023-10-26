@@ -3,7 +3,6 @@ let PopupLayer = cc.Layer.extend({
     _trainTroopPopup: null,
     ctor: function () {
         this._super();
-        this.init();
     },
 
     init: function () {
@@ -21,7 +20,7 @@ let PopupLayer = cc.Layer.extend({
                     this._shopPopup = new ShopPopup();
                     this.addChild(this._shopPopup);
                 }
-                popupScreen = this._shopPopup;
+                popupScreen = this._shopPopu
                 break;
             }
             case POPUP_IDS.TRAIN: {
