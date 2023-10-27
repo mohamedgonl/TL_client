@@ -8,6 +8,7 @@ var BattleScene = cc.Scene.extend({
         MapManager.releaseInstance();
         ArmyManager.releaseInstance();
         TimeManager.releaseInstance();
+        BattleManager.releaseInstance();
 
         BattleManager.getInstance().loadFromServer(MapManager.getInstance().getAllBuilding());
         this.init();

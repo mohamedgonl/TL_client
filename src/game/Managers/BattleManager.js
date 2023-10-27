@@ -22,6 +22,7 @@ var BattleManager = cc.Class.extend({
 
     //load from server to addBuildingToGameManager
     loadFromServer: function (data) {
+        // cc.log("loadFromServer:::::",JSON.stringify(data,null,2));
         const {matchId, enemyId, enemyName, availableGold, availableElixir, winPoint, losePoint, buildings, troops} = data;
 
         //load info

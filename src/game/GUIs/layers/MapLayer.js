@@ -99,7 +99,8 @@ var MapLayer = cc.Layer.extend({
                     console.log("==================================================================")
                 }
                 if (keyCode === cc.KEY.x) {
-                   this.chosenBuilding.removeFromParent(true);
+                    let warrior = new Warrior(0,0);
+                    this.addChild(warrior,999999999);
                 }
                 if (keyCode === cc.KEY.c) {
                 }

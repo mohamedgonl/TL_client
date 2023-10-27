@@ -1,20 +1,12 @@
 
 var BattleLayer = cc.Layer.extend({
-    onModeMovingBuilding: false,
-    canDragBuilding: false,
-    onModeBuyBuilding: false,
+
 
     ctor: function () {
 
         this._super();
-        //cc.log("+++++++++++++++++++++",JSON.stringify(this.getPosition(),null,2));
         this.setAnchorPoint(0, 0);
-        //create label hello world at 0,0
         this.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
-        this.tempPosChosenBuilding = {
-            x: 0,
-            y: 0
-        }
         this.init();
     },
     //init map layer with scale, add event, load background, load building
@@ -31,9 +23,32 @@ var BattleLayer = cc.Layer.extend({
         this.loadBuilding();
     },
 
-    onEnter: function () {
-        this._super();
-        // ArmyManager.getInstance().initTroopSprites();
+    createTroopAtGridPos: function(type, posX, posY) {
+        cc.log("create troop at grid pos: " + type + " " + posX + " " + posY)
+        let troop = null;
+        switch (type) {
+            case 'ARM_1':
+                troop = new Warrior(posX, posY);
+                break;
+            case 'ARM_2':
+                troop = new Archer(posX, posY);
+                break;
+            case 'ARM_3':
+                troop = new Giant(posX, posY);
+                break;
+            case 'ARM_4':
+                troop = new Thief(posX, posY);
+                break;
+            case 'ARM_6':
+                troop = new Bomber(posX, posY);
+            default:
+                cc.log("NOT FOUND TROOP TYPE");
+        }
+        if (troop) {
+            let posToAdd = this.getMapPosFromGridPos({x: posX, y: posY});
+            this.addChild(troop, MAP_ZORDER_TROOP);
+            troop.setPosition(posToAdd);
+        }
     },
 
     //load all building in map manager and add it to MapLayer
@@ -87,30 +102,6 @@ var BattleLayer = cc.Layer.extend({
     //add event listener for map
     addEventListener: function () {
 
-        //add touch
-        // cc.eventManager.addListener({
-        //     event: cc.EventListener.TOUCH_ONE_BY_ONE,
-        //     swallowTouches: true,
-        //
-        //     onTouchBegan: function (event) {
-        //         this.onTouchBegan(event);
-        //         return true;
-        //     }.bind(this),
-        //
-        //     onTouchEnded: function (event) {
-        //         this.onTouchEnded(event);
-        //         return true;
-        //     }.bind(this),
-        //
-        //     onTouchMoved: function (event) {
-        //         this.handMoved = true;
-        //         //cc.log("move event :" + JSON.stringify(event,null,2));
-        //         this.onDrag(event);
-        //         return true;
-        //     }.bind(this)
-        //
-        // }, this);
-
         //scale by scroll
         cc.eventManager.addListener({
             event: cc.EventListener.MOUSE,
@@ -126,8 +117,6 @@ var BattleLayer = cc.Layer.extend({
                     console.log("==================================================================")
                 }
                 if (keyCode === cc.KEY.x) {
-                    // let townhall = BattleManager.getInstance().getTownHall();
-                    // BattleManager.getInstance().callBuilderToBuilding(townhall,"isBuilding");
                 }
                 if (keyCode === cc.KEY.c) {
                 }
@@ -225,32 +214,11 @@ var BattleLayer = cc.Layer.extend({
 
     onTouchBegan: function (touch) {
         this.positionTouchBegan = touch.getLocation();
-        if (this.chosenBuilding == null) return;
-
-        let building = this.getBuildingFromTouch(touch.getLocation());
-        if (building !== this.chosenBuilding || this.chosenBuilding._type.startsWith("OBS")) return;
-        this.enterModeMoveBuilding();
     },
 
     //if not in move building mode, move view, else move building
     onDrag: function (event) {
-        //move view while drag while not move building
-        if (!this.canDragBuilding) {
             this.moveView(event.getDelta());
-            return;
-        }
-
-        //move building
-        if (this.chosenBuilding == null) return;
-
-        let newPos = this.getGridPosFromScreenPos(event.getLocation());
-
-        if (newPos == null) return;
-
-        if (newPos.x !== this.tempPosChosenBuilding.x || newPos.y !== this.tempPosChosenBuilding.y) {
-            this.moveBuildingInLayer(this.chosenBuilding, newPos.x, newPos.y);
-
-        }
     },
 
     onTouchEnded: function (event) {
@@ -260,72 +228,31 @@ var BattleLayer = cc.Layer.extend({
         this.canDragBuilding = false;
         if (distance < 10) this.onClicked(this.positionTouchBegan);
 
-        if (this.onModeBuyBuilding) return;
-
-        //if onModeMoveBuilding and current pos of chosenBuilding is valid, send to server to recheck
-        if (this.onModeMovingBuilding) {
-
-            if (BattleManager.getInstance().checkValidPutBuilding(this.chosenBuilding, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y))
-                this.exitModeMoveBuilding();
-        }
     },
 
     onClicked: function (locationInScreen) {
-
-        if (this.onModeBuyBuilding) return;
-        let building = this.getBuildingFromTouch(locationInScreen);
-        if (building != null && building._type.startsWith("RES") && building._state === 0 && building._showIconHarvest) {
-            building.onClickHarvest();
-            return;
-        }
-        //click building first time or click another building
-
-        //if click nothing -> building = null
-        if (building == null) {
-
-            if (this.onModeMovingBuilding) {
-                this.exitModeMoveBuilding();
-            } else this.unSelectBuilding();
-            return;
-        }
-        if (this.chosenBuilding == null) {
-            this.selectBuilding(building);
-            return;
-        }
-
-        if (this.chosenBuilding !== building) {
-            this.unSelectBuilding();
-            this.selectBuilding(building);
-        }
+        let gridPos = this.getGridPosFromScreenPos(locationInScreen);
+        //get type of chosen slot
+        let type = cc.director.getRunningScene().battleUILayer.getTypeOfChosenSlot();
+        cc.log("choose:::::::::::::::", type);
+        if(type == null) return;
+        this.createTroopAtGridPos(type, gridPos.x, gridPos.y);
     },
 
-    selectBuilding: function (building) {
-        if (this.onModeBuyBuilding) {
-            this.chosenBuilding = building;
-            return;
-        }
-        //if have chosen building, unselect it
-        this.unSelectBuilding(this.chosenBuilding);
-        this.tempPosChosenBuilding = cc.p(building._posX, building._posY);
-        building.setLocalZOrder(MAP_ZORDER_BUILDING + 1);
-
-        this.chosenBuilding = building;
-        this.tempPosChosenBuilding = cc.p(this.chosenBuilding._posX, this.chosenBuilding._posY);
-        building.onSelected();
-    },
 
     getMapPosFromScreenPos: function (posInScreen) {
         var posInMap = cc.pSub(posInScreen, this.getPosition());
         let x = posInMap.x / this.getScale();
         let y = posInMap.y / this.getScale();
+        // cc.log("get map pos from screen pos: " + x + " " + y)
         return cc.p(x, y);
+
     },
 
     //use distance from
     // bottom left grid border and bottom right grid border
     // to get grid pos from map pos
     getGridPosFromMapPos: function (posInMap) {
-        // posInMap = cc.pSub(posInMap,cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
         //calculate distance by distance formula from point to line
         var distanceFromBottomLeft = Utils.findDistanceFromPointToLine(posInMap, CORNER_BOTTOM_BATTLE, CORNER_LEFT_BATTLE);
         var distanceFromBottomRight = Utils.findDistanceFromPointToLine(posInMap, CORNER_RIGHT_BATTLE, CORNER_BOTTOM_BATTLE);
@@ -394,32 +321,32 @@ var BattleLayer = cc.Layer.extend({
 
     //use config zoom max, min, zoom step to zoom by scroll
     zoom: function (event) {
-        let location = event.getLocation();
-        let mapPos = this.getMapPosFromScreenPos(location);
-
-        var delta = event.getScrollY();
-        var scale = this.getScale();
-        let oldScale = this.getScale();
-
-        // Nếu cuộn chuột lên, zoom vào; ngược lại, zoom ra
-        if (delta < 0) {
-            scale += ZOOM_STEP;
-            if (scale > ZOOM_MAX) {
-                scale = ZOOM_MAX;
-            }
-
-        } else {
-            scale -= ZOOM_STEP;
-            if (scale < ZOOM_MIN) {
-                scale = ZOOM_MIN;
-            }
-        }
-        let ratio = scale / oldScale;
-        this.x -= mapPos.x * (ratio - 1);
-        this.y -= mapPos.y * (ratio - 1);
-
-        this.setScale(scale);
-        this.limitBorder();
+        // let location = event.getLocation();
+        // let mapPos = this.getMapPosFromScreenPos(location);
+        //
+        // var delta = event.getScrollY();
+        // var scale = this.getScale();
+        // let oldScale = this.getScale();
+        //
+        // // Nếu cuộn chuột lên, zoom vào; ngược lại, zoom ra
+        // if (delta < 0) {
+        //     scale += ZOOM_STEP;
+        //     if (scale > ZOOM_MAX) {
+        //         scale = ZOOM_MAX;
+        //     }
+        //
+        // } else {
+        //     scale -= ZOOM_STEP;
+        //     if (scale < ZOOM_MIN) {
+        //         scale = ZOOM_MIN;
+        //     }
+        // }
+        // let ratio = scale / oldScale;
+        // this.x -= mapPos.x * (ratio - 1);
+        // this.y -= mapPos.y * (ratio - 1);
+        //
+        // this.setScale(scale);
+        // this.limitBorder();
     },
     zoomMultiTouch: function (touch1, touch2) {
         let location1 = touch1.getLocation();
@@ -459,24 +386,24 @@ var BattleLayer = cc.Layer.extend({
     //if moveView or Zoom out of map, move back
     limitBorder: function () {
 
-        var pos = this.getPosition();
-        //bottom border of screen
-        var currentBottomBorder = this.getMapPosFromScreenPos(cc.p(0, 0)).y;
-        if (currentBottomBorder < BORDER_LIMIT_BOTTOM)
-            this.setPositionY(pos.y + (currentBottomBorder - BORDER_LIMIT_BOTTOM));
-        //top border of screen
-        var currentTopBorder = this.getMapPosFromScreenPos(cc.p(0, cc.winSize.height)).y;
-        if (currentTopBorder > BORDER_LIMIT_TOP)
-            this.setPositionY(pos.y + (currentTopBorder - BORDER_LIMIT_TOP));
-
-        //left border of screen
-        var currentLeftBorder = this.getMapPosFromScreenPos(cc.p(0, 0)).x;
-        if (currentLeftBorder < BORDER_LIMIT_LEFT)
-            this.setPositionX(pos.x + (currentLeftBorder - BORDER_LIMIT_LEFT));
-        //right border of screen
-        var currentRightBorder = this.getMapPosFromScreenPos(cc.p(cc.winSize.width, 0)).x;
-        if (currentRightBorder > BORDER_LIMIT_RIGHT)
-            this.setPositionX(pos.x + (currentRightBorder - BORDER_LIMIT_RIGHT));
+        // var pos = this.getPosition();
+        // //bottom border of screen
+        // var currentBottomBorder = this.getMapPosFromScreenPos(cc.p(0, 0)).y;
+        // if (currentBottomBorder < BORDER_LIMIT_BOTTOM)
+        //     this.setPositionY(pos.y + (currentBottomBorder - BORDER_LIMIT_BOTTOM));
+        // //top border of screen
+        // var currentTopBorder = this.getMapPosFromScreenPos(cc.p(0, cc.winSize.height)).y;
+        // if (currentTopBorder > BORDER_LIMIT_TOP)
+        //     this.setPositionY(pos.y + (currentTopBorder - BORDER_LIMIT_TOP));
+        //
+        // //left border of screen
+        // var currentLeftBorder = this.getMapPosFromScreenPos(cc.p(0, 0)).x;
+        // if (currentLeftBorder < BORDER_LIMIT_LEFT)
+        //     this.setPositionX(pos.x + (currentLeftBorder - BORDER_LIMIT_LEFT));
+        // //right border of screen
+        // var currentRightBorder = this.getMapPosFromScreenPos(cc.p(cc.winSize.width, 0)).x;
+        // if (currentRightBorder > BORDER_LIMIT_RIGHT)
+        //     this.setPositionX(pos.x + (currentRightBorder - BORDER_LIMIT_RIGHT));
 
     },
 

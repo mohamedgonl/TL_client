@@ -15,7 +15,7 @@ var BattleTownhall = BattleBaseStorage.extend({
 
     onAddIntoMapManager: function () {
         this._super();
-        let mapManager = MapManager.getInstance();
+        let mapManager = BattleManager.getInstance();
         mapManager.townHall = this;
     },
 

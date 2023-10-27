@@ -217,6 +217,7 @@ var LoadManager = cc.Node.extend({
             builderBuildUp[i] = res;
         }
         res_map.SPRITE.BUILDER.BUILD.UP = builderBuildUp;
+        this.loadSpriteTroops();
     },
 
     loadSpriteToRes: function (res_address, prefix, suffix, count) {
@@ -245,9 +246,74 @@ var LoadManager = cc.Node.extend({
             }
             res_address[i] = res;
         }
+    },
+    loadSpriteTroops: function () {
+        //ARM_1 run
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image0", 0, 13, res_troop.RUN.ARM_1.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image0", 14, 27, res_troop.RUN.ARM_1.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image0", 28, 41, res_troop.RUN.ARM_1.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image0", 42, 55, res_troop.RUN.ARM_1.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image0", 56, 69, res_troop.RUN.ARM_1.UP);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image0", 70, 83, res_troop.RUN.ARM_1.RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image0", 84, 97, res_troop.RUN.ARM_1.UP_RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image0", 98, 111, res_troop.RUN.ARM_1.DOWN_RIGHT);
+
+        // ARM_2 run
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image0", 0, 15, res_troop.RUN.ARM_2.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image0", 16, 31, res_troop.RUN.ARM_2.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image0", 32, 47, res_troop.RUN.ARM_2.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image0", 48, 63, res_troop.RUN.ARM_2.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image0", 64, 79, res_troop.RUN.ARM_2.UP);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image0", 80, 95, res_troop.RUN.ARM_2.DOWN_RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image0", 96, 111, res_troop.RUN.ARM_2.RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image0", 112, 127, res_troop.RUN.ARM_2.UP_RIGHT);
+
+        //ARM_3 run
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image0", 0, 11, res_troop.RUN.ARM_3.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image0", 12, 23, res_troop.RUN.ARM_3.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image0", 24, 35, res_troop.RUN.ARM_3.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image0", 36, 47, res_troop.RUN.ARM_3.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image0", 48, 59, res_troop.RUN.ARM_3.UP);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image0", 60, 71, res_troop.RUN.ARM_3.DOWN_RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image0", 72, 83, res_troop.RUN.ARM_3.UP_RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image0", 84, 95, res_troop.RUN.ARM_3.RIGHT);
+
+        //ARM_4 run
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image0", 0, 15, res_troop.RUN.ARM_4.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image0", 16, 31, res_troop.RUN.ARM_4.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image0", 32, 47, res_troop.RUN.ARM_4.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image0", 48, 63, res_troop.RUN.ARM_4.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image0", 64, 79, res_troop.RUN.ARM_4.UP);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image0", 80, 95, res_troop.RUN.ARM_4.DOWN_RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image0", 96, 111, res_troop.RUN.ARM_4.RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image0", 112, 127, res_troop.RUN.ARM_4.UP_RIGHT);
+
+        //ARM_6 run
+        this.addAnimationToTarget("res/Troops/ARM_6_1/run/image0", 0, 15, res_troop.RUN.ARM_6.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/run/image0", 16, 31, res_troop.RUN.ARM_6.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/run/image0", 32, 47, res_troop.RUN.ARM_6.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/run/image0", 48, 63, res_troop.RUN.ARM_6.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/run/image0", 64, 79, res_troop.RUN.ARM_6.UP);
+    },
+    addAnimationToTarget: function (link, start,end, target) {
+        let animation = new cc.Animation();
+        for(var i = start; i <= end; i++){
+            let res;
+            if(i < 10)
+                 res = link + "00" + i + ".png";
+            else if(i < 100)
+                 res = link + "0"+ i + ".png";
+            else
+                 res = link + i + ".png";
+            target[i-start] = res;
+            // cc.log("RES:::::::::::", res);
+            animation.addSpriteFrameWithFile(res);
+        }
+        animation.setDelayPerUnit(0.1);
+        animation.setRestoreOriginalFrame(true);
+        target.ANIM = animation;
+        target.ANIM.retain();
     }
-
-
 });
 
 LoadManager.getInstance = function () {
@@ -257,4 +323,143 @@ LoadManager.getInstance = function () {
 
     }
     return LoadManager.instance;
+}
+
+var res_troop = {
+    RUN: {
+        ARM_1: {
+            DOWN: {
+                //0000 -> 0013
+                1: "res/Troops/ARM_1_1/ARM_1_1/run/image0000.png",
+            },
+            DOWN_LEFT: {
+                //0014 -> 0027
+                1: "res/Troops/ARM_1_1/ARM_1_1/run/image0014.png",
+            },
+            LEFT: {
+                //0028 -> 0041
+                1: "res/Troops/ARM_1_1/ARM_1_1/run/image0028.png",
+            },
+            UP_LEFT: {
+                //0042 -> 0055
+                1: "res/Troops/ARM_1_1/ARM_1_1/run/image0042.png",
+            },
+            UP: {
+                //0056 -> 0069
+                1: "res/Troops/ARM_1_1/ARM_1_1/run/image0056.png",
+            },
+            RIGHT: {
+                //0070 -> 0083
+                1: "res/Troops/ARM_1_1/ARM_1_1/run/image0070.png",
+            },
+            UP_RIGHT: {
+                //0084 -> 0097
+                1: "res/Troops/ARM_1_1/ARM_1_1/run/image0084.png",
+            },
+            DOWN_RIGHT: {
+                //0098 -> 0111
+                1: "res/Troops/ARM_1_1/ARM_1_1/run/image0098.png",
+            }
+        },
+        ARM_2: {
+            DOWN: {
+                //0000 -> 0015
+                1: "res/Troops/ARM_2_1/ARM_2_1/run/image0000.png",
+            },
+            DOWN_LEFT: {
+                //0016 -> 0031
+            },
+            LEFT: {
+                //0032 -> 0047
+            },
+            UP_LEFT: {
+                //0048 -> 0063
+            },
+            UP: {
+                //0064 -> 0079
+            },
+            DOWN_RIGHT: {
+                //0080 -> 0095
+            },
+            RIGHT: {
+                //0096 -> 0111
+            },
+            UP_RIGHT: {
+                //0112 -> 0127
+            }
+        },
+        ARM_3: {
+            DOWN: {
+                //0000 -> 0011
+                1: "res/Troops/ARM_3_1/ARM_3_1/run/image0000.png",
+            },
+            DOWN_LEFT: {
+                //0012 -> 0023
+            },
+            LEFT: {
+                //0024 -> 0035
+            },
+            UP_LEFT: {
+                //0036 -> 0047
+            },
+            UP: {
+                //0048 -> 0059
+            },
+            DOWN_RIGHT: {
+                //0060 -> 0071
+            },
+            UP_RIGHT: {
+                //0072 -> 0083
+            },
+            RIGHT: {
+                //0084 -> 0095
+            }
+        },
+        ARM_4: {
+            DOWN: {
+                //0000 -> 0015
+                1: "res/Troops/ARM_4_1/ARM_4_1/run/image0000.png",
+            },
+            DOWN_LEFT: {
+                //0016 -> 0031
+            },
+            LEFT: {
+                //0032 -> 0047
+            },
+            UP_LEFT: {
+                //0048 -> 0063
+            },
+            UP: {
+                //0064 -> 0079
+            },
+            DOWN_RIGHT: {
+                //0080 -> 0095
+            },
+            RIGHT: {
+                //0096 -> 0111
+            },
+            UP_RIGHT: {
+                //0112 -> 0127
+            }
+        },
+        ARM_6: {
+            DOWN: {
+                //0000 -> 0015
+                1: "res/Troops/ARM_6_1/run/image0000.png",
+            },
+            DOWN_LEFT: {
+                //0016 -> 0031
+            },
+            LEFT: {
+                //0032 -> 0047
+            },
+            UP_LEFT: {
+                //0048 -> 0063
+            },
+            UP: {
+                //0064 -> 0079
+            }
+        }
+
+    }
 }

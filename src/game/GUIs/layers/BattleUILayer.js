@@ -172,6 +172,12 @@ var BattleUILayer = cc.Layer.extend({
         count.setString("x"+troopAmount);
         emptySlot.setVisible(false);
 
+        button.type=  troopType;
+
+    },
+    getTypeOfChosenSlot: function () {
+        if(this.chosenSlot == null) return null;
+        return this.troopSlots[this.chosenSlot].getChildByName("button").type;
     }
 });
 

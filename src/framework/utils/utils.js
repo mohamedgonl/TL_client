@@ -233,15 +233,6 @@ var GameUtilities = {
         }
 
     },
-
-
-    //create model building to use in popup, mode buy building
-    createModelBuilding: function (type, level) {
-        let building = getBuildingFromType(type, level);
-
-
-    }
-
 }
 
 

@@ -104,8 +104,16 @@
 
         "src/game/BattleObjects/bullets/CannonBullet.js",
 
+        "src/game/BattleObjects/troops/BaseTroop.js",
+        "src/game/BattleObjects/troops/Warrior.js",
+        "src/game/BattleObjects/troops/Archer.js",
+        "src/game/BattleObjects/troops/Giant.js",
+        "src/game/BattleObjects/troops/Thief.js",
+        "src/game/BattleObjects/troops/Bomber.js",
+
         "src/game/GameObjects/troops/Troop.js",
         "src/game/GameObjects/Builder.js",
+
 
 
         "src/game/Managers/MapManager.js",

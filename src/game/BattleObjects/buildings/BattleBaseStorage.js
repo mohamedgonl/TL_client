@@ -23,7 +23,7 @@ var BattleBaseStorage = BattleBuilding.extend({
 
     onAddIntoMapManager: function () {
         this._super();
-        let mapManager = MapManager.getInstance();
+        let mapManager = BattleManager.getInstance();
         let playerInfoManager = PlayerInfoManager.getInstance();
 
         mapManager.addToListStorage(this);
