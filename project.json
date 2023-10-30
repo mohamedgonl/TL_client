@@ -89,6 +89,7 @@
         "src/game/BattleObjects/BattleObstacle.js",
 
         "src/game/BattleObjects/buildings/BattleBuilding.js",
+        "src/game/BattleObjects/buildings/BattleDefence.js",
         "src/game/BattleObjects/buildings/BattleBuilderHut.js",
         "src/game/BattleObjects/buildings/BattleArmyCamp.js",
         "src/game/BattleObjects/buildings/BattleBaseMine.js",

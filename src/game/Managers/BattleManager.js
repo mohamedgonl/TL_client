@@ -3,13 +3,15 @@ var BattleManager = cc.Class.extend({
     ctor: function () {
         this.listBuildings = new Map();
         this.listTroops = new Map();
-        this.listStorage = [];
-        this.listMine = [];
-        this.listBuilderHut = [];
+
+        this.townHall = null;
+        this.listResources = [];
+        this.listWalls = [];
+        this.listDefences = [];
+
         this.buildingAmount = {};
         this.mapGrid = [];
         this.battleScene = null;
-        this.townHall = null;
 
         //init map grid
         for (var i = 0; i < GRID_SIZE_BATTLE; i++) {
@@ -23,7 +25,17 @@ var BattleManager = cc.Class.extend({
     //load from server to addBuildingToGameManager
     loadFromServer: function (data) {
         // cc.log("loadFromServer:::::",JSON.stringify(data,null,2));
-        const {matchId, enemyId, enemyName, availableGold, availableElixir, winPoint, losePoint, buildings, troops} = data;
+        const {
+            matchId,
+            enemyId,
+            enemyName,
+            availableGold,
+            availableElixir,
+            winPoint,
+            losePoint,
+            buildings,
+            troops
+        } = data;
 
         //load info
         this.matchId = matchId;
@@ -83,7 +95,7 @@ var BattleManager = cc.Class.extend({
             for (let row = posY; row < posY + height; row++)
                 this.mapGrid[column][row] = id;
 
-        building.onAddIntoMapManager();
+        // building.onAddIntoMapManager();
 
         // add to list building {building._id: building}
         this.listBuildings.set(id, building);
@@ -91,19 +103,19 @@ var BattleManager = cc.Class.extend({
         //update list storage, list mine, list builder hut
         switch (typeBuilding.substring(0, 3)) {
             case 'TOW':
-
+                this.townHall = building;
                 break;
             case 'RES':
+                this.listResources.push(building);
                 break;
             case 'STO':
-
+                this.listResources.push(building);
                 break;
-            case 'BAR':
-                //cc.log("hanve barrack+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-                ArmyManager.getInstance().pushBarrack(building);
+            case 'WAL':
+                this.listWalls.push(building);
                 break;
-            case 'AMC':
-                ArmyManager.getInstance().pushArmyCamp(building);
+            case 'DEF':
+                this.listDefences.push(building);
                 break;
             case 'BDH':
                 break;
@@ -172,8 +184,7 @@ var BattleManager = cc.Class.extend({
 
     onFindMatch: function () {
         let currentGold = PlayerInfoManager.getInstance().getResource("gold");
-        if(currentGold <GOLD_FIND_MATCH)
-        {
+        if (currentGold < GOLD_FIND_MATCH) {
             BasicPopup.appear("THIẾU TÀI NGUYÊN", "Bạn không đủ vàng để tìm trận đấu!");
             return;
         }

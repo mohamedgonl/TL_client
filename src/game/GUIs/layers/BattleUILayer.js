@@ -132,8 +132,11 @@ var BattleUILayer = cc.Layer.extend({
         BattleManager.getInstance().onFindMatch();
     },
     onEndClick: function () {
-        cc.log("onEndClick");
-        cc.director.runScene(new GameScene());
+        const loadingView = new Loading(Loading.START);
+        cc.director.getRunningScene().addChild(loadingView);
+        loadingView.startLoading(function () {
+            cc.director.runScene(new GameScene());
+        })
     },
     test: function () {
         this.userName.setString("Nguyen Van A");
