@@ -7,14 +7,14 @@ var BattleObstacle = BattleGameObject.extend({
         this._id = id;
 
         this.init();
-
     },
+
     init: function () {
 
         //load config
         var configObstacle = LoadManager.getInstance().getConfig(this._type, 1);
-        this._width = configObstacle.width;
-        this._height = configObstacle.height;
+        this._width = configObstacle.width * 3;
+        this._height = configObstacle.height * 3;
 
         //load sprites
         this.loadMainSprite();
@@ -38,10 +38,10 @@ var BattleObstacle = BattleGameObject.extend({
     },
     //load main sprite
     loadMainSprite: function () {
-
+        const size = this._width / 3;
         let typeIndex = this._type.substring(4);
         var body_link = res_map.SPRITE.BODY.OBS_LINK + typeIndex + "/idle/image0000.png";
-        var grass_link = res_map.SPRITE.GRASS.OBSTACLE[this._width];
+        var grass_link = res_map.SPRITE.GRASS.OBSTACLE[size];
         this._body = new cc.Sprite(body_link);
         this._grass = new cc.Sprite(grass_link);
 
@@ -55,8 +55,9 @@ var BattleObstacle = BattleGameObject.extend({
     },
 
     loadSubSprite: function () {
+        const size = this._width / 3;
         //arrow move
-        this._arrowMove = new cc.Sprite(res_map.SPRITE.ARROW_MOVE[this._width]);
+        this._arrowMove = new cc.Sprite(res_map.SPRITE.ARROW_MOVE[size]);
         this._arrowMove.setScale(SCALE_BUILDING_BODY);
         this._arrowMove.setAnchorPoint(0.5, 0.5);
         this._arrowMove.setVisible(false);

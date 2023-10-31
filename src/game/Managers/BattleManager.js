@@ -11,21 +11,22 @@ var BattleManager = cc.Class.extend({
         this.listBullets = [];
 
         this.buildingAmount = {};
-        this.mapGrid = [];
+        this.troopMap = [];//map logic for finding path
+        this.battleMap = [];//map logic for drop troops
         this.battleScene = null;
 
         //init map grid
         for (var i = 0; i < GRID_SIZE_BATTLE; i++) {
-            this.mapGrid[i] = [];
-            for (var j = 0; j < GRID_SIZE_BATTLE; j++)
-                this.mapGrid[i][j] = 0;
+            this.troopMap[i] = [];
+            this.battleMap[i] = [];
+            for (var j = 0; j < GRID_SIZE_BATTLE; j++) {
+                this.troopMap[i].push(0);
+                this.battleMap[i].push(0);
+            }
         }
-
     },
 
-    //load from server to addBuildingToGameManager
     loadFromServer: function (data) {
-        // cc.log("loadFromServer:::::",JSON.stringify(data,null,2));
         const {
             matchId,
             enemyId,
@@ -63,8 +64,10 @@ var BattleManager = cc.Class.extend({
 
             this.addBuilding(building);
         }
+        this.initMapLogic();
+
         const Algorithm = AlgorithmImplement.getInstance();
-        Algorithm.setGridMapStar(BattleManager.getInstance().mapGrid);
+        Algorithm.setGridMapStar(BattleManager.getInstance().troopMap);
 
         //load troops
         for (let index in troops) {
@@ -72,15 +75,39 @@ var BattleManager = cc.Class.extend({
             this.listTroops.set(troop.type, troop.amount);
         }
     },
+
     addToListMine: function (building) {
         this.listMine.push(building);
     },
+
     addToListStorage: function (building) {
         this.listStorage.push(building);
     },
+
     addToListBuilderHut: function (building) {
         this.listBuilderHut.push(building);
     },
+
+    initMapLogic: function () {
+        for (let building of this.listBuildings.values())
+            if (!building._type.startsWith("OBS")) {
+                //update troopMap
+                for (let column = building._posX + 1; column < building._posX - 1 + building._width; column++)
+                    for (let row = building._posY + 1; row < building._posY - 1 + building._height; row++)
+                        this.troopMap[column][row] = building._id;
+
+                //update battleMap
+                const padding = 3;
+                for (let column = Math.max(building._posX - padding, 0);
+                     column < Math.min(building._posX + building._width + padding, GRID_SIZE_BATTLE - 1);
+                     column++)
+                    for (let row = Math.max(building._posY - padding, 0);
+                         row < Math.min(building._posY + building._height + padding, GRID_SIZE_BATTLE - 1);
+                         row++)
+                        this.battleMap[column][row] = 1;
+            }
+    },
+
     //add building to list and to grid
     addBuilding: function (building) {
 
@@ -91,10 +118,6 @@ var BattleManager = cc.Class.extend({
         let height = building._height;
         let level = building._level;
         let typeBuilding = building._type;
-
-        for (let column = posX; column < posX + width; column++)
-            for (let row = posY; row < posY + height; row++)
-                this.mapGrid[column][row] = id;
 
         // building.onAddIntoMapManager();
 
@@ -142,8 +165,7 @@ var BattleManager = cc.Class.extend({
         //if x y null, return null
         if (x === null || y === null)
             return null;
-        cc.log("x y::::::::::::::::::::::::::::", x, y)
-        return this.listBuildings.get(this.mapGrid[x][y]) || null;
+        return this.listBuildings.get(this.troopMap[x][y]) || null;
     },
 
     getListBuilderHut: function () {
@@ -170,10 +192,10 @@ var BattleManager = cc.Class.extend({
         this.buildingAmount[building._type] = Math.max(this.buildingAmount[building._type] - 1, 0);
         //remove from list
         this.listBuildings.delete(building._id);
-        //remove from mapGrid
+        //remove from troopMap
         for (var column = building._posX; column < building._posX + building._width; column++)
             for (var row = building._posY; row < building._posY + building._height; row++)
-                this.mapGrid[column][row] = 0;
+                this.troopMap[column][row] = 0;
     },
 
     getBuildingCountByType: function (type) {
@@ -200,7 +222,7 @@ var BattleManager = cc.Class.extend({
         })
     },
 
-    addBullet: function (bullet, defence){
+    addBullet: function (bullet, defence) {
         this.battleScene.battleLayer.addBullet(bullet, defence);
         this.listBullets.push(bullet);
     },

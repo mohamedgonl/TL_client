@@ -20,8 +20,8 @@ var BattleBuilding = BattleGameObject.extend({
         this.addChild(this._upper, ZORDER_BUILDING_UPPER);
 
         let config = LoadManager.getInstance().getConfig(this._type, level);
-        this._width = config.width;
-        this._height = config.height;
+        this._width = config.width * 3;
+        this._height = config.height * 3;
         this._hitpoints = config.hitpoints;
 
         this.setAnchorPoint(0.5, 0.5);
@@ -40,7 +40,7 @@ var BattleBuilding = BattleGameObject.extend({
     //shadow_type = 1 for quare, 2 for circle, 0 for no shadow
     loadSprite: function (bodySprite, upperSprite, shadow_type, isUpperAnimation) {
 
-        var size = this._width;
+        var size = this._width / 3;
         //body
         this._body.setTexture(bodySprite);
         this._body.setAnchorPoint(0.5, 0.5);
@@ -103,8 +103,10 @@ var BattleBuilding = BattleGameObject.extend({
     },
 
     loadSubSprite: function () {
+        const size = this._width / 3;
+
         //arrow move
-        this._arrow_move = new cc.Sprite(res_map.SPRITE.ARROW_MOVE[this._width]);
+        this._arrow_move = new cc.Sprite(res_map.SPRITE.ARROW_MOVE[size]);
         this._arrow_move.setAnchorPoint(0.5, 0.5);
         this._arrow_move.setScale(SCALE_BUILDING_BODY);
         this._arrow_move.setVisible(false);
@@ -112,13 +114,13 @@ var BattleBuilding = BattleGameObject.extend({
         this.addChild(this._arrow_move, ZORDER_BUILDING_EFFECT);
 
         //green square
-        this._green_square = new cc.Sprite(res_map.SPRITE.GREEN_SQUARE[this._width]);
+        this._green_square = new cc.Sprite(res_map.SPRITE.GREEN_SQUARE[size]);
         this._green_square.setAnchorPoint(0.5, 0.5);
         this.addChild(this._green_square, ZORDER_BUILDING_SQUARE);
         this._green_square.setVisible(false);
 
         //red square
-        this._red_square = new cc.Sprite(res_map.SPRITE.RED_SQUARE[this._width]);
+        this._red_square = new cc.Sprite(res_map.SPRITE.RED_SQUARE[size]);
         this._red_square.setAnchorPoint(0.5, 0.5);
         this.addChild(this._red_square, ZORDER_BUILDING_SQUARE);
         this._red_square.setVisible(false);
