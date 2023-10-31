@@ -29,6 +29,7 @@ const CORNER_RIGHT_BATTLE = cc.p(782, 0);
 const MAP_ZORDER_GRID = 0;
 const MAP_ZORDER_BACKGROUND = 1000;
 const MAP_ZORDER_BUILDING = 2000; // max to about 400
+const MAP_ZORDER_BULLET = 2600; // max to about 400
 const MAP_ZORDER_GUI = 3000;
 const MAP_ZORDER_TROOP = 2500;
 

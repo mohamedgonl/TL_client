@@ -365,6 +365,7 @@ var res_map = {
         TOWNHALL: "res/configs/TownHall.json",
         STORAGE: "res/configs/Storage.json",
         DEFENCE: "res/configs/Defence.json",
+        DEFENCE_BASE: "res/configs/DefenceBase.json",
         WALL: "res/configs/Wall.json",
         ARMY_CAMP: "res/configs/ArmyCamp.json",
         BARRACK: "res/configs/Barrack.json",

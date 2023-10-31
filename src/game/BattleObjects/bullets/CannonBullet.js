@@ -1,37 +1,26 @@
-var CannonBullet = cc.Sprite.extend({
+var CannonBullet = Bullet.extend({
     active: true,
-    xVelocity: 0,
-    yVelocity: 200,
-    power: 1,
-    HP: 1,
-    moveType: null,
-    zOrder: 3000,
+    target: null,
 
-    ctor: function (bulletSpeed, weaponType, attackMode) {
-        this._super(res_map.SPRITE.BODY.CANNON.BULLET);
-        // this.yVelocity = -bulletSpeed;
-        // this.attackMode = attackMode;
-        //this.setBlendFunc(cc.SRC_ALPHA, cc.ONE);
-    },
-
-    update: function (dt) {
-        var x = this.x, y = this.y;
-        this.x = x + this.xVelocity * dt;
-        this.y = y + this.yVelocity * dt;
-        // if (x < 0 || x > g_sharedGameLayer.screenRect.width || y < 0 || y > g_sharedGameLayer.screenRect.height || this.HP <= 0) {
-        //     this.destroy();
-        // }
+    ctor: function (type, startPoint, target, damagePerShot) {
+        this._super(res_map.SPRITE.BODY.CANNON.BULLET, startPoint, cc.p(target.x, target.y));
+        this._type = type;
+        this.target = target;
+        this.damagePerShot = damagePerShot;
+        this.speed = 300;
     },
 
     destroy: function () {
         // var explode = HitEffect.getOrCreateHitEffect(this.x, this.y, Math.random() * 360);
-        // this.active = false;
-        // this.visible = false;
-        this.removeFromParent();
+        this.active = false;
+        this.visible = false;
     },
 
-    hurt: function () {
-        this.HP--;
+    onReachDestination: function () {
+        if (this.target && typeof this.target.onGainDamage === 'function') {
+            this.target.onGainDamage(this.damagePerShot);
+        }
+        this.destroy();
     },
 
     collideRect: function (x, y) {

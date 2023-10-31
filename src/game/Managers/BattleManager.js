@@ -8,6 +8,7 @@ var BattleManager = cc.Class.extend({
         this.listResources = [];
         this.listWalls = [];
         this.listDefences = [];
+        this.listBullets = [];
 
         this.buildingAmount = {};
         this.mapGrid = [];
@@ -197,7 +198,12 @@ var BattleManager = cc.Class.extend({
             scene.loadingView = new Loading(Loading.STOP);
             scene.addChild(scene.loadingView);
         })
-    }
+    },
+
+    addBullet: function (bullet, defence){
+        this.battleScene.battleLayer.addBullet(bullet, defence);
+        this.listBullets.push(bullet);
+    },
 });
 
 BattleManager.getInstance = function () {

@@ -12,18 +12,21 @@ var LoadManager = cc.Node.extend({
         this['BAR_1'] = cc.loader.getRes(res_map.JSON.BARRACK)['BAR_1'];
         this['AMC_1'] = cc.loader.getRes(res_map.JSON.ARMY_CAMP)['AMC_1'];
         this['BDH_1'] = cc.loader.getRes(res_map.JSON.BUILDER_HUT)['BDH_1'];
+
         this['DEF_1'] = cc.loader.getRes(res_map.JSON.DEFENCE)['DEF_1'];
+        const def1Base = cc.loader.getRes(res_map.JSON.DEFENCE_BASE)['DEF_1'];
+        this['DEF_1'].baseConfig = def1Base;
+
         this['WAL_1'] = cc.loader.getRes(res_map.JSON.WALL)['WAL_1'];
         this['RES_1'] = cc.loader.getRes(res_map.JSON.RESOURCE)['RES_1'];
         this['RES_2'] = cc.loader.getRes(res_map.JSON.RESOURCE)['RES_2'];
 
-
         //add to resource OBS_1 to OBS_27
         var jsonObstacle = cc.loader.getRes(res_map.JSON.OBSTACLE);
         var obstacleCount = Object.keys(jsonObstacle).length;
-        for(var i = 1; i <= obstacleCount; i++){
-            var res = jsonObstacle['OBS_'+i];
-            this['OBS_'+i] = res;
+        for (var i = 1; i <= obstacleCount; i++) {
+            var res = jsonObstacle['OBS_' + i];
+            this['OBS_' + i] = res;
         }
         //load resource to res
         this.loadResource();
@@ -32,23 +35,29 @@ var LoadManager = cc.Node.extend({
 
     //get config from json
     // example {type: TOW_1, level: 1, key: posX}
-    getConfig: function (type, level=1, key) {
-        if(level ===0) return null;
+    getConfig: function (type, level = 1, key) {
+        if (level === 0) return null;
 
-        if(type === "BDH_1" && key==="coin")
-        {
+        if (type === "BDH_1" && key === "coin") {
             let bdhCount = MapManager.getInstance().buildingAmount["BDH_1"];
-            return this[type][bdhCount+1][key];
+            return this[type][bdhCount + 1][key];
         }
 
-        if(key == null)
+        if (key == null)
             return this[type][level];
         return this[type][level][key];
 
 
     },
 
-    loadResource : function () {
+    getDefBaseConfig: function (type) {
+        if (type.startsWith("DEF")) {
+            return this[type].baseConfig;
+        }
+        return null;
+    },
+
+    loadResource: function () {
         //bo sung OBS
 
         //TOW_1
@@ -133,10 +142,10 @@ var LoadManager = cc.Node.extend({
         let part2 = "/WAL_1_";
         let part3 = "/idle/image000";
         let part4 = ".png";
-        for(let i = 1; i <= wallLevelCount; i++) {
+        for (let i = 1; i <= wallLevelCount; i++) {
             let res = {};
-            for(let j = 0; j < 4; j++){
-                    res[j] = part1 + i + part2 + i + part3 + j + part4;
+            for (let j = 0; j < 4; j++) {
+                res[j] = part1 + i + part2 + i + part3 + j + part4;
             }
             res_map.SPRITE.BODY.WALL[i] = res;
         }
@@ -165,7 +174,7 @@ var LoadManager = cc.Node.extend({
 
         //add to BUILDER.DOWN
         let builderDown = {};
-        for(let i = 0; i < 8; i++){
+        for (let i = 0; i < 8; i++) {
             let res = "res/builder/run/image000" + i + ".png";
             builderDown[i] = res;
         }
@@ -173,38 +182,38 @@ var LoadManager = cc.Node.extend({
 
         //add to BUILDER.UP
         let builderUp = {};
-        for(let i = 32; i < 40; i++){
+        for (let i = 32; i < 40; i++) {
             let res = "res/builder/run/image00" + i + ".png";
-            builderUp[i-32] = res;
+            builderUp[i - 32] = res;
         }
         res_map.SPRITE.BUILDER.UP = builderUp;
 
         //add to BUILDER.LEFT
         let builderLeft = {};
-        for(let i = 16; i < 24; i++){
+        for (let i = 16; i < 24; i++) {
             let res = "res/builder/run/image00" + i + ".png";
-            builderLeft[i-16] = res;
+            builderLeft[i - 16] = res;
         }
         res_map.SPRITE.BUILDER.LEFT = builderLeft;
 
         //add to BUILDER.DOWN_LEFT
         let builderDownLeft = {};
-        for(let i = 8; i < 16; i++){
+        for (let i = 8; i < 16; i++) {
             let res;
-            if(i < 10)
+            if (i < 10)
                 res = "res/builder/run/image000" + i + ".png";
             else
                 res = "res/builder/run/image00" + i + ".png";
 
-            builderDownLeft[i-8] = res;
+            builderDownLeft[i - 8] = res;
         }
         res_map.SPRITE.BUILDER.DOWN_LEFT = builderDownLeft;
 
         //add to BUILDER.UP_LEFT
         let builderUpLeft = {};
-        for(let i = 24; i < 32; i++){
+        for (let i = 24; i < 32; i++) {
             let res = "res/builder/run/image00" + i + ".png";
-            builderUpLeft[i-24] = res;
+            builderUpLeft[i - 24] = res;
         }
         res_map.SPRITE.BUILDER.UP_LEFT = builderUpLeft;
 
@@ -212,7 +221,7 @@ var LoadManager = cc.Node.extend({
         // 1:"res/builder/attack01/image0032.png"
         //32 -> 39
         let builderBuildUp = {};
-        for(let i = 0; i < 8; i++){
+        for (let i = 0; i < 8; i++) {
             let res = "res/builder/attack01/image00" + (32 + i) + ".png";
             builderBuildUp[i] = res;
         }
@@ -221,23 +230,22 @@ var LoadManager = cc.Node.extend({
     },
 
     loadSpriteToRes: function (res_address, prefix, suffix, count) {
-        for(var i = 1; i <= count; i++){
+        for (var i = 1; i <= count; i++) {
             var res = prefix + i + suffix;
             res_address[i] = res;
             //cc.log("added res " + res + " to res_address " + res_address[i])
         }
     },
     loadSpriteFolderToRes: function (res_address, part1, part2, part3, countLevel, countFrame) {
-        for(var i = 1; i <= countLevel; i++){
+        for (var i = 1; i <= countLevel; i++) {
             var res = {};
-            for(var j = 0; j < countFrame; j++){
+            for (var j = 0; j < countFrame; j++) {
 
                 var frame;
 
-                if(j < 10){
-                    frame = part1 + i + part2 + "0" +j + part3;
-                }
-                else
+                if (j < 10) {
+                    frame = part1 + i + part2 + "0" + j + part3;
+                } else
                     frame = part1 + i + part2 + j + part3;
 
                 res[j] = frame;
@@ -295,17 +303,17 @@ var LoadManager = cc.Node.extend({
         this.addAnimationToTarget("res/Troops/ARM_6_1/run/image0", 48, 63, res_troop.RUN.ARM_6.UP_LEFT);
         this.addAnimationToTarget("res/Troops/ARM_6_1/run/image0", 64, 79, res_troop.RUN.ARM_6.UP);
     },
-    addAnimationToTarget: function (link, start,end, target) {
+    addAnimationToTarget: function (link, start, end, target) {
         let animation = new cc.Animation();
-        for(var i = start; i <= end; i++){
+        for (var i = start; i <= end; i++) {
             let res;
-            if(i < 10)
-                 res = link + "00" + i + ".png";
-            else if(i < 100)
-                 res = link + "0"+ i + ".png";
+            if (i < 10)
+                res = link + "00" + i + ".png";
+            else if (i < 100)
+                res = link + "0" + i + ".png";
             else
-                 res = link + i + ".png";
-            target[i-start] = res;
+                res = link + i + ".png";
+            target[i - start] = res;
             // cc.log("RES:::::::::::", res);
             animation.addSpriteFrameWithFile(res);
         }

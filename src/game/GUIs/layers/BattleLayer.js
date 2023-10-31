@@ -407,5 +407,14 @@ var BattleLayer = cc.Layer.extend({
 
     },
 
+    addBullet: function (bullet, defence){
+        this.addChild(bullet, MAP_ZORDER_BULLET);
+
+    },
+
+    gameLoop: function (dt){
+        //check list troop pos -> add to targetQueue of def
+
+    },
 });
 

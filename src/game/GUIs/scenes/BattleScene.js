@@ -10,9 +10,10 @@ var BattleScene = cc.Scene.extend({
         TimeManager.releaseInstance();
         BattleManager.releaseInstance();
 
-        BattleManager.getInstance().loadFromServer(MapManager.getInstance().getAllBuilding());
+        // BattleManager.getInstance().loadFromServer(MapManager.getInstance().getAllBuilding());
         this.init();
         BattleManager.getInstance().battleScene = this;
+        this.schedule(this.gameLoop, 1/20);
     },
 
     init: function () {
@@ -54,5 +55,15 @@ var BattleScene = cc.Scene.extend({
 
     onFindMatchFail: function (errorCode) {
         cc.log("Find match fail: " + errorCode);
+    },
+
+    gameLoop: function (dt) {
+        this.battleLayer.gameLoop(dt);
+        for (let defence of BattleManager.getInstance().listDefences) {
+            defence.gameLoop(dt);
+        }
+        for (let bullet of BattleManager.getInstance().listBullets) {
+            bullet.gameLoop(dt);
+        }
     },
 });

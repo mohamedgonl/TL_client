@@ -1,35 +1,55 @@
-//bullet
 var Bullet = cc.Sprite.extend({
-    active:true,
-    xVelocity:0,
-    yVelocity:200,
-    power:1,
-    HP:1,
-    moveType:null,
-    zOrder:3000,
+    active: true,
+    speed: 200,
+    power: 1,
+    HP: 1,
+    moveType: null,
+    destination: null,
+    startPoint: null,
+    alpha: 0,
     // attackMode:MW.ENEMY_MOVE_TYPE.NORMAL,
     // parentType:MW.BULLET_TYPE.PLAYER,
-    ctor:function (weaponType) {
-        this._super(weaponType);
+
+    ctor: function (type, startPoint, destination) {
+        this._super(type);
         //this.setBlendFunc(cc.SRC_ALPHA, cc.ONE);
+        this.init(startPoint, destination);
     },
-    update:function (dt) {
-        var x = this.x, y = this.y;
-        this.x = x - this.xVelocity * dt;
-        this.y = y - this.yVelocity * dt;
-        // if (x < 0 || x > g_sharedGameLayer.screenRect.width || y < 0 || y > g_sharedGameLayer.screenRect.height || this.HP <= 0) {
-        //     this.destroy();
-        // }
+
+    init: function (startPoint, destination){
+        this.active = true;
+        this.visible = true;
+        this.startPoint = startPoint;
+        this.destination = destination;
+        this.dist = cc.pDistance(cc.p(this.startPoint.x, this.startPoint.y), cc.p(this.destination.x, this.destination.y));
+
+        this.alpha += 25/this.dist;
+        const initPos = cc.pLerp(cc.p(this.startPoint.x, this.startPoint.y), cc.p(this.destination.x, this.destination.y), this.alpha);
+        this.setPosition(initPos.x, initPos.y);
     },
-    destroy:function () {
+
+    gameLoop: function (dt) {
+        if (!this.active || this.destination === null)
+            return;
+        this.alpha += dt * this.speed / this.dist;
+        const newPos = cc.pLerp(cc.p(this.startPoint.x, this.startPoint.y), cc.p(this.destination.x, this.destination.y), this.alpha);
+        this.setPosition(newPos.x, newPos.y);
+        if (this.alpha > 0.99) {
+            this.onReachDestination();
+        }
+    },
+
+    destroy: function () {
         // var explode = HitEffect.getOrCreateHitEffect(this.x, this.y, Math.random() * 360);
         this.active = false;
         this.visible = false;
     },
-    hurt:function () {
+
+    hurt: function () {
         this.HP--;
     },
-    collideRect:function (x, y) {
+
+    collideRect: function (x, y) {
         return cc.rect(x - 3, y - 3, 6, 6);
     }
 });
@@ -47,8 +67,7 @@ Bullet.getOrCreateBullet = function (bulletSpeed, weaponType, attackMode, zOrder
                 return selChild;
             }
         }
-    }
-    else {
+    } else {
         for (var j = 0; j < MW.CONTAINER.ENEMY_BULLETS.length; j++) {
             selChild = MW.CONTAINER.ENEMY_BULLETS[j];
             if (selChild.active == false) {
