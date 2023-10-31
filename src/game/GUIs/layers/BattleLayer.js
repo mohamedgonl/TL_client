@@ -1,9 +1,5 @@
-
 var BattleLayer = cc.Layer.extend({
-
-
     ctor: function () {
-
         this._super();
         this.setAnchorPoint(0, 0);
         this.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
@@ -19,7 +15,6 @@ var BattleLayer = cc.Layer.extend({
     },
 
     onLoadDataSuccess: function () {
-        this.resetState();
         this.loadBuilding();
     },
 
@@ -64,7 +59,6 @@ var BattleLayer = cc.Layer.extend({
         if (!this.listBuilding || !this.listBuilding.length)
             return;
         for (let index in this.listBuilding) {
-            cc.log(this.listBuilding[index]._id)
             this.removeBuilding(this.listBuilding[index]);
         }
     },

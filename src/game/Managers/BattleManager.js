@@ -26,6 +26,29 @@ var BattleManager = cc.Class.extend({
         }
     },
 
+    resetState: function () {
+        this.battleScene.battleLayer.resetState();
+
+        this.listBuildings.clear();
+        this.listTroops.clear();
+
+        this.townHall = null;
+        this.listResources = [];
+        this.listWalls = [];
+        this.listDefences = [];
+        this.listBullets = [];
+
+        this.buildingAmount = {};
+
+        //init map grid
+        for (var i = 0; i < GRID_SIZE_BATTLE; i++) {
+            for (var j = 0; j < GRID_SIZE_BATTLE; j++) {
+                this.troopMap[i][j] = 0;
+                this.battleMap[i][j] = 0;
+            }
+        }
+    },
+
     loadFromServer: function (data) {
         const {
             matchId,
@@ -203,23 +226,6 @@ var BattleManager = cc.Class.extend({
         else {
             return this.buildingAmount[type];
         }
-    },
-
-    onFindMatch: function () {
-        let currentGold = PlayerInfoManager.getInstance().getResource("gold");
-        if (currentGold < GOLD_FIND_MATCH) {
-            BasicPopup.appear("THIẾU TÀI NGUYÊN", "Bạn không đủ vàng để tìm trận đấu!");
-            return;
-        }
-        const loadingView = new Loading(Loading.START);
-        const scene = this.battleScene;
-        scene.addChild(loadingView);
-        loadingView.startLoading(function () {
-            testnetwork.connector.sendFindMatch();
-            loadingView.removeFromParent(true);
-            scene.loadingView = new Loading(Loading.STOP);
-            scene.addChild(scene.loadingView);
-        })
     },
 
     addBullet: function (bullet, defence) {

@@ -1,6 +1,7 @@
 var BattleScene = cc.Scene.extend({
     battleLayer: null,
     popUpLayer: null,
+    tick: 0,
 
     ctor: function () {
         this._super();
@@ -13,7 +14,7 @@ var BattleScene = cc.Scene.extend({
         // BattleManager.getInstance().loadFromServer(MapManager.getInstance().getAllBuilding());
         this.init();
         BattleManager.getInstance().battleScene = this;
-        this.schedule(this.gameLoop, 1/20);
+        this.schedule(this.gameLoop, 1 / 20);
     },
 
     init: function () {
@@ -36,6 +37,62 @@ var BattleScene = cc.Scene.extend({
         return this.popUpLayer;
     },
 
+    countDown: function () {
+        if (this.timeLeft <= 0) {
+            if (this.battleStatus === BATTLE_STATUS.PREPARING)
+                this.onStartBattle();
+            else if (this.battleStatus === BATTLE_STATUS.HAPPENNING)
+                this.onEndBattle();
+        }
+        this.setTimeLeft(this.timeLeft - 1);
+    },
+
+    stopCountDown: function () {
+        this.unschedule(this.countDown);
+    },
+
+    setTimeLeft: function (timeLeft){
+        this.timeLeft = timeLeft;
+        this.battleUILayer.setTimeLeft(timeLeft);
+    },
+
+    onStartBattle: function () {
+        // testnetwork.connector.sendDoAction({type: ACTION_TYPE.START_BATTlE, tick: this.tick,});
+        this.battleStatus = BATTLE_STATUS.HAPPENNING;
+        this.setTimeLeft(BATTlE_LIMIT_TIME + 1);
+        this.battleUILayer.onStartBattle();
+    },
+
+    onEndBattle: function () {
+        //send action end game
+        // testnetwork.connector.sendDoAction({
+        //     type: 0,
+        //     tick: this.tick,
+        // });
+        this.stopCountDown();
+        this.battleStatus = BATTLE_STATUS.END;
+    },
+
+    onFindMatch: function () {
+        let currentGold = PlayerInfoManager.getInstance().getResource("gold");
+        if (currentGold < GOLD_FIND_MATCH) {
+            BasicPopup.appear("THIẾU TÀI NGUYÊN", "Bạn không đủ vàng để tìm trận đấu!");
+            return;
+        }
+        const loadingView = new Loading(Loading.START);
+        this.stopCountDown();
+        this.addChild(loadingView);
+        BattleManager.getInstance().resetState();
+
+        const self = this;
+        loadingView.startLoading(function () {
+            testnetwork.connector.sendFindMatch();
+            loadingView.removeFromParent(true);
+            self.loadingView = new Loading(Loading.STOP);
+            self.addChild(self.loadingView);
+        });
+    },
+
     onFindMatchSuccess: function (data) {
         cc.log("onLoadDataSuccess::::::::::::::::::::::::::::")
         BattleManager.getInstance().loadFromServer(data);
@@ -51,6 +108,11 @@ var BattleScene = cc.Scene.extend({
         this.battleLayer.onLoadDataSuccess();
         this.battleUILayer.onLoadDataSuccess();
         this.loadingView.stopLoading();
+
+        this.timeLeft = BATTlE_PREPARE_TIME;
+        this.battleStatus = BATTLE_STATUS.PREPARING;
+        this.battleUILayer.setTimeLeft(this.timeLeft);
+        this.schedule(this.countDown, 1);
     },
 
     onFindMatchFail: function (errorCode) {
@@ -65,5 +127,6 @@ var BattleScene = cc.Scene.extend({
         for (let bullet of BattleManager.getInstance().listBullets) {
             bullet.gameLoop(dt);
         }
+        this.tick++;
     },
 });
