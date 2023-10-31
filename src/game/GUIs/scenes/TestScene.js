@@ -17,7 +17,6 @@ var TestScene = cc.Scene.extend({
         // },this);
 
 
-
         cc.eventManager.addListener({
 
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
@@ -28,12 +27,20 @@ var TestScene = cc.Scene.extend({
                 return true;
             },
             onTouchEnded: function () {
-                testnetwork.connector.sendBattleMatching()
+                testnetwork.connector.sendEndGame({
+                    result: true,
+                    stars: 3,
+                    trophy: 16,
+                    goldGot: 123,
+                    elixirGot: 170,
+                    army: {
+                        "ARM_1": 1
+                    }
+                })
                 return true;
             }
 
         }, this);
-
 
 
     },

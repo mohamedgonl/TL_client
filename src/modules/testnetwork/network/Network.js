@@ -559,6 +559,13 @@ testnetwork.Connector = cc.Class.extend({
         this.gameClient.sendPacket(pk);
     },
 
+    sendEndGame : function (data) {
+        cc.log("SEND endgame");
+        var pk = this.gameClient.getOutPacket(CmdSendEndGame);
+        pk.pack(data);
+        this.gameClient.sendPacket(pk);
+    },
+
 });
 
 

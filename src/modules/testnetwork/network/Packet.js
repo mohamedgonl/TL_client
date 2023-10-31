@@ -34,6 +34,8 @@ gv.CMD.GET_TIME_SERVER = 1003;
 //quyet----------------------
 
 gv.CMD.BATTLE_MATCHING = 6001;
+gv.CMD.END_GAME = 6003;
+
 
 testnetwork = testnetwork || {};
 testnetwork.packetMap = {};
@@ -405,6 +407,31 @@ CmdSendBattleMatching = fr.OutPacket.extend(
         },
         pack: function () {
             this.packHeader();
+            this.updateSize();
+        }
+    })
+
+CmdSendEndGame = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.END_GAME);
+        },
+        pack: function (data) {
+            this.packHeader();
+
+            this.putInt(data.result);
+            this.putInt(data.stars);
+            this.putInt(data.trophy);
+            this.putInt(data.goldGot);
+            this.putInt(data.elixirGot);
+
+            this.putInt(1);
+            this.putString("ARM_1");
+            this.putInt(1);
+
+
             this.updateSize();
         }
     })
