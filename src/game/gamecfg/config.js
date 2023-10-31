@@ -3,7 +3,7 @@ const OFFSET_BACKGROUND_X = 0;
 const OFFSET_BACKGROUND_Y = 2;
 const GRID_SCALE = 0.49;
 const GRID_SIZE = 40;
-const GRID_SIZE_BATTLE = 126;
+const GRID_SIZE_BATTLE = 132;
 const SCALE_BG = 1;
 
 const ZOOM_DEFAULT = 1.5;
@@ -21,10 +21,10 @@ const CORNER_TOP = cc.p(0, 558);
 const CORNER_LEFT = cc.p(-745, 0);
 const CORNER_RIGHT = cc.p(745, 0);
 
-const CORNER_BOTTOM_BATTLE = cc.p(0, -586);
-const CORNER_TOP_BATTLE = cc.p(0, 586);
-const CORNER_LEFT_BATTLE = cc.p(-782, 0);
-const CORNER_RIGHT_BATTLE = cc.p(782, 0);
+const CORNER_BOTTOM_BATTLE = cc.p(0, -614);
+const CORNER_TOP_BATTLE = cc.p(0, 614);
+const CORNER_LEFT_BATTLE = cc.p(-819, 0);
+const CORNER_RIGHT_BATTLE = cc.p(819, 0);
 
 const MAP_ZORDER_GRID = 0;
 const MAP_ZORDER_BACKGROUND = 1000;
