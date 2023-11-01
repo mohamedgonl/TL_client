@@ -8,20 +8,5 @@ var BattleBaseMine = BattleBuilding.extend({
         this._currentGold = 0;
         this._currentElixir = 0;
     },
-    onAddIntoMapManager: function () {
-        this._super();
-        let mapManager = BattleManager.getInstance();
-        mapManager.addToListMine(this);
-    },
-    loadSprite: function (bodySprite, upperSprite, shadow_type, isUpperAnimation) {
-        this._super(bodySprite, upperSprite, shadow_type, isUpperAnimation);
-
-        // this._iconHarvest have bg, and bg.icon is sprite of harvest icon
-        let node = CCSUlties.parseUIFile(res_ui.ICON_HARVEST);
-
-        this._iconHarvest = node;
-        this.addChild(this._iconHarvest, ZORDER_BUILDING_EFFECT);
-        this._iconHarvest.setVisible(false);
-    },
 
 });

@@ -235,15 +235,19 @@ var res_map = {
     SPRITE: {
         BODY: {
             BUILDER_HUT: {
+                JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/builder hut/idle/image0000.png",
             },
             TOWNHALL: {
+                JUNK: "res/Map/map_obj_bg/junk_mainhouse.png",
                 1: 'res/Buildings/townhall/TOW_1_1/idle/image0000.png',
             },
             ARMY_CAMP: {
+                JUNK: "res/Map/map_obj_bg/junk_contructs_1.png",
                 1: 'res/Buildings/army camp/AMC_1_1/idle/image0000.png',
             },
             GOLD_MINE: {
+                JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 BOTTOM: {
                     1: 'res/Buildings/gold mine/RES_1_1/idle/image0000.png',
                 },
@@ -252,6 +256,7 @@ var res_map = {
                 }
             },
             ELIXIR_MINE: {
+                JUNK: "res/Map/map_obj_bg/junk_elixirdrill.png",
                 BOTTOM: {
                     1: 'res/Buildings/elixir collector/RES_2_1/idle/image0000.png',
                 },
@@ -260,22 +265,28 @@ var res_map = {
                 }
             },
             GOLD_STORAGE: {
+                JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/gold storage/STO_1_1/idle/image0000.png",
             },
             ELIXIR_STORAGE: {
+                JUNK: "res/Map/map_obj_bg/junk_elixirdrill.png",
                 1: "res/Buildings/elixir storage/STO_2_1/idle/image0000.png",
             },
             CANNON: {
+                JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/cannon/canon_1/idle/image0000.png",
                 BULLET: "res/battle/cannon_bullet.png",
             },
             BARRACK: {
+                JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/barrack/BAR_1_1/idle/image0000.png"
             },
             WALL: {
+                JUNK: "res/Map/map_obj_bg/junk_wall.png",
                 1: "res/Buildings/wall/WAL_1_1/WAL_1_1/idle/image0000.png"
             },
             CLAN_CASTLE: {
+                JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/clan_castle/CLC_1_0/idle/image0000.png"
             },
             OBS_LINK: "res/Buildings/obstacle/OBS_",
@@ -326,6 +337,21 @@ var res_map = {
         },
         PROGRESS_BAR: "res/guis/upgrade_building_gui/building_time_bar.png",
         PROGRESS_BAR_BG: "res/guis/upgrade_building_gui/building_time_bg.png",
+        BUILDING_HEALTH_BAR: "res/new/battle_gui/enemies_heal_bar.png",
+        BUILDING_HEALTH_BAR_BG: "res/new/battle_gui/bg_heal_bar.png",
+        BUILDING_EXPLOSION: {
+            1: "res/battle/explosion_1/00.png",
+            2: "res/battle/explosion_1/01.png",
+            3: "res/battle/explosion_1/02.png",
+            4: "res/battle/explosion_1/03.png",
+            5: "res/battle/explosion_1/04.png",
+            6: "res/battle/explosion_1/05.png",
+            7: "res/battle/explosion_1/06.png",
+            8: "res/battle/explosion_1/07.png",
+            9: "res/battle/explosion_1/08.png",
+            10: "res/battle/explosion_1/09.png",
+            11: "res/battle/explosion_1/10.png",
+        },
         FENCE: "res/Map/map_obj_bg/upgrading.png",
         BUILDER: {
             LINK: "res/builder/run/image",

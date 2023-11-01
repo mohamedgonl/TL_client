@@ -17,7 +17,7 @@ var BattleCannon = BattleDefence.extend({
     },
 
     loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.CANNON[level][0], null, 2);
+        this.loadSprite(res_map.SPRITE.BODY.CANNON[level][0], null, 2, null, res_map.SPRITE.BODY.CANNON.JUNK);
     },
 
     attack: function (target) {

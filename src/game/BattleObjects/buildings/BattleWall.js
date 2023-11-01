@@ -23,7 +23,7 @@ var BattleWall = BattleBuilding.extend({
                 wallState = 2;
             else wallState = 0;
         }
-        this.loadSprite(res_map.SPRITE.BODY.WALL[level][wallState], null, 0);
+        this.loadSprite(res_map.SPRITE.BODY.WALL[level][wallState], null, 0, null, res_map.SPRITE.BODY.WALL.JUNK);
     },
     reloadSprite: function () {
         this.loadSprite(res_map.SPRITE.BODY.WALL[this._level][wallState], null, 0);

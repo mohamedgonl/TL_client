@@ -4,9 +4,6 @@ var BattleBuilderHut = BattleBuilding.extend({
         this._super(level, id, posX, posY);
     },
     loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.BUILDER_HUT[level], null, 1);
+        this.loadSprite(res_map.SPRITE.BODY.BUILDER_HUT[level], null, 1, false, res_map.SPRITE.BODY.BUILDER_HUT.JUNK);
     },
-    onAddIntoMapManager: function () {
-        this._super();
-    }
 });

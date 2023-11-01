@@ -10,33 +10,8 @@ var BattleBaseStorage = BattleBuilding.extend({
         this._capacityGold = 0;
         this._capacityElixir = 0;
         let config = LoadManager.getInstance().getConfig(this._type, this._level);
-        this.setCapacity(config.capacity);
+        // this.setCapacity(config.capacity);
 
-        //listen event EVENT_NAMES.RESOURCE_CHANGED to update sprite
-        // cc.eventManager.addListener({
-        //     event: cc.EventListener.CUSTOM,
-        //     eventName: EVENT_NAMES.RESOURCE_CHANGED,
-        //     callback: this.updateSprite.bind(this)
-        // }, this);
-
-    },
-
-    onAddIntoMapManager: function () {
-        this._super();
-        let mapManager = BattleManager.getInstance();
-        let playerInfoManager = PlayerInfoManager.getInstance();
-
-        mapManager.addToListStorage(this);
-
-        //if idle or upgrade, add max resource, if build, not add
-        switch (this._state) {
-            case 0:
-            case 2:
-                playerInfoManager.changeMaxResource({gold: this._capacityGold, elixir: this._capacityElixir});
-                break;
-            case 1:
-                break;
-        }
     },
 
     //get capacity , if building, return 0, if idle or upgrade, return capacity
