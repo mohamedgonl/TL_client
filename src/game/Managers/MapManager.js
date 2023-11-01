@@ -192,23 +192,6 @@ var MapManager = cc.Class.extend({
         let mapLayer = cc.director.getRunningScene().mapLayer;
         mapLayer.addChild(builder,MAP_ZORDER_TROOP);
     },
-
-    onFindMatch: function (){
-        let currentGold = PlayerInfoManager.getInstance().getResource("gold");
-        if(currentGold <GOLD_FIND_MATCH)
-        {
-            BasicPopup.appear("THIẾU TÀI NGUYÊN", "Bạn không đủ vàng để tìm trận đấu!");
-            return;
-        }
-
-        const loadingView = new Loading(Loading.START);
-        this.gameScene.addChild(loadingView);
-
-        loadingView.startLoading(function () {
-            cc.director.runScene(new BattleScene());
-            testnetwork.connector.sendFindMatch();
-        });
-    }
 });
 
 

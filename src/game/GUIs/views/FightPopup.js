@@ -30,7 +30,28 @@ var FightPopup = cc.Layer.extend({
     },
 
     handleClickFindMatch: function () {
-        MapManager.getInstance().onFindMatch();
+        let currentGold = PlayerInfoManager.getInstance().getResource("gold");
+        if(currentGold <GOLD_FIND_MATCH)
+        {
+            BasicPopup.appear("THIẾU TÀI NGUYÊN", "Bạn không đủ vàng để tìm trận đấu!");
+            return;
+        }
+
+        let armyCount = ArmyManager.getInstance().getCurrentSpace();
+        if(armyCount < 1)
+        {
+            BasicPopup.appear("BẠN KHÔNG CÓ LÍNH","Bạn cần luyện lính trước khi tìm trận đấu!")
+            return;
+        }
+
+        const loadingView = new Loading(Loading.START);
+
+        MapManager.getInstance().gameScene.addChild(loadingView);
+
+        loadingView.startLoading(function () {
+            cc.director.runScene(new BattleScene());
+            testnetwork.connector.sendFindMatch();
+        });
     },
 
     handleClickClose: function (closePopupLayer) {

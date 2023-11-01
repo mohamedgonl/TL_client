@@ -18,7 +18,7 @@ var BattleLayer = cc.Layer.extend({
         this.loadBuilding();
     },
 
-    createTroopAtGridPos: function(type, posX, posY) {
+    createTroopAtGridPos: function (type, posX, posY) {
         cc.log("create troop at grid pos: " + type + " " + posX + " " + posY)
         let troop = null;
         switch (type) {
@@ -48,18 +48,16 @@ var BattleLayer = cc.Layer.extend({
 
     //load all building in map manager and add it to MapLayer
     loadBuilding: function () {
-        this.listBuilding = BattleManager.getInstance().getAllBuilding();
-        for (var i = 0; i < this.listBuilding.length; i++) {
-            var building = this.listBuilding[i];
+        const listBuildings = BattleManager.getInstance().getAllBuilding();
+        for (let building of listBuildings.values()) {
             this.addBuildingToLayer(building);
         }
     },
 
     resetState: function () {
-        if (!this.listBuilding || !this.listBuilding.length)
-            return;
-        for (let index in this.listBuilding) {
-            this.removeBuilding(this.listBuilding[index]);
+        const listBuildings = BattleManager.getInstance().getAllBuilding();
+        for (let building of listBuildings.values()) {
+            this.removeBuilding(building);
         }
     },
 
@@ -212,7 +210,7 @@ var BattleLayer = cc.Layer.extend({
 
     //if not in move building mode, move view, else move building
     onDrag: function (event) {
-            this.moveView(event.getDelta());
+        this.moveView(event.getDelta());
     },
 
     onTouchEnded: function (event) {
@@ -229,7 +227,7 @@ var BattleLayer = cc.Layer.extend({
         //get type of chosen slot
         let type = cc.director.getRunningScene().battleUILayer.getTypeOfChosenSlot();
         cc.log("choose:::::::::::::::", type);
-        if(type == null) return;
+        if (type == null) return;
         this.createTroopAtGridPos(type, gridPos.x, gridPos.y);
     },
 
@@ -401,14 +399,12 @@ var BattleLayer = cc.Layer.extend({
 
     },
 
-    addBullet: function (bullet, defence){
+    addBullet: function (bullet, defence) {
         this.addChild(bullet, MAP_ZORDER_BULLET);
-
     },
 
-    gameLoop: function (dt){
+    gameLoop: function (dt) {
         //check list troop pos -> add to targetQueue of def
-
     },
 });
 

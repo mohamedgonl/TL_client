@@ -173,7 +173,7 @@ var BattleManager = cc.Class.extend({
     },
 
     getAllBuilding: function () {
-        return Array.from(this.listBuildings.values());
+        return this.listBuildings;
     },
 
     getTownHall: function () {
@@ -210,12 +210,11 @@ var BattleManager = cc.Class.extend({
         return null;
     },
 
-    removeBuilding: function (building) {
+    onDestroyBuilding: function (building) {
         // remove from building count
         this.buildingAmount[building._type] = Math.max(this.buildingAmount[building._type] - 1, 0);
-        //remove from list
-        this.listBuildings.delete(building._id);
-        //remove from troopMap
+
+        //update troopMap
         for (var column = building._posX; column < building._posX + building._width; column++)
             for (var row = building._posY; row < building._posY + building._height; row++)
                 this.troopMap[column][row] = 0;
@@ -226,6 +225,9 @@ var BattleManager = cc.Class.extend({
         else {
             return this.buildingAmount[type];
         }
+    },
+    getTroopMap: function () {
+        return this.troopMap;
     },
 
     addBullet: function (bullet, defence) {

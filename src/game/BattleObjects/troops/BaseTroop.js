@@ -10,11 +10,11 @@ var BaseTroop = cc.Node.extend({
         this._bodySprite = new cc.Sprite(res_troop.RUN[this._type].LEFT[1]);
         this.addChild(this._bodySprite);
         //random position  -1 1
-        var randomX = Math.floor(Math.random() * 3) - 1;
-        var randomY = Math.floor(Math.random() * 3) - 1;
-        this.run(randomX,randomY);
+        // var randomX = Math.floor(Math.random() * 3) - 1;
+        // var randomY = Math.floor(Math.random() * 3) - 1;
+        // this.setRunDirection(randomX,randomY);
     },
-    run: function (directX,directY) {
+    setRunDirection: function (directX,directY) {
         let moveAction;
         if (directX === 1 && directY === 1) {
             moveAction = res_troop.RUN[this._type].UP.ANIM;
@@ -39,9 +39,4 @@ var BaseTroop = cc.Node.extend({
         }
         this._bodySprite.runAction(cc.animate(moveAction).repeatForever());
     },
-    moveToTarget: function (target) {
-        var moveAction = cc.moveTo(0.5,target.getPosition());
-        this._bodySprite.runAction(moveAction);
-    }
-
 });

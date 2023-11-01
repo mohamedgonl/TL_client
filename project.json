@@ -161,6 +161,7 @@
         "src/framework/ColorUlties.js",
 
         "src/game/algorithms/Algorithm.js",
+        "src/game/algorithms/BattleAStar.js",
         "src/game/Managers/Animations.js",
         "src/game/algorithms/a_star.js",
         "src/game/gamecfg/constValues.js"
