@@ -11,6 +11,6 @@ var BattleBarrack = BattleBuilding.extend({
 
     },
     loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.BARRACK[level], null, 1);
+        this.loadSprite(res_map.SPRITE.BODY.BARRACK[level], null, 1, false, res_map.SPRITE.BODY.BARRACK.JUNK);
     },
 });

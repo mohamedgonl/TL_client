@@ -10,29 +10,9 @@ var BattleTownhall = BattleBaseStorage.extend({
         this._capacityElixir = config.capacityElixir;
     },
     loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.TOWNHALL[level], null, 1);
+        this.loadSprite(res_map.SPRITE.BODY.TOWNHALL[level], null, 1, null, res_map.SPRITE.BODY.TOWNHALL.JUNK);
     },
 
-    onAddIntoMapManager: function () {
-        this._super();
-        let mapManager = BattleManager.getInstance();
-        mapManager.townHall = this;
-    },
-
-    completeProcess: function () {
-
-    },
-    setCapacity: function ({gold, elixir}) {
-        this._capacityGold = gold;
-        this._capacityElixir = elixir;
-    },
-    setCurrentAmount: function (value, type) {
-        if (type === "gold") {
-            this._currentGold = value;
-        } else if (type === "elixir") {
-            this._currentElixir = value;
-        }
-    }
 });
 
 

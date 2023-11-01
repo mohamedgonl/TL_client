@@ -86,7 +86,9 @@ var BattleScene = cc.Scene.extend({
         const loadingView = new Loading(Loading.START);
         this.stopCountDown();
         this.addChild(loadingView);
+
         BattleManager.getInstance().resetState();
+        this.battleLayer.resetState();
 
         const self = this;
         loadingView.startLoading(function () {

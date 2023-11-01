@@ -6,6 +6,6 @@ var BattleArmyCamp = BattleBuilding.extend({
         // this.loadSubSprite();
     },
     loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.ARMY_CAMP[level], null, 0);
+        this.loadSprite(res_map.SPRITE.BODY.ARMY_CAMP[level], null, 0, false , res_map.SPRITE.BODY.ARMY_CAMP.JUNK);
     }
 });
