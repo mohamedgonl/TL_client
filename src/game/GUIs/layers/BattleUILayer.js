@@ -28,11 +28,12 @@ var BattleUILayer = cc.Layer.extend({
         //     })
         // })
 
-        this.userName = node.getChildByName("enemy_info").getChildByName("username");
-        this.goldText = node.getChildByName("enemy_info").getChildByName("goldText");
-        this.elixirText = node.getChildByName("enemy_info").getChildByName("elixirText");
-        this.eloTextWin = node.getChildByName("enemy_info").getChildByName("goldTextWin");
-        this.eloTextLose = node.getChildByName("enemy_info").getChildByName("goldTextLose");
+        this.enemyInfo = node.getChildByName("enemy_info");
+        this.userName = this.enemyInfo.getChildByName("username");
+        this.goldText = this.enemyInfo.getChildByName("goldText");
+        this.elixirText = this.enemyInfo.getChildByName("elixirText");
+        this.eloTextWin = this.enemyInfo.getChildByName("goldTextWin");
+        this.eloTextLose = this.enemyInfo.getChildByName("goldTextLose");
         this.textTime = node.getChildByName("time").getChildByName("text");
         this.timeLabel = node.getChildByName("time").getChildByName("BitmapFontLabel_5");
 
@@ -54,7 +55,8 @@ var BattleUILayer = cc.Layer.extend({
         this.btnEnd.setPressedActionEnabled(true);
 
         //for all troop slot, add button event
-        this.troopSlots = node.getChildByName("troop_container").getChildren();
+        this.troopContainer = node.getChildByName("troop_container");
+        this.troopSlots = this.troopContainer.getChildren();
         for (var i = 0; i < this.troopSlots.length; i++) {
             var slot = this.troopSlots[i];
             var button = slot.getChildByName("button");
@@ -85,6 +87,7 @@ var BattleUILayer = cc.Layer.extend({
         this.goldBar.setPercent(goldPercent * 100);
         this.elixirBar.setPercent(elixirPercent * 100);
         this.timeLabel.setString("Bắt đầu sau:");
+        this.btnFind.enable = true;
         //load state of troop
         this.loadTroopSlots();
     },
@@ -123,18 +126,16 @@ var BattleUILayer = cc.Layer.extend({
             this.troopSlots[slotIndex].getChildByName("button").getChildByName("selected_sprite").setVisible(true);
 
             this.chosenSlot = slotIndex;
-            return;
+
         }
     },
     onFindClick: function () {
+        this.btnFind.enabled = false;
         cc.director.getRunningScene().onFindMatch();
     },
     onEndClick: function () {
-        const loadingView = new Loading(Loading.START);
-        cc.director.getRunningScene().addChild(loadingView);
-        loadingView.startLoading(function () {
-            cc.director.runScene(new GameScene());
-        })
+        this.btnEnd.setVisible(false);
+        cc.director.getRunningScene().onEndBattle();
     },
     setStateSlot: function (slotIndex, troopType = null, troopAmount = null) {
         cc.log("setStateSlot " + slotIndex + " " + troopType + " " + troopAmount)
@@ -169,8 +170,14 @@ var BattleUILayer = cc.Layer.extend({
     setTimeLeft: function (secondsLeft) {
         this.textTime.setString(NumberUltis.formatSecondToString(secondsLeft));
     },
-    onStartBattle: function (){
+    onStartBattle: function () {
         this.timeLabel.setString("Kết thúc sau:");
+        this.btnFind.setVisible(false);
+    },
+    onEndBattle: function () {
+        this.btnEnd.setVisible(false);
+        this.enemyInfo.setVisible(false);
+        this.troopContainer.setVisible(false);
     },
 });
 

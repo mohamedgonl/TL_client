@@ -7,13 +7,31 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
+    <Item Key="PackageParamsKey">
+      <Value ctype="PackageParams">
+        <LuaIsEncrypt Value="False" />
+        <LuaEncryptKey Value="" />
+        <LuaEncryptSign Value="" />
+        <Android_PackageName Value="org.cocos.NewCocosProject" />
+        <AndroidkeyStore Value="" />
+        <AndroidVersion Value="" />
+        <iOS_Target Value="NewCocosProject-mobile" />
+        <iOS_BundleID Value="" />
+        <Platform Value="None" />
+        <RunPlatform Value="None" />
+        <FrameworkVersion Value="cocos2d-x-3.10" />
+        <IsDebugKeystore Value="True" />
+        <EnableSourceMap Value="False" />
+        <EnableHTML5Advanced Value="False" />
+      </Value>
+    </Item>
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
         <OpenedDocuments>
-          <FilePathData Path="InfoLayer1.csd" />
+          <FilePathData Path="BattleEndLayer.csd" />
           <FilePathData Path="BattleGUI.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="BattleGUI.csd" />
+        <ActiveDocument Path="BattleEndLayer.csd" />
       </Value>
     </Item>
   </Properties>

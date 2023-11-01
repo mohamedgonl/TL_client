@@ -11,7 +11,6 @@ var BattleScene = cc.Scene.extend({
         TimeManager.releaseInstance();
         BattleManager.releaseInstance();
 
-        // BattleManager.getInstance().loadFromServer(MapManager.getInstance().getAllBuilding());
         this.init();
         BattleManager.getInstance().battleScene = this;
         this.schedule(this.gameLoop, 1 / 20);
@@ -24,11 +23,16 @@ var BattleScene = cc.Scene.extend({
 
         this.battleLayer = new BattleLayer();
         this.battleUILayer = new BattleUILayer();
+        this.battleEndLayer = new BattleEndLayer();
         this.loadingView = new Loading(Loading.STOP);
         this.popUpLayer = new PopupLayer();
 
+        this.battleEndLayer.setVisible(false);
+        // this.battleEndLayer.setActive(false);
+
         this.addChild(this.battleLayer);
         this.addChild(this.battleUILayer);
+        this.addChild(this.battleEndLayer);
         this.addChild(this.loadingView);
         this.addChild(this.popUpLayer);
     },
@@ -39,9 +43,9 @@ var BattleScene = cc.Scene.extend({
 
     countDown: function () {
         if (this.timeLeft <= 0) {
-            if (this.battleStatus === BATTLE_STATUS.PREPARING)
+            if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.PREPARING)
                 this.onStartBattle();
-            else if (this.battleStatus === BATTLE_STATUS.HAPPENNING)
+            else if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING)
                 this.onEndBattle();
         }
         this.setTimeLeft(this.timeLeft - 1);
@@ -51,14 +55,14 @@ var BattleScene = cc.Scene.extend({
         this.unschedule(this.countDown);
     },
 
-    setTimeLeft: function (timeLeft){
+    setTimeLeft: function (timeLeft) {
         this.timeLeft = timeLeft;
         this.battleUILayer.setTimeLeft(timeLeft);
     },
 
     onStartBattle: function () {
         testnetwork.connector.sendDoAction({type: ACTION_TYPE.START_BATTlE, tick: this.tick,});
-        this.battleStatus = BATTLE_STATUS.HAPPENNING;
+        BattleManager.getInstance().battleStatus = BATTLE_STATUS.HAPPENNING;
         this.setTimeLeft(BATTlE_LIMIT_TIME + 1);
         this.battleUILayer.onStartBattle();
     },
@@ -69,12 +73,16 @@ var BattleScene = cc.Scene.extend({
 
     onEndBattle: function () {
         //send action end game
-        // testnetwork.connector.sendDoAction({
-        //     type: 0,
-        //     tick: this.tick,
-        // });
-        this.stopCountDown();
-        this.battleStatus = BATTLE_STATUS.END;
+        if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING) {
+            //todo: send action end
+
+            this.stopCountDown();
+            BattleManager.getInstance().battleStatus = BATTLE_STATUS.END;
+            this.battleUILayer.onEndBattle();
+            this.battleEndLayer.show();
+        } else {
+            this.goToGameScene();
+        }
     },
 
     onFindMatch: function () {
@@ -116,13 +124,21 @@ var BattleScene = cc.Scene.extend({
         this.loadingView.stopLoading();
 
         this.timeLeft = BATTlE_PREPARE_TIME;
-        this.battleStatus = BATTLE_STATUS.PREPARING;
+        BattleManager.getInstance().battleStatus = BATTLE_STATUS.PREPARING;
         this.battleUILayer.setTimeLeft(this.timeLeft);
         this.schedule(this.countDown, 1);
     },
 
     onFindMatchFail: function (errorCode) {
         cc.log("Find match fail: " + errorCode);
+    },
+
+    goToGameScene: function () {
+        const loadingView = new Loading(Loading.START);
+        this.addChild(loadingView);
+        loadingView.startLoading(function () {
+            cc.director.runScene(new GameScene());
+        })
     },
 
     gameLoop: function (dt) {

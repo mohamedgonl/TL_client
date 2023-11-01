@@ -148,6 +148,7 @@
         "src/game/GUIs/layers/MapLayer.js",
         "src/game/GUIs/layers/BattleLayer.js",
         "src/game/GUIs/layers/BattleUILayer.js",
+        "src/game/GUIs/layers/BattleEndLayer.js",
 
         "src/game/GUIs/scenes/GameScene.js",
         "src/game/GUIs/scenes/BattleScene.js",

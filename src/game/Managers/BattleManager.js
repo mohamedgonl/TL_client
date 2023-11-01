@@ -1,14 +1,9 @@
 var BattleManager = cc.Class.extend({
 
     ctor: function () {
+        this.init();
         this.listBuildings = new Map();
         this.listTroops = new Map();
-
-        this.townHall = null;
-        this.listResources = [];
-        this.listWalls = [];
-        this.listDefences = [];
-        this.listBullets = [];
 
         this.buildingAmount = {};
         this.troopMap = [];//map logic for finding path
@@ -26,19 +21,20 @@ var BattleManager = cc.Class.extend({
         }
     },
 
-    resetState: function () {
-        this.battleScene.battleLayer.resetState();
-
-        this.listBuildings.clear();
-        this.listTroops.clear();
-
+    init: function (){
+        this.isWin = false;
+        this.starAmount = 0;
+        this.battleStatus = BATTLE_STATUS.PREPARING;
         this.townHall = null;
         this.listResources = [];
         this.listWalls = [];
         this.listDefences = [];
         this.listBullets = [];
+    },
 
-        this.buildingAmount = {};
+    resetState: function () {
+        this.listBuildings.clear();
+        this.listTroops.clear();
 
         //init map grid
         for (var i = 0; i < GRID_SIZE_BATTLE; i++) {
@@ -47,6 +43,8 @@ var BattleManager = cc.Class.extend({
                 this.battleMap[i][j] = 0;
             }
         }
+
+        this.init();
     },
 
     loadFromServer: function (data) {
