@@ -123,7 +123,9 @@ testnetwork.Connector = cc.Class.extend({
                 else
                     cc.director.getRunningScene().onFindMatchFail(packet.error);
                 break;
-
+            case gv.CMD.DO_ACTION:
+                // if (packet.error === ErrorCode.SUCCESS)
+                //     cc.director.getRunningScene().onFindMatchSuccess(packet);
         }
     },
     onReceiveTrainTroopSuccess: function (packet) {
@@ -530,6 +532,12 @@ testnetwork.Connector = cc.Class.extend({
         cc.log("SEND find match");
         var pk = this.gameClient.getOutPacket(CmdSendFindMatch);
         pk.pack();
+        this.gameClient.sendPacket(pk);
+    },
+    sendDoAction: function (data) {
+        cc.log("SEND DO ACTION");
+        var pk = this.gameClient.getOutPacket(CmdSendDoAction);
+        pk.pack(data);
         this.gameClient.sendPacket(pk);
     },
 

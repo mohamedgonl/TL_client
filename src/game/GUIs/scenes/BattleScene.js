@@ -57,10 +57,14 @@ var BattleScene = cc.Scene.extend({
     },
 
     onStartBattle: function () {
-        // testnetwork.connector.sendDoAction({type: ACTION_TYPE.START_BATTlE, tick: this.tick,});
+        testnetwork.connector.sendDoAction({type: ACTION_TYPE.START_BATTlE, tick: this.tick,});
         this.battleStatus = BATTLE_STATUS.HAPPENNING;
         this.setTimeLeft(BATTlE_LIMIT_TIME + 1);
         this.battleUILayer.onStartBattle();
+    },
+
+    onDropTroop: function (data) {
+        testnetwork.connector.sendDoAction({type: ACTION_TYPE.DROP_TROOP, tick: this.tick, data});
     },
 
     onEndBattle: function () {

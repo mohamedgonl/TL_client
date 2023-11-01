@@ -17,6 +17,7 @@ gv.CMD.TRAIN_TROOP_SUCCESS = 5002;
 gv.CMD.GET_TRAINING_LIST = 5003;
 gv.CMD.CANCLE_TRAINING = 5004;
 gv.CMD.FIND_MATCH = 6001;
+gv.CMD.DO_ACTION = 6002;
 
 //quyet----------------------
 gv.CMD.REMOVE_OBSTACLE = 2009;
@@ -404,6 +405,25 @@ CmdSendFindMatch = fr.OutPacket.extend(
         },
         pack: function () {
             this.packHeader();
+            this.updateSize();
+        }
+    })
+CmdSendDoAction = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.DO_ACTION);
+        },
+        pack: function ({type, tick, data}) {
+            this.packHeader();
+            this.putInt(type);
+            this.putInt(tick);
+            if (this.type === ACTION_TYPE.DROP_TROOP && data) {
+                this.putString(data.troopType);
+                this.putInt(data.posX);
+                this.putInt(data.posY);
+            }
             this.updateSize();
         }
     })
@@ -845,6 +865,16 @@ testnetwork.packetMap[gv.CMD.FIND_MATCH] = fr.InPacket.extend(
                 this.elixirCapacity = this.getInt();
                 this.gem = this.getInt();
             }
+        }
+    }
+);
+testnetwork.packetMap[gv.CMD.DO_ACTION] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.error = this.getError();
         }
     }
 );
