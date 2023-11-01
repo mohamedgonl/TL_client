@@ -21,9 +21,11 @@ var BattleManager = cc.Class.extend({
         }
     },
 
-    init: function (){
+    init: function () {
         this.isWin = false;
         this.starAmount = 0;
+        this.robbedGold = 0;
+        this.robbedElixir = 0;
         this.battleStatus = BATTLE_STATUS.PREPARING;
         this.townHall = null;
         this.listResources = [];
@@ -85,6 +87,9 @@ var BattleManager = cc.Class.extend({
 
             this.addBuilding(building);
         }
+
+        this.setResourceToBuilding();
+
         this.initMapLogic();
 
         const Algorithm = AlgorithmImplement.getInstance();
@@ -95,6 +100,27 @@ var BattleManager = cc.Class.extend({
             let troop = troops[index];
             this.listTroops.set(troop.type, troop.amount);
         }
+    },
+
+    setResourceToBuilding: function () {
+        if (!this.listResources || this.listResources.length === 0)
+            return;
+        const goldCapacity = Math.floor(this.availableGold / this.listResources.length);
+        const elixirCapacity = Math.floor(this.availableElixir / this.listResources.length);
+
+        for (let building of this.listResources) {
+            if (building._resourceType === RESOURCE_TYPE.GOLD){
+                building.setCapacity(goldCapacity);
+            }
+            else if (building._resourceType === RESOURCE_TYPE.ELIXIR)
+                building.setCapacity(elixirCapacity);
+        }
+
+        let lastBuilding = this.listResources[this.listResources.length - 1];
+        if (lastBuilding._resourceType === RESOURCE_TYPE.GOLD)
+            lastBuilding.setCapacity(this.availableGold - goldCapacity * (this.listResources.length - 1));
+        else if (lastBuilding._resourceType === RESOURCE_TYPE.ELIXIR)
+            lastBuilding.setCapacity(this.availableElixir - elixirCapacity * (this.listResources.length - 1));
     },
 
     addToListMine: function (building) {
@@ -232,6 +258,17 @@ var BattleManager = cc.Class.extend({
         this.battleScene.battleLayer.addBullet(bullet, defence);
         this.listBullets.push(bullet);
     },
+
+    robResource: function (resource, type) {
+        if (type === RESOURCE_TYPE.GOLD) {
+            this.robbedGold += resource;
+            this.battleScene.battleUILayer.setResourceLeft(this.availableGold - this.robbedGold, type);
+        } else if (type === RESOURCE_TYPE.GOLD) {
+            this.battleScene.battleUILayer.setResourceLeft(this.availableElixir - this.robbedElixir, type);
+            this.robbedElixir += resource;
+        }
+    },
+
 });
 
 BattleManager.getInstance = function () {

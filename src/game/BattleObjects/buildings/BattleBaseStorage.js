@@ -1,38 +1,32 @@
 var BattleBaseStorage = BattleBuilding.extend({
+    _capacity: 0,
 
     ctor: function (level, id, posX, posY) {
         this._super(level, id, posX, posY);
-
-        this._currentGold = 0;
-        this._currentElixir = 0;
-
-        //set capacity
-        this._capacityGold = 0;
-        this._capacityElixir = 0;
-        let config = LoadManager.getInstance().getConfig(this._type, this._level);
-        // this.setCapacity(config.capacity);
-
     },
 
-    //get capacity , if building, return 0, if idle or upgrade, return capacity
-    getCapacity: function () {
-        if (this._state === 1) {
-            return {
-                gold: 0,
-                elixir: 0
-            }
-        }
-        return {
-            gold: this._capacityGold,
-            elixir: this._capacityElixir
+    setCapacity: function (capacity) {
+        this._capacity = capacity;
+        this._resourceLeft = capacity;
+    },
+
+    reduceResource: function (resource){
+        this._resourceLeft -= resource;
+        BattleManager.getInstance().robResource(resource, this._resourceType)
+    },
+
+    onGainDamage: function (damage) {
+        this._super(damage);
+        const resource = Math.ceil(damage * this._capacity / this._maxHp);
+        if (resource <= this._resourceLeft){
+            this.reduceResource(resource);
         }
     },
 
-    getCurrentAmount: function () {
-        return {
-            gold: this._currentGold,
-            elixir: this._currentElixir
+    onDestroy: function (){
+        if (this._resourceLeft > 0){
+            this.reduceResource(this._resourceLeft);
         }
-    },
-
+        this._super();
+    }
 });

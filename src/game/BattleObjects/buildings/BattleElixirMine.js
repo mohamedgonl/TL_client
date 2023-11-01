@@ -1,5 +1,7 @@
 var BattleElixirMine = BattleBaseMine.extend({
     _type: "RES_2",
+    _resourceType: RESOURCE_TYPE.ELIXIR,
+
     ctor: function (level, id, posX, posY) {
         this._super(level, id, posX, posY);
     },

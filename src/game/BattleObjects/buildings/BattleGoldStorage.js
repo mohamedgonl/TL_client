@@ -1,5 +1,7 @@
 var BattleGoldStorage = BattleBaseStorage.extend({
     _type: "STO_1",
+    _resourceType: RESOURCE_TYPE.GOLD,
+
     ctor: function (level, id, posX, posY) {
         this._super(level, id, posX, posY);
     },

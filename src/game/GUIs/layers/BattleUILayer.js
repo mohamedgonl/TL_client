@@ -66,6 +66,21 @@ var BattleUILayer = cc.Layer.extend({
             button.setPressedActionEnabled(true);
         }
     },
+
+    setPlayerResource: function (resource, type){
+        // if (type === RESOURCE_TYPE.GOLD)
+        //     this.goldCurrent.setString(resource);
+        // else if (type === RESOURCE_TYPE.GOLD)
+        //     this.elixirCurrent.setString(resource);
+    },
+
+    setResourceLeft: function (resource, type){
+        if (type === RESOURCE_TYPE.GOLD)
+            this.goldText.setString(resource);
+        else if (type === RESOURCE_TYPE.GOLD)
+            this.elixirText.setString(resource);
+    },
+
     onLoadDataSuccess: function () {
         cc.log("onLoadDataSuccess::::::::::::::::::::::::::::")
         this.userName.setString(BattleManager.getInstance().enemyName);
