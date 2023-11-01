@@ -2,20 +2,26 @@ var BattleManager = cc.Class.extend({
 
     ctor: function () {
         this.init();
+        this._battleGraph = null;
         this.listBuildings = new Map();
         this.listTroops = new Map();
 
         this.buildingAmount = {};
-        this.troopMap = [];//map logic for finding path
+
+        this.mapGrid =[];  //map of building id
+        this.findPathGrid = []; //map of weight for find path, if wall, weight += 9 ; if center of building, weight +=9999;
+
         this.battleMap = [];//map logic for drop troops
         this.battleScene = null;
 
         //init map grid
         for (var i = 0; i < GRID_SIZE_BATTLE; i++) {
-            this.troopMap[i] = [];
+            this.mapGrid[i] = [];
+            this.findPathGrid[i] = [];
             this.battleMap[i] = [];
             for (var j = 0; j < GRID_SIZE_BATTLE; j++) {
-                this.troopMap[i].push(0);
+                this.mapGrid[i].push(0);
+                this.findPathGrid[i].push(0);
                 this.battleMap[i].push(0);
             }
         }
@@ -39,7 +45,8 @@ var BattleManager = cc.Class.extend({
         //init map grid
         for (var i = 0; i < GRID_SIZE_BATTLE; i++) {
             for (var j = 0; j < GRID_SIZE_BATTLE; j++) {
-                this.troopMap[i][j] = 0;
+                this.mapGrid[i][j] = 0;
+                this.findPathGrid[i][j] = 0;
                 this.battleMap[i][j] = 0;
             }
         }
@@ -87,9 +94,6 @@ var BattleManager = cc.Class.extend({
         }
         this.initMapLogic();
 
-        const Algorithm = AlgorithmImplement.getInstance();
-        Algorithm.setGridMapStar(BattleManager.getInstance().troopMap);
-
         //load troops
         for (let index in troops) {
             let troop = troops[index];
@@ -112,10 +116,23 @@ var BattleManager = cc.Class.extend({
     initMapLogic: function () {
         for (let building of this.listBuildings.values())
             if (!building._type.startsWith("OBS")) {
-                //update troopMap
-                for (let column = building._posX + 1; column < building._posX - 1 + building._width; column++)
-                    for (let row = building._posY + 1; row < building._posY - 1 + building._height; row++)
-                        this.troopMap[column][row] = building._id;
+
+                //update mapGrid
+                    for (let column = building._posX; column < building._posX  + building._width; column++)
+                        for (let row = building._posY ; row < building._posY  + building._height; row++)
+                            this.mapGrid[column][row] = building._id;
+
+                //update findPathGrid
+                if(building._type.startsWith("WAL")) {
+                    for (let column = building._posX ; column < building._posX + building._width ; column++)
+                        for (let row = building._posY ; row < building._posY + building._height ; row++)
+                            this.findPathGrid[column][row] = 9;
+                }
+                else{
+                    for (let column = building._posX + 1; column < building._posX + building._width - 1; column++)
+                        for (let row = building._posY + 1; row < building._posY + building._height - 1; row++)
+                            this.findPathGrid[column][row] = 99999;
+                }
 
                 //update battleMap
                 const padding = 3;
@@ -127,6 +144,10 @@ var BattleManager = cc.Class.extend({
                          row++)
                         this.battleMap[column][row] = 1;
             }
+
+        //update battle graph
+        this._battleGraph = new BattleGraph(this.findPathGrid);
+        cc.log("get battle graph");
     },
 
     //add building to list and to grid
@@ -186,16 +207,14 @@ var BattleManager = cc.Class.extend({
         //if x y null, return null
         if (x === null || y === null)
             return null;
-        return this.listBuildings.get(this.troopMap[x][y]) || null;
+        return this.listBuildings.get(this.mapGrid[x][y]) || null;
     },
 
-    getListBuilderHut: function () {
-        return this.listBuilderHut;
+    getListResources: function () {
+        return this.listResources;
     },
-
-    //listStorage included townhall, gold storage, elixir storage
-    getListStorage: function () {
-        return this.listStorage;
+    getListDefences: function () {
+        return this.listDefences;
     },
 
     checkValidPutBuilding: function (building, newPosX, newPosY) {
@@ -215,7 +234,7 @@ var BattleManager = cc.Class.extend({
         //update troopMap
         for (var column = building._posX; column < building._posX + building._width; column++)
             for (var row = building._posY; row < building._posY + building._height; row++)
-                this.troopMap[column][row] = 0;
+                this.mapGrid[column][row] = 0;
     },
 
     getBuildingCountByType: function (type) {
@@ -224,8 +243,14 @@ var BattleManager = cc.Class.extend({
             return this.buildingAmount[type];
         }
     },
-    getTroopMap: function () {
-        return this.troopMap;
+    getMapGrid: function () {
+        return this.mapGrid;
+    },
+    getFindPathGrid: function () {
+        return this.findPathGrid;
+    },
+    getBattleGraph: function () {
+        return this._battleGraph;
     },
 
     addBullet: function (bullet, defence) {

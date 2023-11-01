@@ -5,7 +5,7 @@ var GameScene = cc.Scene.extend({
 
     ctor: function () {
         this._super();
-
+        this.isFirstTimeLoading = true;
         PlayerInfoManager.releaseInstance();
         MapManager.releaseInstance();
         ArmyManager.releaseInstance();
@@ -75,7 +75,7 @@ var GameScene = cc.Scene.extend({
             gem: userInfo.gem,
         });
 
-        testnetwork.connector.sendGetArmyInfo();
+        if(this.isFirstTimeLoading) testnetwork.connector.sendGetArmyInfo();
     },
 
     onReceiveArmyInfo: function (armyInfo) {
@@ -102,6 +102,7 @@ var GameScene = cc.Scene.extend({
         // this.setVisible(true);
         ArmyManager.getInstance().initTroopSprites();
         this.loadingView.stopLoading();
+        this.isFirstTimeLoading = false;
     },
 
 });
