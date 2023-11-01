@@ -227,10 +227,16 @@ testnetwork.Connector = cc.Class.extend({
     },
 
     onReceivedCheckBuyBuilding: function (packet) {
+        if(packet.error === 22){
+            BasicPopup.appear("KHÔNG ĐỦ CẤP NHÀ CHÍNH","Bạn cần nâng cấp nhà chính để xây thêm");
+            return;
+        }
+
         if (packet.error !== 0) {
             cc.log("BUY BUILDING ERROR with code ::::::::: ", packet.error);
         } else {
             cc.log("BUY BUILDING SUCCESS ::::::::: ");
+            testnetwork.connector.sendGetUserInfo();
             let mapLayer = cc.director.getRunningScene().mapLayer;
             let building = getBuildingFromType(packet.type, 1, packet.id, packet.posX, packet.posY, packet.status, packet.startTime, packet.endTime);
             MapManager.getInstance().addBuilding(building, true);
@@ -244,6 +250,7 @@ testnetwork.Connector = cc.Class.extend({
 
             if (packet.status === 0) return;
             building.startBuild(packet.startTime, packet.endTime);
+
         }
     },
 

@@ -9,6 +9,7 @@ BattleGridNode.prototype.toString = function () {
 };
 
 BattleGridNode.prototype.getCost = function (fromNeighbor) {
+    //get id of
     // Take diagonal weight into consideration.
     if (fromNeighbor && fromNeighbor.x != this.x && fromNeighbor.y != this.y) {
         return 1.41421;
@@ -119,6 +120,14 @@ BattleGraph.prototype.toString = function () {
     return graphString.join("\n");
 };
 
+BattleGraph.prototype.changeNodeWeight = function (x, y, weight) {
+    this.grid[x][y].weight = weight;
+}
+
+BattleGraph.prototype.getNode = function (x, y) {
+    return this.grid[x][y];
+}
+
 //======================================================================================================================
 
 
@@ -131,43 +140,27 @@ let BattleAStar = {
      */
     search: function (graph, start, end) {
         graph.cleanDirty();
-        let heuristic = BattleAStar.heuristics.manhattan;
+        let heuristic = BattleAStar.heuristics.diagonal;
         let openHeap = getHeap();
         let closestNode = start; // set the start node to be the closest if required
 
-        start.h = BattleAStar.heuristics.manhattan(start, end);
+        start.h = heuristic(start, end);
         start.g = 0;
         graph.markDirty(start);
 
         openHeap.push(start);
 
         while (openHeap.size() > 0) {
-            // cc.log("openHeap.size() = " + openHeap.size());
-
             // Grab the lowest f(x) to process next.  Heap keeps this sorted for us.
             let currentNode = openHeap.pop();
-            cc.log("currentNode =  x " + currentNode.x + " y " + currentNode.y + " f " + currentNode.f + " g " + currentNode.g + " h " + currentNode.h);
 
             // End case -- result has been found, return the traced path.
-            // if (this.isEndCase(currentNode, end)) {
-            //
-            //     return pathTo(currentNode);
-            // }
-
-            let neighborList = graph.neighbors(currentNode);
-
-            for (let i = 0; i < neighborList.length; i++) {
-
-                let neighbor = neighborList[i];
-                let neighborId = BattleManager.getInstance().getTroopMap()[neighbor.x][neighbor.y];
-                let endId = BattleManager.getInstance().getTroopMap()[end.x+1][end.y+1];
-                // cc.log("neighborId = " + neighborId + " endId = " + endId)
-                if (neighborId === endId) {
-                    cc.log("found path")
-                    return pathTo(currentNode);
-                }
+            let endId = BattleManager.getInstance().getMapGrid()[end.x][end.y];
+            let currentId = BattleManager.getInstance().getMapGrid()[currentNode.x][currentNode.y];
+            if (currentId === endId) {
+                cc.log("FOUND PATH")
+                return pathTo(currentNode);
             }
-            // cc.log("neighborList.length = " + neighborList.length)
 
             // Normal case -- move currentNode from open to closed, process each of its neighbors.
             currentNode.closed = true;
@@ -178,14 +171,14 @@ let BattleAStar = {
             for (let i = 0, il = neighbors.length; i < il; ++i) {
                 let neighbor = neighbors[i];
 
-                if (neighbor.closed || neighbor.canNotWalk()) {
+                if (neighbor.closed) {
                     // Not a valid node to process, skip to next neighbor.
                     continue;
                 }
 
                 // The g score is the shortest distance from start to current node.
                 // We need to check if the path we have arrived at this neighbor is the shortest one we have seen yet.
-                let gScore = currentNode.g + neighbor.getCost(currentNode);
+                let gScore = currentNode.g + neighbor.getCost(currentNode) + neighbor.weight;
                 let beenVisited = neighbor.visited;
 
                 if (!beenVisited || gScore < neighbor.g) {
@@ -193,9 +186,9 @@ let BattleAStar = {
                     // Found an optimal (so far) path to this node.  Take score for node to see how good it is.
                     neighbor.visited = true;
                     neighbor.parent = currentNode;
-                    neighbor.h = BattleAStar.heuristics.manhattan(neighbor, end);
+                    neighbor.h = heuristic(neighbor, end);
                     neighbor.g = gScore;
-                    cc.log("neighbor = " + neighbor.x + " " + neighbor.y + " " + neighbor.f + " " + neighbor.g + " " + neighbor.h)
+
                     neighbor.f = neighbor.g + neighbor.h;
                     graph.markDirty(neighbor);
 
@@ -220,13 +213,13 @@ let BattleAStar = {
             let d2 = Math.abs(pos1.y - pos0.y);
             return d1 + d2;
         },
-        // diagonal: function (pos0, pos1) {
-        //     let D = 1;
-        //     let D2 = Math.sqrt(2);
-        //     let d1 = Math.abs(pos1.x - pos0.x);
-        //     let d2 = Math.abs(pos1.y - pos0.y);
-        //     return (D * (d1 + d2)) + ((D2 - (2 * D)) * Math.min(d1, d2));
-        // }
+        diagonal: function (pos0, pos1) {
+            let D = 1;
+            let D2 = Math.sqrt(2);
+            let d1 = Math.abs(pos1.x - pos0.x);
+            let d2 = Math.abs(pos1.y - pos0.y);
+            return (D * (d1 + d2)) + ((D2 - (2 * D)) * Math.min(d1, d2));
+        }
     },
     cleanNode: function (node) {
         node.f = 0;

@@ -399,6 +399,11 @@ var res_map = {
     }
 }
 
+var res_json ={
+    TROOP_BASE:"res/configs/TroopBase.json",
+    TROOP:"res/configs/Troop.json",
+}
+
 
 
 

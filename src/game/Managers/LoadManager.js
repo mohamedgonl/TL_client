@@ -319,7 +319,8 @@ var LoadManager = cc.Node.extend({
         }
         animation.setDelayPerUnit(0.1);
         animation.setRestoreOriginalFrame(true);
-        target.ANIM = animation;
+        target.ANIM = cc.animate(animation).repeatForever();
+
         target.ANIM.retain();
     }
 });

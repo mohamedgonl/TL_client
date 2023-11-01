@@ -38,5 +38,27 @@ var GoldStorage = BaseStorage.extend({
             type = 3;
         }
         // this.loadSpriteByLevel(this._level,type);
-    }
+    },
+    completeProcess: function () {
+        this._super();
+        let playerInfoManager = PlayerInfoManager.getInstance();
+
+        //before set new capacity
+        let amountBefore = this.getCapacity();
+
+
+        let configCapacity = LoadManager.getInstance().getConfig(this._type,this._level,"capacity");
+
+        this.setCapacity(configCapacity);
+
+        let amountAfter = this.getCapacity();
+
+
+        let amountIncrease = {
+            gold: amountAfter.gold - amountBefore.gold,
+            elixir: amountAfter.elixir - amountBefore.elixir
+        }
+
+        playerInfoManager.changeMaxResource(amountIncrease);
+    },
 });
