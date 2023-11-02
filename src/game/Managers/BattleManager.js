@@ -4,12 +4,13 @@ var BattleManager = cc.Class.extend({
         this.init();
         this._battleGraph = null;
         this.listBuildings = new Map();
+        this.listGameObjects = new Map();
         this.listTroops = new Map();
         this.listArmy = [];
 
         this.buildingAmount = {};
 
-        this.mapGrid =[];  //map of building id
+        this.mapGrid = [];  //map of building id
         this.findPathGrid = []; //map of weight for find path, if wall, weight += 9 ; if center of building, weight +=9999;
 
         this.battleMap = [];//map logic for drop troops
@@ -29,10 +30,16 @@ var BattleManager = cc.Class.extend({
     },
 
     init: function () {
-        this.isWin = false;
         this.starAmount = 0;
         this.robbedGold = 0;
         this.robbedElixir = 0;
+        this.playerResources = {
+            gold: 0,
+            elixir: 0,
+            gem: 0,
+            goldCapacity: 0,
+            elixirCapacity: 0,
+        };
         this.battleStatus = BATTLE_STATUS.PREPARING;
         this.townHall = null;
         this.listResources = [];
@@ -43,6 +50,7 @@ var BattleManager = cc.Class.extend({
 
     resetState: function () {
         this.listBuildings.clear();
+        this.listGameObjects.clear();
         this.listTroops.clear();
         this.listArmy = [];
 
@@ -58,6 +66,40 @@ var BattleManager = cc.Class.extend({
         this.init();
     },
 
+    getPlayerResource: function (type) {
+        if (type === RESOURCE_TYPE.GOLD)
+            return this.playerResources.gold;
+        else if (type === RESOURCE_TYPE.ELIXIR)
+            return this.playerResources.elixir;
+        else if (type === RESOURCE_TYPE.G)
+            return this.playerResources.gem;
+        return 0;
+    },
+
+    getPlayerMaxResource: function (type) {
+        if (type === RESOURCE_TYPE.GOLD)
+            return this.playerResources.goldCapacity;
+        else if (type === RESOURCE_TYPE.ELIXIR)
+            return this.playerResources.elixirCapacity;
+        return 0;
+    },
+
+    setPlayerResource: function ({gold, elixir, gem,}) {
+        if (gold >= 0) {
+            this.playerResources.gold = gold;
+        }
+        if (elixir >= 0) {
+            this.playerResources.elixir = elixir;
+        }
+        if (gem >= 0) {
+            this.playerResources.gem = gem;
+        }
+
+        let BattleUILayer = cc.director.getRunningScene().battleUILayer;
+        if (!BattleUILayer) return;
+        BattleUILayer.updatePlayerResources();
+    },
+
     loadFromServer: function (data) {
         const {
             matchId,
@@ -65,6 +107,11 @@ var BattleManager = cc.Class.extend({
             enemyName,
             availableGold,
             availableElixir,
+            gold,
+            elixir,
+            gem,
+            goldCapacity,
+            elixirCapacity,
             winPoint,
             losePoint,
             buildings,
@@ -79,6 +126,12 @@ var BattleManager = cc.Class.extend({
         this.availableElixir = availableElixir;
         this.winPoint = winPoint;
         this.losePoint = losePoint;
+        this.playerResources.goldCapacity = goldCapacity;
+        this.playerResources.elixirCapacity = elixirCapacity;
+        this.playerResources.gold = gold;
+        this.playerResources.elixir = elixir;
+        this.playerResources.gem = gem;
+        this.battleStatus = BATTLE_STATUS.PREPARING;
 
         //load buildings
         for (let index in buildings) {
@@ -191,20 +244,13 @@ var BattleManager = cc.Class.extend({
 
     //add building to list and to grid
     addBuilding: function (building) {
-
-        let posX = building._posX;
-        let posY = building._posY;
         let id = building._id;
-        let width = building._width;
-        let height = building._height;
-        let level = building._level;
         let typeBuilding = building._type;
 
-        // building.onAddIntoMapManager();
+        this.listGameObjects.set(id, building);
 
-        // add to list building {building._id: building}
-        this.listBuildings.set(id, building);
-
+        if (typeBuilding.substring(0, 3) !== 'OBS')
+            this.listBuildings.set(id, building);
         //update list storage, list mine, list builder hut
         switch (typeBuilding.substring(0, 3)) {
             case 'TOW':
@@ -232,6 +278,10 @@ var BattleManager = cc.Class.extend({
 
     getAllBuilding: function () {
         return this.listBuildings;
+    },
+
+    getAllGameObjects: function () {
+        return this.listGameObjects;
     },
 
     getTownHall: function () {
@@ -267,6 +317,16 @@ var BattleManager = cc.Class.extend({
     },
 
     onDestroyBuilding: function (building) {
+        //check if all buildings are destroyed
+        let totalDestroyed = 0;
+        for (let building of this.listBuildings.values()){
+            if (building.isDestroy())
+                totalDestroyed++;
+        }
+        if (totalDestroyed === this.listBuildings.size){
+            this.battleScene.onEndBattle();
+        }
+
         // remove from building count
         this.buildingAmount[building._type] = Math.max(this.buildingAmount[building._type] - 1, 0);
 
@@ -301,9 +361,11 @@ var BattleManager = cc.Class.extend({
         if (type === RESOURCE_TYPE.GOLD) {
             this.robbedGold += resource;
             this.battleScene.battleUILayer.setResourceLeft(this.availableGold - this.robbedGold, type);
+            this.setPlayerResource({gold: this.playerResources.gold + resource});
         } else if (type === RESOURCE_TYPE.GOLD) {
-            this.battleScene.battleUILayer.setResourceLeft(this.availableElixir - this.robbedElixir, type);
             this.robbedElixir += resource;
+            this.battleScene.battleUILayer.setResourceLeft(this.availableElixir - this.robbedElixir, type);
+            this.setPlayerResource({elixir: this.playerResources.elixir + resource});
         }
     },
 

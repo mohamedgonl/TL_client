@@ -86,7 +86,7 @@ var BattleScene = cc.Scene.extend({
     },
 
     onFindMatch: function () {
-        let currentGold = PlayerInfoManager.getInstance().getResource("gold");
+        let currentGold = BattleManager.getInstance().getPlayerResource(RESOURCE_TYPE.GOLD);
         if (currentGold < GOLD_FIND_MATCH) {
             BasicPopup.appear("THIẾU TÀI NGUYÊN", "Bạn không đủ vàng để tìm trận đấu!");
             return;
@@ -95,8 +95,8 @@ var BattleScene = cc.Scene.extend({
         this.stopCountDown();
         this.addChild(loadingView);
 
-        BattleManager.getInstance().resetState();
         this.battleLayer.resetState();
+        BattleManager.getInstance().resetState();
 
         const self = this;
         loadingView.startLoading(function () {
@@ -110,22 +110,14 @@ var BattleScene = cc.Scene.extend({
     onFindMatchSuccess: function (data) {
         cc.log("onLoadDataSuccess::::::::::::::::::::::::::::")
         BattleManager.getInstance().loadFromServer(data);
-        PlayerInfoManager.getInstance().setResource({
-            gold: data.gold,
-            elixir: data.elixir,
-            gem: data.gem,
-        });
-        PlayerInfoManager.getInstance().setMaxResource({
-            gold: data.goldCapacity,
-            elixir: data.elixirCapacity,
-        });
+
         this.battleLayer.onLoadDataSuccess();
         this.battleUILayer.onLoadDataSuccess();
         this.loadingView.stopLoading();
 
         this.timeLeft = BATTlE_PREPARE_TIME;
-        BattleManager.getInstance().battleStatus = BATTLE_STATUS.PREPARING;
         this.battleUILayer.setTimeLeft(this.timeLeft);
+
         this.schedule(this.countDown, 1);
     },
 

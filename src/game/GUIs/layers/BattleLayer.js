@@ -48,14 +48,14 @@ var BattleLayer = cc.Layer.extend({
 
     //load all building in map manager and add it to MapLayer
     loadBuilding: function () {
-        const listBuildings = BattleManager.getInstance().getAllBuilding();
+        const listBuildings = BattleManager.getInstance().getAllGameObjects();
         for (let building of listBuildings.values()) {
             this.addBuildingToLayer(building);
         }
     },
 
     resetState: function () {
-        const listBuildings = BattleManager.getInstance().getAllBuilding();
+        const listBuildings = BattleManager.getInstance().getAllGameObjects();
         for (let building of listBuildings.values()) {
             this.removeBuilding(building);
         }

@@ -27,8 +27,8 @@ var BattleEndLayer = cc.Layer.extend({
     },
 
     show: function () {
-        const isWin = BattleManager.getInstance().isWin;
         const starAmount = BattleManager.getInstance().starAmount;
+        const isWin = starAmount > 0;
         const gold = BattleManager.getInstance().robbedGold;
         const elixir = BattleManager.getInstance().robbedElixir;
         const trophy = isWin ? BattleManager.getInstance().winPoint : BattleManager.getInstance().losePoint;
