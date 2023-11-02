@@ -109,6 +109,8 @@ var BattleLayer = cc.Layer.extend({
                     console.log("==================================================================")
                 }
                 if (keyCode === cc.KEY.x) {
+                    let townhall = BattleManager.getInstance().getTownHall();
+                    cc.log("townhall ::::::::::::",townhall.isDestroy())
                 }
                 if (keyCode === cc.KEY.c) {
                 }
@@ -228,7 +230,11 @@ var BattleLayer = cc.Layer.extend({
         let type = cc.director.getRunningScene().battleUILayer.getTypeOfChosenSlot();
         cc.log("choose:::::::::::::::", type);
         if (type == null) return;
-        this.createTroopAtGridPos(type, gridPos.x, gridPos.y);
+        let canDropTroop = BattleManager.getInstance().getDropTroopGrid()[gridPos.x][gridPos.y];
+        if(canDropTroop)
+            this.createTroopAtGridPos(type, gridPos.x, gridPos.y);
+        else
+            cc.log("can't drop troop here");
     },
 
 

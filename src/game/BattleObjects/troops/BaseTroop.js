@@ -1,4 +1,5 @@
 const GRID_BATTLE_RATIO = 3;
+const TROOP_LEVEL = 1;
 var BaseTroop = cc.Node.extend({
 
     ctor: function (posX,posY) {
@@ -9,6 +10,8 @@ var BaseTroop = cc.Node.extend({
         this._favoriteTarget = TROOP_BASE[this._type]["favoriteTarget"];
         this._moveSpeed = TROOP_BASE[this._type]["moveSpeed"];
         this._attackSpeed = TROOP_BASE[this._type]["attackSpeed"];
+        this._damage = TROOP[this._type][TROOP_LEVEL]["damagePerAttack"];
+        this._hitpoints = TROOP[this._type][TROOP_LEVEL]["hitpoints"];
         this._target = null;
         //state: 3 state: 0: idle,1: move,2: attack
         this._state = 0;
@@ -104,20 +107,26 @@ var BaseTroop = cc.Node.extend({
         }
         //get min distance target
 
-        let minDistance = Math.sqrt(Math.pow(this._posX - listTarget[0]._posX, 2) + Math.pow(this._posY - listTarget[0]._posY, 2));
-        this._target = listTarget[0];
+        let minDistance =null;
+        this._target = null;
 
         for(let i = 0; i < listTarget.length; i++) {
-            //if destroy, continue
+
             let target = listTarget[i];
+
+            //if destroy, continue
+            if(target.isDestroy()) continue;
             //get min distance
             let distance = Math.sqrt(Math.pow(this._posX - target._posX, 2) + Math.pow(this._posY - target._posY, 2));
-            if (distance < minDistance) {
+            if (minDistance == null || distance < minDistance) {
                 minDistance = distance;
                 this._target = target;
             }
         }
-
+        if(this._target === null) {
+            cc.log("Error::::: NOT FOUND TARGET")
+            return -1;
+        }
         this._path = this.getPathToBuilding(this._target);
 
         //for in path, if path go through WAL, this._target = WAL
@@ -133,11 +142,11 @@ var BaseTroop = cc.Node.extend({
         }
 
         cc.log("=====TARGET=====");
-        cc.log(this._target._type);
-        cc.log("=====PATH=====");
-        for(let i = 0; i < this._path.length; i++) {
-            cc.log(this._path[i].x + " " + this._path[i].y);
-        }
+        cc.log(this._target._id);
+        // cc.log("=====PATH=====");
+        // for(let i = 0; i < this._path.length; i++) {
+        //     cc.log(this._path[i].x + " " + this._path[i].y);
+        // }
         cc.log("=====END=====");
         this._currentIndex = 0;
     },
@@ -164,8 +173,10 @@ var BaseTroop = cc.Node.extend({
 
     },
     moveToTarget: function (dt) {
+
+        //đang di chuyển giữa đường thì nhà bị phá
         if(this._path.length === 0) {
-            cc.log("path length 0")
+            // cc.log("path length 0")
             return;
         }
         let distance = dt*this._moveSpeed/GRID_BATTLE_RATIO;
@@ -175,7 +186,9 @@ var BaseTroop = cc.Node.extend({
         else
         {
             this._currentIndex++;
-            cc.log("index: " + this._currentIndex);
+
+
+            //cc.log("index: " + this._currentIndex);
             if(this._currentIndex >= this._path.length) {
 
                 //on end Path -> attack mode
@@ -183,21 +196,23 @@ var BaseTroop = cc.Node.extend({
                 this._state = 2;
                 return;
             }
+            this._posX = this._path[this._currentIndex].x;
+            this._posY = this._path[this._currentIndex].y;
             //nếu chéo, = 1.414, else this._currentIndexLeft = 1
             if(this._path[this._currentIndex].x !== this._path[this._currentIndex - 1].x
                 && this._path[this._currentIndex].y !== this._path[this._currentIndex - 1].y) {
                 this._isCross = false;
                 this._currentIndexLeft = 1.414 - (distance - this._currentIndexLeft||0);
-                cc.log("cross::::, currentIndexLeft: " + this._currentIndexLeft);
+                //cc.log("cross::::, currentIndexLeft: " + this._currentIndexLeft);
             }
             else
             {
                 this._isCross = true;
                 this._currentIndexLeft = 1 - (distance - this._currentIndexLeft||0);
-                cc.log("not cross::::, currentIndexLeft: " + this._currentIndexLeft);
+                //cc.log("not cross::::, currentIndexLeft: " + this._currentIndexLeft);
             }
         }
-        cc.log("currentIndex: " + this._currentIndex + "   " + this._currentIndexLeft)
+        //cc.log("currentIndex: " + this._currentIndex + "   " + this._currentIndexLeft)
 
         //set pos
         let posIndexInMap = cc.director.getRunningScene().battleLayer.getMapPosFromGridPos(
@@ -221,36 +236,85 @@ var BaseTroop = cc.Node.extend({
         this.setRunDirection(directX, directY);
     },
     attackTarget: function (dt){
+        if(this._target.isDestroy()) {
+            cc.log("target destroy")
+            this._state = 0;
+            return;
+        }
 
+        this.performAttackAnimation();
         //perform attack
         if(this._attackCd===0)
         {
-            // this._attackCd = this._attackSpeed;
-            // //attack
-            // this._bodySprite.stopAllActions();
-            // this._bodySprite.runAction(res_troop.ATTACK[this._type].ANIM);
-            // this._target._hp -= TROOP_BASE[this._type]["damage"];
-            // if(this._target._hp<=0)
-            // {
-            //     this._target._hp = 0;
-            //     this._target._state = 2;
-            //     this._target._bodySprite.stopAllActions();
-            //     this._target._bodySprite.runAction(res_building.DESTROY[this._target._type].ANIM);
-            //     this._target._bodySprite.runAction(cc.sequence(cc.delayTime(1),cc.removeSelf()));
-            //     this._target = null;
-            //     this._state = 0;
-            //     this._path = null;
-            //     this._currentIndex = 0;
-            //     return;
-            // }
-            this.performAttackAnimation();
+            this._attackCd = this._attackSpeed;
+            //cc.log("attack damage::::",this._damage)
+            this._target.onGainDamage(this._damage);
+            //attack
+
+        }
+        else
+        {
+            this._attackCd -= dt;
+            if(this._attackCd < 0)
+                this._attackCd = 0;
+
         }
     },
     performAttackAnimation: function () {
         let directX = this._directX;
         let directY = this._directY;
-        let attackAction= res_troop.ATTACK[this._type].LEFT.ANIM;
+        this._bodySprite.setScale(1);
+        let attackAction ;//= res_troop.ATTACK[this._type].LEFT.ANIM;
+
+        if (directX === 1 && directY === 1) { //UP
+            attackAction = res_troop.ATTACK[this._type].UP.ANIM;
+        }
+        else if (directX === 1 && directY === 0) { //UP_RIGHT
+            if(res_troop.ATTACK[this._type].UP_RIGHT === undefined)
+            {
+                attackAction = res_troop.ATTACK[this._type].UP_LEFT.ANIM;
+                this._bodySprite.setScale(-1,1);
+            }
+            else
+                attackAction = res_troop.ATTACK[this._type].UP_RIGHT.ANIM;
+        }
+        else if (directX === 1 && directY === -1) { //RIGHT
+            if(res_troop.ATTACK[this._type].RIGHT === undefined){
+                attackAction = res_troop.ATTACK[this._type].LEFT.ANIM;
+                this._bodySprite.setScale(-1,1);
+            }
+            else
+                attackAction = res_troop.ATTACK[this._type].RIGHT.ANIM;
+        }
+        else if (directX === 0 && directY === 1) { //UP_LEFT
+            attackAction = res_troop.ATTACK[this._type].UP_LEFT.ANIM;
+        }
+        else if (directX === 0 && directY === 0) { //UP
+            attackAction = res_troop.ATTACK[this._type].UP.ANIM;
+        }
+        else if (directX === 0 && directY === -1) { //DOWN_RIGHT
+            if(res_troop.ATTACK[this._type].DOWN_RIGHT === undefined){
+                attackAction = res_troop.ATTACK[this._type].DOWN_LEFT.ANIM;
+                this._bodySprite.setScale(-1,1);
+            }
+            else
+                attackAction = res_troop.ATTACK[this._type].DOWN_RIGHT.ANIM;
+        }
+        else if (directX === -1 && directY === 1) { //LEFT
+            attackAction = res_troop.ATTACK[this._type].LEFT.ANIM;
+        }
+        else if (directX === -1 && directY === 0) { //DOWN_LEFT
+            attackAction = res_troop.ATTACK[this._type].DOWN_LEFT.ANIM;
+        }
+        else if (directX === -1 && directY === -1) { //DOWN
+            attackAction = res_troop.ATTACK[this._type].DOWN.ANIM;
+        }
+
         let cloneAttackAction = attackAction.clone();
+
+        //double speed attack
+        cloneAttackAction.setSpeed(2);
+
         if(this._stateAnimation !== this._state)
         {
             this._stateAnimation = this._state;
@@ -258,8 +322,16 @@ var BaseTroop = cc.Node.extend({
             this._bodySprite.stopAllActions();
             this._bodySprite.runAction(cloneAttackAction);
         }
-
-
-    }
+    },
+    onGainDamage: function (damage) {
+        this._hitpoints -= damage;
+        if(this._hitpoints <= 0) {
+            this._hitpoints = 0;
+            // this.destroy();
+        }
+    },
+    // isAlive: function () {
+    //
+    // }
 
 });
