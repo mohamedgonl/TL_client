@@ -227,6 +227,14 @@ var BattleUILayer = cc.Layer.extend({
         this.troopContainer.setVisible(false);
         this.starContainer.setVisible(false);
     },
+    onInitTroop: function () {
+        let button = this.troopSlots[this.chosenSlot].getChildByName("button");
+        let count = button.getChildByName("count");
+        //count defined as "x20" so we need to get the number after "x"
+        let troopAmount = Number(count.getString().substring(1));
+        troopAmount--;
+        count.setString("x" + troopAmount);
+    }
 });
 
 /*

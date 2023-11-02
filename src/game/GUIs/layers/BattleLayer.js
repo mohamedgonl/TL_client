@@ -244,6 +244,8 @@ var BattleLayer = cc.Layer.extend({
                 cc.director.getRunningScene().onStartBattle();
             }
             this.createTroopAtGridPos(type, gridPos.x, gridPos.y);
+            //get battleUILayer to minus 1 troop
+            cc.director.getRunningScene().battleUILayer.onInitTroop();
         }
 
         else
