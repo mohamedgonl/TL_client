@@ -437,6 +437,8 @@ CmdSendEndBattle = fr.OutPacket.extend(
             this.setCmdId(gv.CMD.END_BATTLE);
         },
         pack: function ({result, starAmount, trophyAmount, robbedGold, robbedElixir, listTroops, tick}) {
+            cc.log("GUI LEN"  + JSON.stringify({result, starAmount, trophyAmount, robbedGold, robbedElixir, listTroops, tick}))
+
             this.packHeader();
             this.putInt(result);
             this.putInt(starAmount);
