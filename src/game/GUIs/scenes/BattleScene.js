@@ -78,8 +78,13 @@ var BattleScene = cc.Scene.extend({
 
             this.stopCountDown();
             BattleManager.getInstance().battleStatus = BATTLE_STATUS.END;
-            this.battleUILayer.onEndBattle();
-            this.battleEndLayer.show();
+
+            const self = this;
+            //scheduleOnce
+            this.schedule(function () {
+                self.battleUILayer.onEndBattle();
+                self.battleEndLayer.show();
+            }, 1, 0, 0);
         } else {
             this.goToGameScene();
         }

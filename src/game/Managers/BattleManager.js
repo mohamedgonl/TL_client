@@ -39,6 +39,11 @@ var BattleManager = cc.Class.extend({
             goldCapacity: 0,
             elixirCapacity: 0,
         };
+
+        this.totalBuildingPoint = 0;
+        this.buildingDestroyedPoint = 0;
+        this.isDestroyedHalf = false;
+
         this.battleStatus = BATTLE_STATUS.PREPARING;
         this.townHall = null;
         this.listResources = [];
@@ -167,10 +172,9 @@ var BattleManager = cc.Class.extend({
         const elixirCapacity = Math.floor(this.availableElixir / this.listResources.length);
 
         for (let building of this.listResources) {
-            if (building._resourceType === RESOURCE_TYPE.GOLD){
+            if (building._resourceType === RESOURCE_TYPE.GOLD) {
                 building.setCapacity(goldCapacity);
-            }
-            else if (building._resourceType === RESOURCE_TYPE.ELIXIR)
+            } else if (building._resourceType === RESOURCE_TYPE.ELIXIR)
                 building.setCapacity(elixirCapacity);
         }
 
@@ -198,17 +202,16 @@ var BattleManager = cc.Class.extend({
             if (!building._type.startsWith("OBS")) {
 
                 //update mapGrid
-                    for (let column = building._posX; column < building._posX  + building._width; column++)
-                        for (let row = building._posY ; row < building._posY  + building._height; row++)
-                            this.mapGrid[column][row] = building._id;
+                for (let column = building._posX; column < building._posX + building._width; column++)
+                    for (let row = building._posY; row < building._posY + building._height; row++)
+                        this.mapGrid[column][row] = building._id;
 
                 //update findPathGrid
-                if(building._type.startsWith("WAL")) {
-                    for (let column = building._posX ; column < building._posX + building._width ; column++)
-                        for (let row = building._posY ; row < building._posY + building._height ; row++)
+                if (building._type.startsWith("WAL")) {
+                    for (let column = building._posX; column < building._posX + building._width; column++)
+                        for (let row = building._posY; row < building._posY + building._height; row++)
                             this.findPathGrid[column][row] = 9;
-                }
-                else{
+                } else {
                     for (let column = building._posX + 1; column < building._posX + building._width - 1; column++)
                         for (let row = building._posY + 1; row < building._posY + building._height - 1; row++)
                             this.findPathGrid[column][row] = 99999;
@@ -233,14 +236,17 @@ var BattleManager = cc.Class.extend({
     //add gameObject to list and to grid
     addBuilding: function (gameObject) {
         let id = gameObject._id;
-        let typeBuilding = gameObject._type;
+        let typeBuildingPrefix = gameObject._type.substring(0, 3);
 
         this.listGameObjects.set(id, gameObject);
 
-        if (typeBuilding.substring(0, 3) !== 'OBS')
+        if (typeBuildingPrefix !== 'OBS') {
             this.listBuildings.set(id, gameObject);
+            if (typeBuildingPrefix !== 'WAL')
+                this.totalBuildingPoint += gameObject._maxHp;
+        }
         //update list storage, list mine, list builder hut
-        switch (typeBuilding.substring(0, 3)) {
+        switch (typeBuildingPrefix) {
             case 'TOW':
                 this.townHall = gameObject;
                 break;
@@ -307,18 +313,29 @@ var BattleManager = cc.Class.extend({
         return null;
     },
 
+    increaseStarAmount: function () {
+        this.starAmount++;
+        this.battleScene.battleUILayer.updateStarUI();
+    },
+
     onDestroyBuilding: function (building) {
+        this.buildingDestroyedPoint += building._maxHp;
+
+        this.battleScene.battleUILayer.updateDestroyPercentage(Math.floor(this.buildingDestroyedPoint * 100 / this.totalBuildingPoint) );
+
+        if (!this.isDestroyedHalf && this.buildingDestroyedPoint * 2 >= this.totalBuildingPoint) {
+            this.isDestroyedHalf = true;
+            this.increaseStarAmount();
+        }
+
         if (building instanceof BattleTownhall)
-            this.starAmount++;
+            this.increaseStarAmount();
 
         //check if all buildings are destroyed
-        let totalDestroyed = 0;
-        for (let building of this.listBuildings.values()){
-            if (building.isDestroy())
-                totalDestroyed++;
-        }
-        if (totalDestroyed === this.listBuildings.size){
+        if (this.buildingDestroyedPoint >= this.totalBuildingPoint) {
+            this.increaseStarAmount();
             this.battleScene.onEndBattle();
+            return;
         }
 
         // remove from building count

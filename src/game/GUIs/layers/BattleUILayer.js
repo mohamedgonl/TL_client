@@ -44,6 +44,14 @@ var BattleUILayer = cc.Layer.extend({
         this.goldMax = node.getChildByName("gold_container").getChildByName("text_max");
         this.elixirMax = node.getChildByName("elixir_container").getChildByName("text_max");
 
+        //star result
+        this.starContainer = node.getChildByName("star_container");
+        this.star1 = this.starContainer.getChildByName("star1");
+        this.star2 = this.starContainer.getChildByName("star2");
+        this.star3 = this.starContainer.getChildByName("star3");
+        this.destroyPercentText = this.starContainer.getChildByName("percent_text");
+        this.starContainer.setVisible(false);
+
         //button
         this.btnFind = node.getChildByName("btn_find");
         this.btnFind.getChildByName("price").setString("250")
@@ -193,14 +201,31 @@ var BattleUILayer = cc.Layer.extend({
     setTimeLeft: function (secondsLeft) {
         this.textTime.setString(NumberUltis.formatSecondToString(secondsLeft));
     },
+
+    updateStarUI: function () {
+        const starAmount = BattleManager.getInstance().starAmount;
+        this.star1.setVisible(starAmount > 0);
+        this.star2.setVisible(starAmount > 1);
+        this.star3.setVisible(starAmount > 2);
+    },
+
+    updateDestroyPercentage: function (percentage) {
+        this.destroyPercentText.setString(percentage.toString() + "%");
+    },
+
     onStartBattle: function () {
         this.timeLabel.setString("Kết thúc sau:");
         this.btnFind.setVisible(false);
+        this.starContainer.setVisible(true);
+        this.star1.setVisible(false);
+        this.star2.setVisible(false);
+        this.star3.setVisible(false);
     },
     onEndBattle: function () {
         this.btnEnd.setVisible(false);
         this.enemyInfo.setVisible(false);
         this.troopContainer.setVisible(false);
+        this.starContainer.setVisible(false);
     },
 });
 
@@ -240,6 +265,12 @@ btn_find
    BitmapFontLabel_14
    price
    gold_icon_11
+star-container
+    result-text
+    star1
+    star2
+    star3
+    percent-text
 btn_end
    BitmapFontLabel_13
 troop_container
