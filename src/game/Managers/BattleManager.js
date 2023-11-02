@@ -6,24 +6,25 @@ var BattleManager = cc.Class.extend({
         this.listBuildings = new Map();
         this.listGameObjects = new Map();
         this.listTroops = new Map();
+        this.listArmy = [];
 
         this.buildingAmount = {};
 
         this.mapGrid = [];  //map of building id
         this.findPathGrid = []; //map of weight for find path, if wall, weight += 9 ; if center of building, weight +=9999;
 
-        this.battleMap = [];//map logic for drop troops
+        this.dropTroopGrid = [];//map logic for drop troops, 1 mean can drop, 0 mean can not drop
         this.battleScene = null;
 
         //init map grid
         for (var i = 0; i < GRID_SIZE_BATTLE; i++) {
             this.mapGrid[i] = [];
             this.findPathGrid[i] = [];
-            this.battleMap[i] = [];
+            this.dropTroopGrid[i] = [];
             for (var j = 0; j < GRID_SIZE_BATTLE; j++) {
                 this.mapGrid[i].push(0);
                 this.findPathGrid[i].push(0);
-                this.battleMap[i].push(0);
+                this.dropTroopGrid[i].push(1);
             }
         }
     },
@@ -57,13 +58,14 @@ var BattleManager = cc.Class.extend({
         this.listBuildings.clear();
         this.listGameObjects.clear();
         this.listTroops.clear();
+        this.listArmy = [];
 
         //init map grid
         for (var i = 0; i < GRID_SIZE_BATTLE; i++) {
             for (var j = 0; j < GRID_SIZE_BATTLE; j++) {
                 this.mapGrid[i][j] = 0;
                 this.findPathGrid[i][j] = 0;
-                this.battleMap[i][j] = 0;
+                this.dropTroopGrid[i][j] = 1;
             }
         }
 
@@ -164,6 +166,9 @@ var BattleManager = cc.Class.extend({
             this.listTroops.set(troop.type, troop.amount);
         }
     },
+    addToListArmy: function (troop) {
+        this.listArmy.push(troop);
+    },
 
     setResourceToBuilding: function () {
         if (!this.listResources || this.listResources.length === 0)
@@ -198,7 +203,7 @@ var BattleManager = cc.Class.extend({
     },
 
     initMapLogic: function () {
-        for (let building of this.listBuildings.values())
+        for (let building of this.listBuildings.values()) {
             if (!building._type.startsWith("OBS")) {
 
                 //update mapGrid
@@ -211,13 +216,15 @@ var BattleManager = cc.Class.extend({
                     for (let column = building._posX; column < building._posX + building._width; column++)
                         for (let row = building._posY; row < building._posY + building._height; row++)
                             this.findPathGrid[column][row] = 9;
-                } else {
+                }
+                else {
                     for (let column = building._posX + 1; column < building._posX + building._width - 1; column++)
                         for (let row = building._posY + 1; row < building._posY + building._height - 1; row++)
                             this.findPathGrid[column][row] = 99999;
+
                 }
 
-                //update battleMap
+                //update dropTroopGrid
                 const padding = 3;
                 for (let column = Math.max(building._posX - padding, 0);
                      column < Math.min(building._posX + building._width + padding, GRID_SIZE_BATTLE - 1);
@@ -225,11 +232,25 @@ var BattleManager = cc.Class.extend({
                     for (let row = Math.max(building._posY - padding, 0);
                          row < Math.min(building._posY + building._height + padding, GRID_SIZE_BATTLE - 1);
                          row++)
-                        this.battleMap[column][row] = 1;
+                        this.dropTroopGrid[column][row] = 0;
             }
+            //is OBS
+            else {
+                for (let column = building._posX + 1; column < building._posX + building._width - 1; column++)
+                    for (let row = building._posY + 1; row < building._posY + building._height - 1; row++)
+                    {
+                        this.findPathGrid[column][row] = 99999;
+                        this.dropTroopGrid[column][row] = 0;
+                    }
+
+
+                //update dropTroopGrid
+            }
+        }
 
         //update battle graph
         this._battleGraph = new BattleGraph(this.findPathGrid);
+
         cc.log("get battle graph");
     },
 
@@ -302,6 +323,9 @@ var BattleManager = cc.Class.extend({
     getListDefences: function () {
         return this.listDefences;
     },
+    getDropTroopGrid: function () {
+        return this.dropTroopGrid;
+    },
 
     checkValidPutBuilding: function (building, newPosX, newPosY) {
 
@@ -345,6 +369,23 @@ var BattleManager = cc.Class.extend({
         for (var column = building._posX; column < building._posX + building._width; column++)
             for (var row = building._posY; row < building._posY + building._height; row++)
                 this.mapGrid[column][row] = 0;
+
+        //update findPathGrid
+        if (building._type.startsWith("WAL")) {
+            for (let column = building._posX; column < building._posX + building._width; column++)
+                for (let row = building._posY; row < building._posY + building._height; row++)
+                    // this.findPathGrid[column][row] = 0;
+                    this._battleGraph.changeNodeWeight(column, row, 0)
+        }
+        else {
+            for (let column = building._posX + 1; column < building._posX + building._width - 1; column++)
+                for (let row = building._posY + 1; row < building._posY + building._height - 1; row++)
+                    // this.findPathGrid[column][row] = 0;
+                    this._battleGraph.changeNodeWeight(column, row, 0)
+        }
+    },
+    onDestroyTroop: function (troop) {
+
     },
 
     getBuildingCountByType: function (type) {

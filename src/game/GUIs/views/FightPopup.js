@@ -33,14 +33,14 @@ var FightPopup = cc.Layer.extend({
         let currentGold = PlayerInfoManager.getInstance().getResource("gold");
         if(currentGold <GOLD_FIND_MATCH)
         {
-            BasicPopup.appear("THIẾU TÀI NGUYÊN", "Bạn không đủ vàng để tìm trận đấu!");
+            BasicPopup.appear("THIẾU TÀI NGUYÊN", "Bạn không đủ vàng để tìm trận đấu!",this.handleClickClose.bind(this));
             return;
         }
 
         let armyCount = ArmyManager.getInstance().getCurrentSpace();
         if(armyCount < 1)
         {
-            BasicPopup.appear("BẠN KHÔNG CÓ LÍNH","Bạn cần luyện lính trước khi tìm trận đấu!")
+            BasicPopup.appear("BẠN KHÔNG CÓ LÍNH","Bạn cần luyện lính trước khi tìm trận đấu!",this.handleClickClose.bind(this))
             return;
         }
 
@@ -55,6 +55,7 @@ var FightPopup = cc.Layer.extend({
     },
 
     handleClickClose: function (closePopupLayer) {
+        cc.log("handleClickClose:::::::::::::")
         let popUp = this;
         PopupEffect.disappear(this, () => {
             popUp.setVisible(false);

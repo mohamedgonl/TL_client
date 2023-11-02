@@ -62,6 +62,12 @@ var InfoLayer = cc.Layer.extend({
         // this.addChild(btnCheat);
 
         this.btn_setting.addTouchEventListener(this.onClickBtnCheat, this);
+        this.btn_train.addTouchEventListener(this.onClickBtnTrain, this);
+    },
+    onClickBtnTrain: function (sender, type) {
+        if (type === ccui.Widget.TOUCH_ENDED) {
+
+        }
     },
 
     onClickBtnCheat: function (sender, type) {
@@ -423,4 +429,5 @@ btn_attack
 btn_shop
     text
 btn_setting
+btn_train
 */

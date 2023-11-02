@@ -109,6 +109,8 @@ var BattleLayer = cc.Layer.extend({
                     console.log("==================================================================")
                 }
                 if (keyCode === cc.KEY.x) {
+                    let townhall = BattleManager.getInstance().getTownHall();
+                    cc.log("townhall ::::::::::::",townhall.isDestroy())
                 }
                 if (keyCode === cc.KEY.c) {
                 }
@@ -228,7 +230,11 @@ var BattleLayer = cc.Layer.extend({
         let type = cc.director.getRunningScene().battleUILayer.getTypeOfChosenSlot();
         cc.log("choose:::::::::::::::", type);
         if (type == null) return;
-        this.createTroopAtGridPos(type, gridPos.x, gridPos.y);
+        let canDropTroop = BattleManager.getInstance().getDropTroopGrid()[gridPos.x][gridPos.y];
+        if(canDropTroop)
+            this.createTroopAtGridPos(type, gridPos.x, gridPos.y);
+        else
+            cc.log("can't drop troop here");
     },
 
 
@@ -313,32 +319,32 @@ var BattleLayer = cc.Layer.extend({
 
     //use config zoom max, min, zoom step to zoom by scroll
     zoom: function (event) {
-        // let location = event.getLocation();
-        // let mapPos = this.getMapPosFromScreenPos(location);
-        //
-        // var delta = event.getScrollY();
-        // var scale = this.getScale();
-        // let oldScale = this.getScale();
-        //
-        // // Nếu cuộn chuột lên, zoom vào; ngược lại, zoom ra
-        // if (delta < 0) {
-        //     scale += ZOOM_STEP;
-        //     if (scale > ZOOM_MAX) {
-        //         scale = ZOOM_MAX;
-        //     }
-        //
-        // } else {
-        //     scale -= ZOOM_STEP;
-        //     if (scale < ZOOM_MIN) {
-        //         scale = ZOOM_MIN;
-        //     }
-        // }
-        // let ratio = scale / oldScale;
-        // this.x -= mapPos.x * (ratio - 1);
-        // this.y -= mapPos.y * (ratio - 1);
-        //
-        // this.setScale(scale);
-        // this.limitBorder();
+        let location = event.getLocation();
+        let mapPos = this.getMapPosFromScreenPos(location);
+
+        var delta = event.getScrollY();
+        var scale = this.getScale();
+        let oldScale = this.getScale();
+
+        // Nếu cuộn chuột lên, zoom vào; ngược lại, zoom ra
+        if (delta < 0) {
+            scale += ZOOM_STEP;
+            if (scale > ZOOM_MAX) {
+                scale = ZOOM_MAX;
+            }
+
+        } else {
+            scale -= ZOOM_STEP;
+            if (scale < ZOOM_MIN) {
+                scale = ZOOM_MIN;
+            }
+        }
+        let ratio = scale / oldScale;
+        this.x -= mapPos.x * (ratio - 1);
+        this.y -= mapPos.y * (ratio - 1);
+
+        this.setScale(scale);
+        this.limitBorder();
     },
     zoomMultiTouch: function (touch1, touch2) {
         let location1 = touch1.getLocation();
@@ -378,24 +384,24 @@ var BattleLayer = cc.Layer.extend({
     //if moveView or Zoom out of map, move back
     limitBorder: function () {
 
-        // var pos = this.getPosition();
-        // //bottom border of screen
-        // var currentBottomBorder = this.getMapPosFromScreenPos(cc.p(0, 0)).y;
-        // if (currentBottomBorder < BORDER_LIMIT_BOTTOM)
-        //     this.setPositionY(pos.y + (currentBottomBorder - BORDER_LIMIT_BOTTOM));
-        // //top border of screen
-        // var currentTopBorder = this.getMapPosFromScreenPos(cc.p(0, cc.winSize.height)).y;
-        // if (currentTopBorder > BORDER_LIMIT_TOP)
-        //     this.setPositionY(pos.y + (currentTopBorder - BORDER_LIMIT_TOP));
-        //
-        // //left border of screen
-        // var currentLeftBorder = this.getMapPosFromScreenPos(cc.p(0, 0)).x;
-        // if (currentLeftBorder < BORDER_LIMIT_LEFT)
-        //     this.setPositionX(pos.x + (currentLeftBorder - BORDER_LIMIT_LEFT));
-        // //right border of screen
-        // var currentRightBorder = this.getMapPosFromScreenPos(cc.p(cc.winSize.width, 0)).x;
-        // if (currentRightBorder > BORDER_LIMIT_RIGHT)
-        //     this.setPositionX(pos.x + (currentRightBorder - BORDER_LIMIT_RIGHT));
+        var pos = this.getPosition();
+        //bottom border of screen
+        var currentBottomBorder = this.getMapPosFromScreenPos(cc.p(0, 0)).y;
+        if (currentBottomBorder < BORDER_LIMIT_BOTTOM)
+            this.setPositionY(pos.y + (currentBottomBorder - BORDER_LIMIT_BOTTOM));
+        //top border of screen
+        var currentTopBorder = this.getMapPosFromScreenPos(cc.p(0, cc.winSize.height)).y;
+        if (currentTopBorder > BORDER_LIMIT_TOP)
+            this.setPositionY(pos.y + (currentTopBorder - BORDER_LIMIT_TOP));
+
+        //left border of screen
+        var currentLeftBorder = this.getMapPosFromScreenPos(cc.p(0, 0)).x;
+        if (currentLeftBorder < BORDER_LIMIT_LEFT)
+            this.setPositionX(pos.x + (currentLeftBorder - BORDER_LIMIT_LEFT));
+        //right border of screen
+        var currentRightBorder = this.getMapPosFromScreenPos(cc.p(cc.winSize.width, 0)).x;
+        if (currentRightBorder > BORDER_LIMIT_RIGHT)
+            this.setPositionX(pos.x + (currentRightBorder - BORDER_LIMIT_RIGHT));
 
     },
 
