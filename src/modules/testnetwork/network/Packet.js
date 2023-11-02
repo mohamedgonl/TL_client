@@ -438,7 +438,7 @@ CmdSendEndBattle = fr.OutPacket.extend(
         },
         pack: function ({result, starAmount, trophyAmount, robbedGold, robbedElixir, listTroops, tick}) {
             this.packHeader();
-            this.putInt(result);
+            this.putInt(result ? 1 : 0);
             this.putInt(starAmount);
             this.putInt(trophyAmount);
             this.putInt(robbedGold);
