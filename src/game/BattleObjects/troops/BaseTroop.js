@@ -12,6 +12,7 @@ var BaseTroop = cc.Node.extend({
         this._attackSpeed = TROOP_BASE[this._type]["attackSpeed"];
         this._damage = TROOP[this._type][TROOP_LEVEL]["damagePerAttack"];
         this._hitpoints = TROOP[this._type][TROOP_LEVEL]["hitpoints"];
+        this._currentHitpoints = this._hitpoints;
         this._target = null;
         //state: 3 state: 0: idle,1: move,2: attack
         this._state = 0;
@@ -103,10 +104,11 @@ var BaseTroop = cc.Node.extend({
         }
 
         if (listTarget.length === 0) {
-            return -1;
+            return;
         }
-        //get min distance target
 
+        this._currentIndex = 0;
+        //get min distance target
         let minDistance =null;
         this._target = null;
 
@@ -125,8 +127,10 @@ var BaseTroop = cc.Node.extend({
         }
         if(this._target === null) {
             cc.log("Error::::: NOT FOUND TARGET")
-            return -1;
+            this.state = 3;
+            return;
         }
+
         this._path = this.getPathToBuilding(this._target);
 
         //for in path, if path go through WAL, this._target = WAL
@@ -140,7 +144,6 @@ var BaseTroop = cc.Node.extend({
                 break;
             }
         }
-
         cc.log("=====TARGET=====");
         cc.log(this._target._id);
         // cc.log("=====PATH=====");
@@ -148,7 +151,7 @@ var BaseTroop = cc.Node.extend({
         //     cc.log(this._path[i].x + " " + this._path[i].y);
         // }
         cc.log("=====END=====");
-        this._currentIndex = 0;
+
     },
     gameLoop: function (dt){
         if(this._state === 0)
@@ -324,14 +327,22 @@ var BaseTroop = cc.Node.extend({
         }
     },
     onGainDamage: function (damage) {
-        this._hitpoints -= damage;
-        if(this._hitpoints <= 0) {
-            this._hitpoints = 0;
-            // this.destroy();
+        this._currentHitpoints -= damage;
+        if(this._currentHitpoints <= 0) {
+            this._currentHitpoints = 0;
+            this.destroy();
         }
     },
-    // isAlive: function () {
-    //
-    // }
+    isAlive: function () {
+        return this._currentHitpoints > 0;
+    },
+    destroy: function () {
+        //remove from list
+        BattleManager.getInstance().onDestroyTroop(this);
+        //remove from map
+        // cc.director.getRunningScene().battleLayer.onDestroy(this._posX,this._posY);
+        //remove from parent
+        this.removeFromParent();
+    }
 
 });

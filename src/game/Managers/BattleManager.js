@@ -360,7 +360,13 @@ var BattleManager = cc.Class.extend({
         }
     },
     onDestroyTroop: function (troop) {
-
+        //update listArmy
+        for (let i = 0; i < this.listArmy.length; i++) {
+            if (this.listArmy[i] === troop) {
+                this.listArmy.splice(i, 1);
+                break;
+            }
+        }
     },
 
     getBuildingCountByType: function (type) {
