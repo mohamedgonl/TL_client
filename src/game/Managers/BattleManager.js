@@ -45,6 +45,7 @@ var BattleManager = cc.Class.extend({
         this.listWalls = [];
         this.listDefences = [];
         this.listBullets = [];
+        this.listObstacles = [];
     },
 
     resetState: function () {
@@ -229,33 +230,36 @@ var BattleManager = cc.Class.extend({
         cc.log("get battle graph");
     },
 
-    //add building to list and to grid
-    addBuilding: function (building) {
-        let id = building._id;
-        let typeBuilding = building._type;
+    //add gameObject to list and to grid
+    addBuilding: function (gameObject) {
+        let id = gameObject._id;
+        let typeBuilding = gameObject._type;
 
-        this.listGameObjects.set(id, building);
+        this.listGameObjects.set(id, gameObject);
 
         if (typeBuilding.substring(0, 3) !== 'OBS')
-            this.listBuildings.set(id, building);
+            this.listBuildings.set(id, gameObject);
         //update list storage, list mine, list builder hut
         switch (typeBuilding.substring(0, 3)) {
             case 'TOW':
-                this.townHall = building;
+                this.townHall = gameObject;
                 break;
             case 'RES':
-                this.listResources.push(building);
+                this.listResources.push(gameObject);
                 break;
             case 'STO':
-                this.listResources.push(building);
+                this.listResources.push(gameObject);
                 break;
             case 'WAL':
-                this.listWalls.push(building);
+                this.listWalls.push(gameObject);
                 break;
             case 'DEF':
-                this.listDefences.push(building);
+                this.listDefences.push(gameObject);
                 break;
             case 'BDH':
+                break;
+            case 'OBS':
+                this.listObstacles.push(gameObject);
                 break;
             default :
                 break;
@@ -304,6 +308,9 @@ var BattleManager = cc.Class.extend({
     },
 
     onDestroyBuilding: function (building) {
+        if (building instanceof BattleTownhall)
+            this.starAmount++;
+
         //check if all buildings are destroyed
         let totalDestroyed = 0;
         for (let building of this.listBuildings.values()){
