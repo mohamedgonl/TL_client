@@ -20,7 +20,8 @@ var BaseTroop = cc.Node.extend({
         this._attackCd = 0;
         this._currentIndex = 0;
         this._stateAnimation = 0;
-        BattleManager.getInstance().addToListArmy(this);
+        BattleManager.getInstance().addToListCurrentTroop(this);
+        BattleManager.getInstance().addToListUsedTroop(this);
         this.init();
         this.findTargetandPath();
 
@@ -131,6 +132,7 @@ var BaseTroop = cc.Node.extend({
             return;
         }
 
+        this._state = 1;
         this._path = this.getPathToBuilding(this._target);
 
         //for in path, if path go through WAL, this._target = WAL
@@ -157,7 +159,7 @@ var BaseTroop = cc.Node.extend({
         if(this._state === 0)
         {
             this.findTargetandPath();
-            this._state = 1;
+
             return;
         }
 

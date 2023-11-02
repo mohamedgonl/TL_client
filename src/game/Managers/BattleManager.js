@@ -6,8 +6,8 @@ var BattleManager = cc.Class.extend({
         this.listBuildings = new Map();
         this.listGameObjects = new Map();
         this.listTroops = new Map();
-        this.listArmy = [];
-
+        this.listCurrentTroop = [];
+        this.listUsedTroop = new Map();
         this.buildingAmount = {};
 
         this.mapGrid = [];  //map of building id
@@ -58,7 +58,12 @@ var BattleManager = cc.Class.extend({
         this.listBuildings.clear();
         this.listGameObjects.clear();
         this.listTroops.clear();
-        this.listArmy = [];
+
+        //for in list army
+        for (let i = 0; i < this.listCurrentTroop.length; i++) {
+            this.listCurrentTroop[i].removeFromParent();
+        }
+        this.listCurrentTroop = [];
 
         //init map grid
         for (var i = 0; i < GRID_SIZE_BATTLE; i++) {
@@ -166,8 +171,16 @@ var BattleManager = cc.Class.extend({
             this.listTroops.set(troop.type, troop.amount);
         }
     },
-    addToListArmy: function (troop) {
-        this.listArmy.push(troop);
+    addToListCurrentTroop: function (troop) {
+        this.listCurrentTroop.push(troop);
+    },
+    addToListUsedTroop: function (troop) {
+        //key is troop type, value + 1
+        if (this.listUsedTroop.has(troop._type)) {
+            this.listUsedTroop.set(troop._type, this.listUsedTroop.get(troop._type) + 1);
+        }
+        else
+            this.listUsedTroop.set(troop._type, 1);
     },
 
     setResourceToBuilding: function () {
@@ -385,10 +398,10 @@ var BattleManager = cc.Class.extend({
         }
     },
     onDestroyTroop: function (troop) {
-        //update listArmy
-        for (let i = 0; i < this.listArmy.length; i++) {
-            if (this.listArmy[i] === troop) {
-                this.listArmy.splice(i, 1);
+        //update listCurrentTroop
+        for (let i = 0; i < this.listCurrentTroop.length; i++) {
+            if (this.listCurrentTroop[i] === troop) {
+                this.listCurrentTroop.splice(i, 1);
                 break;
             }
         }

@@ -113,6 +113,12 @@ var BattleLayer = cc.Layer.extend({
                     cc.log("townhall ::::::::::::",townhall.isDestroy())
                 }
                 if (keyCode === cc.KEY.c) {
+                    //log list usedTroop
+                    let usedTroop = BattleManager.getInstance().listUsedTroop;
+                    //usedTroop is map
+                    for (let [key, value] of usedTroop) {
+                        cc.log("used troop: " + key + " " + value);
+                    }
                 }
                 if (keyCode === cc.KEY.z) {
                 }
@@ -232,7 +238,14 @@ var BattleLayer = cc.Layer.extend({
         if (type == null) return;
         let canDropTroop = BattleManager.getInstance().getDropTroopGrid()[gridPos.x][gridPos.y];
         if(canDropTroop)
+        {
+            if(BattleManager.getInstance().battleStatus === BATTLE_STATUS.PREPARING)
+            {
+                cc.director.getRunningScene().onStartBattle();
+            }
             this.createTroopAtGridPos(type, gridPos.x, gridPos.y);
+        }
+
         else
             cc.log("can't drop troop here");
     },

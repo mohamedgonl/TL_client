@@ -146,7 +146,7 @@ var BattleScene = cc.Scene.extend({
         for (let bullet of BattleManager.getInstance().listBullets) {
             bullet.gameLoop(dt);
         }
-        for (let troop of BattleManager.getInstance().listArmy) {
+        for (let troop of BattleManager.getInstance().listCurrentTroop) {
             troop.gameLoop(dt);
         }
         this.tick++;
