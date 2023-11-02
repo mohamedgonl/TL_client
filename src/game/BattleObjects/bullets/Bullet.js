@@ -28,7 +28,20 @@ var Bullet = cc.Sprite.extend({
         this.setPosition(initPos.x, initPos.y);
     },
 
+    reset: function (destination){
+        this.alpha = 0;
+        this.destination = destination;
+        this.dist = cc.pDistance(cc.p(this.startPoint.x, this.startPoint.y), cc.p(this.destination.x, this.destination.y));
+
+        this.alpha += 25/this.dist;
+        const initPos = cc.pLerp(cc.p(this.startPoint.x, this.startPoint.y), cc.p(this.destination.x, this.destination.y), this.alpha);
+        this.setPosition(initPos.x, initPos.y);
+        this.active = true;
+        this.visible = true;
+    },
+
     gameLoop: function (dt) {
+        // cc.log(JSON.stringify({active: this.active, destination: this.destination, x: this.x, y: this.y}))
         if (!this.active || this.destination === null)
             return;
         this.alpha += dt * this.speed / this.dist;
@@ -39,11 +52,11 @@ var Bullet = cc.Sprite.extend({
         }
     },
 
-    destroy: function () {
-        // var explode = HitEffect.getOrCreateHitEffect(this.x, this.y, Math.random() * 360);
-        this.active = false;
-        this.visible = false;
-    },
+    // destroy: function () {
+    //     // var explode = HitEffect.getOrCreateHitEffect(this.x, this.y, Math.random() * 360);
+    //     this.active = false;
+    //     this.visible = false;
+    // },
 
     hurt: function () {
         this.HP--;

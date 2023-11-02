@@ -110,7 +110,7 @@ var BattleLayer = cc.Layer.extend({
                 }
                 if (keyCode === cc.KEY.x) {
                     let townhall = BattleManager.getInstance().getTownHall();
-                    cc.log("townhall ::::::::::::",townhall.isDestroy())
+                    cc.log("townhall ::::::::::::", townhall.isDestroy())
                 }
                 if (keyCode === cc.KEY.c) {
                     //log list usedTroop
@@ -238,16 +238,14 @@ var BattleLayer = cc.Layer.extend({
         if (type == null) return;
         let canDropTroop = BattleManager.getInstance().getDropTroopGrid()[gridPos.x][gridPos.y];
 
-        if(!canDropTroop) return;
+        if (!canDropTroop) return;
 
-        if(BattleManager.getInstance().listUsedTroop.get(type) >= BattleManager.getInstance().listTroops.get(type))
-        {
+        if (BattleManager.getInstance().listUsedTroop.get(type) >= BattleManager.getInstance().listTroops.get(type)) {
             cc.log("not enough troop")
             return;
         }
 
-        if(BattleManager.getInstance().battleStatus === BATTLE_STATUS.PREPARING)
-        {
+        if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.PREPARING) {
             cc.director.getRunningScene().onStartBattle();
         }
         this.createTroopAtGridPos(type, gridPos.x, gridPos.y);
@@ -431,6 +429,19 @@ var BattleLayer = cc.Layer.extend({
 
     gameLoop: function (dt) {
         //check list troop pos -> add to targetQueue of def
+        // const listDefences = BattleManager.getInstance().getListDefences();
+        // const listTroops = BattleManager.getInstance().getListCurrentTroops();
+        // for (let defence of listDefences) {
+        //     let hasTarget = false;
+        //     for (let troop of listTroops)
+        //         if (defence.checkTargetInRange(troop)) {
+        //             defence.setListTargets([troop]);
+        //             hasTarget = true;
+        //             break;
+        //         }
+        //     if (!hasTarget)
+        //         defence.setListTargets([]);
+        // }
     },
 });
 

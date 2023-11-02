@@ -344,6 +344,9 @@ var BattleManager = cc.Class.extend({
         }
         return listTroops;
     },
+    getListCurrentTroops: function () {
+        return this.listCurrentTroop;
+    },
 
     checkValidPutBuilding: function (building, newPosX, newPosY) {
 

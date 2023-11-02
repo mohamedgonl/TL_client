@@ -21,8 +21,7 @@ var BattleCannon = BattleDefence.extend({
     },
 
     attack: function (target) {
-        const bullet = new CannonBullet(cc.p(this.x, this.y), target, this.damagePerShot);
-        BattleManager.getInstance().addBullet(bullet, this);
+        const bullet = CannonBullet.getOrCreateBullet(this._type, cc.p(this.x, this.y), target, this.damagePerShot);
         // bullet.setPosition(this.x, this.y);
     },
 
