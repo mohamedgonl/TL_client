@@ -13,18 +13,18 @@ var BattleManager = cc.Class.extend({
         this.mapGrid = [];  //map of building id
         this.findPathGrid = []; //map of weight for find path, if wall, weight += 9 ; if center of building, weight +=9999;
 
-        this.battleMap = [];//map logic for drop troops
+        this.canDropTroop = [];//map logic for drop troops, 1 mean can drop, 0 mean can not drop
         this.battleScene = null;
 
         //init map grid
         for (var i = 0; i < GRID_SIZE_BATTLE; i++) {
             this.mapGrid[i] = [];
             this.findPathGrid[i] = [];
-            this.battleMap[i] = [];
+            this.canDropTroop[i] = [];
             for (var j = 0; j < GRID_SIZE_BATTLE; j++) {
                 this.mapGrid[i].push(0);
                 this.findPathGrid[i].push(0);
-                this.battleMap[i].push(0);
+                this.canDropTroop[i].push(1);
             }
         }
     },
@@ -59,7 +59,7 @@ var BattleManager = cc.Class.extend({
             for (var j = 0; j < GRID_SIZE_BATTLE; j++) {
                 this.mapGrid[i][j] = 0;
                 this.findPathGrid[i][j] = 0;
-                this.battleMap[i][j] = 0;
+                this.canDropTroop[i][j] = 1;
             }
         }
 
@@ -219,7 +219,7 @@ var BattleManager = cc.Class.extend({
 
                 }
 
-                //update battleMap
+                //update canDropTroop
                 const padding = 3;
                 for (let column = Math.max(building._posX - padding, 0);
                      column < Math.min(building._posX + building._width + padding, GRID_SIZE_BATTLE - 1);
@@ -227,12 +227,15 @@ var BattleManager = cc.Class.extend({
                     for (let row = Math.max(building._posY - padding, 0);
                          row < Math.min(building._posY + building._height + padding, GRID_SIZE_BATTLE - 1);
                          row++)
-                        this.battleMap[column][row] = 1;
+                        this.canDropTroop[column][row] = 0;
             }
             else {
                 for (let column = building._posX + 1; column < building._posX + building._width - 1; column++)
                     for (let row = building._posY + 1; row < building._posY + building._height - 1; row++)
-                        this.findPathGrid[column][row] = 99999;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       bv
+                        this.findPathGrid[column][row] = 99999;
+                        this.canDropTroop[column][row] = 0;
+
+                //update canDropTroop
             }
         }
 

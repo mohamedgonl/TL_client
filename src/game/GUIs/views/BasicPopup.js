@@ -1,6 +1,7 @@
 var BasicPopup = cc.Node.extend({
     ctor: function (name, string, callback) {
         this._super();
+        this.callback=callback;
         //get popup layer
         let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
         popUpLayer.setVisible(true);
@@ -30,9 +31,19 @@ var BasicPopup = cc.Node.extend({
         this.content.addChild(label);
     },
     onClickCancel: function () {
+        cc.log("onClickCancel::::::::")
         this.removeFromParent(true);
-        let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
-        popUpLayer.setVisible(false);
+       if(this.callback)
+       {
+            cc.log("callback::::::::")
+            this.callback();
+       }
+       else{
+           let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
+           popUpLayer.setVisible(false);
+       }
+
+
     }
 
 })

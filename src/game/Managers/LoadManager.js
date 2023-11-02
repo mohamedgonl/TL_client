@@ -302,6 +302,13 @@ var LoadManager = cc.Node.extend({
         this.addAnimationToTarget("res/Troops/ARM_6_1/run/image0", 32, 47, res_troop.RUN.ARM_6.LEFT);
         this.addAnimationToTarget("res/Troops/ARM_6_1/run/image0", 48, 63, res_troop.RUN.ARM_6.UP_LEFT);
         this.addAnimationToTarget("res/Troops/ARM_6_1/run/image0", 64, 79, res_troop.RUN.ARM_6.UP);
+
+        //ARM_1 attack
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/attack01/image0", 0, 12, res_troop.ATTACK.ARM_1.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/attack01/image0", 13, 25, res_troop.ATTACK.ARM_1.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/attack01/image0", 26, 38, res_troop.ATTACK.ARM_1.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/attack01/image0", 39, 51, res_troop.ATTACK.ARM_1.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/attack01/image0", 52, 64, res_troop.ATTACK.ARM_1.UP);
     },
     addAnimationToTarget: function (link, start, end, target) {
         let animation = new cc.Animation();
@@ -470,5 +477,26 @@ var res_troop = {
             }
         }
 
+    },
+    ATTACK:{
+        ARM_1: {
+            DOWN: {
+                //0000 -> 0012
+                1: "res/Troops/ARM_1_1/ARM_1_1/attack01/image0000.png",
+            },
+            DOWN_LEFT: {
+                //0013 -> 0025
+            },
+            LEFT: {
+                //0026 -> 0038
+            },
+            UP_LEFT: {
+                //0039 -> 0051
+            },
+            UP: {
+                //0052 -> 0064
+            }
+
+        }
     }
 }

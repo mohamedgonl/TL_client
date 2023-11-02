@@ -1,4 +1,6 @@
+const GRID_BATTLE_RATIO = 3;
 var BaseTroop = cc.Node.extend({
+
     ctor: function (posX,posY) {
         this._super();
         this.setScale(0.5)
@@ -6,13 +8,18 @@ var BaseTroop = cc.Node.extend({
         this._posY = posY;
         this._favoriteTarget = TROOP_BASE[this._type]["favoriteTarget"];
         this._moveSpeed = TROOP_BASE[this._type]["moveSpeed"];
+        this._attackSpeed = TROOP_BASE[this._type]["attackSpeed"];
         this._target = null;
-        this.init();
+        //state: 3 state: 0: idle,1: move,2: attack
+        this._state = 0;
         this._path = null;
+        this._attackCd = 0;
         this._currentIndex = 0;
-        this.findTargetandPath();
-        // this.moveToTarget();
+        this._stateAnimation = 0;
         BattleManager.getInstance().addToListArmy(this);
+        this.init();
+        this.findTargetandPath();
+
     },
     init: function () {
         this._bodySprite = new cc.Sprite(res_troop.RUN[this._type].LEFT[1]);
@@ -42,14 +49,15 @@ var BaseTroop = cc.Node.extend({
             cc.log("Error");
         }
         let cloneMoveAction = moveAction.clone();
-        if(this.oldDirectX !== directX || this.oldDirectY !== directY)
+        if(this._stateAnimation !== this._state || this._directX !== directX || this._directY !== directY)
         {
+            this._stateAnimation = this._state;
             cc.log("change move action")
             this._bodySprite.stopAllActions();
             this._bodySprite.runAction(cloneMoveAction);
         }
-        this.oldDirectX = directX;
-        this.oldDirectY = directY;
+        this._directX = directX;
+        this._directY = directY;
     },
     getPathToBuilding: function (building) {
         //get path
@@ -133,42 +141,25 @@ var BaseTroop = cc.Node.extend({
         cc.log("=====END=====");
         this._currentIndex = 0;
     },
-    moveToTarget1: function () {
-        return;
-        let path = this._path;
-        cc.log("length path: " + path.length);
-        let self = this;
-        //create sequence move from path 0 to path.length - 1
-        let sequence = [];
-        for(let i = 0; i < path.length; i++) {
-
-            console.log(i);
-            let mapPos = cc.director.getRunningScene().battleLayer.getMapPosFromGridPos({x: path[i].x, y: path[i].y});
-            let moveAction = cc.moveTo(0.15,mapPos);
-
-            let createDirectAction = function (index) {
-                return cc.callFunc(function () {
-                    let directX = path[index].x - self._posX;
-                    let directY = path[index].y - self._posY;
-                    self.setRunDirection(directX, directY);
-                    self._posX = path[index].x;
-                    self._posY = path[index].y;
-                }, this);
-            };
-
-            let directAction = createDirectAction(i);
-            sequence.push(cc.spawn(moveAction, directAction));
-        }
-        //after all sequence, call Attack
-        sequence.push(cc.callFunc(function () {
-        }, this));
-        // run sequence
-        let sequenceAction = cc.sequence(sequence);
-        this.runAction(sequenceAction);
-    },
     gameLoop: function (dt){
-        if(this._currentIndex < this._path.length) {
+        if(this._state === 0)
+        {
+            this.findTargetandPath();
+            this._state = 1;
+            return;
+        }
+
+        if(this._state === 1)
+        {
             this.moveToTarget(dt);
+            return;
+        }
+
+        if(this._state === 2)
+        {
+
+            this.attackTarget(dt);
+            return;
         }
 
     },
@@ -177,7 +168,7 @@ var BaseTroop = cc.Node.extend({
             cc.log("path length 0")
             return;
         }
-        let distance = dt*this._moveSpeed/4;
+        let distance = dt*this._moveSpeed/GRID_BATTLE_RATIO;
         if(this._currentIndexLeft > distance) {
             this._currentIndexLeft -= distance;
         }
@@ -186,7 +177,10 @@ var BaseTroop = cc.Node.extend({
             this._currentIndex++;
             cc.log("index: " + this._currentIndex);
             if(this._currentIndex >= this._path.length) {
+
+                //on end Path -> attack mode
                 cc.log("end path");
+                this._state = 2;
                 return;
             }
             //nếu chéo, = 1.414, else this._currentIndexLeft = 1
@@ -225,6 +219,47 @@ var BaseTroop = cc.Node.extend({
         let directX = this._path[this._currentIndex].x - this._path[this._currentIndex - 1].x;
         let directY = this._path[this._currentIndex].y - this._path[this._currentIndex - 1].y;
         this.setRunDirection(directX, directY);
+    },
+    attackTarget: function (dt){
+
+        //perform attack
+        if(this._attackCd===0)
+        {
+            // this._attackCd = this._attackSpeed;
+            // //attack
+            // this._bodySprite.stopAllActions();
+            // this._bodySprite.runAction(res_troop.ATTACK[this._type].ANIM);
+            // this._target._hp -= TROOP_BASE[this._type]["damage"];
+            // if(this._target._hp<=0)
+            // {
+            //     this._target._hp = 0;
+            //     this._target._state = 2;
+            //     this._target._bodySprite.stopAllActions();
+            //     this._target._bodySprite.runAction(res_building.DESTROY[this._target._type].ANIM);
+            //     this._target._bodySprite.runAction(cc.sequence(cc.delayTime(1),cc.removeSelf()));
+            //     this._target = null;
+            //     this._state = 0;
+            //     this._path = null;
+            //     this._currentIndex = 0;
+            //     return;
+            // }
+            this.performAttackAnimation();
+        }
+    },
+    performAttackAnimation: function () {
+        let directX = this._directX;
+        let directY = this._directY;
+        let attackAction= res_troop.ATTACK[this._type].LEFT.ANIM;
+        let cloneAttackAction = attackAction.clone();
+        if(this._stateAnimation !== this._state)
+        {
+            this._stateAnimation = this._state;
+            cc.log("change attack action")
+            this._bodySprite.stopAllActions();
+            this._bodySprite.runAction(cloneAttackAction);
+        }
+
+
     }
 
 });
