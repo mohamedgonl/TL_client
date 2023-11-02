@@ -4,6 +4,7 @@ var BattleManager = cc.Class.extend({
         this.init();
         this._battleGraph = null;
         this.listBuildings = new Map();
+        this.listGameObjects = new Map();
         this.listTroops = new Map();
 
         this.buildingAmount = {};
@@ -28,7 +29,6 @@ var BattleManager = cc.Class.extend({
     },
 
     init: function () {
-        this.isWin = false;
         this.starAmount = 0;
         this.robbedGold = 0;
         this.robbedElixir = 0;
@@ -49,6 +49,7 @@ var BattleManager = cc.Class.extend({
 
     resetState: function () {
         this.listBuildings.clear();
+        this.listGameObjects.clear();
         this.listTroops.clear();
 
         //init map grid
@@ -230,20 +231,13 @@ var BattleManager = cc.Class.extend({
 
     //add building to list and to grid
     addBuilding: function (building) {
-
-        let posX = building._posX;
-        let posY = building._posY;
         let id = building._id;
-        let width = building._width;
-        let height = building._height;
-        let level = building._level;
         let typeBuilding = building._type;
 
-        // building.onAddIntoMapManager();
+        this.listGameObjects.set(id, building);
 
-        // add to list building {building._id: building}
-        this.listBuildings.set(id, building);
-
+        if (typeBuilding.substring(0, 3) !== 'OBS')
+            this.listBuildings.set(id, building);
         //update list storage, list mine, list builder hut
         switch (typeBuilding.substring(0, 3)) {
             case 'TOW':
@@ -271,6 +265,10 @@ var BattleManager = cc.Class.extend({
 
     getAllBuilding: function () {
         return this.listBuildings;
+    },
+
+    getAllGameObjects: function () {
+        return this.listGameObjects;
     },
 
     getTownHall: function () {
@@ -306,6 +304,16 @@ var BattleManager = cc.Class.extend({
     },
 
     onDestroyBuilding: function (building) {
+        //check if all buildings are destroyed
+        let totalDestroyed = 0;
+        for (let building of this.listBuildings.values()){
+            if (building.isDestroy())
+                totalDestroyed++;
+        }
+        if (totalDestroyed === this.listBuildings.size){
+            this.battleScene.onEndBattle();
+        }
+
         // remove from building count
         this.buildingAmount[building._type] = Math.max(this.buildingAmount[building._type] - 1, 0);
 

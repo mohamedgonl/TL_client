@@ -146,6 +146,10 @@ var BattleBuilding = BattleGameObject.extend({
         return this._level;
     },
 
+    isDestroy: function () {
+        return this._hp <= 0;
+    },
+
     onGainDamage: function (damage) {
         if (damage <= 0 || this._hp <= 0)
             return;
@@ -162,6 +166,8 @@ var BattleBuilding = BattleGameObject.extend({
     },
 
     onDestroy: function () {
+        BattleManager.getInstance().onDestroyBuilding(this);
+
         this._body.setVisible(false);
         this._shadow.setVisible(false);
         this._hpBar.setVisible(false);
