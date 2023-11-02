@@ -74,7 +74,21 @@ var BattleScene = cc.Scene.extend({
     onEndBattle: function () {
         //send action end game
         if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING) {
-            //todo: send action end
+            //send action end
+            const starAmount = BattleManager.getInstance().starAmount;
+            const robbedGold = BattleManager.getInstance().robbedGold;
+            const robbedElixir = BattleManager.getInstance().robbedElixir;
+            const trophyAmount = starAmount > 0 ? BattleManager.getInstance().winPoint : BattleManager.getInstance().losePoint;
+            const listTroops = BattleManager.getInstance().getListUsedTroops();
+            testnetwork.connector.sendEndBattle({
+                result: starAmount > 0,
+                starAmount,
+                trophyAmount,
+                robbedGold,
+                robbedElixir,
+                listTroops,
+                tick: this.tick,
+            });
 
             this.stopCountDown();
             BattleManager.getInstance().battleStatus = BATTLE_STATUS.END;

@@ -18,6 +18,7 @@ gv.CMD.GET_TRAINING_LIST = 5003;
 gv.CMD.CANCLE_TRAINING = 5004;
 gv.CMD.FIND_MATCH = 6001;
 gv.CMD.DO_ACTION = 6002;
+gv.CMD.END_BATTLE = 6003;
 
 //quyet----------------------
 gv.CMD.REMOVE_OBSTACLE = 2009;
@@ -424,6 +425,30 @@ CmdSendDoAction = fr.OutPacket.extend(
                 this.putInt(data.posX);
                 this.putInt(data.posY);
             }
+            this.updateSize();
+        }
+    })
+
+CmdSendEndBattle = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.DO_ACTION);
+        },
+        pack: function ({result, starAmount, trophyAmount, robbedGold, robbedElixir, listTroops, tick}) {
+            this.packHeader();
+            this.putInt(result);
+            this.putInt(starAmount);
+            this.putInt(trophyAmount);
+            this.putInt(robbedGold);
+            this.putInt(robbedElixir);
+            this.putInt(listTroops.length);
+            for (let troop of listTroops) {
+                this.putString(troop.type);
+                this.putInt(troop.amount);
+            }
+            this.putInt(tick);
             this.updateSize();
         }
     })

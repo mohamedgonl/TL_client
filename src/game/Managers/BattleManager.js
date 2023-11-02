@@ -178,8 +178,7 @@ var BattleManager = cc.Class.extend({
         //key is troop type, value + 1
         if (this.listUsedTroop.has(troop._type)) {
             this.listUsedTroop.set(troop._type, this.listUsedTroop.get(troop._type) + 1);
-        }
-        else
+        } else
             this.listUsedTroop.set(troop._type, 1);
     },
 
@@ -229,8 +228,7 @@ var BattleManager = cc.Class.extend({
                     for (let column = building._posX; column < building._posX + building._width; column++)
                         for (let row = building._posY; row < building._posY + building._height; row++)
                             this.findPathGrid[column][row] = 9;
-                }
-                else {
+                } else {
                     for (let column = building._posX + 1; column < building._posX + building._width - 1; column++)
                         for (let row = building._posY + 1; row < building._posY + building._height - 1; row++)
                             this.findPathGrid[column][row] = 99999;
@@ -250,8 +248,7 @@ var BattleManager = cc.Class.extend({
             //is OBS
             else {
                 for (let column = building._posX + 1; column < building._posX + building._width - 1; column++)
-                    for (let row = building._posY + 1; row < building._posY + building._height - 1; row++)
-                    {
+                    for (let row = building._posY + 1; row < building._posY + building._height - 1; row++) {
                         this.findPathGrid[column][row] = 99999;
                         this.dropTroopGrid[column][row] = 0;
                     }
@@ -339,6 +336,14 @@ var BattleManager = cc.Class.extend({
     getDropTroopGrid: function () {
         return this.dropTroopGrid;
     },
+    getListUsedTroops: function () {
+        const listTroops = []
+        for (let [troopType, amount] of this.listUsedTroop) {
+            if (amount > 0)
+                listTroops.push({type: troopType, amount})
+        }
+        return listTroops;
+    },
 
     checkValidPutBuilding: function (building, newPosX, newPosY) {
 
@@ -358,7 +363,7 @@ var BattleManager = cc.Class.extend({
     onDestroyBuilding: function (building) {
         this.buildingDestroyedPoint += building._maxHp;
 
-        this.battleScene.battleUILayer.updateDestroyPercentage(Math.floor(this.buildingDestroyedPoint * 100 / this.totalBuildingPoint) );
+        this.battleScene.battleUILayer.updateDestroyPercentage(Math.floor(this.buildingDestroyedPoint * 100 / this.totalBuildingPoint));
 
         if (!this.isDestroyedHalf && this.buildingDestroyedPoint * 2 >= this.totalBuildingPoint) {
             this.isDestroyedHalf = true;
@@ -389,8 +394,7 @@ var BattleManager = cc.Class.extend({
                 for (let row = building._posY; row < building._posY + building._height; row++)
                     // this.findPathGrid[column][row] = 0;
                     this._battleGraph.changeNodeWeight(column, row, 0)
-        }
-        else {
+        } else {
             for (let column = building._posX + 1; column < building._posX + building._width - 1; column++)
                 for (let row = building._posY + 1; row < building._posY + building._height - 1; row++)
                     // this.findPathGrid[column][row] = 0;

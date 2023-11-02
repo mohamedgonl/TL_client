@@ -124,8 +124,8 @@ testnetwork.Connector = cc.Class.extend({
                     cc.director.getRunningScene().onFindMatchFail(packet.error);
                 break;
             case gv.CMD.DO_ACTION:
-                // if (packet.error === ErrorCode.SUCCESS)
-                //     cc.director.getRunningScene().onFindMatchSuccess(packet);
+            // if (packet.error === ErrorCode.SUCCESS)
+            //     cc.director.getRunningScene().onFindMatchSuccess(packet);
         }
     },
     onReceiveTrainTroopSuccess: function (packet) {
@@ -227,8 +227,8 @@ testnetwork.Connector = cc.Class.extend({
     },
 
     onReceivedCheckBuyBuilding: function (packet) {
-        if(packet.error === 22){
-            BasicPopup.appear("KHÔNG ĐỦ CẤP NHÀ CHÍNH","Bạn cần nâng cấp nhà chính để xây thêm");
+        if (packet.error === 22) {
+            BasicPopup.appear("KHÔNG ĐỦ CẤP NHÀ CHÍNH", "Bạn cần nâng cấp nhà chính để xây thêm");
             return;
         }
 
@@ -544,6 +544,12 @@ testnetwork.Connector = cc.Class.extend({
     sendDoAction: function (data) {
         cc.log("SEND DO ACTION");
         var pk = this.gameClient.getOutPacket(CmdSendDoAction);
+        pk.pack(data);
+        this.gameClient.sendPacket(pk);
+    },
+    sendEndBattle: function (data) {
+        cc.log("SEND END BATTLE");
+        var pk = this.gameClient.getOutPacket(CmdSendEndBattle);
         pk.pack(data);
         this.gameClient.sendPacket(pk);
     },
