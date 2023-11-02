@@ -4,16 +4,16 @@
 
 
 var res = {
-    FONT : {
+    FONT: {
         FISTA: {
-                16: "res/fonts/fista_16_non.fnt"
+            16: "res/fonts/fista_16_non.fnt"
         },
-         SOJI: {
-                12: 'res/fonts/soji_12.fnt',
-                16: 'res/fonts/soji_12.fnt',
-                20: 'res/fonts/soji_20.fnt',
-                24: 'res/fonts/soji_24.fnt',
-         }
+        SOJI: {
+            12: 'res/fonts/soji_12.fnt',
+            16: 'res/fonts/soji_12.fnt',
+            20: 'res/fonts/soji_20.fnt',
+            24: 'res/fonts/soji_24.fnt',
+        }
     },
     BUTTON: {
         BACK: 'res/guis/shopping/back.png',
@@ -68,6 +68,15 @@ var res = {
         SLOT_CATEGORY: 'res/guis/shopping/slot_catalogy.png',
         SHOP: 'res/guis/shopping/nen2.png'
     },
+    TROOPS_BATTLE: {
+        ARM_1: "res/guis/icons/ARM_1_Battle.png",
+        ARM_2: "res/guis/icons/ARM_2_Battle.png",
+        ARM_3: "res/guis/icons/ARM_3_Battle.png",
+        ARM_4: "res/guis/icons/ARM_4_Battle.png",
+        ARM_5: "res/guis/icons/ARM_5_Battle.png",
+        ARM_6: "res/guis/icons/ARM_6_Battle.png",
+
+    }
 };
 
 var g_resources = [
@@ -135,15 +144,19 @@ var res_ui = {
     TROOPS_TRAINING_ITEM: "TroopTrainingItem.json",
     NOTI_POPUP: "NotiPopup.json",
     CHEAT_POPUP: "CheatPopup.json",
+    FIGHT_POPUP: "FightLayer.json",
     INFO_LAYER: "InfoLayer1.json",
     UPGRADE_POPUP: "UpgradePopup.json",
     INFO_POPUP: "InfoPopup.json",
-    BASIC_POPUP:"BasicPopup.json",
+    BASIC_POPUP: "BasicPopup.json",
     BUTTON_OF_BUILDING: "ButtonOfBuilding.json",
     ICON_HARVEST: "IconHarvest.json",
     TROOP_INFO: "TroopInfoPopup.json",
-    CLOUD_1:"res/guis/map/cloud_1.png",
-    CLOUD_2:"res/guis/map/cloud_2.png",
+    CLOUD_1: "res/guis/map/cloud_1.png",
+    CLOUD_2: "res/guis/map/cloud_2.png",
+    BATTLE_GUI: "BattleGUI.json",
+    LOADING_GUI: "Loading.json",
+    BATTLE_END: "BattleEndLayer.json",
 }
 
 var res_shop = {
@@ -216,55 +229,65 @@ var res_cf = {
     STO: "res/configs/Storage.json",
     WAL: "res/configs/Wall.json",
     TROOP: "res/configs/Troop.json",
-    BAR : "res/configs/Barrack.json"
+    BAR: "res/configs/Barrack.json"
 }
 
 var res_map = {
     SPRITE: {
         BODY: {
             BUILDER_HUT: {
-                1:"res/Buildings/builder hut/idle/image0000.png",
+                JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
+                1: "res/Buildings/builder hut/idle/image0000.png",
             },
-            TOWNHALL:{
-                1:'res/Buildings/townhall/TOW_1_1/idle/image0000.png',
+            TOWNHALL: {
+                JUNK: "res/Map/map_obj_bg/junk_mainhouse.png",
+                1: 'res/Buildings/townhall/TOW_1_1/idle/image0000.png',
             },
-            ARMY_CAMP:{
-                1:'res/Buildings/army camp/AMC_1_1/idle/image0000.png',
+            ARMY_CAMP: {
+                JUNK: "res/Map/map_obj_bg/junk_contructs_1.png",
+                1: 'res/Buildings/army camp/AMC_1_1/idle/image0000.png',
             },
-            GOLD_MINE:{
-                BOTTOM:{
+            GOLD_MINE: {
+                JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
+                BOTTOM: {
                     1: 'res/Buildings/gold mine/RES_1_1/idle/image0000.png',
                 },
-                UPPER:{
-                    1: {
-
-                    }
+                UPPER: {
+                    1: {}
                 }
             },
-            ELIXIR_MINE:{
-                BOTTOM:{
+            ELIXIR_MINE: {
+                JUNK: "res/Map/map_obj_bg/junk_elixirdrill.png",
+                BOTTOM: {
                     1: 'res/Buildings/elixir collector/RES_2_1/idle/image0000.png',
                 },
-                UPPER:{
+                UPPER: {
                     1: 'res/Buildings/elixir collector/RES_2_1/attack01',
                 }
             },
-            GOLD_STORAGE:{
+            GOLD_STORAGE: {
+                JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/gold storage/STO_1_1/idle/image0000.png",
             },
-            ELIXIR_STORAGE:{
-                1:"res/Buildings/elixir storage/STO_2_1/idle/image0000.png",
+            ELIXIR_STORAGE: {
+                JUNK: "res/Map/map_obj_bg/junk_elixirdrill.png",
+                1: "res/Buildings/elixir storage/STO_2_1/idle/image0000.png",
             },
-            CANNON:{
-                1:"res/Buildings/cannon/canon_1/idle/image0000.png"
+            CANNON: {
+                JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
+                1: "res/Buildings/cannon/canon_1/idle/image0000.png",
+                BULLET: "res/battle/cannon_bullet.png",
             },
-            BARRACK:{
-                1:"res/Buildings/barrack/BAR_1_1/idle/image0000.png"
+            BARRACK: {
+                JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
+                1: "res/Buildings/barrack/BAR_1_1/idle/image0000.png"
             },
-            WALL:{
+            WALL: {
+                JUNK: "res/Map/map_obj_bg/junk_wall.png",
                 1: "res/Buildings/wall/WAL_1_1/WAL_1_1/idle/image0000.png"
             },
-            CLAN_CASTLE:{
+            CLAN_CASTLE: {
+                JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/clan_castle/CLC_1_0/idle/image0000.png"
             },
             OBS_LINK: "res/Buildings/obstacle/OBS_",
@@ -288,8 +311,8 @@ var res_map = {
                 5: "res/Map/map_obj_bg/BG_0/5.png",
             },
             OBSTACLE: {
-                2:"res/Map/map_obj_bg/GRASS_0_2_OBS.png",
-                3:"res/Map/map_obj_bg/GRASS_0_3_OBS.png",
+                2: "res/Map/map_obj_bg/GRASS_0_2_OBS.png",
+                3: "res/Map/map_obj_bg/GRASS_0_3_OBS.png",
             },
         },
         ARROW_MOVE: {
@@ -299,14 +322,14 @@ var res_map = {
             4: "res/Map/map_obj_bg/BG/arrowmove4.png",
             5: "res/Map/map_obj_bg/BG/arrowmove5.png",
         },
-        GREEN_SQUARE:{
+        GREEN_SQUARE: {
             1: "res/Map/map_obj_bg/BG/GREEN_1.png",
             2: "res/Map/map_obj_bg/BG/GREEN_2.png",
             3: "res/Map/map_obj_bg/BG/GREEN_3.png",
             4: "res/Map/map_obj_bg/BG/GREEN_4.png",
             5: "res/Map/map_obj_bg/BG/GREEN_5.png",
         },
-        RED_SQUARE:{
+        RED_SQUARE: {
             1: "res/Map/map_obj_bg/BG/RED_1.png",
             2: "res/Map/map_obj_bg/BG/RED_2.png",
             3: "res/Map/map_obj_bg/BG/RED_3.png",
@@ -315,51 +338,73 @@ var res_map = {
         },
         PROGRESS_BAR: "res/guis/upgrade_building_gui/building_time_bar.png",
         PROGRESS_BAR_BG: "res/guis/upgrade_building_gui/building_time_bg.png",
+        BUILDING_HEALTH_BAR: "res/new/battle_gui/enemies_heal_bar.png",
+        BUILDING_HEALTH_BAR_BG: "res/new/battle_gui/bg_heal_bar.png",
+        BUILDING_EXPLOSION: {
+            1: "res/battle/explosion_1/00.png",
+            2: "res/battle/explosion_1/01.png",
+            3: "res/battle/explosion_1/02.png",
+            4: "res/battle/explosion_1/03.png",
+            5: "res/battle/explosion_1/04.png",
+            6: "res/battle/explosion_1/05.png",
+            7: "res/battle/explosion_1/06.png",
+            8: "res/battle/explosion_1/07.png",
+            9: "res/battle/explosion_1/08.png",
+            10: "res/battle/explosion_1/09.png",
+            11: "res/battle/explosion_1/10.png",
+        },
         FENCE: "res/Map/map_obj_bg/upgrading.png",
-        BUILDER:{
+        BUILDER: {
             LINK: "res/builder/run/image",
-            DOWN:{//res/builder/run/image0000.png
-                 //0000 -> 0007
+            DOWN: {//res/builder/run/image0000.png
+                //0000 -> 0007
                 1: "res/builder/run/image0000.png",
             },
-            UP:{
+            UP: {
                 //0032 -> 0039
-                1:"res/builder/run/image0032.png",
+                1: "res/builder/run/image0032.png",
             },
-            LEFT:{
+            LEFT: {
                 //0016 -> 0023
-                1:"res/builder/run/image0016.png",
+                1: "res/builder/run/image0016.png",
             },
-            DOWN_LEFT:{
+            DOWN_LEFT: {
                 //0008 -> 0015
-                1:"res/builder/run/image0008.png",
+                1: "res/builder/run/image0008.png",
             },
-            UP_LEFT:{
+            UP_LEFT: {
                 //0024 -> 0031
-                1:"res/builder/run/image0024.png",
+                1: "res/builder/run/image0024.png",
             },
-            BUILD:{
-                UP:{
+            BUILD: {
+                UP: {
                     //32 -> 39
                     //
-                    1:"res/builder/attack01/image0032.png"
+                    1: "res/builder/attack01/image0032.png"
                 }
             }
         }
     },
-    JSON:{
+    JSON: {
         OBSTACLE: "res/configs/Obstacle.json",
         RESOURCE: "res/configs/Resource.json",
         BUILDER_HUT: "res/configs/BuilderHut.json",
         TOWNHALL: "res/configs/TownHall.json",
         STORAGE: "res/configs/Storage.json",
         DEFENCE: "res/configs/Defence.json",
+        DEFENCE_BASE: "res/configs/DefenceBase.json",
         WALL: "res/configs/Wall.json",
         ARMY_CAMP: "res/configs/ArmyCamp.json",
         BARRACK: "res/configs/Barrack.json",
     }
-
 }
+
+var res_json ={
+    TROOP_BASE:"res/configs/TroopBase.json",
+    TROOP:"res/configs/Troop.json",
+}
+
+
 
 
 

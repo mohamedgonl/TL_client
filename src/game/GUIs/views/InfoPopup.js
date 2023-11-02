@@ -25,8 +25,6 @@ var InfoPopup = cc.Node.extend({
         this._super();
 
         this.building = building;
-        cc.log("building: " + building._type)
-        cc.log("building: " + building._capacityElixir)
         this.building = cc.director.getRunningScene().getMapLayer().chosenBuilding;
 
         var node = CCSUlties.parseUIFile(res_ui.INFO_POPUP);
@@ -35,11 +33,9 @@ var InfoPopup = cc.Node.extend({
         //add to attribute
         children.map(i => {
             this[i.getName()] = i;
-            cc.log(i.getName())
             let childrenOfChildren = i.getChildren();
             childrenOfChildren.map(j => {
                 this[i.getName()] [j.getName()] = j;
-                cc.log(".    ", j.getName())
             })
         })
         this.addChild(node);
@@ -146,8 +142,8 @@ var InfoPopup = cc.Node.extend({
             case "army":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.ARMY);
-                let armyTotal = ArmyManager.Instance().getMaxSpace();
-                let armyCurrent = ArmyManager.Instance().getCurrentSpace();
+                let armyTotal = ArmyManager.getInstance().getMaxSpace();
+                let armyCurrent = ArmyManager.getInstance().getCurrentSpace();
                 text.setString("Quân lính:" + armyCurrent + "/" + armyTotal);
                 break;
         }

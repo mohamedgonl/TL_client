@@ -67,16 +67,15 @@ var UpgradePopup = cc.Node.extend({
         container.btn_upgrade.setPressedActionEnabled(true);
 
         let building = this.building;
-        let priceGold = LoadManager.Instance().getConfig(building._type, building._level + 1).gold;
-        let priceElixir = LoadManager.Instance().getConfig(building._type, building._level + 1).elixir;
-        cc.log("upgrade popup: gold:" + priceGold + "elixir: " + priceElixir);
+        let priceGold = LoadManager.getInstance().getConfig(building._type, building._level + 1).gold;
+        let priceElixir = LoadManager.getInstance().getConfig(building._type, building._level + 1).elixir;
         if(priceGold)
         {
             goldIcon.setVisible(true);
             elixirIcon.setVisible(false);
             resourceText.setString(priceGold);
             //nếu không đủ tiền, hiện tiền màu đỏ
-            if(priceGold > PlayerInfoManager.Instance().getResource().gold)
+            if(priceGold > PlayerInfoManager.getInstance().getResource().gold)
             {
                 resourceText.setColor(cc.color.RED);
             }
@@ -87,15 +86,15 @@ var UpgradePopup = cc.Node.extend({
             elixirIcon.setVisible(true);
             resourceText.setString(priceElixir);
             //nếu không đủ tiền, hiện tiền màu đỏ
-            if(priceElixir > PlayerInfoManager.Instance().getResource().elixir)
+            if(priceElixir > PlayerInfoManager.getInstance().getResource().elixir)
             {
                 resourceText.setColor(cc.color.RED);
             }
         }
 
         //nếu level nhà chính không đủ thì disable button
-        let levelTownHall = MapManager.Instance().getTownHall().getLevel();
-        let levelRequire = LoadManager.Instance().getConfig(building._type, building._level + 1,"townHallLevelRequired")||1;
+        let levelTownHall = MapManager.getInstance().getTownHall().getLevel();
+        let levelRequire = LoadManager.getInstance().getConfig(building._type, building._level + 1,"townHallLevelRequired")||1;
         if(levelTownHall < levelRequire)
         {
             //label "Yêu cầu nhà chính cấp 2" and add to node_text at middle
@@ -110,7 +109,7 @@ var UpgradePopup = cc.Node.extend({
         }
 
         //set text time
-        let time = LoadManager.Instance().getConfig(building._type, building._level + 1,"buildTime");
+        let time = LoadManager.getInstance().getConfig(building._type, building._level + 1,"buildTime");
         let stringTime = Utils.getTimeString(time);
         container.text_time.setString(stringTime);
     },

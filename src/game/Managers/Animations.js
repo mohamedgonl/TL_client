@@ -34,7 +34,7 @@ var Animations = cc.Layer.extend ({
     }
 })
 
-Animations.Instance = function () {
+Animations.getInstance = function () {
     if (Animations.instance == null) {
         Animations.instance = new Animations();
         Animations.instance.retain();

@@ -8,22 +8,24 @@ var BaseMine = Building.extend({
         this._capacityGold = 0;
         this._capacityElixir = 0;
         this._currentGold = 0;
-        this._currentElixir = 0;
-    },
-    onAddIntoMapManager: function () {
-        this._super();
-        let mapManager = MapManager.Instance();
-        mapManager.addToListMine(this);
-    },
-    loadSprite: function (bodySprite, upperSprite, shadow_type, isUpperAnimation) {
-        this._super(bodySprite, upperSprite, shadow_type, isUpperAnimation);
-
-        // this._iconHarvest have bg, and bg.icon is sprite of harvest icon
+        this._currentElixir = 0;    // this._iconHarvest have bg, and bg.icon is sprite of harvest icon
         let node = CCSUlties.parseUIFile(res_ui.ICON_HARVEST);
 
         this._iconHarvest = node;
         this.addChild(this._iconHarvest, ZORDER_BUILDING_EFFECT);
         this._iconHarvest.setVisible(false);
+
+
+    },
+    onAddIntoMapManager: function () {
+        this._super();
+        let mapManager = MapManager.getInstance();
+        mapManager.addToListMine(this);
+    },
+    loadSprite: function () {
+        this._super();
+
+
     },
 
     setLastCollectTimeAndIconHarvest: function (lastCollectTime) {
@@ -47,15 +49,15 @@ var BaseMine = Building.extend({
         }
 
         //if can harvest >= 1% of capacity , show icon
-        let timeNow = TimeManager.Instance().getCurrentTimeInSecond();
+        let timeNow = TimeManager.getInstance().getCurrentTimeInSecond();
 
         let time = timeNow - this._lastCollectTime;
 
-        let productivity = LoadManager.Instance().getConfig(this._type, this._level, "productivity");
+        let productivity = LoadManager.getInstance().getConfig(this._type, this._level, "productivity");
 
         let harvestAmount = Math.floor(time * productivity / 3600);
 
-        let capacity = LoadManager.Instance().getConfig(this._type, this._level, "capacity");
+        let capacity = LoadManager.getInstance().getConfig(this._type, this._level, "capacity");
         if (harvestAmount >= capacity / 50) {
             this._showIconHarvest = true;
             this._iconHarvest.setVisible(true);
@@ -67,12 +69,12 @@ var BaseMine = Building.extend({
     harvest: function (lastCollectTime,gold,elixir) {
 
         this._lastCollectTime = lastCollectTime;
-        let oldElixir = PlayerInfoManager.Instance().getResource().elixir;
-        PlayerInfoManager.Instance().setResource({elixir:elixir});
+        let oldElixir = PlayerInfoManager.getInstance().getResource().elixir;
+        PlayerInfoManager.getInstance().setResource({elixir:elixir});
         let changesElixir = elixir - oldElixir;
 
-        let oldGold = PlayerInfoManager.Instance().getResource().gold;
-        PlayerInfoManager.Instance().setResource({gold:gold});
+        let oldGold = PlayerInfoManager.getInstance().getResource().gold;
+        PlayerInfoManager.getInstance().setResource({gold:gold});
         let changesGold = gold - oldGold;
 
 
@@ -100,7 +102,7 @@ var BaseMine = Building.extend({
         )));
 
         //if storage is full, harvest a part. If timeNow - lastCollectTime > offsetTime, harvest a part
-        let timeNow = TimeManager.Instance().getCurrentTimeInSecond();
+        let timeNow = TimeManager.getInstance().getCurrentTimeInSecond();
         if(timeNow - this._lastCollectTime > OFFSET_HARVEST)
         {
 

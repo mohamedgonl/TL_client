@@ -5,8 +5,6 @@ var InfoLayer = cc.Layer.extend({
     ctor: function () {
         this._super();
         this.init();
-        //size
-        cc.log("InfoLayer ctor:::::::::::::::", JSON.stringify(this.getContentSize()));
 
     },
 
@@ -35,16 +33,9 @@ var InfoLayer = cc.Layer.extend({
                 })
             })
         })
-        //scale by width
-        // node.setScaleX(cc.winSize.width/node.getContentSize().width);
-        // node.setScaleY(cc.winSize.height/node.getContentSize().height);
 
-        // node.width = cc.winSize.width;
-        // node.height = cc.winSize.height;
-
-        // cc.log("================",JSON.stringify(node.getContentSize()));
         this.addChild(node);
-        this.loadResources();
+        // this.loadResources();
         this.addEventListener();
 
         //container for button when select building
@@ -71,13 +62,18 @@ var InfoLayer = cc.Layer.extend({
         // this.addChild(btnCheat);
 
         this.btn_setting.addTouchEventListener(this.onClickBtnCheat, this);
+        this.btn_train.addTouchEventListener(this.onClickBtnTrain, this);
+    },
+    onClickBtnTrain: function (sender, type) {
+        if (type === ccui.Widget.TOUCH_ENDED) {
+
+        }
     },
 
     onClickBtnCheat: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
             let gameScene = cc.director.getRunningScene();
             let popUpLayer = gameScene.getPopUpLayer();
-            cc.log("aaa")
             let cheatPopup = new CheatPopup({
                 acceptCallBack: (data) => {
                     testnetwork.connector.sendCheatResource(data);
@@ -140,7 +136,7 @@ var InfoLayer = cc.Layer.extend({
             if (type != null) {
                 if (type === "elixir")
                     node.type.setTexture(res.ICON.ELIXIR);
-                else if(type === "gold")
+                else if (type === "gold")
                     node.type.setTexture(res.ICON.GOLD);
                 else
                     node.type.setTexture(res.ICON.GEM)
@@ -150,8 +146,7 @@ var InfoLayer = cc.Layer.extend({
 
             //status
 
-            if(status ===1 )
-            {
+            if (status === 1) {
                 node.amount.setColor(cc.color.RED);
             }
 
@@ -173,8 +168,7 @@ var InfoLayer = cc.Layer.extend({
         imageDisabled.addChild(node3);
 
         var button = new cc.MenuItemSprite(image, imagePressed, imageDisabled, callback, this);
-        if(status ===3)
-        {
+        if (status === 3) {
             //disable
             button.setEnabled(false);
             //set to gray
@@ -227,13 +221,22 @@ var InfoLayer = cc.Layer.extend({
 
     //after init UI, get all resources to display
     loadResources: function () {
-        var resource = PlayerInfoManager.Instance().resource;
-        var maxResource = PlayerInfoManager.Instance().maxResource;
-        var builder = PlayerInfoManager.Instance().builder;
-        var info = PlayerInfoManager.Instance().info;
-        let armyCurrent = ArmyManager.Instance().getCurrentSpace();
-        let armyMax = ArmyManager.Instance().getMaxSpace();
-        // var army = PlayerInfoManager.Instance().army;
+        var resource = PlayerInfoManager.getInstance().resource;
+        var maxResource = PlayerInfoManager.getInstance().maxResource;
+        var builder = PlayerInfoManager.getInstance().builder;
+        var info = PlayerInfoManager.getInstance().info;
+        let armyCurrent = ArmyManager.getInstance().getCurrentSpace();
+        let armyMax = ArmyManager.getInstance().getMaxSpace();
+
+        //cc.log all above
+        cc.log("resource: " + JSON.stringify(resource));
+        cc.log("maxResource: " + JSON.stringify(maxResource));
+        cc.log("builder: " + JSON.stringify(builder));
+        cc.log("info: " + JSON.stringify(info));
+        cc.log("army: " + JSON.stringify({current: armyCurrent, max: armyMax}));
+
+
+        // var army = PlayerInfoManager.getInstance().army;
         //update UI
         this.updateUI({
             resource: resource,
@@ -246,7 +249,7 @@ var InfoLayer = cc.Layer.extend({
 
 //add event listener to button
     addEventListener: function () {
-        this.addTouchEventForButton(this.btn_attack, this.onTouchArmyAdd);
+        this.addTouchEventForButton(this.btn_attack, this.onTouchFight);
         this.addTouchEventForButton(this.btn_shop, this.onTouchShop);
         this.addTouchEventForButton(this.btn_setting, this.onTouchSetting);
         this.addTouchEventForButton(this.g_container.btn_add, this.onTouchGAdd);
@@ -267,7 +270,7 @@ var InfoLayer = cc.Layer.extend({
     onTouchArmyAdd: function (sender, type) {
         if (type === 2) {
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
-            if(ArmyManager.Instance().getBarrackList().length){
+            if (ArmyManager.getInstance().getBarrackList().length) {
                 if (popUpLayer.isVisible()) {
                     popUpLayer.disappear(POPUP_IDS.TRAIN);
                 } else {
@@ -289,6 +292,17 @@ var InfoLayer = cc.Layer.extend({
         }
     },
 
+    onTouchFight: function (sender, type) {
+        if (type === 2) {
+            let popUplayer = cc.director.getRunningScene().getPopUpLayer();
+            if (popUplayer.isVisible()) {
+                popUplayer.disappear(POPUP_IDS.FIGHT);
+            } else {
+                popUplayer.appear(POPUP_IDS.FIGHT);
+            }
+        }
+    },
+
     updateUI: function (data) {
         if (data == null) return;
 
@@ -297,13 +311,17 @@ var InfoLayer = cc.Layer.extend({
             let res = data.resource;
             if (res.gold != null) {
                 this.gold_container.getChildByName("text").setString(res.gold);
-                let barPercent = res.gold / PlayerInfoManager.Instance().getMaxResource().gold;
-                this.gold_container.bar_bg.bar.setPercent(barPercent * 100);
+                let barPercent = res.gold / PlayerInfoManager.getInstance().getMaxResource().gold;
+
+                if(barPercent >=0 && barPercent <=1)
+                    this.gold_container.bar_bg.bar.setPercent(barPercent * 100);
             }
             if (res.elixir != null) {
                 this.elixir_container.text.setString(res.elixir);
-                let barPercent = res.elixir / PlayerInfoManager.Instance().getMaxResource().elixir;
-                this.elixir_container.bar_bg.bar.setPercent(barPercent * 100);
+                let barPercent = res.elixir / PlayerInfoManager.getInstance().getMaxResource().elixir;
+
+                if(barPercent >=0 && barPercent <=1)
+                    this.elixir_container.bar_bg.bar.setPercent(barPercent * 100);
             }
             if (res.gem != null) {
                 this.g_container.text.setString(res.gem);
@@ -321,12 +339,12 @@ var InfoLayer = cc.Layer.extend({
         if (data.maxResource != null) {
             if (data.maxResource.gold != null) {
                 this.gold_container.text_max.setString("Tối đa:" + data.maxResource.gold);
-                let barPercent = PlayerInfoManager.Instance().getResource().gold / data.maxResource.gold;
+                let barPercent = PlayerInfoManager.getInstance().getResource().gold / data.maxResource.gold;
                 this.gold_container.bar_bg.bar.setPercent(barPercent * 100);
             }
             if (data.maxResource.elixir != null) {
                 this.elixir_container.text_max.setString("Tối đa:" + data.maxResource.elixir);
-                let barPercent = PlayerInfoManager.Instance().getResource().elixir / data.maxResource.elixir;
+                let barPercent = PlayerInfoManager.getInstance().getResource().elixir / data.maxResource.elixir;
                 this.elixir_container.bar_bg.bar.setPercent(barPercent * 100);
             }
         }
@@ -344,22 +362,19 @@ var InfoLayer = cc.Layer.extend({
     onSelectBuilding: function (event) {
         let id = event.getUserData();
         cc.log("onSelectBuilding::::::::::::::::" + id)
-        let building = MapManager.Instance().getBuildingById(id);
+        let building = MapManager.getInstance().getBuildingById(id);
 
         //rename nameBuilding
         //if building is start with OBS
         if (building._type.startsWith("OBS")) {
             //get gold and elixir of building
-            let priceGold = LoadManager.Instance().getConfig(building._type, building._level, "gold");
-            let priceElixir = LoadManager.Instance().getConfig(building._type, building._level, "elixir");
-            if(priceGold !=null)
-            {
+            let priceGold = LoadManager.getInstance().getConfig(building._type, building._level, "gold");
+            let priceElixir = LoadManager.getInstance().getConfig(building._type, building._level, "elixir");
+            if (priceGold != null) {
                 this.button_container.nameBuilding.setString("Vật cản");
-            }
-            else
+            } else
                 this.button_container.nameBuilding.setString("Cây cối");
-        }
-        else
+        } else
             this.button_container.nameBuilding.setString(BuildingInfo[building._type].name);
         this.button_container.setVisible(true);
         //test
@@ -372,13 +387,6 @@ var InfoLayer = cc.Layer.extend({
 
 });
 
-InfoLayer.Instance = function () {
-    if (!InfoLayer.instance) {
-        InfoLayer.instance = new InfoLayer();
-        InfoLayer.instance.retain();
-    }
-    return InfoLayer.instance;
-}
 
 /*
 gold_container
@@ -421,4 +429,5 @@ btn_attack
 btn_shop
     text
 btn_setting
+btn_train
 */

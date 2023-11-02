@@ -7,7 +7,6 @@ var ButtonOfBuilding = cc.Sprite.extend({
       //add to attribute
       children.map(i => {
          this[i.getName()] = i;
-         cc.log(i.getName())
          let childrenOfChildren = i.getChildren();
          childrenOfChildren.map(j => {
             this[i.getName()] [j.getName()] = j;

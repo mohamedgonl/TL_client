@@ -18,28 +18,11 @@
         <iOS_Target Value="NewCocosProject-mobile" />
         <iOS_BundleID Value="" />
         <Platform Value="None" />
-        <RunPlatform Value="Windows" />
+        <RunPlatform Value="None" />
         <FrameworkVersion Value="cocos2d-x-3.10" />
         <IsDebugKeystore Value="True" />
-        <KeystorePassword Value="" />
-        <KeystoreAliasName Value="" />
-        <KeystoreAliasPassword Value="" />
         <EnableSourceMap Value="False" />
         <EnableHTML5Advanced Value="False" />
-      </Value>
-    </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="TroopInfoPopup.csd" />
-          <FilePathData Path="InfoPopup.csd" />
-          <FilePathData Path="ItemInfoPopup.csd" />
-          <FilePathData Path="NotiPopup.csd" />
-          <FilePathData Path="InfoLayer1.csd" />
-          <FilePathData Path="Layer1.csd" />
-          <FilePathData Path="UpgradePopup.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="InfoPopup.csd" />
       </Value>
     </Item>
   </Properties>

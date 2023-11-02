@@ -15,14 +15,14 @@ var Troop = cc.Node.extend({
         this.troop.setAnchorPoint(0.5, 0.5);
         this.troop.setScale(TroopConfig[cfgId].scale);
 
-        this.armyCamp = ArmyManager.Instance().getArmyCampList()[armyCampIndex];
+        this.armyCamp = ArmyManager.getInstance().getArmyCampList()[armyCampIndex];
         let mapLayer = cc.director.getRunningScene().getMapLayer();
 
         let start;
         let end = mapLayer.getMapPosFromGridPos({x: this.armyCamp._posX, y: this.armyCamp._posY}, true, false);
         cc.log("INIT END ::: " + JSON.stringify(end) + " ARMY ::: " + JSON.stringify({x: this.armyCamp._posX, y: this.armyCamp._posY}))
         if (barrackIndex >= 0 && barrackIndex !== null) {
-            let barrack = ArmyManager.Instance().getBarrackList()[barrackIndex];
+            let barrack = ArmyManager.getInstance().getBarrackList()[barrackIndex];
             start = mapLayer.getMapPosFromGridPos({x: barrack._posX, y: barrack._posY}, true);
             this.troop.setPosition(barrack.getPosition().x + 23, barrack.getPosition().y - 25);
         } else {
@@ -116,8 +116,8 @@ var Troop = cc.Node.extend({
 
     handleMapChange: function (event) {
         cc.log("GRID MAP CHANGED!" + JSON.stringify(event));
-        const Algorithm = AlgorithmImplement.Instance();
-        Algorithm.setGridMapStar(MapManager.Instance().mapGrid);
+        const Algorithm = AlgorithmImplement.getInstance();
+        Algorithm.setGridMapStar(MapManager.getInstance().mapGrid);
         let mapLayer = cc.director.getRunningScene().getMapLayer();
         if (event.getUserData().buildingId === this.armyCamp.getId()) {
             this.troop.stopAllActions();
@@ -174,9 +174,9 @@ var Troop = cc.Node.extend({
         let start = mapLayer.getGridPosFromMapPos(origin);
         let end = mapLayer.getGridPosFromMapPos(target);
 
-        const Algorithm = AlgorithmImplement.Instance();
+        const Algorithm = AlgorithmImplement.getInstance();
         if (!Algorithm._gridMapAStar) {
-            Algorithm.setGridMapStar(MapManager.Instance().mapGrid)
+            Algorithm.setGridMapStar(MapManager.getInstance().mapGrid)
         }
 
         let randomX, randomY;

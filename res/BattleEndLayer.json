@@ -1,0 +1,1312 @@
+{
+  "ID": "c55f6f4b-13ef-4863-9eb0-c5c823d11be3",
+  "Version": "3.10.0.0",
+  "Name": "BattleEndLayer",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 154,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/nen_duoi.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 568.0,
+              "Y": 320.0
+            },
+            "Scale": {
+              "ScaleX": 1.4336,
+              "ScaleY": 1.3339
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.5
+            },
+            "PreSize": {
+              "X": 0.0405,
+              "Y": 0.0719
+            },
+            "LeftMargin": 545.0,
+            "RightMargin": 545.0,
+            "TopMargin": 297.0,
+            "BottomMargin": 297.0,
+            "Tag": 165,
+            "ActionTag": 2006885090,
+            "Size": {
+              "X": 800.0,
+              "Y": 480.0
+            },
+            "Name": "Sprite_11",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/nen_trong_1.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 568.0,
+              "Y": 460.0
+            },
+            "Scale": {
+              "ScaleX": 1.2,
+              "ScaleY": 1.2
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.7188
+            },
+            "PreSize": {
+              "X": 0.0405,
+              "Y": 0.0719
+            },
+            "LeftMargin": 545.0,
+            "RightMargin": 545.0,
+            "TopMargin": 157.0,
+            "BottomMargin": 437.0,
+            "Tag": 164,
+            "ActionTag": 1261484970,
+            "Size": {
+              "X": 497.0,
+              "Y": 511.0
+            },
+            "Name": "spin_bg",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/bong.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 568.0,
+              "Y": 320.0
+            },
+            "Scale": {
+              "ScaleX": 1.43,
+              "ScaleY": 1.5
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.5
+            },
+            "PreSize": {
+              "X": 0.0405,
+              "Y": 0.0719
+            },
+            "LeftMargin": 545.0,
+            "RightMargin": 545.0,
+            "TopMargin": 297.0,
+            "BottomMargin": 297.0,
+            "Tag": 157,
+            "ActionTag": 2065229068,
+            "Size": {
+              "X": 800.0,
+              "Y": 424.0
+            },
+            "Name": "bong_3",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/bang_ron.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 568.0,
+              "Y": 510.0
+            },
+            "Scale": {
+              "ScaleX": 1.5,
+              "ScaleY": 1.5
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.7969
+            },
+            "PreSize": {
+              "X": 0.0405,
+              "Y": 0.0719
+            },
+            "LeftMargin": 545.0,
+            "RightMargin": 545.0,
+            "TopMargin": 107.0,
+            "BottomMargin": 487.0,
+            "Tag": 158,
+            "ActionTag": 1740606672,
+            "Size": {
+              "X": 481.0,
+              "Y": 79.0
+            },
+            "Name": "Sprite_4",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/thang.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 568.0,
+              "Y": 470.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.7344
+            },
+            "PreSize": {
+              "X": 0.0405,
+              "Y": 0.0719
+            },
+            "LeftMargin": 545.0,
+            "RightMargin": 545.0,
+            "TopMargin": 147.0,
+            "BottomMargin": 447.0,
+            "Tag": 159,
+            "ActionTag": -311739299,
+            "Size": {
+              "X": 165.0,
+              "Y": 79.0
+            },
+            "Name": "icon_win",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/thua.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 568.0,
+              "Y": 470.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.7344
+            },
+            "PreSize": {
+              "X": 0.0405,
+              "Y": 0.0719
+            },
+            "LeftMargin": 545.0,
+            "RightMargin": 545.0,
+            "TopMargin": 147.0,
+            "BottomMargin": 447.0,
+            "Tag": 886,
+            "ActionTag": 137573285,
+            "Size": {
+              "X": 149.0,
+              "Y": 63.0
+            },
+            "Name": "icon_lose",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/sao_den.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 568.0,
+              "Y": 575.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.8984
+            },
+            "PreSize": {
+              "X": 0.0405,
+              "Y": 0.0719
+            },
+            "LeftMargin": 545.0,
+            "RightMargin": 545.0,
+            "TopMargin": 42.0,
+            "BottomMargin": 552.0,
+            "Tag": 160,
+            "ActionTag": -235735144,
+            "Size": {
+              "X": 106.0,
+              "Y": 107.0
+            },
+            "Name": "star2_bg",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/sao_den_2.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 468.0,
+              "Y": 550.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.412,
+              "Y": 0.8594
+            },
+            "PreSize": {
+              "X": 0.0405,
+              "Y": 0.0719
+            },
+            "LeftMargin": 445.0,
+            "RightMargin": 645.0,
+            "TopMargin": 67.0,
+            "BottomMargin": 527.0,
+            "Tag": 161,
+            "ActionTag": -307590416,
+            "Size": {
+              "X": 86.0,
+              "Y": 89.0
+            },
+            "Name": "star1_bg",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/sao_den_2.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 668.0,
+              "Y": 550.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.588,
+              "Y": 0.8594
+            },
+            "PreSize": {
+              "X": 0.0405,
+              "Y": 0.0719
+            },
+            "LeftMargin": 645.0,
+            "RightMargin": 445.0,
+            "TopMargin": 67.0,
+            "BottomMargin": 527.0,
+            "Tag": 162,
+            "ActionTag": -624601117,
+            "Size": {
+              "X": 86.0,
+              "Y": 89.0
+            },
+            "Name": "star3_bg",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FontSize": 14,
+            "ButtonText": "",
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
+            "DisabledFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Disable.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/button.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/button.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 11,
+            "Scale9Width": 95,
+            "Scale9Height": 30,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 568.0,
+              "Y": 70.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.1094
+            },
+            "PreSize": {
+              "X": 0.11,
+              "Y": 0.0812
+            },
+            "LeftMargin": 505.5,
+            "RightMargin": 505.5,
+            "TopMargin": 544.0,
+            "BottomMargin": 44.0,
+            "Tag": 882,
+            "ActionTag": -1295058488,
+            "Size": {
+              "X": 125.0,
+              "Y": 52.0
+            },
+            "Name": "button_home",
+            "ctype": "ButtonObjectData"
+          },
+          {
+            "LabelText": "Bạn nhận được:",
+            "LabelBMFontFile_CNB": {
+              "Type": "Normal",
+              "Path": "fonts/soji_16.fnt",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 447.8013,
+              "Y": 420.5541
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.3942,
+              "Y": 0.6571
+            },
+            "PreSize": {
+              "X": 0.1373,
+              "Y": 0.0391
+            },
+            "LeftMargin": 369.8013,
+            "RightMargin": 610.1987,
+            "TopMargin": 206.9459,
+            "BottomMargin": 408.0541,
+            "Tag": 166,
+            "ActionTag": -1653874692,
+            "Size": {
+              "X": 156.0,
+              "Y": 25.0
+            },
+            "Name": "BitmapFontLabel_1",
+            "ctype": "TextBMFontObjectData"
+          },
+          {
+            "LabelText": "VỀ NHÀ",
+            "LabelBMFontFile_CNB": {
+              "Type": "Normal",
+              "Path": "fonts/soji_20.fnt",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 568.0,
+              "Y": 70.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.1094
+            },
+            "PreSize": {
+              "X": 0.081,
+              "Y": 0.05
+            },
+            "LeftMargin": 522.0,
+            "RightMargin": 522.0,
+            "TopMargin": 554.0,
+            "BottomMargin": 54.0,
+            "Tag": 168,
+            "ActionTag": -1071562990,
+            "Size": {
+              "X": 92.0,
+              "Y": 32.0
+            },
+            "Name": "text_button_home",
+            "ctype": "TextBMFontObjectData"
+          },
+          {
+            "LabelText": "Quân đã sử dụng:",
+            "LabelBMFontFile_CNB": {
+              "Type": "Normal",
+              "Path": "fonts/soji_16.fnt",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 457.0341,
+              "Y": 235.1645
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.4023,
+              "Y": 0.3674
+            },
+            "PreSize": {
+              "X": 0.1558,
+              "Y": 0.0391
+            },
+            "LeftMargin": 368.5341,
+            "RightMargin": 590.4659,
+            "TopMargin": 392.3355,
+            "BottomMargin": 222.6645,
+            "Tag": 169,
+            "ActionTag": -633792997,
+            "Size": {
+              "X": 177.0,
+              "Y": 25.0
+            },
+            "Name": "BitmapFontLabel_3",
+            "ctype": "TextBMFontObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/dau_tim.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 500.0,
+              "Y": 330.0
+            },
+            "Scale": {
+              "ScaleX": 1.2,
+              "ScaleY": 1.2
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.4401,
+              "Y": 0.5156
+            },
+            "PreSize": {
+              "X": 0.0405,
+              "Y": 0.0719
+            },
+            "LeftMargin": 477.0,
+            "RightMargin": 613.0,
+            "TopMargin": 287.0,
+            "BottomMargin": 307.0,
+            "Tag": 170,
+            "ActionTag": 816986569,
+            "Size": {
+              "X": 24.0,
+              "Y": 32.0
+            },
+            "Name": "Sprite_13",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/cup.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 500.0,
+              "Y": 270.0
+            },
+            "Scale": {
+              "ScaleX": 1.2,
+              "ScaleY": 1.2
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.4401,
+              "Y": 0.4219
+            },
+            "PreSize": {
+              "X": 0.0405,
+              "Y": 0.0719
+            },
+            "LeftMargin": 477.0,
+            "RightMargin": 613.0,
+            "TopMargin": 347.0,
+            "BottomMargin": 247.0,
+            "Tag": 171,
+            "ActionTag": -341091274,
+            "Size": {
+              "X": 32.0,
+              "Y": 34.0
+            },
+            "Name": "cup_14",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/tien.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 500.0,
+              "Y": 385.0
+            },
+            "Scale": {
+              "ScaleX": 1.2,
+              "ScaleY": 1.2
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.4401,
+              "Y": 0.6016
+            },
+            "PreSize": {
+              "X": 0.0405,
+              "Y": 0.0719
+            },
+            "LeftMargin": 477.0,
+            "RightMargin": 613.0,
+            "TopMargin": 232.0,
+            "BottomMargin": 362.0,
+            "Tag": 172,
+            "ActionTag": 1019865862,
+            "Size": {
+              "X": 28.0,
+              "Y": 30.0
+            },
+            "Name": "tien_15",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/doan_thang.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 568.0,
+              "Y": 360.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.5625
+            },
+            "PreSize": {
+              "X": 0.0405,
+              "Y": 0.0719
+            },
+            "LeftMargin": 545.0,
+            "RightMargin": 545.0,
+            "TopMargin": 257.0,
+            "BottomMargin": 337.0,
+            "Tag": 173,
+            "ActionTag": 27442124,
+            "Size": {
+              "X": 366.0,
+              "Y": 3.0
+            },
+            "Name": "Sprite_16",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/doan_thang.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 568.0,
+              "Y": 300.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5,
+              "Y": 0.4688
+            },
+            "PreSize": {
+              "X": 0.0405,
+              "Y": 0.0719
+            },
+            "LeftMargin": 545.0,
+            "RightMargin": 545.0,
+            "TopMargin": 317.0,
+            "BottomMargin": 277.0,
+            "Tag": 174,
+            "ActionTag": -572895666,
+            "Size": {
+              "X": 366.0,
+              "Y": 3.0
+            },
+            "Name": "Sprite_17",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "LabelText": "2.000",
+            "LabelBMFontFile_CNB": {
+              "Type": "Normal",
+              "Path": "fonts/soji_20.fnt",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 585.2557,
+              "Y": 385.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5152,
+              "Y": 0.6016
+            },
+            "PreSize": {
+              "X": 0.0766,
+              "Y": 0.05
+            },
+            "LeftMargin": 541.7557,
+            "RightMargin": 507.2443,
+            "TopMargin": 239.0,
+            "BottomMargin": 369.0,
+            "Tag": 175,
+            "ActionTag": -1925139772,
+            "Size": {
+              "X": 87.0,
+              "Y": 32.0
+            },
+            "Name": "text_gold",
+            "ctype": "TextBMFontObjectData"
+          },
+          {
+            "LabelText": "2.000",
+            "LabelBMFontFile_CNB": {
+              "Type": "Normal",
+              "Path": "fonts/soji_20.fnt",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 588.5859,
+              "Y": 330.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5181,
+              "Y": 0.5156
+            },
+            "PreSize": {
+              "X": 0.0766,
+              "Y": 0.05
+            },
+            "LeftMargin": 545.0859,
+            "RightMargin": 503.9141,
+            "TopMargin": 294.0,
+            "BottomMargin": 314.0,
+            "Tag": 176,
+            "ActionTag": -1536213681,
+            "Size": {
+              "X": 87.0,
+              "Y": 32.0
+            },
+            "Name": "text_elixir",
+            "ctype": "TextBMFontObjectData"
+          },
+          {
+            "LabelText": "-10",
+            "LabelBMFontFile_CNB": {
+              "Type": "Normal",
+              "Path": "fonts/soji_20.fnt",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 587.5022,
+              "Y": 270.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5172,
+              "Y": 0.4219
+            },
+            "PreSize": {
+              "X": 0.0423,
+              "Y": 0.05
+            },
+            "LeftMargin": 563.5022,
+            "RightMargin": 524.4978,
+            "TopMargin": 354.0,
+            "BottomMargin": 254.0,
+            "Tag": 177,
+            "ActionTag": 796072111,
+            "Size": {
+              "X": 48.0,
+              "Y": 32.0
+            },
+            "Name": "text_trophy",
+            "ctype": "TextBMFontObjectData"
+          },
+          {
+            "AnchorPoint": {},
+            "Position": {
+              "X": 566.917,
+              "Y": 162.5206
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.499,
+              "Y": 0.2539
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 566.917,
+            "RightMargin": 569.083,
+            "TopMargin": 477.4794,
+            "BottomMargin": 162.5206,
+            "Tag": 866,
+            "Children": [
+              {
+                "FileData": {
+                  "Type": "Default",
+                  "Path": "Default/Sprite.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Scale": {
+                  "ScaleX": 1.5,
+                  "ScaleY": 1.5
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -23.0,
+                "RightMargin": -23.0,
+                "TopMargin": -23.0,
+                "BottomMargin": -23.0,
+                "Tag": 879,
+                "ActionTag": 842240576,
+                "Size": {
+                  "X": 46.0,
+                  "Y": 46.0
+                },
+                "Name": "slot_troop_item",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "ket_thuc_tran/Icon_nho_nhat/1.png",
+                  "Plist": ""
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Scale": {
+                  "ScaleX": 1.5,
+                  "ScaleY": 1.5
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -23.0,
+                "RightMargin": -23.0,
+                "TopMargin": -23.0,
+                "BottomMargin": -23.0,
+                "Tag": 880,
+                "ActionTag": 815701894,
+                "Size": {
+                  "X": 43.0,
+                  "Y": 41.0
+                },
+                "Name": "image_troop_item",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "LabelText": "x2",
+                "LabelBMFontFile_CNB": {
+                  "Type": "Normal",
+                  "Path": "fonts/soji_16.fnt",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 0.0,
+                  "Y": 25.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -17.5,
+                "RightMargin": -17.5,
+                "TopMargin": -37.5,
+                "BottomMargin": 12.5,
+                "Tag": 881,
+                "ActionTag": -544511060,
+                "Size": {
+                  "X": 35.0,
+                  "Y": 25.0
+                },
+                "Name": "amount_troop_item",
+                "ctype": "TextBMFontObjectData"
+              }
+            ],
+            "ActionTag": -662186848,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "node_troop_item",
+            "ctype": "SingleNodeObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/sao_lon.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 575.0,
+              "Y": 580.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5062,
+              "Y": 0.9062
+            },
+            "PreSize": {
+              "X": 0.0405,
+              "Y": 0.0719
+            },
+            "LeftMargin": 552.0,
+            "RightMargin": 538.0,
+            "TopMargin": 37.0,
+            "BottomMargin": 557.0,
+            "Tag": 883,
+            "ActionTag": -269366098,
+            "Size": {
+              "X": 106.0,
+              "Y": 107.0
+            },
+            "Name": "star2_win",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/sao_nho.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 475.0,
+              "Y": 555.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.4181,
+              "Y": 0.8672
+            },
+            "PreSize": {
+              "X": 0.0405,
+              "Y": 0.0719
+            },
+            "LeftMargin": 452.0,
+            "RightMargin": 638.0,
+            "TopMargin": 62.0,
+            "BottomMargin": 532.0,
+            "Tag": 884,
+            "ActionTag": -243811454,
+            "Size": {
+              "X": 86.0,
+              "Y": 89.0
+            },
+            "Name": "star1_win",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "ket_thuc_tran/sao_nho.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 675.0,
+              "Y": 555.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5942,
+              "Y": 0.8672
+            },
+            "PreSize": {
+              "X": 0.0405,
+              "Y": 0.0719
+            },
+            "LeftMargin": 652.0,
+            "RightMargin": 438.0,
+            "TopMargin": 62.0,
+            "BottomMargin": 532.0,
+            "Tag": 885,
+            "ActionTag": 1684070191,
+            "Size": {
+              "X": 86.0,
+              "Y": 89.0
+            },
+            "Name": "star3_win",
+            "ctype": "SpriteObjectData"
+          }
+        ],
+        "Size": {
+          "X": 1136.0,
+          "Y": 640.0
+        },
+        "Name": "Layer",
+        "ctype": "LayerObjectData"
+      },
+      "UsedResources": [
+        "Default/Button_Disable.png",
+        "Default/Sprite.png",
+        "fonts/soji_16.fnt",
+        "fonts/soji_16.png",
+        "fonts/soji_20.fnt",
+        "fonts/soji_20.png",
+        "ket_thuc_tran/bang_ron.png",
+        "ket_thuc_tran/bong.png",
+        "ket_thuc_tran/button.png",
+        "ket_thuc_tran/cup.png",
+        "ket_thuc_tran/dau_tim.png",
+        "ket_thuc_tran/doan_thang.png",
+        "ket_thuc_tran/Icon_nho_nhat/1.png",
+        "ket_thuc_tran/nen_duoi.png",
+        "ket_thuc_tran/nen_trong_1.png",
+        "ket_thuc_tran/sao_den.png",
+        "ket_thuc_tran/sao_den_2.png",
+        "ket_thuc_tran/sao_lon.png",
+        "ket_thuc_tran/sao_nho.png",
+        "ket_thuc_tran/thang.png",
+        "ket_thuc_tran/thua.png",
+        "ket_thuc_tran/tien.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Layer"
+}

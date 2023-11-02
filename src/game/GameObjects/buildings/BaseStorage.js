@@ -8,24 +8,31 @@ var BaseStorage = Building.extend({
         this._currentElixir = 0;
 
         //set capacity
-        this._capacityGold = 0;
-        this._capacityElixir = 0;
-        let config = LoadManager.Instance().getConfig(this._type,this._level);
-        this.setCapacity(config.capacity);
 
-        //listen event EVENT_NAMES.RESOURCE_CHANGED to update sprite
-        cc.eventManager.addListener({
-            event: cc.EventListener.CUSTOM,
-            eventName: EVENT_NAMES.RESOURCE_CHANGED,
-            callback: this.updateSprite.bind(this)
-        }, this);
+
+        //if in build, capacity = 0
+
+        if(level == 1 && status == 1)
+        {
+            this._capacityGold = 0;
+            this._capacityElixir = 0;
+        }
+        else
+        {
+            let config = LoadManager.getInstance().getConfig(this._type,this._level);
+            this.setCapacity(config.capacity);
+        }
+
+
+
+
 
     },
 
     onAddIntoMapManager: function () {
         this._super();
-        let mapManager = MapManager.Instance();
-        let playerInfoManager = PlayerInfoManager.Instance();
+        let mapManager = MapManager.getInstance();
+        let playerInfoManager = PlayerInfoManager.getInstance();
 
         mapManager.addToListStorage(this);
 
@@ -39,6 +46,17 @@ var BaseStorage = Building.extend({
                 break;
         }
     },
+    onAddIntoMapLayer: function () {
+        this._super();
+        this.updateSprite();
+        //listen event EVENT_NAMES.RESOURCE_CHANGED to update sprite
+        cc.eventManager.addListener({
+            event: cc.EventListener.CUSTOM,
+            eventName: EVENT_NAMES.RESOURCE_CHANGED,
+            callback: this.updateSprite.bind(this)
+        }, this);
+
+    },
 
     //get capacity , if building, return 0, if idle or upgrade, return capacity
     getCapacity: function () {
@@ -50,38 +68,20 @@ var BaseStorage = Building.extend({
             }
         }
         return {
-            gold: this._capacityGold,
-            elixir: this._capacityElixir
+            gold: this._capacityGold||0,
+            elixir: this._capacityElixir||0
         }
     },
 
     getCurrentAmount: function () {
         return {
-            gold: this._currentGold,
-            elixir: this._currentElixir
+            gold: this._currentGold||0,
+            elixir: this._currentElixir||0
         }
     },
 
-    completeProcess: function () {
-        this._super();
-        let playerInfoManager = PlayerInfoManager.Instance();
-
-        //before set new capacity
-        let amountBefore = this.getCapacity();
-
-        let configCapacity = LoadManager.Instance().getConfig(this._type,this._level,"capacity");
-
-        this.setCapacity(configCapacity);
-
-        let amountAfter = this.getCapacity();
 
 
-        let amountIncrease = {
-            gold: amountAfter.gold - amountBefore.gold,
-            elixir: amountAfter.elixir - amountBefore.elixir
-        }
-        playerInfoManager.changeMaxResource(amountIncrease);
-    },
     updateSprite: function () {
 
     }

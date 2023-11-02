@@ -2,11 +2,13 @@ var ArmyCamp = Building.extend({
     _type: "AMC_1",
     ctor: function (level,id, posX, posY,status,startTime,endTime) {
         this._super(level,id, posX, posY,status,startTime,endTime);
-        // this.loadSprite(res_map.SPRITE.BODY.ARMY_CAMP[1], null, 0);
-        // this.loadSubSprite();
+        this._bodySprite = res_map.SPRITE.BODY.ARMY_CAMP[level];
+        this._upperSprite = null;
+        this._shadowType = 0;
+        this._isUpperAnimate = false;
     },
-    loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.ARMY_CAMP[level], null, 0);
+    loadMainSpriteByLevel: function (level) {
+        this.loadMainSprite(res_map.SPRITE.BODY.ARMY_CAMP[level], null, 0);
     }
 
 

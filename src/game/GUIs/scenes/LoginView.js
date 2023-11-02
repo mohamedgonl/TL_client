@@ -22,7 +22,7 @@ var LoginView = cc.Scene.extend({
         const textFieldUID = node.getChildByName("textfield-uid");
         textFieldUID.addTouchEventListener(this.textFieldEvent, this);
         const cachedUID = cc.sys.localStorage.getItem("UID");
-        if (cachedUID){
+        if (cachedUID) {
             textFieldUID.setString(cachedUID);
         }
         this.textFieldUID = textFieldUID;
@@ -52,7 +52,7 @@ var LoginView = cc.Scene.extend({
             // this.messageText.setString("login: " + uid);
             this.loginButton.enabled = false;
             this.textFieldUID.enabled = false;
-            PlayerInfoManager.Instance().setId(uid);
+            PlayerInfoManager.getInstance().setId(uid);
             gv.gameClient.connect();
         } else {
             this.messageText.setColor(cc.color(255, 0, 0));
@@ -71,52 +71,20 @@ var LoginView = cc.Scene.extend({
         }, interval, repeat, delay);
     },
 
-    onReceiveUserInfo: function (userInfo) {
-        cc.log("ON RECEIVE USER INFO ++++++++++++++++++++++")
-        PlayerInfoManager.Instance().setPlayerInfo({
-            name: userInfo.name,
-            avatar: userInfo.avatar,
-            level: userInfo.level,
-            rank: userInfo.rank
-        });
-        PlayerInfoManager.Instance().setResource({
-            gold: userInfo.gold,
-            elixir: userInfo.elixir,
-            gem: userInfo.gem,
-        });
 
-        this.loadingBar.setPercent(this.loadingBar.getPercent() + 20);
-        testnetwork.connector.sendGetArmyInfo();
-    },
-
-    onReceiveArmyInfo: function (armyInfo) {
-        // MapManager.Instance().loadFromServer(armyInfo.listTroops);
-        cc.log("NHAN THONG TIN VE LINH : "+JSON.stringify(armyInfo.listTroops))
-        ArmyManager.Instance().setArmyAmount(armyInfo.listTroops);
-        this.loadingBar.setPercent(this.loadingBar.getPercent() + 20);
-        testnetwork.connector.sendGetMapInfo();
-    },
-
-    onReceiveMapInfo: function (mapInfo) {
-        MapManager.Instance().loadFromServer(mapInfo.listBuildings);
-        this.loadingBar.setPercent(100);
-        testnetwork.connector.sendGetTimeServer();
-        this.onReceiveAllData();
-    },
-    onReceiveTimeServer: function (time) {
-        TimeManager.Instance().setDeltaTimeClientServer(time);
-        this.onReceiveAllData();
-    },
-
-    onReceiveAllData: function () {
-        cc.sys.localStorage.setItem("UID", PlayerInfoManager.Instance().id);
-        cc.director.runScene(new GameScene());
-    },
 
     onFinishLogin: function (success) {
-        this.messageText.setColor(cc.color(255, 255, 255));
-        this.fetchUserData();
-        this.messageText.setString("Đăng nhập thành công. Đang tải dữ liệu...");
+        // this.messageText.setColor(cc.color(255, 255, 255));
+        // this.fetchUserData();
+        cc.log("------------------------------")
+        //go to game scene
+        cc.sys.localStorage.setItem("UID", PlayerInfoManager.getInstance().id);
+        const loadingView = new Loading(Loading.START);
+        this.addChild(loadingView);
+        loadingView.startLoading(function () {
+            cc.director.runScene(new GameScene());
+        })
+        // this.messageText.setString("Đăng nhập thành công. Đang tải dữ liệu...");
     },
 
     onConnectSuccess: function () {

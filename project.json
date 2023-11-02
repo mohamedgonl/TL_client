@@ -84,16 +84,48 @@
         "src/game/GameObjects/buildings/Barrack.js",
         "src/game/GameObjects/buildings/Cannon.js",
         "src/game/GameObjects/Obstacle.js",
+
+        "src/game/BattleObjects/BattleGameObject.js",
+        "src/game/BattleObjects/BattleObstacle.js",
+
+        "src/game/BattleObjects/buildings/BattleBuilding.js",
+        "src/game/BattleObjects/buildings/BattleDefence.js",
+        "src/game/BattleObjects/buildings/BattleBuilderHut.js",
+        "src/game/BattleObjects/buildings/BattleArmyCamp.js",
+        "src/game/BattleObjects/buildings/BattleBaseMine.js",
+        "src/game/BattleObjects/buildings/BattleGoldMine.js",
+        "src/game/BattleObjects/buildings/BattleElixirMine.js",
+        "src/game/BattleObjects/buildings/BattleBaseStorage.js",
+        "src/game/BattleObjects/buildings/BattleTownhall.js",
+        "src/game/BattleObjects/buildings/BattleGoldStorage.js",
+        "src/game/BattleObjects/buildings/BattleElixirStorage.js",
+        "src/game/BattleObjects/buildings/BattleWall.js",
+        "src/game/BattleObjects/buildings/BattleBarrack.js",
+        "src/game/BattleObjects/buildings/BattleCannon.js",
+
+        "src/game/BattleObjects/bullets/Bullet.js",
+        "src/game/BattleObjects/bullets/CannonBullet.js",
+
+        "src/game/BattleObjects/troops/BaseTroop.js",
+        "src/game/BattleObjects/troops/Warrior.js",
+        "src/game/BattleObjects/troops/Archer.js",
+        "src/game/BattleObjects/troops/Giant.js",
+        "src/game/BattleObjects/troops/Thief.js",
+        "src/game/BattleObjects/troops/Bomber.js",
+
         "src/game/GameObjects/troops/Troop.js",
         "src/game/GameObjects/Builder.js",
+
 
 
         "src/game/Managers/MapManager.js",
         "src/game/Managers/ArmyManager.js",
         "src/game/Managers/PlayerInfoManager.js",
+        "src/game/Managers/BattleManager.js",
 
         "src/game/GUIs/views/ShopPopup.js",
         "src/game/GUIs/views/ItemInfoPopup.js",
+        "src/game/GUIs/views/FightPopup.js",
 
         "src/game/GUIs/components/ShopItem.js",
 
@@ -109,12 +141,17 @@
         "src/game/GUIs/views/BasicPopup.js",
         "src/game/GUIs/views/ButtonOfBuilding.js",
         "src/game/GUIs/views/TroopInfoPopup.js",
+        "src/game/GUIs/views/Loading.js",
 
         "src/game/GUIs/layers/InfoLayer.js",
         "src/game/GUIs/layers/PopUpLayer.js",
         "src/game/GUIs/layers/MapLayer.js",
+        "src/game/GUIs/layers/BattleLayer.js",
+        "src/game/GUIs/layers/BattleUILayer.js",
+        "src/game/GUIs/layers/BattleEndLayer.js",
 
         "src/game/GUIs/scenes/GameScene.js",
+        "src/game/GUIs/scenes/BattleScene.js",
         "src/game/GUIs/scenes/TestScene.js",
 
         "src/framework/ButtonEffect.js",
@@ -125,6 +162,7 @@
         "src/framework/ColorUlties.js",
 
         "src/game/algorithms/Algorithm.js",
+        "src/game/algorithms/BattleAStar.js",
         "src/game/Managers/Animations.js",
         "src/game/algorithms/a_star.js",
         "src/game/gamecfg/constValues.js"

@@ -1688,6 +1688,50 @@
         <Folder Name="item">
           <File Name="shop_item_building.json" />
         </Folder>
+        <Folder Name="ket_thuc_tran">
+          <Folder Name="Icon_nho_nhat">
+            <Image Name="1.png" />
+            <Image Name="2.png" />
+            <Image Name="3.png" />
+            <Image Name="4.png" />
+            <Image Name="5.png" />
+            <Image Name="6.png" />
+            <Image Name="7.png" />
+            <Image Name="8.png" />
+            <Image Name="Hog Rider.png" />
+            <Image Name="king.png" />
+            <Image Name="Minion.png" />
+            <Image Name="ng da.png" />
+            <Image Name="Pekka.png" />
+            <Image Name="qeen 3.png" />
+            <Image Name="rong.png" />
+            <File Name="Thumbs.db" />
+            <Image Name="Vallkyrie (1).png" />
+            <Image Name="Witch.png" />
+          </Folder>
+          <Image Name="bang_ron.png" />
+          <Image Name="bong.png" />
+          <Image Name="bong_1.png" />
+          <Image Name="bong_2.png" />
+          <Image Name="bong_3.png" />
+          <Image Name="button.png" />
+          <Image Name="cup.png" />
+          <Image Name="dau_den.png" />
+          <Image Name="dau_tim.png" />
+          <Image Name="Demo.png" />
+          <Image Name="doan_thang.png" />
+          <Image Name="nen_duoi.png" />
+          <Image Name="nen_trong.png" />
+          <Image Name="nen_trong_1.png" />
+          <Image Name="sao_den.png" />
+          <Image Name="sao_den_2.png" />
+          <Image Name="sao_lon.png" />
+          <Image Name="sao_nho.png" />
+          <Image Name="slost.png" />
+          <Image Name="thang.png" />
+          <Image Name="thua.png" />
+          <Image Name="tien.png" />
+        </Folder>
         <Folder Name="localize">
           <File Name="config.json" />
           <File Name="en" />
@@ -1711,6 +1755,8 @@
         <Folder Name="ui-json" />
         <TmxFile Name="42x42map.tmx" />
         <Project Name="BasicPopup.csd" Type="Node" />
+        <Project Name="BattleEndLayer.csd" Type="Layer" />
+        <Project Name="BattleGUI.csd" Type="Layer" />
         <Project Name="CheatPopup.csd" Type="Node" />
         <Project Name="InfoLayer1.csd" Type="Layer" />
         <Project Name="InfoPopup.csd" Type="Node" />

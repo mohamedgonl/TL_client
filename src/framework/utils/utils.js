@@ -3,12 +3,12 @@
 function getBuildingFromType(type, level, id, posX, posY, status, startTime, endTime) {
     var building = null;
 
-
     //obstacle
     if (type.substring(0, 3) === 'OBS') {
 
         var typeOBS = type.substring(4);
         building = new Obstacle(type, id, posX, posY, status, startTime, endTime);
+        building.retain();
         return building;
     }
 
@@ -46,17 +46,61 @@ function getBuildingFromType(type, level, id, posX, posY, status, startTime, end
             break;
     }
     building.setType(type);
+    building.retain();
     return building;
 }
 
+function getBattleBuildingFromType(type, level, id, posX, posY) {
+    var building = null;
 
+    if (type.substring(0, 3) === 'OBS') {
+        var typeOBS = type.substring(4);
+        building = new BattleObstacle(type, id, posX, posY);
+        return building;
+    }
 
+    switch (type) {
+        case 'TOW_1':
+            building = new BattleTownhall(level, id, posX, posY);
+            break;
+        case 'BDH_1':
+            building = new BattleBuilderHut(level, id, posX, posY);
+            break;
+        case 'AMC_1':
+            building = new BattleArmyCamp(level, id, posX, posY);
+            break;
+        case 'RES_1':
+            building = new BattleGoldMine(level, id, posX, posY);
+            break;
+        case 'RES_2':
+            building = new BattleElixirMine(level, id, posX, posY);
+            break;
+        case 'STO_1':
+            building = new BattleGoldStorage(level, id, posX, posY);
+            break;
+        case 'STO_2':
+            building = new BattleElixirStorage(level, id, posX, posY);
+            break;
+        case 'BAR_1':
+            building = new BattleBarrack(level, id, posX, posY);
+            break;
+        case 'DEF_1':
+            building = new BattleCannon(level, id, posX, posY);
+            break;
+        case 'WAL_1':
+            building = new BattleWall(level, id, posX, posY);
+            break;
+    }
+
+    if (building)
+        building.setType(type);
+    return building;
+}
 
 var Utils = {
-
     //add , to number every 3 digits
     numberToText: function (number) {
-        if(number === 0)
+        if (number === 0)
             return "0";
 
         let text = "";
@@ -122,30 +166,34 @@ var Utils = {
     },
     // Hàm trợ giúp để tạo và cấu hình button
     createButton: function (imagePath, scale, position, callback, target) {
-    var button = new ccui.Button(imagePath);
-    button.setScale(scale);
-    button.setPosition(position);
-    button.addClickEventListener(callback.bind(target));
-    return button;
+        var button = new ccui.Button(imagePath);
+        button.setScale(scale);
+        button.setPosition(position);
+        button.addClickEventListener(callback.bind(target));
+        return button;
+    },
+    calculateGBuyRes: function (gold, elixir) {
+        return Math.ceil(gold / G_BUY_GOLD) + Math.ceil(elixir / G_BUY_ELIXIR);
+    },
+    calculateGBuyTime: function (time) {
+        //G BUY SECOND = 900
+        return Math.ceil(time / G_BUY_SECOND);
     }
 }
-var GameUtilities ={
+var GameUtilities = {
     updateCurrentCapacityAllBuilding: function () {
-        let listStorage = MapManager.Instance().getListStorage();
-        let townhall = MapManager.Instance().getTownHall();
-        let goldCurrent = PlayerInfoManager.Instance().getResource("gold")
-        let elixirCurrent = PlayerInfoManager.Instance().getResource("elixir")
+        let listStorage = MapManager.getInstance().getListStorage();
+        let townhall = MapManager.getInstance().getTownHall();
+        let goldCurrent = PlayerInfoManager.getInstance().getResource("gold")
+        let elixirCurrent = PlayerInfoManager.getInstance().getResource("elixir")
         let listGoldStorage = [];
         let listElixirStorage = [];
 
-        for(let i = 0; i < listStorage.length; i++)
-        {
-            if(listStorage[i]._capacityGold)
-            {
+        for (let i = 0; i < listStorage.length; i++) {
+            if (listStorage[i]._capacityGold) {
                 listGoldStorage.push(listStorage[i]);
             }
-            if(listStorage[i]._capacityElixir)
-            {
+            if (listStorage[i]._capacityElixir) {
                 listElixirStorage.push(listStorage[i]);
             }
         }
@@ -153,19 +201,17 @@ var GameUtilities ={
 
         //update gold storage
         let length = listGoldStorage.length;
-        for(let i = 0; i <length; i++)
-        {
+        for (let i = 0; i < length; i++) {
             let storage = listGoldStorage[i];
             let capacity = storage._capacityGold;
-            if(goldCurrent/(length - i )> capacity)
-            {
+            if (goldCurrent / (length - i) > capacity) {
+                storage.setCurrentAmount(capacity, "gold");
                 goldCurrent -= capacity;
-            }
-            else
-            {
-                let newAmount = Math.floor(goldCurrent/(length - i ));
+
+            } else {
+                let newAmount = Math.floor(goldCurrent / (length - i));
                 console.log("newAmount:-------------------- " + newAmount + " " + storage._id);
-                storage.setCurrentAmount(newAmount,"gold");
+                storage.setCurrentAmount(newAmount, "gold");
                 goldCurrent -= newAmount;
             }
         }
@@ -173,24 +219,20 @@ var GameUtilities ={
 
         //update elixir storage
         length = listElixirStorage.length;
-        for(let i = 0; i <length; i++)
-        {
+        for (let i = 0; i < length; i++) {
             let storage = listElixirStorage[i];
             let capacity = storage._capacityElixir;
-            if(elixirCurrent/(length - i )> capacity)
-            {
+            if (elixirCurrent / (length - i) > capacity) {
+                storage.setCurrentAmount(capacity, "elixir");
                 elixirCurrent -= capacity;
-            }
-            else
-            {
-                let newAmount = Math.floor(elixirCurrent/(length - i ));
-                storage.setCurrentAmount(newAmount,"elixir");
+            } else {
+                let newAmount = Math.floor(elixirCurrent / (length - i));
+                storage.setCurrentAmount(newAmount, "elixir");
                 elixirCurrent -= newAmount;
             }
         }
 
     },
-
 }
 
 

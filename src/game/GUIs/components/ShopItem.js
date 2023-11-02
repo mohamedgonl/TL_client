@@ -52,8 +52,8 @@ var ShopItem = cc.Node.extend({
             name.setString(data.name);
             let value = this._itemNode.getChildByName("ngankho_item_value");
             let maxValue = data.value_type === RESOURCE_TYPE.GOLD
-                ? PlayerInfoManager.Instance().getMaxResource().gold
-                : PlayerInfoManager.Instance().getMaxResource().elixir;
+                ? PlayerInfoManager.getInstance().getMaxResource().gold
+                : PlayerInfoManager.getInstance().getMaxResource().elixir;
             value.setString(fr.toMoneyString(maxValue * (data.nganhko_percent)));
 
 
@@ -67,7 +67,7 @@ var ShopItem = cc.Node.extend({
         let price_string = this._itemNode.getChildByName("item_price");
 
         if (category === "category_tainguyen" && data.cfgId === "BDH_1") {
-            let bdhCount = MapManager.Instance().getBuildingCountByType("BDH_1");
+            let bdhCount = MapManager.getInstance().getBuildingCountByType("BDH_1");
             let price;
             if(bdhCount === 5) {
                 price = BDH["BDH_1"][bdhCount]["coin"] * 2;
@@ -90,7 +90,7 @@ var ShopItem = cc.Node.extend({
         switch (data.price_type) {
             case RESOURCE_TYPE.ELIXIR : {
                 price_type.setTexture(res.ICON.ELIXIR);
-                if (data.price > PlayerInfoManager.Instance().getResource().elixir) {
+                if (data.price > PlayerInfoManager.getInstance().getResource().elixir) {
                     price_string.setColor(COLOR_SHOP_RED);
                     // this._available = false;
                 }
@@ -98,7 +98,7 @@ var ShopItem = cc.Node.extend({
             }
             case RESOURCE_TYPE.GOLD : {
                 price_type.setTexture(res.ICON.GOLD);
-                if (data.price > PlayerInfoManager.Instance().getResource().gold) {
+                if (data.price > PlayerInfoManager.getInstance().getResource().gold) {
                     price_string.setColor(COLOR_SHOP_RED);
                     // this._available = false;
                 }
@@ -106,7 +106,7 @@ var ShopItem = cc.Node.extend({
             }
             case RESOURCE_TYPE.G : {
                 price_type.setTexture(res.ICON.GEM);
-                if (data.price > PlayerInfoManager.Instance().getResource().gem) {
+                if (data.price > PlayerInfoManager.getInstance().getResource().gem) {
                     price_string.setColor(COLOR_SHOP_RED);
                     // this._available = false;
                 }
@@ -166,7 +166,7 @@ var ShopItem = cc.Node.extend({
     },
 
     getBuildMaxCount: function () {
-        let townHallLevel = MapManager.Instance().getTownHall()._level;
+        let townHallLevel = MapManager.getInstance().getTownHall()._level;
 
         let maxCount = TOW["TOW_1"][townHallLevel][this._data.cfgId];
 
@@ -188,7 +188,7 @@ var ShopItem = cc.Node.extend({
     },
 
     getBuiltCount: function (type) {
-        return MapManager.Instance().getBuildingCountByType(type)
+        return MapManager.getInstance().getBuildingCountByType(type)
     },
 
     handleTouchInfoButton: function () {

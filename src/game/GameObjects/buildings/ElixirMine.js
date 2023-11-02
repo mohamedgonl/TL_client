@@ -2,12 +2,17 @@ var ElixirMine = BaseMine.extend({
     _type: "RES_2",
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
-        let capacity = LoadManager.Instance().getConfig(this._type, this._level)
+        let capacity = LoadManager.getInstance().getConfig(this._type, this._level)
         this._capacityElixir = capacity.capacity;
         this._productivityElixir = capacity.productivity;
+
+        this._bodySprite = res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level];
+        this._upperSprite = res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level];
+        this._shadowType = 1;
+        this._isUpperAnimate = true;
     },
-    loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level],
+    loadMainSpriteByLevel: function (level) {
+        this.loadMainSprite(res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level],
             res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level],1,1);
     },
 
@@ -31,19 +36,19 @@ var ElixirMine = BaseMine.extend({
     },
     completeProcess: function () {
         this._super();
-        let playerInfoManager = PlayerInfoManager.Instance();
-        let capacity = LoadManager.Instance().getConfig(this._type, this._level)
+        let playerInfoManager = PlayerInfoManager.getInstance();
+        let capacity = LoadManager.getInstance().getConfig(this._type, this._level)
         this._capacityElixir = capacity.capacity;
         this._productivityElixir = capacity.productivity;
     },
     getCurrentAmount: function () {
         //calculate current amount by lastCollectTime
-        let timeNow = TimeManager.Instance().getCurrentTimeInSecond();
+        let timeNow = TimeManager.getInstance().getCurrentTimeInSecond();
         let duration = timeNow - this._lastCollectTime;
-        let productivity = LoadManager.Instance().getConfig(this._type, this._level, "productivity");
+        let productivity = LoadManager.getInstance().getConfig(this._type, this._level, "productivity");
         let harvestAmount = Math.floor(duration * productivity / 3600);
 
-        let capacity = LoadManager.Instance().getConfig(this._type, this._level, "capacity");
+        let capacity = LoadManager.getInstance().getConfig(this._type, this._level, "capacity");
 
         let currentAmount = Math.min(harvestAmount, capacity);
         return {
