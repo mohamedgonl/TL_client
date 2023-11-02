@@ -237,19 +237,24 @@ var BattleLayer = cc.Layer.extend({
         cc.log("choose:::::::::::::::", type);
         if (type == null) return;
         let canDropTroop = BattleManager.getInstance().getDropTroopGrid()[gridPos.x][gridPos.y];
-        if(canDropTroop)
+
+        if(!canDropTroop) return;
+
+        if(BattleManager.getInstance().listUsedTroop.get(type) >= BattleManager.getInstance().listTroops.get(type))
         {
-            if(BattleManager.getInstance().battleStatus === BATTLE_STATUS.PREPARING)
-            {
-                cc.director.getRunningScene().onStartBattle();
-            }
-            this.createTroopAtGridPos(type, gridPos.x, gridPos.y);
-            //get battleUILayer to minus 1 troop
-            cc.director.getRunningScene().battleUILayer.onInitTroop();
+            cc.log("not enough troop")
+            return;
         }
 
-        else
-            cc.log("can't drop troop here");
+        if(BattleManager.getInstance().battleStatus === BATTLE_STATUS.PREPARING)
+        {
+            cc.director.getRunningScene().onStartBattle();
+        }
+        this.createTroopAtGridPos(type, gridPos.x, gridPos.y);
+        //get battleUILayer to minus 1 troop
+        cc.director.getRunningScene().battleUILayer.onInitTroop();
+
+
     },
 
 
