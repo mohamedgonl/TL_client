@@ -5,11 +5,14 @@ var BaseTroop = cc.Node.extend({
         this._posX = posX;
         this._posY = posY;
         this._favoriteTarget = TROOP_BASE[this._type]["favoriteTarget"];
+        this._moveSpeed = TROOP_BASE[this._type]["moveSpeed"];
         this._target = null;
         this.init();
         this._path = null;
+        this._currentIndex = 0;
         this.findTargetandPath();
-        this.moveToTarget();
+        // this.moveToTarget();
+        BattleManager.getInstance().addToListArmy(this);
     },
     init: function () {
         this._bodySprite = new cc.Sprite(res_troop.RUN[this._type].LEFT[1]);
@@ -60,24 +63,6 @@ var BaseTroop = cc.Node.extend({
         cc.log(JSON.stringify(targetCenter, null, 2));
         let end = new BattleGridNode(targetCenter.x,targetCenter.y,graph.getNode(targetCenter.x,targetCenter.y).weight);
         return BattleAStar.search(graph,start,end);
-    },
-    move: function (i) {
-        if(i === this._path.length) {
-            return;
-        }
-        //have array path, move to each grid in path 0.2s by setPosition
-        let path = this._path;
-        let self = this;
-        cc.log(path[i].x + " " + path[i].y);
-
-        let mapPos = cc.director.getRunningScene().battleLayer.getMapPosFromGridPos({x: path[i].x, y: path[i].y});
-        this.setPosition(mapPos);
-        //delay 0.2s and call
-        if (i < path.length - 1) {
-            setTimeout(function () {
-                self.move(i + 1);
-            }, 200);
-        }
     },
 
     //return -1 if not found
@@ -146,8 +131,10 @@ var BaseTroop = cc.Node.extend({
             cc.log(this._path[i].x + " " + this._path[i].y);
         }
         cc.log("=====END=====");
+        this._currentIndex = 0;
     },
-    moveToTarget: function () {
+    moveToTarget1: function () {
+        return;
         let path = this._path;
         cc.log("length path: " + path.length);
         let self = this;
@@ -174,13 +161,70 @@ var BaseTroop = cc.Node.extend({
         }
         //after all sequence, call Attack
         sequence.push(cc.callFunc(function () {
-            self.attack();
         }, this));
         // run sequence
         let sequenceAction = cc.sequence(sequence);
         this.runAction(sequenceAction);
     },
-    attack: function () {
+    gameLoop: function (dt){
+        if(this._currentIndex < this._path.length) {
+            this.moveToTarget(dt);
+        }
 
+    },
+    moveToTarget: function (dt) {
+        if(this._path.length === 0) {
+            cc.log("path length 0")
+            return;
+        }
+        let distance = dt*this._moveSpeed/4;
+        if(this._currentIndexLeft > distance) {
+            this._currentIndexLeft -= distance;
+        }
+        else
+        {
+            this._currentIndex++;
+            cc.log("index: " + this._currentIndex);
+            if(this._currentIndex >= this._path.length) {
+                cc.log("end path");
+                return;
+            }
+            //nếu chéo, = 1.414, else this._currentIndexLeft = 1
+            if(this._path[this._currentIndex].x !== this._path[this._currentIndex - 1].x
+                && this._path[this._currentIndex].y !== this._path[this._currentIndex - 1].y) {
+                this._isCross = false;
+                this._currentIndexLeft = 1.414 - (distance - this._currentIndexLeft||0);
+                cc.log("cross::::, currentIndexLeft: " + this._currentIndexLeft);
+            }
+            else
+            {
+                this._isCross = true;
+                this._currentIndexLeft = 1 - (distance - this._currentIndexLeft||0);
+                cc.log("not cross::::, currentIndexLeft: " + this._currentIndexLeft);
+            }
+        }
+        cc.log("currentIndex: " + this._currentIndex + "   " + this._currentIndexLeft)
+
+        //set pos
+        let posIndexInMap = cc.director.getRunningScene().battleLayer.getMapPosFromGridPos(
+            {x: this._path[this._currentIndex].x, y: this._path[this._currentIndex].y});
+
+        let posPrevIndexInMap = cc.director.getRunningScene().battleLayer.getMapPosFromGridPos(
+            {x: this._path[this._currentIndex - 1].x, y: this._path[this._currentIndex - 1].y});
+
+        //let length = 1 if not cross, 1.414 if cross
+        let pos;
+        if(this._isCross === true) {
+            pos = cc.pLerp(posIndexInMap, posPrevIndexInMap, this._currentIndexLeft);
+        }
+        else
+            pos = cc.pLerp(posIndexInMap, posPrevIndexInMap, this._currentIndexLeft/1.414);
+        this.setPosition(pos);
+
+        //set direction
+        let directX = this._path[this._currentIndex].x - this._path[this._currentIndex - 1].x;
+        let directY = this._path[this._currentIndex].y - this._path[this._currentIndex - 1].y;
+        this.setRunDirection(directX, directY);
     }
+
 });

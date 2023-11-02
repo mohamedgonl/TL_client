@@ -5,6 +5,7 @@ var BattleManager = cc.Class.extend({
         this._battleGraph = null;
         this.listBuildings = new Map();
         this.listTroops = new Map();
+        this.listArmy = [];
 
         this.buildingAmount = {};
 
@@ -43,6 +44,7 @@ var BattleManager = cc.Class.extend({
     resetState: function () {
         this.listBuildings.clear();
         this.listTroops.clear();
+        this.listArmy = [];
 
         //init map grid
         for (var i = 0; i < GRID_SIZE_BATTLE; i++) {
@@ -105,6 +107,9 @@ var BattleManager = cc.Class.extend({
             this.listTroops.set(troop.type, troop.amount);
         }
     },
+    addToListArmy: function (troop) {
+        this.listArmy.push(troop);
+    },
 
     setResourceToBuilding: function () {
         if (!this.listResources || this.listResources.length === 0)
@@ -140,24 +145,25 @@ var BattleManager = cc.Class.extend({
     },
 
     initMapLogic: function () {
-        for (let building of this.listBuildings.values())
+        for (let building of this.listBuildings.values()) {
             if (!building._type.startsWith("OBS")) {
 
                 //update mapGrid
-                    for (let column = building._posX; column < building._posX  + building._width; column++)
-                        for (let row = building._posY ; row < building._posY  + building._height; row++)
-                            this.mapGrid[column][row] = building._id;
+                for (let column = building._posX; column < building._posX + building._width; column++)
+                    for (let row = building._posY; row < building._posY + building._height; row++)
+                        this.mapGrid[column][row] = building._id;
 
                 //update findPathGrid
-                if(building._type.startsWith("WAL")) {
-                    for (let column = building._posX ; column < building._posX + building._width ; column++)
-                        for (let row = building._posY ; row < building._posY + building._height ; row++)
+                if (building._type.startsWith("WAL")) {
+                    for (let column = building._posX; column < building._posX + building._width; column++)
+                        for (let row = building._posY; row < building._posY + building._height; row++)
                             this.findPathGrid[column][row] = 9;
                 }
-                else{
+                else {
                     for (let column = building._posX + 1; column < building._posX + building._width - 1; column++)
                         for (let row = building._posY + 1; row < building._posY + building._height - 1; row++)
                             this.findPathGrid[column][row] = 99999;
+
                 }
 
                 //update battleMap
@@ -170,9 +176,16 @@ var BattleManager = cc.Class.extend({
                          row++)
                         this.battleMap[column][row] = 1;
             }
+            else {
+                for (let column = building._posX + 1; column < building._posX + building._width - 1; column++)
+                    for (let row = building._posY + 1; row < building._posY + building._height - 1; row++)
+                        this.findPathGrid[column][row] = 99999;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       bv
+            }
+        }
 
         //update battle graph
         this._battleGraph = new BattleGraph(this.findPathGrid);
+
         cc.log("get battle graph");
     },
 
