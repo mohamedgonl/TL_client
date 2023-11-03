@@ -441,10 +441,10 @@ var BattleLayer = cc.Layer.extend({
             }
 
             for (let troop of listTroops){
-                if(troop.isAlive() === false) continue;
+                if(!troop.isAlive()) continue;
 
                 if (defence.checkTargetInRange(troop)) {
-                    defence.addTarget(troop);
+                    defence.setListTargets([troop]);
                     hasTarget = true;
                     break;
                 }

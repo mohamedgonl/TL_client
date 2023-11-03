@@ -155,10 +155,12 @@ var BattleScene = cc.Scene.extend({
     gameLoop: function (dt) {
         this.battleLayer.gameLoop(dt);
         for (let defence of BattleManager.getInstance().listDefences) {
-            defence.gameLoop(dt);
+            if (!defence.isDestroy())
+                defence.gameLoop(dt);
         }
         for (let bullet of BattleManager.getInstance().listBullets) {
-            bullet.gameLoop(dt);
+            if (bullet.active)
+                bullet.gameLoop(dt);
         }
         for (let troop of BattleManager.getInstance().listCurrentTroop) {
             troop.gameLoop(dt);

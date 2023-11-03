@@ -36,7 +36,7 @@ CannonBullet.getOrCreateBullet = function (type, startPoint, target, damagePerSh
     const listBullets = BattleManager.getInstance().listBullets;
     for (let bullet of listBullets)
         if (!bullet.active && bullet._type === type) {
-            bullet.reset(cc.p(target.x, target.y));
+            bullet.reset(target);
             return bullet;
         }
     selChild = new CannonBullet(type, startPoint, target, damagePerShot);

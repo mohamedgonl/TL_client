@@ -23,24 +23,14 @@ var BattleDefence = BattleBuilding.extend({
         if (this.targetQueue.length === 0)
             return;
 
-        //remove dead target
-        cc.log(JSON.stringify(this.targetQueue));
-
-        while(this.targetQueue[0].isAlive() === false) {
-            cc.log("REMOVE DEAD TARGET");
-            this.targetQueue.shift();
-            if (this.targetQueue.length === 0)
-                return;
-        }
-
         const target = this.targetQueue[0];
         this.attackCd = this.attackSpeed;
         this.attack(target);
     },
 
-    addTarget: function (target) {
-        this.targetQueue.push(target);
-    },
+    // addTarget: function (target) {
+    //     this.targetQueue.push(target);
+    // },
 
     setListTargets: function (targets) {
         this.targetQueue = targets;
