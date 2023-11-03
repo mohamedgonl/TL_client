@@ -1,5 +1,5 @@
 var BattleDefence = BattleBuilding.extend({
-
+    targetQueue: [],
     attackCd: 0,
 
     ctor: function (level, id, posX, posY) {
