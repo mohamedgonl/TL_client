@@ -254,8 +254,10 @@ var BaseTroop = cc.Node.extend({
         let posIndexInMap = cc.director.getRunningScene().battleLayer.getMapPosFromGridPos(
             {x: this._path[this._currentIndex].x, y: this._path[this._currentIndex].y});
 
+        let prevIndex = (this._currentIndex - 1) || 0;
         let posPrevIndexInMap = cc.director.getRunningScene().battleLayer.getMapPosFromGridPos(
-            {x: this._path[this._currentIndex - 1].x, y: this._path[this._currentIndex - 1].y});
+            {x: this._path[prevIndex].x, y: this._path[prevIndex].y})
+            ;
 
         //let length = 1 if not cross, 1.414 if cross
         let pos;
@@ -375,6 +377,8 @@ var BaseTroop = cc.Node.extend({
         this._state = TROOP_STATE.DEAD;
         this._bodySprite.stopAllActions();
         this._bodySprite.setTexture(effect.RIP);
+
+        this._hpBar.setVisible(false);
 
         //effect.GHOST bay lên và biến mất sau 0.5s
         let ghost = new cc.Sprite(effect.GHOST);
