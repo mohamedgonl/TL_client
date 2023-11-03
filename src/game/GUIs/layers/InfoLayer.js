@@ -63,10 +63,19 @@ var InfoLayer = cc.Layer.extend({
 
         this.btn_setting.addTouchEventListener(this.onClickBtnCheat, this);
         this.btn_train.addTouchEventListener(this.onClickBtnTrain, this);
+        // this.btn_history = node.getChildByName("btn_history");
+        this.btn_history.addTouchEventListener(this.onClickBtnHistory, this);
     },
     onClickBtnTrain: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
 
+        }
+    },
+    onClickBtnHistory: function (sender, type) {
+        if (type === ccui.Widget.TOUCH_ENDED) {
+            let gameScene = cc.director.getRunningScene();
+            let popUpLayer = gameScene.getPopUpLayer();
+            popUpLayer.appear(POPUP_IDS.ATTACK_HISTORY)
         }
     },
 

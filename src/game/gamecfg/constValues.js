@@ -2,6 +2,7 @@ const POPUP_IDS = {
     SHOP : "shop",
     TRAIN : "train",
     FIGHT : "fight",
+    ATTACK_HISTORY: "atk_history"
 }
 
 const ACTION_TYPE = {
@@ -18,3 +19,8 @@ const BATTLE_STATUS = {
 
 const BATTlE_PREPARE_TIME = 30;
 const BATTlE_LIMIT_TIME = 150;
+
+const MATCH_HISTORY_SCROLL_POS = {x: 353, y: 1400};
+const MATCH_DETAIL_TROOP_POS = {x: -239.00, y: 6}
+const MATCH_HISTORY_ITEM_HEIGHT = 170;
+const MATCH_HISTORY_ITEM_MARGIN = 15;

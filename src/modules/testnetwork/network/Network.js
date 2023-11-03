@@ -123,6 +123,12 @@ testnetwork.Connector = cc.Class.extend({
                 else
                     cc.director.getRunningScene().onFindMatchFail(packet.error);
                 break;
+            case gv.CMD.GET_HISTORY_ATTACK: {
+                if(packet.error === ErrorCode.SUCCESS) {
+                    let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
+                    popUpLayer.getHistoryPopup().initMatches(packet.matches);
+                }
+            }
             case gv.CMD.DO_ACTION:
             // if (packet.error === ErrorCode.SUCCESS)
             //     cc.director.getRunningScene().onFindMatchSuccess(packet);
@@ -553,6 +559,13 @@ testnetwork.Connector = cc.Class.extend({
         pk.pack(data);
         this.gameClient.sendPacket(pk);
     },
+
+    sendGetHistoryAttack: function (data) {
+        cc.log("SEND GET HISTORY ATTACK");
+        var pk = this.gameClient.getOutPacket(CmdSendGetHistoryAttack);
+        pk.pack(data);
+        this.gameClient.sendPacket(pk);
+    }
 
 });
 

@@ -126,8 +126,10 @@
         "src/game/GUIs/views/ShopPopup.js",
         "src/game/GUIs/views/ItemInfoPopup.js",
         "src/game/GUIs/views/FightPopup.js",
+        "src/game/GUIs/views/MatchHistoryPopup.js",
 
         "src/game/GUIs/components/ShopItem.js",
+        "src/game/GUIs/components/MatchHistoryItem.js",
 
         "src/game/GUIs/scenes/LoginView.js",
         "src/game/GUIs/views/TrainTroopPopup.js",

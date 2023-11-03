@@ -5317,7 +5317,7 @@
                 "IconVisible": false,
                 "PrePosition": {
                   "X": 0.4949,
-                  "Y": 0.1562
+                  "Y": 0.1563
                 },
                 "PreSize": {
                   "X": 0.0488,
@@ -5488,34 +5488,6 @@
         "Name": "Layer",
         "ctype": "LayerObjectData"
       },
-      "UsedResources": [
-        "fonts/soji_12.fnt",
-        "fonts/soji_12.png",
-        "fonts/soji_16.fnt",
-        "fonts/soji_16.png",
-        "fonts/soji_20.fnt",
-        "fonts/soji_20.png",
-        "fonts/soji_24.fnt",
-        "fonts/soji_24.png",
-        "guis/icons/ARM_10_Battle.png",
-        "guis/icons/bg_troop_gui_battle.png",
-        "guis/icons/select_troop.png",
-        "guis/icons/slot_empty.png",
-        "guis/icons/slot_troop_battle.png",
-        "guis/Main_Gui/bg_bar_1.png",
-        "guis/Main_Gui/bg_bar_2.png",
-        "guis/Main_Gui/elixir_bar.png",
-        "guis/Main_Gui/elixir_icon.png",
-        "guis/Main_Gui/exp_icon.png",
-        "guis/Main_Gui/g_icon.png",
-        "guis/Main_Gui/gold_bar.png",
-        "guis/Main_Gui/gold_icon.png",
-        "guis/Main_Gui/trophy.png",
-        "guis/pop_up/button2.png",
-        "new/battle_gui/bg_troop_gui_battle.png",
-        "new/battle_gui/big_star.png",
-        "new/battle_gui/sao_den.png"
-      ],
       "ctype": "GameFileData"
     }
   },

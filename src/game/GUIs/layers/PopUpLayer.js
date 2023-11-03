@@ -38,6 +38,14 @@ let PopupLayer = cc.Layer.extend({
                 popupScreen = this._fightPopup;
                 break;
             }
+            case POPUP_IDS.ATTACK_HISTORY: {
+                if (!this._attackHistoryPopup) {
+                    this._attackHistoryPopup = new MatchHistoryPopup();
+                    this.addChild(this._attackHistoryPopup);
+                }
+                popupScreen = this._attackHistoryPopup;
+                break;
+            }
         }
 
         popupScreen.setVisible(true);
@@ -63,6 +71,10 @@ let PopupLayer = cc.Layer.extend({
 
     getTrainingPopup: function () {
         return this._trainTroopPopup;
+    },
+
+    getHistoryPopup: function () {
+        return this._attackHistoryPopup;
     },
 
     push: function (popup) {
