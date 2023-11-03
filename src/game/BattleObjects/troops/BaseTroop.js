@@ -385,7 +385,7 @@ var BaseTroop = cc.Node.extend({
         ghost.setScale(0.5);
         ghost.setPosition(this.getPosition());
         this.getParent().addChild(ghost);
-        ghost.runAction(cc.sequence(cc.moveBy(0.5,0,50),cc.fadeOut(0.5),cc.removeSelf()));
+        ghost.runAction(cc.sequence(cc.moveBy(0.3,0,30),cc.fadeOut(0.5),cc.removeSelf()));
     }
 
 });

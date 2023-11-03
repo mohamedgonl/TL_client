@@ -1,8 +1,9 @@
 var TrainTroopPopup = cc.Layer.extend({
-    _trainPages: [],
+
     _curPage: 0,
     ctor: function () {
         this._super();
+        this._trainPages = [];
         this.initPages();
         this.updateBarracks();
         this.setVisible(false);
