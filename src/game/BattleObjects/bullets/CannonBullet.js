@@ -17,7 +17,10 @@ var CannonBullet = Bullet.extend({
     },
 
     onReachDestination: function () {
-        if (this.target && typeof this.target.onGainDamage === 'function') {
+        if(!this.target.isAlive()) {
+            cc.log("Target is dead")
+        }
+        if (this.target.isAlive() && typeof this.target.onGainDamage === 'function') {
             this.target.onGainDamage(this.damagePerShot);
         }
         this.destroyBullet();

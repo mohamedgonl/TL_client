@@ -1,5 +1,5 @@
 var BattleDefence = BattleBuilding.extend({
-    targetQueue: [],
+
     attackCd: 0,
 
     ctor: function (level, id, posX, posY) {
@@ -8,7 +8,7 @@ var BattleDefence = BattleBuilding.extend({
         let config = LoadManager.getInstance().getDefBaseConfig(this._type);
         this._minRange = config.minRange * 3;
         this._maxRange = config.maxRange * 3;
-
+        this.targetQueue = [];
         this.centerPoint = cc.p(this._posX + Math.floor(this._width / 2), this._posY + Math.floor(this._height / 2))
         // var upper_sprite =  res_map.SPRITE.BODY.CANNON.UPPER[level];
         // this.loadSprite(res_map.SPRITE.BODY.CANNON.BOTTOM[level],upper_sprite,2);
@@ -22,6 +22,17 @@ var BattleDefence = BattleBuilding.extend({
         }
         if (this.targetQueue.length === 0)
             return;
+
+        //remove dead target
+        cc.log(JSON.stringify(this.targetQueue));
+
+        while(this.targetQueue[0].isAlive() === false) {
+            cc.log("REMOVE DEAD TARGET");
+            this.targetQueue.shift();
+            if (this.targetQueue.length === 0)
+                return;
+        }
+
         const target = this.targetQueue[0];
         this.attackCd = this.attackSpeed;
         this.attack(target);

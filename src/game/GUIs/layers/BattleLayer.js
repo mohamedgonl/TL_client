@@ -429,19 +429,30 @@ var BattleLayer = cc.Layer.extend({
 
     gameLoop: function (dt) {
         //check list troop pos -> add to targetQueue of def
-        // const listDefences = BattleManager.getInstance().getListDefences();
-        // const listTroops = BattleManager.getInstance().getListCurrentTroops();
-        // for (let defence of listDefences) {
-        //     let hasTarget = false;
-        //     for (let troop of listTroops)
-        //         if (defence.checkTargetInRange(troop)) {
-        //             defence.setListTargets([troop]);
-        //             hasTarget = true;
-        //             break;
-        //         }
-        //     if (!hasTarget)
-        //         defence.setListTargets([]);
-        // }
+        const listDefences = BattleManager.getInstance().getListDefences();
+        const listTroops = BattleManager.getInstance().getListCurrentTroops();
+        for (let defence of listDefences) {
+            let hasTarget = false;
+
+            if(defence.isDestroy())
+            {
+                defence.setListTargets([]);
+                continue;
+            }
+
+            for (let troop of listTroops){
+                if(troop.isAlive() === false) continue;
+
+                if (defence.checkTargetInRange(troop)) {
+                    defence.addTarget(troop);
+                    hasTarget = true;
+                    break;
+                }
+            }
+
+            if (!hasTarget)
+                defence.setListTargets([]);
+        }
     },
 });
 

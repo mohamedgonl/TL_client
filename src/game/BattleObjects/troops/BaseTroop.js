@@ -1,7 +1,14 @@
 const GRID_BATTLE_RATIO = 3;
 const TROOP_LEVEL = 1;
+const TROOP_STATE = {
+    FIND_PATH: 0,
+    MOVE: 1,
+    ATTACK: 2,
+    IDLE: 3,
+    DEAD: 4,
+}
 var BaseTroop = cc.Node.extend({
-
+    delayTime: 0.6,
     ctor: function (posX,posY) {
         this._super();
         this.setScale(0.5)
@@ -14,24 +21,62 @@ var BaseTroop = cc.Node.extend({
         this._hitpoints = TROOP[this._type][TROOP_LEVEL]["hitpoints"];
         this._currentHitpoints = this._hitpoints;
         this._target = null;
-        //state: 3 state: 0: idle,1: move,2: attack
-        this._state = 0;
+        //state: 3 state: 0: findPath,1: move,2: attack, 3:idle, 4: death
+        this._state = TROOP_STATE.FIND_PATH;
         this._path = null;
-        this._attackCd = 0;
+        this._attackCd = this._attackSpeed;
         this._currentIndex = 0;
         this._stateAnimation = 0;
         BattleManager.getInstance().addToListCurrentTroop(this);
         BattleManager.getInstance().addToListUsedTroop(this);
-        this.init();
-        this.findTargetandPath();
-
+        this.initSprite();
     },
-    init: function () {
+    initSprite: function () {
+        //shadow
+        this._shadow = new cc.Sprite(res_troop.SHADOW.SMALL);
+        this._shadow.setScale(0.5)
+        this.addChild(this._shadow);
+
+        //body
         this._bodySprite = new cc.Sprite(res_troop.RUN[this._type].LEFT[1]);
         this.addChild(this._bodySprite);
+
+        //progress bar hp
+        this._hpBar = new ccui.Slider();
+        this._hpBar.setScale(SCALE_BUILDING_BODY);
+        this._hpBar.loadBarTexture(res_map.SPRITE.HEALTH_BAR_BG);
+        this._hpBar.loadProgressBarTexture(res_map.SPRITE.TROOP_HEALTH_BAR);
+        this._hpBar.setAnchorPoint(0.5, 1);
+        this._hpBar.setPosition(0, 35);
+        this._hpBar.setPercent(100);
+        this._hpBar.setVisible(true);
+        this.addChild(this._hpBar, ZORDER_BUILDING_EFFECT);
+
+
+
+    },
+    gameLoop: function (dt){
+        if(this._state === TROOP_STATE.FIND_PATH)
+        {
+            this.findTargetandPath();
+            return;
+        }
+        if(this._state === TROOP_STATE.MOVE)
+        {
+            this.moveToTarget(dt);
+            return;
+        }
+
+        if(this._state === TROOP_STATE.ATTACK)
+        {
+            this.attackTarget(dt);
+            return;
+        }
+
     },
     setRunDirection: function (directX,directY) {
-        let moveAction;
+        this._bodySprite.setScale(1);
+        let moveAction = null;
         if (directX === 1 && directY === 1) {
             moveAction = res_troop.RUN[this._type].UP.ANIM;
         } else if (directX === 1 && directY === 0) {
@@ -44,6 +89,7 @@ var BaseTroop = cc.Node.extend({
             moveAction = res_troop.RUN[this._type].UP.ANIM;
         } else if (directX === 0 && directY === -1) {
             moveAction = res_troop.RUN[this._type].DOWN_RIGHT.ANIM;
+
         } else if (directX === -1 && directY === 1) {
             moveAction = res_troop.RUN[this._type].LEFT.ANIM;
         } else if (directX === -1 && directY === 0) {
@@ -57,7 +103,7 @@ var BaseTroop = cc.Node.extend({
         if(this._stateAnimation !== this._state || this._directX !== directX || this._directY !== directY)
         {
             this._stateAnimation = this._state;
-            cc.log("change move action")
+
             this._bodySprite.stopAllActions();
             this._bodySprite.runAction(cloneMoveAction);
         }
@@ -155,30 +201,14 @@ var BaseTroop = cc.Node.extend({
         cc.log("=====END=====");
 
     },
-    gameLoop: function (dt){
-        if(this._state === 0)
-        {
-            this.findTargetandPath();
 
-            return;
-        }
-
-        if(this._state === 1)
-        {
-            this.moveToTarget(dt);
-            return;
-        }
-
-        if(this._state === 2)
-        {
-
-            this.attackTarget(dt);
-            return;
-        }
-
-    },
     moveToTarget: function (dt) {
-
+        //if target destroy, find new target
+        if(this._target.isDestroy()) {
+            cc.log("target destroy")
+            this._state = TROOP_STATE.FIND_PATH;
+            return;
+        }
         //đang di chuyển giữa đường thì nhà bị phá
         if(this._path.length === 0) {
             // cc.log("path length 0")
@@ -198,7 +228,8 @@ var BaseTroop = cc.Node.extend({
 
                 //on end Path -> attack mode
                 cc.log("end path");
-                this._state = 2;
+                this._firstAttack = true;
+                this._state = TROOP_STATE.ATTACK;
                 return;
             }
             this._posX = this._path[this._currentIndex].x;
@@ -243,12 +274,14 @@ var BaseTroop = cc.Node.extend({
     attackTarget: function (dt){
         if(this._target.isDestroy()) {
             cc.log("target destroy")
-            this._state = 0;
+            this._state = TROOP_STATE.FIND_PATH;
             return;
         }
-
-        this.performAttackAnimation();
         //perform attack
+        if(this._firstAttack === true && this._attackCd >= this._attackSpeed/2) {
+            this._firstAttack = false;
+            this.performAttackAnimation();
+        }
         if(this._attackCd===0)
         {
             this._attackCd = this._attackSpeed;
@@ -262,7 +295,6 @@ var BaseTroop = cc.Node.extend({
             this._attackCd -= dt;
             if(this._attackCd < 0)
                 this._attackCd = 0;
-
         }
     },
     performAttackAnimation: function () {
@@ -317,34 +349,40 @@ var BaseTroop = cc.Node.extend({
 
         let cloneAttackAction = attackAction.clone();
 
-        //double speed attack
-        cloneAttackAction.setSpeed(2);
-
         if(this._stateAnimation !== this._state)
         {
             this._stateAnimation = this._state;
-            cc.log("change attack action")
             this._bodySprite.stopAllActions();
             this._bodySprite.runAction(cloneAttackAction);
         }
     },
     onGainDamage: function (damage) {
+        cc.log("gain damage: " + damage);
         this._currentHitpoints -= damage;
+        this._hpBar.setPercent(this._currentHitpoints/this._hitpoints*100);
         if(this._currentHitpoints <= 0) {
             this._currentHitpoints = 0;
-            this.destroy();
+            this.dead();
         }
     },
     isAlive: function () {
         return this._currentHitpoints > 0;
     },
-    destroy: function () {
+    dead: function () {
         //remove from list
-        BattleManager.getInstance().onDestroyTroop(this);
-        //remove from map
-        // cc.director.getRunningScene().battleLayer.onDestroy(this._posX,this._posY);
-        //remove from parent
-        this.removeFromParent();
+        BattleManager.getInstance().onTroopDead(this);
+        //perform death animation
+        this._state = TROOP_STATE.DEAD;
+        this._bodySprite.stopAllActions();
+        this._bodySprite.setTexture(effect.RIP);
+
+        //effect.GHOST bay lên và biến mất sau 0.5s
+        let ghost = new cc.Sprite(effect.GHOST);
+        ghost.setScale(0.5);
+        ghost.setPosition(this.getPosition());
+        this.getParent().addChild(ghost);
+        ghost.runAction(cc.sequence(cc.moveBy(0.5,0,50),cc.fadeOut(0.5),cc.removeSelf()));
     }
 
 });
+

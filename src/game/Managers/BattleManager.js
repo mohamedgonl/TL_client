@@ -404,7 +404,7 @@ var BattleManager = cc.Class.extend({
                     this._battleGraph.changeNodeWeight(column, row, 0)
         }
     },
-    onDestroyTroop: function (troop) {
+    onTroopDead: function (troop) {
         //update listCurrentTroop
         for (let i = 0; i < this.listCurrentTroop.length; i++) {
             if (this.listCurrentTroop[i] === troop) {

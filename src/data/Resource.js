@@ -339,7 +339,9 @@ var res_map = {
         PROGRESS_BAR: "res/guis/upgrade_building_gui/building_time_bar.png",
         PROGRESS_BAR_BG: "res/guis/upgrade_building_gui/building_time_bg.png",
         BUILDING_HEALTH_BAR: "res/new/battle_gui/enemies_heal_bar.png",
-        BUILDING_HEALTH_BAR_BG: "res/new/battle_gui/bg_heal_bar.png",
+        HEALTH_BAR_BG: "res/new/battle_gui/bg_heal_bar.png",
+        TROOP_HEALTH_BAR: "res/new/battle_gui/ally_heal_bar.png",
+
         BUILDING_EXPLOSION: {
             1: "res/battle/explosion_1/00.png",
             2: "res/battle/explosion_1/01.png",

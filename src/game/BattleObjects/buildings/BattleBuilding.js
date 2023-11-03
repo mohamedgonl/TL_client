@@ -115,7 +115,7 @@ var BattleBuilding = BattleGameObject.extend({
         //progress bar
         this._hpBar = new ccui.Slider();
         this._hpBar.setScale(SCALE_BUILDING_BODY);
-        this._hpBar.loadBarTexture(res_map.SPRITE.BUILDING_HEALTH_BAR_BG);
+        this._hpBar.loadBarTexture(res_map.SPRITE.HEALTH_BAR_BG);
         this._hpBar.loadProgressBarTexture(res_map.SPRITE.BUILDING_HEALTH_BAR);
         this._hpBar.setAnchorPoint(0.5, 1);
         this._hpBar.setPosition(0, 30);

@@ -227,6 +227,7 @@ var LoadManager = cc.Node.extend({
         }
         res_map.SPRITE.BUILDER.BUILD.UP = builderBuildUp;
         this.loadSpriteTroops();
+        this.createAnimation();
     },
 
     loadSpriteToRes: function (res_address, prefix, suffix, count) {
@@ -310,6 +311,9 @@ var LoadManager = cc.Node.extend({
         this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/attack01/image0", 39, 51, res_troop.ATTACK.ARM_1.UP_LEFT);
         this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/attack01/image0", 52, 64, res_troop.ATTACK.ARM_1.UP);
     },
+    createAnimation: function () {
+        //DEAD_EFFECT
+    },
     addAnimationToTarget: function (link, start, end, target) {
         let animation = new cc.Animation();
         for (var i = start; i <= end; i++) {
@@ -324,10 +328,11 @@ var LoadManager = cc.Node.extend({
             // cc.log("RES:::::::::::", res);
             animation.addSpriteFrameWithFile(res);
         }
-        animation.setDelayPerUnit(0.1);
+        //loop in 1s
+
+        animation.setDelayPerUnit(1/(end-start+1));
         animation.setRestoreOriginalFrame(true);
         target.ANIM = cc.animate(animation).repeatForever();
-
         target.ANIM.retain();
     }
 });
@@ -498,5 +503,14 @@ var res_troop = {
             }
 
         }
+    },
+    SHADOW: {
+        SMALL: "res/Map/map_obj_bg/1x1_bong.png",
+        BIG: "res/Map/map_obj_bg/big_shadow_troop.png"
     }
+}
+var effect= {
+    RIP: "res/battle/rip_elixir.png",
+    GHOST: "res/battle/ghost.png",
+    // DEAD_EFFECT: null,
 }
