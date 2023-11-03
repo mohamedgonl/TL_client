@@ -151,47 +151,6 @@
             "ctype": "SpriteObjectData"
           },
           {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "TroopTrainingItem.json",
-              "Plist": ""
-            },
-            "StretchWidthEnable": false,
-            "StretchHeightEnable": false,
-            "InnerActionSpeed": 1.0,
-            "AnchorPoint": {},
-            "Position": {
-              "X": -239.0,
-              "Y": 6.2115
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": true,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": -239.0,
-            "RightMargin": 239.0,
-            "TopMargin": -6.2115,
-            "BottomMargin": 6.2115,
-            "Tag": 45,
-            "ActionTag": 206224357,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Name": "FileNode_1",
-            "ctype": "ProjectNodeObjectData"
-          },
-          {
             "LabelText": "",
             "LabelBMFontFile_CNB": {
               "Type": "Normal",
@@ -734,6 +693,7 @@
             "TopMargin": 21.0176,
             "BottomMargin": -65.0176,
             "Tag": 201,
+            "FrameEvent": "-press_action",
             "ActionTag": 924645138,
             "Size": {
               "X": 118.0,
@@ -933,8 +893,7 @@
         "guis/Main_Gui/login/slot.png",
         "guis/Main_Gui/trophy.png",
         "guis/train_troop_gui/bg_cost_2.png",
-        "LoginGui/okbutton.png",
-        "TroopTrainingItem.json"
+        "LoginGui/okbutton.png"
       ],
       "ctype": "GameFileData"
     }

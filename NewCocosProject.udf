@@ -30,6 +30,7 @@
         <OpenedDocuments>
           <FilePathData Path="MatchHistoryItem.csd" />
           <FilePathData Path="HistoryAttackPopup.csd" />
+          <FilePathData Path="TroopTrainingItem.csd" />
         </OpenedDocuments>
         <ActiveDocument Path="MatchHistoryItem.csd" />
       </Value>

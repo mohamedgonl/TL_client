@@ -38,16 +38,6 @@
             <FileData Type="Normal" Path="guis/Main_Gui/login/bg.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="FileNode_1" ActionTag="206224357" Tag="45" IconVisible="True" LeftMargin="-239.0000" RightMargin="239.0000" TopMargin="-6.2115" BottomMargin="6.2115" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
-            <Size X="0.0000" Y="0.0000" />
-            <AnchorPoint />
-            <Position X="-239.0000" Y="6.2115" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition />
-            <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="Normal" Path="TroopTrainingItem.csd" Plist="" />
-          </AbstractNodeData>
           <AbstractNodeData Name="enemy_name" ActionTag="-1269094483" Tag="184" IconVisible="False" LeftMargin="-193.3392" RightMargin="193.3392" TopMargin="-59.4892" BottomMargin="59.4892" LabelText="" ctype="TextBMFontObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -166,7 +156,7 @@
             <FileData Type="Normal" Path="guis/Main_Gui/trophy.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="button_replay" ActionTag="924645138" Tag="201" IconVisible="False" LeftMargin="188.8798" RightMargin="-306.8798" TopMargin="21.0176" BottomMargin="-65.0176" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="88" Scale9Height="22" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="button_replay" ActionTag="924645138" Tag="201" FrameEvent="-press_action" IconVisible="False" LeftMargin="188.8798" RightMargin="-306.8798" TopMargin="21.0176" BottomMargin="-65.0176" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="88" Scale9Height="22" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="118.0000" Y="44.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="247.8798" Y="-43.0176" />

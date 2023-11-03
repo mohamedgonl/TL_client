@@ -17,17 +17,40 @@ var MatchHistoryItem = cc.Node.extend({
     },
     initData : function (data) {
         cc.log(JSON.stringify(data))
-
         this._enemyName.setString(data.enemyName);
-        this._time.setString(data.time);
-
-        // troop list
-
+        this._time.setString(fr.getTimeDifferenceString(TimeManager.getInstance().getCurrentTimeInSecond(), data.time));
         this._result.setString(data.isWin ? "CHIẾN THẮNG": "THẤT BẠI");
         this._percentage.setString(data.percentage*100 + "%");
         this._elxirGot.setString(data.elixirGot);
         this._goldGot.setString(data.goldGot);
         this._trophy.setString(data.isWin?"":"-" + data.trophy);
 
+        data.troops.map(troop => {
+            let troopItem = new TroopItem(troop.cfgId, troop.count);
+            this._troopList.addChild(troopItem);
+            troopItem.setPosition(MATCH_DETAIL_TROOP_POS.x, MATCH_DETAIL_TROOP_POS.y);
+        })
     }
+})
+
+
+let TroopItem = cc.Node.extend({
+    ctor: function (cfgId, count) {
+        this._super();
+        this._troopCfgId = cfgId;
+        let node = CCSUlties.parseUIFile(res_ui.TROOPS_TRAINING_ITEM);
+        this._node = node.getChildByName("bg");
+        this._node.getChildByName("sub_icon").setVisible(false);
+        this._node.getChildByName("count_string").setString(count)
+        this.loadData();
+        this.addChild(node);
+    },
+
+    loadData: function () {
+        let icon = this._node.getChildByName("troop_icon");
+        icon.loadTexture(TROOP_SMALL_ICON_BASE_URL+this._troopCfgId+".png");
+        icon.ignoreContentAdaptWithSize(true);
+    },
+
+
 })

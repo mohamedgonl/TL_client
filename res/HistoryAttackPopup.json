@@ -240,11 +240,11 @@
             "IsBounceEnabled": true,
             "InnerNodeSize": {
               "Width": 706,
-              "Height": 1508
+              "Height": 405
             },
             "ScrollDirectionType": "Vertical",
             "ClipAble": true,
-            "BackColorAlpha": 115,
+            "BackColorAlpha": 119,
             "ComboBoxIndex": 2,
             "SingleColor": {},
             "FirstColor": {
@@ -254,8 +254,8 @@
             },
             "EndColor": {},
             "ColorVector": {
-              "ScaleX": -0.2079,
-              "ScaleY": 0.9781
+              "ScaleX": -0.8746,
+              "ScaleY": 0.4848
             },
             "Scale9Width": 1,
             "Scale9Height": 1,
