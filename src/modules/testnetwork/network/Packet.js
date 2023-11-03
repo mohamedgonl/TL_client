@@ -440,7 +440,7 @@ CmdSendEndBattle = fr.OutPacket.extend(
             cc.log("GUI LEN"  + JSON.stringify({result, starAmount, trophyAmount, robbedGold, robbedElixir, listTroops, tick}))
 
             this.packHeader();
-            this.putInt(result);
+            this.putInt(result ? 1 : 0);
             this.putInt(starAmount);
             this.putInt(trophyAmount);
             this.putInt(robbedGold);

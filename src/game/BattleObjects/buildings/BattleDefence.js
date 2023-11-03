@@ -4,15 +4,19 @@ var BattleDefence = BattleBuilding.extend({
 
     ctor: function (level, id, posX, posY) {
         this._super(level, id, posX, posY);
+
+        let config = LoadManager.getInstance().getDefBaseConfig(this._type);
+        this._minRange = config.minRange * 3;
+        this._maxRange = config.maxRange * 3;
+
+        this.centerPoint = cc.p(this._posX + Math.floor(this._width / 2), this._posY + Math.floor(this._height / 2))
         // var upper_sprite =  res_map.SPRITE.BODY.CANNON.UPPER[level];
         // this.loadSprite(res_map.SPRITE.BODY.CANNON.BOTTOM[level],upper_sprite,2);
         // this.loadSubSprite();
-        // this.update();
-        // this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
     },
 
-    gameLoop: function (dt){
-        if (this.attackCd > 0){
+    gameLoop: function (dt) {
+        if (this.attackCd > 0) {
             this.attackCd -= dt;
             return;
         }
@@ -23,14 +27,23 @@ var BattleDefence = BattleBuilding.extend({
         this.attack(target);
     },
 
-    addTarget: function (target){
+    addTarget: function (target) {
         this.targetQueue.push(target);
     },
 
-    removeAllTargets: function (){
-      this.targetQueue = [];
+    setListTargets: function (targets) {
+        this.targetQueue = targets;
     },
 
-    attack: function (target){
+    removeAllTargets: function () {
+        this.targetQueue = [];
+    },
+
+    checkTargetInRange: function (target) {
+        const dist = cc.pDistance(cc.p(target._posX, target._posY), this.centerPoint);
+        return dist > this._minRange && dist < this._maxRange;
+    },
+
+    attack: function (target) {
     }
 });
