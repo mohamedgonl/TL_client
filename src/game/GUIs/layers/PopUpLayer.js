@@ -12,6 +12,8 @@ let PopupLayer = cc.Layer.extend({
 
     appear: function (popUpId, data) {
         cc.log("APPEAR : ", this.isVisible())
+        cc.log("POPUP _ID : " + popUpId)
+
         this.setVisible(true);
         let popupScreen;
         switch (popUpId) {
@@ -25,6 +27,10 @@ let PopupLayer = cc.Layer.extend({
             }
 
             case POPUP_IDS.TRAIN: {
+                if(!this._trainTroopPopup) {
+                    this._trainTroopPopup = new TrainTroopPopup();
+                    this.addChild(this._trainTroopPopup)
+                }
                 popupScreen = this._trainTroopPopup;
                 this._trainTroopPopup.open(data.page);
                 break;
@@ -36,6 +42,14 @@ let PopupLayer = cc.Layer.extend({
                     this.addChild(this._fightPopup);
                 }
                 popupScreen = this._fightPopup;
+                break;
+            }
+            case POPUP_IDS.ATTACK_HISTORY: {
+                if (!this._attackHistoryPopup) {
+                    this._attackHistoryPopup = new MatchHistoryPopup();
+                    this.addChild(this._attackHistoryPopup);
+                }
+                popupScreen = this._attackHistoryPopup;
                 break;
             }
         }
@@ -58,11 +72,20 @@ let PopupLayer = cc.Layer.extend({
                 this._fightPopup.handleClickClose(closePopupLayer);
                 break;
             }
+            case POPUP_IDS.ATTACK_HISTORY: {
+                this._fightPopup.handleClickClose(closePopupLayer);
+                break;
+            }
+
         }
     },
 
     getTrainingPopup: function () {
         return this._trainTroopPopup;
+    },
+
+    getHistoryPopup: function () {
+        return this._attackHistoryPopup;
     },
 
     push: function (popup) {

@@ -3,7 +3,7 @@ var TrainTroopPage = cc.Node.extend({
     _available: true,
     _curBarrack: null,
     _isActive: false,
-    _troopListItem: [],
+
     _totalTime: 0,
     _curTroopTimeLeft: null,
     ctor: function (curPage) {

@@ -1,5 +1,5 @@
 <GameFile>
-  <PropertyGroup Name="TroopTrainPopup" Type="Node" ID="3db1347a-fa68-4039-a0c3-8720855dcb45" Version="3.10.0.0" />
+  <PropertyGroup Name="TroopTrainingPopup" Type="Node" ID="08225b0a-bd9e-4dc9-85b5-469addb5eef2" Version="3.10.0.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />

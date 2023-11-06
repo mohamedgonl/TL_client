@@ -20,6 +20,8 @@ gv.CMD.FIND_MATCH = 6001;
 gv.CMD.DO_ACTION = 6002;
 gv.CMD.END_BATTLE = 6003;
 
+gv.CMD.GET_HISTORY_ATTACK = 6005;
+
 //quyet----------------------
 gv.CMD.REMOVE_OBSTACLE = 2009;
 gv.CMD.CANCEL_BUILD = 2002;
@@ -437,6 +439,8 @@ CmdSendEndBattle = fr.OutPacket.extend(
             this.setCmdId(gv.CMD.END_BATTLE);
         },
         pack: function ({result, starAmount, trophyAmount, robbedGold, robbedElixir, listTroops, tick}) {
+            cc.log("GUI LEN"  + JSON.stringify({result, starAmount, trophyAmount, robbedGold, robbedElixir, listTroops, tick}))
+
             this.packHeader();
             this.putInt(result ? 1 : 0);
             this.putInt(starAmount);
@@ -449,6 +453,19 @@ CmdSendEndBattle = fr.OutPacket.extend(
                 this.putInt(troop.amount);
             }
             this.putInt(tick);
+            this.updateSize();
+        }
+    })
+
+CmdSendGetHistoryAttack = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.GET_HISTORY_ATTACK);
+        },
+        pack: function (data) {
+            this.packHeader();
             this.updateSize();
         }
     })
@@ -900,6 +917,46 @@ testnetwork.packetMap[gv.CMD.DO_ACTION] = fr.InPacket.extend(
         },
         readData: function () {
             this.error = this.getError();
+        }
+    }
+);
+
+testnetwork.packetMap[gv.CMD.GET_HISTORY_ATTACK] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.error = this.getError();
+            if(this.error === 0) {
+                this.matchCount = this.getInt();
+                let matches = [];
+                for (let i = 0; i < this.matchCount; i++) {
+                    let match = {};
+                    match.id = this.getInt();
+                    match.enemyId = this.getInt();
+                    match.enemyName = this.getString();
+                    match.trophy = this.getInt();
+                    match.goldGot = this.getInt();
+                    match.elixirGot = this.getInt();
+                    match.isWin  = this.getInt() !== 0;
+                    match.percentage = this.getDouble();
+                    match.stars = this.getInt();
+                    match.time = this.getInt();
+                    // army
+                    let troopCount = this.getInt();
+                    let troops = []
+                    for (let j = 0; j < troopCount; j++) {
+                        let troop = {}
+                        troop.cfgId = this.getString();
+                        troop.count = this.getInt();
+                        troops.push(troop);
+                    }
+                    match.troops = troops;
+                    matches.push(match);
+                }
+                this.matches = matches;
+            }
         }
     }
 );
