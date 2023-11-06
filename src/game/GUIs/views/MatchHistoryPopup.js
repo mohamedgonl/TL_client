@@ -16,9 +16,11 @@ var MatchHistoryPopup = cc.Layer.extend({
     initMatches: function (matches) {
 
         let prevItemPosY;
+        // this._scrollView.setContentSize(cc.size(this._scrollView.getInnerContainerSize().width,
+        //     MATCH_HISTORY_ITEM_HEIGHT * (matches.length) + (matches.length-1) * ITEM_MARGIN))
+
         for (let i = 0; i < matches.length; i++) {
             let item = new MatchHistoryItem(matches[i]);
-            this._scrollView.addChild(item);
             let scrollViewSize =  this._scrollView.getContentSize();
             item.setPositionX(scrollViewSize.width/2);
             if (i === 0) {
@@ -26,12 +28,13 @@ var MatchHistoryPopup = cc.Layer.extend({
             } else {
                 item.setPositionY(prevItemPosY - ITEM_MARGIN - MATCH_HISTORY_ITEM_HEIGHT);
             }
+            this._scrollView.addChild(item);
             prevItemPosY = item.getPosition().y;
-
-
         }
-        // this._scrollView.setInnerContainerSize(cc.size(this._scrollView.getInnerContainerSize().width, 700))
-        cc.log(this._scrollView.getInnerContainerSize().height)
+
+        this._scrollView.setInnerContainerSize(cc.size(this._scrollView.getInnerContainerSize().width,
+            MATCH_HISTORY_ITEM_HEIGHT * (matches.length) + (matches.length-1) * ITEM_MARGIN))
+
     },
 
     handleClickClose: function () {
