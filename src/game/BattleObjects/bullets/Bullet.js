@@ -33,7 +33,8 @@ var Bullet = cc.Sprite.extend({
         this.setPosition(initPos.x, initPos.y);
     },
 
-    reset: function (target) {
+    reset: function (startPoint, target) {
+        this.startPoint = startPoint;
         this.target = target;
         this.alpha = 0;
         this.destination = cc.p(target.x, target.y);
@@ -87,7 +88,7 @@ Bullet.getOrCreateBullet = function (type, startPoint, target, damagePerShot) {
     const listBullets = BattleManager.getInstance().listBullets;
     for (let bullet of listBullets)
         if (!bullet.active && bullet._type === type) {
-            bullet.reset(target);
+            bullet.reset(startPoint, target);
             return bullet;
         }
     if (type === "DEF_1") {

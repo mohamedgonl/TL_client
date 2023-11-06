@@ -18,13 +18,13 @@ var BattleCannon = BattleDefence.extend({
         this.loadSprite(res_map.SPRITE.BODY.CANNON[level][0], null, 2, null, res_map.SPRITE.BODY.CANNON.JUNK);
     },
 
-    attack: function (target) {
-        const bullet = Bullet.getOrCreateBullet(this._type, {
-            x: this.x,
-            y: this.y,
-            _posX: this.centerPoint.x,
-            _posY: this.centerPoint.y
-        }, target, this.damagePerShot);
-    },
+    // attack: function (target) {
+    //     const bullet = Bullet.getOrCreateBullet(this._type, {
+    //         x: this.x,
+    //         y: this.y,
+    //         _posX: this.centerPoint.x,
+    //         _posY: this.centerPoint.y
+    //     }, target, this.damagePerShot);
+    // },
 
 });

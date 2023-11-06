@@ -19,3 +19,5 @@ const BATTLE_STATUS = {
 const BATTlE_PREPARE_TIME = 30;
 const BATTlE_LIMIT_TIME = 150;
 const BATTLE_FPS = 20;
+const TOTAL_DEFENCE_DIRECT = 8;
+
