@@ -840,48 +840,6 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 158.7896,
-              "Y": -43.0176
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "LeftMargin": 158.7896,
-            "RightMargin": -158.7896,
-            "TopMargin": 43.0176,
-            "BottomMargin": -43.0176,
-            "Tag": 205,
-            "ActionTag": -840747801,
-            "Size": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Name": "trophy",
-            "ctype": "TextBMFontObjectData"
-          },
-          {
-            "LabelText": "",
-            "LabelBMFontFile_CNB": {
-              "Type": "Normal",
-              "Path": "fonts/soji_16.fnt",
-              "Plist": ""
-            },
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
               "X": 158.0366,
               "Y": -42.813
             },

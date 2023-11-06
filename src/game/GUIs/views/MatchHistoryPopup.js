@@ -5,7 +5,7 @@ var MatchHistoryPopup = cc.Layer.extend({
         let node = CCSUlties.parseUIFile(res_ui.MATCH_HISTORY_POPUP);
         node.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
         this._scrollView = node.getChildByName("ScrollView_1");
-        this._scrollView.setScrollBarEnabled(false);
+        // this._scrollView.setScrollBarEnabled(false);
         let closeButton = node.getChildByName("button_close");
         closeButton.addClickEventListener(this.handleClickClose.bind(this));
         this.addChild(node);
@@ -14,12 +14,13 @@ var MatchHistoryPopup = cc.Layer.extend({
     },
 
     initMatches: function (matches) {
-       cc.log(this._scrollView.getChildren().length)
+
         let prevItemPosY;
         for (let i = 0; i < matches.length; i++) {
             let item = new MatchHistoryItem(matches[i]);
             this._scrollView.addChild(item);
-            item.setPositionX(MATCH_HISTORY_SCROLL_POS.x);
+            let scrollViewSize =  this._scrollView.getContentSize();
+            item.setPositionX(scrollViewSize.width/2);
             if (i === 0) {
                 item.setPositionY(MATCH_HISTORY_SCROLL_POS.y);
             } else {
@@ -27,9 +28,10 @@ var MatchHistoryPopup = cc.Layer.extend({
             }
             prevItemPosY = item.getPosition().y;
 
+
         }
-        this._scrollView.setInnerContainerSize(cc.size(MATCH_HISTORY_ITEM_WIDTH,
-            (matches.length) * (MATCH_HISTORY_ITEM_MARGIN + MATCH_HISTORY_ITEM_HEIGHT)))
+        // this._scrollView.setInnerContainerSize(cc.size(this._scrollView.getInnerContainerSize().width, 700))
+        cc.log(this._scrollView.getInnerContainerSize().height)
     },
 
     handleClickClose: function () {

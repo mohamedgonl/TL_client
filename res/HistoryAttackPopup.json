@@ -239,26 +239,24 @@
           {
             "IsBounceEnabled": true,
             "InnerNodeSize": {
-              "Width": 706,
-              "Height": 405
+              "Width": 700,
+              "Height": 400
             },
             "ScrollDirectionType": "Vertical",
             "ClipAble": true,
-            "BackColorAlpha": 119,
-            "ComboBoxIndex": 2,
-            "SingleColor": {},
+            "BackColorAlpha": 102,
+            "SingleColor": {
+              "G": 150,
+              "B": 100
+            },
             "FirstColor": {
-              "R": 254,
-              "G": 182,
-              "B": 147
+              "G": 150,
+              "B": 100
             },
             "EndColor": {},
             "ColorVector": {
-              "ScaleX": -0.8746,
-              "ScaleY": 0.4848
+              "ScaleY": 1.0
             },
-            "Scale9Width": 1,
-            "Scale9Height": 1,
             "TouchEnable": true,
             "AnchorPoint": {
               "ScaleX": 0.5,
@@ -266,7 +264,7 @@
             },
             "Position": {
               "X": 0.0,
-              "Y": -12.0
+              "Y": -12.7
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -274,7 +272,6 @@
             },
             "CColor": {},
             "IconVisible": false,
-            "PositionPercentXEnabled": true,
             "PrePosition": {
               "X": 0.0,
               "Y": 0.0
@@ -283,15 +280,15 @@
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": -352.5,
-            "RightMargin": -352.5,
-            "TopMargin": -190.5,
-            "BottomMargin": -214.5,
-            "Tag": 175,
-            "ActionTag": -628969306,
+            "LeftMargin": -350.0,
+            "RightMargin": -350.0,
+            "TopMargin": -187.3,
+            "BottomMargin": -212.7,
+            "Tag": 340,
+            "ActionTag": 129003777,
             "Size": {
-              "X": 705.0,
-              "Y": 405.0
+              "X": 700.0,
+              "Y": 400.0
             },
             "Name": "ScrollView_1",
             "ctype": "ScrollViewObjectData"

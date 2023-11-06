@@ -56,19 +56,19 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="ScrollView_1" ActionTag="-628969306" Tag="175" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="-352.5000" RightMargin="-352.5000" TopMargin="-190.5000" BottomMargin="-214.5000" TouchEnable="True" ClipAble="True" BackColorAlpha="119" ComboBoxIndex="2" ColorAngle="151.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
-            <Size X="705.0000" Y="405.0000" />
+          <AbstractNodeData Name="ScrollView_1" ActionTag="129003777" Tag="340" IconVisible="False" LeftMargin="-350.0000" RightMargin="-350.0000" TopMargin="-187.3000" BottomMargin="-212.7000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+            <Size X="700.0000" Y="400.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position Y="-12.0000" />
+            <Position Y="-12.7000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <SingleColor A="255" R="255" G="255" B="255" />
-            <FirstColor A="255" R="254" G="182" B="147" />
+            <SingleColor A="255" R="255" G="150" B="100" />
+            <FirstColor A="255" R="255" G="150" B="100" />
             <EndColor A="255" R="255" G="255" B="255" />
-            <ColorVector ScaleX="-0.8746" ScaleY="0.4848" />
-            <InnerNodeSize Width="706" Height="405" />
+            <ColorVector ScaleY="1.0000" />
+            <InnerNodeSize Width="700" Height="400" />
           </AbstractNodeData>
         </Children>
       </ObjectData>
