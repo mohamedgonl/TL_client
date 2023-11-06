@@ -61,6 +61,8 @@ var BattleScene = cc.Scene.extend({
     },
 
     onStartBattle: function () {
+        if (BattleManager.getInstance().battleStatus !== BATTLE_STATUS.PREPARING)
+            return;
         testnetwork.connector.sendDoAction({type: ACTION_TYPE.START_BATTlE, tick: this.tick,});
         BattleManager.getInstance().battleStatus = BATTLE_STATUS.HAPPENNING;
         this.setTimeLeft(BATTlE_LIMIT_TIME + 1);
@@ -99,7 +101,7 @@ var BattleScene = cc.Scene.extend({
                 self.battleUILayer.onEndBattle();
                 self.battleEndLayer.show();
             }, 1, 0, 0);
-        } else {
+        } else if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.PREPARING) {
             this.goToGameScene();
         }
     },
@@ -155,10 +157,12 @@ var BattleScene = cc.Scene.extend({
     gameLoop: function (dt) {
         this.battleLayer.gameLoop(dt);
         for (let defence of BattleManager.getInstance().listDefences) {
-            defence.gameLoop(dt);
+            if (!defence.isDestroy())
+                defence.gameLoop(dt);
         }
         for (let bullet of BattleManager.getInstance().listBullets) {
-            bullet.gameLoop(dt);
+            if (bullet.active)
+                bullet.gameLoop(dt);
         }
         for (let troop of BattleManager.getInstance().listCurrentTroop) {
             troop.gameLoop(dt);

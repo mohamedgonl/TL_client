@@ -3,7 +3,7 @@ var TrainTroopPopup = cc.Layer.extend({
     _curPage: 0,
     ctor: function () {
         this._super();
-        this._trainPages = []
+        this._trainPages = [];
         this.initPages();
         this.updateBarracks();
         this.setVisible(false);
@@ -73,6 +73,7 @@ var TrainTroopPopup = cc.Layer.extend({
 
         this._curPage = page;
         this._trainPages[this._curPage].setVisible(true);
+        cc.log("ĐI QUA DAY =-----------------------------------" + this._curPage);
     },
 
     changePage: function (page) {

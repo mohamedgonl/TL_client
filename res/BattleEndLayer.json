@@ -43,13 +43,13 @@
               "Y": 0.5
             },
             "PreSize": {
-              "X": 0.0405,
-              "Y": 0.0719
+              "X": 0.7042,
+              "Y": 0.75
             },
-            "LeftMargin": 545.0,
-            "RightMargin": 545.0,
-            "TopMargin": 297.0,
-            "BottomMargin": 297.0,
+            "LeftMargin": 168.0,
+            "RightMargin": 168.0,
+            "TopMargin": 80.0,
+            "BottomMargin": 80.0,
             "Tag": 165,
             "ActionTag": 2006885090,
             "Size": {
@@ -88,13 +88,13 @@
               "Y": 0.7188
             },
             "PreSize": {
-              "X": 0.0405,
-              "Y": 0.0719
+              "X": 0.4375,
+              "Y": 0.7984
             },
-            "LeftMargin": 545.0,
-            "RightMargin": 545.0,
-            "TopMargin": 157.0,
-            "BottomMargin": 437.0,
+            "LeftMargin": 319.5,
+            "RightMargin": 319.5,
+            "TopMargin": -75.5,
+            "BottomMargin": 204.5,
             "Tag": 164,
             "ActionTag": 1261484970,
             "Size": {
@@ -133,13 +133,13 @@
               "Y": 0.5
             },
             "PreSize": {
-              "X": 0.0405,
-              "Y": 0.0719
+              "X": 0.7042,
+              "Y": 0.6625
             },
-            "LeftMargin": 545.0,
-            "RightMargin": 545.0,
-            "TopMargin": 297.0,
-            "BottomMargin": 297.0,
+            "LeftMargin": 168.0,
+            "RightMargin": 168.0,
+            "TopMargin": 108.0,
+            "BottomMargin": 108.0,
             "Tag": 157,
             "ActionTag": 2065229068,
             "Size": {
@@ -178,13 +178,13 @@
               "Y": 0.7969
             },
             "PreSize": {
-              "X": 0.0405,
-              "Y": 0.0719
+              "X": 0.4234,
+              "Y": 0.1234
             },
-            "LeftMargin": 545.0,
-            "RightMargin": 545.0,
-            "TopMargin": 107.0,
-            "BottomMargin": 487.0,
+            "LeftMargin": 327.5,
+            "RightMargin": 327.5,
+            "TopMargin": 90.5,
+            "BottomMargin": 470.5,
             "Tag": 158,
             "ActionTag": 1740606672,
             "Size": {
@@ -223,13 +223,13 @@
               "Y": 0.7344
             },
             "PreSize": {
-              "X": 0.0405,
-              "Y": 0.0719
+              "X": 0.1452,
+              "Y": 0.1234
             },
-            "LeftMargin": 545.0,
-            "RightMargin": 545.0,
-            "TopMargin": 147.0,
-            "BottomMargin": 447.0,
+            "LeftMargin": 485.5,
+            "RightMargin": 485.5,
+            "TopMargin": 130.5,
+            "BottomMargin": 430.5,
             "Tag": 159,
             "ActionTag": -311739299,
             "Size": {
@@ -268,13 +268,13 @@
               "Y": 0.7344
             },
             "PreSize": {
-              "X": 0.0405,
-              "Y": 0.0719
+              "X": 0.1312,
+              "Y": 0.0984
             },
-            "LeftMargin": 545.0,
-            "RightMargin": 545.0,
-            "TopMargin": 147.0,
-            "BottomMargin": 447.0,
+            "LeftMargin": 493.5,
+            "RightMargin": 493.5,
+            "TopMargin": 138.5,
+            "BottomMargin": 438.5,
             "Tag": 886,
             "ActionTag": 137573285,
             "Size": {
@@ -313,13 +313,13 @@
               "Y": 0.8984
             },
             "PreSize": {
-              "X": 0.0405,
-              "Y": 0.0719
+              "X": 0.0933,
+              "Y": 0.1672
             },
-            "LeftMargin": 545.0,
-            "RightMargin": 545.0,
-            "TopMargin": 42.0,
-            "BottomMargin": 552.0,
+            "LeftMargin": 515.0,
+            "RightMargin": 515.0,
+            "TopMargin": 11.5,
+            "BottomMargin": 521.5,
             "Tag": 160,
             "ActionTag": -235735144,
             "Size": {
@@ -358,13 +358,13 @@
               "Y": 0.8594
             },
             "PreSize": {
-              "X": 0.0405,
-              "Y": 0.0719
+              "X": 0.0757,
+              "Y": 0.1391
             },
-            "LeftMargin": 445.0,
-            "RightMargin": 645.0,
-            "TopMargin": 67.0,
-            "BottomMargin": 527.0,
+            "LeftMargin": 425.0,
+            "RightMargin": 625.0,
+            "TopMargin": 45.5,
+            "BottomMargin": 505.5,
             "Tag": 161,
             "ActionTag": -307590416,
             "Size": {
@@ -403,13 +403,13 @@
               "Y": 0.8594
             },
             "PreSize": {
-              "X": 0.0405,
-              "Y": 0.0719
+              "X": 0.0757,
+              "Y": 0.1391
             },
-            "LeftMargin": 645.0,
-            "RightMargin": 445.0,
-            "TopMargin": 67.0,
-            "BottomMargin": 527.0,
+            "LeftMargin": 625.0,
+            "RightMargin": 425.0,
+            "TopMargin": 45.5,
+            "BottomMargin": 505.5,
             "Tag": 162,
             "ActionTag": -624601117,
             "Size": {
@@ -649,13 +649,13 @@
               "Y": 0.5156
             },
             "PreSize": {
-              "X": 0.0405,
-              "Y": 0.0719
+              "X": 0.0211,
+              "Y": 0.05
             },
-            "LeftMargin": 477.0,
-            "RightMargin": 613.0,
-            "TopMargin": 287.0,
-            "BottomMargin": 307.0,
+            "LeftMargin": 488.0,
+            "RightMargin": 624.0,
+            "TopMargin": 294.0,
+            "BottomMargin": 314.0,
             "Tag": 170,
             "ActionTag": 816986569,
             "Size": {
@@ -694,13 +694,13 @@
               "Y": 0.4219
             },
             "PreSize": {
-              "X": 0.0405,
-              "Y": 0.0719
+              "X": 0.0282,
+              "Y": 0.0531
             },
-            "LeftMargin": 477.0,
-            "RightMargin": 613.0,
-            "TopMargin": 347.0,
-            "BottomMargin": 247.0,
+            "LeftMargin": 484.0,
+            "RightMargin": 620.0,
+            "TopMargin": 353.0,
+            "BottomMargin": 253.0,
             "Tag": 171,
             "ActionTag": -341091274,
             "Size": {
@@ -739,13 +739,13 @@
               "Y": 0.6016
             },
             "PreSize": {
-              "X": 0.0405,
-              "Y": 0.0719
+              "X": 0.0246,
+              "Y": 0.0469
             },
-            "LeftMargin": 477.0,
-            "RightMargin": 613.0,
-            "TopMargin": 232.0,
-            "BottomMargin": 362.0,
+            "LeftMargin": 486.0,
+            "RightMargin": 622.0,
+            "TopMargin": 240.0,
+            "BottomMargin": 370.0,
             "Tag": 172,
             "ActionTag": 1019865862,
             "Size": {
@@ -784,13 +784,13 @@
               "Y": 0.5625
             },
             "PreSize": {
-              "X": 0.0405,
-              "Y": 0.0719
+              "X": 0.3222,
+              "Y": 0.0047
             },
-            "LeftMargin": 545.0,
-            "RightMargin": 545.0,
-            "TopMargin": 257.0,
-            "BottomMargin": 337.0,
+            "LeftMargin": 385.0,
+            "RightMargin": 385.0,
+            "TopMargin": 278.5,
+            "BottomMargin": 358.5,
             "Tag": 173,
             "ActionTag": 27442124,
             "Size": {
@@ -829,13 +829,13 @@
               "Y": 0.4688
             },
             "PreSize": {
-              "X": 0.0405,
-              "Y": 0.0719
+              "X": 0.3222,
+              "Y": 0.0047
             },
-            "LeftMargin": 545.0,
-            "RightMargin": 545.0,
-            "TopMargin": 317.0,
-            "BottomMargin": 277.0,
+            "LeftMargin": 385.0,
+            "RightMargin": 385.0,
+            "TopMargin": 338.5,
+            "BottomMargin": 298.5,
             "Tag": 174,
             "ActionTag": -572895666,
             "Size": {
@@ -996,140 +996,6 @@
             "TopMargin": 477.4794,
             "BottomMargin": 162.5206,
             "Tag": 866,
-            "Children": [
-              {
-                "FileData": {
-                  "Type": "Default",
-                  "Path": "Default/Sprite.png",
-                  "Plist": ""
-                },
-                "BlendFunc": {
-                  "Src": 1,
-                  "Dst": 771
-                },
-                "AnchorPoint": {
-                  "ScaleX": 0.5,
-                  "ScaleY": 0.5
-                },
-                "Position": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Scale": {
-                  "ScaleX": 1.5,
-                  "ScaleY": 1.5
-                },
-                "CColor": {},
-                "IconVisible": false,
-                "PrePosition": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": -23.0,
-                "RightMargin": -23.0,
-                "TopMargin": -23.0,
-                "BottomMargin": -23.0,
-                "Tag": 879,
-                "ActionTag": 842240576,
-                "Size": {
-                  "X": 46.0,
-                  "Y": 46.0
-                },
-                "Name": "slot_troop_item",
-                "ctype": "SpriteObjectData"
-              },
-              {
-                "FileData": {
-                  "Type": "Normal",
-                  "Path": "ket_thuc_tran/Icon_nho_nhat/1.png",
-                  "Plist": ""
-                },
-                "BlendFunc": {
-                  "Src": 1,
-                  "Dst": 771
-                },
-                "AnchorPoint": {
-                  "ScaleX": 0.5,
-                  "ScaleY": 0.5
-                },
-                "Position": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "Scale": {
-                  "ScaleX": 1.5,
-                  "ScaleY": 1.5
-                },
-                "CColor": {},
-                "IconVisible": false,
-                "PrePosition": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": -23.0,
-                "RightMargin": -23.0,
-                "TopMargin": -23.0,
-                "BottomMargin": -23.0,
-                "Tag": 880,
-                "ActionTag": 815701894,
-                "Size": {
-                  "X": 43.0,
-                  "Y": 41.0
-                },
-                "Name": "image_troop_item",
-                "ctype": "SpriteObjectData"
-              },
-              {
-                "LabelText": "x2",
-                "LabelBMFontFile_CNB": {
-                  "Type": "Normal",
-                  "Path": "fonts/soji_16.fnt",
-                  "Plist": ""
-                },
-                "AnchorPoint": {
-                  "ScaleX": 0.5,
-                  "ScaleY": 0.5
-                },
-                "Position": {
-                  "X": 0.0,
-                  "Y": 25.0
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": false,
-                "PrePosition": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "PreSize": {
-                  "X": 0.0,
-                  "Y": 0.0
-                },
-                "LeftMargin": -17.5,
-                "RightMargin": -17.5,
-                "TopMargin": -37.5,
-                "BottomMargin": 12.5,
-                "Tag": 881,
-                "ActionTag": -544511060,
-                "Size": {
-                  "X": 35.0,
-                  "Y": 25.0
-                },
-                "Name": "amount_troop_item",
-                "ctype": "TextBMFontObjectData"
-              }
-            ],
             "ActionTag": -662186848,
             "Size": {
               "X": 0.0,
@@ -1167,13 +1033,13 @@
               "Y": 0.9063
             },
             "PreSize": {
-              "X": 0.0405,
-              "Y": 0.0719
+              "X": 0.0933,
+              "Y": 0.1672
             },
-            "LeftMargin": 552.0,
-            "RightMargin": 538.0,
-            "TopMargin": 37.0,
-            "BottomMargin": 557.0,
+            "LeftMargin": 522.0,
+            "RightMargin": 508.0,
+            "TopMargin": 6.5,
+            "BottomMargin": 526.5,
             "Tag": 883,
             "ActionTag": -269366098,
             "Size": {
@@ -1212,13 +1078,13 @@
               "Y": 0.8672
             },
             "PreSize": {
-              "X": 0.0405,
-              "Y": 0.0719
+              "X": 0.0757,
+              "Y": 0.1391
             },
-            "LeftMargin": 452.0,
-            "RightMargin": 638.0,
-            "TopMargin": 62.0,
-            "BottomMargin": 532.0,
+            "LeftMargin": 432.0,
+            "RightMargin": 618.0,
+            "TopMargin": 40.5,
+            "BottomMargin": 510.5,
             "Tag": 884,
             "ActionTag": -243811454,
             "Size": {
@@ -1257,13 +1123,13 @@
               "Y": 0.8672
             },
             "PreSize": {
-              "X": 0.0405,
-              "Y": 0.0719
+              "X": 0.0757,
+              "Y": 0.1391
             },
-            "LeftMargin": 652.0,
-            "RightMargin": 438.0,
-            "TopMargin": 62.0,
-            "BottomMargin": 532.0,
+            "LeftMargin": 632.0,
+            "RightMargin": 418.0,
+            "TopMargin": 40.5,
+            "BottomMargin": 510.5,
             "Tag": 885,
             "ActionTag": 1684070191,
             "Size": {
@@ -1283,7 +1149,6 @@
       },
       "UsedResources": [
         "Default/Button_Disable.png",
-        "Default/Sprite.png",
         "fonts/soji_16.fnt",
         "fonts/soji_16.png",
         "fonts/soji_20.fnt",
@@ -1294,7 +1159,6 @@
         "ket_thuc_tran/cup.png",
         "ket_thuc_tran/dau_tim.png",
         "ket_thuc_tran/doan_thang.png",
-        "ket_thuc_tran/Icon_nho_nhat/1.png",
         "ket_thuc_tran/nen_duoi.png",
         "ket_thuc_tran/nen_trong_1.png",
         "ket_thuc_tran/sao_den.png",

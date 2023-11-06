@@ -97,10 +97,10 @@ var BattleManager = cc.Class.extend({
 
     setPlayerResource: function ({gold, elixir, gem,}) {
         if (gold >= 0) {
-            this.playerResources.gold = gold;
+            this.playerResources.gold = Math.min(gold, this.playerResources.goldCapacity);
         }
         if (elixir >= 0) {
-            this.playerResources.elixir = elixir;
+            this.playerResources.elixir = Math.min(elixir, this.playerResources.elixirCapacity);
         }
         if (gem >= 0) {
             this.playerResources.gem = gem;
@@ -404,7 +404,7 @@ var BattleManager = cc.Class.extend({
                     this._battleGraph.changeNodeWeight(column, row, 0)
         }
     },
-    onDestroyTroop: function (troop) {
+    onTroopDead: function (troop) {
         //update listCurrentTroop
         for (let i = 0; i < this.listCurrentTroop.length; i++) {
             if (this.listCurrentTroop[i] === troop) {

@@ -6,102 +6,102 @@
       <ObjectData Name="Layer" Tag="154" ctype="GameLayerObjectData">
         <Size X="1136.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="Sprite_11" ActionTag="2006885090" Tag="165" IconVisible="False" LeftMargin="545.0000" RightMargin="545.0000" TopMargin="297.0000" BottomMargin="297.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_11" ActionTag="2006885090" Tag="165" IconVisible="False" LeftMargin="168.0000" RightMargin="168.0000" TopMargin="80.0000" BottomMargin="80.0000" ctype="SpriteObjectData">
             <Size X="800.0000" Y="480.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="568.0000" Y="320.0000" />
             <Scale ScaleX="1.4336" ScaleY="1.3339" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
-            <PreSize X="0.0405" Y="0.0719" />
+            <PreSize X="0.7042" Y="0.7500" />
             <FileData Type="Normal" Path="ket_thuc_tran/nen_duoi.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="spin_bg" ActionTag="1261484970" Tag="164" IconVisible="False" LeftMargin="545.0000" RightMargin="545.0000" TopMargin="157.0000" BottomMargin="437.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="spin_bg" ActionTag="1261484970" Tag="164" IconVisible="False" LeftMargin="319.5000" RightMargin="319.5000" TopMargin="-75.5000" BottomMargin="204.5000" ctype="SpriteObjectData">
             <Size X="497.0000" Y="511.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="568.0000" Y="460.0000" />
             <Scale ScaleX="1.2000" ScaleY="1.2000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.7188" />
-            <PreSize X="0.0405" Y="0.0719" />
+            <PreSize X="0.4375" Y="0.7984" />
             <FileData Type="Normal" Path="ket_thuc_tran/nen_trong_1.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="bong_3" ActionTag="2065229068" Tag="157" IconVisible="False" LeftMargin="545.0000" RightMargin="545.0000" TopMargin="297.0000" BottomMargin="297.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="bong_3" ActionTag="2065229068" Tag="157" IconVisible="False" LeftMargin="168.0000" RightMargin="168.0000" TopMargin="108.0000" BottomMargin="108.0000" ctype="SpriteObjectData">
             <Size X="800.0000" Y="424.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="568.0000" Y="320.0000" />
             <Scale ScaleX="1.4300" ScaleY="1.5000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
-            <PreSize X="0.0405" Y="0.0719" />
+            <PreSize X="0.7042" Y="0.6625" />
             <FileData Type="Normal" Path="ket_thuc_tran/bong.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_4" ActionTag="1740606672" Tag="158" IconVisible="False" LeftMargin="545.0000" RightMargin="545.0000" TopMargin="107.0000" BottomMargin="487.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_4" ActionTag="1740606672" Tag="158" IconVisible="False" LeftMargin="327.5000" RightMargin="327.5000" TopMargin="90.5000" BottomMargin="470.5000" ctype="SpriteObjectData">
             <Size X="481.0000" Y="79.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="568.0000" Y="510.0000" />
             <Scale ScaleX="1.5000" ScaleY="1.5000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.7969" />
-            <PreSize X="0.0405" Y="0.0719" />
+            <PreSize X="0.4234" Y="0.1234" />
             <FileData Type="Normal" Path="ket_thuc_tran/bang_ron.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="icon_win" ActionTag="-311739299" Tag="159" IconVisible="False" LeftMargin="545.0000" RightMargin="545.0000" TopMargin="147.0000" BottomMargin="447.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="icon_win" ActionTag="-311739299" Tag="159" IconVisible="False" LeftMargin="485.5000" RightMargin="485.5000" TopMargin="130.5000" BottomMargin="430.5000" ctype="SpriteObjectData">
             <Size X="165.0000" Y="79.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="568.0000" Y="470.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.7344" />
-            <PreSize X="0.0405" Y="0.0719" />
+            <PreSize X="0.1452" Y="0.1234" />
             <FileData Type="Normal" Path="ket_thuc_tran/thang.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="icon_lose" ActionTag="137573285" Tag="886" IconVisible="False" LeftMargin="545.0000" RightMargin="545.0000" TopMargin="147.0000" BottomMargin="447.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="icon_lose" ActionTag="137573285" Tag="886" IconVisible="False" LeftMargin="493.5000" RightMargin="493.5000" TopMargin="138.5000" BottomMargin="438.5000" ctype="SpriteObjectData">
             <Size X="149.0000" Y="63.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="568.0000" Y="470.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.7344" />
-            <PreSize X="0.0405" Y="0.0719" />
+            <PreSize X="0.1312" Y="0.0984" />
             <FileData Type="Normal" Path="ket_thuc_tran/thua.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="star2_bg" ActionTag="-235735144" Tag="160" IconVisible="False" LeftMargin="545.0000" RightMargin="545.0000" TopMargin="42.0000" BottomMargin="552.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="star2_bg" ActionTag="-235735144" Tag="160" IconVisible="False" LeftMargin="515.0000" RightMargin="515.0000" TopMargin="11.5000" BottomMargin="521.5000" ctype="SpriteObjectData">
             <Size X="106.0000" Y="107.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="568.0000" Y="575.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.8984" />
-            <PreSize X="0.0405" Y="0.0719" />
+            <PreSize X="0.0933" Y="0.1672" />
             <FileData Type="Normal" Path="ket_thuc_tran/sao_den.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="star1_bg" ActionTag="-307590416" Tag="161" IconVisible="False" LeftMargin="445.0000" RightMargin="645.0000" TopMargin="67.0000" BottomMargin="527.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="star1_bg" ActionTag="-307590416" Tag="161" IconVisible="False" LeftMargin="425.0000" RightMargin="625.0000" TopMargin="45.5000" BottomMargin="505.5000" ctype="SpriteObjectData">
             <Size X="86.0000" Y="89.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="468.0000" Y="550.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.4120" Y="0.8594" />
-            <PreSize X="0.0405" Y="0.0719" />
+            <PreSize X="0.0757" Y="0.1391" />
             <FileData Type="Normal" Path="ket_thuc_tran/sao_den_2.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="star3_bg" ActionTag="-624601117" Tag="162" IconVisible="False" LeftMargin="645.0000" RightMargin="445.0000" TopMargin="67.0000" BottomMargin="527.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="star3_bg" ActionTag="-624601117" Tag="162" IconVisible="False" LeftMargin="625.0000" RightMargin="425.0000" TopMargin="45.5000" BottomMargin="505.5000" ctype="SpriteObjectData">
             <Size X="86.0000" Y="89.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="668.0000" Y="550.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5880" Y="0.8594" />
-            <PreSize X="0.0405" Y="0.0719" />
+            <PreSize X="0.0757" Y="0.1391" />
             <FileData Type="Normal" Path="ket_thuc_tran/sao_den_2.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
@@ -150,58 +150,58 @@
             <PreSize X="0.1558" Y="0.0391" />
             <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_13" ActionTag="816986569" Tag="170" IconVisible="False" LeftMargin="477.0000" RightMargin="613.0000" TopMargin="287.0000" BottomMargin="307.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_13" ActionTag="816986569" Tag="170" IconVisible="False" LeftMargin="488.0000" RightMargin="624.0000" TopMargin="294.0000" BottomMargin="314.0000" ctype="SpriteObjectData">
             <Size X="24.0000" Y="32.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="500.0000" Y="330.0000" />
             <Scale ScaleX="1.2000" ScaleY="1.2000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.4401" Y="0.5156" />
-            <PreSize X="0.0405" Y="0.0719" />
+            <PreSize X="0.0211" Y="0.0500" />
             <FileData Type="Normal" Path="ket_thuc_tran/dau_tim.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="cup_14" ActionTag="-341091274" Tag="171" IconVisible="False" LeftMargin="477.0000" RightMargin="613.0000" TopMargin="347.0000" BottomMargin="247.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="cup_14" ActionTag="-341091274" Tag="171" IconVisible="False" LeftMargin="484.0000" RightMargin="620.0000" TopMargin="353.0000" BottomMargin="253.0000" ctype="SpriteObjectData">
             <Size X="32.0000" Y="34.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="500.0000" Y="270.0000" />
             <Scale ScaleX="1.2000" ScaleY="1.2000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.4401" Y="0.4219" />
-            <PreSize X="0.0405" Y="0.0719" />
+            <PreSize X="0.0282" Y="0.0531" />
             <FileData Type="Normal" Path="ket_thuc_tran/cup.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="tien_15" ActionTag="1019865862" Tag="172" IconVisible="False" LeftMargin="477.0000" RightMargin="613.0000" TopMargin="232.0000" BottomMargin="362.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="tien_15" ActionTag="1019865862" Tag="172" IconVisible="False" LeftMargin="486.0000" RightMargin="622.0000" TopMargin="240.0000" BottomMargin="370.0000" ctype="SpriteObjectData">
             <Size X="28.0000" Y="30.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="500.0000" Y="385.0000" />
             <Scale ScaleX="1.2000" ScaleY="1.2000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.4401" Y="0.6016" />
-            <PreSize X="0.0405" Y="0.0719" />
+            <PreSize X="0.0246" Y="0.0469" />
             <FileData Type="Normal" Path="ket_thuc_tran/tien.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_16" ActionTag="27442124" Tag="173" IconVisible="False" LeftMargin="545.0000" RightMargin="545.0000" TopMargin="257.0000" BottomMargin="337.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_16" ActionTag="27442124" Tag="173" IconVisible="False" LeftMargin="385.0000" RightMargin="385.0000" TopMargin="278.5000" BottomMargin="358.5000" ctype="SpriteObjectData">
             <Size X="366.0000" Y="3.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="568.0000" Y="360.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5625" />
-            <PreSize X="0.0405" Y="0.0719" />
+            <PreSize X="0.3222" Y="0.0047" />
             <FileData Type="Normal" Path="ket_thuc_tran/doan_thang.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_17" ActionTag="-572895666" Tag="174" IconVisible="False" LeftMargin="545.0000" RightMargin="545.0000" TopMargin="317.0000" BottomMargin="277.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_17" ActionTag="-572895666" Tag="174" IconVisible="False" LeftMargin="385.0000" RightMargin="385.0000" TopMargin="338.5000" BottomMargin="298.5000" ctype="SpriteObjectData">
             <Size X="366.0000" Y="3.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="568.0000" Y="300.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.4688" />
-            <PreSize X="0.0405" Y="0.0719" />
+            <PreSize X="0.3222" Y="0.0047" />
             <FileData Type="Normal" Path="ket_thuc_tran/doan_thang.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
@@ -237,40 +237,6 @@
           </AbstractNodeData>
           <AbstractNodeData Name="node_troop_item" ActionTag="-662186848" Tag="866" IconVisible="True" LeftMargin="566.9170" RightMargin="569.0830" TopMargin="477.4794" BottomMargin="162.5206" ctype="SingleNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
-            <Children>
-              <AbstractNodeData Name="slot_troop_item" ActionTag="842240576" Tag="879" IconVisible="False" LeftMargin="-23.0000" RightMargin="-23.0000" TopMargin="-23.0000" BottomMargin="-23.0000" ctype="SpriteObjectData">
-                <Size X="46.0000" Y="46.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position />
-                <Scale ScaleX="1.5000" ScaleY="1.5000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition />
-                <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
-                <BlendFunc Src="1" Dst="771" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="image_troop_item" ActionTag="815701894" Tag="880" IconVisible="False" LeftMargin="-23.0000" RightMargin="-23.0000" TopMargin="-23.0000" BottomMargin="-23.0000" ctype="SpriteObjectData">
-                <Size X="43.0000" Y="41.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position />
-                <Scale ScaleX="1.5000" ScaleY="1.5000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition />
-                <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="ket_thuc_tran/Icon_nho_nhat/1.png" Plist="" />
-                <BlendFunc Src="1" Dst="771" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="amount_troop_item" ActionTag="-544511060" Tag="881" IconVisible="False" LeftMargin="-17.5000" RightMargin="-17.5000" TopMargin="-37.5000" BottomMargin="12.5000" LabelText="x2" ctype="TextBMFontObjectData">
-                <Size X="35.0000" Y="25.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position Y="25.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition />
-                <PreSize X="0.0000" Y="0.0000" />
-                <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
-              </AbstractNodeData>
-            </Children>
             <AnchorPoint />
             <Position X="566.9170" Y="162.5206" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -278,36 +244,36 @@
             <PrePosition X="0.4990" Y="0.2539" />
             <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="star2_win" ActionTag="-269366098" Tag="883" IconVisible="False" LeftMargin="552.0000" RightMargin="538.0000" TopMargin="37.0000" BottomMargin="557.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="star2_win" ActionTag="-269366098" Tag="883" IconVisible="False" LeftMargin="522.0000" RightMargin="508.0000" TopMargin="6.5000" BottomMargin="526.5000" ctype="SpriteObjectData">
             <Size X="106.0000" Y="107.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="575.0000" Y="580.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5062" Y="0.9063" />
-            <PreSize X="0.0405" Y="0.0719" />
+            <PreSize X="0.0933" Y="0.1672" />
             <FileData Type="Normal" Path="ket_thuc_tran/sao_lon.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="star1_win" ActionTag="-243811454" Tag="884" IconVisible="False" LeftMargin="452.0000" RightMargin="638.0000" TopMargin="62.0000" BottomMargin="532.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="star1_win" ActionTag="-243811454" Tag="884" IconVisible="False" LeftMargin="432.0000" RightMargin="618.0000" TopMargin="40.5000" BottomMargin="510.5000" ctype="SpriteObjectData">
             <Size X="86.0000" Y="89.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="475.0000" Y="555.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.4181" Y="0.8672" />
-            <PreSize X="0.0405" Y="0.0719" />
+            <PreSize X="0.0757" Y="0.1391" />
             <FileData Type="Normal" Path="ket_thuc_tran/sao_nho.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="star3_win" ActionTag="1684070191" Tag="885" IconVisible="False" LeftMargin="652.0000" RightMargin="438.0000" TopMargin="62.0000" BottomMargin="532.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="star3_win" ActionTag="1684070191" Tag="885" IconVisible="False" LeftMargin="632.0000" RightMargin="418.0000" TopMargin="40.5000" BottomMargin="510.5000" ctype="SpriteObjectData">
             <Size X="86.0000" Y="89.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="675.0000" Y="555.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5942" Y="0.8672" />
-            <PreSize X="0.0405" Y="0.0719" />
+            <PreSize X="0.0757" Y="0.1391" />
             <FileData Type="Normal" Path="ket_thuc_tran/sao_nho.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>

@@ -75,7 +75,14 @@ var res = {
         ARM_4: "res/guis/icons/ARM_4_Battle.png",
         ARM_5: "res/guis/icons/ARM_5_Battle.png",
         ARM_6: "res/guis/icons/ARM_6_Battle.png",
-
+    },
+    TROOPS_END_BATTLE: {
+        ARM_1: "res/ket_thuc_tran/Icon_nho_nhat/1.png",
+        ARM_2: "res/ket_thuc_tran/Icon_nho_nhat/2.png",
+        ARM_3: "res/ket_thuc_tran/Icon_nho_nhat/3.png",
+        ARM_4: "res/ket_thuc_tran/Icon_nho_nhat/4.png",
+        ARM_5: "res/ket_thuc_tran/Icon_nho_nhat/5.png",
+        ARM_6: "res/ket_thuc_tran/Icon_nho_nhat/6.png",
     }
 };
 
@@ -159,6 +166,7 @@ var res_ui = {
     BATTLE_END: "BattleEndLayer.json",
     MATCH_HISTORY_POPUP: "HistoryAttackPopup.json",
     MATCH_HISTORY_ITEM: "MatchHistoryItem.json"
+    USED_TROOP_ITEM: "UsedTroopItem.json",
 }
 
 var res_shop = {
@@ -341,7 +349,9 @@ var res_map = {
         PROGRESS_BAR: "res/guis/upgrade_building_gui/building_time_bar.png",
         PROGRESS_BAR_BG: "res/guis/upgrade_building_gui/building_time_bg.png",
         BUILDING_HEALTH_BAR: "res/new/battle_gui/enemies_heal_bar.png",
-        BUILDING_HEALTH_BAR_BG: "res/new/battle_gui/bg_heal_bar.png",
+        HEALTH_BAR_BG: "res/new/battle_gui/bg_heal_bar.png",
+        TROOP_HEALTH_BAR: "res/new/battle_gui/ally_heal_bar.png",
+
         BUILDING_EXPLOSION: {
             1: "res/battle/explosion_1/00.png",
             2: "res/battle/explosion_1/01.png",
@@ -401,9 +411,9 @@ var res_map = {
     }
 }
 
-var res_json ={
-    TROOP_BASE:"res/configs/TroopBase.json",
-    TROOP:"res/configs/Troop.json",
+var res_json = {
+    TROOP_BASE: "res/configs/TroopBase.json",
+    TROOP: "res/configs/Troop.json",
 }
 
 

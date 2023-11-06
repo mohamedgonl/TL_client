@@ -17,7 +17,10 @@ var CannonBullet = Bullet.extend({
     },
 
     onReachDestination: function () {
-        if (this.target && typeof this.target.onGainDamage === 'function') {
+        if(!this.target.isAlive()) {
+            cc.log("Target is dead")
+        }
+        if (this.target.isAlive() && typeof this.target.onGainDamage === 'function') {
             this.target.onGainDamage(this.damagePerShot);
         }
         this.destroyBullet();
@@ -33,7 +36,7 @@ CannonBullet.getOrCreateBullet = function (type, startPoint, target, damagePerSh
     const listBullets = BattleManager.getInstance().listBullets;
     for (let bullet of listBullets)
         if (!bullet.active && bullet._type === type) {
-            bullet.reset(cc.p(target.x, target.y));
+            bullet.reset(target);
             return bullet;
         }
     selChild = new CannonBullet(type, startPoint, target, damagePerShot);

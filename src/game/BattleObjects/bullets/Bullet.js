@@ -28,9 +28,10 @@ var Bullet = cc.Sprite.extend({
         this.setPosition(initPos.x, initPos.y);
     },
 
-    reset: function (destination){
+    reset: function (target){
+        this.target = target;
         this.alpha = 0;
-        this.destination = destination;
+        this.destination = cc.p(target.x, target.y);
         this.dist = cc.pDistance(cc.p(this.startPoint.x, this.startPoint.y), cc.p(this.destination.x, this.destination.y));
 
         this.alpha += 25/this.dist;
