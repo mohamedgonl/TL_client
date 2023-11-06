@@ -68,7 +68,9 @@ var InfoLayer = cc.Layer.extend({
     },
     onClickBtnTrain: function (sender, type) {
         if (type === ccui.Widget.TOUCH_ENDED) {
-
+            let gameScene = cc.director.getRunningScene();
+            let popUpLayer = gameScene.getPopUpLayer();
+            popUpLayer.appear(POPUP_IDS.TRAIN, {page: 0})
         }
     },
     onClickBtnHistory: function (sender, type) {
@@ -293,22 +295,14 @@ var InfoLayer = cc.Layer.extend({
         if (type === 2) {
             cc.log("onTouchShop:::::::::::::::::::::::::::");
             let popUplayer = cc.director.getRunningScene().getPopUpLayer();
-            if (popUplayer.isVisible()) {
-                popUplayer.disappear(POPUP_IDS.SHOP);
-            } else {
-                popUplayer.appear(POPUP_IDS.SHOP);
-            }
+            popUplayer.appear(POPUP_IDS.SHOP);
         }
     },
 
     onTouchFight: function (sender, type) {
         if (type === 2) {
             let popUplayer = cc.director.getRunningScene().getPopUpLayer();
-            if (popUplayer.isVisible()) {
-                popUplayer.disappear(POPUP_IDS.FIGHT);
-            } else {
-                popUplayer.appear(POPUP_IDS.FIGHT);
-            }
+            popUplayer.appear(POPUP_IDS.FIGHT);
         }
     },
 
@@ -322,14 +316,14 @@ var InfoLayer = cc.Layer.extend({
                 this.gold_container.getChildByName("text").setString(res.gold);
                 let barPercent = res.gold / PlayerInfoManager.getInstance().getMaxResource().gold;
 
-                if(barPercent >=0 && barPercent <=1)
+                if (barPercent >= 0 && barPercent <= 1)
                     this.gold_container.bar_bg.bar.setPercent(barPercent * 100);
             }
             if (res.elixir != null) {
                 this.elixir_container.text.setString(res.elixir);
                 let barPercent = res.elixir / PlayerInfoManager.getInstance().getMaxResource().elixir;
 
-                if(barPercent >=0 && barPercent <=1)
+                if (barPercent >= 0 && barPercent <= 1)
                     this.elixir_container.bar_bg.bar.setPercent(barPercent * 100);
             }
             if (res.gem != null) {

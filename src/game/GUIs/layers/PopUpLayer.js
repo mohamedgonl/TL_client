@@ -6,14 +6,13 @@ let PopupLayer = cc.Layer.extend({
     },
 
     init: function () {
-        if(this._trainTroopPopup) this._trainTroopPopup.removeAllChildrenWithCleanup();
         this._trainTroopPopup = new TrainTroopPopup();
-        cc.log("CREATE POP UP TRAIn")
         this.addChild(this._trainTroopPopup);
     },
 
     appear: function (popUpId, data) {
         cc.log("APPEAR : ", this.isVisible())
+        cc.log("POPUP _ID : " + popUpId)
 
         this.setVisible(true);
         let popupScreen;
@@ -73,6 +72,11 @@ let PopupLayer = cc.Layer.extend({
                 this._fightPopup.handleClickClose(closePopupLayer);
                 break;
             }
+            case POPUP_IDS.ATTACK_HISTORY: {
+                this._fightPopup.handleClickClose(closePopupLayer);
+                break;
+            }
+
         }
     },
 

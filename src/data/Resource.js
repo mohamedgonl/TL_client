@@ -165,7 +165,7 @@ var res_ui = {
     LOADING_GUI: "Loading.json",
     BATTLE_END: "BattleEndLayer.json",
     MATCH_HISTORY_POPUP: "HistoryAttackPopup.json",
-    MATCH_HISTORY_ITEM: "MatchHistoryItem.json"
+    MATCH_HISTORY_ITEM: "MatchHistoryItem.json",
     USED_TROOP_ITEM: "UsedTroopItem.json",
 }
 
