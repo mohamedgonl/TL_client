@@ -8,27 +8,28 @@ var MatchHistoryPopup = cc.Layer.extend({
         this._scrollView.setScrollBarEnabled(false);
         let closeButton = node.getChildByName("button_close");
         closeButton.addClickEventListener(this.handleClickClose.bind(this));
-
         this.addChild(node);
         testnetwork.connector.sendGetHistoryAttack();
 
     },
 
     initMatches: function (matches) {
+       cc.log(this._scrollView.getChildren().length)
         let prevItemPosY;
         for (let i = 0; i < matches.length; i++) {
             let item = new MatchHistoryItem(matches[i]);
             this._scrollView.addChild(item);
             item.setPositionX(MATCH_HISTORY_SCROLL_POS.x);
             if (i === 0) {
-                item.setPositionY(MATCH_HISTORY_ITEM_HEIGHT / 2);
+                item.setPositionY(MATCH_HISTORY_SCROLL_POS.y);
             } else {
-                item.setPositionY(prevItemPosY + ITEM_MARGIN + MATCH_HISTORY_ITEM_HEIGHT);
+                item.setPositionY(prevItemPosY - ITEM_MARGIN - MATCH_HISTORY_ITEM_HEIGHT);
             }
             prevItemPosY = item.getPosition().y;
 
         }
-        this._scrollView.setInnerContainerSize(cc.size(704, (matches.length) * (MATCH_HISTORY_ITEM_MARGIN + MATCH_HISTORY_ITEM_HEIGHT)))
+        this._scrollView.setInnerContainerSize(cc.size(MATCH_HISTORY_ITEM_WIDTH,
+            (matches.length) * (MATCH_HISTORY_ITEM_MARGIN + MATCH_HISTORY_ITEM_HEIGHT)))
     },
 
     handleClickClose: function () {

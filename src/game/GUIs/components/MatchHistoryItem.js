@@ -4,7 +4,6 @@ var MatchHistoryItem = cc.Node.extend({
         let node = CCSUlties.parseUIFile(res_ui.MATCH_HISTORY_ITEM);
         this._enemyName = node.getChildByName("enemy_name");
         this._time = node.getChildByName("time");
-        this._troopList = node.getChildByName("troop_list");
         this._result = node.getChildByName("result_label");
         this._percentage = node.getChildByName("percentage");
         this._elxirGot = node.getChildByName("elixir_got");
@@ -12,8 +11,9 @@ var MatchHistoryItem = cc.Node.extend({
         this._trophy = node.getChildByName("trophy");
         this._stars = node.getChildByName("stars");
         this.setScaleX(1.15);
-        this.initData(data);
+        // this._node = node;
         this.addChild(node);
+        this.initData(data);
     },
     initData : function (data) {
         cc.log(JSON.stringify(data))
@@ -23,34 +23,19 @@ var MatchHistoryItem = cc.Node.extend({
         this._percentage.setString(data.percentage*100 + "%");
         this._elxirGot.setString(data.elixirGot);
         this._goldGot.setString(data.goldGot);
-        this._trophy.setString(data.isWin?"":"-" + data.trophy);
+        this._trophy.setString( (data.isWin?"":"-") + data.trophy);
 
-        data.troops.map(troop => {
+        data.troops.map((troop,index) => {
             let troopItem = new TroopItem(troop.cfgId, troop.count);
-            this._troopList.addChild(troopItem);
-            troopItem.setPosition(MATCH_DETAIL_TROOP_POS.x, MATCH_DETAIL_TROOP_POS.y);
-        })
+            troopItem.setPosition(MATCH_DETAIL_TROOP_POS.x+ index*(TROOP_ITEM_WIDTH+TROOP_ITEM_MARGIN), MATCH_DETAIL_TROOP_POS.y);
+            this.addChild(troopItem);
+        });
+
+        let stars = this._stars.getChildren();
+        for (let i = data.stars; i < 3; i++) {
+            ColorUlties.setGrayObjects(stars[i]);
+        }
     }
 })
 
 
-let TroopItem = cc.Node.extend({
-    ctor: function (cfgId, count) {
-        this._super();
-        this._troopCfgId = cfgId;
-        let node = CCSUlties.parseUIFile(res_ui.TROOPS_TRAINING_ITEM);
-        this._node = node.getChildByName("bg");
-        this._node.getChildByName("sub_icon").setVisible(false);
-        this._node.getChildByName("count_string").setString(count)
-        this.loadData();
-        this.addChild(node);
-    },
-
-    loadData: function () {
-        let icon = this._node.getChildByName("troop_icon");
-        icon.loadTexture(TROOP_SMALL_ICON_BASE_URL+this._troopCfgId+".png");
-        icon.ignoreContentAdaptWithSize(true);
-    },
-
-
-})

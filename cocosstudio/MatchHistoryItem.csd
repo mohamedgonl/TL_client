@@ -156,7 +156,7 @@
             <FileData Type="Normal" Path="guis/Main_Gui/trophy.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="button_replay" ActionTag="924645138" Tag="201" FrameEvent="-press_action" IconVisible="False" LeftMargin="188.8798" RightMargin="-306.8798" TopMargin="21.0176" BottomMargin="-65.0176" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="88" Scale9Height="22" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="button_replay" ActionTag="924645138" UserData="-press_action" Tag="201" IconVisible="False" LeftMargin="188.8798" RightMargin="-306.8798" TopMargin="21.0176" BottomMargin="-65.0176" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="88" Scale9Height="22" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="118.0000" Y="44.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="247.8798" Y="-43.0176" />
@@ -201,10 +201,10 @@
             <PreSize X="0.0000" Y="0.0000" />
             <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="trophy" ActionTag="-840747801" Tag="205" IconVisible="False" LeftMargin="158.7896" RightMargin="-158.7896" TopMargin="43.0176" BottomMargin="-43.0176" LabelText="" ctype="TextBMFontObjectData">
+          <AbstractNodeData Name="trophy" ActionTag="-741404619" Tag="115" IconVisible="False" LeftMargin="158.0366" RightMargin="-158.0366" TopMargin="42.8130" BottomMargin="-42.8130" LabelText="" ctype="TextBMFontObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="158.7896" Y="-43.0176" />
+            <Position X="158.0366" Y="-42.8130" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />

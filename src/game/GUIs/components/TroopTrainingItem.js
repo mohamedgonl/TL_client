@@ -13,8 +13,6 @@ var TroopTrainingItem = cc.Node.extend({
         this.addChild(node);
     },
 
-
-
     loadData: function () {
         let icon = this._node.getChildByName("troop_icon");
         icon.loadTexture(TROOP_SMALL_ICON_BASE_URL+this._troopCfgId+".png");

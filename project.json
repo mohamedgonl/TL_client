@@ -130,6 +130,7 @@
 
         "src/game/GUIs/components/ShopItem.js",
         "src/game/GUIs/components/MatchHistoryItem.js",
+        "src/game/GUIs/components/HistoryTroopItem.js",
 
         "src/game/GUIs/scenes/LoginView.js",
         "src/game/GUIs/views/TrainTroopPopup.js",

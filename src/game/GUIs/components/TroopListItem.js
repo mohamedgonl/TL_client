@@ -39,10 +39,10 @@ var TroopListItem = cc.Node.extend({
             this.setCount(0);
         });
 
-        cc.eventManager.addCustomListener(EVENT_NAMES.RESOURCE_CHANGED, (e) => {
-            cc.log("RESOURCE UPDATED :::: ")
-            this.recheck();
-        })
+        // cc.eventManager.addCustomListener(EVENT_NAMES.RESOURCE_CHANGED, (e) => {
+        //     cc.log("RESOURCE UPDATED :::: ")
+        //     this.recheck();
+        // })
 
         cc.eventManager.addCustomListener(EVENT_NAMES.BUILDING_UPDATED, (e) => {
             if (this._curBarrack.getId() === e.getUserData().id) {

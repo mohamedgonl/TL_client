@@ -6,12 +6,15 @@ let PopupLayer = cc.Layer.extend({
     },
 
     init: function () {
+        if(this._trainTroopPopup) this._trainTroopPopup.removeAllChildrenWithCleanup();
         this._trainTroopPopup = new TrainTroopPopup();
+        cc.log("CREATE POP UP TRAIn")
         this.addChild(this._trainTroopPopup);
     },
 
     appear: function (popUpId, data) {
         cc.log("APPEAR : ", this.isVisible())
+
         this.setVisible(true);
         let popupScreen;
         switch (popUpId) {
@@ -25,6 +28,10 @@ let PopupLayer = cc.Layer.extend({
             }
 
             case POPUP_IDS.TRAIN: {
+                if(!this._trainTroopPopup) {
+                    this._trainTroopPopup = new TrainTroopPopup();
+                    this.addChild(this._trainTroopPopup)
+                }
                 popupScreen = this._trainTroopPopup;
                 this._trainTroopPopup.open(data.page);
                 break;
