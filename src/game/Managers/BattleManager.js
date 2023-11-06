@@ -379,7 +379,7 @@ var BattleManager = cc.Class.extend({
         //check if all buildings are destroyed
         if (this.buildingDestroyedPoint >= this.totalBuildingPoint) {
             this.increaseStarAmount();
-            this.battleScene.onEndBattle();
+            this.battleScene.onEndBattle(1);
             return;
         }
 

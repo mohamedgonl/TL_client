@@ -46,7 +46,7 @@ var BattleScene = cc.Scene.extend({
             if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.PREPARING)
                 this.onStartBattle();
             else if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING)
-                this.onEndBattle();
+                this.onEndBattle(1);
         }
         this.setTimeLeft(this.timeLeft - 1);
     },
@@ -73,7 +73,7 @@ var BattleScene = cc.Scene.extend({
         testnetwork.connector.sendDoAction({type: ACTION_TYPE.DROP_TROOP, tick: this.tick, data});
     },
 
-    onEndBattle: function () {
+    onEndBattle: function (delay = 0) {
         //send action end game
         if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING) {
             //send action end
@@ -95,12 +95,17 @@ var BattleScene = cc.Scene.extend({
             this.stopCountDown();
             BattleManager.getInstance().battleStatus = BATTLE_STATUS.END;
 
-            const self = this;
             //scheduleOnce
-            this.schedule(function () {
-                self.battleUILayer.onEndBattle();
-                self.battleEndLayer.show();
-            }, 1, 0, 0);
+            if (delay > 0) {
+                const self = this;
+                this.schedule(function () {
+                    self.battleUILayer.onEndBattle();
+                    self.battleEndLayer.show();
+                }, delay, 0, 0);
+            } else {
+                this.battleUILayer.onEndBattle();
+                this.battleEndLayer.show();
+            }
         } else if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.PREPARING) {
             this.goToGameScene();
         }
@@ -155,17 +160,19 @@ var BattleScene = cc.Scene.extend({
     },
 
     gameLoop: function (dt) {
-        this.battleLayer.gameLoop(dt);
-        for (let defence of BattleManager.getInstance().listDefences) {
-            if (!defence.isDestroy())
-                defence.gameLoop(dt);
-        }
-        for (let bullet of BattleManager.getInstance().listBullets) {
-            if (bullet.active)
-                bullet.gameLoop(dt);
-        }
-        for (let troop of BattleManager.getInstance().listCurrentTroop) {
-            troop.gameLoop(dt);
+        if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING) {
+            this.battleLayer.gameLoop(dt);
+            for (let defence of BattleManager.getInstance().listDefences) {
+                if (!defence.isDestroy())
+                    defence.gameLoop(dt);
+            }
+            for (let bullet of BattleManager.getInstance().listBullets) {
+                if (bullet.active)
+                    bullet.gameLoop(dt);
+            }
+            for (let troop of BattleManager.getInstance().listCurrentTroop) {
+                troop.gameLoop(dt);
+            }
         }
         this.tick++;
     },
