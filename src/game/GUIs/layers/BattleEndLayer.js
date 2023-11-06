@@ -18,6 +18,7 @@ var BattleEndLayer = cc.Layer.extend({
         this.trophyText = node.getChildByName("text_trophy");
 
         this.troopItem = node.getChildByName("node_troop_item");
+        this.troopItem.setVisible(false);
 
         this.homeBtn = node.getChildByName("button_home");
 
@@ -43,6 +44,31 @@ var BattleEndLayer = cc.Layer.extend({
         this.goldText.setString(gold);
         this.elixirText.setString(elixir);
         this.trophyText.setString(isWin ? trophy : ("-" + trophy));
+
+        //list used troops
+        const listUsedTroops = BattleManager.getInstance().getListUsedTroops();
+        const size = listUsedTroops.length;
+
+        const posY = this.troopItem.y;
+        const troopItemWidth = 70;
+        const padding = 10;
+        let curPosX = this.troopItem.x - Math.floor(size / 2) * (troopItemWidth + padding);
+
+        if (size % 2 === 0) {
+            curPosX += troopItemWidth / 2;
+        }
+        for (let idx in listUsedTroops) {
+            let troopNode = CCSUlties.parseUIFile(res_ui.USED_TROOP_ITEM);
+
+            let troopIcon = troopNode.getChildByName('image_troop_item');
+            troopIcon.setTexture(res.TROOPS_END_BATTLE[listUsedTroops[idx].type]);
+            let amount = troopNode.getChildByName('amount_troop_item');
+            amount.setString('x' + listUsedTroops[idx].amount.toString());
+
+            troopNode.setPosition(curPosX, posY);
+            curPosX += troopItemWidth + padding;
+            this.addChild(troopNode);
+        }
 
         this.setVisible(true);
     },

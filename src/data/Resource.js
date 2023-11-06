@@ -75,7 +75,14 @@ var res = {
         ARM_4: "res/guis/icons/ARM_4_Battle.png",
         ARM_5: "res/guis/icons/ARM_5_Battle.png",
         ARM_6: "res/guis/icons/ARM_6_Battle.png",
-
+    },
+    TROOPS_END_BATTLE: {
+        ARM_1: "res/ket_thuc_tran/Icon_nho_nhat/1.png",
+        ARM_2: "res/ket_thuc_tran/Icon_nho_nhat/2.png",
+        ARM_3: "res/ket_thuc_tran/Icon_nho_nhat/3.png",
+        ARM_4: "res/ket_thuc_tran/Icon_nho_nhat/4.png",
+        ARM_5: "res/ket_thuc_tran/Icon_nho_nhat/5.png",
+        ARM_6: "res/ket_thuc_tran/Icon_nho_nhat/6.png",
     }
 };
 
@@ -157,6 +164,7 @@ var res_ui = {
     BATTLE_GUI: "BattleGUI.json",
     LOADING_GUI: "Loading.json",
     BATTLE_END: "BattleEndLayer.json",
+    USED_TROOP_ITEM: "UsedTroopItem.json",
 }
 
 var res_shop = {
@@ -401,9 +409,9 @@ var res_map = {
     }
 }
 
-var res_json ={
-    TROOP_BASE:"res/configs/TroopBase.json",
-    TROOP:"res/configs/Troop.json",
+var res_json = {
+    TROOP_BASE: "res/configs/TroopBase.json",
+    TROOP: "res/configs/Troop.json",
 }
 
 

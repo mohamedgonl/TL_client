@@ -61,6 +61,8 @@ var BattleScene = cc.Scene.extend({
     },
 
     onStartBattle: function () {
+        if (BattleManager.getInstance().battleStatus !== BATTLE_STATUS.PREPARING)
+            return;
         testnetwork.connector.sendDoAction({type: ACTION_TYPE.START_BATTlE, tick: this.tick,});
         BattleManager.getInstance().battleStatus = BATTLE_STATUS.HAPPENNING;
         this.setTimeLeft(BATTlE_LIMIT_TIME + 1);
@@ -99,7 +101,7 @@ var BattleScene = cc.Scene.extend({
                 self.battleUILayer.onEndBattle();
                 self.battleEndLayer.show();
             }, 1, 0, 0);
-        } else {
+        } else if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.PREPARING) {
             this.goToGameScene();
         }
     },
