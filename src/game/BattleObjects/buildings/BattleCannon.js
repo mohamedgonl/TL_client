@@ -12,8 +12,6 @@ var BattleCannon = BattleDefence.extend({
         // var upper_sprite =  res_map.SPRITE.BODY.CANNON.UPPER[level];
         // this.loadSprite(res_map.SPRITE.BODY.CANNON.BOTTOM[level],upper_sprite,2);
         // this.loadSubSprite();
-        // this.update();
-        // this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
     },
 
     loadSpriteByLevel: function (level) {
@@ -21,8 +19,12 @@ var BattleCannon = BattleDefence.extend({
     },
 
     attack: function (target) {
-        const bullet = CannonBullet.getOrCreateBullet(this._type, cc.p(this.x, this.y), target, this.damagePerShot);
-        // bullet.setPosition(this.x, this.y);
+        const bullet = Bullet.getOrCreateBullet(this._type, {
+            x: this.x,
+            y: this.y,
+            _posX: this.centerPoint.x,
+            _posY: this.centerPoint.y
+        }, target, this.damagePerShot);
     },
 
 });

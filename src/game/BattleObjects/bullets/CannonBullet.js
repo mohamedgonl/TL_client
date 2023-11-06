@@ -1,13 +1,14 @@
 var CannonBullet = Bullet.extend({
     active: true,
     target: null,
+    speed: 300,
+    gridSpeed: 40,
 
     ctor: function (type, startPoint, target, damagePerShot) {
-        this._super(res_map.SPRITE.BODY.CANNON.BULLET, startPoint, cc.p(target.x, target.y));
+        this._super(res_map.SPRITE.BODY.CANNON.BULLET, startPoint, target);
         this._type = type;
         this.target = target;
         this.damagePerShot = damagePerShot;
-        this.speed = 300;
     },
 
     destroyBullet: function () {
@@ -17,7 +18,7 @@ var CannonBullet = Bullet.extend({
     },
 
     onReachDestination: function () {
-        if(!this.target.isAlive()) {
+        if (!this.target.isAlive()) {
             cc.log("Target is dead")
         }
         if (this.target.isAlive() && typeof this.target.onGainDamage === 'function') {
@@ -30,17 +31,4 @@ var CannonBullet = Bullet.extend({
         return cc.rect(x - 3, y - 3, 6, 6);
     }
 });
-
-CannonBullet.getOrCreateBullet = function (type, startPoint, target, damagePerShot) {
-    var selChild = null;
-    const listBullets = BattleManager.getInstance().listBullets;
-    for (let bullet of listBullets)
-        if (!bullet.active && bullet._type === type) {
-            bullet.reset(target);
-            return bullet;
-        }
-    selChild = new CannonBullet(type, startPoint, target, damagePerShot);
-    BattleManager.getInstance().addBullet(selChild);
-    return selChild;
-};
 

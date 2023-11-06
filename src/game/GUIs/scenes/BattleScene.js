@@ -2,6 +2,7 @@ var BattleScene = cc.Scene.extend({
     battleLayer: null,
     popUpLayer: null,
     tick: 0,
+    secPerTick: 1 / BATTLE_FPS,
 
     ctor: function () {
         this._super();
@@ -13,7 +14,7 @@ var BattleScene = cc.Scene.extend({
 
         this.init();
         BattleManager.getInstance().battleScene = this;
-        this.schedule(this.gameLoop, 1 / 20);
+        this.schedule(this.gameLoop, this.secPerTick);
     },
 
     init: function () {
@@ -161,17 +162,17 @@ var BattleScene = cc.Scene.extend({
 
     gameLoop: function (dt) {
         if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING) {
-            this.battleLayer.gameLoop(dt);
+            this.battleLayer.gameLoop(this.secPerTick);
             for (let defence of BattleManager.getInstance().listDefences) {
                 if (!defence.isDestroy())
-                    defence.gameLoop(dt);
+                    defence.gameLoop(this.secPerTick);
             }
             for (let bullet of BattleManager.getInstance().listBullets) {
                 if (bullet.active)
-                    bullet.gameLoop(dt);
+                    bullet.gameLoop(this.secPerTick);
             }
             for (let troop of BattleManager.getInstance().listCurrentTroop) {
-                troop.gameLoop(dt);
+                troop.gameLoop(this.secPerTick);
             }
         }
         this.tick++;

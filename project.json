@@ -37,6 +37,8 @@
         "src/framework/NumberUltis.js",
         "src/framework/RandomUltils.js",
 
+        "src/game/gamecfg/constValues.js",
+
         "src/base/network/GameClient.js",
         "src/base/network/GameClientListener.js",
         "src/base/network/InPacketFactory.js",
@@ -164,7 +166,6 @@
         "src/game/algorithms/Algorithm.js",
         "src/game/algorithms/BattleAStar.js",
         "src/game/Managers/Animations.js",
-        "src/game/algorithms/a_star.js",
-        "src/game/gamecfg/constValues.js"
+        "src/game/algorithms/a_star.js"
     ]
 }
