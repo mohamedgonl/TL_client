@@ -45,6 +45,9 @@ var BattleManager = cc.Class.extend({
         this.buildingDestroyedPoint = 0;
         this.isDestroyedHalf = false;
 
+        this.totalTroop = 0;
+        this.totalDeadTroop = 0;
+
         this.battleStatus = BATTLE_STATUS.PREPARING;
         this.townHall = null;
         this.listResources = [];
@@ -169,6 +172,7 @@ var BattleManager = cc.Class.extend({
         for (let index in troops) {
             let troop = troops[index];
             this.listTroops.set(troop.type, troop.amount);
+            this.totalTroop += troop.amount;
         }
     },
     addToListCurrentTroop: function (troop) {
@@ -362,6 +366,10 @@ var BattleManager = cc.Class.extend({
         return Math.floor(this.buildingDestroyedPoint * 100 / this.totalBuildingPoint);
     },
 
+    isAllTroopsDead: function () {
+        return this.totalDeadTroop >= this.totalTroop;
+    },
+
     increaseStarAmount: function () {
         this.starAmount++;
         this.battleScene.battleUILayer.updateStarUI();
@@ -409,12 +417,17 @@ var BattleManager = cc.Class.extend({
         }
     },
     onTroopDead: function (troop) {
+        this.totalDeadTroop++;
+
         //update listCurrentTroop
         for (let i = 0; i < this.listCurrentTroop.length; i++) {
             if (this.listCurrentTroop[i] === troop) {
                 this.listCurrentTroop.splice(i, 1);
                 break;
             }
+        }
+        if (this.isAllTroopsDead()) {
+            this.battleScene.onEndBattle(1);
         }
     },
 
