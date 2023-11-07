@@ -14,14 +14,6 @@ var BattleDefence = BattleBuilding.extend({
     },
 
     setDirection: function (direct) {
-        this.direct = direct;
-        if (direct <= TOTAL_DEFENCE_DIRECT / 2) {
-            this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][direct]);
-            this._body.flippedX = false;
-        } else {
-            this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][TOTAL_DEFENCE_DIRECT - direct]);
-            this._body.flippedX = true;
-        }
     },
 
     gameLoop: function (dt) {

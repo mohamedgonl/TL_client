@@ -1,5 +1,5 @@
-var BattleCannon = BattleDefence.extend({
-    _type: "DEF_1",
+var BattleArcherTower = BattleDefence.extend({
+    _type: "DEF_2",
 
     ctor: function (level, id, posX, posY) {
         this._super(level, id, posX, posY);
@@ -15,18 +15,19 @@ var BattleCannon = BattleDefence.extend({
     },
 
     loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.CANNON[level][0], null, 2, null, res_map.SPRITE.BODY.CANNON.JUNK);
+        this.loadSprite(res_map.SPRITE.BODY.ARCHER_TOWER[level], null,
+            null, 2, res_map.SPRITE.BODY.ARCHER_TOWER.JUNK);
     },
 
     setDirection: function (direct) {
         this.direct = direct;
-        if (direct <= TOTAL_DEFENCE_DIRECT / 2) {
-            this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][direct]);
-            this._body.flippedX = false;
-        } else {
-            this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][TOTAL_DEFENCE_DIRECT - direct]);
-            this._body.flippedX = true;
-        }
+        // if (direct <= TOTAL_DEFENCE_DIRECT / 2) {
+        //     this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][direct]);
+        //     this._body.flippedX = false;
+        // } else {
+        //     this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][TOTAL_DEFENCE_DIRECT - direct]);
+        //     this._body.flippedX = true;
+        // }
     },
 
     // attack: function (target) {
