@@ -8,7 +8,7 @@ const BuildingInfo = {
     "BDH_1":{
         name:"Nhà Thợ xây",
         dataInfo: ["hitpoints"],
-        description: "Có công trình nào quanh đây ko cần tới bóng dáng người thợ xây?\nCâu trả lời là không."
+        description: "Có công trình nào quanh đây ko cần tới bóng dáng người thợ xây?\nCâu trả lời là không"
     },
     "AMC_1":{
         name: "Trại lính",
@@ -21,14 +21,15 @@ const BuildingInfo = {
         dataInfo: ["damage","hitpoints"],
         description: "Pháo là công trình phòng thủ cơ bản của bạn. Giá trị rõ ràng của mỗi phát đạn "+
             "sau mỗi lần nâng cấp khiến Pháo trở thành công trình không thể thiếu của "+
-            "vương quốc."
+            "vương quốc.",
     },
     "DEF_2":{
         name: "Chòi cung",
         dataInfo: ["damage","hitpoints"],
         description: "Chòi cung là công trình phòng thủ cơ bản của bạn. Giá trị rõ ràng của mỗi phát đạn "+
             "sau mỗi lần nâng cấp khiến Chòi cung trở thành công trình không thể thiếu của "+
-            "vương quốc."
+            "vương quốc.",
+        offsetMainSpriteY: 17,
     },
     "DEF_3":{
         name: "Máy bắn đá",

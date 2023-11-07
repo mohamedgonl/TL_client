@@ -180,6 +180,9 @@ var MapManager = cc.Class.extend({
 
 
     },
+    getMapGrid: function () {
+        return this.mapGrid;
+    },
 
     getBuildingCountByType:  function (type) {
         if(this.buildingAmount[type] === undefined) return 0;

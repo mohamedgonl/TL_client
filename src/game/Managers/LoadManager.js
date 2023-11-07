@@ -165,6 +165,7 @@ var LoadManager = cc.Node.extend({
 
         //upper : archer
         //link "res/Buildings/AcherTower/DEF_2_1/DEF_2_1/idle/image0000.png to image0004.png"
+
         this.loadSpriteFolderToRes(res_map.SPRITE.BODY.ARCHER_TOWER.UPPER,
             "res/Buildings/AcherTower/DEF_2_",
             "/DEF_2_",

@@ -249,7 +249,7 @@ var GameUtilities = {
         for(let i=1; i<= MAXLEVEL.DEF_2 ; i++)
         {
             DEF_2[i] = {};
-            DEF_2[i].shadow = "res/Buildings/defense_base/DEF_1_"+ i +"_Shadow.png";
+            DEF_2[i].shadow = "res/Buildings/defense_base/DEF_2_"+ i +"_Shadow.png";
         }
         //archer_idle
         for(let i = 1; i<= MAXLEVEL.DEF_2; i++){

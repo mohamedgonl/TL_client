@@ -204,6 +204,10 @@ var Building = GameObject.extend({
         // this._body = new cc.Sprite();
         this._body.setTexture(bodySprite);
         this._body.setAnchorPoint(0.5,0.5);
+        //if have .offsetMainSpriteY, set position
+        if(BuildingInfo[this._type].offsetMainSpriteY)  {
+            this._body.setPosition(0,BuildingInfo[this._type].offsetMainSpriteY);
+        }
         this._body.setScale(SCALE_BUILDING_BODY);
 
 

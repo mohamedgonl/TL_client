@@ -11,7 +11,7 @@ var GameScene = cc.Scene.extend({
         ArmyManager.releaseInstance();
         TimeManager.releaseInstance();
 
-        // GameUtilities.loadResource();
+        GameUtilities.loadResource();
 
         const mapManager = MapManager.getInstance();
         mapManager.gameScene = this;
