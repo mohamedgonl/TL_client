@@ -153,10 +153,12 @@ var BattleBuilding = BattleGameObject.extend({
     onGainDamage: function (damage) {
         if (damage <= 0 || this._hp <= 0)
             return;
-        if (this._hp === this._maxHp) {
+        this._hp = Math.max(this._hp - damage, 0);
+
+        //UI
+        if (this._hp < this._maxHp) {
             this._hpBar.setVisible(true);
         }
-        this._hp = Math.max(this._hp - damage, 0);
         if (this._hp > 0) {
             let percent = this._hp / this._maxHp * 100;
             this._hpBar.setPercent(percent);

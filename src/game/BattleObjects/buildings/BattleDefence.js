@@ -1,5 +1,5 @@
 var BattleDefence = BattleBuilding.extend({
-    targetQueue: [],
+    target: null,
     attackCd: 0,
     direct: 0, // from 0 -> TOTAL_DEFENCE_DIRECT
 
@@ -9,7 +9,7 @@ var BattleDefence = BattleBuilding.extend({
         let config = LoadManager.getInstance().getDefBaseConfig(this._type);
         this._minRange = config.minRange * 3;
         this._maxRange = config.maxRange * 3;
-        this.targetQueue = [];
+        this.target = null;
         this.centerPoint = cc.p(this._posX + Math.floor(this._width / 2), this._posY + Math.floor(this._height / 2))
     },
 
@@ -29,29 +29,28 @@ var BattleDefence = BattleBuilding.extend({
             this.attackCd -= dt;
             return;
         }
-        if (this.targetQueue.length === 0)
+        if (!this.hasTarget())
             return;
 
-        const target = this.targetQueue[0];
         this.attackCd = this.attackSpeed;
-        this.attack(target);
+        this.attack(this.target);
     },
 
-    // addTarget: function (target) {
-    //     this.targetQueue.push(target);
-    // },
-
-    setListTargets: function (targets) {
-        this.targetQueue = targets;
+    setTarget: function (target) {
+        this.target = target;
     },
 
-    removeAllTargets: function () {
-        this.targetQueue = [];
-    },
+    //check if troop can be added as new target
+    checkTarget: function (target) {
+        //todo: check target type
 
-    checkTargetInRange: function (target) {
+        //check distance
         const dist = cc.pDistance(cc.p(target._posX, target._posY), this.centerPoint);
         return dist > this._minRange && dist < this._maxRange;
+    },
+
+    hasTarget: function () {
+        return this.target && this.target.isAlive();
     },
 
     attack: function (target) {
@@ -67,6 +66,7 @@ var BattleDefence = BattleBuilding.extend({
             this.setDirection(newDirect);
         }
 
+        //logic
         const bullet = Bullet.getOrCreateBullet(this._type, {
             x: this.x,
             y: this.y,

@@ -432,26 +432,16 @@ var BattleLayer = cc.Layer.extend({
         const listDefences = BattleManager.getInstance().getListDefences();
         const listTroops = BattleManager.getInstance().getListCurrentTroops();
         for (let defence of listDefences) {
-            let hasTarget = false;
-
-            if(defence.isDestroy())
-            {
-                defence.setListTargets([]);
+            if (defence.isDestroy() || defence.hasTarget()) {
                 continue;
             }
-
-            for (let troop of listTroops){
-                if(!troop.isAlive()) continue;
-
-                if (defence.checkTargetInRange(troop)) {
-                    defence.setListTargets([troop]);
-                    hasTarget = true;
+            for (let troop of listTroops) {
+                if (!troop.isAlive()) continue;
+                if (defence.checkTarget(troop)) {
+                    defence.setTarget(troop);
                     break;
                 }
             }
-
-            if (!hasTarget)
-                defence.setListTargets([]);
         }
     },
 });
