@@ -83,6 +83,8 @@ var BattleScene = cc.Scene.extend({
             const robbedElixir = BattleManager.getInstance().robbedElixir;
             const trophyAmount = starAmount > 0 ? BattleManager.getInstance().winPoint : BattleManager.getInstance().losePoint;
             const listTroops = BattleManager.getInstance().getListUsedTroops();
+            let percentage = BattleManager.getInstance().getDestroyedPercentage();
+
             testnetwork.connector.sendEndBattle({
                 result: starAmount > 0,
                 starAmount,
@@ -91,6 +93,7 @@ var BattleScene = cc.Scene.extend({
                 robbedElixir,
                 listTroops,
                 tick: this.tick,
+                percentage,
             });
 
             this.stopCountDown();

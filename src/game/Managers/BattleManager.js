@@ -358,6 +358,10 @@ var BattleManager = cc.Class.extend({
         return null;
     },
 
+    getDestroyedPercentage: function () {
+        return Math.floor(this.buildingDestroyedPoint * 100 / this.totalBuildingPoint);
+    },
+
     increaseStarAmount: function () {
         this.starAmount++;
         this.battleScene.battleUILayer.updateStarUI();
