@@ -2,6 +2,7 @@ var BattleScene = cc.Scene.extend({
     battleLayer: null,
     popUpLayer: null,
     tick: 0,
+    secPerTick: 1 / BATTLE_FPS,
 
     ctor: function () {
         this._super();
@@ -13,7 +14,7 @@ var BattleScene = cc.Scene.extend({
 
         this.init();
         BattleManager.getInstance().battleScene = this;
-        this.schedule(this.gameLoop, 1 / 20);
+        this.schedule(this.gameLoop, this.secPerTick);
     },
 
     init: function () {
@@ -46,7 +47,7 @@ var BattleScene = cc.Scene.extend({
             if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.PREPARING)
                 this.onStartBattle();
             else if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING)
-                this.onEndBattle();
+                this.onEndBattle(1);
         }
         this.setTimeLeft(this.timeLeft - 1);
     },
@@ -73,7 +74,7 @@ var BattleScene = cc.Scene.extend({
         testnetwork.connector.sendDoAction({type: ACTION_TYPE.DROP_TROOP, tick: this.tick, data});
     },
 
-    onEndBattle: function () {
+    onEndBattle: function (delay = 0) {
         //send action end game
         if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING) {
             //send action end
@@ -82,6 +83,8 @@ var BattleScene = cc.Scene.extend({
             const robbedElixir = BattleManager.getInstance().robbedElixir;
             const trophyAmount = starAmount > 0 ? BattleManager.getInstance().winPoint : BattleManager.getInstance().losePoint;
             const listTroops = BattleManager.getInstance().getListUsedTroops();
+            let percentage = BattleManager.getInstance().getDestroyedPercentage();
+
             testnetwork.connector.sendEndBattle({
                 result: starAmount > 0,
                 starAmount,
@@ -90,17 +93,23 @@ var BattleScene = cc.Scene.extend({
                 robbedElixir,
                 listTroops,
                 tick: this.tick,
+                percentage,
             });
 
             this.stopCountDown();
             BattleManager.getInstance().battleStatus = BATTLE_STATUS.END;
 
-            const self = this;
             //scheduleOnce
-            this.schedule(function () {
-                self.battleUILayer.onEndBattle();
-                self.battleEndLayer.show();
-            }, 1, 0, 0);
+            if (delay > 0) {
+                const self = this;
+                this.schedule(function () {
+                    self.battleUILayer.onEndBattle();
+                    self.battleEndLayer.show();
+                }, delay, 0, 0);
+            } else {
+                this.battleUILayer.onEndBattle();
+                this.battleEndLayer.show();
+            }
         } else if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.PREPARING) {
             this.goToGameScene();
         }
@@ -155,17 +164,19 @@ var BattleScene = cc.Scene.extend({
     },
 
     gameLoop: function (dt) {
-        this.battleLayer.gameLoop(dt);
-        for (let defence of BattleManager.getInstance().listDefences) {
-            if (!defence.isDestroy())
-                defence.gameLoop(dt);
-        }
-        for (let bullet of BattleManager.getInstance().listBullets) {
-            if (bullet.active)
-                bullet.gameLoop(dt);
-        }
-        for (let troop of BattleManager.getInstance().listCurrentTroop) {
-            troop.gameLoop(dt);
+        if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING) {
+            this.battleLayer.gameLoop(this.secPerTick);
+            for (let defence of BattleManager.getInstance().listDefences) {
+                if (!defence.isDestroy())
+                    defence.gameLoop(this.secPerTick);
+            }
+            for (let bullet of BattleManager.getInstance().listBullets) {
+                if (bullet.active)
+                    bullet.gameLoop(this.secPerTick);
+            }
+            for (let troop of BattleManager.getInstance().listCurrentTroop) {
+                troop.gameLoop(this.secPerTick);
+            }
         }
         this.tick++;
     },

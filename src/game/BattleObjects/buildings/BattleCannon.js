@@ -12,17 +12,19 @@ var BattleCannon = BattleDefence.extend({
         // var upper_sprite =  res_map.SPRITE.BODY.CANNON.UPPER[level];
         // this.loadSprite(res_map.SPRITE.BODY.CANNON.BOTTOM[level],upper_sprite,2);
         // this.loadSubSprite();
-        // this.update();
-        // this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
     },
 
     loadSpriteByLevel: function (level) {
         this.loadSprite(res_map.SPRITE.BODY.CANNON[level][0], null, 2, null, res_map.SPRITE.BODY.CANNON.JUNK);
     },
 
-    attack: function (target) {
-        const bullet = CannonBullet.getOrCreateBullet(this._type, cc.p(this.x, this.y), target, this.damagePerShot);
-        // bullet.setPosition(this.x, this.y);
-    },
+    // attack: function (target) {
+    //     const bullet = Bullet.getOrCreateBullet(this._type, {
+    //         x: this.x,
+    //         y: this.y,
+    //         _posX: this.centerPoint.x,
+    //         _posY: this.centerPoint.y
+    //     }, target, this.damagePerShot);
+    // },
 
 });

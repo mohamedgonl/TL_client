@@ -27,6 +27,7 @@ var Loading = cc.Node.extend({
             this.cloudLeft.setPosition(0, 0);
             this.cloudRight.setPosition(cc.winSize.width, 0);
             this.loading.setVisible(true);
+            this.showLoadingSpin();
         }
 
         this.addChild(node);
@@ -64,6 +65,20 @@ var Loading = cc.Node.extend({
             }, this.duration);
         }
     },
+
+    showLoadingSpin: function (){
+        let animate = new cc.Animation();
+        const frames = res_map.SPRITE.LOADING;
+        for (let idx in frames) {
+            animate.addSpriteFrameWithFile(frames[idx]);
+        }
+        animate.setDelayPerUnit(0.02);
+        animate.setRestoreOriginalFrame(true);
+
+        let action = cc.animate(animate);
+        action.repeatForever();
+        this.loading.runAction(action);
+    }
 
 });
 

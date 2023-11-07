@@ -358,6 +358,10 @@ var BattleManager = cc.Class.extend({
         return null;
     },
 
+    getDestroyedPercentage: function () {
+        return Math.floor(this.buildingDestroyedPoint * 100 / this.totalBuildingPoint);
+    },
+
     increaseStarAmount: function () {
         this.starAmount++;
         this.battleScene.battleUILayer.updateStarUI();
@@ -379,7 +383,7 @@ var BattleManager = cc.Class.extend({
         //check if all buildings are destroyed
         if (this.buildingDestroyedPoint >= this.totalBuildingPoint) {
             this.increaseStarAmount();
-            this.battleScene.onEndBattle();
+            this.battleScene.onEndBattle(1);
             return;
         }
 

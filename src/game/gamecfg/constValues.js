@@ -19,6 +19,10 @@ const BATTLE_STATUS = {
 
 const BATTlE_PREPARE_TIME = 30;
 const BATTlE_LIMIT_TIME = 150;
+const BATTLE_FPS = 20;
+const TOTAL_DEFENCE_DIRECT = 8;
+
+
 
 const MATCH_HISTORY_SCROLL_POS = {x: 353, y: 309};
 const MATCH_DETAIL_TROOP_POS = {x: -238, y: 6}
