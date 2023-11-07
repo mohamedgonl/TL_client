@@ -940,7 +940,7 @@ testnetwork.packetMap[gv.CMD.GET_HISTORY_ATTACK] = fr.InPacket.extend(
                     match.goldGot = this.getInt();
                     match.elixirGot = this.getInt();
                     match.isWin  = this.getInt() !== 0;
-                    match.percentage = this.getDouble();
+                    match.percentage = this.getInt();
                     match.stars = this.getInt();
                     match.time = this.getInt();
                     // army

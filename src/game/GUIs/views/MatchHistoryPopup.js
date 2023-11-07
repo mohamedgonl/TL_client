@@ -18,10 +18,10 @@ var MatchHistoryPopup = cc.Layer.extend({
         let prevItemPosY;
         // this._scrollView.setContentSize(cc.size(this._scrollView.getInnerContainerSize().width,
         //     MATCH_HISTORY_ITEM_HEIGHT * (matches.length) + (matches.length-1) * ITEM_MARGIN))
-
+        this._scrollView.setDirection(cc.SCROLLVIEW_DIRECTION_VERTICAL)
+        let scrollViewSize = this._scrollView.getContentSize();
         for (let i = 0; i < matches.length; i++) {
             let item = new MatchHistoryItem(matches[i]);
-            let scrollViewSize =  this._scrollView.getContentSize();
             item.setPositionX(scrollViewSize.width/2);
             if (i === 0) {
                 item.setPositionY(MATCH_HISTORY_SCROLL_POS.y);
