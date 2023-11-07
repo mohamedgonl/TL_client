@@ -11,6 +11,28 @@ var CannonBullet = Bullet.extend({
         this.damagePerShot = damagePerShot;
     },
 
+    gameLoop: function (dt) {
+        if (!this.active || this.destination === null)
+            return;
+        this.time -= dt;
+        this.alpha += dt * this.speed / this.dist;
+        if (this.alpha < 0.99) {
+            const newPos = cc.pLerp(cc.p(this.startPoint.x, this.startPoint.y), cc.p(this.destination.x, this.destination.y), this.alpha);
+            this.setPosition(newPos.x, newPos.y);
+        } else {
+            this.setVisible(false);
+        }
+        if (this.time <= 0) {
+            this.onReachDestination();
+        }
+    },
+
+    setInitPosition: function (){
+        this.alpha += 20 / this.dist;
+        const initPos = cc.pLerp(cc.p(this.startPoint.x, this.startPoint.y), cc.p(this.destination.x, this.destination.y), this.alpha);
+        this.setPosition(initPos.x, initPos.y);
+    },
+
     destroyBullet: function () {
         // var explode = HitEffect.getOrCreateHitEffect(this.x, this.y, Math.random() * 360);
         this.active = false;
