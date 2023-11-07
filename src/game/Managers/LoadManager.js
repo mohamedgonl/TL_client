@@ -1,4 +1,16 @@
 //call when init game, get config and load resource to res
+TOW_1 = cc.loader.getRes(res_map.JSON.TOWNHALL)['TOW_1'];
+STO_1 = cc.loader.getRes(res_map.JSON.STORAGE)['STO_1'];
+STO_2 = cc.loader.getRes(res_map.JSON.STORAGE)['STO_2'];
+BAR_1 = cc.loader.getRes(res_map.JSON.BARRACK)['BAR_1'];
+AMC_1 = cc.loader.getRes(res_map.JSON.ARMY_CAMP)['AMC_1'];
+BDH_1 = cc.loader.getRes(res_map.JSON.BUILDER_HUT)['BDH_1'];
+DEF_1 = cc.loader.getRes(res_map.JSON.DEFENCE)['DEF_1'];
+DEF_1.baseConfig = cc.loader.getRes(res_map.JSON.DEFENCE_BASE)['DEF_1'];
+WAL_1 = cc.loader.getRes(res_map.JSON.WALL)['WAL_1'];
+RES_1 = cc.loader.getRes(res_map.JSON.RESOURCE)['RES_1'];
+RES_2 = cc.loader.getRes(res_map.JSON.RESOURCE)['RES_2'];
+
 var LoadManager = cc.Node.extend({
 
     instance: null,
@@ -16,6 +28,15 @@ var LoadManager = cc.Node.extend({
         this['DEF_1'] = cc.loader.getRes(res_map.JSON.DEFENCE)['DEF_1'];
         const def1Base = cc.loader.getRes(res_map.JSON.DEFENCE_BASE)['DEF_1'];
         this['DEF_1'].baseConfig = def1Base;
+
+        this['DEF_2'] = cc.loader.getRes(res_map.JSON.DEFENCE)['DEF_2'];
+        const def2Base = cc.loader.getRes(res_map.JSON.DEFENCE_BASE)['DEF_2'];
+        this['DEF_2'].baseConfig = def2Base;
+
+        this['DEF_3'] = cc.loader.getRes(res_map.JSON.DEFENCE)['DEF_3'];
+        const def3Base = cc.loader.getRes(res_map.JSON.DEFENCE_BASE)['DEF_3'];
+        this['DEF_3'].baseConfig = def3Base;
+
 
         this['WAL_1'] = cc.loader.getRes(res_map.JSON.WALL)['WAL_1'];
         this['RES_1'] = cc.loader.getRes(res_map.JSON.RESOURCE)['RES_1'];
@@ -134,14 +155,49 @@ var LoadManager = cc.Node.extend({
             cannonLevelCount,
             5);
 
+
+        //DEF_2
+        //body
+
+        let def2LevelCount =  9;
+        //path res/Buildings/defense_base/DEF_1_1_Shadow.png
+        this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER, "res/Buildings/defense_base/DEF_2_", "_Shadow.png", def2LevelCount);
+
+        //upper : archer
+        //link "res/Buildings/AcherTower/DEF_2_1/DEF_2_1/idle/image0000.png to image0004.png"
+        this.loadSpriteFolderToRes(res_map.SPRITE.BODY.ARCHER_TOWER.UPPER,
+            "res/Buildings/AcherTower/DEF_2_",
+            "/DEF_2_",
+            "/idle/image00",
+            def2LevelCount,
+            5);
+
+        //DEF 3
+
+        let def3LevelCount = 9;
+        //path res/Buildings/Mortar/DEF_3_1/DEF_3_1/idle/image0000.png - > 5
+
+        let part1 = "res/Buildings/Motar/DEF_3_";
+        let part2 = "/DEF_3_";
+        let part3 = "/idle/image000";
+        let part4 = ".png";
+
+        for (let i = 1; i <= def3LevelCount; i++) {
+            let res = {};
+            for (let j = 0; j < 5; j++) {
+                res[j] = part1 + i + part2 + i + part3 + j + part4;
+            }
+            res_map.SPRITE.BODY.MORTAR[i] = res;
+        }
+
         //WAL_1
         //body 4 sprites
         //res/Buildings/wall/WAL_1_1/WAL_1_1/idle/image0000.png
         let wallLevelCount = 7;
-        let part1 = "res/Buildings/wall/WAL_1_";
-        let part2 = "/WAL_1_";
-        let part3 = "/idle/image000";
-        let part4 = ".png";
+         part1 = "res/Buildings/wall/WAL_1_";
+         part2 = "/WAL_1_";
+         part3 = "/idle/image000";
+         part4 = ".png";
         for (let i = 1; i <= wallLevelCount; i++) {
             let res = {};
             for (let j = 0; j < 4; j++) {
@@ -226,6 +282,7 @@ var LoadManager = cc.Node.extend({
             builderBuildUp[i] = res;
         }
         res_map.SPRITE.BUILDER.BUILD.UP = builderBuildUp;
+
         this.loadSpriteTroops();
         this.createAnimation();
     },

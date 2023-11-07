@@ -85,6 +85,8 @@
         "src/game/GameObjects/buildings/Wall.js",
         "src/game/GameObjects/buildings/Barrack.js",
         "src/game/GameObjects/buildings/Cannon.js",
+        "src/game/GameObjects/buildings/ArcherTower.js",
+        "src/game/GameObjects/buildings/Mortar.js",
         "src/game/GameObjects/Obstacle.js",
 
         "src/game/BattleObjects/BattleGameObject.js",

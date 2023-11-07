@@ -15,7 +15,7 @@ var MatchHistoryPopup = cc.Layer.extend({
 
     initMatches: function (matches) {
         let scrollInnerHeight = MATCH_HISTORY_ITEM_HEIGHT * (matches.length) + (matches.length - 1) * ITEM_MARGIN;
-        let deltaHeight = scrollInnerHeight - this._scrollView.getContentSize().height;
+        let deltaHeight = matches.length <3 ? 0: scrollInnerHeight - this._scrollView.getContentSize().height;
         let prevItemPosY;
         this._scrollView.setDirection(cc.SCROLLVIEW_DIRECTION_VERTICAL)
         let scrollViewSize = this._scrollView.getContentSize();
