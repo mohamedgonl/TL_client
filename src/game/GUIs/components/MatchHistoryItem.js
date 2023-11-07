@@ -20,7 +20,7 @@ var MatchHistoryItem = cc.Node.extend({
         this._enemyName.setString(data.enemyName);
         this._time.setString(fr.getTimeDifferenceString(TimeManager.getInstance().getCurrentTimeInSecond(), data.time));
         this._result.setString(data.isWin ? "CHIẾN THẮNG": "THẤT BẠI");
-        this._percentage.setString(data.percentage*100 + "%");
+        this._percentage.setString(data.percentage + "%");
         this._elxirGot.setString(data.elixirGot);
         this._goldGot.setString(data.goldGot);
         this._trophy.setString( (data.isWin?"":"-") + data.trophy);
