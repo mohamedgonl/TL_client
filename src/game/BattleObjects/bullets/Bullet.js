@@ -63,6 +63,8 @@ Bullet.getOrCreateBullet = function (type, startPoint, target, damagePerShot) {
         selChild = new CannonBullet(type, startPoint, target, damagePerShot);
     } else if (type === "DEF_2") {
         selChild = new ArcherTowerBullet(type, startPoint, target, damagePerShot);
+    } else if (type === "DEF_3") {
+        selChild = new MortarBullet(type, startPoint, target, damagePerShot);
     }
     BattleManager.getInstance().addBullet(selChild);
     return selChild;

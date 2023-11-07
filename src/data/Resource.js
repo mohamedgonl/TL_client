@@ -292,12 +292,11 @@ var res_map = {
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/AcherTower/DEF_2_1/DEF_2_1/idle/image0000.png",
                 BULLET: "res/battle/archerbullet3.png",
-                UPPER:{
-
-                }
+                UPPER: {}
             },
-            MORTAR:{
-
+            MORTAR: {
+                JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
+                BULLET: "res/battle/mortal_bullet_normal/00.png",
             },
             BARRACK: {
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
