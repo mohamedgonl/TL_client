@@ -44,6 +44,16 @@ function getBuildingFromType(type, level, id, posX, posY, status, startTime, end
         case 'WAL_1':
             building = new Wall(level, id, posX, posY, status, startTime, endTime);
             break;
+        case 'DEF_2':
+            building = new ArcherTower(level, id, posX, posY, status, startTime, endTime);
+            break;
+        case 'DEF_3':
+            building = new Mortar(level, id, posX, posY, status, startTime, endTime);
+            break;
+        default:
+            cc.log("getBuildingFromType: not found type: " + type);
+            break;
+
     }
     building.setType(type);
     building.retain();
@@ -233,6 +243,37 @@ var GameUtilities = {
         }
 
     },
+    loadResource: function () {
+        //DEF_2
+        //shadow
+        for(let i=1; i<= MAXLEVEL.DEF_2 ; i++)
+        {
+            DEF_2[i] = {};
+            DEF_2[i].shadow = "res/Buildings/defense_base/DEF_1_"+ i +"_Shadow.png";
+        }
+        //archer_idle
+        for(let i = 1; i<= MAXLEVEL.DEF_2; i++){
+            DEF_2[i].archer_idle = [];
+            for(let j =0;j<=5;j++)
+            {
+                DEF_2[i].archer_idle.push("res/Buildings/AcherTower/DEF_2_"+i+"/DEF_2_"+i+"/idle/image000"+j+".png");
+            }
+        }
+
+        //DEF_1
+        //shadow
+        for(let i=1; i<= MAXLEVEL.DEF_1 ; i++)
+        {
+            DEF_1[i].shadow = "res/Buildings/defense_base/DEF_1_"+ i +"_Shadow.png";
+        }
+    }
 }
+DEF_1 = {};
+DEF_2 = {};
+MAXLEVEL= {
+    DEF_1: 9,
+    DEF_2: 9,
+}
+
 
 

@@ -301,6 +301,15 @@ var res_map = {
                 1: "res/Buildings/clan_castle/CLC_1_0/idle/image0000.png"
             },
             OBS_LINK: "res/Buildings/obstacle/OBS_",
+            ARCHER_TOWER:{
+
+                UPPER:{
+
+                }
+            },
+            MORTAR:{
+
+            },
         },
         SHADOW: {
             1: "res/Map/map_obj_bg/GRASS_1_Shadow.png",

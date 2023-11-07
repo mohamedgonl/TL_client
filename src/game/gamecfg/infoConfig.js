@@ -23,6 +23,20 @@ const BuildingInfo = {
             "sau mỗi lần nâng cấp khiến Pháo trở thành công trình không thể thiếu của "+
             "vương quốc."
     },
+    "DEF_2":{
+        name: "Chòi cung",
+        dataInfo: ["damage","hitpoints"],
+        description: "Chòi cung là công trình phòng thủ cơ bản của bạn. Giá trị rõ ràng của mỗi phát đạn "+
+            "sau mỗi lần nâng cấp khiến Chòi cung trở thành công trình không thể thiếu của "+
+            "vương quốc."
+    },
+    "DEF_3":{
+        name: "Máy bắn đá",
+        dataInfo: ["damage","hitpoints"],
+        description: "Máy bắn đá là công trình phòng thủ cơ bản của bạn. Giá trị rõ ràng của mỗi phát đạn "+
+            "sau mỗi lần nâng cấp khiến Máy bắn đá trở thành công trình không thể thiếu của "+
+            "vương quốc."
+    },
     "RES_1":{
         name: "Mỏ vàng",
         // sức chua, sản lượng, máu
