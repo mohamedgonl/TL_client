@@ -19,7 +19,7 @@ var Bullet = cc.Sprite.extend({
         this.startPoint = startPoint;
         this.target = target;
         this.alpha = 0;
-        this.destination = cc.p(target.x, target.y);
+        this.destination = {x: target.x, y: target.y, _posX: target._posX, _posY: target._posY};
 
         const gridDist = Math.sqrt(Math.pow(this.startPoint._posX - target._posX, 2) + Math.pow(this.startPoint._posY - target._posY, 2));
         this.time = gridDist / this.gridSpeed;
@@ -51,7 +51,7 @@ var Bullet = cc.Sprite.extend({
 
 });
 
-Bullet.getOrCreateBullet = function (type, startPoint, target, damagePerShot) {
+Bullet.getOrCreateBullet = function (type, startPoint, target, damagePerShot, attackRadius) {
     var selChild = null;
     const listBullets = BattleManager.getInstance().listBullets;
     for (let bullet of listBullets)
@@ -64,7 +64,7 @@ Bullet.getOrCreateBullet = function (type, startPoint, target, damagePerShot) {
     } else if (type === "DEF_2") {
         selChild = new ArcherTowerBullet(type, startPoint, target, damagePerShot);
     } else if (type === "DEF_3") {
-        selChild = new MortarBullet(type, startPoint, target, damagePerShot);
+        selChild = new MortarBullet(type, startPoint, target, damagePerShot, attackRadius);
     }
     BattleManager.getInstance().addBullet(selChild);
     return selChild;
