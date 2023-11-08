@@ -24,6 +24,20 @@ var Wall = Building.extend({
                 stateWall = 1;
             }
         this.loadMainSprite(res_map.SPRITE.BODY.WALL[level][stateWall],null);
-    }
+    },
+    onMoved: function () {
+        this._super();
+        this.loadMainSpriteByLevel(this._level);
+        //load wall below and left grid
+        let belowBuilding = MapManager.getInstance().getBuildingByGrid(this._posX, this._posY - 1);
+        let leftBuilding = MapManager.getInstance().getBuildingByGrid(this._posX - 1, this._posY);
+
+        if(belowBuilding && belowBuilding._type === "WAL_1"){
+            belowBuilding.loadMainSpriteByLevel(belowBuilding._level);
+        }
+        if(leftBuilding && leftBuilding._type === "WAL_1"){
+            leftBuilding.loadMainSpriteByLevel(leftBuilding._level);
+        }
+    },
 
 });

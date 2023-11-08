@@ -122,6 +122,7 @@ var MapManager = cc.Class.extend({
     },
     moveBuilding: function (building,newPosX,newPosY) {
 
+
         var width = building._width;
         var height = building._height;
         // dat lai nhung o cu = 0
@@ -139,6 +140,10 @@ var MapManager = cc.Class.extend({
         building._posY = newPosY;
 
         cc.eventManager.dispatchCustomEvent(EVENT_TROOP_NAME.MOVE_BUILDING, {buildingId: building.getId()});
+
+
+        building.onMoved();
+
         const Algorithm = AlgorithmImplement.getInstance();
         Algorithm.setGridMapStar(MapManager.getInstance().mapGrid);
     },

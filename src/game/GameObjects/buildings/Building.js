@@ -683,4 +683,6 @@ var Building = GameObject.extend({
         }
         return 0;
     },
+    onMoved: function () {
+    },
 });
