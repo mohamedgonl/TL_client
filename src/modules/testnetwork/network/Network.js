@@ -246,7 +246,8 @@ testnetwork.Connector = cc.Class.extend({
             let mapLayer = cc.director.getRunningScene().mapLayer;
             let building = getBuildingFromType(packet.type, 1, packet.id, packet.posX, packet.posY, packet.status, packet.startTime, packet.endTime);
             MapManager.getInstance().addBuilding(building, true);
-            mapLayer.addBuildingToLayer(building);
+            building.addIntoMapLayer();
+
             mapLayer.exitModeBuyBuilding();
             mapLayer.selectBuilding(building);
 

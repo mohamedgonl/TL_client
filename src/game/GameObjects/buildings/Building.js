@@ -26,26 +26,9 @@ var Building = GameObject.extend({
 
 
 
-
-        //
-        // this._grass.retain();
-        // this._shadow.retain();
-        // this._green_square.retain();
-        // this._red_square.retain();
-        // this._body.retain();
-        // this._upper.retain();
-        // this._arrow.retain();
-        // this._nameLabel.retain();
-        // this._progressBar.retain();
-        // this._levelLabel.retain();
-        // this._timeLabel.retain();
-        // this._fence.retain();
-        // this._mainSprite.retain();
-        // this._bottom.retain();
-        // this._effect.retain();
     },
 
-    onAddIntoMapLayer: function () {
+    addIntoMapLayer: function () {
         this._grass = new cc.Sprite();
         this._shadow = new cc.Sprite();
         this._green_square = new cc.Sprite();
@@ -60,7 +43,7 @@ var Building = GameObject.extend({
         this._fence = new cc.Sprite();
 
 
-        this._progressBar.addChild(this._timeLabel,ZORDER_BUILDING_EFFECT);
+        this._progressBar.addChild(this._timeLabel);
 
 
         this._bottom = new cc.Node();
@@ -85,13 +68,58 @@ var Building = GameObject.extend({
         this.loadMainSpriteByLevel(this._level);
 
 
-        this.addChild(this._bottom);
-        this.addChild(this._mainSprite);
-        this.addChild(this._effect);
-    },
-    onMoveInLayer: function () {
+        let mapLayer = cc.director.getRunningScene().getMapLayer();
+        let center = cc.p(this._posX + (this._width/2),this._posY +(this._height/2))
+        let posInMap = mapLayer.getMapPosFromGridPos(center) ;
+        mapLayer.addChild(this._bottom, ZORDER_BUILDING_BOTTOM);
+        mapLayer.addChild(this._mainSprite,mapLayer.getZOrderByPosition(center.x,center.y)); //add
+        mapLayer.addChild(this._effect, ZORDER_BUILDING_EFFECT);
 
+        cc.log("posInMap::::::::::::::::",JSON.stringify(posInMap,null,2))
+        this._bottom.setPosition(posInMap);
+        this._mainSprite.setPosition(posInMap);
+        this._effect.setPosition(posInMap);
+
+        // this.addChild(this._bottom);
+        // this.addChild(this._mainSprite);
+        // this.addChild(this._effect);
     },
+
+    moveSpriteToGridPos: function(gridPosX, gridPosY){
+        let center = cc.p(gridPosX + (this._width/2),gridPosY +(this._height/2))
+        let mapLayer = cc.director.getRunningScene().getMapLayer();
+        let posInMap = mapLayer.getMapPosFromGridPos(center);
+        this._bottom.setPosition(posInMap);
+        this._mainSprite.setPosition(posInMap);
+        this._effect.setPosition(posInMap);
+    },
+    moveToGridPos:function (gridPosX,gridPosY){
+
+        //change mapGrid
+        let mapGrid = MapManager.getInstance().getMapGrid();
+        for(let i = this._posX; i < this._posX + this._width; i++){
+            for(let j = this._posY; j < this._posY + this._height; j++){
+                mapGrid[i][j] = 0;
+            }
+        }
+
+        for(let i = gridPosX; i < gridPosX + this._width; i++){
+            for(let j = gridPosY; j < gridPosY + this._height; j++){
+                mapGrid[i][j] = this._id;
+            }
+        }
+
+        this._posX = gridPosX;
+        this._posY = gridPosY;
+
+        cc.eventManager.dispatchCustomEvent(EVENT_TROOP_NAME.MOVE_BUILDING, {buildingId: this._id});
+        const Algorithm = AlgorithmImplement.getInstance();
+        Algorithm.setGridMapStar(MapManager.getInstance().mapGrid);
+
+        this.moveSpriteToGridPos(gridPosX,gridPosY);
+        this.onMoved();
+    },
+
     loadBottomSprite: function () {
         let size = this._width;
 

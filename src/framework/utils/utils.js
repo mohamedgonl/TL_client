@@ -6,7 +6,6 @@ function getBuildingFromType(type, level, id, posX, posY, status, startTime, end
     //obstacle
     if (type.substring(0, 3) === 'OBS') {
 
-        var typeOBS = type.substring(4);
         building = new Obstacle(type, id, posX, posY, status, startTime, endTime);
         building.retain();
         return building;
@@ -55,7 +54,7 @@ function getBuildingFromType(type, level, id, posX, posY, status, startTime, end
             break;
 
     }
-    building.setType(type);
+    // building.setType(type);
     building.retain();
     return building;
 }

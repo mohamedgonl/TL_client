@@ -139,13 +139,7 @@ var MapManager = cc.Class.extend({
         building._posX = newPosX;
         building._posY = newPosY;
 
-        cc.eventManager.dispatchCustomEvent(EVENT_TROOP_NAME.MOVE_BUILDING, {buildingId: building.getId()});
 
-
-        building.onMoved();
-
-        const Algorithm = AlgorithmImplement.getInstance();
-        Algorithm.setGridMapStar(MapManager.getInstance().mapGrid);
     },
     getAllBuilding: function () {
         return Array.from(this.listBuildings.values());

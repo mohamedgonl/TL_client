@@ -22,14 +22,22 @@ var Obstacle = GameObject.extend({
         this._width = configObstacle.width;
         this._height = configObstacle.height;
 
-        //load sprites
+
+
+    },
+    addIntoMapLayer: function(){
         this.loadMainSprite();
         this.loadSubSprite();
-        this.initState();
+        let mapLayer = cc.director.getRunningScene().getMapLayer();
+        let center = cc.p(this._posX + (this._width/2),this._posY +(this._height/2));
 
-        //schedule update 1s 1 time
-        this.update()
-        this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0)
+        let posInMap = mapLayer.getMapPosFromGridPos(center);
+        mapLayer.addChild(this,mapLayer.getZOrderByPosition(center.x,center.y));
+
+        this.setPosition(posInMap);
+
+        //load sprites
+        this.initState();
     },
 
     initState: function(){
