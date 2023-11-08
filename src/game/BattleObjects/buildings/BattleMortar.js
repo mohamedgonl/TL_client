@@ -1,5 +1,5 @@
-var BattleCannon = BattleDefence.extend({
-    _type: "DEF_1",
+var BattleMortar = BattleDefence.extend({
+    _type: "DEF_3",
 
     ctor: function (level, id, posX, posY) {
         this._super(level, id, posX, posY);
@@ -9,22 +9,22 @@ var BattleCannon = BattleDefence.extend({
         this.minRange = baseConfig.minRange;
         this.maxRange = baseConfig.maxRange;
         this.attackSpeed = baseConfig.attackSpeed;
-        // var upper_sprite =  res_map.SPRITE.BODY.CANNON.UPPER[level];
-        // this.loadSprite(res_map.SPRITE.BODY.CANNON.BOTTOM[level],upper_sprite,2);
+        // var upper_sprite =  res_map.SPRITE.BODY.MORTAR.UPPER[level];
+        // this.loadSprite(res_map.SPRITE.BODY.MORTAR.BOTTOM[level],upper_sprite,2);
         // this.loadSubSprite();
     },
 
     loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.CANNON[level][0], null, 2, null, res_map.SPRITE.BODY.CANNON.JUNK);
+        this.loadSprite(res_map.SPRITE.BODY.MORTAR[level][0], null, 2, null, res_map.SPRITE.BODY.MORTAR.JUNK);
     },
 
     setDirection: function (direct) {
         this.direct = direct;
         if (direct <= TOTAL_DEFENCE_DIRECT / 2) {
-            this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][direct]);
+            this._body.setTexture(res_map.SPRITE.BODY.MORTAR[this._level][direct]);
             this._body.flippedX = false;
         } else {
-            this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][TOTAL_DEFENCE_DIRECT - direct]);
+            this._body.setTexture(res_map.SPRITE.BODY.MORTAR[this._level][TOTAL_DEFENCE_DIRECT - direct]);
             this._body.flippedX = true;
         }
     },

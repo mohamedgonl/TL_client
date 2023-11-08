@@ -97,6 +97,12 @@ function getBattleBuildingFromType(type, level, id, posX, posY) {
         case 'DEF_1':
             building = new BattleCannon(level, id, posX, posY);
             break;
+        case 'DEF_2':
+            building = new BattleArcherTower(level, id, posX, posY);
+            break;
+        case 'DEF_3':
+            building = new BattleMortar(level, id, posX, posY);
+            break;
         case 'WAL_1':
             building = new BattleWall(level, id, posX, posY);
             break;

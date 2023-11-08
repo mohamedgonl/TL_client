@@ -432,9 +432,12 @@ var BattleLayer = cc.Layer.extend({
         const listDefences = BattleManager.getInstance().getListDefences();
         const listTroops = BattleManager.getInstance().getListCurrentTroops();
         for (let defence of listDefences) {
-            if (defence.isDestroy() || defence.hasTarget()) {
+            if (defence.isDestroy()) {
                 continue;
             }
+            defence.validateCurrentTarget();
+            if (defence.hasTarget())
+                return;
             for (let troop of listTroops) {
                 if (!troop.isAlive()) continue;
                 if (defence.checkTarget(troop)) {

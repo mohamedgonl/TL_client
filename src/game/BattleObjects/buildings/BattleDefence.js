@@ -14,14 +14,6 @@ var BattleDefence = BattleBuilding.extend({
     },
 
     setDirection: function (direct) {
-        this.direct = direct;
-        if (direct <= TOTAL_DEFENCE_DIRECT / 2) {
-            this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][direct]);
-            this._body.flippedX = false;
-        } else {
-            this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][TOTAL_DEFENCE_DIRECT - direct]);
-            this._body.flippedX = true;
-        }
     },
 
     gameLoop: function (dt) {
@@ -44,13 +36,29 @@ var BattleDefence = BattleBuilding.extend({
     checkTarget: function (target) {
         //todo: check target type
 
-        //check distance
-        const dist = cc.pDistance(cc.p(target._posX, target._posY), this.centerPoint);
-        return dist > this._minRange && dist < this._maxRange;
+        return this.isTargetInRange(target);
     },
 
     hasTarget: function () {
         return this.target && this.target.isAlive();
+    },
+
+    //check if current target is still valid or not
+    //set current target to null if not valid
+    validateCurrentTarget: function () {
+        if (!this.hasTarget()){
+            this.target = null;
+            return;
+        }
+        if (!this.isTargetInRange(this.target)){
+            this.target = null;
+        }
+    },
+
+    isTargetInRange: function (target) {
+        //check distance
+        const dist = cc.pDistance(cc.p(target._posX, target._posY), this.centerPoint);
+        return dist > this._minRange && dist < this._maxRange;
     },
 
     attack: function (target) {

@@ -288,6 +288,16 @@ var res_map = {
                 1: "res/Buildings/cannon/canon_1/idle/image0000.png",
                 BULLET: "res/battle/cannon_bullet.png",
             },
+            ARCHER_TOWER: {
+                JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
+                1: "res/Buildings/AcherTower/DEF_2_1/DEF_2_1/idle/image0000.png",
+                BULLET: "res/battle/archerbullet3.png",
+                UPPER: {}
+            },
+            MORTAR: {
+                JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
+                BULLET: "res/battle/mortal_bullet_normal/00.png",
+            },
             BARRACK: {
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/barrack/BAR_1_1/idle/image0000.png"
@@ -301,15 +311,6 @@ var res_map = {
                 1: "res/Buildings/clan_castle/CLC_1_0/idle/image0000.png"
             },
             OBS_LINK: "res/Buildings/obstacle/OBS_",
-            ARCHER_TOWER:{
-
-                UPPER:{
-
-                }
-            },
-            MORTAR:{
-
-            },
         },
         SHADOW: {
             1: "res/Map/map_obj_bg/GRASS_1_Shadow.png",
