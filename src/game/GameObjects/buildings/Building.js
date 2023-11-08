@@ -233,7 +233,7 @@ var Building = GameObject.extend({
                 for (let i = 0; i < countFrame; i++) {
                     animation.addSpriteFrameWithFile(upperSprite[i]);
                 }
-                animation.setDelayPerUnit(0.3);
+                animation.setDelayPerUnit(0.1);
                 animation.setRestoreOriginalFrame(true);
                 let action = cc.animate(animation);
                 this._upper.runAction(cc.repeatForever(action))
@@ -293,12 +293,9 @@ var Building = GameObject.extend({
         this.loadButton();
         cc.eventManager.dispatchCustomEvent(EVENT_SELECT_BUILDING, this._id);
         // opacity to 80 to 100 to 80 repeat forever
-        var action = cc.sequence(cc.fadeTo(0.8, 150), cc.fadeTo(0.8, 255));
-        this._body.runAction(cc.repeatForever(action));
-        if(this._upper != null)
-        {
-            this._upper.runAction(cc.repeatForever(action.clone()));
-        }
+        this.blinkAction = cc.repeatForever(cc.sequence(cc.fadeTo(0.5, 150), cc.fadeTo(0.5, 255)));
+        this.blinkAction.retain();
+        this._body.runAction(this.blinkAction);
     },
     onUnselected: function(){
         let infoLayer = cc.director.getRunningScene().infoLayer;
@@ -315,11 +312,7 @@ var Building = GameObject.extend({
         this._levelLabel.setVisible(false);
 
         //stop nhấp nháy
-        this._body.stopAllActions();
-        if(this._upper != null)
-        {
-            this._upper.stopAllActions();
-        }
+        this._body.stopAction(this.blinkAction);
         //opacity to 255
         this._body.setOpacity(255);
         if(this._upper != null)

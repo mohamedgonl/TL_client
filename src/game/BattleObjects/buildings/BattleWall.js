@@ -2,31 +2,30 @@ var BattleWall = BattleBuilding.extend({
     _type: "WAL_1",
     ctor: function (level, id, posX, posY) {
         this._super(level, id, posX, posY);
-        //schedule load sprite
-        // this.schedule(this.loadSpriteByLevel, 5);
     },
     loadSpriteByLevel: function (level) {
         if (level == null)
             level = this._level;
 
-        let wallState = 0;
-        if (this._posX && this._posY) {
-            let RightBuilding = BattleManager.getInstance().getBuildingByGrid(this._posX + 1, this._posY);
-            let UpperBuilding = BattleManager.getInstance().getBuildingByGrid(this._posX, this._posY + 1);
-            if (RightBuilding && RightBuilding._type === "WAL_1") {
-                if (UpperBuilding && UpperBuilding._type === "WAL_1") {
-                    wallState = 3;
-                } else {
-                    wallState = 1;
-                }
-            } else if (UpperBuilding && UpperBuilding._type === "WAL_1")
-                wallState = 2;
-            else wallState = 0;
+        cc.log("level:::::",this._level)
+        let stateWall=0;
+        //check up and right grid, if is wall
+        let upBuilding = BattleManager.getInstance().getBuildingByGrid(this._posX, this._posY + 3); // battle grid size is x3
+        let rightBuilding = BattleManager.getInstance().getBuildingByGrid(this._posX + 3, this._posY); // battle grid size is x3
+
+        let upGrid = upBuilding && upBuilding._type === "WAL_1";
+        let rightGrid = rightBuilding && rightBuilding._type === "WAL_1";
+
+        if (upGrid && rightGrid) {
+            stateWall = 3;
         }
-        this.loadSprite(res_map.SPRITE.BODY.WALL[level][wallState], null, 0, null, res_map.SPRITE.BODY.WALL.JUNK);
+        else if(upGrid && !rightGrid){
+            stateWall = 2;
+        }
+        else if(!upGrid && rightGrid){
+            stateWall = 1;
+        }
+        this.loadSprite(res_map.SPRITE.BODY.WALL[level][stateWall], null, 0, null, res_map.SPRITE.BODY.WALL.JUNK);
     },
-    reloadSprite: function () {
-        this.loadSprite(res_map.SPRITE.BODY.WALL[this._level][wallState], null, 0);
-    }
 
 });

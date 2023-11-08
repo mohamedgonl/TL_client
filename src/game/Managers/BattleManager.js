@@ -164,9 +164,16 @@ var BattleManager = cc.Class.extend({
             this.addBuilding(building);
         }
 
+
         this.setResourceToBuilding();
 
         this.initMapLogic();
+
+        //reload sprite wall after load all building
+        for (let building of this.listWalls) {
+            cc.log("++++++++++++++++++++++++")
+            building.loadSpriteByLevel(building._level);
+        }
 
         //load troops
         for (let index in troops) {

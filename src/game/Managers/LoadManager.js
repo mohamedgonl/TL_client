@@ -163,25 +163,52 @@ var LoadManager = cc.Node.extend({
         //path res/Buildings/defense_base/DEF_1_1_Shadow.png
         this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER, "res/Buildings/defense_base/DEF_2_", "_Shadow.png", def2LevelCount);
 
-        //upper : archer
+        //upper : archer idle
         //link "res/Buildings/AcherTower/DEF_2_1/DEF_2_1/idle/image0000.png to image0004.png"
 
-        this.loadSpriteFolderToRes(res_map.SPRITE.BODY.ARCHER_TOWER.UPPER,
-            "res/Buildings/AcherTower/DEF_2_",
-            "/DEF_2_",
-            "/idle/image00",
-            def2LevelCount,
-            5);
+        let part1 = "res/Buildings/AcherTower/DEF_2_";
+        let part2 = "/DEF_2_";
+        let part3 = "/idle/image000";
+        let part4 = ".png";
+
+        for (let i = 1; i <= def2LevelCount; i++) {
+            let res = {};
+            for (let j = 0; j < 5; j++) {
+                res[j] = part1 + i + part2 + i + part3 + j + part4;
+            }
+            res_map.SPRITE.BODY.ARCHER_TOWER.UPPER.IDLE[i] = res;
+        }
+
+        //upper : archer attack
+        //link res/Buildings/AcherTower/DEF_2_1/DEF_2_1/attack01/image0000.png
+
+        part1 = "res/Buildings/AcherTower/DEF_2_";
+        part2 = "/DEF_2_";
+        part3 = "/attack01/image00";
+        part4 = ".png";
+
+        for (let i = 1; i <= def2LevelCount; i++) {
+            let res = {};
+            for (let j = 0; j < 65; j++) {
+                if(j<10)
+                    res[j] = part1 + i + part2 + i + part3 + "0" + j + part4;
+                else
+                    res[j] = part1 + i + part2 + i + part3 + j + part4;
+            }
+            res_map.SPRITE.BODY.ARCHER_TOWER.UPPER.ATTACK[i] = res;
+        }
+
+
 
         //DEF 3
 
         let def3LevelCount = 9;
         //path res/Buildings/Mortar/DEF_3_1/DEF_3_1/idle/image0000.png - > 5
 
-        let part1 = "res/Buildings/Motar/DEF_3_";
-        let part2 = "/DEF_3_";
-        let part3 = "/idle/image000";
-        let part4 = ".png";
+        part1 = "res/Buildings/Motar/DEF_3_";
+        part2 = "/DEF_3_";
+        part3 = "/idle/image000";
+        part4 = ".png";
 
         for (let i = 1; i <= def3LevelCount; i++) {
             let res = {};
