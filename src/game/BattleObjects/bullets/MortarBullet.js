@@ -4,11 +4,12 @@ var MortarBullet = Bullet.extend({
     speed: 150,
     gridSpeed: 20,
 
-    ctor: function (type, startPoint, target, damagePerShot) {
+    ctor: function (type, startPoint, target, damagePerShot, attackRadius) {
         this._super(res_map.SPRITE.BODY.MORTAR.BULLET, startPoint, target);
         this._type = type;
         this.target = target;
         this.damagePerShot = damagePerShot;
+        this.attackRadius = attackRadius;
     },
 
     gameLoop: function (dt) {
@@ -27,7 +28,7 @@ var MortarBullet = Bullet.extend({
         }
     },
 
-    setInitPosition: function (){
+    setInitPosition: function () {
         this.alpha += 20 / this.dist;
         const initPos = cc.pLerp(cc.p(this.startPoint.x, this.startPoint.y), cc.p(this.destination.x, this.destination.y), this.alpha);
         this.setPosition(initPos.x, initPos.y);
@@ -40,17 +41,14 @@ var MortarBullet = Bullet.extend({
     },
 
     onReachDestination: function () {
-        if (!this.target.isAlive()) {
-            cc.log("Target is dead")
+        const listTargets = BattleManager.getInstance()
+            .getListTroopsInRange(cc.p(this.destination._posX, this.destination._posY), this.attackRadius);
+        for (let target of listTargets) {
+            if (target.isAlive() && typeof this.target.onGainDamage === 'function')
+                target.onGainDamage(this.damagePerShot);
         }
-        if (this.target.isAlive() && typeof this.target.onGainDamage === 'function') {
-            this.target.onGainDamage(this.damagePerShot);
-        }
+
         this.destroyBullet();
     },
-
-    collideRect: function (x, y) {
-        return cc.rect(x - 3, y - 3, 6, 6);
-    }
 });
 

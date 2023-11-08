@@ -454,6 +454,19 @@ var BattleManager = cc.Class.extend({
         return this._battleGraph;
     },
 
+    //get list troops in a circle
+    getListTroopsInRange: function (centerPoint, range) {
+        //update listCurrentTroop
+        const troops = [];
+        for (let i = 0; i < this.listCurrentTroop.length; i++) {
+            let troop = this.listCurrentTroop[i];
+            if (!troop.isAlive())
+                continue;
+            if (cc.pDistance(centerPoint, cc.p(troop._posX, troop._posY)) <= range)
+                troops.push(troop);
+        }
+    },
+
     addBullet: function (bullet, defence) {
         this.battleScene.battleLayer.addBullet(bullet, defence);
         this.listBullets.push(bullet);

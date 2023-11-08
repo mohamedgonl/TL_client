@@ -9,6 +9,7 @@ var BattleDefence = BattleBuilding.extend({
         let config = LoadManager.getInstance().getDefBaseConfig(this._type);
         this._minRange = config.minRange * 3;
         this._maxRange = config.maxRange * 3;
+        this._attackRadius = config.attackRadius * 3;
         this.target = null;
         this.centerPoint = cc.p(this._posX + Math.floor(this._width / 2), this._posY + Math.floor(this._height / 2))
     },
@@ -80,7 +81,7 @@ var BattleDefence = BattleBuilding.extend({
             y: this.y,
             _posX: this.centerPoint.x,
             _posY: this.centerPoint.y
-        }, target, this.damagePerShot);
+        }, target, this.damagePerShot, this._attackRadius);
     },
 
 });
