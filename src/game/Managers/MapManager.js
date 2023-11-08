@@ -120,27 +120,6 @@ var MapManager = cc.Class.extend({
         }
 
     },
-    moveBuilding: function (building,newPosX,newPosY) {
-
-
-        var width = building._width;
-        var height = building._height;
-        // dat lai nhung o cu = 0
-        for(var column = building._posX; column < building._posX + width; column++)
-            for(var row = building._posY; row < building._posY + height; row++)
-                this.mapGrid[column][row] = 0;
-
-        //dat lai nhung o moi = id
-        for(var column = newPosX; column < newPosX + width; column++)
-            for(var row = newPosY; row < newPosY + height; row++)
-                this.mapGrid[column][row] = building._id;
-
-        //dat lai vi tri cua building va updateUI
-        building._posX = newPosX;
-        building._posY = newPosY;
-
-
-    },
     getAllBuilding: function () {
         return Array.from(this.listBuildings.values());
     },

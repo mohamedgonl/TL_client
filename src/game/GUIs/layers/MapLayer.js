@@ -387,12 +387,9 @@ var MapLayer = cc.Layer.extend({
         cc.log("ON RECEIVED CHECK MOVE BUILDING",JSON.stringify(data,null,2))
         //if valid move, move building in map manager
         if (data.error === 0) {
-            // MapManager.getInstance().moveBuilding(this.chosenBuilding, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y)
-            cc.log("CAN MOVE__________________",this.tempPosChosenBuilding.x,this.tempPosChosenBuilding.y)
             this.chosenBuilding.moveToGridPos(this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y);
         } else {
             //move back to old pos
-            cc.log("MOVE TO OLD")
             this.chosenBuilding.moveSpriteToGridPos(this.originGridPosition.x, this.originGridPosition.y);
         }
     },
