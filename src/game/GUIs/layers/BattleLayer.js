@@ -16,6 +16,7 @@ var BattleLayer = cc.Layer.extend({
 
     onLoadDataSuccess: function () {
         this.loadBuilding();
+        this.initDropTroopBorder();
     },
 
     createTroopAtGridPos: function (type, posX, posY) {
@@ -54,11 +55,86 @@ var BattleLayer = cc.Layer.extend({
         }
     },
 
+    initDropTroopBorder: function () {
+        this._borderDropTroop = new cc.DrawNode();
+
+        const grid = BattleManager.getInstance().getDropTroopGrid();
+
+        const BATTLE_CELL_SCALE = 3;
+
+        //draw bottom lines
+        for (let i = BATTLE_CELL_SCALE; i < GRID_SIZE_BATTLE - BATTLE_CELL_SCALE; i++) {
+            let j = BATTLE_CELL_SCALE;
+            let startLine = 0;
+            while (j < GRID_SIZE_BATTLE - BATTLE_CELL_SCALE) {
+                if (grid[i][j] === 0 && grid[i - 1][j] > 0) {
+                    startLine = j;
+                    while (grid[i][j] === 0 && grid[i - 1][j] > 0)
+                        j++;
+                    //draw from startLine to j
+                    this._borderDropTroop.drawSegment(this.getMapPosFromGridPos(cc.p(i, startLine)), this.getMapPosFromGridPos(cc.p(i, j)), 0.5, cc.Color(250, 0, 0, 255));
+                }
+                j++;
+            }
+        }
+        //draw top lines
+        for (let i = BATTLE_CELL_SCALE; i < GRID_SIZE_BATTLE - BATTLE_CELL_SCALE; i++) {
+            let j = BATTLE_CELL_SCALE;
+            let startLine = 0;
+            while (j < GRID_SIZE_BATTLE - BATTLE_CELL_SCALE) {
+                if (grid[i][j] === 0 && grid[i + 1][j] > 0) {
+                    startLine = j;
+                    while (grid[i][j] === 0 && grid[i + 1][j] > 0)
+                        j++;
+                    //draw from startLine to j
+                    this._borderDropTroop.drawSegment(this.getMapPosFromGridPos(cc.p(i + 1, startLine)), this.getMapPosFromGridPos(cc.p(i + 1, j)), 0.5, cc.Color(250, 0, 0, 255));
+                }
+                j++;
+            }
+        }
+        //draw right lines
+        for (let j = BATTLE_CELL_SCALE; j < GRID_SIZE_BATTLE - BATTLE_CELL_SCALE; j++) {
+            let i = BATTLE_CELL_SCALE;
+            let startLine = 0;
+            while (i < GRID_SIZE_BATTLE - BATTLE_CELL_SCALE) {
+                if (grid[i][j] === 0 && grid[i][j - 1] > 0) {
+                    startLine = i;
+                    while (grid[i][j] === 0 && grid[i][j - 1] > 0)
+                        i++;
+                    //draw from startLine to i
+                    this._borderDropTroop.drawSegment(this.getMapPosFromGridPos(cc.p(startLine, j)), this.getMapPosFromGridPos(cc.p(i, j)), 0.5, cc.Color(250, 0, 0, 255));
+                }
+                i++;
+            }
+        }
+        //draw left lines
+        for (let j = BATTLE_CELL_SCALE; j < GRID_SIZE_BATTLE - BATTLE_CELL_SCALE; j++) {
+            let i = BATTLE_CELL_SCALE;
+            let startLine = 0;
+            while (i < GRID_SIZE_BATTLE - BATTLE_CELL_SCALE) {
+                if (grid[i][j] === 0 && grid[i][j + 1] > 0) {
+                    startLine = i;
+                    while (grid[i][j] === 0 && grid[i][j + 1] > 0)
+                        i++;
+                    //draw from startLine to i
+                    this._borderDropTroop.drawSegment(this.getMapPosFromGridPos(cc.p(startLine, j + 1)), this.getMapPosFromGridPos(cc.p(i, j + 1)), 0.5, cc.Color(250, 0, 0, 255));
+                }
+                i++;
+            }
+        }
+
+        this._borderDropTroop.setVisible(false);
+        this.addChild(this._borderDropTroop, MAP_ZORDER_BUILDING + 1);
+        this.showBorderDropTroop();
+    },
+
     resetState: function () {
         const listBuildings = BattleManager.getInstance().getAllGameObjects();
         for (let building of listBuildings.values()) {
             this.removeBuilding(building);
         }
+        this.removeChild(this._borderDropTroop);
+        this._borderDropTroop = null;
     },
 
     //add building to layer with gridPos of it
@@ -238,7 +314,11 @@ var BattleLayer = cc.Layer.extend({
         if (type == null) return;
         let canDropTroop = BattleManager.getInstance().getDropTroopGrid()[gridPos.x][gridPos.y];
 
-        if (!canDropTroop) return;
+        if (!canDropTroop) {
+            this.showBorderDropTroop();
+            //todo: show text
+            return;
+        }
 
         if (BattleManager.getInstance().listUsedTroop.get(type) >= BattleManager.getInstance().listTroops.get(type)) {
             cc.log("not enough troop")
@@ -421,6 +501,16 @@ var BattleLayer = cc.Layer.extend({
         if (currentRightBorder > BORDER_LIMIT_RIGHT)
             this.setPositionX(pos.x + (currentRightBorder - BORDER_LIMIT_RIGHT));
 
+    },
+
+    showBorderDropTroop: function () {
+        if (this._borderDropTroop.isVisible())
+            return;
+        const self = this;
+        this._borderDropTroop.setVisible(true);
+        this.schedule(function () {
+            self._borderDropTroop.setVisible(false);
+        }, 0, 0, 3);
     },
 
     addBullet: function (bullet, defence) {
