@@ -15,8 +15,8 @@ var BattleArcherTower = BattleDefence.extend({
     },
 
     loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.ARCHER_TOWER[level], null,
-            null, 2, res_map.SPRITE.BODY.ARCHER_TOWER.JUNK);
+        this.loadSprite(res_map.SPRITE.BODY.ARCHER_TOWER[level], res_map.SPRITE.BODY.ARCHER_TOWER.UPPER.ATTACK[level],
+            null, null, res_map.SPRITE.BODY.ARCHER_TOWER.JUNK);
     },
 
     setDirection: function (direct) {

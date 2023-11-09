@@ -7,6 +7,8 @@ var BattleElixirMine = BattleBaseMine.extend({
     },
     loadSpriteByLevel: function (level) {
         this.loadSprite(res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level],
-            res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level], 1, 1, res_map.SPRITE.BODY.ELIXIR_MINE.JUNK);
+            null, 1, null, res_map.SPRITE.BODY.ELIXIR_MINE.JUNK);
+        // this.loadSprite(res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level],
+        //     res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level], 1, 1, res_map.SPRITE.BODY.ELIXIR_MINE.JUNK);
     },
 });
