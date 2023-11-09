@@ -1,5 +1,5 @@
 
-var MapManager = cc.Class.extend({
+var     MapManager = cc.Class.extend({
 
     ctor: function () {
         this.listBuildings = new Map();
@@ -134,6 +134,8 @@ var MapManager = cc.Class.extend({
         //if x y null, return null
         if(x === null || y === null)
             return null;
+        if(!this.mapGrid[x]) return null;
+        if(!this.mapGrid[x][y]) return null;
         return this.listBuildings.get(this.mapGrid[x][y]) || null;
     },
     getListBuilderHut: function () {

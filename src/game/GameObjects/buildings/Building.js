@@ -70,6 +70,7 @@ var Building = GameObject.extend({
 
         let mapLayer = cc.director.getRunningScene().getMapLayer();
         let center = cc.p(this._posX + (this._width/2),this._posY +(this._height/2))
+        cc.log("center",JSON.stringify(center))
         let posInMap = mapLayer.getMapPosFromGridPos(center) ;
         mapLayer.addChild(this._bottom, ZORDER_BUILDING_BOTTOM);
         mapLayer.addChild(this._mainSprite,mapLayer.getZOrderByPosition(center.x,center.y)); //add
@@ -83,6 +84,12 @@ var Building = GameObject.extend({
         // this.addChild(this._bottom);
         // this.addChild(this._mainSprite);
         // this.addChild(this._effect);
+    },
+    removeFromMapLayer: function(){
+        this._bottom.removeFromParent(true);
+        this._mainSprite.removeFromParent(true);
+        this._effect.removeFromParent(true);
+        this.removeFromParent(true);
     },
 
     moveSpriteToGridPos: function(gridPosX, gridPosY){
@@ -388,6 +395,7 @@ var Building = GameObject.extend({
         //log start time, end time, current time
         let currentTime = TimeManager.getInstance().getCurrentTimeInSecond();
         let percent = (currentTime - this._startTime)/(this._endTime - this._startTime)*100;
+        cc.log("percent",percent)
         this._progressBar.setPercent(percent);
         //set time label = end time - current time in 1d2h3m40s format, if 0d -> 2h3m40s, if 0d0h -> 3m40s
         let time = this._endTime - currentTime;
@@ -406,6 +414,7 @@ var Building = GameObject.extend({
         }
     },
     update: function () {
+        cc.log("update")
         if(this._state === 1 || this._state === 2){
             this.updateProgress();
         }
@@ -431,6 +440,7 @@ var Building = GameObject.extend({
         this._fence.setVisible(true);
 
         this.loadButton();
+        cc.log("call update",this._id)
         this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
         //MapManager.getInstance().callBuilderToBuilding(this);
     },
@@ -440,7 +450,7 @@ var Building = GameObject.extend({
         this._startTime = startTime;
         this._endTime = endTime;
         this.startProcess();
-        },
+    },
     startUpgrade: function (startTime,endTime) {
 
 

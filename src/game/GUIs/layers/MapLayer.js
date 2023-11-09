@@ -138,7 +138,7 @@ var MapLayer = cc.Layer.extend({
 
     exitModeBuyBuilding: function () {
         if (this.chosenBuilding)
-            this.chosenBuilding.removeFromParent(true);
+            this.chosenBuilding.removeFromMapLayer();
         this.chosenBuilding = null;
         this.onModeBuyBuilding = false;
         this.tempPosChosenBuilding = null;
@@ -356,6 +356,8 @@ var MapLayer = cc.Layer.extend({
     selectBuilding: function (building) {
         if (this.onModeBuyBuilding) {
             this.chosenBuilding = building;
+            this.tempPosChosenBuilding = cc.p(this.chosenBuilding._posX, this.chosenBuilding._posY);
+            building.onSelected();
             return;
         }
         //if have chosen building, unselect it
@@ -664,30 +666,23 @@ var MapLayer = cc.Layer.extend({
         //init building and set it to chosen building
         this.chosenBuilding = getBuildingFromType(buildingType, 1);
 
-        //add button accept and cancel to building
-        var buttonAccept = Utils.createButton(res.BUTTON.ACCEPT, SCALE_BUTTON_BUY_BUILDING, OFFSET_BUTTON_BUY_BUILDING, this.acceptBuyBuilding, this);
-        this.chosenBuilding.addChild(buttonAccept, MAP_ZORDER_GUI);
-        var buttonCancel = Utils.createButton(res.BUTTON.CANCEL, SCALE_BUTTON_BUY_BUILDING, cc.p(-OFFSET_BUTTON_BUY_BUILDING.x, OFFSET_BUTTON_BUY_BUILDING.y), this.exitModeBuyBuilding, this);
-        this.chosenBuilding.addChild(buttonCancel, MAP_ZORDER_GUI);
-
-
-
         //set position of building
         let validPosition = this.getEmptyPositionPutBuilding(this.chosenBuilding);
-
         if(posX && posY) {
             validPosition = cc.p(posX,posY);
         }
 
         //if not valid position, set to center of map and square to red, else set to valid position and square to green, move screen to see building
-        if (validPosition == null) {
-            validPosition = cc.p(GRID_SIZE / 2, GRID_SIZE / 2)
-            this.chosenBuilding.setSquare(2);
-        } else {
-            this.chosenBuilding.setSquare(1);
-        }
         this.chosenBuilding.setGridPosition(validPosition.x, validPosition.y);
         this.tempPosChosenBuilding = cc.p(validPosition.x, validPosition.y);
+
+        this.chosenBuilding.addIntoMapLayer();
+
+        //add button accept and cancel to building
+        var buttonAccept = Utils.createButton(res.BUTTON.ACCEPT, SCALE_BUTTON_BUY_BUILDING, OFFSET_BUTTON_BUY_BUILDING, this.acceptBuyBuilding, this);
+        this.chosenBuilding._effect.addChild(buttonAccept, ZORDER_BUILDING_EFFECT);
+        var buttonCancel = Utils.createButton(res.BUTTON.CANCEL, SCALE_BUTTON_BUY_BUILDING, cc.p(-OFFSET_BUTTON_BUY_BUILDING.x, OFFSET_BUTTON_BUY_BUILDING.y), this.exitModeBuyBuilding, this);
+        this.chosenBuilding._effect.addChild(buttonCancel, ZORDER_BUILDING_EFFECT);
 
         // move screen to see building
         // let currentPos = this.getPosition();
@@ -696,7 +691,7 @@ var MapLayer = cc.Layer.extend({
         // this.limitBorder();
 
         //add building to layer to display
-        this.chosenBuilding.addIntoMapLayer();
+
 
         //set chosen building
         this.selectBuilding(this.chosenBuilding);
