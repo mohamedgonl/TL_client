@@ -4,11 +4,11 @@ var CannonBullet = Bullet.extend({
     speed: 300,
     gridSpeed: 40,
 
-    ctor: function (type, startPoint, target, damagePerShot) {
-        this._super(res_map.SPRITE.BODY.CANNON.BULLET, startPoint, target);
+    ctor: function (type, startPoint, target, damagePerShot, attackRadius, initPos) {
+        this._super(res_map.SPRITE.BODY.CANNON.BULLET, startPoint, target, damagePerShot, attackRadius, initPos);
         this._type = type;
-        this.target = target;
-        this.damagePerShot = damagePerShot;
+
+        this.setScale(0.5, 0.5);
     },
 
     gameLoop: function (dt) {
@@ -25,12 +25,6 @@ var CannonBullet = Bullet.extend({
         if (this.time <= 0) {
             this.onReachDestination();
         }
-    },
-
-    setInitPosition: function (){
-        this.alpha += 20 / this.dist;
-        const initPos = cc.pLerp(cc.p(this.startPoint.x, this.startPoint.y), cc.p(this.destination.x, this.destination.y), this.alpha);
-        this.setPosition(initPos.x, initPos.y);
     },
 
     destroyBullet: function () {

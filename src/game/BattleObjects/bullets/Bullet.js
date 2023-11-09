@@ -9,9 +9,14 @@ var Bullet = cc.Sprite.extend({
     alpha: 0,
     time: 0, // time logic to reach destination
 
-    ctor: function (type, startPoint, target) {
+    ctor: function (type, startPoint, target, damagePerShot, attackRadius, initPos) {
         this._super(type);
         //this.setBlendFunc(cc.SRC_ALPHA, cc.ONE);
+        this.target = target;
+        this.damagePerShot = damagePerShot;
+        this.attackRadius = attackRadius;
+        this.initPos = initPos;
+
         this.init(startPoint, target);
     },
 
@@ -30,6 +35,10 @@ var Bullet = cc.Sprite.extend({
 
         this.active = true;
         this.visible = true;
+    },
+
+    setInitPosition: function (){
+        this.setPosition(this.initPos.x, this.initPos.y);
     },
 
     gameLoop: function (dt) {
@@ -51,7 +60,7 @@ var Bullet = cc.Sprite.extend({
 
 });
 
-Bullet.getOrCreateBullet = function (type, startPoint, target, damagePerShot, attackRadius) {
+Bullet.getOrCreateBullet = function (type, startPoint, target, damagePerShot, attackRadius, initPos) {
     var selChild = null;
     const listBullets = BattleManager.getInstance().listBullets;
     for (let bullet of listBullets)
@@ -60,11 +69,11 @@ Bullet.getOrCreateBullet = function (type, startPoint, target, damagePerShot, at
             return bullet;
         }
     if (type === "DEF_1") {
-        selChild = new CannonBullet(type, startPoint, target, damagePerShot);
+        selChild = new CannonBullet(type, startPoint, target, damagePerShot, attackRadius, initPos);
     } else if (type === "DEF_2") {
-        selChild = new ArcherTowerBullet(type, startPoint, target, damagePerShot);
+        selChild = new ArcherTowerBullet(type, startPoint, target, damagePerShot, attackRadius, initPos);
     } else if (type === "DEF_3") {
-        selChild = new MortarBullet(type, startPoint, target, damagePerShot, attackRadius);
+        selChild = new MortarBullet(type, startPoint, target, damagePerShot, attackRadius, initPos);
     }
     BattleManager.getInstance().addBullet(selChild);
     return selChild;
