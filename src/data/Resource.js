@@ -287,10 +287,28 @@ var res_map = {
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/cannon/canon_1/idle/image0000.png",
                 BULLET: "res/battle/cannon_bullet.png",
+                ATK_0:{
+                    1:null,
+                },
+                ATK_1:{
+
+                },
+                ATK_2:{
+
+                },
+                ATK_3:{
+
+                },
+                ATK_4:{
+
+                }
             },
             ARCHER_TOWER: {
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/AcherTower/DEF_2_1/DEF_2_1/idle/image0000.png",
+                BASE:{
+
+                },
                 BULLET: "res/battle/archerbullet3.png",
                 UPPER: {
                     IDLE:{
@@ -299,11 +317,41 @@ var res_map = {
                     ATTACK:{
                         1:null,
                     }
+                },
+                ATK_0:{
+
+                },
+                ATK_1:{
+
+                },
+                ATK_2:{
+
+                },
+                ATK_3:{
+
+                },
+                ATK_4:{
+
                 }
             },
             MORTAR: {
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 BULLET: "res/battle/mortal_bullet_normal/00.png",
+                ATK_0:{
+
+                },
+                ATK_1:{
+
+                },
+                ATK_2:{
+
+                },
+                ATK_3:{
+
+                },
+                ATK_4:{
+
+                }
             },
             BARRACK: {
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
