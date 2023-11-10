@@ -1,7 +1,6 @@
 var CannonBullet = Bullet.extend({
     active: true,
     target: null,
-    speed: 300,
     gridSpeed: 40,
 
     ctor: function (type, startPoint, target, damagePerShot, attackRadius, initPos) {
@@ -15,15 +14,16 @@ var CannonBullet = Bullet.extend({
         if (!this.active || this.destination === null)
             return;
         this.time -= dt;
-        this.alpha += dt * this.speed / this.dist;
-        if (this.alpha < 0.99) {
-            const newPos = cc.pLerp(cc.p(this.startPoint.x, this.startPoint.y), cc.p(this.destination.x, this.destination.y), this.alpha);
-            this.setPosition(newPos.x, newPos.y);
-        } else {
-            this.setVisible(false);
-        }
         if (this.time <= 0) {
             this.onReachDestination();
+        }
+
+        //UI
+        let alpha = 1 - this.time / this.totalTime;
+
+        if (alpha < 1) {
+            const newPos = cc.pLerp(cc.p(this.startPoint.x, this.startPoint.y), cc.p(this.destination.x, this.destination.y), alpha);
+            this.setPosition(newPos.x, newPos.y);
         }
     },
 
@@ -34,17 +34,10 @@ var CannonBullet = Bullet.extend({
     },
 
     onReachDestination: function () {
-        if (!this.target.isAlive()) {
-            cc.log("Target is dead")
-        }
         if (this.target.isAlive() && typeof this.target.onGainDamage === 'function') {
             this.target.onGainDamage(this.damagePerShot);
         }
         this.destroyBullet();
     },
-
-    collideRect: function (x, y) {
-        return cc.rect(x - 3, y - 3, 6, 6);
-    }
 });
 
