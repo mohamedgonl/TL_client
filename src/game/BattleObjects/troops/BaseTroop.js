@@ -19,6 +19,7 @@ var BaseTroop = cc.Node.extend({
         this._attackSpeed = TROOP_BASE[this._type]["attackSpeed"];
         this._damage = TROOP[this._type][TROOP_LEVEL]["damagePerAttack"]*5;
         this._hitpoints = TROOP[this._type][TROOP_LEVEL]["hitpoints"];
+        this._attackRange = TROOP_BASE[this._type][TROOP_LEVEL]["attackRange"];
         this._currentHitpoints = this._hitpoints;
         this._target = null;
         //state: 3 state: 0: findPath,1: move,2: attack, 3:idle, 4: death
@@ -58,7 +59,10 @@ var BaseTroop = cc.Node.extend({
     gameLoop: function (dt){
         if(this._state === TROOP_STATE.FIND_PATH)
         {
-            this.findTargetandPath();
+            // this.findTargetandPath();
+            this.findTarget();
+            this._path = this.getPathToBuilding(this._target);
+            this.checkPath();
             return;
         }
         if(this._state === TROOP_STATE.MOVE)
@@ -126,6 +130,66 @@ var BaseTroop = cc.Node.extend({
 
     //return -1 if not found
     //set this._target and this._path
+
+    findTarget: function(){
+        let listTarget = [];
+        switch (this._favoriteTarget) {
+            case "DEF":
+                listTarget = BattleManager.getInstance().getListDefences();
+                break;
+            case "RES":
+                listTarget = BattleManager.getInstance().getListResources();
+                break;
+            case "NONE":
+                let mapListBuilding = BattleManager.getInstance().getAllBuilding();
+                //to list
+                for (let [key, value] of mapListBuilding) {
+                    //if obs, continue
+                    if (value._type.startsWith("OBS")) continue;
+                    if(value._type.startsWith("WAL")) continue;
+
+                    listTarget.push(value);
+                }
+                break;
+            default:
+                cc.log("Error::::: NOT FOUND FAVORITE TARGET")
+        }
+
+        if (listTarget.length === 0) {
+            this._target =null;
+            return;
+        }
+
+        this._currentIndex = 0;
+        //get min distance target
+        let minDistance =null;
+        this._target = null;
+
+        for(let i = 0; i < listTarget.length; i++) {
+
+            let target = listTarget[i];
+
+            //if destroy, continue
+            if(target.isDestroy()) continue;
+            //get min distance
+            let distance = Math.sqrt(Math.pow(this._posX - target._posX, 2) + Math.pow(this._posY - target._posY, 2));
+            if (minDistance == null || distance < minDistance) {
+                minDistance = distance;
+                this._target = target;
+            }
+        }
+
+        if(this._target === null) {
+            cc.log("Error::::: NOT FOUND TARGET")
+            this.state = TROOP_STATE.IDLE;
+            return;
+        }
+
+        this._state = TROOP_STATE.MOVE;
+    },
+    checkPath: function () {
+
+    },
     findTargetandPath: function () {
         let listTarget = [];
         switch (this._favoriteTarget) {
