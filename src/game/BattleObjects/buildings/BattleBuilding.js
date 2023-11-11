@@ -16,11 +16,11 @@ var BattleBuilding = BattleGameObject.extend({
 
         this._junk.setVisible(false);
 
-        this.addChild(this._grass, ZORDER_BUILDING_GRASS);
-        this.addChild(this._body, ZORDER_BUILDING_BODY);
-        this.addChild(this._shadow, ZORDER_BUILDING_SHADOW);
-        this.addChild(this._upper, ZORDER_BUILDING_UPPER);
-        this.addChild(this._junk, ZORDER_BUILDING_BODY);
+        this.addChild(this._grass, BATTLE_ZORDER_BUILDING_GRASS);
+        this.addChild(this._body, BATTLE_ZORDER_BUILDING_BODY);
+        this.addChild(this._shadow, BATTLE_ZORDER_BUILDING_SHADOW);
+        this.addChild(this._upper, BATTLE_ZORDER_BUILDING_UPPER);
+        this.addChild(this._junk, BATTLE_ZORDER_BUILDING_BODY);
 
         let config = LoadManager.getInstance().getConfig(this._type, level);
         this._width = config.width * 3;
