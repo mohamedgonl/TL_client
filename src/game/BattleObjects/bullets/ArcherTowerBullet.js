@@ -1,7 +1,7 @@
 var ArcherTowerBullet = Bullet.extend({
     active: true,
     target: null,
-    gridSpeed: 20,
+    gridSpeed: 50,
 
     ctor: function (type, startPoint, target, damagePerShot, attackRadius, initPos) {
         this._super(res_map.SPRITE.BODY.ARCHER_TOWER.BULLET, startPoint, target, damagePerShot, attackRadius, initPos);
