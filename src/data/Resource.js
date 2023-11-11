@@ -312,6 +312,21 @@ var res_map = {
                     "9": "res/battle/cannon_hit/09.png",
                     "10": "res/battle/cannon_hit/10.png",
                 },
+                ATK_0: {
+
+                },
+                ATK_1: {
+
+                },
+                ATK_2: {
+
+                },
+                ATK_3: {
+
+                },
+                ATK_4: {
+
+                }
             },
             ARCHER_TOWER: {
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
@@ -324,6 +339,21 @@ var res_map = {
                     ATTACK:{
                         1:null,
                     }
+                },
+                ATK_0: {
+
+                },
+                ATK_1: {
+
+                },
+                ATK_2: {
+
+                },
+                ATK_3: {
+
+                },
+                ATK_4: {
+
                 }
             },
             MORTAR: {
@@ -353,6 +383,21 @@ var res_map = {
                     "10": "res/battle/mortalbullet_explosion/10.png",
                     "11": "res/battle/mortalbullet_explosion/11.png",
                 },
+                ATK_0: {
+
+                },
+                ATK_1: {
+
+                },
+                ATK_2: {
+
+                },
+                ATK_3: {
+
+                },
+                ATK_4: {
+
+                }
             },
             BARRACK: {
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
