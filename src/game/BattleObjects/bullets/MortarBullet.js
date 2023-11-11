@@ -6,6 +6,24 @@ var MortarBullet = Bullet.extend({
     ctor: function (type, startPoint, target, damagePerShot, attackRadius, initPos) {
         this._super(res_map.SPRITE.BODY.MORTAR.BULLET, startPoint, target, damagePerShot, attackRadius, initPos);
         this._type = type;
+
+        this.setScale(0.5, 0.5);
+
+        //run action roll bullet
+        let animateRoll = new cc.Animation();
+        const frames = res_map.SPRITE.BODY.MORTAR.BULLETS;
+        for (let idx in frames) {
+            animateRoll.addSpriteFrameWithFile(frames[idx]);
+        }
+        animateRoll.setDelayPerUnit(0.1);
+        animateRoll.setRestoreOriginalFrame(true);
+
+        let actionRoll = cc.animate(animateRoll).repeatForever();
+        this.runAction(actionRoll);
+
+        //bullet explosion
+        this._explosion = new cc.Sprite();
+        this._explosion.setScale(0.5, 0.5);
     },
 
     init: function (startPoint, target) {
@@ -58,6 +76,19 @@ var MortarBullet = Bullet.extend({
         }
 
         this.destroyBullet();
+
+        //run action explose
+        let animate = new cc.Animation();
+        const frames = res_map.SPRITE.BODY.MORTAR.HIT;
+        for (let idx in frames) {
+            animate.addSpriteFrameWithFile(frames[idx]);
+        }
+        animate.setDelayPerUnit(0.1);
+        animate.setRestoreOriginalFrame(true);
+        let action = cc.animate(animate);
+
+        this._explosion.setPosition(this.destination.x, this.destination.y);
+        this._explosion.runAction(action);
     },
 });
 

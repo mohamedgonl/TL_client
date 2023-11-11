@@ -515,6 +515,9 @@ var BattleLayer = cc.Layer.extend({
 
     addBullet: function (bullet, defence) {
         this.addChild(bullet, MAP_ZORDER_BULLET);
+        if (bullet._explosion) {
+            this.addChild(bullet._explosion, MAP_ZORDER_BULLET);
+        }
     },
 
     gameLoop: function (dt) {
