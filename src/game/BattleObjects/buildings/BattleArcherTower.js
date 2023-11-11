@@ -21,13 +21,13 @@ var BattleArcherTower = BattleDefence.extend({
 
     setDirection: function (direct) {
         this.direct = direct;
-        // if (direct <= TOTAL_DEFENCE_DIRECT / 2) {
-        //     this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][direct]);
-        //     this._body.flippedX = false;
-        // } else {
-        //     this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][TOTAL_DEFENCE_DIRECT - direct]);
-        //     this._body.flippedX = true;
-        // }
+        if (direct <= TOTAL_DEFENCE_DIRECT / 2) {
+            this._upper.setTexture(res_map.SPRITE.BODY.ARCHER_TOWER.UPPER.IDLE[this._level][direct]);
+            this._upper.flippedX = false;
+        } else {
+            this._upper.setTexture(res_map.SPRITE.BODY.ARCHER_TOWER.UPPER.IDLE[this._level][TOTAL_DEFENCE_DIRECT - direct]);
+            this._upper.flippedX = true;
+        }
     },
 
     // attack: function (target) {
