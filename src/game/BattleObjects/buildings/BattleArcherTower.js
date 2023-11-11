@@ -30,13 +30,19 @@ var BattleArcherTower = BattleDefence.extend({
         }
     },
 
-    // attack: function (target) {
-    //     const bullet = Bullet.getOrCreateBullet(this._type, {
-    //         x: this.x,
-    //         y: this.y,
-    //         _posX: this.centerPoint.x,
-    //         _posY: this.centerPoint.y
-    //     }, target, this.damagePerShot);
-    // },
+    attack: function (target) {
+        //logic
+        this._super(target);
+
+        //UI
+        //run action attack
+        const directCfg = this.direct <= TOTAL_DEFENCE_DIRECT / 2 ? this.direct : TOTAL_DEFENCE_DIRECT - this.direct
+
+        let actionAttack = fr.createActionByFrames(res_map.SPRITE.BODY.ARCHER_TOWER['ATK_' + directCfg][this._level], {
+            delayPerUnit: 0.07,
+            restoreOriginalFrame: true
+        });
+        this._upper.runAction(actionAttack);
+    },
 
 });

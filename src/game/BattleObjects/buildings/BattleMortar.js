@@ -41,7 +41,6 @@ var BattleMortar = BattleDefence.extend({
             delayPerUnit: 0.1,
             restoreOriginalFrame: true
         });
-        this._body.stopAllActions()
         this._body.runAction(actionAttack);
     },
 

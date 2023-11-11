@@ -63,7 +63,6 @@ var BattleCannon = BattleDefence.extend({
             delayPerUnit: 0.1,
             restoreOriginalFrame: true
         });
-        this._body.stopAllActions()
         this._body.runAction(actionAttack);
 
         //run action fire
