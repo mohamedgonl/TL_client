@@ -10,20 +10,15 @@ var MortarBullet = Bullet.extend({
         this.setScale(0.5, 0.5);
 
         //run action roll bullet
-        let animateRoll = new cc.Animation();
-        const frames = res_map.SPRITE.BODY.MORTAR.BULLETS;
-        for (let idx in frames) {
-            animateRoll.addSpriteFrameWithFile(frames[idx]);
-        }
-        animateRoll.setDelayPerUnit(0.1);
-        animateRoll.setRestoreOriginalFrame(true);
-
-        let actionRoll = cc.animate(animateRoll).repeatForever();
-        this.runAction(actionRoll);
+        let actionRoll = fr.createActionByFrames(res_map.SPRITE.BODY.MORTAR.BULLETS, {delayPerUnit: 0.1, restoreOriginalFrame: true});
+        this.runAction(actionRoll.repeatForever());
 
         //bullet explosion
         this._explosion = new cc.Sprite();
         this._explosion.setScale(0.5, 0.5);
+
+        this.actionExplose = fr.createActionByFrames(res_map.SPRITE.BODY.MORTAR.HIT, {delayPerUnit: 0.1, restoreOriginalFrame: true});
+        this.actionExplose.retain();
     },
 
     init: function (startPoint, target) {
@@ -78,17 +73,9 @@ var MortarBullet = Bullet.extend({
         this.destroyBullet();
 
         //run action explose
-        let animate = new cc.Animation();
-        const frames = res_map.SPRITE.BODY.MORTAR.HIT;
-        for (let idx in frames) {
-            animate.addSpriteFrameWithFile(frames[idx]);
-        }
-        animate.setDelayPerUnit(0.1);
-        animate.setRestoreOriginalFrame(true);
-        let action = cc.animate(animate);
-
         this._explosion.setPosition(this.destination.x, this.destination.y);
-        this._explosion.runAction(action);
+        this._explosion.stopAction(this.actionExplose);
+        this._explosion.runAction(this.actionExplose);
     },
 });
 

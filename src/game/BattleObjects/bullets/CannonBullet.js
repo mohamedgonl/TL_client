@@ -12,6 +12,9 @@ var CannonBullet = Bullet.extend({
         //bullet explosion
         this._explosion = new cc.Sprite();
         this._explosion.setScale(0.5, 0.5);
+
+        this.actionExplose = fr.createActionByFrames(res_map.SPRITE.BODY.CANNON.HIT, {delayPerUnit: 0.1, restoreOriginalFrame: true});
+        this.actionExplose.retain();
     },
 
     gameLoop: function (dt) {
@@ -44,17 +47,9 @@ var CannonBullet = Bullet.extend({
         this.destroyBullet();
 
         //run action explose
-        let animate = new cc.Animation();
-        const frames = res_map.SPRITE.BODY.CANNON.HIT;
-        for (let idx in frames) {
-            animate.addSpriteFrameWithFile(frames[idx]);
-        }
-        animate.setDelayPerUnit(0.1);
-        animate.setRestoreOriginalFrame(true);
-        let action = cc.animate(animate);
-
         this._explosion.setPosition(this.destination.x, this.destination.y);
-        this._explosion.runAction(action);
+        this._explosion.stopAction(this.actionExplose);
+        this._explosion.runAction(this.actionExplose);
     },
 });
 

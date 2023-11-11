@@ -38,6 +38,13 @@ var BattleBuilding = BattleGameObject.extend({
         // this._shadow.setGlobalZOrder(20);
         // this._body.setGlobalZOrder(30);
         // this._upper.setGlobalZOrder(40);
+
+        //init action destroy
+        this.actionDestroy = fr.createActionByFrames(res_map.SPRITE.BUILDING_EXPLOSION, {delayPerUnit: 0.1, restoreOriginalFrame: true})
+        this.actionDestroy.retain();
+        this._nodeDestroyAction = new cc.Sprite();
+        this._nodeDestroyAction.setPosition(this._nodeDestroyAction.x, this._nodeDestroyAction.y + 60);
+        this.addChild(this._nodeDestroyAction);
     },
 
     //load sprite with size,
@@ -173,20 +180,8 @@ var BattleBuilding = BattleGameObject.extend({
         this._hpBar.setVisible(false);
         this._junk.setVisible(true);
 
-        //run action
-        let animate = new cc.Animation();
-        const frames = res_map.SPRITE.BUILDING_EXPLOSION;
-        for (let idx in frames) {
-            animate.addSpriteFrameWithFile(frames[idx]);
-        }
-        animate.setDelayPerUnit(0.1);
-        animate.setRestoreOriginalFrame(true);
-
-        let action = cc.animate(animate);
-        let temp = new cc.Sprite();
-        temp.setPosition(temp.x, temp.y + 60)
-        this.addChild(temp);
-        temp.runAction(action);
+        //run action destroy
+        this._nodeDestroyAction.runAction(this.actionDestroy);
     },
 
 });

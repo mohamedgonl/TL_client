@@ -28,6 +28,10 @@ var BattleCannon = BattleDefence.extend({
         this._fire.setScale(0.7, 0.7);
         this._fire.setPosition(this._body.x + this.deltaBarrelPosition[0].dx, this._body.y + this.deltaBarrelPosition[0].dy);
         this.addChild(this._fire);
+
+        //init animation
+        this.actionFire = fr.createActionByFrames(res_map.SPRITE.BODY.CANNON.FIRE, {delayPerUnit: 0.1, restoreOriginalFrame: true});
+        this.actionFire.retain();
     },
 
     loadSpriteByLevel: function (level) {
@@ -47,20 +51,13 @@ var BattleCannon = BattleDefence.extend({
     },
 
     attack: function (target) {
-        //run animation
-        let animateAttack = new cc.Animation();
-        const frames = res_map.SPRITE.BODY.CANNON.FIRE;
-        for (let idx in frames) {
-            animateAttack.addSpriteFrameWithFile(frames[idx]);
-        }
-        animateAttack.setDelayPerUnit(0.1);
-        animateAttack.setRestoreOriginalFrame(true);
-        let actionAttack = cc.animate(animateAttack);
-        this._fire.runAction(actionAttack);
-
         //logic
         this._super(target, cc.p(this.x + this.deltaBarrelPosition[this.direct].dx,
             this.y + this.deltaBarrelPosition[this.direct].dy));
+
+        //run action
+        this._fire.stopAction(this.actionFire);
+        this._fire.runAction(this.actionFire);
     },
 
 });
