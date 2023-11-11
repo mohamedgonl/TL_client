@@ -55,7 +55,18 @@ var BattleCannon = BattleDefence.extend({
         this._super(target, cc.p(this.x + this.deltaBarrelPosition[this.direct].dx,
             this.y + this.deltaBarrelPosition[this.direct].dy));
 
-        //run action
+        //UI
+        //run action attack
+        const directCfg = this.direct <= TOTAL_DEFENCE_DIRECT / 2 ? this.direct : TOTAL_DEFENCE_DIRECT - this.direct
+
+        let actionAttack = fr.createActionByFrames(res_map.SPRITE.BODY.CANNON['ATK_' + directCfg][this._level], {
+            delayPerUnit: 0.1,
+            restoreOriginalFrame: true
+        });
+        this._body.stopAllActions()
+        this._body.runAction(actionAttack);
+
+        //run action fire
         this._fire.stopAction(this.actionFire);
         this._fire.runAction(this.actionFire);
     },
