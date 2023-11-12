@@ -78,11 +78,11 @@ var res = {
     },
     TROOPS_END_BATTLE: {
         ARM_1: "res/ket_thuc_tran/Icon_nho_nhat/1.png",
-        ARM_2: "res/ket_thuc_tran/Icon_nho_nhat/2.png",
-        ARM_3: "res/ket_thuc_tran/Icon_nho_nhat/3.png",
-        ARM_4: "res/ket_thuc_tran/Icon_nho_nhat/4.png",
+        ARM_2: "res/ket_thuc_tran/Icon_nho_nhat/3.png",
+        ARM_3: "res/ket_thuc_tran/Icon_nho_nhat/4.png",
+        ARM_4: "res/ket_thuc_tran/Icon_nho_nhat/5.png",
         ARM_5: "res/ket_thuc_tran/Icon_nho_nhat/5.png",
-        ARM_6: "res/ket_thuc_tran/Icon_nho_nhat/6.png",
+        ARM_6: "res/ket_thuc_tran/Icon_nho_nhat/2.png",
     }
 };
 
@@ -312,62 +312,42 @@ var res_map = {
                     "9": "res/battle/cannon_hit/09.png",
                     "10": "res/battle/cannon_hit/10.png",
                 },
-                ATK_0: {
-
-                },
-                ATK_1: {
-
-                },
-                ATK_2: {
-
-                },
-                ATK_3: {
-
-                },
-                ATK_4: {
-
-                }
+                ATK_0: {},
+                ATK_1: {},
+                ATK_2: {},
+                ATK_3: {},
+                ATK_4: {}
             },
             ARCHER_TOWER: {
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/AcherTower/DEF_2_1/DEF_2_1/idle/image0000.png",
                 BULLET: "res/battle/archerbullet3.png",
                 UPPER: {
-                    IDLE:{
-                        1:null,
+                    IDLE: {
+                        1: null,
                     },
-                    ATTACK:{
-                        1:null,
+                    ATTACK: {
+                        1: null,
                     }
                 },
-                ATK_0: {
-
-                },
-                ATK_1: {
-
-                },
-                ATK_2: {
-
-                },
-                ATK_3: {
-
-                },
-                ATK_4: {
-
-                }
+                ATK_0: {},
+                ATK_1: {},
+                ATK_2: {},
+                ATK_3: {},
+                ATK_4: {}
             },
             MORTAR: {
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 BULLET: "res/battle/mortal_bullet_normal/00.png",
                 BULLETS: {
-                    "0":"res/battle/mortal_bullet_normal/00.png",
-                    "1":"res/battle/mortal_bullet_normal/01.png",
-                    "2":"res/battle/mortal_bullet_normal/02.png",
-                    "3":"res/battle/mortal_bullet_normal/03.png",
-                    "4":"res/battle/mortal_bullet_normal/04.png",
-                    "5":"res/battle/mortal_bullet_normal/05.png",
-                    "8":"res/battle/mortal_bullet_normal/08.png",
-                    "9":"res/battle/mortal_bullet_normal/09.png",
+                    "0": "res/battle/mortal_bullet_normal/00.png",
+                    "1": "res/battle/mortal_bullet_normal/01.png",
+                    "2": "res/battle/mortal_bullet_normal/02.png",
+                    "3": "res/battle/mortal_bullet_normal/03.png",
+                    "4": "res/battle/mortal_bullet_normal/04.png",
+                    "5": "res/battle/mortal_bullet_normal/05.png",
+                    "8": "res/battle/mortal_bullet_normal/08.png",
+                    "9": "res/battle/mortal_bullet_normal/09.png",
                 },
                 HIT: {
                     "0": "res/battle/mortalbullet_explosion/00.png",
@@ -383,21 +363,11 @@ var res_map = {
                     "10": "res/battle/mortalbullet_explosion/10.png",
                     "11": "res/battle/mortalbullet_explosion/11.png",
                 },
-                ATK_0: {
-
-                },
-                ATK_1: {
-
-                },
-                ATK_2: {
-
-                },
-                ATK_3: {
-
-                },
-                ATK_4: {
-
-                }
+                ATK_0: {},
+                ATK_1: {},
+                ATK_2: {},
+                ATK_3: {},
+                ATK_4: {}
             },
             BARRACK: {
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
