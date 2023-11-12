@@ -7,6 +7,7 @@ var Bullet = cc.Sprite.extend({
     destination: null,
     startPoint: null,
     time: 0, // time logic to reach destination
+    minimumTime: 0, // minimum time to reach destination
 
     ctor: function (type, startPoint, target, damagePerShot, attackRadius, initPos) {
         this._super(type);
@@ -25,7 +26,7 @@ var Bullet = cc.Sprite.extend({
         this.destination = {x: target.x, y: target.y, _posX: target._posX, _posY: target._posY};
 
         const gridDist = Math.sqrt(Math.pow(this.startPoint._posX - target._posX, 2) + Math.pow(this.startPoint._posY - target._posY, 2));
-        this.time = gridDist / this.gridSpeed;
+        this.time = Math.max(gridDist / this.gridSpeed, this.minimumTime);
         this.totalTime = this.time;
 
         this.setInitPosition();
@@ -34,7 +35,7 @@ var Bullet = cc.Sprite.extend({
         this.visible = true;
     },
 
-    setInitPosition: function (){
+    setInitPosition: function () {
         this.setPosition(this.initPos.x, this.initPos.y);
     },
 

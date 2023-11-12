@@ -6,6 +6,7 @@ var ArcherTowerBullet = Bullet.extend({
     ctor: function (type, startPoint, target, damagePerShot, attackRadius, initPos) {
         this._super(res_map.SPRITE.BODY.ARCHER_TOWER.BULLET, startPoint, target, damagePerShot, attackRadius, initPos);
         this._type = type;
+        this.minimumTime = 15 / this.gridSpeed;
     },
 
     init: function (startPoint, target) {

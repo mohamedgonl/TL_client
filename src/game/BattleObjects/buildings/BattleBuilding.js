@@ -177,6 +177,7 @@ var BattleBuilding = BattleGameObject.extend({
 
         this._body.setVisible(false);
         this._shadow.setVisible(false);
+        this._upper.setVisible(false);
         this._hpBar.setVisible(false);
         this._junk.setVisible(true);
 
