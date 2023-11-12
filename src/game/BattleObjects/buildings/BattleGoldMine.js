@@ -8,7 +8,7 @@ var BattleGoldMine = BattleBaseMine.extend({
 
     loadSpriteByLevel: function (level) {
         this.loadSprite(res_map.SPRITE.BODY.GOLD_MINE.BOTTOM[level],
-            null, 1, null, res_map.SPRITE.BODY.GOLD_MINE.JUNK);
+            res_map.SPRITE.BODY.GOLD_MINE.UPPER[level], 1, null, res_map.SPRITE.BODY.GOLD_MINE.JUNK);
         // this.loadSprite(res_map.SPRITE.BODY.GOLD_MINE.BOTTOM[level],
         //     res_map.SPRITE.BODY.GOLD_MINE.UPPER[level], 1, null, res_map.SPRITE.BODY.GOLD_MINE.JUNK);
     },
