@@ -271,10 +271,10 @@ var LoadManager = cc.Node.extend({
         //body 4 sprites
         //res/Buildings/wall/WAL_1_1/WAL_1_1/idle/image0000.png
         let wallLevelCount = 7;
-         part1 = "res/Buildings/wall/WAL_1_";
-         part2 = "/WAL_1_";
-         part3 = "/idle/image000";
-         part4 = ".png";
+        part1 = "res/Buildings/wall/WAL_1_";
+        part2 = "/WAL_1_";
+        part3 = "/idle/image000";
+        part4 = ".png";
         for (let i = 1; i <= wallLevelCount; i++) {
             let res = {};
             for (let j = 0; j < 4; j++) {

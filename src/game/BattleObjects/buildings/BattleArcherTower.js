@@ -15,28 +15,34 @@ var BattleArcherTower = BattleDefence.extend({
     },
 
     loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.ARCHER_TOWER[level], null,
-            null, 2, res_map.SPRITE.BODY.ARCHER_TOWER.JUNK);
+        this.loadSprite(res_map.SPRITE.BODY.ARCHER_TOWER[level], res_map.SPRITE.BODY.ARCHER_TOWER.UPPER.ATTACK[level],
+            null, null, res_map.SPRITE.BODY.ARCHER_TOWER.JUNK);
     },
 
     setDirection: function (direct) {
         this.direct = direct;
-        // if (direct <= TOTAL_DEFENCE_DIRECT / 2) {
-        //     this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][direct]);
-        //     this._body.flippedX = false;
-        // } else {
-        //     this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][TOTAL_DEFENCE_DIRECT - direct]);
-        //     this._body.flippedX = true;
-        // }
+        if (direct <= TOTAL_DEFENCE_DIRECT / 2) {
+            this._upper.setTexture(res_map.SPRITE.BODY.ARCHER_TOWER.UPPER.IDLE[this._level][direct]);
+            this._upper.flippedX = false;
+        } else {
+            this._upper.setTexture(res_map.SPRITE.BODY.ARCHER_TOWER.UPPER.IDLE[this._level][TOTAL_DEFENCE_DIRECT - direct]);
+            this._upper.flippedX = true;
+        }
     },
 
-    // attack: function (target) {
-    //     const bullet = Bullet.getOrCreateBullet(this._type, {
-    //         x: this.x,
-    //         y: this.y,
-    //         _posX: this.centerPoint.x,
-    //         _posY: this.centerPoint.y
-    //     }, target, this.damagePerShot);
-    // },
+    attack: function (target) {
+        //logic
+        this._super(target);
+
+        //UI
+        //run action attack
+        const directCfg = this.direct <= TOTAL_DEFENCE_DIRECT / 2 ? this.direct : TOTAL_DEFENCE_DIRECT - this.direct
+
+        let actionAttack = fr.createActionByFrames(res_map.SPRITE.BODY.ARCHER_TOWER['ATK_' + directCfg][this._level], {
+            delayPerUnit: 0.07,
+            restoreOriginalFrame: true
+        });
+        this._upper.runAction(actionAttack);
+    },
 
 });

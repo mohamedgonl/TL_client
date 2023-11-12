@@ -10,9 +10,7 @@ var Cannon = Building.extend({
 
     },
     loadMainSpriteByLevel: function (level) {
-        cc.log("++++++++++++++++++++++++++++++")
-        cc.log(JSON.stringify(res_map.SPRITE.BODY.CANNON,null,2))
-        cc.log("++++++++++++++++++++++++++++++")
+
         this.loadMainSprite(res_map.SPRITE.BODY.CANNON[level][0],res_map.SPRITE.BODY.CANNON.ATK_0[level],1);
 
     },

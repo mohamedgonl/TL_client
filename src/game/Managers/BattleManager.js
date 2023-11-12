@@ -465,6 +465,7 @@ var BattleManager = cc.Class.extend({
             if (cc.pDistance(centerPoint, cc.p(troop._posX, troop._posY)) <= range)
                 troops.push(troop);
         }
+        return troops;
     },
 
     addBullet: function (bullet, defence) {

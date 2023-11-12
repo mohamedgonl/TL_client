@@ -38,6 +38,13 @@ var BattleBuilding = BattleGameObject.extend({
         // this._shadow.setGlobalZOrder(20);
         // this._body.setGlobalZOrder(30);
         // this._upper.setGlobalZOrder(40);
+
+        //init action destroy
+        this.actionDestroy = fr.createActionByFrames(res_map.SPRITE.BUILDING_EXPLOSION, {delayPerUnit: 0.1, restoreOriginalFrame: true})
+        this.actionDestroy.retain();
+        this._nodeDestroyAction = new cc.Sprite();
+        this._nodeDestroyAction.setPosition(this._nodeDestroyAction.x, this._nodeDestroyAction.y + 60);
+        this.addChild(this._nodeDestroyAction);
     },
 
     //load sprite with size,
@@ -48,6 +55,10 @@ var BattleBuilding = BattleGameObject.extend({
         //body
         this._body.setTexture(bodySprite);
         this._body.setAnchorPoint(0.5, 0.5);
+        //if have .offsetMainSpriteY, set position
+        if (BuildingInfo[this._type].offsetMainSpriteY) {
+            this._body.setPosition(0, BuildingInfo[this._type].offsetMainSpriteY);
+        }
         this._body.setScale(SCALE_BUILDING_BODY);
 
         //body explose
@@ -72,41 +83,35 @@ var BattleBuilding = BattleGameObject.extend({
         }
 
         //upper
-        // if (upperSprite != null) {
-        //     if (isUpperAnimation) {
-        //
-        //         //this._upper = new cc.Sprite(upperSprite[0]);
-        //         //set texture for first frame and remove old action
-        //         this._upper.setTexture(upperSprite[0]);
-        //         this._upper.stopAllActions();
-        //
-        //
-        //         var animation = new cc.Animation();
-        //         var countFrame = Object.keys(upperSprite).length;
-        //
-        //
-        //         for (var i = 0; i < countFrame; i++) {
-        //             animation.addSpriteFrameWithFile(upperSprite[i]);
-        //         }
-        //         cc.log(animation.getFrames().length);
-        //         animation.setDelayPerUnit(0.3);
-        //         animation.setRestoreOriginalFrame(true);
-        //         var action = cc.animate(animation);
-        //
-        //         this._upper.runAction(cc.repeatForever(action))
-        //
-        //         this._upper.setAnchorPoint(0.5, 0.5);
-        //         this._upper.setScale(SCALE_BUILDING_BODY);
-        //
-        //     } else {
-        //         this._upper = new cc.Sprite(upperSprite);
-        //         this._upper.setTexture(upperSprite)
-        //         this._upper.setAnchorPoint(0.5, 0.5);
-        //         this._upper.setScale(SCALE_BUILDING_BODY);
-        //     }
-        // }
+        if (upperSprite) {
+            // this._upper.setPosition(this._body.getBoundingBox().width,this._body.getBoundingBox().height);
+
+            this._upper.setAnchorPoint(0.5, 0.5);
+            this._upper.setScale(SCALE_BUILDING_BODY);
+            if (isUpperAnimation) {
+
+                //this._upper = new cc.Sprite(upperSprite[0]);
+                //set texture for first frame and remove old action
+                this._upper.setTexture(upperSprite[0]);
+                this._upper.stopAllActions();
 
 
+                let animation = new cc.Animation();
+                let countFrame = Object.keys(upperSprite).length;
+
+
+                for (let i = 0; i < countFrame; i++) {
+                    animation.addSpriteFrameWithFile(upperSprite[i]);
+                }
+                animation.setDelayPerUnit(0.1);
+                animation.setRestoreOriginalFrame(true);
+                let action = cc.animate(animation);
+                this._upper.runAction(cc.repeatForever(action))
+
+            } else {
+                this._upper.setTexture(upperSprite[0])
+            }
+        }
     },
 
     loadSubSprite: function () {
@@ -175,20 +180,20 @@ var BattleBuilding = BattleGameObject.extend({
         this._hpBar.setVisible(false);
         this._junk.setVisible(true);
 
-        //run action
-        let animate = new cc.Animation();
-        const frames = res_map.SPRITE.BUILDING_EXPLOSION;
-        for (let idx in frames) {
-            animate.addSpriteFrameWithFile(frames[idx]);
-        }
-        animate.setDelayPerUnit(0.1);
-        animate.setRestoreOriginalFrame(true);
-
-        let action = cc.animate(animate);
-        let temp = new cc.Sprite();
-        temp.setPosition(temp.x, temp.y + 60)
-        this.addChild(temp);
-        temp.runAction(action);
+        //run action destroy
+        this._nodeDestroyAction.runAction(this.actionDestroy);
     },
 
+    //get 4 corners
+    getCorners: function () {
+        let size = this._width;
+        let x = this._posX;
+        let y = this._posY;
+        return [
+            cc.p(x, y),
+            cc.p(x + size, y),
+            cc.p(x, y + size),
+            cc.p(x + size, y + size)
+        ];
+    },
 });

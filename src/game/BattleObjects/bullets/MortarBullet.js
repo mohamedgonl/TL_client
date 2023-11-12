@@ -1,37 +1,59 @@
 var MortarBullet = Bullet.extend({
     active: true,
     target: null,
-    speed: 150,
-    gridSpeed: 20,
+    gridSpeed: 13,
 
-    ctor: function (type, startPoint, target, damagePerShot, attackRadius) {
-        this._super(res_map.SPRITE.BODY.MORTAR.BULLET, startPoint, target);
+    ctor: function (type, startPoint, target, damagePerShot, attackRadius, initPos) {
+        this._super(res_map.SPRITE.BODY.MORTAR.BULLET, startPoint, target, damagePerShot, attackRadius, initPos);
         this._type = type;
-        this.target = target;
-        this.damagePerShot = damagePerShot;
-        this.attackRadius = attackRadius;
+
+        this.setScale(0.5, 0.5);
+
+        //run action roll bullet
+        let actionRoll = fr.createActionByFrames(res_map.SPRITE.BODY.MORTAR.BULLETS, {delayPerUnit: 0.1, restoreOriginalFrame: true});
+        this.runAction(actionRoll.repeatForever());
+
+        //bullet explosion
+        this._explosion = new cc.Sprite();
+        this._explosion.setScale(0.5, 0.5);
+
+        this.actionExplose = fr.createActionByFrames(res_map.SPRITE.BODY.MORTAR.HIT, {delayPerUnit: 0.1, restoreOriginalFrame: true});
+        this.actionExplose.retain();
+    },
+
+    init: function (startPoint, target) {
+        this._super(startPoint, target);
+
+        this.func = this.calcMotionFunc(startPoint, cc.p((startPoint.x + this.destination.x) / 2, startPoint.y + 200), this.destination)
+        this.distanceX = this.destination.x - startPoint.x;
     },
 
     gameLoop: function (dt) {
         if (!this.active || this.destination === null)
             return;
         this.time -= dt;
-        this.alpha += dt * this.speed / this.dist;
-        if (this.alpha < 0.99) {
-            const newPos = cc.pLerp(cc.p(this.startPoint.x, this.startPoint.y), cc.p(this.destination.x, this.destination.y), this.alpha);
-            this.setPosition(newPos.x, newPos.y);
-        } else {
-            this.setVisible(false);
-        }
         if (this.time <= 0) {
             this.onReachDestination();
         }
+        //UI
+        const newX = this.x + this.distanceX * dt / this.totalTime;
+        const newY = this.calcMotionFuncValue(this.func, newX);
+
+        this.setPosition(newX, newY);
     },
 
-    setInitPosition: function () {
-        this.alpha += 20 / this.dist;
-        const initPos = cc.pLerp(cc.p(this.startPoint.x, this.startPoint.y), cc.p(this.destination.x, this.destination.y), this.alpha);
-        this.setPosition(initPos.x, initPos.y);
+    // y = ax^2+bx+c: parabol co tiep tuyen tai A la AB va tiep tuyen tai C la CB
+    calcMotionFunc: function (A, B, C) {
+        let a = ((B.y - A.y) / (B.x - A.x) - (B.y - C.y) / (B.x - C.x)) / (2 * (A.x - C.x));
+        let b = (B.y - A.y) / (B.x - A.x) - 2 * a * A.x;
+        let c = A.y - a * A.x * A.x - b * A.x;
+        return [a, b, c];
+    },
+
+    //return y = ax^2+bx+c
+    calcMotionFuncValue: function (func, x) {
+        const [a, b, c] = func;
+        return a * x * x + b * x + c;
     },
 
     destroyBullet: function () {
@@ -49,6 +71,11 @@ var MortarBullet = Bullet.extend({
         }
 
         this.destroyBullet();
+
+        //run action explose
+        this._explosion.setPosition(this.destination.x, this.destination.y);
+        this._explosion.stopAction(this.actionExplose);
+        this._explosion.runAction(this.actionExplose);
     },
 });
 
