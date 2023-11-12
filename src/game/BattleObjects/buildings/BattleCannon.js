@@ -1,6 +1,6 @@
 var BattleCannon = BattleDefence.extend({
     _type: "DEF_1",
-    deltaBarrelPosition: {
+    deltaBarrelPosition: {//vi tri nong sung so voi center theo tung huong
         0: {dx: 0, dy: -35,},
         1: {dx: -20, dy: -20,},
         2: {dx: -25, dy: -5,},
