@@ -20,7 +20,7 @@ var Troop = cc.Node.extend({
 
         let start;
         let end = mapLayer.getMapPosFromGridPos({x: this.armyCamp._posX, y: this.armyCamp._posY}, true, false);
-        cc.log("INIT END ::: " + JSON.stringify(end) + " ARMY ::: " + JSON.stringify({x: this.armyCamp._posX, y: this.armyCamp._posY}))
+
         if (barrackIndex >= 0 && barrackIndex !== null) {
             let barrack = ArmyManager.getInstance().getBarrackList()[barrackIndex];
             start = mapLayer.getMapPosFromGridPos({x: barrack._posX, y: barrack._posY}, true);
@@ -51,32 +51,8 @@ var Troop = cc.Node.extend({
         let shadow = new cc.Sprite(shadowUrl);
         shadow.setAnchorPoint(0.5, 0.5);
         shadow.setOpacity(90)
-
-        switch (this._cfgId) {
-            case "ARM_1": {
-                shadow.setScale(0.7);
-                shadow.setPosition(99, 93);
-                break;
-            }
-            case "ARM_2" : {
-                shadow.setScale(0.5);
-                shadow.setPosition(67, 67);
-                break;
-            }
-            case "ARM_3": {
-                shadow.setScale(0.5);
-                shadow.setPosition(67, 67);
-                break;
-            }
-            case "ARM_4": {
-                shadow.setPosition(167, 160);
-                break;
-            }
-            default: {
-                cc.log("INIT SHADOW NOT FOUND :  " + this._cfgId)
-            }
-        }
-
+        shadow.setScale(TroopConfig[this._cfgId].shadow_scale);
+        shadow.setPosition(TroopConfig[this._cfgId].shadow_pos[0], TroopConfig[this._cfgId].shadow_pos[1]);
         this.troop.addChild(shadow, -1);
 
     },
@@ -95,7 +71,7 @@ var Troop = cc.Node.extend({
                             animation.addSpriteFrameWithFile(frameName);
                         }
                         animation.setDelayPerUnit(TroopConfig[cfgId][action].frame_time);
-                        animation.setRestoreOriginalFrame(true);
+                        // animation.setRestoreOriginalFrame(true);
                         this._animations[action][direct] = cc.animate(animation).repeatForever();
                     } else {
                     }
@@ -121,7 +97,7 @@ var Troop = cc.Node.extend({
         let mapLayer = cc.director.getRunningScene().getMapLayer();
         if (event.getUserData().buildingId === this.armyCamp.getId()) {
             this.troop.stopAllActions();
-            let end =  mapLayer.getMapPosFromGridPos({x: this.armyCamp._posX, y: this.armyCamp._posY}, true, false);
+            let end = mapLayer.getMapPosFromGridPos({x: this.armyCamp._posX, y: this.armyCamp._posY}, true, false);
             let start = this.troop.getPosition()
             this.runToCamp(start, end);
         }
@@ -169,6 +145,7 @@ var Troop = cc.Node.extend({
     },
 
     findWayToCamp: function (origin, target) {
+
         let mapLayer = cc.director.getRunningScene().getMapLayer();
 
         let start = mapLayer.getGridPosFromMapPos(origin);
@@ -181,15 +158,15 @@ var Troop = cc.Node.extend({
 
         let randomX, randomY;
         do {
-            randomX =  Math.floor(Math.random() * AMC_SIZE);
-            randomY =  Math.floor(Math.random() * AMC_SIZE);
+            randomX = Math.floor(Math.random() * AMC_SIZE);
+            randomY = Math.floor(Math.random() * AMC_SIZE);
         }
         while (randomX === 2 && randomY === 2);
 
         end.x += randomX;
         end.y += randomY;
 
-        let wayGrid = Algorithm.searchPathByAStar([start.x, start.y], [end.x, end.y]);
+        let wayGrid =  Algorithm.searchPathByAStar([start.x, start.y], [end.x, end.y]);
 
         wayGrid.unshift({x: start.x, y: start.y})
         wayGrid.push({x: end.x, y: end.y});
@@ -236,7 +213,7 @@ var Troop = cc.Node.extend({
     stayInCamp: function () {
         let mapLayer = cc.director.getRunningScene().getMapLayer();
         let action = cc.sequence(cc.delayTime(TROOP_STAY_TIME), cc.callFunc(() => {
-            let target =  mapLayer.getMapPosFromGridPos({x: this.armyCamp._posX, y: this.armyCamp._posY}, true, false);
+            let target = mapLayer.getMapPosFromGridPos({x: this.armyCamp._posX, y: this.armyCamp._posY}, true, false);
             let origin = this.troop.getPosition()
             this.runToCamp(origin, target);
         }, this));

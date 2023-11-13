@@ -22,7 +22,7 @@ const TROOPS_LIST = [
     },
     {
         troopCfgId: "ARM_6",
-        available: false,
+        available: true,
     },
     {
         troopCfgId: "ARM_7",

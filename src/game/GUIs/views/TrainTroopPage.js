@@ -145,7 +145,11 @@ var TrainTroopPage = cc.Node.extend({
         buttonDoneNowString.setString(doneNowPrice);
         let doneNowButton = this._trainContainer.getChildByName("button_done_now");
         let gem = PlayerInfoManager.getInstance().getResource().gem;
-        doneNowButton.setEnabled(doneNowPrice !== 0 && doneNowPrice <= gem)
+        let currentSpace = ArmyManager.getInstance().getCurrentSpace();
+        let maxSpace = ArmyManager.getInstance().getMaxSpace();
+        let barrackCurrentSpace = this._curBarrack.getTrainingSpace();
+        let curCount = (currentSpace + barrackCurrentSpace);
+        doneNowButton.setEnabled(doneNowPrice !== 0 && doneNowPrice <= gem && curCount <= maxSpace)
     },
 
     updateTotalTimeString: function () {
