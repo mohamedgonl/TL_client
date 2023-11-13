@@ -186,41 +186,6 @@ var InfoLayer = cc.Layer.extend({
             // button.setDisabledColor(cc.color.GRAY);
         }
 
-        // let labelText = new cc.LabelBMFont(text, res.FONT.SOJI[16], null, cc.TEXT_ALIGNMENT_CENTER);
-        // //label hien o giua duoi cua button
-        // labelText.setPosition(spriteWidth / 2, spriteHeight / 11);
-        // labelText.setAnchorPoint(0.5, 0);
-        // button.addChild(labelText);
-        //
-        // if (textResource != null) {
-        //     let labelResource = new cc.LabelBMFont(textResource, res.FONT.SOJI[16], null, cc.TEXT_ALIGNMENT_CENTER);
-        //     //label hien o giua tren cua button
-        //     labelResource.setPosition(spriteWidth * 0.6, spriteHeight / 11 * 10);
-        //     labelResource.setAnchorPoint(0.8, 1);
-        //     button.addChild(labelResource);
-        //
-        //     //icon cua resource
-        //     if (typeResource != null) {
-        //         let iconSprite = new cc.Sprite();
-        //         switch (typeResource) {
-        //             case "gold":
-        //                 iconSprite.setTexture(res.ICON.GOLD);
-        //                 break;
-        //             case "elixir":
-        //                 iconSprite.setTexture(res.ICON.ELIXIR);
-        //                 break;
-        //         }
-        //         iconSprite.setScale(0.6)
-        //         button.addChild(iconSprite);
-        //         //set position for icon in top right of button
-        //         iconSprite.setPosition(spriteWidth * 0.8, spriteHeight / 10 * 8);
-        //     }
-        //     if(status === 1) {
-        //         //change color of text to red
-        //         labelResource.setColor(cc.color.RED);
-        //     }
-        // }
-
 
         this.menu.addChild(button);
         this.menu.alignItemsHorizontallyWithPadding(10);
@@ -367,6 +332,12 @@ var InfoLayer = cc.Layer.extend({
         cc.log("onSelectBuilding::::::::::::::::" + id)
         let building = MapManager.getInstance().getBuildingById(id);
 
+        //select temporary building, return
+        if(building == null) {
+            this.menu.removeAllChildren();
+            return;
+        }
+
         //rename nameBuilding
         //if building is start with OBS
         if (building._type.startsWith("OBS")) {
@@ -379,6 +350,8 @@ var InfoLayer = cc.Layer.extend({
                 this.button_container.nameBuilding.setString("Cây cối");
         } else
             this.button_container.nameBuilding.setString(BuildingInfo[building._type].name);
+
+        cc.log("---------------button containet TRUE------")
         this.button_container.setVisible(true);
         //test
 

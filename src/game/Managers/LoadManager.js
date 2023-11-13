@@ -155,7 +155,6 @@ var LoadManager = cc.Node.extend({
             cannonLevelCount,
             5);
 
-
         //DEF_2
         //body
 
@@ -163,24 +162,52 @@ var LoadManager = cc.Node.extend({
         //path res/Buildings/defense_base/DEF_1_1_Shadow.png
         this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER, "res/Buildings/defense_base/DEF_2_", "_Shadow.png", def2LevelCount);
 
-        //upper : archer
+        //upper : archer idle
         //link "res/Buildings/AcherTower/DEF_2_1/DEF_2_1/idle/image0000.png to image0004.png"
-        this.loadSpriteFolderToRes(res_map.SPRITE.BODY.ARCHER_TOWER.UPPER,
-            "res/Buildings/AcherTower/DEF_2_",
-            "/DEF_2_",
-            "/idle/image00",
-            def2LevelCount,
-            5);
+
+        let part1 = "res/Buildings/AcherTower/DEF_2_";
+        let part2 = "/DEF_2_";
+        let part3 = "/idle/image000";
+        let part4 = ".png";
+
+        for (let i = 1; i <= def2LevelCount; i++) {
+            let res = {};
+            for (let j = 0; j < 5; j++) {
+                res[j] = part1 + i + part2 + i + part3 + j + part4;
+            }
+            res_map.SPRITE.BODY.ARCHER_TOWER.UPPER.IDLE[i] = res;
+        }
+
+        //upper : archer attack
+        //link res/Buildings/AcherTower/DEF_2_1/DEF_2_1/attack01/image0000.png
+
+        part1 = "res/Buildings/AcherTower/DEF_2_";
+        part2 = "/DEF_2_";
+        part3 = "/attack01/image00";
+        part4 = ".png";
+
+        for (let i = 1; i <= def2LevelCount; i++) {
+            let res = {};
+            for (let j = 0; j < 65; j++) {
+                if(j<10)
+                    res[j] = part1 + i + part2 + i + part3 + "0" + j + part4;
+                else
+                    res[j] = part1 + i + part2 + i + part3 + j + part4;
+            }
+            res_map.SPRITE.BODY.ARCHER_TOWER.UPPER.ATTACK[i] = res;
+        }
+
+
 
         //DEF 3
 
         let def3LevelCount = 9;
         //path res/Buildings/Mortar/DEF_3_1/DEF_3_1/idle/image0000.png - > 5
 
-        let part1 = "res/Buildings/Motar/DEF_3_";
-        let part2 = "/DEF_3_";
-        let part3 = "/idle/image000";
-        let part4 = ".png";
+        part1 = "res/Buildings/Motar/DEF_3_";
+        part2 = "/DEF_3_";
+        part3 = "/idle/image000";
+        part4 = ".png";
 
         for (let i = 1; i <= def3LevelCount; i++) {
             let res = {};
@@ -190,14 +217,64 @@ var LoadManager = cc.Node.extend({
             res_map.SPRITE.BODY.MORTAR[i] = res;
         }
 
+        //DEF_1 ATK  res/Buildings/cannon/canon_1/attack01/image0000.png
+        for(let level = 1; level <=cannonLevelCount; level ++)
+        {
+            let prefixLink = "res/Buildings/cannon/canon_"+level+"/attack01/image00"
+            res_map.SPRITE.BODY.CANNON.ATK_0[level] = {}
+            res_map.SPRITE.BODY.CANNON.ATK_1[level] = {}
+            res_map.SPRITE.BODY.CANNON.ATK_2[level] = {}
+            res_map.SPRITE.BODY.CANNON.ATK_3[level] = {}
+            res_map.SPRITE.BODY.CANNON.ATK_4[level] = {}
+            this.loadSpriteToRes(res_map.SPRITE.BODY.CANNON.ATK_0[level],prefixLink,".png",null,0,6);
+            this.loadSpriteToRes(res_map.SPRITE.BODY.CANNON.ATK_1[level],prefixLink,".png",null,7,13);
+            this.loadSpriteToRes(res_map.SPRITE.BODY.CANNON.ATK_2[level],prefixLink,".png",null,14,20);
+            this.loadSpriteToRes(res_map.SPRITE.BODY.CANNON.ATK_3[level],prefixLink,".png",null,21,27);
+            this.loadSpriteToRes(res_map.SPRITE.BODY.CANNON.ATK_4[level],prefixLink,".png",null,28,34);
+        }
+
+        //DEF_2 ATK res/Buildings/AcherTower/DEF_2_1/DEF_2_1/attack01/image0000.png
+        for(let level =1; level <= def2LevelCount; level ++)
+        {
+            let prefixLink = "res/Buildings/AcherTower/DEF_2_"+level+"/DEF_2_"+level+"/attack01/image00";
+            res_map.SPRITE.BODY.ARCHER_TOWER.ATK_0[level] = {}
+            res_map.SPRITE.BODY.ARCHER_TOWER.ATK_1[level] = {}
+            res_map.SPRITE.BODY.ARCHER_TOWER.ATK_2[level] = {}
+            res_map.SPRITE.BODY.ARCHER_TOWER.ATK_3[level] = {}
+            res_map.SPRITE.BODY.ARCHER_TOWER.ATK_4[level] = {}
+            this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER.ATK_0[level],prefixLink,".png",null,0,12)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER.ATK_1[level],prefixLink,".png",null,13,25)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER.ATK_2[level],prefixLink,".png",null,26,38)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER.ATK_3[level],prefixLink,".png",null,39,51)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER.ATK_4[level],prefixLink,".png",null,52,64)
+        }
+
+        //DEF_3 ATK res/Buildings/Motar/DEF_3_1/DEF_3_1/attack01/image0000.png
+        for(let level =1; level <= def3LevelCount; level ++)
+        {
+            let prefixLink = "res/Buildings/Motar/DEF_3_"+level+"/DEF_3_"+level+"/attack01/image00";
+            res_map.SPRITE.BODY.MORTAR.ATK_0[level] = {}
+            res_map.SPRITE.BODY.MORTAR.ATK_1[level] = {}
+            res_map.SPRITE.BODY.MORTAR.ATK_2[level] = {}
+            res_map.SPRITE.BODY.MORTAR.ATK_3[level] = {}
+            res_map.SPRITE.BODY.MORTAR.ATK_4[level] = {}
+            this.loadSpriteToRes(res_map.SPRITE.BODY.MORTAR.ATK_0[level],prefixLink,".png",null,0,4)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.MORTAR.ATK_1[level],prefixLink,".png",null,5,9)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.MORTAR.ATK_2[level],prefixLink,".png",null,10,14)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.MORTAR.ATK_3[level],prefixLink,".png",null,15,19)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.MORTAR.ATK_4[level],prefixLink,".png",null,20,24)
+        }
+        // cc.log("++++++++++++---------------::::::::::::::::")
+        // cc.log(JSON.stringify(res_map.SPRITE.BODY.CANNON.ATK_0,null,2))
+        // cc.log("++++++++++++---------------::::::::::::::::")
         //WAL_1
         //body 4 sprites
         //res/Buildings/wall/WAL_1_1/WAL_1_1/idle/image0000.png
         let wallLevelCount = 7;
-         part1 = "res/Buildings/wall/WAL_1_";
-         part2 = "/WAL_1_";
-         part3 = "/idle/image000";
-         part4 = ".png";
+        part1 = "res/Buildings/wall/WAL_1_";
+        part2 = "/WAL_1_";
+        part3 = "/idle/image000";
+        part4 = ".png";
         for (let i = 1; i <= wallLevelCount; i++) {
             let res = {};
             for (let j = 0; j < 4; j++) {
@@ -287,7 +364,21 @@ var LoadManager = cc.Node.extend({
         this.createAnimation();
     },
 
-    loadSpriteToRes: function (res_address, prefix, suffix, count) {
+    loadSpriteToRes: function (res_address, prefix, suffix, count,start,end) {
+        if(res_address === undefined)
+        {
+            res_address={}
+        }
+        if(start!=null)
+        {
+            for (let i = start; i <= end; i++) {
+                let iString = i;
+                if(i<10) iString = "0"+i;
+                var res = prefix + iString + suffix;
+                res_address[i-start]=res;
+            }
+            return;
+        }
         for (var i = 1; i <= count; i++) {
             var res = prefix + i + suffix;
             res_address[i] = res;

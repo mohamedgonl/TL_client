@@ -106,9 +106,13 @@
         "src/game/BattleObjects/buildings/BattleWall.js",
         "src/game/BattleObjects/buildings/BattleBarrack.js",
         "src/game/BattleObjects/buildings/BattleCannon.js",
+        "src/game/BattleObjects/buildings/BattleArcherTower.js",
+        "src/game/BattleObjects/buildings/BattleMortar.js",
 
         "src/game/BattleObjects/bullets/Bullet.js",
         "src/game/BattleObjects/bullets/CannonBullet.js",
+        "src/game/BattleObjects/bullets/ArcherTowerBullet.js",
+        "src/game/BattleObjects/bullets/MortarBullet.js",
 
         "src/game/BattleObjects/troops/BaseTroop.js",
         "src/game/BattleObjects/troops/Warrior.js",

@@ -26,26 +26,9 @@ var Building = GameObject.extend({
 
 
 
-
-        //
-        // this._grass.retain();
-        // this._shadow.retain();
-        // this._green_square.retain();
-        // this._red_square.retain();
-        // this._body.retain();
-        // this._upper.retain();
-        // this._arrow.retain();
-        // this._nameLabel.retain();
-        // this._progressBar.retain();
-        // this._levelLabel.retain();
-        // this._timeLabel.retain();
-        // this._fence.retain();
-        // this._mainSprite.retain();
-        // this._bottom.retain();
-        // this._effect.retain();
     },
 
-    onAddIntoMapLayer: function () {
+    addIntoMapLayer: function () {
         this._grass = new cc.Sprite();
         this._shadow = new cc.Sprite();
         this._green_square = new cc.Sprite();
@@ -60,7 +43,7 @@ var Building = GameObject.extend({
         this._fence = new cc.Sprite();
 
 
-        this._progressBar.addChild(this._timeLabel,ZORDER_BUILDING_EFFECT);
+        this._progressBar.addChild(this._timeLabel);
 
 
         this._bottom = new cc.Node();
@@ -85,13 +68,65 @@ var Building = GameObject.extend({
         this.loadMainSpriteByLevel(this._level);
 
 
-        this.addChild(this._bottom);
-        this.addChild(this._mainSprite);
-        this.addChild(this._effect);
-    },
-    onMoveInLayer: function () {
+        let mapLayer = cc.director.getRunningScene().getMapLayer();
+        let center = cc.p(this._posX + (this._width/2),this._posY +(this._height/2))
+        cc.log("center",JSON.stringify(center))
+        let posInMap = mapLayer.getMapPosFromGridPos(center) ;
+        mapLayer.addChild(this._bottom, ZORDER_BUILDING_BOTTOM);
+        mapLayer.addChild(this._mainSprite,mapLayer.getZOrderByPosition(center.x,center.y)); //add
+        mapLayer.addChild(this._effect, ZORDER_BUILDING_EFFECT);
 
+        cc.log("posInMap::::::::::::::::",JSON.stringify(posInMap,null,2))
+        this._bottom.setPosition(posInMap);
+        this._mainSprite.setPosition(posInMap);
+        this._effect.setPosition(posInMap);
+
+        // this.addChild(this._bottom);
+        // this.addChild(this._mainSprite);
+        // this.addChild(this._effect);
     },
+    removeFromMapLayer: function(){
+        this._bottom.removeFromParent(true);
+        this._mainSprite.removeFromParent(true);
+        this._effect.removeFromParent(true);
+        this.removeFromParent(true);
+    },
+
+    moveSpriteToGridPos: function(gridPosX, gridPosY){
+        let center = cc.p(gridPosX + (this._width/2),gridPosY +(this._height/2))
+        let mapLayer = cc.director.getRunningScene().getMapLayer();
+        let posInMap = mapLayer.getMapPosFromGridPos(center);
+        this._bottom.setPosition(posInMap);
+        this._mainSprite.setPosition(posInMap);
+        this._effect.setPosition(posInMap);
+    },
+    moveToGridPos:function (gridPosX,gridPosY){
+
+        //change mapGrid
+        let mapGrid = MapManager.getInstance().getMapGrid();
+        for(let i = this._posX; i < this._posX + this._width; i++){
+            for(let j = this._posY; j < this._posY + this._height; j++){
+                mapGrid[i][j] = 0;
+            }
+        }
+
+        for(let i = gridPosX; i < gridPosX + this._width; i++){
+            for(let j = gridPosY; j < gridPosY + this._height; j++){
+                mapGrid[i][j] = this._id;
+            }
+        }
+
+        this._posX = gridPosX;
+        this._posY = gridPosY;
+
+        cc.eventManager.dispatchCustomEvent(EVENT_TROOP_NAME.MOVE_BUILDING, {buildingId: this._id});
+        const Algorithm = AlgorithmImplement.getInstance();
+        Algorithm.setGridMapStar(MapManager.getInstance().mapGrid);
+
+        this.moveSpriteToGridPos(gridPosX,gridPosY);
+        this.onMoved();
+    },
+
     loadBottomSprite: function () {
         let size = this._width;
 
@@ -204,6 +239,10 @@ var Building = GameObject.extend({
         // this._body = new cc.Sprite();
         this._body.setTexture(bodySprite);
         this._body.setAnchorPoint(0.5,0.5);
+        //if have .offsetMainSpriteY, set position
+        if(BuildingInfo[this._type].offsetMainSpriteY)  {
+            this._body.setPosition(0,BuildingInfo[this._type].offsetMainSpriteY);
+        }
         this._body.setScale(SCALE_BUILDING_BODY);
 
 
@@ -229,7 +268,7 @@ var Building = GameObject.extend({
                 for (let i = 0; i < countFrame; i++) {
                     animation.addSpriteFrameWithFile(upperSprite[i]);
                 }
-                animation.setDelayPerUnit(0.3);
+                animation.setDelayPerUnit(0.1);
                 animation.setRestoreOriginalFrame(true);
                 let action = cc.animate(animation);
                 this._upper.runAction(cc.repeatForever(action))
@@ -289,12 +328,9 @@ var Building = GameObject.extend({
         this.loadButton();
         cc.eventManager.dispatchCustomEvent(EVENT_SELECT_BUILDING, this._id);
         // opacity to 80 to 100 to 80 repeat forever
-        var action = cc.sequence(cc.fadeTo(0.8, 150), cc.fadeTo(0.8, 255));
-        this._body.runAction(cc.repeatForever(action));
-        if(this._upper != null)
-        {
-            this._upper.runAction(cc.repeatForever(action.clone()));
-        }
+        this.blinkAction = cc.repeatForever(cc.sequence(cc.fadeTo(0.5, 150), cc.fadeTo(0.5, 255)));
+        this.blinkAction.retain();
+        this._body.runAction(this.blinkAction);
     },
     onUnselected: function(){
         let infoLayer = cc.director.getRunningScene().infoLayer;
@@ -311,11 +347,7 @@ var Building = GameObject.extend({
         this._levelLabel.setVisible(false);
 
         //stop nhấp nháy
-        this._body.stopAllActions();
-        if(this._upper != null)
-        {
-            this._upper.stopAllActions();
-        }
+        this._body.stopAction(this.blinkAction);
         //opacity to 255
         this._body.setOpacity(255);
         if(this._upper != null)
@@ -363,6 +395,7 @@ var Building = GameObject.extend({
         //log start time, end time, current time
         let currentTime = TimeManager.getInstance().getCurrentTimeInSecond();
         let percent = (currentTime - this._startTime)/(this._endTime - this._startTime)*100;
+        cc.log("percent",percent)
         this._progressBar.setPercent(percent);
         //set time label = end time - current time in 1d2h3m40s format, if 0d -> 2h3m40s, if 0d0h -> 3m40s
         let time = this._endTime - currentTime;
@@ -381,6 +414,7 @@ var Building = GameObject.extend({
         }
     },
     update: function () {
+        cc.log("update")
         if(this._state === 1 || this._state === 2){
             this.updateProgress();
         }
@@ -406,6 +440,7 @@ var Building = GameObject.extend({
         this._fence.setVisible(true);
 
         this.loadButton();
+        cc.log("call update",this._id)
         this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0);
         //MapManager.getInstance().callBuilderToBuilding(this);
     },
@@ -415,7 +450,7 @@ var Building = GameObject.extend({
         this._startTime = startTime;
         this._endTime = endTime;
         this.startProcess();
-        },
+    },
     startUpgrade: function (startTime,endTime) {
 
 
@@ -685,5 +720,7 @@ var Building = GameObject.extend({
             return 1;
         }
         return 0;
+    },
+    onMoved: function () {
     },
 });

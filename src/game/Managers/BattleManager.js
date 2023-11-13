@@ -45,6 +45,9 @@ var BattleManager = cc.Class.extend({
         this.buildingDestroyedPoint = 0;
         this.isDestroyedHalf = false;
 
+        this.totalTroop = 0;
+        this.totalDeadTroop = 0;
+
         this.battleStatus = BATTLE_STATUS.PREPARING;
         this.townHall = null;
         this.listResources = [];
@@ -161,14 +164,22 @@ var BattleManager = cc.Class.extend({
             this.addBuilding(building);
         }
 
+
         this.setResourceToBuilding();
 
         this.initMapLogic();
+
+        //reload sprite wall after load all building
+        for (let building of this.listWalls) {
+            cc.log("++++++++++++++++++++++++")
+            building.loadSpriteByLevel(building._level);
+        }
 
         //load troops
         for (let index in troops) {
             let troop = troops[index];
             this.listTroops.set(troop.type, troop.amount);
+            this.totalTroop += troop.amount;
         }
     },
     addToListCurrentTroop: function (troop) {
@@ -362,6 +373,10 @@ var BattleManager = cc.Class.extend({
         return Math.floor(this.buildingDestroyedPoint * 100 / this.totalBuildingPoint);
     },
 
+    isAllTroopsDead: function () {
+        return this.totalDeadTroop >= this.totalTroop;
+    },
+
     increaseStarAmount: function () {
         this.starAmount++;
         this.battleScene.battleUILayer.updateStarUI();
@@ -409,12 +424,17 @@ var BattleManager = cc.Class.extend({
         }
     },
     onTroopDead: function (troop) {
+        this.totalDeadTroop++;
+
         //update listCurrentTroop
         for (let i = 0; i < this.listCurrentTroop.length; i++) {
             if (this.listCurrentTroop[i] === troop) {
                 this.listCurrentTroop.splice(i, 1);
                 break;
             }
+        }
+        if (this.isAllTroopsDead()) {
+            this.battleScene.onEndBattle(1);
         }
     },
 
@@ -432,6 +452,20 @@ var BattleManager = cc.Class.extend({
     },
     getBattleGraph: function () {
         return this._battleGraph;
+    },
+
+    //get list troops in a circle
+    getListTroopsInRange: function (centerPoint, range) {
+        //update listCurrentTroop
+        const troops = [];
+        for (let i = 0; i < this.listCurrentTroop.length; i++) {
+            let troop = this.listCurrentTroop[i];
+            if (!troop.isAlive())
+                continue;
+            if (cc.pDistance(centerPoint, cc.p(troop._posX, troop._posY)) <= range)
+                troops.push(troop);
+        }
+        return troops;
     },
 
     addBullet: function (bullet, defence) {

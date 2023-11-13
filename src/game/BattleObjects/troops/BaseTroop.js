@@ -19,6 +19,8 @@ var BaseTroop = cc.Node.extend({
         this._attackSpeed = TROOP_BASE[this._type]["attackSpeed"];
         this._damage = TROOP[this._type][TROOP_LEVEL]["damagePerAttack"]*5;
         this._hitpoints = TROOP[this._type][TROOP_LEVEL]["hitpoints"];
+        this._attackRange = TROOP_BASE[this._type]["attackRange"]*GRID_BATTLE_RATIO;
+        cc.log("attack range: " + this._attackRange)
         this._currentHitpoints = this._hitpoints;
         this._target = null;
         //state: 3 state: 0: findPath,1: move,2: attack, 3:idle, 4: death
@@ -30,6 +32,16 @@ var BaseTroop = cc.Node.extend({
         BattleManager.getInstance().addToListCurrentTroop(this);
         BattleManager.getInstance().addToListUsedTroop(this);
         this.initSprite();
+
+        //listen event press f to show isInAttackRange
+        cc.eventManager.addListener({
+            event: cc.EventListener.KEYBOARD,
+            onKeyPressed: function (keyCode, event) {
+                if (keyCode === 70) {
+                    cc.log("isInAttackRange: " + this.isInAttackRange(this._target));
+                }
+            }.bind(this)
+        }, this);
     },
     initSprite: function () {
         //shadow
@@ -59,6 +71,9 @@ var BaseTroop = cc.Node.extend({
         if(this._state === TROOP_STATE.FIND_PATH)
         {
             this.findTargetandPath();
+            // this.findTarget();
+            // this._path = this.getPathToBuilding(this._target);
+            // this.checkPath();
             return;
         }
         if(this._state === TROOP_STATE.MOVE)
@@ -123,9 +138,133 @@ var BaseTroop = cc.Node.extend({
         let end = new BattleGridNode(targetCenter.x,targetCenter.y,graph.getNode(targetCenter.x,targetCenter.y).weight);
         return BattleAStar.search(graph,start,end);
     },
+    isInAttackRange: function(building){
+        let corners = building.getCorners();
+
+        let xStart = corners[0].x;
+        let xEnd = corners[1].x;
+        let yStart = corners[0].y;
+        let yEnd = corners[2].y;
+
+        let x = this._posX;
+        let y = this._posY;
+
+        //if X and Y in range of building
+        if(x >= xStart && x <= xEnd && y >= yStart && y <= yEnd)
+        {
+            cc.log("X and Y in range of building")
+            return true;
+        }
+
+
+        //if X or Y in range of building
+        if(x >= xStart && x <= xEnd)
+        {
+            cc.log("X in range of building")
+            cc.log("y: " + y + " yStart: " + yStart + " yEnd: " + yEnd)
+            return (Math.abs(y - yStart) <= this._attackRange || Math.abs(yEnd - y) <= this._attackRange);
+        }
+        if(y >= yStart && y <= yEnd)
+        {
+            cc.log("Y in range of building")
+            cc.log("x: " + x + " xStart: " + xStart + " xEnd: " + xEnd)
+            return (Math.abs(x - xStart) <= this._attackRange || Math.abs(xEnd - x) <= this._attackRange);
+        }
+
+        //if X and Y not in range of building, get nearest corner by if else
+        let xNearest = 0;
+        let yNearest = 0;
+        if(x < xStart)
+            xNearest = xStart;
+        else if(x > xEnd)
+            xNearest = xEnd;
+        else
+            xNearest = x;
+
+        if(y < yStart)
+            yNearest = yStart;
+        else if(y > yEnd)
+            yNearest = yEnd;
+        else
+            yNearest = y;
+
+        //if distance from nearest corner to troop < attack range
+        let distance = Math.sqrt(Math.pow(xNearest - x,2) + Math.pow(yNearest - y,2));
+        cc.log("distance: " + distance)
+        cc.log("attack range: " + this._attackRange)
+        if(distance <= this._attackRange)
+        {
+            cc.log("is in attack range")
+            return true;
+        }
+
+        return false;
+    },
 
     //return -1 if not found
     //set this._target and this._path
+
+    findTarget: function(){
+        let listTarget = [];
+        switch (this._favoriteTarget) {
+            case "DEF":
+                listTarget = BattleManager.getInstance().getListDefences();
+                break;
+            case "RES":
+                listTarget = BattleManager.getInstance().getListResources();
+                break;
+            case "NONE":
+                let mapListBuilding = BattleManager.getInstance().getAllBuilding();
+                //to list
+                for (let [key, value] of mapListBuilding) {
+                    //if obs, continue
+                    if (value._type.startsWith("OBS")) continue;
+                    if(value._type.startsWith("WAL")) continue;
+
+                    listTarget.push(value);
+                }
+                break;
+            default:
+                cc.log("Error::::: NOT FOUND FAVORITE TARGET")
+        }
+
+        if (listTarget.length === 0) {
+            this._target =null;
+            return;
+        }
+
+        this._currentIndex = 0;
+        //get min distance target
+        let minDistance =null;
+        this._target = null;
+
+        for(let i = 0; i < listTarget.length; i++) {
+
+            let target = listTarget[i];
+
+            //if destroy, continue
+            if(target.isDestroy()) continue;
+            //get min distance
+            let distance = Math.sqrt(Math.pow(this._posX - target._posX, 2) + Math.pow(this._posY - target._posY, 2));
+            if (minDistance == null || distance < minDistance) {
+                minDistance = distance;
+                this._target = target;
+            }
+        }
+
+        if(this._target === null) {
+            cc.log("Error::::: NOT FOUND TARGET")
+            this.state = TROOP_STATE.IDLE;
+            return;
+        }
+
+        this._state = TROOP_STATE.MOVE;
+    },
+
+    //check path have wall
+    checkPath: function () {
+
+    },
     findTargetandPath: function () {
         let listTarget = [];
         switch (this._favoriteTarget) {
@@ -209,11 +348,14 @@ var BaseTroop = cc.Node.extend({
             this._state = TROOP_STATE.FIND_PATH;
             return;
         }
-        //đang di chuyển giữa đường thì nhà bị phá
+
+
         if(this._path.length === 0) {
             // cc.log("path length 0")
             return;
         }
+
+        //distance each dt
         let distance = dt*this._moveSpeed/GRID_BATTLE_RATIO;
         if(this._currentIndexLeft > distance) {
             this._currentIndexLeft -= distance;
@@ -221,13 +363,10 @@ var BaseTroop = cc.Node.extend({
         else
         {
             this._currentIndex++;
-
-
-            //cc.log("index: " + this._currentIndex);
-            if(this._currentIndex >= this._path.length) {
-
+            if(this.isInAttackRange(this._target) === true)
+            {
                 //on end Path -> attack mode
-                cc.log("end path");
+                cc.log("start attack");
                 this._firstAttack = true;
                 this._state = TROOP_STATE.ATTACK;
                 return;
@@ -279,7 +418,7 @@ var BaseTroop = cc.Node.extend({
             this._state = TROOP_STATE.FIND_PATH;
             return;
         }
-        //perform attack
+        //perform attack when first attack, delay /2 attack speed to anim match with building gain dame
         if(this._firstAttack === true && this._attackCd >= this._attackSpeed/2) {
             this._firstAttack = false;
             this.performAttackAnimation();

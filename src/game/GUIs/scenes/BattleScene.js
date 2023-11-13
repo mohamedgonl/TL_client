@@ -165,7 +165,25 @@ var BattleScene = cc.Scene.extend({
 
     gameLoop: function (dt) {
         if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING) {
-            this.battleLayer.gameLoop(this.secPerTick);
+            //check defences targets
+            const listDefences = BattleManager.getInstance().getListDefences();
+            const listTroops = BattleManager.getInstance().getListCurrentTroops();
+            for (let defence of listDefences) {
+                if (defence.isDestroy()) {
+                    continue;
+                }
+                defence.validateCurrentTarget();
+                if (defence.hasTarget())
+                    continue;
+                for (let troop of listTroops) {
+                    if (!troop.isAlive()) continue;
+                    if (defence.checkTarget(troop)) {
+                        defence.setTarget(troop);
+                        break;
+                    }
+                }
+            }
+
             for (let defence of BattleManager.getInstance().listDefences) {
                 if (!defence.isDestroy())
                     defence.gameLoop(this.secPerTick);
@@ -180,4 +198,5 @@ var BattleScene = cc.Scene.extend({
         }
         this.tick++;
     },
-});
+})
+

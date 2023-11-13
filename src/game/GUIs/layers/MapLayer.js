@@ -31,27 +31,12 @@ var MapLayer = cc.Layer.extend({
     //load all building in map manager and add it to MapLayer
     loadBuilding: function () {
         cc.log("LOAD BUILDING:::::::::::::::::::::::::::")
-        var listBuilding = MapManager.getInstance().getAllBuilding();
-        for (var i = 0; i < listBuilding.length; i++) {
-            var building = listBuilding[i];
-            this.addBuildingToLayer(building);
+        let listBuilding = MapManager.getInstance().getAllBuilding();
+        for (let i = 0; i < listBuilding.length; i++) {
+
+            let building = listBuilding[i];
+            building.addIntoMapLayer();
         }
-    },
-
-    //load builder, load sprite of storage
-    loadState: function () {
-        var listBuilding = MapManager.getInstance().getAllBuilding();
-        for (var i = 0; i < listBuilding.length; i++) {
-            var building = listBuilding[i];
-            if(building._state !== 0) {
-                let builder = new Builder("isBuilding",building);
-                builder.setPosition(this.getMapPosFromGridPos(cc.p(building._posX,building._posY),true));
-                this.addChild(builder,MAP_ZORDER_TROOP);
-            }
-        }
-
-        GameUtilities.updateCurrentCapacityAllBuilding();
-
     },
 
     //add building to layer with gridPos of it
@@ -61,23 +46,23 @@ var MapLayer = cc.Layer.extend({
         }
 
         if(!building._type.startsWith("OBS")){
-            building.onAddIntoMapLayer();
+            building.addIntoMapLayer();
         }
 
-
-        if(building._type.startsWith("RES"))
-            building.setLastCollectTimeAndIconHarvest(this._lastCollectTime);
-
-        let sizeX = building._width;
-        let sizeY = building._height;
-        let gridPosX = building._posX;
-        let gridPosY = building._posY;
-
-        let buildingCenterX = gridPosX + sizeX / 2;
-        let buildingCenterY = gridPosY + sizeY / 2;
-        let zOrderValue = zOrder == null ? this.getZOrderBuilding(gridPosX, gridPosY) : zOrder;
-
-        this.addGameObjectToMapLayer(building, buildingCenterX, buildingCenterY, zOrderValue)
+        //
+        // if(building._type.startsWith("RES"))
+        //     building.setLastCollectTimeAndIconHarvest(this._lastCollectTime);
+        //
+        // let sizeX = building._width;
+        // let sizeY = building._height;
+        // let gridPosX = building._posX;
+        // let gridPosY = building._posY;
+        //
+        // let buildingCenterX = gridPosX + sizeX / 2;
+        // let buildingCenterY = gridPosY + sizeY / 2;
+        // let zOrderValue = zOrder == null ? this.getZOrderByPosition(gridPosX, gridPosY) : zOrder;
+        //
+        // this.addGameObjectToMapLayer(building, buildingCenterX, buildingCenterY, zOrderValue)
 
     },
 
@@ -153,7 +138,7 @@ var MapLayer = cc.Layer.extend({
 
     exitModeBuyBuilding: function () {
         if (this.chosenBuilding)
-            this.chosenBuilding.removeFromParent(true);
+            this.chosenBuilding.removeFromMapLayer();
         this.chosenBuilding = null;
         this.onModeBuyBuilding = false;
         this.tempPosChosenBuilding = null;
@@ -250,7 +235,7 @@ var MapLayer = cc.Layer.extend({
         tmxMap.setPosition(0, 0);
         tmxMap.setScale(GRID_SCALE)
 
-        this.addChild(tmxMap, MAP_ZORDER_GRID);
+        this.addChild(tmxMap, ZORDER_GRID);
 
 
         //load 4 corner of  background
@@ -286,9 +271,9 @@ var MapLayer = cc.Layer.extend({
         this.addChild(backgroundDownRight, MAP_ZORDER_BACKGROUND);
     },
 
-    getZOrderBuilding: function (gridPosX, gridPosY) {
-        // gridPos cang thap thi zỎder cang cao, cao nhat la MAP_ZORDER_BUILDING
-        return MAP_ZORDER_BUILDING - gridPosX - gridPosY;
+    //get ZORDER of troop, building. Depend on position of it, the higher position, the lower ZORDER, max is ZORDER_BUILDING_MAINSPRITE_MAX
+    getZOrderByPosition: function (gridPosX, gridPosY) {
+        return ZORDER_BUILDING_MAINSPRITE_MAX - gridPosX - gridPosY;
     },
 
     onTouchBegan: function (touch) {
@@ -318,8 +303,8 @@ var MapLayer = cc.Layer.extend({
         if (newPos == null) return;
 
         if (newPos.x !== this.tempPosChosenBuilding.x || newPos.y !== this.tempPosChosenBuilding.y) {
-            this.moveBuildingInLayer(this.chosenBuilding, newPos.x, newPos.y);
-
+            this.tempPosChosenBuilding = newPos;
+            this.chosenBuilding.moveSpriteToGridPos(newPos.x, newPos.y);
         }
     },
 
@@ -371,6 +356,8 @@ var MapLayer = cc.Layer.extend({
     selectBuilding: function (building) {
         if (this.onModeBuyBuilding) {
             this.chosenBuilding = building;
+            this.tempPosChosenBuilding = cc.p(this.chosenBuilding._posX, this.chosenBuilding._posY);
+            building.onSelected();
             return;
         }
         //if have chosen building, unselect it
@@ -389,7 +376,7 @@ var MapLayer = cc.Layer.extend({
             if (this.onModeMovingBuilding) {
                 this.exitModeMoveBuilding();
             }
-            this.chosenBuilding.setLocalZOrder(this.getZOrderBuilding(this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y));
+            this.chosenBuilding.setLocalZOrder(this.getZOrderByPosition(this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y));
             this.chosenBuilding.onUnselected();
         }
         this.chosenBuilding = null;
@@ -399,18 +386,21 @@ var MapLayer = cc.Layer.extend({
     },
 
     onReceivedCheckMoveBuilding: function (data) {
+        cc.log("ON RECEIVED CHECK MOVE BUILDING",JSON.stringify(data,null,2))
         //if valid move, move building in map manager
         if (data.error === 0) {
-            MapManager.getInstance().moveBuilding(this.chosenBuilding, this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y)
+            this.chosenBuilding.moveToGridPos(this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y);
         } else {
             //move back to old pos
-            this.moveBuildingInLayer(this.chosenBuilding, this.chosenBuilding._posX, this.chosenBuilding._posY);
+            this.chosenBuilding.moveSpriteToGridPos(this.originGridPosition.x, this.originGridPosition.y);
         }
     },
 
 
     enterModeMoveBuilding: function () {
-        this.chosenBuilding.setLocalZOrder(MAP_ZORDER_BUILDING + 1);
+
+        this.originGridPosition = this.chosenBuilding.getGridPosition();
+        this.chosenBuilding.setLocalZOrder(ZORDER_BUILDING_ON_CHOOSE);
         this.canDragBuilding = true;
         this.onModeMovingBuilding = true;
         var infoLayer = cc.director.getRunningScene().infoLayer;
@@ -426,7 +416,7 @@ var MapLayer = cc.Layer.extend({
     //exit mode move building, send to server to recheck if valid, else move back to old pos
     exitModeMoveBuilding: function () {
 
-        // this.chosenBuilding.setLocalZOrder(this.getZOrderBuilding(this.chosenBuilding._posX, this.chosenBuilding._posY));
+        this.chosenBuilding.setLocalZOrder(this.getZOrderByPosition(this.chosenBuilding._posX, this.chosenBuilding._posY));
         this.canDragBuilding = false;
         this.onModeMovingBuilding = false;
         var infoLayer = cc.director.getRunningScene().infoLayer;
@@ -437,7 +427,8 @@ var MapLayer = cc.Layer.extend({
             testnetwork.connector.sendMoveBuilding(this.chosenBuilding._id, newPosX, newPosY);
         } else {
             //move back to old pos
-            this.moveBuildingInLayer(this.chosenBuilding, this.chosenBuilding._posX, this.chosenBuilding._posY);
+            cc.log("MOVE TO OLD")
+            this.chosenBuilding.moveSpriteToGridPos(this.originGridPosition.x, this.originGridPosition.y);
         }
         this.chosenBuilding.setSquare(0);
 
@@ -675,39 +666,31 @@ var MapLayer = cc.Layer.extend({
         //init building and set it to chosen building
         this.chosenBuilding = getBuildingFromType(buildingType, 1);
 
-        //add button accept and cancel to building
-        var buttonAccept = Utils.createButton(res.BUTTON.ACCEPT, SCALE_BUTTON_BUY_BUILDING, OFFSET_BUTTON_BUY_BUILDING, this.acceptBuyBuilding, this);
-        this.chosenBuilding.addChild(buttonAccept, MAP_ZORDER_GUI);
-        var buttonCancel = Utils.createButton(res.BUTTON.CANCEL, SCALE_BUTTON_BUY_BUILDING, cc.p(-OFFSET_BUTTON_BUY_BUILDING.x, OFFSET_BUTTON_BUY_BUILDING.y), this.exitModeBuyBuilding, this);
-        this.chosenBuilding.addChild(buttonCancel, MAP_ZORDER_GUI);
-
-
-
         //set position of building
         let validPosition = this.getEmptyPositionPutBuilding(this.chosenBuilding);
-
         if(posX && posY) {
             validPosition = cc.p(posX,posY);
         }
 
         //if not valid position, set to center of map and square to red, else set to valid position and square to green, move screen to see building
-        if (validPosition == null) {
-            validPosition = cc.p(GRID_SIZE / 2, GRID_SIZE / 2)
-            // this.chosenBuilding.setSquare(2);
-        } else {
-            // this.chosenBuilding.setSquare(1);
-        }
         this.chosenBuilding.setGridPosition(validPosition.x, validPosition.y);
         this.tempPosChosenBuilding = cc.p(validPosition.x, validPosition.y);
 
-        //move screen to see building
+        this.chosenBuilding.addIntoMapLayer();
+
+        //add button accept and cancel to building
+        var buttonAccept = Utils.createButton(res.BUTTON.ACCEPT, SCALE_BUTTON_BUY_BUILDING, OFFSET_BUTTON_BUY_BUILDING, this.acceptBuyBuilding, this);
+        this.chosenBuilding._effect.addChild(buttonAccept, ZORDER_BUILDING_EFFECT);
+        var buttonCancel = Utils.createButton(res.BUTTON.CANCEL, SCALE_BUTTON_BUY_BUILDING, cc.p(-OFFSET_BUTTON_BUY_BUILDING.x, OFFSET_BUTTON_BUY_BUILDING.y), this.exitModeBuyBuilding, this);
+        this.chosenBuilding._effect.addChild(buttonCancel, ZORDER_BUILDING_EFFECT);
+
+        // move screen to see building
         // let currentPos = this.getPosition();
         // let newPos = this.getMapPosFromGridPos(validPosition);
         // this.setPosition(cc.pSub(currentPos, newPos));
         // this.limitBorder();
 
         //add building to layer to display
-        this.addBuildingToLayer(this.chosenBuilding, MAP_ZORDER_BUILDING);
 
 
         //set chosen building

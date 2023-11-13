@@ -1,5 +1,5 @@
 
-var MapManager = cc.Class.extend({
+var     MapManager = cc.Class.extend({
 
     ctor: function () {
         this.listBuildings = new Map();
@@ -120,28 +120,6 @@ var MapManager = cc.Class.extend({
         }
 
     },
-    moveBuilding: function (building,newPosX,newPosY) {
-
-        var width = building._width;
-        var height = building._height;
-        // dat lai nhung o cu = 0
-        for(var column = building._posX; column < building._posX + width; column++)
-            for(var row = building._posY; row < building._posY + height; row++)
-                this.mapGrid[column][row] = 0;
-
-        //dat lai nhung o moi = id
-        for(var column = newPosX; column < newPosX + width; column++)
-            for(var row = newPosY; row < newPosY + height; row++)
-                this.mapGrid[column][row] = building._id;
-
-        //dat lai vi tri cua building va updateUI
-        building._posX = newPosX;
-        building._posY = newPosY;
-
-        cc.eventManager.dispatchCustomEvent(EVENT_TROOP_NAME.MOVE_BUILDING, {buildingId: building.getId()});
-        const Algorithm = AlgorithmImplement.getInstance();
-        Algorithm.setGridMapStar(MapManager.getInstance().mapGrid);
-    },
     getAllBuilding: function () {
         return Array.from(this.listBuildings.values());
     },
@@ -156,6 +134,8 @@ var MapManager = cc.Class.extend({
         //if x y null, return null
         if(x === null || y === null)
             return null;
+        if(!this.mapGrid[x]) return null;
+        if(!this.mapGrid[x][y]) return null;
         return this.listBuildings.get(this.mapGrid[x][y]) || null;
     },
     getListBuilderHut: function () {
@@ -179,6 +159,9 @@ var MapManager = cc.Class.extend({
                 this.mapGrid[column][row] = 0;
 
 
+    },
+    getMapGrid: function () {
+        return this.mapGrid;
     },
 
     getBuildingCountByType:  function (type) {
