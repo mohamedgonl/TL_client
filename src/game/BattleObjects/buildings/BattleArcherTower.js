@@ -40,7 +40,7 @@ var BattleArcherTower = BattleDefence.extend({
 
         let actionAttack = fr.createActionByFrames(res_map.SPRITE.BODY.ARCHER_TOWER['ATK_' + directCfg][this._level], {
             delayPerUnit: 0.07,
-            restoreOriginalFrame: true
+            restoreOriginalFrame: false
         });
         this._upper.runAction(actionAttack);
     },

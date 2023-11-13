@@ -39,7 +39,7 @@ var BattleMortar = BattleDefence.extend({
 
         let actionAttack = fr.createActionByFrames(res_map.SPRITE.BODY.MORTAR['ATK_' + directCfg][this._level], {
             delayPerUnit: 0.1,
-            restoreOriginalFrame: true
+            restoreOriginalFrame: false
         });
         this._body.runAction(actionAttack);
     },

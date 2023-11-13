@@ -30,7 +30,10 @@ var BattleCannon = BattleDefence.extend({
         this.addChild(this._fire);
 
         //init animation
-        this.actionFire = fr.createActionByFrames(res_map.SPRITE.BODY.CANNON.FIRE, {delayPerUnit: 0.1, restoreOriginalFrame: true});
+        this.actionFire = fr.createActionByFrames(res_map.SPRITE.BODY.CANNON.FIRE, {
+            delayPerUnit: 0.1,
+            restoreOriginalFrame: true
+        });
         this.actionFire.retain();
     },
 
@@ -40,14 +43,14 @@ var BattleCannon = BattleDefence.extend({
 
     setDirection: function (direct) {
         this.direct = direct;
-        if (direct <= TOTAL_DEFENCE_DIRECT / 2) {
-            this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][direct]);
+        if (this.direct <= TOTAL_DEFENCE_DIRECT / 2) {
+            this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][this.direct]);
             this._body.flippedX = false;
         } else {
-            this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][TOTAL_DEFENCE_DIRECT - direct]);
+            this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][TOTAL_DEFENCE_DIRECT - this.direct]);
             this._body.flippedX = true;
         }
-        this._fire.setPosition(this._body.x + this.deltaBarrelPosition[direct].dx, this._body.y + this.deltaBarrelPosition[direct].dy);
+        this._fire.setPosition(this._body.x + this.deltaBarrelPosition[this.direct].dx, this._body.y + this.deltaBarrelPosition[this.direct].dy);
     },
 
     attack: function (target) {
@@ -61,7 +64,7 @@ var BattleCannon = BattleDefence.extend({
 
         let actionAttack = fr.createActionByFrames(res_map.SPRITE.BODY.CANNON['ATK_' + directCfg][this._level], {
             delayPerUnit: 0.1,
-            restoreOriginalFrame: true
+            restoreOriginalFrame: false
         });
         this._body.runAction(actionAttack);
 
