@@ -6,6 +6,8 @@ const TroopConfig = {
             height: 192,
         },
         scale: 0.5,
+        shadow_scale: 0.7,
+        shadow_pos: [99, 93],
         run: {
             frame_time: 0.07,
             down: [0, 13],
@@ -36,6 +38,8 @@ const TroopConfig = {
             height: 192,
         },
         scale: 0.5,
+        shadow_scale: 0.5,
+        shadow_pos: [67, 67],
         run: {
             frame_time: 0.05,
             down: [0, 15],
@@ -65,6 +69,8 @@ const TroopConfig = {
             height: 192,
         },
         scale: 0.5,
+        shadow_scale: 0.5,
+        shadow_pos: [67, 67],
         run: {
             frame_time: 0.07,
             down: [0, 11],
@@ -94,6 +100,8 @@ const TroopConfig = {
             height: 192,
         },
         scale: 0.5,
+        shadow_scale: 1,
+        shadow_pos: [167, 160],
         run: {
             frame_time: 0.07,
             down: [0, 15],
@@ -123,6 +131,8 @@ const TroopConfig = {
             height: 192,
         },
         scale: 0.5,
+        shadow_scale: 0.7,
+        shadow_pos: [99, 160],
         run: {
             frame_time: 0.07,
             down: [0, 15],

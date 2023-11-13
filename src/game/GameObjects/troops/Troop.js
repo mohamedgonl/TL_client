@@ -20,7 +20,7 @@ var Troop = cc.Node.extend({
 
         let start;
         let end = mapLayer.getMapPosFromGridPos({x: this.armyCamp._posX, y: this.armyCamp._posY}, true, false);
-        cc.log("INIT END ::: " + JSON.stringify(end) + " ARMY ::: " + JSON.stringify({x: this.armyCamp._posX, y: this.armyCamp._posY}))
+
         if (barrackIndex >= 0 && barrackIndex !== null) {
             let barrack = ArmyManager.getInstance().getBarrackList()[barrackIndex];
             start = mapLayer.getMapPosFromGridPos({x: barrack._posX, y: barrack._posY}, true);
@@ -51,32 +51,8 @@ var Troop = cc.Node.extend({
         let shadow = new cc.Sprite(shadowUrl);
         shadow.setAnchorPoint(0.5, 0.5);
         shadow.setOpacity(90)
-
-        switch (this._cfgId) {
-            case "ARM_1": {
-                shadow.setScale(0.7);
-                shadow.setPosition(99, 93);
-                break;
-            }
-            case "ARM_2" : {
-                shadow.setScale(0.5);
-                shadow.setPosition(67, 67);
-                break;
-            }
-            case "ARM_3": {
-                shadow.setScale(0.5);
-                shadow.setPosition(67, 67);
-                break;
-            }
-            case "ARM_4": {
-                shadow.setPosition(167, 160);
-                break;
-            }
-            default: {
-                cc.log("INIT SHADOW NOT FOUND :  " + this._cfgId)
-            }
-        }
-
+        shadow.setScale(TroopConfig[this._cfgId].shadow_scale);
+        shadow.setPosition(TroopConfig[this._cfgId].shadow_pos[0],TroopConfig[this._cfgId].shadow_pos[1]);
         this.troop.addChild(shadow, -1);
 
     },
