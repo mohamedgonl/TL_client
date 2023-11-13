@@ -144,8 +144,8 @@ var BattleLayer = cc.Layer.extend({
         }
 
         const buildingConfig = LoadManager.getInstance().getConfig(building._type, building._level);
-        let sizeX = buildingConfig.width * 3;
-        let sizeY = buildingConfig.height * 3;
+        let sizeX = buildingConfig.width * GRID_BATTLE_RATIO;
+        let sizeY = buildingConfig.height * GRID_BATTLE_RATIO;
 
         let gridPosX = building._posX;
         let gridPosY = building._posY;

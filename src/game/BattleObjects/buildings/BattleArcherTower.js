@@ -3,15 +3,6 @@ var BattleArcherTower = BattleDefence.extend({
 
     ctor: function (level, id, posX, posY) {
         this._super(level, id, posX, posY);
-        const config = LoadManager.getInstance().getConfig(this._type, level);
-        const baseConfig = LoadManager.getInstance().getDefBaseConfig(this._type);
-        this.damagePerShot = config.damagePerShot;
-        this.minRange = baseConfig.minRange;
-        this.maxRange = baseConfig.maxRange;
-        this.attackSpeed = baseConfig.attackSpeed;
-        // var upper_sprite =  res_map.SPRITE.BODY.CANNON.UPPER[level];
-        // this.loadSprite(res_map.SPRITE.BODY.CANNON.BOTTOM[level],upper_sprite,2);
-        // this.loadSubSprite();
     },
 
     loadSpriteByLevel: function (level) {

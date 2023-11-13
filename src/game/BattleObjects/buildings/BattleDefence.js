@@ -6,10 +6,15 @@ var BattleDefence = BattleBuilding.extend({
     ctor: function (level, id, posX, posY) {
         this._super(level, id, posX, posY);
 
-        let config = LoadManager.getInstance().getDefBaseConfig(this._type);
-        this._minRange = config.minRange * 3;
-        this._maxRange = config.maxRange * 3;
-        this._attackRadius = config.attackRadius * 3;
+        let config = LoadManager.getInstance().getConfig(this._type, level);
+        this.damagePerShot = config.damagePerShot;
+
+        let defConfig = LoadManager.getInstance().getDefBaseConfig(this._type);
+        this._minRange = defConfig.minRange * GRID_BATTLE_RATIO;
+        this._maxRange = defConfig.maxRange * GRID_BATTLE_RATIO;
+        this._attackRadius = defConfig.attackRadius * GRID_BATTLE_RATIO;
+        this.attackSpeed = defConfig.attackSpeed;
+
         this.target = null;
         this.centerPoint = cc.p(this._posX + Math.floor(this._width / 2), this._posY + Math.floor(this._height / 2))
     },

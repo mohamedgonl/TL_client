@@ -1,6 +1,6 @@
 var Bullet = cc.Sprite.extend({
     active: true,
-    speed: 200, //pixel per sec
+    gridSpeed: 1, //cell/s
     power: 1,
     HP: 1,
     moveType: null,
