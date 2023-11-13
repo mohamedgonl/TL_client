@@ -30,10 +30,10 @@ var BattleLayer = cc.Layer.extend({
                 troop = new Archer(posX, posY);
                 break;
             case 'ARM_3':
-                troop = new Giant(posX, posY);
+                troop = new Thief(posX, posY);
                 break;
             case 'ARM_4':
-                troop = new Thief(posX, posY);
+                troop = new Giant(posX, posY);
                 break;
             case 'ARM_6':
                 troop = new Bomber(posX, posY);
