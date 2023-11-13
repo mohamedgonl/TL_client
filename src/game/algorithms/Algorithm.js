@@ -7,7 +7,7 @@ var AlgorithmImplement = cc.Class.extend({
         this
     },
 
-    getGridMapStar : function () {
+    getGridMapStar: function () {
         return this._gridMapAStar;
     },
 
@@ -18,17 +18,15 @@ var AlgorithmImplement = cc.Class.extend({
         let armyCamps = ArmyManager.getInstance().getArmyCampList();
         let armyCampIds = armyCamps.map(e => e.getId());
         this._results = {};
-        let gridMap = JSON.parse(JSON.stringify(gridMapGame)) ;
+        let gridMap = JSON.parse(JSON.stringify(gridMapGame));
         for (let i = 0; i < gridMap.length; i++) {
             for (let j = 0; j < gridMap[i].length; j++) {
                 if (gridMap[i][j] === 0 || armyCampIds.indexOf(gridMap[i][j]) !== -1) {
                     gridMap[i][j] = 1;
-                }
-                else if ( (gridMap[i][j] !== 0 && (gridMap[i+1] ? gridMap[i+1][j] : 0.1) !== gridMap[i][j])
-                || (gridMap[i][j] !== 0 && gridMap[i][j+1] !== gridMap[i][j]) ) {
+                } else if ((gridMap[i][j] !== 0 && (gridMap[i + 1] ? gridMap[i + 1][j] : 0.1) !== gridMap[i][j])
+                    || (gridMap[i][j] !== 0 && gridMap[i][j + 1] !== gridMap[i][j])) {
                     gridMap[i][j] = 1;
-                }
-                else {
+                } else {
                     gridMap[i][j] = 0;
                 }
             }
@@ -48,6 +46,23 @@ var AlgorithmImplement = cc.Class.extend({
             this._results[key] = result;
             return result;
         }
+    },
+
+    getDiagonalPoints: function (startX, startY, endX, endY) {
+        // Make startX <= endX, if you don't need to check, remove this block
+        if (startX > endX) {
+            [startX, startY, endX, endY] = [endX, endY, startX, startY];
+        }
+
+        const result = [];
+        const slope = Math.floor((endY - startY) / (endX - startX));
+
+        for (let i = startX, j = startY; i < endX; i++, j += slope) {
+            result.push({x: i,y :j});
+        }
+
+        cc.log("RESULT ::: " + JSON.stringify(result))
+        return result;
     },
 
     printGridMap: function (grid) {
