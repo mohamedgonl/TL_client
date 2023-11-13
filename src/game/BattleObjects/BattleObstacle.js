@@ -13,8 +13,8 @@ var BattleObstacle = BattleGameObject.extend({
 
         //load config
         var configObstacle = LoadManager.getInstance().getConfig(this._type, 1);
-        this._width = configObstacle.width * 3;
-        this._height = configObstacle.height * 3;
+        this._width = configObstacle.width * GRID_BATTLE_RATIO;
+        this._height = configObstacle.height * GRID_BATTLE_RATIO;
 
         //load sprites
         this.loadMainSprite();
@@ -38,7 +38,7 @@ var BattleObstacle = BattleGameObject.extend({
     },
     //load main sprite
     loadMainSprite: function () {
-        const size = this._width / 3;
+        const size = this._width / GRID_BATTLE_RATIO;
         let typeIndex = this._type.substring(4);
         var body_link = res_map.SPRITE.BODY.OBS_LINK + typeIndex + "/idle/image0000.png";
         var grass_link = res_map.SPRITE.GRASS.OBSTACLE[size];
@@ -55,7 +55,7 @@ var BattleObstacle = BattleGameObject.extend({
     },
 
     loadSubSprite: function () {
-        const size = this._width / 3;
+        const size = this._width / GRID_BATTLE_RATIO;
         //arrow move
         this._arrowMove = new cc.Sprite(res_map.SPRITE.ARROW_MOVE[size]);
         this._arrowMove.setScale(SCALE_BUILDING_BODY);

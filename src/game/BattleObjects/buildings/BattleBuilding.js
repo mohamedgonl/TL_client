@@ -23,8 +23,8 @@ var BattleBuilding = BattleGameObject.extend({
         this.addChild(this._junk, BATTLE_ZORDER_BUILDING_BODY);
 
         let config = LoadManager.getInstance().getConfig(this._type, level);
-        this._width = config.width * 3;
-        this._height = config.height * 3;
+        this._width = config.width * GRID_BATTLE_RATIO;
+        this._height = config.height * GRID_BATTLE_RATIO;
         this._maxHp = config.hitpoints;
         this._hp = this._maxHp;
 
@@ -51,7 +51,7 @@ var BattleBuilding = BattleGameObject.extend({
     //shadow_type = 1 for quare, 2 for circle, 0 for no shadow
     loadSprite: function (bodySprite, upperSprite, shadow_type, isUpperAnimation, junkSprite) {
 
-        var size = this._width / 3;
+        var size = this._width / GRID_BATTLE_RATIO;
         //body
         this._body.setTexture(bodySprite);
         this._body.setAnchorPoint(0.5, 0.5);
@@ -115,7 +115,7 @@ var BattleBuilding = BattleGameObject.extend({
     },
 
     loadSubSprite: function () {
-        const size = this._width / 3;
+        const size = this._width / GRID_BATTLE_RATIO;
 
         //progress bar
         this._hpBar = new ccui.Slider();
