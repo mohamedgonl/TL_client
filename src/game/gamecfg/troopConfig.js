@@ -117,6 +117,35 @@ const TroopConfig = {
             up_right:[42,47]
         }
     },
+    ARM_6: {
+        size: {
+            width: 192,
+            height: 192,
+        },
+        scale: 0.5,
+        run: {
+            frame_time: 0.07,
+            down: [0, 15],
+            down_left: [16, 31],
+            left: [32, 47],
+            up_left: [48, 63],
+            up: [64, 79],
+            down_right: [80,95],
+            right: [96,111],
+            up_right: [112,127]
+        },
+        idle: {
+            frame_time: 0.2,
+            down:[0,5],
+            down_left:  [6,11],
+            left: [12,17],
+            up_left: [18,23],
+            up: [24,29],
+            down_right: [30,35],
+            right: [36,41],
+            up_right:[42,47]
+        }
+    },
 }
 
 
@@ -140,7 +169,7 @@ const DIRECTIONS_STRING = {
     UP: "up"
 }
 
-const TROOP_ANIMS_LIST = ["ARM_1", "ARM_2", "ARM_3", "ARM_4"];
+const TROOP_ANIMS_LIST = ["ARM_1", "ARM_2", "ARM_3", "ARM_4", "ARM_6"];
 
 const TROOP_STAY_TIME = 5;
 
