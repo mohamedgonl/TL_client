@@ -21,9 +21,7 @@ var TroopBullet = cc.Node.extend({
 
         this._endTime = distance/this._speedPerSec;
 
-        //sprite
-        let sprite = new cc.Sprite(res_map.SPRITE.BODY.ARCHER_TOWER.BULLET);
-        this.addChild(sprite);
+
 
         //set position at start point
         let positionInMap = cc.director.getRunningScene().battleLayer.getMapPosFromGridPos(startPoint);
@@ -50,8 +48,7 @@ var TroopBullet = cc.Node.extend({
     }
 });
 
-TroopBullet.
-    createBullet = function (target, startPoint, damage) {
+TroopBullet.createBullet = function (target, startPoint, damage) {
     cc.log("hahaha create byullet")
     let troopBullet = new TroopBullet(target, startPoint, damage);
     const listBullets = BattleManager.getInstance().listBullets;

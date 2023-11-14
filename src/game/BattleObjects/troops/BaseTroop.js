@@ -20,6 +20,7 @@ var BaseTroop = cc.Node.extend({
         this._hitpoints = TROOP[this._type][TROOP_LEVEL]["hitpoints"];
         this._attackRange = TROOP_BASE[this._type]["attackRange"] * GRID_BATTLE_RATIO;
         this._damageScale = TROOP_BASE[this._type]["dmgScale"];
+        this.isOverhead = (this._type === "ARM_6");
         cc.log("attack range: " + this._attackRange)
         this._currentHitpoints = this._hitpoints;
         this._target = null;

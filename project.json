@@ -125,6 +125,7 @@
         "src/game/GameObjects/Builder.js",
 
         "src/game/BattleObjects/bullets/TroopBullet.js",
+        "src/game/BattleObjects/bullets/ArcherBullet.js",
 
 
 

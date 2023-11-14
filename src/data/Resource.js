@@ -530,6 +530,11 @@ var res_map = {
         BARRACK: "res/configs/Barrack.json",
     }
 }
+var res_battle = {
+    BULLET:{
+        ARCHER_ARROW: "res/battle/arrow_small_burning.png",
+    }
+}
 
 var res_json = {
     TROOP_BASE: "res/configs/TroopBase.json",
