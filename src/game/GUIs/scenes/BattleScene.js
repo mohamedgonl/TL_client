@@ -168,6 +168,7 @@ var BattleScene = cc.Scene.extend({
             const listDefences = BattleManager.getInstance().getListDefences();
             const listTroops = BattleManager.getInstance().getListCurrentTroops();
             const listBullets = BattleManager.getInstance().getListBullets();
+            const listTroopBullets = BattleManager.getInstance().getListTroopBullets();
             for (let defence of listDefences) {
                 if (defence.isDestroy()) {
                     continue;
@@ -194,6 +195,14 @@ var BattleScene = cc.Scene.extend({
             }
             for (let troop of listTroops) {
                 troop.gameLoop(this.secPerTick);
+            }
+            for (let troopBullet of listTroopBullets) {
+                if(troopBullet.active)
+                    troopBullet.gameLoop(this.secPerTick);
+                // else
+                // {
+                //     listTroopBullets.shift();
+                // }
             }
         }
         this.tick++;

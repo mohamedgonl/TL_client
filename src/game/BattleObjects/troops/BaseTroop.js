@@ -17,9 +17,10 @@ var BaseTroop = cc.Node.extend({
         this._moveSpeed = TROOP_BASE[this._type]["moveSpeed"];
         this._attackSpeed = TROOP_BASE[this._type]["attackSpeed"];
         this._damage = TROOP[this._type][TROOP_LEVEL]["damagePerAttack"];
-        this._hitpoints = TROOP[this._type][TROOP_LEVEL]["hitpoints"] * 20;
+        this._hitpoints = TROOP[this._type][TROOP_LEVEL]["hitpoints"];
         this._attackRange = TROOP_BASE[this._type]["attackRange"] * GRID_BATTLE_RATIO;
         this._damageScale = TROOP_BASE[this._type]["dmgScale"];
+        this.isOverhead = (this._type === "ARM_6");
         cc.log("attack range: " + this._attackRange)
         this._currentHitpoints = this._hitpoints;
         this._target = null;
@@ -34,15 +35,6 @@ var BaseTroop = cc.Node.extend({
         BattleManager.getInstance().addToListUsedTroop(this);
         this.initSprite();
 
-        //listen event press f to sh    ow isInAttackRange
-        cc.eventManager.addListener({
-            event: cc.EventListener.KEYBOARD,
-            onKeyPressed: function (keyCode, event) {
-                if (keyCode === 70) {
-                    cc.log("isInAttackRange: " + this.isInAttackRange(this._target));
-                }
-            }.bind(this)
-        }, this);
     },
     initSprite: function () {
         //shadow
@@ -110,7 +102,7 @@ var BaseTroop = cc.Node.extend({
         }
 
         if (this._state === TROOP_STATE.ATTACK) {
-            this.attackTarget(dt);
+            this.attackLoop(dt);
             return;
         }
 
@@ -462,7 +454,7 @@ var BaseTroop = cc.Node.extend({
         let directY = this._path[this._currentIndex].y - this._path[this._currentIndex - 1].y;
         this.setRunDirection(directX, directY);
     },
-    attackTarget: function (dt) {
+    attackLoop: function (dt) {
         if (this._target.isDestroy()) {
             cc.log("target destroy")
             this._state = TROOP_STATE.FIND_PATH;
@@ -479,15 +471,8 @@ var BaseTroop = cc.Node.extend({
 
         if (this._attackCd === 0) {
             this._attackCd = this._attackSpeed;
-            let damage = this._damage;
+            this.attack();
 
-            //if target is favorite target, damage *= damageScale
-            if (this._target._type.startsWith(this._favoriteTarget) === true) {
-                cc.log("favorite target");
-                damage *= this._damageScale;
-            }
-
-            this._target.onGainDamage(damage);
         } else {
             this._attackCd -= dt;
             if (this._attackCd < 0) {
@@ -495,6 +480,15 @@ var BaseTroop = cc.Node.extend({
                 cc.log("attack cd = 0")
             }
         }
+    },
+    attack:function (){
+        let damage = this._damage;
+
+        //if target is favorite target, damage *= damageScale
+        if (this._target._type.startsWith(this._favoriteTarget) === true) {
+            damage *= this._damageScale;
+        }
+        this._target.onGainDamage(damage);
     },
 
     performAttackAnimation: function () {
