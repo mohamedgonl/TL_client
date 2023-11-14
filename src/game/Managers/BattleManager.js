@@ -344,6 +344,9 @@ var BattleManager = cc.Class.extend({
     getListDefences: function () {
         return this.listDefences;
     },
+    getListBullets: function () {
+        return this.listBullets;
+    },
     getDropTroopGrid: function () {
         return this.dropTroopGrid;
     },

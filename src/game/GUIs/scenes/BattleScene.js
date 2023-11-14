@@ -138,7 +138,6 @@ var BattleScene = cc.Scene.extend({
     },
 
     onFindMatchSuccess: function (data) {
-        cc.log("onLoadDataSuccess::::::::::::::::::::::::::::")
         BattleManager.getInstance().loadFromServer(data);
 
         this.battleLayer.onLoadDataSuccess();
@@ -152,7 +151,7 @@ var BattleScene = cc.Scene.extend({
     },
 
     onFindMatchFail: function (errorCode) {
-        cc.log("Find match fail: " + errorCode);
+        cc.director.runScene(new GameScene());
     },
 
     goToGameScene: function () {
@@ -168,6 +167,7 @@ var BattleScene = cc.Scene.extend({
             //check defences targets
             const listDefences = BattleManager.getInstance().getListDefences();
             const listTroops = BattleManager.getInstance().getListCurrentTroops();
+            const listBullets = BattleManager.getInstance().getListBullets();
             for (let defence of listDefences) {
                 if (defence.isDestroy()) {
                     continue;
@@ -184,15 +184,15 @@ var BattleScene = cc.Scene.extend({
                 }
             }
 
-            for (let defence of BattleManager.getInstance().listDefences) {
+            for (let defence of listDefences) {
                 if (!defence.isDestroy())
                     defence.gameLoop(this.secPerTick);
             }
-            for (let bullet of BattleManager.getInstance().listBullets) {
+            for (let bullet of listBullets) {
                 if (bullet.active)
                     bullet.gameLoop(this.secPerTick);
             }
-            for (let troop of BattleManager.getInstance().listCurrentTroop) {
+            for (let troop of listTroops) {
                 troop.gameLoop(this.secPerTick);
             }
         }
