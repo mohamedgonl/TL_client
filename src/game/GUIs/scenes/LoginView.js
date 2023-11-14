@@ -8,6 +8,9 @@ var LoginView = cc.Scene.extend({
         const size = cc.director.getVisibleSize();
         const node = CCSUlties.parseUIFile(res_ui.LOGIN_SCENE);
 
+        LogUtils.writeLog("HELLO ANH EM 1")
+        LogUtils.writeLog("HELLO ANH EM 2")
+        LogUtils.writeLog("HELLO ANH EM 3")
 
         node.setAnchorPoint(0, 0);
         node.setPosition(0, 0);

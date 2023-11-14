@@ -36,6 +36,7 @@
         "src/framework/utils/utils.js",
         "src/framework/NumberUltis.js",
         "src/framework/RandomUltils.js",
+        "src/framework/LogUtils.js",
 
         "src/game/gamecfg/constValues.js",
 
