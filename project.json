@@ -124,6 +124,8 @@
         "src/game/GameObjects/troops/Troop.js",
         "src/game/GameObjects/Builder.js",
 
+        "src/game/BattleObjects/bullets/TroopBullet.js",
+
 
 
         "src/game/Managers/MapManager.js",
