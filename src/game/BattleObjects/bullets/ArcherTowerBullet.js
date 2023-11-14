@@ -7,6 +7,13 @@ var ArcherTowerBullet = Bullet.extend({
         this._super(res_map.SPRITE.BODY.ARCHER_TOWER.BULLET, startPoint, target, damagePerShot, attackRadius, initPos);
         this._type = type;
         this.minimumTime = 15 / this.gridSpeed;
+
+        //bullet explosion
+        this._explosion = new cc.Sprite();
+        this._explosion.setScale(0.5, 0.5);
+
+        this.actionExplose = fr.createActionByFrames(res_map.SPRITE.BODY.ARCHER_TOWER.HIT, {delayPerUnit: 0.1, restoreOriginalFrame: false});
+        this.actionExplose.retain();
     },
 
     init: function (startPoint, target) {
@@ -64,6 +71,11 @@ var ArcherTowerBullet = Bullet.extend({
     },
 
     onReachDestination: function () {
+        //run action explose
+        this._explosion.setPosition(this.target.x, this.target.y);
+        this._explosion.stopAction(this.actionExplose);
+        this._explosion.runAction(this.actionExplose);
+
         if (this.target.isAlive() && typeof this.target.onGainDamage === 'function') {
             this.target.onGainDamage(this.damagePerShot);
         }

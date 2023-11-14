@@ -13,7 +13,7 @@ var CannonBullet = Bullet.extend({
         this._explosion = new cc.Sprite();
         this._explosion.setScale(0.5, 0.5);
 
-        this.actionExplose = fr.createActionByFrames(res_map.SPRITE.BODY.CANNON.HIT, {delayPerUnit: 0.1, restoreOriginalFrame: true});
+        this.actionExplose = fr.createActionByFrames(res_map.SPRITE.BODY.CANNON.HIT, {delayPerUnit: 0.1,});
         this.actionExplose.retain();
     },
 
@@ -41,15 +41,16 @@ var CannonBullet = Bullet.extend({
     },
 
     onReachDestination: function () {
+        //run action explose
+        this._explosion.setPosition(this.destination.x, this.destination.y);
+        this._explosion.stopAction(this.actionExplose);
+        this._explosion.runAction(this.actionExplose);
+
         if (this.target.isAlive() && typeof this.target.onGainDamage === 'function') {
             this.target.onGainDamage(this.damagePerShot);
         }
         this.destroyBullet();
 
-        //run action explose
-        this._explosion.setPosition(this.destination.x, this.destination.y);
-        this._explosion.stopAction(this.actionExplose);
-        this._explosion.runAction(this.actionExplose);
     },
 });
 
