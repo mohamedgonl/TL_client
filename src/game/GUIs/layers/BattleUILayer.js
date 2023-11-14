@@ -132,8 +132,26 @@ var BattleUILayer = cc.Layer.extend({
             this.setStateSlot(i);
         }
 
-        let index = 0;
+        //create list troop sorted
+        let listTroopSorted = [];
+
+        //listTroop is a Map
         for (let [key, value] of listTroops) {
+            listTroopSorted.push([key, value]);
+        }
+
+        listTroopSorted.sort(function (a, b) {
+            return a[0] > b[0];
+        });
+
+
+        let index = 0;
+
+        for (let troop of listTroopSorted) {
+            let key = troop[0];
+            let value = troop[1];
+
+            if(!value) continue;
             let slot = this.troopSlots[index];
             this.setStateSlot(index, key, value);
             index++;
@@ -169,7 +187,6 @@ var BattleUILayer = cc.Layer.extend({
         cc.director.getRunningScene().onEndBattle();
     },
     setStateSlot: function (slotIndex, troopType = null, troopAmount = null) {
-        cc.log("setStateSlot " + slotIndex + " " + troopType + " " + troopAmount)
         //empty case
         if (troopType == null) {
             this.troopSlots[slotIndex].getChildByName("button").setVisible(false);
