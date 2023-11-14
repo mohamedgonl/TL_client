@@ -14,14 +14,13 @@ var BaseTroop = cc.Node.extend({
         this._posX = posX;
         this._posY = posY;
         this._favoriteTarget = TROOP_BASE[this._type]["favoriteTarget"];
-        this._moveSpeed = TROOP_BASE[this._type]["moveSpeed"];
+        this._moveSpeed = TROOP_BASE[this._type]["moveSpeed"] * GRID_BATTLE_RATIO;
         this._attackSpeed = TROOP_BASE[this._type]["attackSpeed"];
         this._damage = TROOP[this._type][TROOP_LEVEL]["damagePerAttack"];
         this._hitpoints = TROOP[this._type][TROOP_LEVEL]["hitpoints"];
         this._attackRange = TROOP_BASE[this._type]["attackRange"] * GRID_BATTLE_RATIO;
         this._damageScale = TROOP_BASE[this._type]["dmgScale"];
         this.isOverhead = (this._type === "ARM_6");
-        cc.log("attack range: " + this._attackRange)
         this._currentHitpoints = this._hitpoints;
         this._target = null;
         //state: 3 state: 0: findPath,1: move,2: attack, 3:idle, 4: death
@@ -30,7 +29,7 @@ var BaseTroop = cc.Node.extend({
         this._attackCd = this._attackSpeed;
         this._currentIndex = 0;
         this._stateAnimation = 0;
-        this._firstAttack =true;
+        this._firstAttack = true;
         BattleManager.getInstance().addToListCurrentTroop(this);
         BattleManager.getInstance().addToListUsedTroop(this);
         this.initSprite();
@@ -65,7 +64,7 @@ var BaseTroop = cc.Node.extend({
 
             //if not in range, move, else attack
             this._state = TROOP_STATE.MOVE;
-            if(this.isInAttackRange(this._target) === true){
+            if (this.isInAttackRange(this._target) === true) {
                 this._state = TROOP_STATE.ATTACK;
 
                 //set direct to target
@@ -405,7 +404,7 @@ var BaseTroop = cc.Node.extend({
         }
 
         //distance each dt
-        let distance = dt * this._moveSpeed / GRID_BATTLE_RATIO;
+        let distance = dt * this._moveSpeed;
         if (this._currentIndexLeft > distance) {
             this._currentIndexLeft -= distance;
         } else {
@@ -461,11 +460,11 @@ var BaseTroop = cc.Node.extend({
             return;
         }
 
+        this.performAttackAnimation();
+
         //perform attack when first attack, delay /2 attack speed to anim match with building gain dame
         if (this._firstAttack === true && this._attackCd >= this._attackSpeed / 2) {
             this._firstAttack = false;
-            cc.log("first attack")
-            this.performAttackAnimation();
         }
 
 
@@ -481,7 +480,7 @@ var BaseTroop = cc.Node.extend({
             }
         }
     },
-    attack:function (){
+    attack: function () {
         let damage = this._damage;
 
         //if target is favorite target, damage *= damageScale
@@ -495,32 +494,23 @@ var BaseTroop = cc.Node.extend({
         let directX = this._directX;
         let directY = this._directY;
         this._bodySprite.setScale(1);
-        let attackAction;//= res_troop.ATTACK[this._type].LEFT.ANIM;
 
+        let attackAction;
         if (directX === 1 && directY === 1) { //UP
             attackAction = res_troop.ATTACK[this._type].UP.ANIM;
         } else if (directX === 1 && directY === 0) { //UP_RIGHT
-            if (res_troop.ATTACK[this._type].UP_RIGHT === undefined) {
-                attackAction = res_troop.ATTACK[this._type].UP_LEFT.ANIM;
-                this._bodySprite.setScale(-1, 1);
-            } else
-                attackAction = res_troop.ATTACK[this._type].UP_RIGHT.ANIM;
+            attackAction = res_troop.ATTACK[this._type].UP_LEFT.ANIM;
+            this._bodySprite.setScale(-1, 1);
         } else if (directX === 1 && directY === -1) { //RIGHT
-            if (res_troop.ATTACK[this._type].RIGHT === undefined) {
-                attackAction = res_troop.ATTACK[this._type].LEFT.ANIM;
-                this._bodySprite.setScale(-1, 1);
-            } else
-                attackAction = res_troop.ATTACK[this._type].RIGHT.ANIM;
+            attackAction = res_troop.ATTACK[this._type].LEFT.ANIM;
+            this._bodySprite.setScale(-1, 1);
         } else if (directX === 0 && directY === 1) { //UP_LEFT
             attackAction = res_troop.ATTACK[this._type].UP_LEFT.ANIM;
         } else if (directX === 0 && directY === 0) { //UP
             attackAction = res_troop.ATTACK[this._type].UP.ANIM;
         } else if (directX === 0 && directY === -1) { //DOWN_RIGHT
-            if (res_troop.ATTACK[this._type].DOWN_RIGHT === undefined) {
-                attackAction = res_troop.ATTACK[this._type].DOWN_LEFT.ANIM;
-                this._bodySprite.setScale(-1, 1);
-            } else
-                attackAction = res_troop.ATTACK[this._type].DOWN_RIGHT.ANIM;
+            attackAction = res_troop.ATTACK[this._type].DOWN_LEFT.ANIM;
+            this._bodySprite.setScale(-1, 1);
         } else if (directX === -1 && directY === 1) { //LEFT
             attackAction = res_troop.ATTACK[this._type].LEFT.ANIM;
         } else if (directX === -1 && directY === 0) { //DOWN_LEFT
@@ -528,6 +518,8 @@ var BaseTroop = cc.Node.extend({
         } else if (directX === -1 && directY === -1) { //DOWN
             attackAction = res_troop.ATTACK[this._type].DOWN.ANIM;
         }
+
+
         if (attackAction === undefined) {
             cc.log("attack action undefined");
             cc.log("directX: " + directX + " directY: " + directY)
@@ -536,26 +528,28 @@ var BaseTroop = cc.Node.extend({
         //animate forever
         let animate = cc.animate(cloneAttackAction);
         animate.repeatForever();
-        animate.setSpeed(1/this._attackSpeed);
+        animate.setSpeed(1 / this._attackSpeed);
 
-        cc.log("performAttack")
         if (this._stateAnimation !== this._state) {
             this._stateAnimation = this._state;
             this._bodySprite.stopAllActions();
             this._bodySprite.runAction(animate);
         }
     },
+
+    //call when troop gain damage, update hp bar, if hp = 0, call dead
     onGainDamage: function (damage) {
         this._currentHitpoints -= damage;
         this._hpBar.setPercent(this._currentHitpoints / this._hitpoints * 100);
         if (this._currentHitpoints <= 0) {
-            this._currentHitpoints = 0;
             this.dead();
         }
     },
+
     isAlive: function () {
         return this._currentHitpoints > 0;
     },
+
     dead: function () {
         //remove from list
         BattleManager.getInstance().onTroopDead(this);

@@ -721,11 +721,45 @@ var MapLayer = cc.Layer.extend({
         let width = building._width;
         let height = building._height;
 
-        //find empty rect to place building in mapGrid
-        for(let column = 0; column < 40; column++)
-            for(let row = 0; row < 40; row++)
-                if(this.checkValidPutBuilding(building, column, row))
-                    return {x: column, y: row};
+        //find empty rect to place building in mapGrid by bfs from middle of map
+
+        // for(let column = 0; column < 40; column++)
+        //     for(let row = 0; row < 40; row++)
+        //         if(this.checkValidPutBuilding(building, column, row))
+        //             return {x: column, y: row};
+
+        let mapGrid = MapManager.getInstance().mapGrid;
+        let queue = [];
+        let visited = [];
+        let middleX = 20;
+        let middleY = 20;
+        queue.push({x: middleX, y: middleY});
+        visited[middleX] = [];
+        visited[middleX][middleY] = true;
+
+        while(queue.length > 0){
+            let currentPos = queue.shift();
+            let currentX = currentPos.x;
+            let currentY = currentPos.y;
+            let isValid = this.checkValidPutBuilding(building, currentX, currentY);
+            if(isValid) return {x: currentX, y: currentY}
+
+            //add 4 neighbor of current pos to queue
+            let dx = [0, 0, -1, 1];
+            let dy = [-1, 1, 0, 0];
+            for(let i = 0; i < 4; i++){
+                let nextX = currentX + dx[i];
+                let nextY = currentY + dy[i];
+
+                if(nextX < 0 || nextX >= 40 || nextY < 0 || nextY >= 40) continue;
+
+                if(visited[nextX] == null) visited[nextX] = [];
+                if(visited[nextX][nextY] == null){
+                    visited[nextX][nextY] = true;
+                    queue.push({x: nextX, y: nextY});
+                }
+            }
+        }
 
         return null;
     },

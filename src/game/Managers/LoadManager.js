@@ -158,7 +158,7 @@ var LoadManager = cc.Node.extend({
         //DEF_2
         //body
 
-        let def2LevelCount =  9;
+        let def2LevelCount = 9;
         //path res/Buildings/defense_base/DEF_1_1_Shadow.png
         this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER, "res/Buildings/defense_base/DEF_2_", "_Shadow.png", def2LevelCount);
 
@@ -189,14 +189,13 @@ var LoadManager = cc.Node.extend({
         for (let i = 1; i <= def2LevelCount; i++) {
             let res = {};
             for (let j = 0; j < 65; j++) {
-                if(j<10)
+                if (j < 10)
                     res[j] = part1 + i + part2 + i + part3 + "0" + j + part4;
                 else
                     res[j] = part1 + i + part2 + i + part3 + j + part4;
             }
             res_map.SPRITE.BODY.ARCHER_TOWER.UPPER.ATTACK[i] = res;
         }
-
 
 
         //DEF 3
@@ -218,51 +217,48 @@ var LoadManager = cc.Node.extend({
         }
 
         //DEF_1 ATK  res/Buildings/cannon/canon_1/attack01/image0000.png
-        for(let level = 1; level <=cannonLevelCount; level ++)
-        {
-            let prefixLink = "res/Buildings/cannon/canon_"+level+"/attack01/image00"
+        for (let level = 1; level <= cannonLevelCount; level++) {
+            let prefixLink = "res/Buildings/cannon/canon_" + level + "/attack01/image00"
             res_map.SPRITE.BODY.CANNON.ATK_0[level] = {}
             res_map.SPRITE.BODY.CANNON.ATK_1[level] = {}
             res_map.SPRITE.BODY.CANNON.ATK_2[level] = {}
             res_map.SPRITE.BODY.CANNON.ATK_3[level] = {}
             res_map.SPRITE.BODY.CANNON.ATK_4[level] = {}
-            this.loadSpriteToRes(res_map.SPRITE.BODY.CANNON.ATK_0[level],prefixLink,".png",null,0,6);
-            this.loadSpriteToRes(res_map.SPRITE.BODY.CANNON.ATK_1[level],prefixLink,".png",null,7,13);
-            this.loadSpriteToRes(res_map.SPRITE.BODY.CANNON.ATK_2[level],prefixLink,".png",null,14,20);
-            this.loadSpriteToRes(res_map.SPRITE.BODY.CANNON.ATK_3[level],prefixLink,".png",null,21,27);
-            this.loadSpriteToRes(res_map.SPRITE.BODY.CANNON.ATK_4[level],prefixLink,".png",null,28,34);
+            this.loadSpriteToRes(res_map.SPRITE.BODY.CANNON.ATK_0[level], prefixLink, ".png", null, 0, 6);
+            this.loadSpriteToRes(res_map.SPRITE.BODY.CANNON.ATK_1[level], prefixLink, ".png", null, 7, 13);
+            this.loadSpriteToRes(res_map.SPRITE.BODY.CANNON.ATK_2[level], prefixLink, ".png", null, 14, 20);
+            this.loadSpriteToRes(res_map.SPRITE.BODY.CANNON.ATK_3[level], prefixLink, ".png", null, 21, 27);
+            this.loadSpriteToRes(res_map.SPRITE.BODY.CANNON.ATK_4[level], prefixLink, ".png", null, 28, 34);
         }
 
         //DEF_2 ATK res/Buildings/AcherTower/DEF_2_1/DEF_2_1/attack01/image0000.png
-        for(let level =1; level <= def2LevelCount; level ++)
-        {
-            let prefixLink = "res/Buildings/AcherTower/DEF_2_"+level+"/DEF_2_"+level+"/attack01/image00";
+        for (let level = 1; level <= def2LevelCount; level++) {
+            let prefixLink = "res/Buildings/AcherTower/DEF_2_" + level + "/DEF_2_" + level + "/attack01/image00";
             res_map.SPRITE.BODY.ARCHER_TOWER.ATK_0[level] = {}
             res_map.SPRITE.BODY.ARCHER_TOWER.ATK_1[level] = {}
             res_map.SPRITE.BODY.ARCHER_TOWER.ATK_2[level] = {}
             res_map.SPRITE.BODY.ARCHER_TOWER.ATK_3[level] = {}
             res_map.SPRITE.BODY.ARCHER_TOWER.ATK_4[level] = {}
-            this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER.ATK_0[level],prefixLink,".png",null,0,12)
-            this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER.ATK_1[level],prefixLink,".png",null,13,25)
-            this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER.ATK_2[level],prefixLink,".png",null,26,38)
-            this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER.ATK_3[level],prefixLink,".png",null,39,51)
-            this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER.ATK_4[level],prefixLink,".png",null,52,64)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER.ATK_0[level], prefixLink, ".png", null, 0, 12)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER.ATK_1[level], prefixLink, ".png", null, 13, 25)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER.ATK_2[level], prefixLink, ".png", null, 26, 38)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER.ATK_3[level], prefixLink, ".png", null, 39, 51)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER.ATK_4[level], prefixLink, ".png", null, 52, 64)
         }
 
         //DEF_3 ATK res/Buildings/Motar/DEF_3_1/DEF_3_1/attack01/image0000.png
-        for(let level =1; level <= def3LevelCount; level ++)
-        {
-            let prefixLink = "res/Buildings/Motar/DEF_3_"+level+"/DEF_3_"+level+"/attack01/image00";
+        for (let level = 1; level <= def3LevelCount; level++) {
+            let prefixLink = "res/Buildings/Motar/DEF_3_" + level + "/DEF_3_" + level + "/attack01/image00";
             res_map.SPRITE.BODY.MORTAR.ATK_0[level] = {}
             res_map.SPRITE.BODY.MORTAR.ATK_1[level] = {}
             res_map.SPRITE.BODY.MORTAR.ATK_2[level] = {}
             res_map.SPRITE.BODY.MORTAR.ATK_3[level] = {}
             res_map.SPRITE.BODY.MORTAR.ATK_4[level] = {}
-            this.loadSpriteToRes(res_map.SPRITE.BODY.MORTAR.ATK_0[level],prefixLink,".png",null,0,4)
-            this.loadSpriteToRes(res_map.SPRITE.BODY.MORTAR.ATK_1[level],prefixLink,".png",null,5,9)
-            this.loadSpriteToRes(res_map.SPRITE.BODY.MORTAR.ATK_2[level],prefixLink,".png",null,10,14)
-            this.loadSpriteToRes(res_map.SPRITE.BODY.MORTAR.ATK_3[level],prefixLink,".png",null,15,19)
-            this.loadSpriteToRes(res_map.SPRITE.BODY.MORTAR.ATK_4[level],prefixLink,".png",null,20,24)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.MORTAR.ATK_0[level], prefixLink, ".png", null, 0, 4)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.MORTAR.ATK_1[level], prefixLink, ".png", null, 5, 9)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.MORTAR.ATK_2[level], prefixLink, ".png", null, 10, 14)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.MORTAR.ATK_3[level], prefixLink, ".png", null, 15, 19)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.MORTAR.ATK_4[level], prefixLink, ".png", null, 20, 24)
         }
         // cc.log("++++++++++++---------------::::::::::::::::")
         // cc.log(JSON.stringify(res_map.SPRITE.BODY.CANNON.ATK_0,null,2))
@@ -364,18 +360,16 @@ var LoadManager = cc.Node.extend({
         this.createAnimation();
     },
 
-    loadSpriteToRes: function (res_address, prefix, suffix, count,start,end) {
-        if(res_address === undefined)
-        {
-            res_address={}
+    loadSpriteToRes: function (res_address, prefix, suffix, count, start, end) {
+        if (res_address === undefined) {
+            res_address = {}
         }
-        if(start!=null)
-        {
+        if (start != null) {
             for (let i = start; i <= end; i++) {
                 let iString = i;
-                if(i<10) iString = "0"+i;
+                if (i < 10) iString = "0" + i;
                 var res = prefix + iString + suffix;
-                res_address[i-start]=res;
+                res_address[i - start] = res;
             }
             return;
         }
@@ -406,86 +400,124 @@ var LoadManager = cc.Node.extend({
     },
     loadSpriteTroops: function () {
         //ARM_1 run
-        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image0", 0, 13, res_troop.RUN.ARM_1.DOWN);
-        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image0", 14, 27, res_troop.RUN.ARM_1.DOWN_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image0", 28, 41, res_troop.RUN.ARM_1.LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image0", 42, 55, res_troop.RUN.ARM_1.UP_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image0", 56, 69, res_troop.RUN.ARM_1.UP);
-        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image0", 70, 83, res_troop.RUN.ARM_1.RIGHT);
-        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image0", 84, 97, res_troop.RUN.ARM_1.UP_RIGHT);
-        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image0", 98, 111, res_troop.RUN.ARM_1.DOWN_RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image", 0, 13, res_troop.RUN.ARM_1.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image", 14, 27, res_troop.RUN.ARM_1.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image", 28, 41, res_troop.RUN.ARM_1.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image", 42, 55, res_troop.RUN.ARM_1.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image", 56, 69, res_troop.RUN.ARM_1.UP);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image", 70, 83, res_troop.RUN.ARM_1.RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image", 84, 97, res_troop.RUN.ARM_1.UP_RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/run/image", 98, 111, res_troop.RUN.ARM_1.DOWN_RIGHT);
 
         // ARM_2 run
-        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image0", 0, 15, res_troop.RUN.ARM_2.DOWN);
-        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image0", 16, 31, res_troop.RUN.ARM_2.DOWN_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image0", 32, 47, res_troop.RUN.ARM_2.LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image0", 48, 63, res_troop.RUN.ARM_2.UP_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image0", 64, 79, res_troop.RUN.ARM_2.UP);
-        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image0", 80, 95, res_troop.RUN.ARM_2.DOWN_RIGHT);
-        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image0", 96, 111, res_troop.RUN.ARM_2.RIGHT);
-        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image0", 112, 127, res_troop.RUN.ARM_2.UP_RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image", 0, 15, res_troop.RUN.ARM_2.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image", 16, 31, res_troop.RUN.ARM_2.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image", 32, 47, res_troop.RUN.ARM_2.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image", 48, 63, res_troop.RUN.ARM_2.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image", 64, 79, res_troop.RUN.ARM_2.UP);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image", 80, 95, res_troop.RUN.ARM_2.DOWN_RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image", 96, 111, res_troop.RUN.ARM_2.RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/run/image", 112, 127, res_troop.RUN.ARM_2.UP_RIGHT);
 
         //ARM_3 run
-        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image0", 0, 11, res_troop.RUN.ARM_3.DOWN);
-        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image0", 12, 23, res_troop.RUN.ARM_3.DOWN_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image0", 24, 35, res_troop.RUN.ARM_3.LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image0", 36, 47, res_troop.RUN.ARM_3.UP_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image0", 48, 59, res_troop.RUN.ARM_3.UP);
-        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image0", 60, 71, res_troop.RUN.ARM_3.DOWN_RIGHT);
-        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image0", 72, 83, res_troop.RUN.ARM_3.UP_RIGHT);
-        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image0", 84, 95, res_troop.RUN.ARM_3.RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image", 0, 11, res_troop.RUN.ARM_3.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image", 12, 23, res_troop.RUN.ARM_3.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image", 24, 35, res_troop.RUN.ARM_3.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image", 36, 47, res_troop.RUN.ARM_3.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image", 48, 59, res_troop.RUN.ARM_3.UP);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image", 60, 71, res_troop.RUN.ARM_3.DOWN_RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image", 72, 83, res_troop.RUN.ARM_3.UP_RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/run/image", 84, 95, res_troop.RUN.ARM_3.RIGHT);
 
         //ARM_4 run
-        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image0", 0, 15, res_troop.RUN.ARM_4.DOWN);
-        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image0", 16, 31, res_troop.RUN.ARM_4.DOWN_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image0", 32, 47, res_troop.RUN.ARM_4.LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image0", 48, 63, res_troop.RUN.ARM_4.UP_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image0", 64, 79, res_troop.RUN.ARM_4.UP);
-        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image0", 80, 95, res_troop.RUN.ARM_4.DOWN_RIGHT);
-        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image0", 96, 111, res_troop.RUN.ARM_4.RIGHT);
-        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image0", 112, 127, res_troop.RUN.ARM_4.UP_RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image", 0, 15, res_troop.RUN.ARM_4.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image", 16, 31, res_troop.RUN.ARM_4.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image", 32, 47, res_troop.RUN.ARM_4.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image", 48, 63, res_troop.RUN.ARM_4.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image", 64, 79, res_troop.RUN.ARM_4.UP);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image", 80, 95, res_troop.RUN.ARM_4.DOWN_RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image", 96, 111, res_troop.RUN.ARM_4.RIGHT);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/run/image", 112, 127, res_troop.RUN.ARM_4.UP_RIGHT);
 
         //ARM_6 run
-        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/run/image0", 0, 15, res_troop.RUN.ARM_6.DOWN);
-        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/run/image0", 16, 31, res_troop.RUN.ARM_6.DOWN_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/run/image0", 32, 47, res_troop.RUN.ARM_6.LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/run/image0", 48, 63, res_troop.RUN.ARM_6.UP_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/run/image0", 64, 79, res_troop.RUN.ARM_6.UP);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/run/image", 0, 15, res_troop.RUN.ARM_6.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/run/image", 16, 31, res_troop.RUN.ARM_6.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/run/image", 32, 47, res_troop.RUN.ARM_6.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/run/image", 48, 63, res_troop.RUN.ARM_6.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/run/image", 64, 79, res_troop.RUN.ARM_6.UP);
 
         //ARM_1 attack
-        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/attack01/image0", 0, 12, res_troop.ATTACK.ARM_1.DOWN);
-        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/attack01/image0", 13, 25, res_troop.ATTACK.ARM_1.DOWN_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/attack01/image0", 26, 38, res_troop.ATTACK.ARM_1.LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/attack01/image0", 39, 51, res_troop.ATTACK.ARM_1.UP_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/attack01/image0", 52, 64, res_troop.ATTACK.ARM_1.UP);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/attack01/image", 0, 12, res_troop.ATTACK.ARM_1.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/attack01/image", 13, 25, res_troop.ATTACK.ARM_1.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/attack01/image", 26, 38, res_troop.ATTACK.ARM_1.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/attack01/image", 39, 51, res_troop.ATTACK.ARM_1.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/attack01/image", 52, 64, res_troop.ATTACK.ARM_1.UP);
 
         //ARM_2 attack
-        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/attack01/image0", 0, 12, res_troop.ATTACK.ARM_2.DOWN);
-        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/attack01/image0", 13, 25, res_troop.ATTACK.ARM_2.DOWN_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/attack01/image0", 26, 38, res_troop.ATTACK.ARM_2.LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/attack01/image0", 39, 51, res_troop.ATTACK.ARM_2.UP_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/attack01/image0", 52, 64, res_troop.ATTACK.ARM_2.UP);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/attack01/image", 0, 12, res_troop.ATTACK.ARM_2.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/attack01/image", 13, 25, res_troop.ATTACK.ARM_2.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/attack01/image", 26, 38, res_troop.ATTACK.ARM_2.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/attack01/image", 39, 51, res_troop.ATTACK.ARM_2.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/attack01/image", 52, 64, res_troop.ATTACK.ARM_2.UP);
 
         //ARM_3 attack
-        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/attack01/image0", 0, 12, res_troop.ATTACK.ARM_3.DOWN);
-        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/attack01/image0", 13, 25, res_troop.ATTACK.ARM_3.DOWN_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/attack01/image0", 26, 38, res_troop.ATTACK.ARM_3.LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/attack01/image0", 39, 51, res_troop.ATTACK.ARM_3.UP_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/attack01/image0", 52, 64, res_troop.ATTACK.ARM_3.UP);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/attack01/image", 0, 12, res_troop.ATTACK.ARM_3.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/attack01/image", 13, 25, res_troop.ATTACK.ARM_3.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/attack01/image", 26, 38, res_troop.ATTACK.ARM_3.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/attack01/image", 39, 51, res_troop.ATTACK.ARM_3.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/attack01/image", 52, 64, res_troop.ATTACK.ARM_3.UP);
 
         //ARM_4 attack
-        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/attack01/image0",0, 12, res_troop.ATTACK.ARM_4.DOWN);
-        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/attack01/image0",13, 25, res_troop.ATTACK.ARM_4.DOWN_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/attack01/image0",26, 38, res_troop.ATTACK.ARM_4.LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/attack01/image0",39, 51, res_troop.ATTACK.ARM_4.UP_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/attack01/image0",52, 64, res_troop.ATTACK.ARM_4.UP);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/attack01/image", 0, 12, res_troop.ATTACK.ARM_4.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/attack01/image", 13, 25, res_troop.ATTACK.ARM_4.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/attack01/image", 26, 38, res_troop.ATTACK.ARM_4.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/attack01/image", 39, 51, res_troop.ATTACK.ARM_4.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/attack01/image", 52, 64, res_troop.ATTACK.ARM_4.UP);
 
         //ARM_6 attack
-        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/attack01/image0",0, 11, res_troop.ATTACK.ARM_6.DOWN);
-        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/attack01/image0",12, 23, res_troop.ATTACK.ARM_6.DOWN_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/attack01/image0",24, 35, res_troop.ATTACK.ARM_6.LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/attack01/image0",36, 47, res_troop.ATTACK.ARM_6.UP_LEFT);
-        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/attack01/image0",48, 59, res_troop.ATTACK.ARM_6.UP);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/attack01/image", 0, 11, res_troop.ATTACK.ARM_6.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/attack01/image", 12, 23, res_troop.ATTACK.ARM_6.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/attack01/image", 24, 35, res_troop.ATTACK.ARM_6.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/attack01/image", 36, 47, res_troop.ATTACK.ARM_6.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/attack01/image", 48, 59, res_troop.ATTACK.ARM_6.UP);
+
+        //ARM_1 idle
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/idle/image", 0, 5, res_troop.IDLE.ARM_1.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/idle/image", 6, 11, res_troop.IDLE.ARM_1.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/idle/image", 12, 17, res_troop.IDLE.ARM_1.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/idle/image", 18, 23, res_troop.IDLE.ARM_1.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_1_1/ARM_1_1/idle/image", 24, 29, res_troop.IDLE.ARM_1.UP);
+
+
+        //ARM_2 idle
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/idle/image", 0, 5, res_troop.IDLE.ARM_2.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/idle/image", 6, 11, res_troop.IDLE.ARM_2.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/idle/image", 12, 17, res_troop.IDLE.ARM_2.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/idle/image", 18, 23, res_troop.IDLE.ARM_2.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_2_1/ARM_2_1/idle/image", 24, 29, res_troop.IDLE.ARM_2.UP);
+
+
+        //ARM_3 idle
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/idle/image", 0, 5, res_troop.IDLE.ARM_3.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/idle/image", 6, 11, res_troop.IDLE.ARM_3.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/idle/image", 12, 17, res_troop.IDLE.ARM_3.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/idle/image", 18, 23, res_troop.IDLE.ARM_3.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_3_1/ARM_3_1/idle/image", 24, 29, res_troop.IDLE.ARM_3.UP);
+
+
+        //ARM_4 idle
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/idle/image", 0, 5, res_troop.IDLE.ARM_4.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/idle/image", 6, 11, res_troop.IDLE.ARM_4.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/idle/image", 12, 17, res_troop.IDLE.ARM_4.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/idle/image", 18, 23, res_troop.IDLE.ARM_4.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_4_1/ARM_4_1/idle/image", 24, 29, res_troop.IDLE.ARM_4.UP);
+
+        //ARM_6 idle
+        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/idle/image", 0, 5, res_troop.IDLE.ARM_6.DOWN);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/idle/image", 6, 11, res_troop.IDLE.ARM_6.DOWN_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/idle/image", 12, 17, res_troop.IDLE.ARM_6.LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/idle/image", 18, 23, res_troop.IDLE.ARM_6.UP_LEFT);
+        this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/idle/image", 24, 29, res_troop.IDLE.ARM_6.UP);
     },
     createAnimation: function () {
         //DEAD_EFFECT
@@ -495,8 +527,10 @@ var LoadManager = cc.Node.extend({
         for (var i = start; i <= end; i++) {
             let res;
             if (i < 10)
-                res = link + "00" + i + ".png";
+                res = link + "000" + i + ".png";
             else if (i < 100)
+                res = link + "00" + i + ".png";
+            else if (i < 1000)
                 res = link + "0" + i + ".png";
             else
                 res = link + i + ".png";
@@ -505,8 +539,7 @@ var LoadManager = cc.Node.extend({
             animation.addSpriteFrameWithFile(res);
         }
         //loop in 1s
-
-        animation.setDelayPerUnit(1/(end-start+1));
+        animation.setDelayPerUnit(1 / (end - start + 1));
         animation.setRestoreOriginalFrame(true);
         target.ANIM = animation;
         target.ANIM.retain();
@@ -659,7 +692,7 @@ var res_troop = {
         }
 
     },
-    ATTACK:{
+    ATTACK: {
         ARM_1: {
             DOWN: {
                 //0000 -> 0012
@@ -679,61 +712,80 @@ var res_troop = {
             }
         },
         ARM_2: {
-            DOWN: {
-            },
-            DOWN_LEFT: {
-            },
-            LEFT: {
-            },
-            UP_LEFT: {
-            },
-            UP: {
-            }
+            DOWN: {},
+            DOWN_LEFT: {},
+            LEFT: {},
+            UP_LEFT: {},
+            UP: {}
         },
         ARM_3: {
-            DOWN: {
-            },
-            DOWN_LEFT: {
-            },
-            LEFT: {
-            },
-            UP_LEFT: {
-            },
-            UP: {
-            }
+            DOWN: {},
+            DOWN_LEFT: {},
+            LEFT: {},
+            UP_LEFT: {},
+            UP: {}
         },
         ARM_4: {
-            DOWN: {
-            },
-            DOWN_LEFT: {
-            },
-            LEFT: {
-            },
-            UP_LEFT: {
-            },
-            UP: {
-            }
+            DOWN: {},
+            DOWN_LEFT: {},
+            LEFT: {},
+            UP_LEFT: {},
+            UP: {}
         },
         ARM_6: {
-            DOWN: {
-            },
-            DOWN_LEFT: {
-            },
-            LEFT: {
-            },
-            UP_LEFT: {
-            },
-            UP: {
-            }
+            DOWN: {},
+            DOWN_LEFT: {},
+            LEFT: {},
+            UP_LEFT: {},
+            UP: {}
         }
 
     },
+    IDLE: {
+        ARM_1: {
+            DOWN: {},
+            DOWN_LEFT: {},
+            LEFT: {},
+            UP_LEFT: {},
+            UP: {}
+        },
+        ARM_2: {
+            DOWN: {},
+            DOWN_LEFT: {},
+            LEFT: {},
+            UP_LEFT: {},
+            UP: {}
+        },
+        ARM_3: {
+            DOWN: {},
+            DOWN_LEFT: {},
+            LEFT: {},
+            UP_LEFT: {},
+            UP: {}
+        },
+        ARM_4: {
+            DOWN: {},
+            DOWN_LEFT: {},
+            LEFT: {},
+            UP_LEFT: {},
+            UP: {}
+        },
+        ARM_6: {
+            DOWN: {},
+            DOWN_LEFT: {},
+            LEFT: {},
+            UP_LEFT: {},
+            UP: {}
+        }
+
+    },
+
     SHADOW: {
         SMALL: "res/Map/map_obj_bg/1x1_bong.png",
         BIG: "res/Map/map_obj_bg/big_shadow_troop.png"
     }
 }
-var effect= {
+var effect = {
     RIP: "res/battle/rip_elixir.png",
     GHOST: "res/battle/ghost.png",
     // DEAD_EFFECT: null,
