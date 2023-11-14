@@ -52,11 +52,11 @@ var BattleDefence = BattleBuilding.extend({
     //check if current target is still valid or not
     //set current target to null if not valid
     validateCurrentTarget: function () {
-        if (!this.hasTarget()){
+        if (!this.hasTarget()) {
             this.target = null;
             return;
         }
-        if (!this.isTargetInRange(this.target)){
+        if (!this.isTargetInRange(this.target)) {
             this.target = null;
         }
     },
@@ -83,7 +83,7 @@ var BattleDefence = BattleBuilding.extend({
         //logic
         if (!bulletInitPos)
             bulletInitPos = cc.p(this.x, this.y);
-        const bullet = Bullet.getOrCreateBullet(this._type, {
+        const bullet = BattleManager.getInstance().getOrCreateBullet(this._type, {
             x: this.x,
             y: this.y,
             _posX: this.centerPoint.x,

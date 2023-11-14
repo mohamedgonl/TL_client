@@ -41,8 +41,8 @@ var BattleManager = cc.Class.extend({
             elixirCapacity: 0,
         };
 
-        this.totalBuildingPoint = 0;
-        this.buildingDestroyedPoint = 0;
+        this.totalBuildingPoint = 0;//to calc destroy percentage
+        this.buildingDestroyedPoint = 0;//to calc destroy percentage
         this.isDestroyedHalf = false;
 
         this.totalTroop = 0;
@@ -136,8 +136,8 @@ var BattleManager = cc.Class.extend({
         this.matchId = matchId;
         this.enemyId = enemyId;
         this.enemyName = enemyName;
-        this.availableGold = availableGold;
-        this.availableElixir = availableElixir;
+        this.availableGold = availableGold; //maximum gold can be robbed
+        this.availableElixir = availableElixir; //maximum elixir can be robbed
         this.winPoint = winPoint;
         this.losePoint = losePoint;
         this.playerResources.goldCapacity = goldCapacity;
@@ -171,7 +171,6 @@ var BattleManager = cc.Class.extend({
 
         //reload sprite wall after load all building
         for (let building of this.listWalls) {
-            cc.log("++++++++++++++++++++++++")
             building.loadSpriteByLevel(building._level);
         }
 
@@ -271,8 +270,6 @@ var BattleManager = cc.Class.extend({
 
         //update battle graph
         this._battleGraph = new BattleGraph(this.findPathGrid);
-
-        cc.log("get battle graph");
     },
 
     //add gameObject to list and to grid
@@ -315,6 +312,14 @@ var BattleManager = cc.Class.extend({
         }
     },
 
+    onStartBattle: function (){
+        this.battleStatus = BATTLE_STATUS.HAPPENNING;
+    },
+
+    onEndBattle: function (){
+        this.battleStatus = BATTLE_STATUS.END;
+    },
+
     getAllBuilding: function () {
         return this.listBuildings;
     },
@@ -343,6 +348,9 @@ var BattleManager = cc.Class.extend({
     },
     getListDefences: function () {
         return this.listDefences;
+    },
+    getListBullets: function () {
+        return this.listBullets;
     },
     getDropTroopGrid: function () {
         return this.dropTroopGrid;
@@ -468,9 +476,26 @@ var BattleManager = cc.Class.extend({
         return troops;
     },
 
-    addBullet: function (bullet, defence) {
-        this.battleScene.battleLayer.addBullet(bullet, defence);
-        this.listBullets.push(bullet);
+    getOrCreateBullet: function (type, startPoint, target, damagePerShot, attackRadius, initPos) {
+        let newBullet = null;
+        const listBullets = this.listBullets;
+        for (let bullet of listBullets)
+            if (!bullet.active && bullet._type === type) {
+                bullet.init(startPoint, target);
+                return bullet;
+            }
+        if (type === "DEF_1") {
+            newBullet = new CannonBullet(type, startPoint, target, damagePerShot, attackRadius, initPos);
+        } else if (type === "DEF_2") {
+            newBullet = new ArcherTowerBullet(type, startPoint, target, damagePerShot, attackRadius, initPos);
+        } else if (type === "DEF_3") {
+            newBullet = new MortarBullet(type, startPoint, target, damagePerShot, attackRadius, initPos);
+        }
+
+        this.battleScene.battleLayer.addBullet(newBullet);
+        this.listBullets.push(newBullet);
+
+        return newBullet;
     },
 
     robResource: function (resource, type) {

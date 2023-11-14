@@ -322,6 +322,14 @@ var res_map = {
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/AcherTower/DEF_2_1/DEF_2_1/idle/image0000.png",
                 BULLET: "res/battle/archerbullet3.png",
+                HIT: {
+                    "0": "res/battle/AtkHit_00/00.png",
+                    "1": "res/battle/AtkHit_00/01.png",
+                    "2": "res/battle/AtkHit_00/02.png",
+                    "3": "res/battle/AtkHit_00/03.png",
+                    "4": "res/battle/AtkHit_00/04.png",
+                    "5": "res/battle/AtkHit_00/05.png",
+                },
                 UPPER: {
                     IDLE: {
                         1: null,

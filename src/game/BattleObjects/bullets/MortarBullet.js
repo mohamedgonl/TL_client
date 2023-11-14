@@ -10,14 +10,14 @@ var MortarBullet = Bullet.extend({
         this.setScale(0.5, 0.5);
 
         //run action roll bullet
-        let actionRoll = fr.createActionByFrames(res_map.SPRITE.BODY.MORTAR.BULLETS, {delayPerUnit: 0.1, restoreOriginalFrame: true});
+        let actionRoll = fr.createActionByFrames(res_map.SPRITE.BODY.MORTAR.BULLETS, {delayPerUnit: 0.1,});
         this.runAction(actionRoll.repeatForever());
 
         //bullet explosion
         this._explosion = new cc.Sprite();
         this._explosion.setScale(0.5, 0.5);
 
-        this.actionExplose = fr.createActionByFrames(res_map.SPRITE.BODY.MORTAR.HIT, {delayPerUnit: 0.1, restoreOriginalFrame: true});
+        this.actionExplose = fr.createActionByFrames(res_map.SPRITE.BODY.MORTAR.HIT, {delayPerUnit: 0.1,});
         this.actionExplose.retain();
     },
 
@@ -63,6 +63,11 @@ var MortarBullet = Bullet.extend({
     },
 
     onReachDestination: function () {
+        //run action explose
+        this._explosion.setPosition(this.destination.x, this.destination.y);
+        this._explosion.stopAction(this.actionExplose);
+        this._explosion.runAction(this.actionExplose);
+
         const listTargets = BattleManager.getInstance()
             .getListTroopsInRange(cc.p(this.destination._posX, this.destination._posY), this.attackRadius);
         for (let target of listTargets) {
@@ -71,11 +76,6 @@ var MortarBullet = Bullet.extend({
         }
 
         this.destroyBullet();
-
-        //run action explose
-        this._explosion.setPosition(this.destination.x, this.destination.y);
-        this._explosion.stopAction(this.actionExplose);
-        this._explosion.runAction(this.actionExplose);
     },
 });
 

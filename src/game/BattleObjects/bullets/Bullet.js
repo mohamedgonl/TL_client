@@ -41,21 +41,3 @@ var Bullet = cc.Sprite.extend({
 
 });
 
-Bullet.getOrCreateBullet = function (type, startPoint, target, damagePerShot, attackRadius, initPos) {
-    var selChild = null;
-    const listBullets = BattleManager.getInstance().listBullets;
-    for (let bullet of listBullets)
-        if (!bullet.active && bullet._type === type) {
-            bullet.init(startPoint, target);
-            return bullet;
-        }
-    if (type === "DEF_1") {
-        selChild = new CannonBullet(type, startPoint, target, damagePerShot, attackRadius, initPos);
-    } else if (type === "DEF_2") {
-        selChild = new ArcherTowerBullet(type, startPoint, target, damagePerShot, attackRadius, initPos);
-    } else if (type === "DEF_3") {
-        selChild = new MortarBullet(type, startPoint, target, damagePerShot, attackRadius, initPos);
-    }
-    BattleManager.getInstance().addBullet(selChild);
-    return selChild;
-};
