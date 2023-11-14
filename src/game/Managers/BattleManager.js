@@ -41,8 +41,8 @@ var BattleManager = cc.Class.extend({
             elixirCapacity: 0,
         };
 
-        this.totalBuildingPoint = 0;
-        this.buildingDestroyedPoint = 0;
+        this.totalBuildingPoint = 0;//to calc destroy percentage
+        this.buildingDestroyedPoint = 0;//to calc destroy percentage
         this.isDestroyedHalf = false;
 
         this.totalTroop = 0;
@@ -136,8 +136,8 @@ var BattleManager = cc.Class.extend({
         this.matchId = matchId;
         this.enemyId = enemyId;
         this.enemyName = enemyName;
-        this.availableGold = availableGold;
-        this.availableElixir = availableElixir;
+        this.availableGold = availableGold; //maximum gold can be robbed
+        this.availableElixir = availableElixir; //maximum elixir can be robbed
         this.winPoint = winPoint;
         this.losePoint = losePoint;
         this.playerResources.goldCapacity = goldCapacity;
@@ -171,7 +171,6 @@ var BattleManager = cc.Class.extend({
 
         //reload sprite wall after load all building
         for (let building of this.listWalls) {
-            cc.log("++++++++++++++++++++++++")
             building.loadSpriteByLevel(building._level);
         }
 
@@ -271,8 +270,6 @@ var BattleManager = cc.Class.extend({
 
         //update battle graph
         this._battleGraph = new BattleGraph(this.findPathGrid);
-
-        cc.log("get battle graph");
     },
 
     //add gameObject to list and to grid
@@ -313,6 +310,14 @@ var BattleManager = cc.Class.extend({
                 break;
 
         }
+    },
+
+    onStartBattle: function (){
+        this.battleStatus = BATTLE_STATUS.HAPPENNING;
+    },
+
+    onEndBattle: function (){
+        this.battleStatus = BATTLE_STATUS.END;
     },
 
     getAllBuilding: function () {
