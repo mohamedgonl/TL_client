@@ -545,6 +545,7 @@ var Building = GameObject.extend({
         else {
             mapManager.buildingAmount[this._type] ++;
         }
+
         switch (this._state){
             case 0:
                 break;
