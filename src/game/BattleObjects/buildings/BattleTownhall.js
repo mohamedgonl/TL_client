@@ -5,12 +5,6 @@ var BattleTownhall = BattleBaseStorage.extend({
     ctor: function (level, id, posX, posY) {
         this._super(level, id, posX, posY);
 
-        let config = LoadManager.getInstance().getConfig(this._type, this._level);
-        this._currentGold = 0;
-        this._currentElixir = 0;
-        this._capacityGold = config.capacityGold;
-        this._capacityElixir = config.capacityElixir;
-
         this.flame1 = new cc.Sprite();
         // this.flame1.setScale(0.7, 0.7);
         this.flame1.setPosition(this._body.x, this._body.y + 20);

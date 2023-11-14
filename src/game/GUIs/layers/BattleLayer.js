@@ -310,7 +310,6 @@ var BattleLayer = cc.Layer.extend({
         let gridPos = this.getGridPosFromScreenPos(locationInScreen);
         //get type of chosen slot
         let type = cc.director.getRunningScene().battleUILayer.getTypeOfChosenSlot();
-        cc.log("choose:::::::::::::::", type);
         if (type == null) return;
         let canDropTroop = BattleManager.getInstance().getDropTroopGrid()[gridPos.x][gridPos.y];
 
@@ -321,7 +320,6 @@ var BattleLayer = cc.Layer.extend({
         }
 
         if (BattleManager.getInstance().listUsedTroop.get(type) >= BattleManager.getInstance().listTroops.get(type)) {
-            cc.log("not enough troop")
             return;
         }
 
@@ -509,7 +507,8 @@ var BattleLayer = cc.Layer.extend({
         const self = this;
         this._borderDropTroop.setVisible(true);
         this.schedule(function () {
-            self._borderDropTroop.setVisible(false);
+            if (self._borderDropTroop)
+                self._borderDropTroop.setVisible(false);
         }, 0, 0, 3);
     },
 

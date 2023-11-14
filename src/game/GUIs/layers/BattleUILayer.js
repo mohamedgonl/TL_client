@@ -87,12 +87,11 @@ var BattleUILayer = cc.Layer.extend({
     setResourceLeft: function (resource, type) {
         if (type === RESOURCE_TYPE.GOLD)
             this.goldText.setString(resource);
-        else if (type === RESOURCE_TYPE.GOLD)
+        else if (type === RESOURCE_TYPE.ELIXIR)
             this.elixirText.setString(resource);
     },
 
     onLoadDataSuccess: function () {
-        cc.log("onLoadDataSuccess::::::::::::::::::::::::::::")
         this.userName.setString(BattleManager.getInstance().enemyName);
         this.goldText.setString(BattleManager.getInstance().availableGold);
         this.elixirText.setString(BattleManager.getInstance().availableElixir);
@@ -160,7 +159,6 @@ var BattleUILayer = cc.Layer.extend({
     },
     onTroopSlotClick: function (slotIndex) {
         //show troop list
-        cc.log("onTroopSlotClick " + slotIndex);
         if (this.chosenSlot == null) {
             this.chosenSlot = slotIndex;
             //turn on selected sprite

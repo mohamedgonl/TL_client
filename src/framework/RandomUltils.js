@@ -33,11 +33,26 @@ RandomUtils.JenkinsSimpleFast32 = function (seed_1, seed_2, seed_3, seed_4) {
     }
 }
 
-RandomUtils.generateRandomBySeed = function (min = 0, max = 1, seed, isInteger = false) {
-    let generate_seed = RandomUtils.MurmurHash3(seed);
-    let random_number = RandomUtils.JenkinsSimpleFast32(generate_seed(), generate_seed());
-    const scaledRandom = min + random_number() * (max - min);
-    return isInteger ? Math.round(scaledRandom) : scaledRandom;
+RandomUtils.hashCode = function (str) {
+    let hash = 0;
+    if (str.length === 0) return hash;
+
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = (hash << 5) - hash + char;
+        hash |= 0;
+    }
+    cc.log("HASH : " + hash)
+
+    return hash;
 }
+
+RandomUtils.generateRandomBySeed = function (min = 0, max = 1, seed, isInteger = false) {
+    let randomNumber = Math.sin(RandomUtils.hashCode(seed));
+    const scaledRandom = min + randomNumber * (max - min);
+    let rd = isInteger ? Math.round(scaledRandom) : scaledRandom;
+    return Math.abs(rd);
+}
+
 
 

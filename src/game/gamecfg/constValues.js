@@ -17,6 +17,12 @@ const BATTLE_STATUS = {
     END: 2,
 }
 
+const DEF_ATTACK_AREA = {
+    GROUND: 1,
+    OVERHEAD: 2,
+    BOTH: 3,
+}
+
 const BATTlE_PREPARE_TIME = 30;
 const BATTlE_LIMIT_TIME = 150;
 const BATTLE_FPS = 60;
