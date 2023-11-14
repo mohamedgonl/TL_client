@@ -198,8 +198,19 @@ var BattleManager = cc.Class.extend({
     setResourceToBuilding: function () {
         if (!this.listResources || this.listResources.length === 0)
             return;
-        const goldCapacity = Math.floor(this.availableGold / this.listResources.length);
-        const elixirCapacity = Math.floor(this.availableElixir / this.listResources.length);
+
+        let goldBuildingAmount = 0;
+        let elixirBuildingAmount = 0;
+
+        for (let building of this.listResources) {
+            if (building._resourceType === RESOURCE_TYPE.GOLD) {
+                goldBuildingAmount++;
+            } else if (building._resourceType === RESOURCE_TYPE.ELIXIR)
+                elixirBuildingAmount++;
+        }
+
+        const goldCapacity = Math.floor(this.availableGold / goldBuildingAmount);
+        const elixirCapacity = Math.floor(this.availableElixir / elixirBuildingAmount);
 
         for (let building of this.listResources) {
             if (building._resourceType === RESOURCE_TYPE.GOLD) {
@@ -208,11 +219,20 @@ var BattleManager = cc.Class.extend({
                 building.setCapacity(elixirCapacity);
         }
 
-        let lastBuilding = this.listResources[this.listResources.length - 1];
-        if (lastBuilding._resourceType === RESOURCE_TYPE.GOLD)
-            lastBuilding.setCapacity(this.availableGold - goldCapacity * (this.listResources.length - 1));
-        else if (lastBuilding._resourceType === RESOURCE_TYPE.ELIXIR)
-            lastBuilding.setCapacity(this.availableElixir - elixirCapacity * (this.listResources.length - 1));
+        for (let i = this.listResources.length - 1; i >= 0; i--) {
+            let lastBuilding = this.listResources[i];
+            if (lastBuilding._resourceType === RESOURCE_TYPE.GOLD) {
+                lastBuilding.setCapacity(this.availableGold - goldCapacity * (goldBuildingAmount - 1));
+                break;
+            }
+        }
+        for (let i = this.listResources.length - 1; i >= 0; i--) {
+            let lastBuilding = this.listResources[i];
+            if (lastBuilding._resourceType === RESOURCE_TYPE.ELIXIR) {
+                lastBuilding.setCapacity(this.availableElixir - elixirCapacity * (elixirBuildingAmount - 1));
+                break;
+            }
+        }
     },
 
     addToListMine: function (building) {

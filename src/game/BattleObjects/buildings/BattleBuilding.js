@@ -40,7 +40,10 @@ var BattleBuilding = BattleGameObject.extend({
         // this._upper.setGlobalZOrder(40);
 
         //init action destroy
-        this.actionDestroy = fr.createActionByFrames(res_map.SPRITE.BUILDING_EXPLOSION, {delayPerUnit: 0.1, restoreOriginalFrame: true})
+        this.actionDestroy = fr.createActionByFrames(res_map.SPRITE.BUILDING_EXPLOSION, {
+            delayPerUnit: 0.1,
+            restoreOriginalFrame: false
+        })
         this.actionDestroy.retain();
         this._nodeDestroyAction = new cc.Sprite();
         this._nodeDestroyAction.setPosition(this._nodeDestroyAction.x, this._nodeDestroyAction.y + 60);
@@ -159,14 +162,12 @@ var BattleBuilding = BattleGameObject.extend({
         if (damage <= 0 || this._hp <= 0)
             return;
         this._hp = Math.max(this._hp - damage, 0);
-        if (this._hp <= 0)
+        if (this._hp <= 0) {
             this.onDestroy();
-
-        //UI
-        if (this._hp < this._maxHp) {
-            this._hpBar.setVisible(true);
-        }
-        if (this._hp > 0) {
+        } else {//UI
+            if (this._hp < this._maxHp) {
+                this._hpBar.setVisible(true);
+            }
             let percent = this._hp / this._maxHp * 100;
             this._hpBar.setPercent(percent);
         }
