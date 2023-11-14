@@ -14,6 +14,7 @@ var BattleDefence = BattleBuilding.extend({
         this._maxRange = defConfig.maxRange * GRID_BATTLE_RATIO;
         this._attackRadius = defConfig.attackRadius * GRID_BATTLE_RATIO;
         this.attackSpeed = defConfig.attackSpeed;
+        this.attackArea = defConfig.attackArea;
 
         this.target = null;
         this.centerPoint = cc.p(this._posX + Math.floor(this._width / 2), this._posY + Math.floor(this._height / 2))
@@ -40,8 +41,14 @@ var BattleDefence = BattleBuilding.extend({
 
     //check if troop can be added as new target
     checkTarget: function (target) {
-        //todo: check target type
-
+        // target in air
+        if (target.isOverhead && this.attackArea === DEF_ATTACK_AREA.GROUND) {
+            return false;
+        }
+        // target on ground
+        if (!target.isOverhead && this.attackArea === DEF_ATTACK_AREA.OVERHEAD) {
+            return false;
+        }
         return this.isTargetInRange(target);
     },
 

@@ -503,7 +503,7 @@ var BattleManager = cc.Class.extend({
             this.robbedGold += resource;
             this.battleScene.battleUILayer.setResourceLeft(this.availableGold - this.robbedGold, type);
             this.setPlayerResource({gold: this.playerResources.gold + resource});
-        } else if (type === RESOURCE_TYPE.GOLD) {
+        } else if (type === RESOURCE_TYPE.ELIXIR) {
             this.robbedElixir += resource;
             this.battleScene.battleUILayer.setResourceLeft(this.availableElixir - this.robbedElixir, type);
             this.setPlayerResource({elixir: this.playerResources.elixir + resource});
