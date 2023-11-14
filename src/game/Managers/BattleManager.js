@@ -53,7 +53,10 @@ var BattleManager = cc.Class.extend({
         this.listResources = [];
         this.listWalls = [];
         this.listDefences = [];
+
         this.listBullets = [];
+        this.listTroopBullets = [];
+
         this.listObstacles = [];
     },
 
@@ -352,6 +355,9 @@ var BattleManager = cc.Class.extend({
     getListBullets: function () {
         return this.listBullets;
     },
+    getListTroopBullets: function () {
+        return this.listTroopBullets;
+    },
     getDropTroopGrid: function () {
         return this.dropTroopGrid;
     },
@@ -509,6 +515,10 @@ var BattleManager = cc.Class.extend({
             this.setPlayerResource({elixir: this.playerResources.elixir + resource});
         }
     },
+
+    addTroopBullet: function (bullet) {
+        this.listTroopBullets.push(bullet);
+    }
 
 });
 
