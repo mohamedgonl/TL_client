@@ -86,16 +86,17 @@ var BattleScene = cc.Scene.extend({
             const listTroops = BattleManager.getInstance().getListUsedTroops();
             let percentage = BattleManager.getInstance().getDestroyedPercentage();
 
-            testnetwork.connector.sendEndBattle({
-                result: starAmount > 0,
-                starAmount,
-                trophyAmount,
-                robbedGold,
-                robbedElixir,
-                listTroops,
-                tick: this.tick,
-                percentage,
-            });
+            // testnetwork.connector.sendEndBattle({
+            //     result: starAmount > 0,
+            //     starAmount,
+            //     trophyAmount,
+            //     robbedGold,
+            //     robbedElixir,
+            //     listTroops,
+            //     tick: this.tick,
+            //     percentage,
+            // });
+            testnetwork.connector.sendDoAction({type: ACTION_TYPE.END_BATTLE, tick: this.tick,});
 
             this.stopCountDown();
             BattleManager.getInstance().onEndBattle();

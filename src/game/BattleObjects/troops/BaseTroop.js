@@ -21,7 +21,6 @@ var BaseTroop = cc.Node.extend({
         this._attackRange = TROOP_BASE[this._type]["attackRange"] * GRID_BATTLE_RATIO;
         this._damageScale = TROOP_BASE[this._type]["dmgScale"];
         this.isOverhead = (this._type === "ARM_6");
-        cc.log("attack range: " + this._attackRange)
         this._currentHitpoints = this._hitpoints;
         this._target = null;
         //state: 3 state: 0: findPath,1: move,2: attack, 3:idle, 4: death
@@ -164,7 +163,7 @@ var BaseTroop = cc.Node.extend({
         }
         //ELSE
         else {
-            cc.log("Error");
+            // //cc.log("Error");
         }
 
         let cloneMoveAction = moveAction.clone();
@@ -274,7 +273,7 @@ var BaseTroop = cc.Node.extend({
                 }
                 break;
             default:
-                cc.log("Error::::: NOT FOUND FAVORITE TARGET")
+                //cc.log("Error::::: NOT FOUND FAVORITE TARGET")
         }
 
         if (listTarget.length === 0) {
@@ -302,7 +301,7 @@ var BaseTroop = cc.Node.extend({
         }
 
         if (this._target === null) {
-            cc.log("Error::::: NOT FOUND TARGET")
+            //cc.log("Error::::: NOT FOUND TARGET")
             this.state = TROOP_STATE.IDLE;
             return;
         }
@@ -330,12 +329,12 @@ var BaseTroop = cc.Node.extend({
                     //if obs, continue
                     if (value._type.startsWith("OBS")) continue;
                     if (value._type.startsWith("WAL")) continue;
-                    cc.log("push target")
+                    //cc.log("push target")
                     listTarget.push(value);
                 }
                 break;
             default:
-                cc.log("Error::::: NOT FOUND FAVORITE TARGET", this._favoriteTarget)
+                //cc.log("Error::::: NOT FOUND FAVORITE TARGET", this._favoriteTarget)
         }
 
         if (listTarget.length === 0) {
@@ -366,7 +365,7 @@ var BaseTroop = cc.Node.extend({
             if (this._favoriteTarget === "NONE") {
                 this._state = TROOP_STATE.IDLE;
                 return;
-                cc.log("no target");
+                //cc.log("no target");
             } else {
                 this._favoriteTarget = "NONE";
                 this._state = TROOP_STATE.FIND_PATH;
@@ -393,14 +392,14 @@ var BaseTroop = cc.Node.extend({
     moveToTarget: function (dt) {
         //if target destroy, find new target
         if (this._target.isDestroy()) {
-            cc.log("target destroy")
+            //cc.log("target destroy")
             this._state = TROOP_STATE.FIND_PATH;
             return;
         }
 
 
         if (this._path.length === 0) {
-            // cc.log("path length 0")
+            // //cc.log("path length 0")
             return;
         }
 
@@ -423,14 +422,14 @@ var BaseTroop = cc.Node.extend({
                 && this._path[this._currentIndex].y !== this._path[this._currentIndex - 1].y) {
                 this._isCross = false;
                 this._currentIndexLeft = 1.414 - (distance - this._currentIndexLeft || 0);
-                //cc.log("cross::::, currentIndexLeft: " + this._currentIndexLeft);
+                ////cc.log("cross::::, currentIndexLeft: " + this._currentIndexLeft);
             } else {
                 this._isCross = true;
                 this._currentIndexLeft = 1 - (distance - this._currentIndexLeft || 0);
-                //cc.log("not cross::::, currentIndexLeft: " + this._currentIndexLeft);
+                ////cc.log("not cross::::, currentIndexLeft: " + this._currentIndexLeft);
             }
         }
-        //cc.log("currentIndex: " + this._currentIndex + "   " + this._currentIndexLeft)
+        ////cc.log("currentIndex: " + this._currentIndex + "   " + this._currentIndexLeft)
 
         //set pos
         let posIndexInMap = cc.director.getRunningScene().battleLayer.getMapPosFromGridPos(
@@ -456,7 +455,7 @@ var BaseTroop = cc.Node.extend({
     },
     attackLoop: function (dt) {
         if (this._target.isDestroy()) {
-            cc.log("target destroy")
+            //cc.log("target destroy")
             this._state = TROOP_STATE.FIND_PATH;
             return;
         }
@@ -464,7 +463,7 @@ var BaseTroop = cc.Node.extend({
         //perform attack when first attack, delay /2 attack speed to anim match with building gain dame
         if (this._firstAttack === true && this._attackCd >= this._attackSpeed / 2) {
             this._firstAttack = false;
-            cc.log("first attack")
+            //cc.log("first attack")
             this.performAttackAnimation();
         }
 
@@ -477,7 +476,7 @@ var BaseTroop = cc.Node.extend({
             this._attackCd -= dt;
             if (this._attackCd < 0) {
                 this._attackCd = 0;
-                cc.log("attack cd = 0")
+                //cc.log("attack cd = 0")
             }
         }
     },
@@ -529,8 +528,8 @@ var BaseTroop = cc.Node.extend({
             attackAction = res_troop.ATTACK[this._type].DOWN.ANIM;
         }
         if (attackAction === undefined) {
-            cc.log("attack action undefined");
-            cc.log("directX: " + directX + " directY: " + directY)
+            //cc.log("attack action undefined");
+            //cc.log("directX: " + directX + " directY: " + directY)
         }
         let cloneAttackAction = attackAction.clone();
         //animate forever
@@ -538,7 +537,7 @@ var BaseTroop = cc.Node.extend({
         animate.repeatForever();
         animate.setSpeed(1/this._attackSpeed);
 
-        cc.log("performAttack")
+        //cc.log("performAttack")
         if (this._stateAnimation !== this._state) {
             this._stateAnimation = this._state;
             this._bodySprite.stopAllActions();
@@ -552,6 +551,9 @@ var BaseTroop = cc.Node.extend({
             this._currentHitpoints = 0;
             this.dead();
         }
+
+        LogUtils.writeLog("troop " + this._type + " gain " + damage + " ~ " + this._currentHitpoints);
+
     },
     isAlive: function () {
         return this._currentHitpoints > 0;
@@ -572,6 +574,8 @@ var BaseTroop = cc.Node.extend({
         ghost.setPosition(this.getPosition());
         this.getParent().addChild(ghost);
         ghost.runAction(cc.sequence(cc.moveBy(0.3, 0, 30), cc.fadeOut(0.5), cc.removeSelf()));
+
+        LogUtils.writeLog('troop ' + this._type + ' dead')
     }
 
 });

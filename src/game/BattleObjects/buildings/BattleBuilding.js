@@ -171,6 +171,8 @@ var BattleBuilding = BattleGameObject.extend({
             let percent = this._hp / this._maxHp * 100;
             this._hpBar.setPercent(percent);
         }
+
+        LogUtils.writeLog('building ' + this._id + ' gain ' + damage + ' ~ ' + this._hp)
     },
 
     onDestroy: function () {
@@ -184,6 +186,8 @@ var BattleBuilding = BattleGameObject.extend({
 
         //run action destroy
         this._nodeDestroyAction.runAction(this.actionDestroy);
+
+        LogUtils.writeLog('building ' + this._id + ' destroyed')
     },
 
     //get 4 corners

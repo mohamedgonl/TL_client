@@ -422,7 +422,7 @@ CmdSendDoAction = fr.OutPacket.extend(
             this.packHeader();
             this.putInt(type);
             this.putInt(tick);
-            if (this.type === ACTION_TYPE.DROP_TROOP && data) {
+            if (type === ACTION_TYPE.DROP_TROOP && data) {
                 this.putString(data.troopType);
                 this.putInt(data.posX);
                 this.putInt(data.posY);
