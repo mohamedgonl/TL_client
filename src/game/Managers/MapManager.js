@@ -67,6 +67,7 @@ var     MapManager = cc.Class.extend({
     addToListBuilderHut: function (building) {
         this.listBuilderHut.push(building);
     },
+
     //add building to list and to grid
     addBuilding: function (building, isBuy = false) {
         // cc.log("building  ", JSON.stringify(building, null, 2));
@@ -87,36 +88,11 @@ var     MapManager = cc.Class.extend({
         // add to list building {building._id: building}
         this.listBuildings.set(id,building);
 
-
-        //update list storage, list mine, list builder hut
-
-
-        switch (typeBuilding.substring(0,3)){
-            case 'TOW':
-
-
-                break;
-            case 'RES':
-                break;
-            case 'STO':
-
-                break;
-            case 'BAR':
-                ArmyManager.getInstance().pushBarrack(building);
-                break;
-            case 'AMC':
-                ArmyManager.getInstance().pushArmyCamp(building);
-                break;
-            case 'BDH':
-                break;
-            default : break;
-
-        }
         if(isBuy === true) {
             const Algorithm = AlgorithmImplement.getInstance();
             Algorithm.setGridMapStar(MapManager.getInstance().mapGrid);
-            // cc.eventManager.dispatchCustomEvent(EVENT_NAMES.NEW_BUILDING_ADDED, {type: typeBuilding});
 
+            // cc.eventManager.dispatchCustomEvent(EVENT_NAMES.NEW_BUILDING_ADDED, {type: typeBuilding});
         }
 
     },

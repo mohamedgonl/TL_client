@@ -15,9 +15,6 @@ var Barrack = Building.extend({
 
         this._trainingQueue = [];
         this.lastTrainingTime = 0;
-
-
-
     },
     loadMainSpriteByLevel: function (level) {
         this.loadMainSprite(res_map.SPRITE.BODY.BARRACK[level],null,1);
@@ -42,7 +39,10 @@ var Barrack = Building.extend({
                 return;
             }
         }
-
+    },
+    onAddIntoMapManager: function () {
+        this._super();
+        ArmyManager.getInstance().pushBarrack(this);
     },
 
     getLastTrainingTime: function () {

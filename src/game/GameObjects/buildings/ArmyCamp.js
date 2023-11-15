@@ -9,6 +9,10 @@ var ArmyCamp = Building.extend({
     },
     loadMainSpriteByLevel: function (level) {
         this.loadMainSprite(res_map.SPRITE.BODY.ARMY_CAMP[level], null, 0);
+    },
+    onAddIntoMapManager: function () {
+        this._super();
+        ArmyManager.getInstance().pushArmyCamp(this);
     }
 
 
