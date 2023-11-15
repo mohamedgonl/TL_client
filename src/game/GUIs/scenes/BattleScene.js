@@ -11,6 +11,7 @@ var BattleScene = cc.Scene.extend({
         ArmyManager.releaseInstance();
         TimeManager.releaseInstance();
         BattleManager.releaseInstance();
+        LogUtils.reset();
 
         this.init();
         BattleManager.getInstance().battleScene = this;
@@ -113,6 +114,7 @@ var BattleScene = cc.Scene.extend({
         } else if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.PREPARING) {
             this.goToGameScene();
         }
+        LogUtils.writeFile();
     },
 
     onFindMatch: function () {
@@ -206,6 +208,7 @@ var BattleScene = cc.Scene.extend({
             }
         }
         this.tick++;
+        LogUtils.tick = this.tick;
     },
 })
 
