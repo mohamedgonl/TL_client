@@ -13,7 +13,7 @@ var BaseTroop = cc.Node.extend({
         this._favoriteTarget = TROOP_BASE[this._type]["favoriteTarget"];
         this._moveSpeed = TROOP_BASE[this._type]["moveSpeed"] * GRID_BATTLE_RATIO;
         this._attackSpeed = TROOP_BASE[this._type]["attackSpeed"];
-        this._damage = TROOP[this._type][TROOP_LEVEL]["damagePerAttack"]*10;
+        this._damage = TROOP[this._type][TROOP_LEVEL]["damagePerAttack"];
         this._hitpoints = TROOP[this._type][TROOP_LEVEL]["hitpoints"];
         this._attackRange = TROOP_BASE[this._type]["attackRange"] * GRID_BATTLE_RATIO;
         this._damageScale = TROOP_BASE[this._type]["dmgScale"];
@@ -48,8 +48,7 @@ var BaseTroop = cc.Node.extend({
                 graph.changeNodeWeight(x, y, graph.getNode(x, y).weight + 1);
             }
             //if not found target, return
-            if(this._target === null)
-            {
+            if (this._target === null) {
                 cc.log("ERROR :::::: not found target");
                 return;
             }
@@ -85,15 +84,15 @@ var BaseTroop = cc.Node.extend({
 
     //set direct to target grid
     setDirect: function (directX, directY) {
-        if(directX>0)
+        if (directX > 0)
             directX = 1;
-        else if(directX<0)
+        else if (directX < 0)
             directX = -1;
         else directX = 0;
 
-        if(directY>0)
+        if (directY > 0)
             directY = 1;
-        else if(directY<0)
+        else if (directY < 0)
             directY = -1;
         else directY = 0;
 
@@ -105,7 +104,7 @@ var BaseTroop = cc.Node.extend({
     getPathToBuilding: function (building) {
         //get path
         let graph = BattleManager.getInstance().getBattleGraph();
-        let start = new BattleGridNode(this._posX, this._posY, graph.getNode(this._posX, this._posY).weight,null);
+        let start = new BattleGridNode(this._posX, this._posY, graph.getNode(this._posX, this._posY).weight, null);
 
         //get center of building
         let targetCenterX = building._posX + Math.floor(building._width / 2);
@@ -117,14 +116,14 @@ var BaseTroop = cc.Node.extend({
         // let buildingRandomY = Math.floor(Math.random() * (building._height-1)) + building._posY;
 
 
-        let end = new BattleGridNode(targetCenterX, targetCenterY, graph.getNode(targetCenterX, targetCenterY).weight,building._id);
+        let end = new BattleGridNode(targetCenterX, targetCenterY, graph.getNode(targetCenterX, targetCenterY).weight, building._id);
         return BattleAStar.search(graph, start, end);
     },
 
     //check if troop in attack range of building,
     // normal case : troop._posX, troop._posY,
     // else : tempX, tempY
-    isInAttackRange: function (building,tempX,tempY) {
+    isInAttackRange: function (building, tempX, tempY) {
         let corners = building.getCorners();
 
         let xStart = corners[0].x;
@@ -135,8 +134,7 @@ var BaseTroop = cc.Node.extend({
         let x = this._posX;
         let y = this._posY;
 
-        if(tempX !== undefined && tempY !== undefined)
-        {
+        if (tempX !== undefined && tempY !== undefined) {
             x = tempX;
             y = tempY;
         }
@@ -227,19 +225,19 @@ var BaseTroop = cc.Node.extend({
             //if no building left, change to idle
             if (this._favoriteTarget === "NONE") {
                 this._state = TROOP_STATE.IDLE;
-                return;
+
             }
             //if no favorite target, change to find all building and find again
             else {
                 this._favoriteTarget = "NONE";
                 this._state = TROOP_STATE.FIND;
                 this.findTarget();
-                return;
+
             }
         }
     },
 
-    findPath : function () {
+    findPath: function () {
         this._path = this.getPathToBuilding(this._target);
     },
 
@@ -260,7 +258,7 @@ var BaseTroop = cc.Node.extend({
             }
 
             //if (x,y) is in range attack, path is valid, return;
-            if (this.isInAttackRange(this._target,x,y) === true) {
+            if (this.isInAttackRange(this._target, x, y) === true) {
                 return;
             }
         }
@@ -281,16 +279,14 @@ var BaseTroop = cc.Node.extend({
         //perform run animation by direction
 
 
-        if(this._isFirstMove === true)
-        {
+        if (this._isFirstMove === true) {
             this._nextIndex = 0;
 
             //current index distance left = 1 if not cross, 1.414 if cross
             if (this._path[this._nextIndex].x !== this._posX && this._path[this._nextIndex].y !== this._posY) {
                 this._isCross = false;
                 this._nextIndexDistanceLeft = 1.414;
-            }
-            else {
+            } else {
                 this._isCross = true;
                 this._nextIndexDistanceLeft = 1;
             }
@@ -301,7 +297,7 @@ var BaseTroop = cc.Node.extend({
         this.performRunAnimation();
 
         //distance moved each dt
-        let distance = dt * this._moveSpeed*TROOP_SPEED_RATIO;
+        let distance = dt * this._moveSpeed * TROOP_SPEED_RATIO;
 
         //if move in this grid, not ++ currentIndex
         if (this._nextIndexDistanceLeft > distance) {
@@ -311,8 +307,7 @@ var BaseTroop = cc.Node.extend({
         //if move to next index of path
         else {
             this._nextIndex++;
-            if(this._nextIndex >= this._path.length)
-            {
+            if (this._nextIndex >= this._path.length) {
                 this._state = TROOP_STATE.ATTACK;
                 this._firstAttack = true;
                 return;
@@ -337,8 +332,8 @@ var BaseTroop = cc.Node.extend({
             }
 
             // set posX, y is currentPos
-            this._posX = this._path[this._nextIndex-1].x;
-            this._posY = this._path[this._nextIndex-1].y;
+            this._posX = this._path[this._nextIndex - 1].x;
+            this._posY = this._path[this._nextIndex - 1].y;
         }
 
         //set pos
@@ -358,7 +353,6 @@ var BaseTroop = cc.Node.extend({
         this.setPosition(pos);
 
 
-
     },
 
     attackLoop: function (dt) {
@@ -369,10 +363,8 @@ var BaseTroop = cc.Node.extend({
 
         this.performAttackAnimation();
 
-        if(this._firstAttack === true)
-        {
-            if(this._target._type.startsWith("WAL"))
-            {
+        if (this._firstAttack === true) {
+            if (this._target._type.startsWith("WAL")) {
                 this._target.addTroopAttack(this);
             }
         }
@@ -424,7 +416,7 @@ var BaseTroop = cc.Node.extend({
         } else if (directX === -1 && directY === 1) { //LEFT
             attackAction = res_troop.ATTACK[this._type].LEFT.ANIM;
         } else if (directX === -1 && directY === 0) { //DOWN_LEFT
-               attackAction = res_troop.ATTACK[this._type].DOWN_LEFT.ANIM;
+            attackAction = res_troop.ATTACK[this._type].DOWN_LEFT.ANIM;
         } else if (directX === -1 && directY === -1) { //DOWN
             attackAction = res_troop.ATTACK[this._type].DOWN.ANIM;
         }
@@ -541,6 +533,8 @@ var BaseTroop = cc.Node.extend({
         ghost.setPosition(this.getPosition());
         this.getParent().addChild(ghost);
         ghost.runAction(cc.sequence(cc.moveBy(0.3, 0, 30), cc.fadeOut(0.5), cc.removeSelf()));
+
+        LogUtils.writeLog("troop " + this._type + " dead");
     },
     //create sprite of troop with shadow, body, hp bar
     initSprite: function () {
