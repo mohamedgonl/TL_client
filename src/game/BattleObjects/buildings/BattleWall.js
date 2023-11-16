@@ -41,11 +41,16 @@ var BattleWall = BattleBuilding.extend({
     },
     onDestroy: function () {
         this._super();
-        //remove all troop attack this wall
-        this._listTroopAttack.map(troop => {
-            if(troop && troop._target === this)
-                troop.refindTarget();
-        })
+        //get list troop from battle manager
+        let listTroop = BattleManager.getInstance().getListCurrentTroops();
+
+        //for in list troop, if troop attack type wall, remove from list troop attack
+        for (let i = 0; i < listTroop.length; i++) {
+            if(listTroop[i]._target._type.startsWith("WAL")){
+                listTroop[i].refindTarget();
+            }
+        }
+
     }
 
 });
