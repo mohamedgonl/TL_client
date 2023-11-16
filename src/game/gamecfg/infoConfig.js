@@ -89,3 +89,7 @@ const BuildingInfo = {
         name: "Cây cối",
     }
 }
+const TroopInfo= {
+    "ARM_1": {
+    }
+}

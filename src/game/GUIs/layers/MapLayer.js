@@ -30,7 +30,6 @@ var MapLayer = cc.Layer.extend({
 
     //load all building in map manager and add it to MapLayer
     loadBuilding: function () {
-        cc.log("LOAD BUILDING:::::::::::::::::::::::::::")
         let listBuilding = MapManager.getInstance().getAllBuilding();
         for (let i = 0; i < listBuilding.length; i++) {
 
@@ -697,6 +696,7 @@ var MapLayer = cc.Layer.extend({
         this.selectBuilding(this.chosenBuilding);
     },
 
+    //check valid put building in mapGrid when change position of building or buy building
     checkValidPutBuilding: function (building, newPosX, newPosY) {
         var id = building._id;
         var width = building._width;
@@ -717,15 +717,39 @@ var MapLayer = cc.Layer.extend({
         return true;
     },
 
+    //find empty rect to place building in mapGrid by breadth first search from middle of map
     getEmptyPositionPutBuilding: function (building) {
-        let width = building._width;
-        let height = building._height;
+        let queue = [];
+        let visited = [];
+        let middleX = GRID_SIZE / 2;
+        let middleY = GRID_SIZE / 2;
+        queue.push({x: middleX, y: middleY});
+        visited[middleX] = [];
+        visited[middleX][middleY] = true;
 
-        //find empty rect to place building in mapGrid
-        for(let column = 0; column < 40; column++)
-            for(let row = 0; row < 40; row++)
-                if(this.checkValidPutBuilding(building, column, row))
-                    return {x: column, y: row};
+        while(queue.length > 0){
+            let currentPos = queue.shift();
+            let currentX = currentPos.x;
+            let currentY = currentPos.y;
+            let isValid = this.checkValidPutBuilding(building, currentX, currentY);
+            if(isValid) return {x: currentX, y: currentY}
+
+            //add 4 neighbor of current pos to queue
+            let dx = [0, 0, -1, 1];
+            let dy = [-1, 1, 0, 0];
+            for(let i = 0; i < 4; i++){
+                let nextX = currentX + dx[i];
+                let nextY = currentY + dy[i];
+
+                if(nextX < 0 || nextX >= 40 || nextY < 0 || nextY >= 40) continue;
+
+                if(visited[nextX] == null) visited[nextX] = [];
+                if(visited[nextX][nextY] == null){
+                    visited[nextX][nextY] = true;
+                    queue.push({x: nextX, y: nextY});
+                }
+            }
+        }
 
         return null;
     },

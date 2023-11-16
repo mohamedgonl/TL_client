@@ -115,10 +115,10 @@ var BattleScene = cc.Scene.extend({
                 this.battleUILayer.onEndBattle();
                 this.battleEndLayer.show();
             }
+            LogUtils.writeFile();
         } else if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.PREPARING) {
             this.goToGameScene();
         }
-        LogUtils.writeFile();
     },
 
     onFindMatch: function () {

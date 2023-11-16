@@ -280,7 +280,7 @@ var BattleManager = cc.Class.extend({
         }
 
         //update battle graph
-        this._battleGraph = new BattleGraph(this.findPathGrid);
+        this._battleGraph = new BattleGraph(this.findPathGrid,this.mapGrid);
     },
 
     //add gameObject to list and to grid
