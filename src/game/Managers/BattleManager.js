@@ -235,18 +235,6 @@ var BattleManager = cc.Class.extend({
         }
     },
 
-    addToListMine: function (building) {
-        this.listMine.push(building);
-    },
-
-    addToListStorage: function (building) {
-        this.listStorage.push(building);
-    },
-
-    addToListBuilderHut: function (building) {
-        this.listBuilderHut.push(building);
-    },
-
     initMapLogic: function () {
         for (let building of this.listBuildings.values()) {
             if (!building._type.startsWith("OBS")) {
@@ -292,7 +280,7 @@ var BattleManager = cc.Class.extend({
         }
 
         //update battle graph
-        this._battleGraph = new BattleGraph(this.findPathGrid);
+        this._battleGraph = new BattleGraph(this.findPathGrid,this.mapGrid);
     },
 
     //add gameObject to list and to grid
@@ -335,12 +323,25 @@ var BattleManager = cc.Class.extend({
         }
     },
 
-    onStartBattle: function (){
+    onStartBattle: function () {
         this.battleStatus = BATTLE_STATUS.HAPPENNING;
+
+        // LogUtils.writeLog("LIST INIT BUILDING")
+        // for (let building of this.listBuildings.values()) {
+        //     LogUtils.writeLog(([building._id, building._type, building._level, building._posX, building._posY, building._hp, building._resourceLeft].join('-')))
+        // }
+        // //log troop amount
+        // LogUtils.writeLog("TROOP AMOUNT: " + JSON.stringify(Array.from(this.listTroops.entries())));
     },
 
-    onEndBattle: function (){
+    onEndBattle: function () {
         this.battleStatus = BATTLE_STATUS.END;
+
+        // LogUtils.writeLog("LIST END BUILDING")
+        // for (let building of this.listBuildings.values()) {
+        //     LogUtils.writeLog(([building._id, building._type, building._level, building._posX, building._posY, building._hp, building._resourceLeft].join(' - ')))
+        // }
+        // LogUtils.writeLog("TROOP AMOUNT: " + JSON.stringify(Array.from(this.listUsedTroop.entries())));
     },
 
     getAllBuilding: function () {
@@ -391,16 +392,6 @@ var BattleManager = cc.Class.extend({
     },
     getListCurrentTroops: function () {
         return this.listCurrentTroop;
-    },
-
-    checkValidPutBuilding: function (building, newPosX, newPosY) {
-
-        return true;
-    },
-
-    getEmptyPositionPutBuilding: function (building) {
-
-        return null;
     },
 
     getDestroyedPercentage: function () {

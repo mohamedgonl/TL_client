@@ -1,7 +1,9 @@
-function BattleGridNode(x, y, weight) {
+const CROSS_DISTANCE = 1.41421;
+function BattleGridNode(x, y, weight,id) {
     this.x = x;
     this.y = y;
     this.weight = weight;
+    this.buildingId = id;
 }
 
 BattleGridNode.prototype.toString = function () {
@@ -12,27 +14,22 @@ BattleGridNode.prototype.getCost = function (fromNeighbor) {
     //get id of
     // Take diagonal weight into consideration.
     if (fromNeighbor && fromNeighbor.x != this.x && fromNeighbor.y != this.y) {
-        return 1.41421;
+        return CROSS_DISTANCE;
     }
     return 1;
 };
 
-BattleGridNode.prototype.canNotWalk = function () {
-    let x = this.x;
-    let y = this.y;
-    let grid = BattleManager.getInstance().getTroopMap();
-    return grid[x][y] !== 0;
-};
+
 //======================================================================================================================
 
-function BattleGraph(gridIn) {
+function BattleGraph(gridIn, idIn) {
     this.nodes = [];
     this.grid = [];
     for (let x = 0; x < gridIn.length; x++) {
         this.grid[x] = [];
 
         for (let y = 0, row = gridIn[x]; y < row.length; y++) {
-            let node = new BattleGridNode(x, y, row[y]);
+            let node = new BattleGridNode(x, y, row[y],idIn[x][y]);
             this.grid[x][y] = node;
             this.nodes.push(node);
         }
@@ -144,6 +141,7 @@ let BattleAStar = {
         let openHeap = getHeap();
         let closestNode = start; // set the start node to be the closest if required
 
+
         start.h = heuristic(start, end);
         start.g = 0;
         graph.markDirty(start);
@@ -154,13 +152,13 @@ let BattleAStar = {
             // Grab the lowest f(x) to process next.  Heap keeps this sorted for us.
             let currentNode = openHeap.pop();
 
+
             // End case -- result has been found, return the traced path.
-            let endId = BattleManager.getInstance().getMapGrid()[end.x][end.y];
-            let currentId = BattleManager.getInstance().getMapGrid()[currentNode.x][currentNode.y];
-            if (currentId === endId) {
-                cc.log("FOUND PATH")
+
+            if(currentNode.x === end.x && currentNode.y === end.y){
                 return pathTo(currentNode);
             }
+
 
             // Normal case -- move currentNode from open to closed, process each of its neighbors.
             currentNode.closed = true;
@@ -178,7 +176,13 @@ let BattleAStar = {
 
                 // The g score is the shortest distance from start to current node.
                 // We need to check if the path we have arrived at this neighbor is the shortest one we have seen yet.
-                let gScore = currentNode.g + neighbor.getCost(currentNode) + neighbor.weight;
+                let gScore;
+                if (neighbor.buildingId === end.buildingId) {
+                    gScore = currentNode.g + neighbor.getCost(currentNode);
+                }
+                else{
+                    gScore = currentNode.g + neighbor.getCost(currentNode) + neighbor.weight;
+                }
                 let beenVisited = neighbor.visited;
 
                 if (!beenVisited || gScore < neighbor.g) {
@@ -202,7 +206,7 @@ let BattleAStar = {
                 }
             }
         }
-        cc.log("not found path")
+        cc.log("ERRORR::::not found path")
         // No result was found - empty array signifies failure to find path.
         return [];
     },

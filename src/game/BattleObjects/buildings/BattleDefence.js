@@ -37,6 +37,8 @@ var BattleDefence = BattleBuilding.extend({
 
     setTarget: function (target) {
         this.target = target;
+
+        LogUtils.writeLog('def ' + this._id + ' set new target ' + target._type)
     },
 
     //check if troop can be added as new target
@@ -96,6 +98,8 @@ var BattleDefence = BattleBuilding.extend({
             _posX: this.centerPoint.x,
             _posY: this.centerPoint.y
         }, target, this.damagePerShot, this._attackRadius, bulletInitPos);
+
+        LogUtils.writeLog('def ' + this._id + ' fire to ' + target._posX + ' ' + target._posY)
     },
 
 });

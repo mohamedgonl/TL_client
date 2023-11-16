@@ -11,6 +11,7 @@ var BattleScene = cc.Scene.extend({
         ArmyManager.releaseInstance();
         TimeManager.releaseInstance();
         BattleManager.releaseInstance();
+        LogUtils.reset();
 
         this.init();
         BattleManager.getInstance().battleScene = this;
@@ -85,16 +86,17 @@ var BattleScene = cc.Scene.extend({
             const listTroops = BattleManager.getInstance().getListUsedTroops();
             let percentage = BattleManager.getInstance().getDestroyedPercentage();
 
-            testnetwork.connector.sendEndBattle({
-                result: starAmount > 0,
-                starAmount,
-                trophyAmount,
-                robbedGold,
-                robbedElixir,
-                listTroops,
-                tick: this.tick,
-                percentage,
-            });
+            // testnetwork.connector.sendEndBattle({
+            //     result: starAmount > 0,
+            //     starAmount,
+            //     trophyAmount,
+            //     robbedGold,
+            //     robbedElixir,
+            //     listTroops,
+            //     tick: this.tick,
+            //     percentage,
+            // });
+            testnetwork.connector.sendDoAction({type: ACTION_TYPE.END_BATTLE, tick: this.tick,});
 
             this.stopCountDown();
             BattleManager.getInstance().onEndBattle();
@@ -113,6 +115,7 @@ var BattleScene = cc.Scene.extend({
         } else if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.PREPARING) {
             this.goToGameScene();
         }
+        LogUtils.writeFile();
     },
 
     onFindMatch: function () {
@@ -206,6 +209,7 @@ var BattleScene = cc.Scene.extend({
             }
         }
         this.tick++;
+        LogUtils.tick = this.tick;
     },
 })
 

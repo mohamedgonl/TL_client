@@ -20,7 +20,7 @@ var BattleLayer = cc.Layer.extend({
     },
 
     createTroopAtGridPos: function (type, posX, posY) {
-        cc.log("create troop at grid pos: " + type + " " + posX + " " + posY)
+        LogUtils.writeLog("create troop : " + type + " " + posX + " " + posY)
         let troop = null;
         switch (type) {
             case 'ARM_1':
@@ -44,6 +44,11 @@ var BattleLayer = cc.Layer.extend({
             let posToAdd = this.getMapPosFromGridPos({x: posX, y: posY});
             this.addChild(troop, MAP_ZORDER_TROOP);
             troop.setPosition(posToAdd);
+            cc.director.getRunningScene().onDropTroop({
+                troopType: type,
+                posX,
+                posY
+            })
         }
     },
 
