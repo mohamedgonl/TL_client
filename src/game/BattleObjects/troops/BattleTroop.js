@@ -4,7 +4,7 @@ const TROOP_STATE = {
     FIND: 0, MOVE: 1, ATTACK: 2, IDLE: 3, DEAD: 4,
 }
 const TROOP_SPEED_RATIO = 0.1;
-var BaseTroop = cc.Node.extend({
+var BattleTroop = cc.Node.extend({
     ctor: function (posX, posY) {
         this._super();
         this.setScale(0.5)
@@ -24,7 +24,6 @@ var BaseTroop = cc.Node.extend({
         this._state = TROOP_STATE.FIND;
         this._path = null;
         this._attackCd = this._attackSpeed;
-        this._currentIndex = 0;
         this._stateAnimation = 0;
         this._firstAttack = true;
         BattleManager.getInstance().addToListCurrentTroop(this);

@@ -115,7 +115,7 @@
         "src/game/BattleObjects/bullets/ArcherTowerBullet.js",
         "src/game/BattleObjects/bullets/MortarBullet.js",
 
-        "src/game/BattleObjects/troops/BaseTroop.js",
+        "src/game/BattleObjects/troops/BattleTroop.js",
         "src/game/BattleObjects/troops/Warrior.js",
         "src/game/BattleObjects/troops/Archer.js",
         "src/game/BattleObjects/troops/Giant.js",
