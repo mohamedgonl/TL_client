@@ -565,6 +565,21 @@ var BattleTroop = cc.Node.extend({
     },
     refindTarget: function () {
         this._state = TROOP_STATE.FIND;
+    },
+    toString: function (type) {
+        return "BattleTroop{" +
+            ", type='" + type + '\'' +
+            ", posX=" + this._posX +
+            ", posY=" + this._posY +
+            ", hp=" + this._hitpoints +
+            ", level=" + 1 +
+            ", currentIndex=" + this._currentIndex +
+            ", state=" + this._state +
+            ", _firstAttack=" + this._firstAttack +
+            ", _attackCd=" + this._attackCd +
+            ", isOverhead=" + this.isOverhead +
+            ", _currentIndexLeft=" + this._currentIndexLeft +
+            '}';
     }
 
 });

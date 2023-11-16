@@ -39,6 +39,13 @@ var TroopBullet = cc.Node.extend({
             let positionInMap = cc.director.getRunningScene().battleLayer.getMapPosFromGridPos(newGridPos);
             this.setPosition(positionInMap);
         }
+    },
+    toString: function () {
+        return "BattleBullet{" +
+            "active=" + this.active +
+            ", target=" + this._target +
+            ", destination=" + this._endPoint.x +" "+ this._endPoint.y+
+            '}';
     }
 });
 

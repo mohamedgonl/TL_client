@@ -202,4 +202,18 @@ var BattleBuilding = BattleGameObject.extend({
             cc.p(x + size, y + size)
         ];
     },
+
+    toString: function (type) {
+        return "BattleBuilding{" +
+            "id=" + this._id +
+            ", posX=" + this._posX +
+            ", posY=" + this._posY +
+            ", hp=" + this._hp +
+            ", type='" + this._type + '\'' +
+            ", level=" + 1 +
+            ", width=" + this._width +
+            ", height=" + this._height +
+            ", maxHp=" + this._maxHp +
+            '}';
+    }
 });
