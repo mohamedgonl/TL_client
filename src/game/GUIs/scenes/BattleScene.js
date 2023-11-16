@@ -2,7 +2,7 @@ var BattleScene = cc.Scene.extend({
     battleLayer: null,
     popUpLayer: null,
     tick: 0,
-    secPerTick: 1 / BATTLE_FPS,
+    secPerTick: Math.round(1.0 / BATTLE_FPS * 1e6) / 1e6,
 
     ctor: function () {
         this._super();
@@ -65,6 +65,7 @@ var BattleScene = cc.Scene.extend({
     onStartBattle: function () {
         if (BattleManager.getInstance().battleStatus !== BATTLE_STATUS.PREPARING)
             return;
+        this.setTick(0)
         testnetwork.connector.sendDoAction({type: ACTION_TYPE.START_BATTlE, tick: this.tick,});
         BattleManager.getInstance().onStartBattle();
         this.setTimeLeft(BATTlE_LIMIT_TIME + 1);
@@ -78,6 +79,8 @@ var BattleScene = cc.Scene.extend({
     onEndBattle: function (delay = 0) {
         //send action end game
         if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING) {
+
+            this.unschedule(this.gameLoop);
             //send action end
             const starAmount = BattleManager.getInstance().starAmount;
             const robbedGold = BattleManager.getInstance().robbedGold;
@@ -182,6 +185,7 @@ var BattleScene = cc.Scene.extend({
                 for (let troop of listTroops) {
                     if (!troop.isAlive()) continue;
                     if (defence.checkTarget(troop)) {
+                        LogUtils.writeLog("check target :" + this.tick)
                         defence.setTarget(troop);
                         break;
                     }
@@ -196,20 +200,24 @@ var BattleScene = cc.Scene.extend({
                 if (bullet.active)
                     bullet.gameLoop(this.secPerTick);
             }
-            for (let troop of listTroops) {
-                troop.gameLoop(this.secPerTick);
-            }
-            for (let troopBullet of listTroopBullets) {
-                if(troopBullet.active)
-                    troopBullet.gameLoop(this.secPerTick);
-                // else
-                // {
-                //     listTroopBullets.shift();
-                // }
-            }
+            // for (let troop of listTroops) {
+            //     troop.gameLoop(this.secPerTick);
+            // }
+            // for (let troopBullet of listTroopBullets) {
+            //     if(troopBullet.active)
+            //         troopBullet.gameLoop(this.secPerTick);
+            //     // else
+            //     // {
+            //     //     listTroopBullets.shift();
+            //     // }
+            // }
         }
-        this.tick++;
-        LogUtils.tick = this.tick;
+        this.setTick(this.tick + 1)
     },
+
+    setTick: function (tick) {
+        this.tick = tick;
+        LogUtils.tick = tick;
+    }
 })
 

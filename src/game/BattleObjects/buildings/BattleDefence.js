@@ -2,7 +2,6 @@ var BattleDefence = BattleBuilding.extend({
     target: null,
     attackCd: 0,
     direct: 0, // from 0 -> TOTAL_DEFENCE_DIRECT - 1
-
     ctor: function (level, id, posX, posY) {
         this._super(level, id, posX, posY);
 
@@ -101,5 +100,4 @@ var BattleDefence = BattleBuilding.extend({
 
         LogUtils.writeLog('def ' + this._id + ' fire to ' + target._posX + ' ' + target._posY)
     },
-
 });

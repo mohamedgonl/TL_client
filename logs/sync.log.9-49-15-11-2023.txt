@@ -1,6 +1,0 @@
-Tick: 0
-HELLO ANH EM 1
-Tick: 0
-HELLO ANH EM 2
-Tick: 0
-HELLO ANH EM 3

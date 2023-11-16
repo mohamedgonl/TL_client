@@ -1,3 +1,4 @@
+
 const GRID_BATTLE_RATIO = 3;
 const TROOP_LEVEL = 1;
 const TROOP_STATE = {
@@ -576,7 +577,24 @@ var BaseTroop = cc.Node.extend({
         ghost.runAction(cc.sequence(cc.moveBy(0.3, 0, 30), cc.fadeOut(0.5), cc.removeSelf()));
 
         LogUtils.writeLog('troop ' + this._type + ' dead')
+    },
+
+    toString: function (type) {
+        return "BattleTroop{" +
+            ", type='" + type + '\'' +
+            ", posX=" + this._posX +
+            ", posY=" + this._posY +
+            ", hp=" + this._hitpoints+
+            ", level=" + 1 +
+            ", currentIndex=" + this._currentIndex +
+            ", state=" + this._state +
+            ", _firstAttack=" + this._firstAttack +
+            ", _attackCd=" + this._attackCd +
+            ", isOverhead=" + this.isOverhead +
+            ", _currentIndexLeft=" + this._currentIndexLeft +
+            '}';
     }
+
 
 });
 
