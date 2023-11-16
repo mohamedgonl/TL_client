@@ -1,4 +1,4 @@
-var Archer = BaseTroop.extend({
+var Archer = BattleTroop.extend({
     ctor: function (posX,posY) {
         this._type = "ARM_2";
         this._super(posX,posY);
