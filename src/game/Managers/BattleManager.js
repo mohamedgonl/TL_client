@@ -338,13 +338,18 @@ var BattleManager = cc.Class.extend({
         this.battleStatus = BATTLE_STATUS.END;
         LogUtils.writeLog("------------------------------------------ BATTLE ENDED ------------------------------------------");
         LogUtils.writeLog("LIST BUILDING");
-        this.listBuildings.map(e => {
-            LogUtils.writeLog(e.toString());
-        });
+        for (let building of this.listBuildings.values()) {
+            LogUtils.writeLog(building.toString());
+
+        }
+
         LogUtils.writeLog("LIST TROOP");
-        this.listTroops.map(e => {
-            LogUtils.writeLog(e.toString());
-        });
+        for (let troop of this.listCurrentTroop) {
+            cc.log("TROOP ::: " + JSON.stringify(troop));
+            LogUtils.writeLog(troop.toString(troop._type));
+
+        }
+
         LogUtils.writeLog("LIST BULLET");
         this.listBullets.map(e => {
             LogUtils.writeLog(e.toString());

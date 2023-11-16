@@ -8,8 +8,5 @@ var Archer = BaseTroop.extend({
 
     },
 
-    toString: function () {
-        this._super(this._type)
-    }
 
 })

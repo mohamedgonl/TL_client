@@ -572,14 +572,13 @@ var BaseTroop = cc.Node.extend({
             ", type='" + type + '\'' +
             ", posX=" + this._posX +
             ", posY=" + this._posY +
-            ", hp=" + this._hitpoints +
+            ", hp=" + this._currentHitpoints +
             ", level=" + 1 +
             ", currentIndex=" + this._currentIndex +
-            ", state=" + this._state +
+            // ", state=" + this._state +
             ", _firstAttack=" + this._firstAttack +
             ", _attackCd=" + this._attackCd +
             ", isOverhead=" + this.isOverhead +
-            ", _currentIndexLeft=" + this._currentIndexLeft +
             '}';
     }
 

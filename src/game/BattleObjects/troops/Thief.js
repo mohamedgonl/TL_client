@@ -3,8 +3,6 @@ var Thief = BaseTroop.extend({
         this._type = "ARM_3";
             this._super(posX,posY);
     },
-    toString: function () {
-        this._super(this._type)
-    }
+
 
 })

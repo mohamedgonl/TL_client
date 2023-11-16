@@ -3,8 +3,6 @@ var Bomber = BaseTroop.extend({
         this._type = "ARM_6";
         this._super(posX,posY);
     },
-    toString: function () {
-        this._super(this._type)
-    }
+
 
 })
