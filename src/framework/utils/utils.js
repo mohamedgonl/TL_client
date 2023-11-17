@@ -193,6 +193,13 @@ var Utils = {
     calculateGBuyTime: function (time) {
         //G BUY SECOND = 900
         return Math.ceil(time / G_BUY_SECOND);
+    },
+    roundFloat: function (val, n) {
+        let tmp = 1;
+        for (let i = 0; i < n; i++) {
+            tmp *= 10;
+        }
+        return Math.round(val * tmp) / tmp;
     }
 }
 var GameUtilities = {
@@ -251,31 +258,28 @@ var GameUtilities = {
     loadResource: function () {
         //DEF_2
         //shadow
-        for(let i=1; i<= MAXLEVEL.DEF_2 ; i++)
-        {
+        for (let i = 1; i <= MAXLEVEL.DEF_2; i++) {
             DEF_2[i] = {};
-            DEF_2[i].shadow = "res/Buildings/defense_base/DEF_2_"+ i +"_Shadow.png";
+            DEF_2[i].shadow = "res/Buildings/defense_base/DEF_2_" + i + "_Shadow.png";
         }
         //archer_idle
-        for(let i = 1; i<= MAXLEVEL.DEF_2; i++){
+        for (let i = 1; i <= MAXLEVEL.DEF_2; i++) {
             DEF_2[i].archer_idle = [];
-            for(let j =0;j<=5;j++)
-            {
-                DEF_2[i].archer_idle.push("res/Buildings/AcherTower/DEF_2_"+i+"/DEF_2_"+i+"/idle/image000"+j+".png");
+            for (let j = 0; j <= 5; j++) {
+                DEF_2[i].archer_idle.push("res/Buildings/AcherTower/DEF_2_" + i + "/DEF_2_" + i + "/idle/image000" + j + ".png");
             }
         }
 
         //DEF_1
         //shadow
-        for(let i=1; i<= MAXLEVEL.DEF_1 ; i++)
-        {
-            DEF_1[i].shadow = "res/Buildings/defense_base/DEF_1_"+ i +"_Shadow.png";
+        for (let i = 1; i <= MAXLEVEL.DEF_1; i++) {
+            DEF_1[i].shadow = "res/Buildings/defense_base/DEF_1_" + i + "_Shadow.png";
         }
     }
 }
 DEF_1 = {};
 DEF_2 = {};
-MAXLEVEL= {
+MAXLEVEL = {
     DEF_1: 9,
     DEF_2: 9,
 }

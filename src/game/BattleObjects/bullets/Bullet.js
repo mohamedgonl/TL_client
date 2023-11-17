@@ -9,13 +9,16 @@ var Bullet = cc.Sprite.extend({
     time: 0, // time logic to reach destination
     minimumTime: 0, // minimum time to reach destination
 
-    ctor: function (type, startPoint, target, damagePerShot, attackRadius, initPos) {
-        this._super(type);
+    ctor: function (type, spriteType, startPoint, target, damagePerShot, attackRadius, initPos, minimumTime) {
+        this._super(spriteType);
         //this.setBlendFunc(cc.SRC_ALPHA, cc.ONE);
         this.target = target;
+        this._type = type;
         this.damagePerShot = damagePerShot;
         this.attackRadius = attackRadius;
         this.initPos = initPos;
+        if (minimumTime > 0)
+            this.minimumTime = minimumTime;
 
         this.init(startPoint, target);
     },
@@ -25,10 +28,12 @@ var Bullet = cc.Sprite.extend({
         this.target = target;
         this.destination = {x: target.x, y: target.y, _posX: target._posX, _posY: target._posY};
 
-        const gridDist = Math.sqrt(Math.pow(this.startPoint._posX - target._posX, 2) + Math.pow(this.startPoint._posY - target._posY, 2));
-        this.time = Math.max(gridDist / this.gridSpeed, this.minimumTime);
+        let gridDist = Math.sqrt(Math.pow(this.startPoint._posX - target._posX, 2) + Math.pow(this.startPoint._posY - target._posY, 2));
+        gridDist = Utils.roundFloat(gridDist, 2);
+        this.time = Math.max(Utils.roundFloat(gridDist / this.gridSpeed, 2), this.minimumTime);
         this.totalTime = this.time;
-
+        if (this._type === "DEF_2")
+            LogUtils.writeLog(gridDist + " time to reach dest " + this.time + ' ' + this.minimumTime);
         this.setInitPosition();
 
         this.active = true;

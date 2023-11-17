@@ -71,7 +71,8 @@ var BattleDefence = BattleBuilding.extend({
 
     isTargetInRange: function (target) {
         //check distance
-        const dist = cc.pDistance(cc.p(target._posX, target._posY), this.centerPoint);
+        let dist = Math.sqrt(Math.pow(this.centerPoint.x - target._posX, 2) + Math.pow(this.centerPoint.y - target._posY, 2));
+        dist = Utils.roundFloat(dist, 2);
         return dist > this._minRange && dist < this._maxRange;
     },
 

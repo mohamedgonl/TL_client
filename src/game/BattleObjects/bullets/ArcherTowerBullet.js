@@ -4,15 +4,17 @@ var ArcherTowerBullet = Bullet.extend({
     gridSpeed: 50,
 
     ctor: function (type, startPoint, target, damagePerShot, attackRadius, initPos) {
-        this._super(res_map.SPRITE.BODY.ARCHER_TOWER.BULLET, startPoint, target, damagePerShot, attackRadius, initPos);
-        this._type = type;
-        this.minimumTime = 15 / this.gridSpeed;
+        this._super(type, res_map.SPRITE.BODY.ARCHER_TOWER.BULLET, startPoint, target,
+            damagePerShot, attackRadius, initPos, Utils.roundFloat(15.0 / this.gridSpeed, 2));
 
         //bullet explosion
         this._explosion = new cc.Sprite();
         this._explosion.setScale(0.5, 0.5);
 
-        this.actionExplose = fr.createActionByFrames(res_map.SPRITE.BODY.ARCHER_TOWER.HIT, {delayPerUnit: 0.1, restoreOriginalFrame: false});
+        this.actionExplose = fr.createActionByFrames(res_map.SPRITE.BODY.ARCHER_TOWER.HIT, {
+            delayPerUnit: 0.1,
+            restoreOriginalFrame: false
+        });
         this.actionExplose.retain();
     },
 
@@ -48,6 +50,7 @@ var ArcherTowerBullet = Bullet.extend({
         let a = ((B.y - A.y) / (B.x - A.x) - (B.y - C.y) / (B.x - C.x)) / (2 * (A.x - C.x));
         let b = (B.y - A.y) / (B.x - A.x) - 2 * a * A.x;
         let c = A.y - a * A.x * A.x - b * A.x;
+        cc.log('ptcd archer ' + JSON.stringify([a, b, c]))
         return [a, b, c];
     },
 
