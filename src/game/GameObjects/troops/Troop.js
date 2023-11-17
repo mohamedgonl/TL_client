@@ -24,10 +24,10 @@ var Troop = cc.Node.extend({
         if (barrackIndex >= 0 && barrackIndex !== null) {
             let barrack = ArmyManager.getInstance().getBarrackList()[barrackIndex];
             start = mapLayer.getMapPosFromGridPos({x: barrack._posX, y: barrack._posY}, true);
-            this.troop.setPosition(barrack.getPosition().x + 23, barrack.getPosition().y - 25);
+            this.troop.setPosition(barrack._bottom.getPosition().x + 23, barrack._bottom.getPosition().y - 25);
         } else {
             start = end;
-            this.troop.setPosition(this.armyCamp.getPosition().x, this.armyCamp.getPosition().y);
+            this.troop.setPosition(this.armyCamp._bottom.getPosition().x, this.armyCamp._bottom.getPosition().y);
         }
 
         this.initShadow();
