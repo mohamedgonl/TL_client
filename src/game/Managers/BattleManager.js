@@ -268,13 +268,11 @@ var BattleManager = cc.Class.extend({
             }
             //is OBS
             else {
-                for (let column = building._posX + 1; column < building._posX + building._width - 1; column++)
-                    for (let row = building._posY + 1; row < building._posY + building._height - 1; row++) {
-                        this.findPathGrid[column][row] = 99999;
-                        this.dropTroopGrid[column][row] = 0;
-                    }
-
-
+                // for (let column = building._posX + 1; column < building._posX + building._width - 1; column++)
+                //     for (let row = building._posY + 1; row < building._posY + building._height - 1; row++) {
+                //         this.findPathGrid[column][row] = 99999;
+                //         this.dropTroopGrid[column][row] = 0;
+                //     }
                 //update dropTroopGrid
             }
         }

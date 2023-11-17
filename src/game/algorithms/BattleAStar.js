@@ -206,7 +206,7 @@ let BattleAStar = {
                 }
             }
         }
-        cc.log("ERRORR::::not found path")
+        // cc.log("ERRORR::::not found path")
         // No result was found - empty array signifies failure to find path.
         return [];
     },
@@ -234,9 +234,5 @@ let BattleAStar = {
         node.parent = null;
     },
 
-    //if currentNode neighbor grid value == end grid value return true. else return false
-    isEndCase: function (currentNode, endNode) {
-
-    }
 };
 
