@@ -343,7 +343,7 @@ var BattleManager = cc.Class.extend({
 
         LogUtils.writeLog("LIST TROOP");
         for (let troop of this.listCurrentTroop) {
-            LogUtils.writeLog(troop.toString(troop._type));
+            LogUtils.writeLog(troop.toString());
 
         }
 

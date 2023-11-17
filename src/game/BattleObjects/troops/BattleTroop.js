@@ -26,6 +26,7 @@ var BattleTroop = cc.Node.extend({
         this._attackCd = this._attackSpeed;
         this._stateAnimation = 0;
         this._firstAttack = true;
+        this.dtCount = 0;
         BattleManager.getInstance().addToListCurrentTroop(this);
         BattleManager.getInstance().addToListUsedTroop(this);
         this.initSprite();
@@ -33,6 +34,7 @@ var BattleTroop = cc.Node.extend({
     },
     //gameLoop, call in BattleScene
     gameLoop: function (dt) {
+        this.dtCount += dt;
         if (this._state === TROOP_STATE.FIND) {
             // this.findTargetandPath();
             this.findTarget();
@@ -62,14 +64,19 @@ var BattleTroop = cc.Node.extend({
             }
             //move case
             else {
-                this._currentIndex = 0;
                 this._state = TROOP_STATE.MOVE;
                 this._isFirstMove = true;
+            }
+
+            LogUtils.writeLog("troop " + this._type + " find target " + this._target._type);
+            for(let i = 0; i < this._path.length; i++){
+                LogUtils.writeLog("path: " + this._path[i].x + " " + this._path[i].y);
             }
             return;
         }
 
         if (this._state === TROOP_STATE.MOVE) {
+
             this.moveLoop(dt);
             return;
         }
@@ -108,6 +115,7 @@ var BattleTroop = cc.Node.extend({
         //get center of building
         let targetCenterX = building._posX + Math.floor(building._width / 2);
         let targetCenterY = building._posY + Math.floor(building._height / 2);
+        LogUtils.writeLog("target center: " + targetCenterX + " " + targetCenterY);
 
         // let end = new BattleGridNode(targetCenter.x,targetCenter.y,graph.getNode(targetCenter.x,targetCenter.y).weight);
         //let end = random node in building
@@ -116,7 +124,8 @@ var BattleTroop = cc.Node.extend({
 
 
         let end = new BattleGridNode(targetCenterX, targetCenterY, graph.getNode(targetCenterX, targetCenterY).weight, building._id);
-        return BattleAStar.search(graph, start, end);
+        // return BattleAStar.search(graph, start, end);
+        return BattleAStar.searchSimple(graph, start, end);
     },
 
     //check if troop in attack range of building,
@@ -202,7 +211,6 @@ var BattleTroop = cc.Node.extend({
             return;
         }
 
-        this._currentIndex = 0;
         //get min distance target
         let minDistance = null;
         this._target = null;
@@ -282,7 +290,8 @@ var BattleTroop = cc.Node.extend({
             this._nextIndex = 0;
 
             //current index distance left = 1 if not cross, 1.414 if cross
-            if (this._path[this._nextIndex].x !== this._posX && this._path[this._nextIndex].y !== this._posY) {
+            if (this._path[this._nextIndex].x !== this._posX &&
+                this._path[this._nextIndex].y !== this._posY) {
                 this._isCross = false;
                 this._nextIndexDistanceLeft = 1.414;
             } else {
@@ -324,15 +333,16 @@ var BattleTroop = cc.Node.extend({
             //nếu chéo, = 1.414, else this._nextIndexDistanceLeft = 1
             if (nextPos.x !== this._posX && nextPos.y !== this._posY) {
                 this._isCross = false;
-                this._nextIndexDistanceLeft = 1.414 - (distance - this._nextIndexDistanceLeft || 0);
+                this._nextIndexDistanceLeft = 1.414 - (distance - this._nextIndexDistanceLeft);
             } else {
                 this._isCross = true;
-                this._nextIndexDistanceLeft = 1 - (distance - this._nextIndexDistanceLeft || 0);
+                this._nextIndexDistanceLeft = 1 - (distance - this._nextIndexDistanceLeft);
             }
 
             // set posX, y is currentPos
             this._posX = this._path[this._nextIndex - 1].x;
             this._posY = this._path[this._nextIndex - 1].y;
+            LogUtils.writeLog("troop " + this._type + " move to next index" + this._posX + " " + this._posY  + " dt:" + this.dtCount);
         }
 
         //set pos
@@ -557,18 +567,13 @@ var BattleTroop = cc.Node.extend({
     refindTarget: function () {
         this._state = TROOP_STATE.FIND;
     },
-    toString: function (type) {
+    toString: function () {
         return "BattleTroop{" +
-            ", type='" + type + '\'' +
+            "type='" + this._type + '\'' +
             ", posX=" + this._posX +
             ", posY=" + this._posY +
-            ", hp=" + this._currentHitpoints +
-            ", level=" + 1 +
-            ", currentIndex=" + this._currentIndex +
-            // ", state=" + this._state +
-            ", _firstAttack=" + this._firstAttack +
-            ", _attackCd=" + this._attackCd +
-            ", isOverhead=" + this.isOverhead +
+            ", favoriteTarget='" + this._favoriteTarget + '\'' +
+            ", currentHitpoints=" + this._currentHitpoints +
             '}';
     }
 

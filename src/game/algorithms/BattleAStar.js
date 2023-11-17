@@ -129,6 +129,37 @@ BattleGraph.prototype.getNode = function (x, y) {
 
 
 let BattleAStar = {
+
+    searchSimple: function (graph, start, end) {
+        let path = [];
+        if(start.x !== end.x) {
+            //go to end x
+            let x = start.x;
+            let y = start.y;
+            while (x !== end.x) {
+                if (x < end.x) {
+                    x++;
+                } else {
+                    x--;
+                }
+                path.push(graph.grid[x][y]);
+            }
+        }
+        if(start.y !== end.y) {
+            //go to end y
+            let x = start.x;
+            let y = start.y;
+            while (y !== end.y) {
+                if (y < end.y) {
+                    y++;
+                } else {
+                    y--;
+                }
+                path.push(graph.grid[x][y]);
+            }
+        }
+        return path;
+    },
     /**
      * Perform an A* Search on a graph given a start and end node.
      * @param {BattleGraph} graph
