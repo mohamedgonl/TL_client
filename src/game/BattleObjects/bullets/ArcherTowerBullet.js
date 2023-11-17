@@ -50,6 +50,7 @@ var ArcherTowerBullet = Bullet.extend({
         let a = ((B.y - A.y) / (B.x - A.x) - (B.y - C.y) / (B.x - C.x)) / (2 * (A.x - C.x));
         let b = (B.y - A.y) / (B.x - A.x) - 2 * a * A.x;
         let c = A.y - a * A.x * A.x - b * A.x;
+        cc.log('ptcd archer ' + JSON.stringify([a, b, c]))
         return [a, b, c];
     },
 
