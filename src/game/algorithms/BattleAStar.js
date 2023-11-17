@@ -182,7 +182,7 @@ let BattleAStar = {
         while (openHeap.size() > 0) {
             // Grab the lowest f(x) to process next.  Heap keeps this sorted for us.
             let currentNode = openHeap.pop();
-
+            LogUtils.writeLog("currentNode: "+currentNode.x+" "+currentNode.y);
 
             // End case -- result has been found, return the traced path.
 
@@ -197,8 +197,12 @@ let BattleAStar = {
             // Find all neighbors for the current node.
             let neighbors = graph.neighbors(currentNode);
 
-            for (let i = 0, il = neighbors.length; i < il; ++i) {
-                let neighbor = neighbors[i];
+            for(let neighbor of neighbors)
+            {
+                LogUtils.writeLog("neighbor: "+neighbor.x+" "+neighbor.y);
+            }
+
+            for(let neighbor of neighbors){
 
                 if (neighbor.closed) {
                     // Not a valid node to process, skip to next neighbor.
@@ -209,11 +213,12 @@ let BattleAStar = {
                 // We need to check if the path we have arrived at this neighbor is the shortest one we have seen yet.
                 let gScore;
                 if (neighbor.buildingId === end.buildingId) {
-                    gScore = currentNode.g + neighbor.getCost(currentNode);
+                    gScore = Utils.roundFloat(currentNode.g + neighbor.getCost(currentNode),4);
                 }
                 else{
-                    gScore = currentNode.g + neighbor.getCost(currentNode) + neighbor.weight;
+                    gScore = Utils.roundFloat(currentNode.g + neighbor.getCost(currentNode) + neighbor.weight,4);
                 }
+                LogUtils.writeLog("gScore: "+gScore);
                 let beenVisited = neighbor.visited;
 
                 if (!beenVisited || gScore < neighbor.g) {

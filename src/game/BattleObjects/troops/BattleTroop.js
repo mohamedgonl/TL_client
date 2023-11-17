@@ -40,7 +40,6 @@ var BattleTroop = cc.Node.extend({
             this.findTarget();
             this.findPath();
             this.checkPath();
-
             //change weight of grid in path +1 for various path each troop
             let graph = BattleManager.getInstance().getBattleGraph();
             for (let i = 0; i < this._path.length; i++) {
@@ -124,8 +123,8 @@ var BattleTroop = cc.Node.extend({
 
 
         let end = new BattleGridNode(targetCenterX, targetCenterY, graph.getNode(targetCenterX, targetCenterY).weight, building._id);
-        // return BattleAStar.search(graph, start, end);
-        return BattleAStar.searchSimple(graph, start, end);
+        return BattleAStar.search(graph, start, end);
+        // return BattleAStar.searchSimple(graph, start, end);
     },
 
     //check if troop in attack range of building,
@@ -305,11 +304,12 @@ var BattleTroop = cc.Node.extend({
         this.performRunAnimation();
 
         //distance moved each dt
-        let distance = dt * this._moveSpeed * TROOP_SPEED_RATIO;
+        let distance = Utils.roundFloat(dt * this._moveSpeed * TROOP_SPEED_RATIO,4);
 
         //if move in this grid, not ++ currentIndex
         if (this._nextIndexDistanceLeft > distance) {
             this._nextIndexDistanceLeft -= distance;
+            LogUtils.writeLog("nextIndexDistanceLeft: " + this._nextIndexDistanceLeft + " distance: " + distance + " moveSpeed: " + this._moveSpeed + "dt: " + dt);
         }
 
         //if move to next index of path
