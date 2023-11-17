@@ -18,8 +18,8 @@ var ArcherTowerBullet = Bullet.extend({
         this.actionExplose.retain();
     },
 
-    init: function (startPoint, target) {
-        this._super(startPoint, target);
+    init: function (startPoint, target, initPos) {
+        this._super(startPoint, target, initPos);
 
         this.func = this.calcMotionFunc(startPoint, cc.p((startPoint.x + this.destination.x) / 2, startPoint.y + 200), this.destination)
         this.distanceX = this.destination.x - startPoint.x;
@@ -50,7 +50,7 @@ var ArcherTowerBullet = Bullet.extend({
         let a = ((B.y - A.y) / (B.x - A.x) - (B.y - C.y) / (B.x - C.x)) / (2 * (A.x - C.x));
         let b = (B.y - A.y) / (B.x - A.x) - 2 * a * A.x;
         let c = A.y - a * A.x * A.x - b * A.x;
-        cc.log('ptcd archer ' + JSON.stringify([a, b, c]))
+
         return [a, b, c];
     },
 
@@ -63,8 +63,9 @@ var ArcherTowerBullet = Bullet.extend({
     //goc giua vector chi phuong cua tiep tuyen tai X va vector thang dung (bullet ban dau co phuong thang dung)
     getAngleToRotate: function (func, x) {
         const [a, b, c] = func;
-        const angle = cc.radiansToDegrees(cc.pAngleSigned(cc.p(1, 2 * a * x + b), cc.p(0, 1)));
-        return angle;
+        const angleRad = cc.pAngleSigned(cc.p(1, 2 * a * x + b), cc.p(0, 1))
+        const angleDeg = cc.radiansToDegrees(angleRad);
+        return angleDeg;
     },
 
     destroyBullet: function () {

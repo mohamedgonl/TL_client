@@ -16,15 +16,16 @@ var Bullet = cc.Sprite.extend({
         this._type = type;
         this.damagePerShot = damagePerShot;
         this.attackRadius = attackRadius;
-        this.initPos = initPos;
+
         if (minimumTime > 0)
             this.minimumTime = minimumTime;
 
-        this.init(startPoint, target);
+        this.init(startPoint, target, initPos);
     },
 
-    init: function (startPoint, target) {
+    init: function (startPoint, target, initPos) {
         this.startPoint = startPoint;
+        this.initPos = initPos;
         this.target = target;
         this.destination = {x: target.x, y: target.y, _posX: target._posX, _posY: target._posY};
 
@@ -32,8 +33,7 @@ var Bullet = cc.Sprite.extend({
         gridDist = Utils.roundFloat(gridDist, 2);
         this.time = Math.max(Utils.roundFloat(gridDist / this.gridSpeed, 2), this.minimumTime);
         this.totalTime = this.time;
-        if (this._type === "DEF_2")
-            LogUtils.writeLog(gridDist + " time to reach dest " + this.time + ' ' + this.minimumTime);
+
         this.setInitPosition();
 
         this.active = true;

@@ -23,7 +23,7 @@ var BattleArcherTower = BattleDefence.extend({
 
     attack: function (target) {
         //logic
-        this._super(target);
+        this._super(target,  cc.p(this.x, this.y));
 
         //UI
         //run action attack

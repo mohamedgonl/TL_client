@@ -89,9 +89,6 @@ var BattleDefence = BattleBuilding.extend({
             this.setDirection(newDirect);
         }
 
-        //logic
-        if (!bulletInitPos)
-            bulletInitPos = cc.p(this.x, this.y);
         const bullet = BattleManager.getInstance().getOrCreateBullet(this._type, {
             x: this.x,
             y: this.y,

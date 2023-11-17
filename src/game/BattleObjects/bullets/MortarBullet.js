@@ -20,8 +20,8 @@ var MortarBullet = Bullet.extend({
         this.actionExplose.retain();
     },
 
-    init: function (startPoint, target) {
-        this._super(startPoint, target);
+    init: function (startPoint, target, initPos) {
+        this._super(startPoint, target, initPos);
 
         this.func = this.calcMotionFunc(startPoint, cc.p((startPoint.x + this.destination.x) / 2, startPoint.y + 200), this.destination)
         this.distanceX = this.destination.x - startPoint.x;
