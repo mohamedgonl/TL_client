@@ -363,9 +363,7 @@ var BattleTroop = cc.Node.extend({
         this.performAttackAnimation();
 
         if (this._firstAttack === true) {
-            if (this._target._type.startsWith("WAL")) {
-                this._target.addTroopAttack(this);
-            }
+            this._firstAttack = false;
         }
         if (this._attackCd === 0) {
             this._attackCd = this._attackSpeed;
@@ -378,7 +376,6 @@ var BattleTroop = cc.Node.extend({
             }
         }
 
-        this._firstAttack = false;
     },
 
     attack: function () {

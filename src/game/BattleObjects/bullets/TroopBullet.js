@@ -9,8 +9,8 @@ var TroopBullet = cc.Node.extend({
         this._currentTime = 0;
 
         //calculate end time
-        this._endPoint  = cc.pAdd(target.getGridPosition(), cc.p(target._width/2, target._height/2));
-
+        this._endPoint  = cc.pAdd(target.getGridPosition(),
+            cc.p(Math.floor(target._width/2), Math.floor(target._height/2)));
 
         let distance = cc.pDistance(startPoint, this._endPoint);
 

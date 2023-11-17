@@ -28,17 +28,6 @@ var BattleWall = BattleBuilding.extend({
         }
         this.loadSprite(res_map.SPRITE.BODY.WALL[level][stateWall], null, 0, null, res_map.SPRITE.BODY.WALL.JUNK);
     },
-
-    addTroopAttack: function (troop) {
-        cc.log("add troop attack")
-        this._listTroopAttack.push(troop);
-    },
-    removeTroopAttack: function (troop) {
-        let index = this._listTroopAttack.indexOf(troop);
-        if (index !== -1) {
-            this._listTroopAttack.splice(index, 1);
-        }
-    },
     onDestroy: function () {
         this._super();
         //get list troop from battle manager
@@ -46,6 +35,7 @@ var BattleWall = BattleBuilding.extend({
 
         //for in list troop, if troop attack type wall, remove from list troop attack
         for (let i = 0; i < listTroop.length; i++) {
+            if(!listTroop[i].isAlive()) continue;
             if(listTroop[i]._target._type.startsWith("WAL")){
                 listTroop[i].refindTarget();
             }

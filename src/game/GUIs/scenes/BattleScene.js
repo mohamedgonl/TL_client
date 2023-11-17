@@ -200,17 +200,17 @@ var BattleScene = cc.Scene.extend({
                 if (bullet.active)
                     bullet.gameLoop(this.secPerTick);
             }
-            // for (let troop of listTroops) {
-            //     troop.gameLoop(this.secPerTick);
-            // }
-            // for (let troopBullet of listTroopBullets) {
-            //     if(troopBullet.active)
-            //         troopBullet.gameLoop(this.secPerTick);
-            //     // else
-            //     // {
-            //     //     listTroopBullets.shift();
-            //     // }
-            // }
+            for (let troop of listTroops) {
+                troop.gameLoop(this.secPerTick);
+            }
+            for (let troopBullet of listTroopBullets) {
+                if(troopBullet.active)
+                    troopBullet.gameLoop(this.secPerTick);
+                // else
+                // {
+                //     listTroopBullets.shift();
+                // }
+            }
         }
         this.setTick(this.tick + 1)
     },

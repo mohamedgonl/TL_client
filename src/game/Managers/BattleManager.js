@@ -343,7 +343,6 @@ var BattleManager = cc.Class.extend({
 
         LogUtils.writeLog("LIST TROOP");
         for (let troop of this.listCurrentTroop) {
-            cc.log("TROOP ::: " + JSON.stringify(troop));
             LogUtils.writeLog(troop.toString(troop._type));
 
         }
@@ -462,13 +461,6 @@ var BattleManager = cc.Class.extend({
     onTroopDead: function (troop) {
         this.totalDeadTroop++;
 
-        //update listCurrentTroop
-        for (let i = 0; i < this.listCurrentTroop.length; i++) {
-            if (this.listCurrentTroop[i] === troop) {
-                this.listCurrentTroop.splice(i, 1);
-                break;
-            }
-        }
         if (this.isAllTroopsDead()) {
             this.battleScene.onEndBattle(1);
         }
