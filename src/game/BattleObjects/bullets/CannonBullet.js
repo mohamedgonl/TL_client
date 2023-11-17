@@ -4,8 +4,7 @@ var CannonBullet = Bullet.extend({
     gridSpeed: 40,
 
     ctor: function (type, startPoint, target, damagePerShot, attackRadius, initPos) {
-        this._super(res_map.SPRITE.BODY.CANNON.BULLET, startPoint, target, damagePerShot, attackRadius, initPos);
-        this._type = type;
+        this._super(type, res_map.SPRITE.BODY.CANNON.BULLET, startPoint, target, damagePerShot, attackRadius, initPos);
 
         this.setScale(0.5, 0.5);
 
