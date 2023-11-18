@@ -36,7 +36,6 @@ var BattleTroop = cc.Node.extend({
     gameLoop: function (dt) {
         this.dtCount += dt;
         if (this._state === TROOP_STATE.FIND) {
-            // this.findTargetandPath();
             this.findTarget();
             this.findPath();
             this.checkPath();
@@ -221,6 +220,8 @@ var BattleTroop = cc.Node.extend({
             if (target.isDestroy()) continue;
             //get min distance
             let distance = Math.sqrt(Math.pow(this._posX - target._posX, 2) + Math.pow(this._posY - target._posY, 2));
+            distance = Utils.roundFloat(distance,4);
+            LogUtils.writeLog("troop " + this._type + " distance to " + target._type + " " + distance);
             if (minDistance == null || distance < minDistance) {
                 minDistance = distance;
                 this._target = target;
@@ -308,7 +309,7 @@ var BattleTroop = cc.Node.extend({
 
         //if move in this grid, not ++ currentIndex
         if (this._nextIndexDistanceLeft > distance) {
-            this._nextIndexDistanceLeft -= distance;
+            this._nextIndexDistanceLeft = Utils.roundFloat(this._nextIndexDistanceLeft - distance,4);
             LogUtils.writeLog("nextIndexDistanceLeft: " + this._nextIndexDistanceLeft + " distance: " + distance + " moveSpeed: " + this._moveSpeed + "dt: " + dt);
         }
 
@@ -337,7 +338,9 @@ var BattleTroop = cc.Node.extend({
             } else {
                 this._isCross = true;
                 this._nextIndexDistanceLeft = 1 - (distance - this._nextIndexDistanceLeft);
+
             }
+            this._nextIndexDistanceLeft = Utils.roundFloat(this._nextIndexDistanceLeft,4);
 
             // set posX, y is currentPos
             this._posX = this._path[this._nextIndex - 1].x;
@@ -345,7 +348,8 @@ var BattleTroop = cc.Node.extend({
             LogUtils.writeLog("troop " + this._type + " move to next index" + this._posX + " " + this._posY  + " dt:" + this.dtCount);
         }
 
-        //set pos
+
+        //set pos in layer
         let posIndexInMap = cc.director.getRunningScene().battleLayer.getMapPosFromGridPos({
             x: this._path[this._nextIndex].x, y: this._path[this._nextIndex].y
         });
@@ -377,10 +381,14 @@ var BattleTroop = cc.Node.extend({
         }
         if (this._attackCd === 0) {
             this._attackCd = this._attackSpeed;
+            this._attackCd = Utils.roundFloat(this._attackCd,4);
+            LogUtils.writeLog("troop" + this._type + " attack" + this._target._type + " dtCount" + this.dtCount);
             this.attack();
+            LogUtils.writeLog("troop" + this._type + " attacked" + this._target._type + " dtCount" + this.dtCount);
 
         } else {
             this._attackCd -= dt;
+            this._attackCd = Utils.roundFloat(this._attackCd,4);
             if (this._attackCd < 0) {
                 this._attackCd = 0;
             }

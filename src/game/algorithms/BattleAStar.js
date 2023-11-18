@@ -182,7 +182,6 @@ let BattleAStar = {
         while (openHeap.size() > 0) {
             // Grab the lowest f(x) to process next.  Heap keeps this sorted for us.
             let currentNode = openHeap.pop();
-            LogUtils.writeLog("currentNode: "+currentNode.x+" "+currentNode.y);
 
             // End case -- result has been found, return the traced path.
 
@@ -197,10 +196,6 @@ let BattleAStar = {
             // Find all neighbors for the current node.
             let neighbors = graph.neighbors(currentNode);
 
-            for(let neighbor of neighbors)
-            {
-                LogUtils.writeLog("neighbor: "+neighbor.x+" "+neighbor.y);
-            }
 
             for(let neighbor of neighbors){
 
@@ -218,7 +213,6 @@ let BattleAStar = {
                 else{
                     gScore = Utils.roundFloat(currentNode.g + neighbor.getCost(currentNode) + neighbor.weight,4);
                 }
-                LogUtils.writeLog("gScore: "+gScore);
                 let beenVisited = neighbor.visited;
 
                 if (!beenVisited || gScore < neighbor.g) {
@@ -230,6 +224,7 @@ let BattleAStar = {
                     neighbor.g = gScore;
 
                     neighbor.f = neighbor.g + neighbor.h;
+                    neighbor.f = Utils.roundFloat(neighbor.f,4);
                     graph.markDirty(neighbor);
 
                     if (!beenVisited) {
@@ -255,10 +250,10 @@ let BattleAStar = {
         },
         diagonal: function (pos0, pos1) {
             let D = 1;
-            let D2 = Math.sqrt(2);
-            let d1 = Math.abs(pos1.x - pos0.x);
-            let d2 = Math.abs(pos1.y - pos0.y);
-            return (D * (d1 + d2)) + ((D2 - (2 * D)) * Math.min(d1, d2));
+            let D2 = Utils.roundFloat(Math.sqrt(2),4);
+            let d1 =Utils.roundFloat(Math.abs(pos1.x - pos0.x),4);
+            let d2 =Utils.roundFloat(Math.abs(pos1.y - pos0.y),4);
+            return Utils.roundFloat((D * (d1 + d2)) + ((D2 - (2 * D)) * Math.min(d1, d2)),4);
         }
     },
     cleanNode: function (node) {
