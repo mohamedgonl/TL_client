@@ -40,7 +40,7 @@ var TroopListItem = cc.Node.extend({
         });
 
         cc.eventManager.addCustomListener(EVENT_NAMES.RESOURCE_CHANGED, (e) => {
-            this.recheck();
+            // this.recheck();
         })
 
         cc.eventManager.addCustomListener(EVENT_NAMES.BUILDING_UPDATED, (e) => {
