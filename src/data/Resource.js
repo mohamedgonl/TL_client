@@ -533,6 +533,10 @@ var res_map = {
 var res_battle = {
     BULLET:{
         ARCHER_ARROW: "res/battle/arrow_small_burning.png",
+    },
+    EFFECT:{
+        STAR_PNG: "res/new/battle_gui/star_single_map.png",
+        ORANGE_PNG :  "res/new/battle_gui/orange_blur.png",
     }
 }
 

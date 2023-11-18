@@ -557,5 +557,6 @@ const EVENT_NAMES = {
     RESOURCE_CHANGED: "res_changed",
     MAX_RESOURCE_CHANGED: "max_res_changed",
     NEW_BUILDING_ADDED: "new_building",
-    BUILDING_UPDATED: "building_updated"
+    BUILDING_UPDATED: "building_updated",
+    END_BATTLE: "end_battle"
 }

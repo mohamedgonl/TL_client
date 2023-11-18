@@ -2,6 +2,7 @@ const GRID_BATTLE_RATIO = 3;
 const TROOP_LEVEL = 1;
 const TROOP_STATE = {
     FIND: 0, MOVE: 1, ATTACK: 2, IDLE: 3, DEAD: 4,
+    IDLE_WHILE_ATTACK: 5
 }
 const TROOP_SPEED_RATIO = 0.1;
 var BattleTroop = cc.Node.extend({
@@ -23,13 +24,22 @@ var BattleTroop = cc.Node.extend({
         //state: 3 state: 0: findPath,1: move,2: attack, 3:idle, 4: death
         this._state = TROOP_STATE.FIND;
         this._path = null;
-        this._attackCd = this._attackSpeed;
+
+
         this._stateAnimation = 0;
         this._firstAttack = true;
         this.dtCount = 0;
         BattleManager.getInstance().addToListCurrentTroop(this);
         BattleManager.getInstance().addToListUsedTroop(this);
         this.initSprite();
+        //listen event on end game
+        this._eventListener = cc.eventManager.addCustomListener(EVENT_NAMES.END_BATTLE, this.onEndGame.bind(this));
+
+    },
+    onEndGame: function () {
+        cc.log("END GAME:::::")
+        cc.eventManager.removeListener(this._eventListener);
+        this.performIdleAnimation();
 
     },
     //gameLoop, call in BattleScene
@@ -82,6 +92,11 @@ var BattleTroop = cc.Node.extend({
         if (this._state === TROOP_STATE.ATTACK) {
             this.attackLoop(dt);
 
+        }
+
+        if(this._state === TROOP_STATE.IDLE){
+            cc.log("IDLE:::::")
+            this.performIdleAnimation();
         }
 
     },
@@ -374,24 +389,90 @@ var BattleTroop = cc.Node.extend({
             return;
         }
 
-        this.performAttackAnimation();
+        // this.performAttackAnimation();
+
+        let timeAttackAnimationHit = TroopInfo[this._type]["timeAttackAnimationHit"];
 
         if (this._firstAttack === true) {
+            // attackCd = timeAttackAnimationHit for first time
+            this._attackCd = timeAttackAnimationHit;
             this._firstAttack = false;
         }
+
+        //loop Attack CD
         if (this._attackCd === 0) {
-            this._attackCd = this._attackSpeed;
+            this._attackCd = this._attackSpeed ;
             this._attackCd = Utils.roundFloat(this._attackCd,4);
             LogUtils.writeLog("troop" + this._type + " attack" + this._target._type + " dtCount" + this.dtCount);
             this.attack();
             LogUtils.writeLog("troop" + this._type + " attacked" + this._target._type + " dtCount" + this.dtCount);
 
-        } else {
+        } else{
+
             this._attackCd -= dt;
+            let timeAttackAnimation = 1;
+            if(this._attackCd <= timeAttackAnimationHit || this._attackCd >= this._attackSpeed - (timeAttackAnimation - timeAttackAnimationHit))
+            {
+                this.performAttackAnimation();
+            }
+            else {
+                // cc.log("IDLEEE:::::")
+                this.performIdleAnimation();
+            }
+
             this._attackCd = Utils.roundFloat(this._attackCd,4);
             if (this._attackCd < 0) {
                 this._attackCd = 0;
             }
+        }
+    },
+
+    performIdleAnimation: function () {
+        let directX = this._directX;
+        let directY = this._directY;
+        this._bodySprite.setScale(1);
+
+        let action;
+        if (directX === 1 && directY === 1) { //UP
+            action = res_troop.IDLE[this._type].UP.ANIM;
+        } else if (directX === 1 && directY === 0) { //UP_RIGHT
+            action = res_troop.IDLE[this._type].UP_LEFT.ANIM;
+            this._bodySprite.setScale(-1, 1);
+        } else if (directX === 1 && directY === -1) { //RIGHT
+            action = res_troop.IDLE[this._type].LEFT.ANIM;
+            this._bodySprite.setScale(-1, 1);
+        } else if (directX === 0 && directY === 1) { //UP_LEFT
+            action = res_troop.IDLE[this._type].UP_LEFT.ANIM;
+        } else if (directX === 0 && directY === 0) { //UP
+            action = res_troop.IDLE[this._type].UP.ANIM;
+        } else if (directX === 0 && directY === -1) { //DOWN_RIGHT
+            action = res_troop.IDLE[this._type].DOWN_LEFT.ANIM;
+            this._bodySprite.setScale(-1, 1);
+        } else if (directX === -1 && directY === 1) { //LEFT
+            action = res_troop.IDLE[this._type].LEFT.ANIM;
+        } else if (directX === -1 && directY === 0) { //DOWN_LEFT
+            action = res_troop.IDLE[this._type].DOWN_LEFT.ANIM;
+        } else if (directX === -1 && directY === -1) { //DOWN
+            action = res_troop.IDLE[this._type].DOWN.ANIM;
+        }
+
+
+        if (action === undefined) {
+            cc.log("ERROR ::::::: action undefined");
+            cc.log("directX: " + directX + " directY: " + directY)
+        }
+
+        let cloneAction = action.clone();
+        //animate forever
+        let animate = cc.animate(cloneAction);
+        animate.repeatForever();
+
+        if (this._stateAnimation !== TROOP_STATE.IDLE_WHILE_ATTACK || this._directXAnimation !== directX || this._directYAnimation !== directY) {
+            this._stateAnimation = TROOP_STATE.IDLE_WHILE_ATTACK;
+            this._directXAnimation = directX;
+            this._directYAnimation = directY;
+            this._bodySprite.stopAllActions();
+            this._bodySprite.runAction(animate);
         }
 
     },
@@ -445,10 +526,11 @@ var BattleTroop = cc.Node.extend({
         //animate forever
         let animate = cc.animate(cloneAttackAction);
         animate.repeatForever();
-        animate.setSpeed(1 / this._attackSpeed);
 
-        if (this._stateAnimation !== this._state) {
+        if (this._stateAnimation !== this._state || this._directXAnimation !== directX || this._directYAnimation !== directY) {
             this._stateAnimation = this._state;
+            this._directXAnimation = directX;
+            this._directYAnimation = directY;
             this._bodySprite.stopAllActions();
             this._bodySprite.runAction(animate);
         }

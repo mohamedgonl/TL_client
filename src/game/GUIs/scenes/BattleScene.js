@@ -77,6 +77,11 @@ var BattleScene = cc.Scene.extend({
     },
 
     onEndBattle: function (delay = 0) {
+
+        //dispatch event end battle
+        let event = new cc.EventCustom(EVENT_NAMES.END_BATTLE);
+        cc.eventManager.dispatchEvent(event);
+
         //send action end game
         if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING) {
 

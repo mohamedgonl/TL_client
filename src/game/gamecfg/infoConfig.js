@@ -91,5 +91,18 @@ const BuildingInfo = {
 }
 const TroopInfo= {
     "ARM_1": {
-    }
+        "timeAttackAnimationHit": 1,
+    },
+    "ARM_2": {
+        "timeAttackAnimationHit": 0.7,
+    },
+    "ARM_3": {
+        "timeAttackAnimationHit": 0.5,
+    },
+    "ARM_4": {
+        "timeAttackAnimationHit": 0.6,
+    },
+    "ARM_6": {
+        "timeAttackAnimationHit": 0.83,
+    },
 }
