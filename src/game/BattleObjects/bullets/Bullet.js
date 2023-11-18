@@ -44,5 +44,14 @@ var Bullet = cc.Sprite.extend({
         this.setPosition(this.initPos.x, this.initPos.y);
     },
 
+    toString: function () {
+        return "BattleBullet{" +
+            "active=" + this.active +
+            ", target=" + this.target.toString() +
+            ", destination=" + this.destination._posX + " " + this.destination._posY +
+            '}';
+    }
+
+
 });
 

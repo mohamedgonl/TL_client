@@ -221,7 +221,7 @@ var BattleTroop = cc.Node.extend({
             //get min distance
             let distance = Math.sqrt(Math.pow(this._posX - target._posX, 2) + Math.pow(this._posY - target._posY, 2));
             distance = Utils.roundFloat(distance,4);
-            LogUtils.writeLog("troop " + this._type + " distance to " + target._type + " " + distance);
+            LogUtils.writeLog("troop " + this._type + " distance to " + target._type + " " + Math.floor(distance));
             if (minDistance == null || distance < minDistance) {
                 minDistance = distance;
                 this._target = target;
