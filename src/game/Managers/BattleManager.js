@@ -352,6 +352,16 @@ var BattleManager = cc.Class.extend({
             LogUtils.writeLog(e.toString());
         });
 
+        LogUtils.writeLog("STAR: " + this.starAmount);
+        LogUtils.writeLog("PERCENT : " + this.buildingDestroyedPoint/this.totalBuildingPoint)
+        LogUtils.writeLog("RESOURCE GOT");
+        LogUtils.writeLog("GOLD : " + this.robbedGold + " ELIXIR : " + this.robbedElixir);
+        LogUtils.writeLog("TROOPS : " );
+        this.listUsedTroop.forEach((value, key) => {
+            LogUtils.writeLog("Key: "+key+", Value: "+value);
+        });
+
+
     },
 
     getAllBuilding: function () {
