@@ -76,7 +76,7 @@ var BattleScene = cc.Scene.extend({
         testnetwork.connector.sendDoAction({type: ACTION_TYPE.DROP_TROOP, tick: this.tick, data});
     },
 
-    onEndBattle: function (delay = 0) {
+    onEndBattle: function (delay = 0, isClickEnd = false) {
 
         //dispatch event end battle
         let event = new cc.EventCustom(EVENT_NAMES.END_BATTLE);
@@ -104,6 +104,8 @@ var BattleScene = cc.Scene.extend({
             //     tick: this.tick,
             //     percentage,
             // });
+            if (!isClickEnd)
+                this.setTick(this.tick + 1);
             testnetwork.connector.sendDoAction({type: ACTION_TYPE.END_BATTLE, tick: this.tick,});
 
             this.stopCountDown();

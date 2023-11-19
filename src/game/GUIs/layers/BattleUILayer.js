@@ -182,7 +182,7 @@ var BattleUILayer = cc.Layer.extend({
     },
     onEndClick: function () {
         this.btnEnd.setVisible(false);
-        cc.director.getRunningScene().onEndBattle();
+        cc.director.getRunningScene().onEndBattle(0, true);
     },
     setStateSlot: function (slotIndex, troopType = null, troopAmount = null) {
         //empty case
