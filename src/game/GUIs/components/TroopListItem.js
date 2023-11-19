@@ -1,13 +1,12 @@
 var TroopListItem = cc.Node.extend({
-    _troopCfgId: null,
-    _level: 1,
-    _space: null,
-    _count: 0,
-    _tempCount: 0,
-    _isLongPress: false,
     ctor: function (troopCfgId, curPage, index) {
-
         this._super();
+        this._troopCfgId = null;
+        this._level= 1;
+        this._space= null;
+        this._count= 0;
+        this._tempCount = 0;
+        this._isLongPress = false;
         this._index = index;
         this._troopCfgId = troopCfgId;
         this._curPage = curPage;
@@ -40,6 +39,7 @@ var TroopListItem = cc.Node.extend({
         });
 
         cc.eventManager.addCustomListener(EVENT_NAMES.RESOURCE_CHANGED, (e) => {
+            cc.log("RESOURCE_CHANGED")
             // this.recheck();
         })
 
@@ -168,6 +168,7 @@ var TroopListItem = cc.Node.extend({
     },
 
     handleLongPress: function () {
+        cc.log("HANDLE  LONG PRESS")
         if (this._available) {
             let barList = ArmyManager.getInstance().getBarrackList();
             let currentSpace = barList[this._curPage].getTrainingSpace();
