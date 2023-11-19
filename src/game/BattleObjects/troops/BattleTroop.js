@@ -14,7 +14,7 @@ var BattleTroop = cc.Node.extend({
         this._favoriteTarget = TROOP_BASE[this._type]["favoriteTarget"];
         this._moveSpeed = TROOP_BASE[this._type]["moveSpeed"] * GRID_BATTLE_RATIO;
         this._attackSpeed = TROOP_BASE[this._type]["attackSpeed"];
-        this._damage = TROOP[this._type][TROOP_LEVEL]["damagePerAttack"];
+        this._damage = TROOP[this._type][TROOP_LEVEL]["damagePerAttack"]*20;
         this._hitpoints = TROOP[this._type][TROOP_LEVEL]["hitpoints"];
         this._attackRange = TROOP_BASE[this._type]["attackRange"] * GRID_BATTLE_RATIO;
         this._damageScale = TROOP_BASE[this._type]["dmgScale"];
@@ -35,6 +35,15 @@ var BattleTroop = cc.Node.extend({
         //listen event on end game
         this._eventListener = cc.eventManager.addCustomListener(EVENT_NAMES.END_BATTLE, this.onEndGame.bind(this));
 
+        //log all grid building
+        // for(let i = 0; i<132;i++)
+        // for(let j = 0; j<132;j++){
+        //     let id = BattleManager.getInstance().mapGrid[i][j];
+        //     if(id === 0) continue;
+        //     LogUtils.writeLog("map: " + i + " " + j + " " + id);
+        // }
+
+
     },
     onEndGame: function () {
         cc.log("END GAME:::::")
@@ -47,8 +56,14 @@ var BattleTroop = cc.Node.extend({
         this.dtCount += dt;
         if (this._state === TROOP_STATE.FIND) {
             this.findTarget();
+            LogUtils.writeLog("1 :troop " + this._type + " find target " + this._target._type);
             this.findPath();
+            LogUtils.writeLog("2 :troop " + this._type + " find target " + this._target._type);
+            for(let i = 0; i < this._path.length; i++){
+                LogUtils.writeLog("path: " + this._path[i].x + " " + this._path[i].y);
+            }
             this.checkPath();
+            LogUtils.writeLog("3 :troop " + this._type + " find target " + this._target._type);
             //change weight of grid in path +1 for various path each troop
             let graph = BattleManager.getInstance().getBattleGraph();
             for (let i = 0; i < this._path.length; i++) {
@@ -76,7 +91,10 @@ var BattleTroop = cc.Node.extend({
                 this._isFirstMove = true;
             }
 
-            LogUtils.writeLog("troop " + this._type + " find target " + this._target._type);
+            LogUtils.writeLog("troop " + this._type +
+                            " find target " + this._target._type +
+                            "length path: " + this._path.length);
+            LogUtils.writeLog("target pos: " + this._target._posX + " " + this._target._posY + "width: " + this._target._width + " height: " + this._target._height);
             for(let i = 0; i < this._path.length; i++){
                 LogUtils.writeLog("path: " + this._path[i].x + " " + this._path[i].y);
             }
@@ -280,7 +298,14 @@ var BattleTroop = cc.Node.extend({
 
             // if path go through WAL, this._target = WAL
             let building = BattleManager.getInstance().getBuildingByGrid(x, y);
+            if(building !== null) {
+                LogUtils.writeLog("building: " + building._type);
+                LogUtils.writeLog("x , y" + x + " " + y);
+                LogUtils.writeLog("building pos: " + building._posX + " " + building._posY);
+                LogUtils.writeLog("building width: " + building._width + " height: " + building._height);
+            }
             if (building !== null && building._type.startsWith("WAL")) {
+                LogUtils.writeLog("troop " + this._type + " change target to " + building._type);
                 this._target = building;
                 //update this._path = _path from 0 to i
                 this._path = this._path.slice(0, i);
@@ -333,7 +358,7 @@ var BattleTroop = cc.Node.extend({
         //if move in this grid, not ++ currentIndex
         if (this._nextIndexDistanceLeft > distance) {
             this._nextIndexDistanceLeft = Utils.roundFloat(this._nextIndexDistanceLeft - distance,4);
-            LogUtils.writeLog("nextIndexDistanceLeft: " + this._nextIndexDistanceLeft + " distance: " + distance + " moveSpeed: " + this._moveSpeed + "dt: " + dt);
+            // LogUtils.writeLog("nextIndexDistanceLeft: " + this._nextIndexDistanceLeft + " distance: " + distance + " moveSpeed: " + this._moveSpeed + "dt: " + dt);
         }
 
         //if move to next index of path

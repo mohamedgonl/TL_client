@@ -452,7 +452,7 @@ var BattleManager = cc.Class.extend({
         // remove from building count
         this.buildingAmount[building._type] = Math.max(this.buildingAmount[building._type] - 1, 0);
 
-        //update troopMap
+        //update mapGrid
         for (var column = building._posX; column < building._posX + building._width; column++)
             for (var row = building._posY; row < building._posY + building._height; row++)
                 this.mapGrid[column][row] = 0;
