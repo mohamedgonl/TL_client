@@ -32,8 +32,7 @@ var Bullet = cc.Sprite.extend({
         gridDist = Utils.roundFloat(gridDist, 2);
         this.time = Math.max(Utils.roundFloat(gridDist / this.gridSpeed, 2), this.minimumTime);
         this.totalTime = this.time;
-        if (this._type === "DEF_2")
-            LogUtils.writeLog(gridDist + " time to reach dest " + this.time + ' ' + this.minimumTime);
+
         this.setInitPosition();
 
         this.active = true;

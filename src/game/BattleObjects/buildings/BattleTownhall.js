@@ -1,4 +1,4 @@
-var BattleTownhall = BattleBaseStorage.extend({
+var BattleTownhall = BattleBuilding.extend({
     _type: "TOW_1",
     totalFlame: 3,
 
