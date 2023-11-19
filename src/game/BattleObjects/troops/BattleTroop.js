@@ -217,10 +217,18 @@ var BattleTroop = cc.Node.extend({
                 cc.log("Error::::: NOT FOUND FAVORITE TARGET", this._favoriteTarget)
         }
 
+
         //if not have favourite target, change to NONE and find again
         if (listTarget.length === 0) {
-            this._favoriteTarget = "NONE";
-            this.findTarget();
+            if (this._favoriteTarget !== "NONE")
+            {
+                this._favoriteTarget = "NONE";
+                this.findTarget();
+            }
+            else
+            {
+                this._state = TROOP_STATE.IDLE;
+            }
             return;
         }
 
@@ -396,6 +404,7 @@ var BattleTroop = cc.Node.extend({
         if (this._firstAttack === true) {
             // attackCd = timeAttackAnimationHit for first time
             this._attackCd = timeAttackAnimationHit;
+            this._attackCd = Utils.roundFloat(this._attackCd,4);
             this._firstAttack = false;
         }
 
