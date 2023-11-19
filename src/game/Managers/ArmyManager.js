@@ -37,7 +37,7 @@ var ArmyManager = cc.Class.extend({
             }
         }
 
-        this.updateArmyAmount(troops, Math.floor(Math.random() * this._barrackList.length), true)
+        this.updateArmyAmount(troops, null, true)
     },
 
     getCurrentSpace: function () {
