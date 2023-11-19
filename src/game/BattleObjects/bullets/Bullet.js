@@ -16,15 +16,16 @@ var Bullet = cc.Sprite.extend({
         this._type = type;
         this.damagePerShot = damagePerShot;
         this.attackRadius = attackRadius;
-        this.initPos = initPos;
+
         if (minimumTime > 0)
             this.minimumTime = minimumTime;
 
-        this.init(startPoint, target);
+        this.init(startPoint, target, initPos);
     },
 
-    init: function (startPoint, target) {
+    init: function (startPoint, target, initPos) {
         this.startPoint = startPoint;
+        this.initPos = initPos;
         this.target = target;
         this.destination = {x: target.x, y: target.y, _posX: target._posX, _posY: target._posY};
 

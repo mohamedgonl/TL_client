@@ -513,7 +513,7 @@ var BattleManager = cc.Class.extend({
         const listBullets = this.listBullets;
         for (let bullet of listBullets)
             if (!bullet.active && bullet._type === type) {
-                bullet.init(startPoint, target);
+                bullet.init(startPoint, target, initPos);
                 return bullet;
             }
         if (type === "DEF_1") {
