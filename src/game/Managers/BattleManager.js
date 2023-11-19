@@ -278,7 +278,7 @@ var BattleManager = cc.Class.extend({
         }
 
         //update battle graph
-        this._battleGraph = new BattleGraph(this.findPathGrid,this.mapGrid);
+        this._battleGraph = new BattleGraph(this.findPathGrid, this.mapGrid);
     },
 
     //add gameObject to list and to grid
@@ -428,13 +428,15 @@ var BattleManager = cc.Class.extend({
     },
 
     onDestroyBuilding: function (building) {
-        this.buildingDestroyedPoint += building._maxHp;
+        if (!building._type.startsWith("WAL")) {
+            this.buildingDestroyedPoint += building._maxHp;
 
-        this.battleScene.battleUILayer.updateDestroyPercentage(Math.floor(this.buildingDestroyedPoint * 100 / this.totalBuildingPoint));
+            this.battleScene.battleUILayer.updateDestroyPercentage(Math.floor(this.buildingDestroyedPoint * 100 / this.totalBuildingPoint));
 
-        if (!this.isDestroyedHalf && this.buildingDestroyedPoint * 2 >= this.totalBuildingPoint) {
-            this.isDestroyedHalf = true;
-            this.increaseStarAmount();
+            if (!this.isDestroyedHalf && this.buildingDestroyedPoint * 2 >= this.totalBuildingPoint) {
+                this.isDestroyedHalf = true;
+                this.increaseStarAmount();
+            }
         }
 
         if (building instanceof BattleTownhall)
