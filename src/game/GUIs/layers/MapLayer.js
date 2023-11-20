@@ -361,8 +361,6 @@ var MapLayer = cc.Layer.extend({
         }
         //if have chosen building, unselect it
         this.unSelectBuilding(this.chosenBuilding);
-        this.tempPosChosenBuilding = cc.p(building._posX, building._posY);
-        building.setLocalZOrder(MAP_ZORDER_BUILDING + 1);
 
         this.chosenBuilding = building;
         this.tempPosChosenBuilding = cc.p(this.chosenBuilding._posX, this.chosenBuilding._posY);
@@ -375,7 +373,6 @@ var MapLayer = cc.Layer.extend({
             if (this.onModeMovingBuilding) {
                 this.exitModeMoveBuilding();
             }
-            this.chosenBuilding.setLocalZOrder(this.getZOrderByPosition(this.tempPosChosenBuilding.x, this.tempPosChosenBuilding.y));
             this.chosenBuilding.onUnselected();
         }
         this.chosenBuilding = null;
@@ -393,22 +390,17 @@ var MapLayer = cc.Layer.extend({
             //move back to old pos
             this.chosenBuilding.moveSpriteToGridPos(this.originGridPosition.x, this.originGridPosition.y);
         }
+        this.chosenBuilding.setSquare(0);
     },
 
 
     enterModeMoveBuilding: function () {
 
         this.originGridPosition = this.chosenBuilding.getGridPosition();
-        this.chosenBuilding.setLocalZOrder(ZORDER_BUILDING_ON_CHOOSE);
+        this.chosenBuilding.setLocalZOrder(99999);
         this.canDragBuilding = true;
         this.onModeMovingBuilding = true;
         var infoLayer = cc.director.getRunningScene().infoLayer;
-        //if chosen building can put in new pos, set green square, else set red square
-        if (this.checkValidPutBuilding(this.chosenBuilding, this.chosenBuilding._posX, this.chosenBuilding._posY)) {
-            this.chosenBuilding.setSquare(1);
-        } else {
-            this.chosenBuilding.setSquare(2);
-        }
         infoLayer.setVisible(false);
     },
 
@@ -429,34 +421,10 @@ var MapLayer = cc.Layer.extend({
             cc.log("MOVE TO OLD")
             this.chosenBuilding.moveSpriteToGridPos(this.originGridPosition.x, this.originGridPosition.y);
         }
+        cc.log("EXIT MODE MOVE BUILDING")
         this.chosenBuilding.setSquare(0);
 
         infoLayer.setVisible(true);
-    },
-
-    // move view of building, not change building pos in MapManager and Building
-    moveBuildingInLayer: function (building, newPosX, newPosY) {
-        if (building == null) return;
-
-        this.tempPosChosenBuilding = {x: newPosX, y: newPosY};
-        //change color of square
-        if (this.checkValidPutBuilding(building, newPosX, newPosY)) {
-            building.setSquare(1);
-        } else {
-            building.setSquare(2);
-        }
-
-        var sizeX = building._width;
-        var sizeY = building._height;
-
-        var buildingCenterX = newPosX + sizeX / 2;
-        var buildingCenterY = newPosY + sizeY / 2;
-
-
-        let newPosInMap = this.getMapPosFromGridPos(cc.p(buildingCenterX, buildingCenterY));
-
-        this.moveGameObjectInMapLayer(building, buildingCenterX, buildingCenterY, false);
-
     },
 
     getBuildingFromTouch: function (locationInScreen) {

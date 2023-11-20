@@ -99,6 +99,12 @@ var Building = GameObject.extend({
         this._bottom.setPosition(posInMap);
         this._mainSprite.setPosition(posInMap);
         this._effect.setPosition(posInMap);
+        if(mapLayer.checkValidPutBuilding(this,gridPosX,gridPosY)){
+            this.setSquare(1);
+        }
+        else {
+            this.setSquare(2);
+        }
     },
     moveToGridPos:function (gridPosX,gridPosY){
 
@@ -124,7 +130,6 @@ var Building = GameObject.extend({
         Algorithm.setGridMapStar(MapManager.getInstance().mapGrid);
 
         this.moveSpriteToGridPos(gridPosX,gridPosY);
-        this.onMoved();
     },
 
     loadBottomSprite: function () {
@@ -325,12 +330,18 @@ var Building = GameObject.extend({
         this._nameLabel.setVisible(true);
         this._levelLabel.setVisible(true);
 
+        //zorder
+        this._mainSprite.setLocalZOrder(ZORDER_BUILDING_MAINSPRITE_MAX+1);
+        this._bottom.setLocalZOrder(ZORDER_BUILDING_MAINSPRITE_MAX);
+
         this.loadButton();
         cc.eventManager.dispatchCustomEvent(EVENT_SELECT_BUILDING, this._id);
         // opacity to 80 to 100 to 80 repeat forever
         this.blinkAction = cc.repeatForever(cc.sequence(cc.fadeTo(0.5, 150), cc.fadeTo(0.5, 255)));
         this.blinkAction.retain();
         this._body.runAction(this.blinkAction);
+
+
     },
     onUnselected: function(){
         let infoLayer = cc.director.getRunningScene().infoLayer;
@@ -345,6 +356,11 @@ var Building = GameObject.extend({
         this._arrow.setVisible(false);
         this._nameLabel.setVisible(false);
         this._levelLabel.setVisible(false);
+
+        //zorder
+        let mapLayer = cc.director.getRunningScene().getMapLayer();
+        this._mainSprite.setLocalZOrder(mapLayer.getZOrderByPosition(this._posX,this._posY));
+        this._bottom.setLocalZOrder(ZORDER_BUILDING_BOTTOM);
 
         //stop nhấp nháy
         this._body.stopAction(this.blinkAction);
@@ -378,6 +394,7 @@ var Building = GameObject.extend({
     },
     //3 state of Square: 0: no square, 1: green square, 2: red square
     setSquare: function (square) {
+        cc.log("setSquare",square)
         if(square === 0){
             this._green_square.setVisible(false);
             this._red_square.setVisible(false);
