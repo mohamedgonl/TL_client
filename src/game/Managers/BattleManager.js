@@ -353,12 +353,12 @@ var BattleManager = cc.Class.extend({
         });
 
         LogUtils.writeLog("STAR: " + this.starAmount);
-        LogUtils.writeLog("PERCENT : " + this.buildingDestroyedPoint/this.totalBuildingPoint)
+        LogUtils.writeLog("PERCENT : " + Math.floor(this.buildingDestroyedPoint * 100 / this.totalBuildingPoint))
         LogUtils.writeLog("RESOURCE GOT");
         LogUtils.writeLog("GOLD : " + this.robbedGold + " ELIXIR : " + this.robbedElixir);
-        LogUtils.writeLog("TROOPS : " );
+        LogUtils.writeLog("TROOPS : ");
         this.listUsedTroop.forEach((value, key) => {
-            LogUtils.writeLog("Key: "+key+", Value: "+value);
+            LogUtils.writeLog("Key: " + key + ", Value: " + value);
         });
 
 
