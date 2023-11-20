@@ -5,7 +5,7 @@ var Wall = Building.extend({
         //schedule load sprite
         //this.schedule(this.loadSpriteByLevel, 5);
     },
-    loadMainSpriteByLevel: function (level) {
+    loadMainSpriteByLevel: function (level = this._level) {
         let stateWall=0;
             //check up and right grid, if is wall
             let upBuilding = MapManager.getInstance().getBuildingByGrid(this._posX, this._posY + 1);
@@ -27,7 +27,15 @@ var Wall = Building.extend({
     },
     onMoved: function () {
         this._super();
-        this.loadMainSpriteByLevel(this._level);
+        cc.log("wall onMoved")
+        this.loadMainSpriteByLevel();
+        this.reloadSpriteWallAround();
+    },
+    completeBuild: function () {
+        this._super();
+    },
+
+    reloadSpriteWallAround: function () {
         //load wall below and left grid
         let belowBuilding = MapManager.getInstance().getBuildingByGrid(this._posX, this._posY - 1);
         let leftBuilding = MapManager.getInstance().getBuildingByGrid(this._posX - 1, this._posY);
@@ -38,6 +46,6 @@ var Wall = Building.extend({
         if(leftBuilding && leftBuilding._type === "WAL_1"){
             leftBuilding.loadMainSpriteByLevel(leftBuilding._level);
         }
-    },
+    }
 
 });

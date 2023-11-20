@@ -11,11 +11,6 @@ var Cannon = Building.extend({
     },
     loadMainSpriteByLevel: function (level) {
 
-        this.loadMainSprite(res_map.SPRITE.BODY.CANNON[level][0],res_map.SPRITE.BODY.CANNON.ATK_0[level],1);
-        // this._upper.stopAllActions();
-        // let idleAction = res_map.SPRITE.BODY.CANNON.IDLE[level].ANIM.clone();
-        // let animate = cc.animate(idleAction);
-        // animate.repeatForever();
-        // this._upper.runAction(animate);
+        this.loadMainSprite(res_map.SPRITE.BODY.CANNON.BOTTOM[level],res_map.SPRITE.BODY.CANNON.IDLE[level],1);
     },
 });

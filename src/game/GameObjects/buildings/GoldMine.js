@@ -7,13 +7,11 @@ var GoldMine = BaseMine.extend({
         this._productivityGold = capacity.productivity;
 
         this._bodySprite = res_map.SPRITE.BODY.GOLD_MINE.BOTTOM[level];
-        this._upperSprite = res_map.SPRITE.BODY.GOLD_MINE.UPPER[level];
         this._shadowType = 1;
-        this._isUpperAnimate = true;
     },
     loadMainSpriteByLevel: function (level) {
         this.loadMainSprite(res_map.SPRITE.BODY.GOLD_MINE.BOTTOM[level],
-            res_map.SPRITE.BODY.GOLD_MINE.UPPER[level],1,1);
+            res_map.SPRITE.BODY.GOLD_MINE.UPPER[level],1);
     },
 
     loadSprite: function (bodySprite, upperSprite, shadow_type, isUpperAnimation) {

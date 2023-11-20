@@ -358,7 +358,6 @@ var LoadManager = cc.Node.extend({
         res_map.SPRITE.BUILDER.BUILD.UP = builderBuildUp;
 
         this.loadSpriteTroops();
-        this.createAnimation();
     },
 
     loadSpriteToRes: function (res_address, prefix, suffix, count, start, end) {
@@ -525,44 +524,117 @@ var LoadManager = cc.Node.extend({
         //DEF_1
         maxLevel = BuildingInfo["DEF_1"].max_level;
         for (let level = 1; level <= maxLevel; level++) {
+            //UPPER
             //res/Buildings/cannon/canon_1/idle/image0000.png
-            let link = "res/Buildings/cannon/canon_"+level+"/idle/image";
+            let link = "res/Buildings/cannon/canon_" + level + "/idle/image";
             res_map.SPRITE.BODY.CANNON.IDLE[level] = {};
-            this.addAnimationToTarget(link, 0, 4, res_map.SPRITE.BODY.CANNON.IDLE[level],30);
+            this.addAnimationToTarget(link, 0, 4, res_map.SPRITE.BODY.CANNON.IDLE[level], 30);
+
+            //BOTTOM
+            //res/Buildings/defense_base/DEF_1_1_Shadow.png
+            link = "res/Buildings/defense_base/DEF_1_" + level + "_Shadow.png";
+            res_map.SPRITE.BODY.CANNON.BOTTOM[level] = link;
         }
+
 
         //DEF_2
         maxLevel = BuildingInfo["DEF_2"].max_level;
         for (let level = 1; level <= maxLevel; level++) {
+
+            //UPPER
             // res/Buildings/AcherTower/DEF_2_1/DEF_2_1/idle/image0000.png
-            let link = "res/Buildings/AcherTower/DEF_2_"+level+"/DEF_2_"+level+"/idle/image";
-            res_map.SPRITE.BODY.ARCHER_TOWER.IDLE[level] = {};
-            this.addAnimationToTarget(link, 0, 4, res_map.SPRITE.BODY.ARCHER_TOWER.IDLE[level],30);
+            let link = "res/Buildings/AcherTower/DEF_2_" + level + "/DEF_2_" + level + "/idle/image";
+            res_map.SPRITE.BODY.ARCHER_TOWER.UPPER.IDLE[level] = {};
+            this.addAnimationToTarget(link, 0, 4, res_map.SPRITE.BODY.ARCHER_TOWER.UPPER.IDLE[level], 30);
+
+            //BOTTOM
+            //res/Buildings/defense_base/DEF_2_1_Shadow.png
+            //level toi da la 6
+            link = "res/Buildings/defense_base/DEF_2_" + Math.min(6, level) + "_Shadow.png";
+            res_map.SPRITE.BODY.ARCHER_TOWER.BOTTOM[level] = link;
         }
 
         //DEF_3
         maxLevel = BuildingInfo["DEF_3"].max_level;
         for (let level = 1; level <= maxLevel; level++) {
+            //BOTTOM
             // res/Buildings/Motar/DEF_3_1/DEF_3_1/idle/image0000.png
-            let link = "res/Buildings/Motar/DEF_3_"+level+"/DEF_3_"+level+"/idle/image";
-            res_map.SPRITE.BODY.MORTAR.IDLE[level] = {};
-            this.addAnimationToTarget(link, 0, 4, res_map.SPRITE.BODY.MORTAR.IDLE[level],30);
+            let link = "res/Buildings/Motar/DEF_3_" + level + "/DEF_3_" + level + "/idle/image";
+            res_map.SPRITE.BODY.MORTAR.BOTTOM[level] = {};
+            this.addAnimationToTarget(link, 0, 4, res_map.SPRITE.BODY.MORTAR.BOTTOM[level], 30);
         }
+
+        //RES_1
+        maxLevel = BuildingInfo["RES_1"].max_level;
+        for (let level = 1; level <= maxLevel; level++) {
+            //BOTTOM
+            //res/Buildings/gold mine/RES_1_1/idle/image0000.png
+            let link = "res/Buildings/gold mine/RES_1_" + level + "/idle/image0000.png";
+            res_map.SPRITE.BODY.GOLD_MINE.BOTTOM[level] = link;
+
+            //UPPER
+            //res/Effects/RES_1_1_effect/00.png to 09
+            link = "res/Effects/RES_1_" + level + "_effect/";
+            res_map.SPRITE.BODY.GOLD_MINE.UPPER[level] = {};
+            this.addAnimationToTarget(link, 0, 9, res_map.SPRITE.BODY.GOLD_MINE.UPPER[level], 1,2);
+        }
+
+        //RES_2
+        maxLevel = BuildingInfo["RES_2"].max_level;
+        for (let level = 1; level <= maxLevel; level++) {
+            //BOTTOM
+            //res/Buildings/elixir collector/RES_2_1/idle/image0000.png
+            let link = "res/Buildings/elixir collector/RES_2_" + level + "/idle/image0000.png";
+            res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level] = link;
+
+            //UPPER
+            //res/Effects/RES_2_1_effect/00.png to 09
+            link = "res/Effects/RES_2_" + level + "_effect/";
+            res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level] = {};
+            this.addAnimationToTarget(link, 0, 9, res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level], 1,2);
+        }
+
+        //STO_1
+        maxLevel = BuildingInfo["STO_1"].max_level;
+        for (let level = 1; level <= maxLevel; level++) {
+            //BOTTOM
+            //res/Buildings/gold storage/STO_1_1/idle/image0000.png
+            let link = "res/Buildings/gold storage/STO_1_" + level + "/idle/image";
+            res_map.SPRITE.BODY.GOLD_STORAGE.BOTTOM[level] = {};
+            this.addAnimationToTarget(link, 0, 3, res_map.SPRITE.BODY.GOLD_STORAGE.BOTTOM[level], 4);
+        }
+
+        //STO_2
+        maxLevel = BuildingInfo["STO_2"].max_level;
+        for (let level = 1; level <= maxLevel; level++) {
+            //BOTTOM
+            //res/Buildings/elixir storage/STO_2_1/idle/image0000.png
+            let link = "res/Buildings/elixir storage/STO_2_" + level + "/idle/image";
+            res_map.SPRITE.BODY.ELIXIR_STORAGE.BOTTOM[level] = {};
+            this.addAnimationToTarget(link, 0, 3, res_map.SPRITE.BODY.ELIXIR_STORAGE.BOTTOM[level], 4);
+        }
+
     },
-    addAnimationToTarget: function (link, start, end, target, duration =1 ) {
+    addAnimationToTarget: function (link, start, end, target, duration = 1, numberLength = 4) {
         let animation = new cc.Animation();
         for (var i = start; i <= end; i++) {
             let res;
-            if (i < 10)
-                res = link + "000" + i + ".png";
-            else if (i < 100)
-                res = link + "00" + i + ".png";
-            else if (i < 1000)
-                res = link + "0" + i + ".png";
-            else
-                res = link + i + ".png";
+
+            let iToString = i.toString();
+            switch(numberLength - iToString.length){
+                case 1:
+                    iToString = "0" + iToString;
+                    break;
+                case 2:
+                    iToString = "00" + iToString;
+                    break;
+                case 3:
+                    iToString = "000" + iToString;
+                    break;
+            }
+
+            res = link + iToString + ".png";
             target[i - start] = res;
-            cc.log("RES:::::::::::", res);
             animation.addSpriteFrameWithFile(res);
         }
         //loop in 1s

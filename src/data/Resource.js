@@ -278,14 +278,17 @@ var res_map = {
                 }
             },
             GOLD_STORAGE: {
+                BOTTOM:{},
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/gold storage/STO_1_1/idle/image0000.png",
             },
             ELIXIR_STORAGE: {
+                BOTTOM:{},
                 JUNK: "res/Map/map_obj_bg/junk_elixirdrill.png",
                 1: "res/Buildings/elixir storage/STO_2_1/idle/image0000.png",
             },
             CANNON: {
+                BOTTOM:{},
                 IDLE:{
 
                 },
@@ -324,6 +327,7 @@ var res_map = {
                 ATK_4: {}
             },
             ARCHER_TOWER: {
+                BOTTOM:{},
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/AcherTower/DEF_2_1/DEF_2_1/idle/image0000.png",
                 BULLET: "res/battle/archerbullet3.png",
@@ -350,6 +354,7 @@ var res_map = {
                 ATK_4: {}
             },
             MORTAR: {
+                BOTTOM:{},
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 BULLET: "res/battle/mortal_bullet_normal/00.png",
                 BULLETS: {

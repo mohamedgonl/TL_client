@@ -133,6 +133,7 @@ var Building = GameObject.extend({
         Algorithm.setGridMapStar(MapManager.getInstance().mapGrid);
 
         this.moveSpriteToGridPos(gridPosX,gridPosY);
+        this.onMoved();
     },
 
     loadBottomSprite: function () {
@@ -242,29 +243,22 @@ var Building = GameObject.extend({
 
     //load sprite with size,
     loadMainSprite: function (bodySprite, upperSprite, isUpperAnimate) {
-        let size = this._width;
         //body
-        // this._body = new cc.Sprite();
-        this._body.setTexture(bodySprite);
-        this._body.setAnchorPoint(0.5,0.5);
-        //if have .offsetMainSpriteY, set position
-        if(BuildingInfo[this._type].offsetMainSpriteY)  {
-            this._body.setPosition(0,BuildingInfo[this._type].offsetMainSpriteY);
+        if(bodySprite != null)
+        {
+            this._body.setTexture(bodySprite);
+            this._body.setAnchorPoint(0.5,0.5);
+            //if have .offsetMainSpriteY, set position
+            if(BuildingInfo[this._type].offsetMainSpriteY)  {
+                this._body.setPosition(0,BuildingInfo[this._type].offsetMainSpriteY);
+            }
+            this._body.setScale(SCALE_BUILDING_BODY);
         }
-        this._body.setScale(SCALE_BUILDING_BODY);
-
-
         //upper
-        // this._upper = new cc.Sprite();
         if(upperSprite != null){
-            // this._upper.setPosition(this._body.getBoundingBox().width,this._body.getBoundingBox().height);
-
             this._upper.setAnchorPoint(0.5,0.5);
             this._upper.setScale(SCALE_BUILDING_BODY);
             if(isUpperAnimate){
-
-                //this._upper = new cc.Sprite(upperSprite[0]);
-                //set texture for first frame and remove old action
                 this._upper.stopAllActions();
                 let action = upperSprite.ANIM.clone();
                 let animate = cc.animate(action);
@@ -275,7 +269,6 @@ var Building = GameObject.extend({
                 this._upper.setTexture(upperSprite)
             }
         }
-
     },
 
     //load button for building, reload when select building, upgrade, build, cancel

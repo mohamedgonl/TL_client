@@ -7,19 +7,16 @@ var ElixirMine = BaseMine.extend({
         this._productivityElixir = capacity.productivity;
 
         this._bodySprite = res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level];
-        this._upperSprite = res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level];
         this._shadowType = 1;
         this._isUpperAnimate = true;
     },
     loadMainSpriteByLevel: function (level) {
         this.loadMainSprite(res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM[level],
-            res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level],1,1);
+            res_map.SPRITE.BODY.ELIXIR_MINE.UPPER[level],1);
     },
 
     loadSprite: function (bodySprite, upperSprite, shadow_type, isUpperAnimation) {
         this._super(bodySprite, upperSprite, shadow_type, isUpperAnimation);
-        let icon = this._iconHarvest.getChildByName("icon");
-        icon.setTexture(res.ICON.ELIXIR);
     },
 
     loadButton: function () {

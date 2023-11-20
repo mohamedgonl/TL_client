@@ -4,7 +4,7 @@ var Mortar = Building.extend({
         this._super(level,id,posX,posY,status,startTime,endTime);
     },
     loadMainSpriteByLevel: function (level) {
-        this.loadMainSprite(res_map.SPRITE.BODY.MORTAR[level][0],res_map.SPRITE.BODY.MORTAR.ATK_0[level],1);
+        this.loadMainSprite(null,res_map.SPRITE.BODY.MORTAR.BOTTOM[level],1);
     },
 
 });

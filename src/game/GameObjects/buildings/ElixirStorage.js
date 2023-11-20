@@ -3,14 +3,13 @@ var ElixirStorage = BaseStorage.extend({
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
 
-        this._bodySprite = res_map.SPRITE.BODY.ELIXIR_STORAGE[level][0];
         this._upperSprite = null;
         this._shadowType = 1;
         this._isUpperAnimate = false;
     },
     //load sprite by level , type = 0, 1 , 2, 3 (0->25%,26->50%,51->75%,76->100%)
     loadMainSpriteByLevel: function (level,type =0) {
-        this.loadMainSprite(res_map.SPRITE.BODY.ELIXIR_STORAGE[level][type],null,1);
+        this.loadMainSprite(res_map.SPRITE.BODY.ELIXIR_STORAGE.BOTTOM[level][type],null,1);
     },
 
     //update current amount and change sprite

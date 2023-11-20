@@ -251,6 +251,7 @@ testnetwork.Connector = cc.Class.extend({
 
             if (packet.type === "WAL_1") {
                 mapLayer.enterModeBuyBuilding("WAL_1", packet.posX, packet.posY - 1);
+                building.reloadSpriteWallAround();
             }
 
             if (packet.status !== 0) {
