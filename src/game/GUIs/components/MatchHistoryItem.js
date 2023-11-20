@@ -15,19 +15,19 @@ var MatchHistoryItem = cc.Node.extend({
         this.addChild(node);
         this.initData(data);
     },
-    initData : function (data) {
+    initData: function (data) {
         cc.log(JSON.stringify(data))
         this._enemyName.setString(data.enemyName);
         this._time.setString(fr.getTimeDifferenceString(TimeManager.getInstance().getCurrentTimeInSecond(), data.time));
-        this._result.setString(data.isWin ? "CHIẾN THẮNG": "THẤT BẠI");
+        this._result.setString(data.isWin ? "CHIẾN THẮNG" : "THẤT BẠI");
         this._percentage.setString(data.percentage + "%");
         this._elxirGot.setString(data.elixirGot);
         this._goldGot.setString(data.goldGot);
-        this._trophy.setString( (data.isWin?"":"-") + data.trophy);
+        this._trophy.setString(data.trophy);
 
-        data.troops.map((troop,index) => {
+        data.troops.map((troop, index) => {
             let troopItem = new TroopItem(troop.cfgId, troop.count);
-            troopItem.setPosition(MATCH_DETAIL_TROOP_POS.x+ index*(TROOP_ITEM_WIDTH+TROOP_ITEM_MARGIN), MATCH_DETAIL_TROOP_POS.y);
+            troopItem.setPosition(MATCH_DETAIL_TROOP_POS.x + index * (TROOP_ITEM_WIDTH + TROOP_ITEM_MARGIN), MATCH_DETAIL_TROOP_POS.y);
             this.addChild(troopItem);
         });
 
