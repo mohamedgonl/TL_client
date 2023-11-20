@@ -2,7 +2,8 @@ var BattleScene = cc.Scene.extend({
     battleLayer: null,
     popUpLayer: null,
     tick: 0,
-    secPerTick: Math.round(1.0 / BATTLE_FPS * 1e6) / 1e6,
+    countTick: 0, //from 0 to BATTLE_FPS
+    secPerTick: Utils.roundFloat(1.0 / BATTLE_FPS, 6),
 
     ctor: function () {
         this._super();
@@ -44,11 +45,8 @@ var BattleScene = cc.Scene.extend({
     },
 
     countDown: function () {
-        if (this.timeLeft <= 0) {
-            if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.PREPARING)
-                this.onStartBattle();
-            else if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING)
-                this.onEndBattle(1);
+        if (this.timeLeft <= 0 && BattleManager.getInstance().battleStatus === BATTLE_STATUS.PREPARING) {
+            this.onStartBattle();
         }
         this.setTimeLeft(this.timeLeft - 1);
     },
@@ -65,10 +63,12 @@ var BattleScene = cc.Scene.extend({
     onStartBattle: function () {
         if (BattleManager.getInstance().battleStatus !== BATTLE_STATUS.PREPARING)
             return;
-        this.setTick(0)
+
+        this.stopCountDown();
+        this.setTick(0);
         testnetwork.connector.sendDoAction({type: ACTION_TYPE.START_BATTlE, tick: this.tick,});
         BattleManager.getInstance().onStartBattle();
-        this.setTimeLeft(BATTlE_LIMIT_TIME + 1);
+        this.setTimeLeft(BATTlE_LIMIT_TIME);
         this.battleUILayer.onStartBattle();
     },
 
@@ -108,7 +108,7 @@ var BattleScene = cc.Scene.extend({
                 this.setTick(this.tick + 1);
             testnetwork.connector.sendDoAction({type: ACTION_TYPE.END_BATTLE, tick: this.tick,});
 
-            this.stopCountDown();
+            // this.stopCountDown();
             BattleManager.getInstance().onEndBattle();
 
             //scheduleOnce
@@ -177,6 +177,13 @@ var BattleScene = cc.Scene.extend({
 
     gameLoop: function (dt) {
         if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING) {
+            if (this.countTick === BATTLE_FPS - 1) {
+                this.countTick = 0;
+                this.setTimeLeft(this.timeLeft - 1);
+            } else {
+                this.countTick++;
+            }
+
             //check defences targets
             const listDefences = BattleManager.getInstance().getListDefences();
             const listTroops = BattleManager.getInstance().getListCurrentTroops();
@@ -211,12 +218,17 @@ var BattleScene = cc.Scene.extend({
                 troop.gameLoop(this.secPerTick);
             }
             for (let troopBullet of listTroopBullets) {
-                if(troopBullet.active)
+                if (troopBullet.active)
                     troopBullet.gameLoop(this.secPerTick);
                 // else
                 // {
                 //     listTroopBullets.shift();
                 // }
+            }
+
+            if (this.timeLeft === 0){
+                this.onEndBattle(1);
+                return;
             }
         }
         this.setTick(this.tick + 1)
