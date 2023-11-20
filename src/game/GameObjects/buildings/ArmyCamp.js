@@ -13,7 +13,11 @@ var ArmyCamp = Building.extend({
     onAddIntoMapManager: function () {
         this._super();
         ArmyManager.getInstance().pushArmyCamp(this);
-    }
+    },
+    completeProcess: function () {
+        this._super();
+        ArmyManager.getInstance().updateArmyInfo();
+    },
 
 
 });

@@ -39,6 +39,7 @@ var     MapManager = cc.Class.extend({
             if(type.startsWith("RES"))
             {
                 let lastCollectTime = construct.lastCollectTime;
+                building.setLastCollectTime(lastCollectTime);
 
             }
 
@@ -76,8 +77,6 @@ var     MapManager = cc.Class.extend({
         let id = building._id;
         let width = building._width;
         let height = building._height;
-        let level = building._level;
-        let typeBuilding = building._type;
 
         for(let column = posX; column < posX + width; column++)
             for(let row = posY; row < posY + height; row++)

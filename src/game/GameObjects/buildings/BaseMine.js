@@ -8,14 +8,26 @@ var BaseMine = Building.extend({
         this._capacityGold = 0;
         this._capacityElixir = 0;
         this._currentGold = 0;
-        this._currentElixir = 0;    // this._iconHarvest have bg, and bg.icon is sprite of harvest icon
-        let node = CCSUlties.parseUIFile(res_ui.ICON_HARVEST);
+        this._currentElixir = 0;
+    },
+    addIntoMapLayer: function () {
+        this._super();
 
+        //add icon harvest
+        let node = CCSUlties.parseUIFile(res_ui.ICON_MINE);
+        let icon = node.getChildByName("bg").getChildByName("icon");
+        icon.loadTexture(res_ui[this._type+"_COLLECT"]);
+        icon.setScale(0.9)
         this._iconHarvest = node;
-        this.addChild(this._iconHarvest, ZORDER_BUILDING_EFFECT);
+        this._effect.addChild(this._iconHarvest, ZORDER_BUILDING_EFFECT);
         this._iconHarvest.setVisible(false);
 
-
+        //schedule check show harvest icon
+        this.checkShowHarvestIcon();
+        this.schedule(this.checkShowHarvestIcon, 5, cc.REPEAT_FOREVER, 0);
+    },
+    setLastCollectTime: function (lastCollectTime) {
+        this._lastCollectTime = lastCollectTime;
     },
     onAddIntoMapManager: function () {
         this._super();
@@ -28,12 +40,6 @@ var BaseMine = Building.extend({
 
     },
 
-    setLastCollectTimeAndIconHarvest: function (lastCollectTime) {
-        this._lastCollectTime = lastCollectTime;
-        this.checkShowHarvestIcon();
-        this.schedule(this.checkShowHarvestIcon, 10, cc.REPEAT_FOREVER, 0);
-    },
-
     //send to server
     onClickHarvest: function () {
         testnetwork.connector.sendHarvest(this._id);
@@ -41,6 +47,7 @@ var BaseMine = Building.extend({
 
 
     checkShowHarvestIcon: function () {
+        cc.log("checkShowHarvestIcon")
 
         if(this._state !== 0)
         {
@@ -58,7 +65,9 @@ var BaseMine = Building.extend({
         let harvestAmount = Math.floor(time * productivity / 3600);
 
         let capacity = LoadManager.getInstance().getConfig(this._type, this._level, "capacity");
-        if (harvestAmount >= capacity / 50) {
+
+        cc.log("harvestAmount",harvestAmount);
+        if (harvestAmount >= 2) {
             this._showIconHarvest = true;
             this._iconHarvest.setVisible(true);
         } else {
@@ -95,7 +104,7 @@ var BaseMine = Building.extend({
         //init a TMP label to show changes in pos 0 0 of this building and hide after 1s
         let label = new cc.LabelBMFont("+" + changes,res.FONT.SOJI[20]);
         label.setColor(color);
-        this.addChild(label,ZORDER_BUILDING_EFFECT);
+        this._effect.addChild(label,ZORDER_BUILDING_EFFECT);
         label.runAction(cc.sequence(cc.moveBy(1,0,50),cc.callFunc(function () {
                 label.removeFromParent(true);
             }

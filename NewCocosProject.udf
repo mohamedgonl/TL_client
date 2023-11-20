@@ -30,8 +30,12 @@
         <OpenedDocuments>
           <FilePathData Path="MatchHistoryItem.csd" />
           <FilePathData Path="HistoryAttackPopup.csd" />
+          <FilePathData Path="ItemInfoPopup.csd" />
+          <FilePathData Path="InfoPopup.csd" />
+          <FilePathData Path="InfoLayer1.csd" />
+          <FilePathData Path="IconMine.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="HistoryAttackPopup.csd" />
+        <ActiveDocument Path="IconMine.csd" />
       </Value>
     </Item>
   </Properties>

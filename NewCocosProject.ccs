@@ -1778,6 +1778,7 @@
         <Project Name="TroopTrainingItem.csd" Type="Node" />
         <Project Name="TroopTrainPopup.csd" Type="Node" />
         <Project Name="UpgradePopup.csd" Type="Node" />
+        <Project Name="IconMine.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

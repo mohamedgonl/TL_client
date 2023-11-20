@@ -1,0 +1,125 @@
+{
+  "ID": "3a1bb660-f589-467c-9c42-774998c0d254",
+  "Version": "3.10.0.0",
+  "Name": "IconMine",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 204,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "guis/collect_res/collect_bg.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 27,
+            "Scale9OriginY": 33,
+            "Scale9Width": 30,
+            "Scale9Height": 35,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": -0.2509,
+              "Y": 48.6573
+            },
+            "Scale": {
+              "ScaleX": 0.6,
+              "ScaleY": 0.6
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": -42.2509,
+            "RightMargin": -41.7491,
+            "TopMargin": -99.1573,
+            "BottomMargin": -1.8427,
+            "Tag": 205,
+            "Children": [
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "guis/collect_res/RES_1.png",
+                  "Plist": ""
+                },
+                "Scale9OriginX": 19,
+                "Scale9OriginY": 20,
+                "Scale9Width": 20,
+                "Scale9Height": 21,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 42.5741,
+                  "Y": 56.7643
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.5068,
+                  "Y": 0.562
+                },
+                "PreSize": {
+                  "X": 0.6905,
+                  "Y": 0.604
+                },
+                "LeftMargin": 13.5741,
+                "RightMargin": 12.4259,
+                "TopMargin": 13.7357,
+                "BottomMargin": 26.2643,
+                "Tag": 206,
+                "ActionTag": -39716999,
+                "Size": {
+                  "X": 58.0,
+                  "Y": 61.0
+                },
+                "Name": "icon",
+                "ctype": "ImageViewObjectData"
+              }
+            ],
+            "ActionTag": 1515184827,
+            "Size": {
+              "X": 84.0,
+              "Y": 101.0
+            },
+            "Name": "bg",
+            "ctype": "ImageViewObjectData"
+          }
+        ],
+        "Size": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "Name": "Node",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "guis/collect_res/collect_bg.png",
+        "guis/collect_res/RES_1.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Node"
+}

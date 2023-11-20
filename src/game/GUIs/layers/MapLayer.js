@@ -38,32 +38,6 @@ var MapLayer = cc.Layer.extend({
         }
     },
 
-    //add building to layer with gridPos of it
-    addBuildingToLayer: function (building, zOrder) {
-        if (building == null) {
-            return;
-        }
-
-        if(!building._type.startsWith("OBS")){
-            building.addIntoMapLayer();
-        }
-
-        //
-        // if(building._type.startsWith("RES"))
-        //     building.setLastCollectTimeAndIconHarvest(this._lastCollectTime);
-        //
-        // let sizeX = building._width;
-        // let sizeY = building._height;
-        // let gridPosX = building._posX;
-        // let gridPosY = building._posY;
-        //
-        // let buildingCenterX = gridPosX + sizeX / 2;
-        // let buildingCenterY = gridPosY + sizeY / 2;
-        // let zOrderValue = zOrder == null ? this.getZOrderByPosition(gridPosX, gridPosY) : zOrder;
-        //
-        // this.addGameObjectToMapLayer(building, buildingCenterX, buildingCenterY, zOrderValue)
-
-    },
 
     //add event listener for map
     addEventListener: function () {

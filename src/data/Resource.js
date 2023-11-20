@@ -157,7 +157,7 @@ var res_ui = {
     INFO_POPUP: "InfoPopup.json",
     BASIC_POPUP: "BasicPopup.json",
     BUTTON_OF_BUILDING: "ButtonOfBuilding.json",
-    ICON_HARVEST: "IconHarvest.json",
+    ICON_MINE: "IconMine.json",
     TROOP_INFO: "TroopInfoPopup.json",
     CLOUD_1: "res/guis/map/cloud_1.png",
     CLOUD_2: "res/guis/map/cloud_2.png",
@@ -167,6 +167,8 @@ var res_ui = {
     MATCH_HISTORY_POPUP: "HistoryAttackPopup.json",
     MATCH_HISTORY_ITEM: "MatchHistoryItem.json",
     USED_TROOP_ITEM: "UsedTroopItem.json",
+    RES_1_COLLECT: "res/guis/collect_res/RES_1.png",
+    RES_2_COLLECT: "res/guis/collect_res/RES_2.png",
 }
 
 var res_shop = {

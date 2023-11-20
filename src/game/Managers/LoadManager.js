@@ -83,11 +83,11 @@ var LoadManager = cc.Node.extend({
 
         //TOW_1
         // 1:'res/Buildings/townhall/TOW_1_1/idle/image0000.png'
-        let townhallLevelCount = 6;
+        let townhallLevelCount = BuildingInfo["TOW_1"].max_level;
         this.loadSpriteToRes(res_map.SPRITE.BODY.TOWNHALL, "res/Buildings/townhall/TOW_1_", "/idle/image0000.png", townhallLevelCount);
 
         //RES_1 gold mine
-        let goldMineLevelCount = Object.keys(this["RES_1"]).length;
+        let goldMineLevelCount = BuildingInfo["RES_1"].max_level;
         this.loadSpriteToRes(res_map.SPRITE.BODY.GOLD_MINE.BOTTOM, "res/Buildings/gold mine/RES_1_", "/idle/image0000.png", goldMineLevelCount);
         this.loadSpriteFolderToRes(res_map.SPRITE.BODY.GOLD_MINE.UPPER,
             "res/Effects/RES_1_",
@@ -99,7 +99,7 @@ var LoadManager = cc.Node.extend({
         //RES_2 elixir mine
         //bottom: res/Buildings/elixir collector/RES_2_1/idle/image0000.png
         //upper: res/Effects/RES_2_1_effect/00.png
-        let elixirMineLevelCount = Object.keys(this["RES_2"]).length;
+        let elixirMineLevelCount = BuildingInfo["RES_2"].max_level;
         this.loadSpriteToRes(res_map.SPRITE.BODY.ELIXIR_MINE.BOTTOM, "res/Buildings/elixir collector/RES_2_", "/idle/image0000.png", elixirMineLevelCount);
 
         this.loadSpriteFolderToRes(res_map.SPRITE.BODY.ELIXIR_MINE.UPPER,
@@ -110,7 +110,7 @@ var LoadManager = cc.Node.extend({
             COUNT_FRAME_MINE_EFFECT);
 
         //STO_1
-        let goldStorageLevelCount = Object.keys(this["STO_1"]).length;
+        let goldStorageLevelCount = BuildingInfo["STO_1"].max_level;
         //body res/Buildings/gold storage/STO_1_1/idle/image0000.png to image0003.png
         this.loadSpriteFolderToRes(res_map.SPRITE.BODY.GOLD_STORAGE,
             "res/Buildings/gold storage/STO_1_",
@@ -120,7 +120,7 @@ var LoadManager = cc.Node.extend({
             4);
 
         //STO_2
-        let elixirStorageLevelCount = Object.keys(this["STO_2"]).length;
+        let elixirStorageLevelCount = BuildingInfo["STO_2"].max_level;
         //body
         //res/Buildings/elixir storage/STO_2_1/idle/image0000.png
         this.loadSpriteFolderToRes(res_map.SPRITE.BODY.ELIXIR_STORAGE,
@@ -135,19 +135,19 @@ var LoadManager = cc.Node.extend({
         //AMC_1
         //body 1 sprite
         //res/Buildings/army camp/AMC_1_1/idle/image0000.png
-        let armyCampLevelCount = Object.keys(this["AMC_1"]).length;
+        let armyCampLevelCount = BuildingInfo["AMC_1"].max_level;
         this.loadSpriteToRes(res_map.SPRITE.BODY.ARMY_CAMP, "res/Buildings/army camp/AMC_1_", "/idle/image0000.png", armyCampLevelCount);
 
         //BAR_1
         //body 1 sprite
         //res/Buildings/barrack/BAR_1_1/idle/image0000.png
-        let barrackLevelCount = Object.keys(this["BAR_1"]).length;
+        let barrackLevelCount = BuildingInfo["BAR_1"].max_level;
         this.loadSpriteToRes(res_map.SPRITE.BODY.BARRACK, "res/Buildings/barrack/BAR_1_", "/idle/image0000.png", barrackLevelCount);
 
         //DEF_1
         //body 5 sprites
         //res/Buildings/cannon/canon_1/idle/image0000.png to image0004.png
-        let cannonLevelCount = Object.keys(this["DEF_1"]).length;
+        let cannonLevelCount = BuildingInfo["DEF_1"].max_level;
         this.loadSpriteFolderToRes(res_map.SPRITE.BODY.CANNON,
             "res/Buildings/cannon/canon_",
             "/idle/image00",
@@ -158,7 +158,7 @@ var LoadManager = cc.Node.extend({
         //DEF_2
         //body
 
-        let def2LevelCount = 9;
+        let def2LevelCount = BuildingInfo["DEF_2"].max_level;
         //path res/Buildings/defense_base/DEF_1_1_Shadow.png
         this.loadSpriteToRes(res_map.SPRITE.BODY.ARCHER_TOWER, "res/Buildings/defense_base/DEF_2_", "_Shadow.png", def2LevelCount);
 
@@ -200,7 +200,7 @@ var LoadManager = cc.Node.extend({
 
         //DEF 3
 
-        let def3LevelCount = 9;
+        let def3LevelCount = BuildingInfo["DEF_3"].max_level;
         //path res/Buildings/Mortar/DEF_3_1/DEF_3_1/idle/image0000.png - > 5
 
         part1 = "res/Buildings/Motar/DEF_3_";

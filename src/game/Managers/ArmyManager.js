@@ -12,14 +12,37 @@ var ArmyManager = cc.Class.extend({
 
     pushBarrack: function (barack) {
         this._barrackList.push(barack);
+        cc.log("update army info")
+        cc.director.getRunningScene().infoLayer.updateUI({
+            army: {
+                current: this.getCurrentSpace(),
+                max: this.getMaxSpace()
+            }
+        });
     },
 
     getArmyCampList: function () {
         return this._armyCampList;
     },
+    updateArmyInfo: function () {
+        cc.log("update army info")
+        cc.director.getRunningScene().infoLayer.updateUI({
+            army: {
+                current: this.getCurrentSpace(),
+                max: this.getMaxSpace()
+            }
+        });
+    },
 
     pushArmyCamp: function (armyCamp) {
         this._armyCampList.push(armyCamp);
+        cc.log("update army info")
+        cc.director.getRunningScene().infoLayer.updateUI({
+            army: {
+                current: this.getCurrentSpace(),
+                max: this.getMaxSpace()
+            }
+        });
     },
 
     setArmyAmount: function (armyAmount) {
@@ -54,7 +77,8 @@ var ArmyManager = cc.Class.extend({
     getMaxSpace: function () {
         let maxTotalSpace = 0;
         this._armyCampList.map(armyCamp => {
-            maxTotalSpace += AMC["AMC_1"][armyCamp._level]["capacity"];
+            if(armyCamp._state !== 1)
+                maxTotalSpace += AMC["AMC_1"][armyCamp._level]["capacity"];
         })
         return maxTotalSpace;
     },
@@ -91,6 +115,7 @@ var ArmyManager = cc.Class.extend({
 
         });
 
+        cc.log("update army info")
         cc.director.getRunningScene().infoLayer.updateUI({
             army: {
                 current: this.getCurrentSpace(),

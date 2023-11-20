@@ -75,11 +75,14 @@ var Building = GameObject.extend({
         mapLayer.addChild(this._bottom, ZORDER_BUILDING_BOTTOM);
         mapLayer.addChild(this._mainSprite,mapLayer.getZOrderByPosition(center.x,center.y)); //add
         mapLayer.addChild(this._effect, ZORDER_BUILDING_EFFECT);
+        mapLayer.addChild(this)
 
         cc.log("posInMap::::::::::::::::",JSON.stringify(posInMap,null,2))
         this._bottom.setPosition(posInMap);
         this._mainSprite.setPosition(posInMap);
         this._effect.setPosition(posInMap);
+
+
 
         // this.addChild(this._bottom);
         // this.addChild(this._mainSprite);
