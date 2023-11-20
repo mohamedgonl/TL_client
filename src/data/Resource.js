@@ -286,6 +286,9 @@ var res_map = {
                 1: "res/Buildings/elixir storage/STO_2_1/idle/image0000.png",
             },
             CANNON: {
+                IDLE:{
+
+                },
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/cannon/canon_1/idle/image0000.png",
                 BULLET: "res/battle/cannon_bullet.png",

@@ -265,22 +265,11 @@ var Building = GameObject.extend({
 
                 //this._upper = new cc.Sprite(upperSprite[0]);
                 //set texture for first frame and remove old action
-                this._upper.setTexture(upperSprite[0]);
                 this._upper.stopAllActions();
-
-
-                let animation = new cc.Animation();
-                let countFrame = Object.keys(upperSprite).length;
-
-
-                for (let i = 0; i < countFrame; i++) {
-                    animation.addSpriteFrameWithFile(upperSprite[i]);
-                }
-                animation.setDelayPerUnit(0.1);
-                animation.setRestoreOriginalFrame(true);
-                let action = cc.animate(animation);
-                this._upper.runAction(cc.repeatForever(action))
-
+                let action = upperSprite.ANIM.clone();
+                let animate = cc.animate(action);
+                animate.repeatForever();
+                this._upper.runAction(animate);
             }
             else {
                 this._upper.setTexture(upperSprite)

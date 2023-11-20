@@ -51,6 +51,7 @@ var LoadManager = cc.Node.extend({
         }
         //load resource to res
         this.loadResource();
+        this.loadSpriteBuilding();
 
     },
 
@@ -519,10 +520,36 @@ var LoadManager = cc.Node.extend({
         this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/idle/image", 18, 23, res_troop.IDLE.ARM_6.UP_LEFT);
         this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/idle/image", 24, 29, res_troop.IDLE.ARM_6.UP);
     },
-    createAnimation: function () {
-        //DEAD_EFFECT
+    loadSpriteBuilding: function () {
+        let maxLevel;
+        //DEF_1
+        maxLevel = BuildingInfo["DEF_1"].max_level;
+        for (let level = 1; level <= maxLevel; level++) {
+            //res/Buildings/cannon/canon_1/idle/image0000.png
+            let link = "res/Buildings/cannon/canon_"+level+"/idle/image";
+            res_map.SPRITE.BODY.CANNON.IDLE[level] = {};
+            this.addAnimationToTarget(link, 0, 4, res_map.SPRITE.BODY.CANNON.IDLE[level],30);
+        }
+
+        //DEF_2
+        maxLevel = BuildingInfo["DEF_2"].max_level;
+        for (let level = 1; level <= maxLevel; level++) {
+            // res/Buildings/AcherTower/DEF_2_1/DEF_2_1/idle/image0000.png
+            let link = "res/Buildings/AcherTower/DEF_2_"+level+"/DEF_2_"+level+"/idle/image";
+            res_map.SPRITE.BODY.ARCHER_TOWER.IDLE[level] = {};
+            this.addAnimationToTarget(link, 0, 4, res_map.SPRITE.BODY.ARCHER_TOWER.IDLE[level],30);
+        }
+
+        //DEF_3
+        maxLevel = BuildingInfo["DEF_3"].max_level;
+        for (let level = 1; level <= maxLevel; level++) {
+            // res/Buildings/Motar/DEF_3_1/DEF_3_1/idle/image0000.png
+            let link = "res/Buildings/Motar/DEF_3_"+level+"/DEF_3_"+level+"/idle/image";
+            res_map.SPRITE.BODY.MORTAR.IDLE[level] = {};
+            this.addAnimationToTarget(link, 0, 4, res_map.SPRITE.BODY.MORTAR.IDLE[level],30);
+        }
     },
-    addAnimationToTarget: function (link, start, end, target) {
+    addAnimationToTarget: function (link, start, end, target, duration =1 ) {
         let animation = new cc.Animation();
         for (var i = start; i <= end; i++) {
             let res;
@@ -535,11 +562,11 @@ var LoadManager = cc.Node.extend({
             else
                 res = link + i + ".png";
             target[i - start] = res;
-            // cc.log("RES:::::::::::", res);
+            cc.log("RES:::::::::::", res);
             animation.addSpriteFrameWithFile(res);
         }
         //loop in 1s
-        animation.setDelayPerUnit(1 / (end - start + 1));
+        animation.setDelayPerUnit(duration / (end - start + 1));
         animation.setRestoreOriginalFrame(true);
         target.ANIM = animation;
         target.ANIM.retain();
