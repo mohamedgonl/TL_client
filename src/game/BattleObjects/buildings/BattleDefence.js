@@ -94,7 +94,7 @@ var BattleDefence = BattleBuilding.extend({
             y: this.y,
             _posX: this.centerPoint.x,
             _posY: this.centerPoint.y
-        }, target, this.damagePerShot, this._attackRadius, bulletInitPos);
+        }, target, this.damagePerShot, this._attackRadius, this.attackArea, bulletInitPos);
 
         LogUtils.writeLog('def ' + this._id + ' fire to ' + target._posX + ' ' + target._posY)
     },

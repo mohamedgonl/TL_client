@@ -41,8 +41,8 @@ var BattleEndLayer = cc.Layer.extend({
         this.star2.setVisible(starAmount > 1);
         this.star3.setVisible(starAmount > 2);
 
-        this.goldText.setString(gold);
-        this.elixirText.setString(elixir);
+        this.goldText.setString(Utils.numberToText(gold));
+        this.elixirText.setString(Utils.numberToText(elixir));
         this.trophyText.setString(isWin ? trophy : ("-" + trophy));
 
         //list used troops

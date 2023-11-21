@@ -3,8 +3,8 @@ var MortarBullet = Bullet.extend({
     target: null,
     gridSpeed: 13,
 
-    ctor: function (type, startPoint, target, damagePerShot, attackRadius, initPos) {
-        this._super(type, res_map.SPRITE.BODY.MORTAR.BULLET, startPoint, target, damagePerShot, attackRadius, initPos);
+    ctor: function (type, startPoint, target, damagePerShot, attackRadius, attackArea, initPos) {
+        this._super(type, res_map.SPRITE.BODY.MORTAR.BULLET, startPoint, target, damagePerShot, attackRadius, attackArea, initPos);
 
         this.setScale(0.5, 0.5);
 
@@ -69,12 +69,26 @@ var MortarBullet = Bullet.extend({
 
         const listTargets = BattleManager.getInstance()
             .getListTroopsInRange(cc.p(this.destination._posX, this.destination._posY), this.attackRadius);
+
         for (let target of listTargets) {
-            if (target.isAlive() && typeof this.target.onGainDamage === 'function')
+            if (this.checkTarget(target))
                 target.onGainDamage(this.damagePerShot);
         }
 
         this.destroyBullet();
+    },
+
+    //check if troop can be attacked
+    checkTarget: function (target) {
+        // target in air
+        if (target.isOverhead && this.attackArea === DEF_ATTACK_AREA.GROUND) {
+            return false;
+        }
+        // target on ground
+        if (!target.isOverhead && this.attackArea === DEF_ATTACK_AREA.OVERHEAD) {
+            return false;
+        }
+        return target.isAlive() && typeof this.target.onGainDamage === 'function';
     },
 });
 
