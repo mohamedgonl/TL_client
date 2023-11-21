@@ -1,5 +1,15 @@
 var BattleArcherTower = BattleDefence.extend({
     _type: "DEF_2",
+    deltaBarrelPosition: {//vi tri nong sung so voi center theo tung huong
+        0: {dx: 0, dy: 50,},
+        1: {dx: -5, dy: 50,},
+        2: {dx: -10, dy: 45,},
+        3: {dx: -10, dy: 50,},
+        4: {dx: 0, dy: 70,},
+        5: {dx: 10, dy: 50,},
+        6: {dx: 10, dy: 45,},
+        7: {dx: 10, dy: 40,},
+    },
 
     ctor: function (level, id, posX, posY) {
         this._super(level, id, posX, posY);
@@ -23,7 +33,7 @@ var BattleArcherTower = BattleDefence.extend({
 
     attack: function (target) {
         //logic
-        this._super(target, cc.p(this.x, this.y));
+        this._super(target);
 
         //UI
         //run action attack

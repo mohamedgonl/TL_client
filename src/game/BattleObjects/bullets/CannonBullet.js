@@ -28,7 +28,7 @@ var CannonBullet = Bullet.extend({
         let alpha = 1 - this.time / this.totalTime;
 
         if (alpha < 1) {
-            const newPos = cc.pLerp(cc.p(this.startPoint.x, this.startPoint.y), cc.p(this.destination.x, this.destination.y), alpha);
+            const newPos = cc.pLerp(cc.p(this.initPos.x, this.initPos.y), cc.p(this.destination.x, this.destination.y), alpha);
             this.setPosition(newPos.x, newPos.y);
         }
     },

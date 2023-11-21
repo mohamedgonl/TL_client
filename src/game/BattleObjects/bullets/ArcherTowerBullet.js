@@ -21,8 +21,8 @@ var ArcherTowerBullet = Bullet.extend({
     init: function (startPoint, target, initPos) {
         this._super(startPoint, target, initPos);
 
-        this.func = this.calcMotionFunc(startPoint, cc.p((startPoint.x + this.destination.x) / 2, startPoint.y + 200), this.destination)
-        this.distanceX = this.destination.x - startPoint.x;
+        this.func = this.calcMotionFunc(initPos, cc.p((initPos.x + this.destination.x) / 2, initPos.y + 200), this.destination)
+        this.distanceX = this.destination.x - initPos.x;
     },
 
     gameLoop: function (dt) {
