@@ -171,6 +171,7 @@ var BattleScene = cc.Scene.extend({
         const loadingView = new Loading(Loading.START);
         this.addChild(loadingView);
         loadingView.startLoading(function () {
+            cc.eventManager.removeAllListeners();
             cc.director.runScene(new GameScene());
         })
     },

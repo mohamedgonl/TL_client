@@ -49,6 +49,7 @@ var FightPopup = cc.Layer.extend({
         MapManager.getInstance().gameScene.addChild(loadingView);
 
         loadingView.startLoading(function () {
+            cc.eventManager.removeAllListeners();
             cc.director.runScene(new BattleScene());
             testnetwork.connector.sendFindMatch();
         });
