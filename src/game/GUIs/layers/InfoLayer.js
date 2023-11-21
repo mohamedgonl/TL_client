@@ -139,7 +139,7 @@ var InfoLayer = cc.Layer.extend({
 
             //set amount
             if (amount != null)
-                node.amount.setString(amount);
+                node.amount.setString(Utils.numberToText(amount));
             else
                 node.amount.setVisible(false);
 
@@ -278,21 +278,21 @@ var InfoLayer = cc.Layer.extend({
         if (data.resource != null) {
             let res = data.resource;
             if (res.gold != null) {
-                this.gold_container.getChildByName("text").setString(res.gold);
+                this.gold_container.getChildByName("text").setString(Utils.numberToText(res.gold));
                 let barPercent = res.gold / PlayerInfoManager.getInstance().getMaxResource().gold;
 
                 if (barPercent >= 0 && barPercent <= 1)
                     this.gold_container.bar_bg.bar.setPercent(barPercent * 100);
             }
             if (res.elixir != null) {
-                this.elixir_container.text.setString(res.elixir);
+                this.elixir_container.text.setString(Utils.numberToText(res.elixir));
                 let barPercent = res.elixir / PlayerInfoManager.getInstance().getMaxResource().elixir;
 
                 if (barPercent >= 0 && barPercent <= 1)
                     this.elixir_container.bar_bg.bar.setPercent(barPercent * 100);
             }
             if (res.gem != null) {
-                this.g_container.text.setString(res.gem);
+                this.g_container.text.setString(Utils.numberToText(res.gem));
             }
         }
 
@@ -306,12 +306,12 @@ var InfoLayer = cc.Layer.extend({
         //max resource
         if (data.maxResource != null) {
             if (data.maxResource.gold != null) {
-                this.gold_container.text_max.setString("Tối đa:" + data.maxResource.gold);
+                this.gold_container.text_max.setString("Tối đa:" +Utils.numberToText(data.maxResource.gold));
                 let barPercent = PlayerInfoManager.getInstance().getResource().gold / data.maxResource.gold;
                 this.gold_container.bar_bg.bar.setPercent(barPercent * 100);
             }
             if (data.maxResource.elixir != null) {
-                this.elixir_container.text_max.setString("Tối đa:" + data.maxResource.elixir);
+                this.elixir_container.text_max.setString("Tối đa:" +Utils.numberToText(data.maxResource.elixir));
                 let barPercent = PlayerInfoManager.getInstance().getResource().elixir / data.maxResource.elixir;
                 this.elixir_container.bar_bg.bar.setPercent(barPercent * 100);
             }
@@ -333,7 +333,7 @@ var InfoLayer = cc.Layer.extend({
         let building = MapManager.getInstance().getBuildingById(id);
 
         //select temporary building, return
-        if(building == null) {
+        if (building == null) {
             this.menu.removeAllChildren();
             return;
         }
