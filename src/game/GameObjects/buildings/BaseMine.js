@@ -16,7 +16,7 @@ var BaseMine = Building.extend({
         //add icon harvest
         let node = CCSUlties.parseUIFile(res_ui.ICON_MINE);
         let icon = node.getChildByName("bg").getChildByName("icon");
-        icon.loadTexture(res_ui[this._type+"_COLLECT"]);
+        icon.loadTexture(res_ui[this._type + "_COLLECT"]);
         icon.setScale(0.9)
         this._iconHarvest = node;
         this._effect.addChild(this._iconHarvest, ZORDER_BUILDING_EFFECT);
@@ -49,8 +49,7 @@ var BaseMine = Building.extend({
     checkShowHarvestIcon: function () {
         cc.log("checkShowHarvestIcon")
 
-        if(this._state !== 0)
-        {
+        if (this._state !== 0) {
             this._iconHarvest.setVisible(false);
             return;
         }
@@ -66,7 +65,7 @@ var BaseMine = Building.extend({
 
         let capacity = LoadManager.getInstance().getConfig(this._type, this._level, "capacity");
 
-        cc.log("harvestAmount",harvestAmount);
+        cc.log("harvestAmount", harvestAmount);
         if (harvestAmount >= 2) {
             this._showIconHarvest = true;
             this._iconHarvest.setVisible(true);
@@ -75,45 +74,40 @@ var BaseMine = Building.extend({
             this._iconHarvest.setVisible(false);
         }
     },
-    harvest: function (lastCollectTime,gold,elixir) {
+    harvest: function (lastCollectTime, gold, elixir) {
 
         this._lastCollectTime = lastCollectTime;
         let oldElixir = PlayerInfoManager.getInstance().getResource().elixir;
-        PlayerInfoManager.getInstance().setResource({elixir:elixir});
+        PlayerInfoManager.getInstance().setResource({elixir: elixir});
         let changesElixir = elixir - oldElixir;
 
         let oldGold = PlayerInfoManager.getInstance().getResource().gold;
-        PlayerInfoManager.getInstance().setResource({gold:gold});
+        PlayerInfoManager.getInstance().setResource({gold: gold});
         let changesGold = gold - oldGold;
 
 
-        
         let color;
         let changes = 0;
-        if(this._type === "RES_1")
-        {
-            color = cc.color(255,255,0);
+        if (this._type === "RES_1") {
+            color = cc.color(255, 255, 0);
             changes = changesGold;
-        }
-        else
-        {
-            color = cc.color(255,0,255);
+        } else {
+            color = cc.color(255, 0, 255);
             changes = changesElixir;
         }
 
         //init a TMP label to show changes in pos 0 0 of this building and hide after 1s
-        let label = new cc.LabelBMFont("+" + changes,res.FONT.SOJI[20]);
+        let label = new cc.LabelBMFont("+" + Utils.numberToText(changes), res.FONT.SOJI[20]);
         label.setColor(color);
-        this._effect.addChild(label,ZORDER_BUILDING_EFFECT);
-        label.runAction(cc.sequence(cc.moveBy(1,0,50),cc.callFunc(function () {
+        this._effect.addChild(label, ZORDER_BUILDING_EFFECT);
+        label.runAction(cc.sequence(cc.moveBy(1, 0, 50), cc.callFunc(function () {
                 label.removeFromParent(true);
             }
         )));
 
         //if storage is full, harvest a part. If timeNow - lastCollectTime > offsetTime, harvest a part
         let timeNow = TimeManager.getInstance().getCurrentTimeInSecond();
-        if(timeNow - this._lastCollectTime > OFFSET_HARVEST)
-        {
+        if (timeNow - this._lastCollectTime > OFFSET_HARVEST) {
 
         }
 
@@ -128,6 +122,6 @@ var BaseMine = Building.extend({
         this.scheduleOnce(function () {
             this._canHarvest = true;
             this.loadButton();
-        }.bind(this),5);
+        }.bind(this), 5);
     }
 });
