@@ -2,9 +2,9 @@ var TroopListItem = cc.Node.extend({
     ctor: function (troopCfgId, curPage, index) {
         this._super();
         this._troopCfgId = null;
-        this._level= 1;
-        this._space= null;
-        this._count= 0;
+        this._level = 1;
+        this._space = null;
+        this._count = 0;
         this._tempCount = 0;
         this._isLongPress = false;
         this._index = index;
@@ -40,7 +40,7 @@ var TroopListItem = cc.Node.extend({
 
         cc.eventManager.addCustomListener(EVENT_NAMES.RESOURCE_CHANGED, (e) => {
             cc.log("RESOURCE_CHANGED")
-            // this.recheck();
+            this.recheck();
         })
 
         cc.eventManager.addCustomListener(EVENT_NAMES.BUILDING_UPDATED, (e) => {
@@ -67,7 +67,7 @@ var TroopListItem = cc.Node.extend({
         } else {
             this._nodeButton.setOpacity(255);
         }
-        cc.log(this._troopCfgId + " " + PlayerInfoManager.getInstance().getResource("elixir")+ " " + price)
+        cc.log(this._troopCfgId + " " + PlayerInfoManager.getInstance().getResource("elixir") + " " + price)
         if (PlayerInfoManager.getInstance().getResource("elixir") < price) {
             this._available = false;
             let costContainer = this._node.getChildByName("cost_container");
@@ -82,12 +82,9 @@ var TroopListItem = cc.Node.extend({
     setCostDisplay: function () {
         let costContainer = this._node.getChildByName("cost_container")
         if (this._barrackRequired <= this._curBarrack._level) {
-            if (this.label) {
-                let barRequired = this._node.getChildByName("bar_required");
-                barRequired.setVisible(false);
-                costContainer.setVisible(true);
-                this.label.setVisible(false);
-            }
+            let barRequired = this._node.getChildByName("bar_required");
+            barRequired.setVisible(false);
+            costContainer.setVisible(true);
             let costString = costContainer.getChildByName("cost");
             costString.setString(this._cost);
         } else {
@@ -95,10 +92,12 @@ var TroopListItem = cc.Node.extend({
             let barRequired = this._node.getChildByName("bar_required");
             barRequired.setVisible(true);
             let barRqString = barRequired.getChildByName("bar_rq_string");
-            let label = new cc.LabelBMFont("Yêu cầu\nNhà lính cấp " + this._barrackRequired, res.FONT.FISTA["16"], 120, cc.TEXT_ALIGNMENT_CENTER);
-            label.setColor(COLOR_REQUIRED_TROOP)
-            barRqString.addChild(label);
-            this.label = label;
+            if(!this.label){
+                let label = new cc.LabelBMFont("Yêu cầu\nNhà lính cấp " + this._barrackRequired, res.FONT.FISTA["16"], 120, cc.TEXT_ALIGNMENT_CENTER);
+                label.setColor(COLOR_REQUIRED_TROOP)
+                barRqString.addChild(label);
+                this.label = label;
+            }
         }
     },
 
@@ -151,19 +150,21 @@ var TroopListItem = cc.Node.extend({
     },
 
     handleTrainTroop: function (sender, type) {
+        if(this._available) {
         cc.log("CREATE TROOP ::: " + this._troopCfgId + " PAGE :" + this._curPage)
-        if (type === ccui.Widget.TOUCH_BEGAN) {
-            this.setScale(BUTTON_TOUCH_SCALE_BIG);
-            this.schedule(this.handleLongPress, LONG_PRESS_THRESHOLD);
-        }
-        if (type === ccui.Widget.TOUCH_ENDED) {
-            this.setScale(1);
-            this.unschedule(this.handleLongPress);
+            if (type === ccui.Widget.TOUCH_BEGAN) {
+                this.setScale(BUTTON_TOUCH_SCALE_BIG);
+                this.schedule(this.handleLongPress, LONG_PRESS_THRESHOLD);
+            }
+            if (type === ccui.Widget.TOUCH_ENDED || type === ccui.Widget.TOUCH_MOVED) {
+                this.setScale(1);
+                this.unschedule(this.handleLongPress);
 
-            this.dispatchTrainEvent(this._isLongPress ? this._tempCount : 1, false, true);
+                this.dispatchTrainEvent(this._isLongPress ? this._tempCount : 1, false, true);
 
-            this._tempCount = 0;
-            this._isLongPress = false;
+                this._tempCount = 0;
+                this._isLongPress = false;
+            }
         }
     },
 
@@ -191,11 +192,10 @@ var TroopListItem = cc.Node.extend({
         cc.eventManager.dispatchEvent(event);
     },
 
-    updateResource:  function () {
+    updateResource: function () {
         let trainCost = TROOP[this._troopCfgId][this._level]["trainingElixir"];
         PlayerInfoManager.getInstance().changeResource("elixir", -trainCost);
     }
-
 
 
 })
