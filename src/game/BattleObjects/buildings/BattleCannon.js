@@ -17,7 +17,7 @@ var BattleCannon = BattleDefence.extend({
         this._fire = new cc.Sprite();
         this._fire.setAnchorPoint(0.5, 0.5);
         this._fire.setScale(0.7, 0.7);
-        this._fire.setPosition(this._body.x + this.deltaBarrelPosition[0].dx, this._body.y + this.deltaBarrelPosition[0].dy);
+        this._fire.setPosition(this._upper.x + this.deltaBarrelPosition[0].dx, this._upper.y + this.deltaBarrelPosition[0].dy);
         this.addChild(this._fire);
 
         //init animation
@@ -29,19 +29,19 @@ var BattleCannon = BattleDefence.extend({
     },
 
     loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.CANNON[level][0], null, 2, null, res_map.SPRITE.BODY.CANNON.JUNK);
+        this.loadSprite(res_map.SPRITE.BODY.CANNON.BOTTOM[level], res_map.SPRITE.BODY.CANNON[level], 2, null, res_map.SPRITE.BODY.CANNON.JUNK);
     },
 
     setDirection: function (direct) {
         this.direct = direct;
         if (this.direct <= TOTAL_DEFENCE_DIRECT / 2) {
-            this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][this.direct]);
-            this._body.flippedX = false;
+            this._upper.setTexture(res_map.SPRITE.BODY.CANNON[this._level][this.direct]);
+            this._upper.flippedX = false;
         } else {
-            this._body.setTexture(res_map.SPRITE.BODY.CANNON[this._level][TOTAL_DEFENCE_DIRECT - this.direct]);
-            this._body.flippedX = true;
+            this._upper.setTexture(res_map.SPRITE.BODY.CANNON[this._level][TOTAL_DEFENCE_DIRECT - this.direct]);
+            this._upper.flippedX = true;
         }
-        this._fire.setPosition(this._body.x + this.deltaBarrelPosition[this.direct].dx, this._body.y + this.deltaBarrelPosition[this.direct].dy);
+        this._fire.setPosition(this._upper.x + this.deltaBarrelPosition[this.direct].dx, this._upper.y + this.deltaBarrelPosition[this.direct].dy);
     },
 
     attack: function (target) {
@@ -57,7 +57,7 @@ var BattleCannon = BattleDefence.extend({
             delayPerUnit: 0.1,
             restoreOriginalFrame: false
         });
-        this._body.runAction(actionAttack);
+        this._upper.runAction(actionAttack);
 
         //run action fire
         this._fire.stopAction(this.actionFire);

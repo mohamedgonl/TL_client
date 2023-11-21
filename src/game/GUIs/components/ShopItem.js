@@ -76,9 +76,9 @@ var ShopItem = cc.Node.extend({
             else {
                 price = BDH["BDH_1"][bdhCount+1]["coin"];
             }
-                price_string.setString(price);
+                price_string.setString(Utils.numberToText(price));
         } else {
-            price_string.setString(data.price === 0 ? "Miễn phí" : data.price);
+            price_string.setString(data.price === 0 ? "Miễn phí" : Utils.numberToText(data.price));
         }
 
 

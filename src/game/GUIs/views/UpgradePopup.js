@@ -12,14 +12,14 @@ var UpgradePopup = cc.Node.extend({
     ctor: function (building) {
         this._super();
 
-        this.upgrade_container= {
-                close_btn: null,
-                text: null,
-                white_container: null,
-                node_building: null,
-                node_infor: null,
-                node_text: null,
-                btn_upgrade: null,
+        this.upgrade_container = {
+            close_btn: null,
+            text: null,
+            white_container: null,
+            node_building: null,
+            node_infor: null,
+            node_text: null,
+            btn_upgrade: null,
         }
         this.building = building;
         this.building = cc.director.getRunningScene().getMapLayer().chosenBuilding;
@@ -47,11 +47,11 @@ var UpgradePopup = cc.Node.extend({
         cc.director.getRunningScene().infoLayer.setVisible(false);
 
         //set text : Nâng nhà chính cấp 7
-        let level = this.building._level+1;
+        let level = this.building._level + 1;
         container.text.setString("Nâng lên cấp " + level);
 
         //create a building and set to node_building
-        let newBuilding = getBuildingFromType(this.building._type, this.building._level+1);
+        let newBuilding = getBuildingFromType(this.building._type, this.building._level + 1);
         newBuilding.setScale(1.5)
         container.node_building.addChild(newBuilding);
 
@@ -69,39 +69,33 @@ var UpgradePopup = cc.Node.extend({
         let building = this.building;
         let priceGold = LoadManager.getInstance().getConfig(building._type, building._level + 1).gold;
         let priceElixir = LoadManager.getInstance().getConfig(building._type, building._level + 1).elixir;
-        if(priceGold)
-        {
+        if (priceGold) {
             goldIcon.setVisible(true);
             elixirIcon.setVisible(false);
-            resourceText.setString(priceGold);
+            resourceText.setString(Utils.numberToText(priceGold));
             //nếu không đủ tiền, hiện tiền màu đỏ
-            if(priceGold > PlayerInfoManager.getInstance().getResource().gold)
-            {
+            if (priceGold > PlayerInfoManager.getInstance().getResource().gold) {
                 resourceText.setColor(cc.color.RED);
             }
-        }
-        else
-        {
+        } else {
             goldIcon.setVisible(false);
             elixirIcon.setVisible(true);
-            resourceText.setString(priceElixir);
+            resourceText.setString(Utils.numberToText(priceElixir));
             //nếu không đủ tiền, hiện tiền màu đỏ
-            if(priceElixir > PlayerInfoManager.getInstance().getResource().elixir)
-            {
+            if (priceElixir > PlayerInfoManager.getInstance().getResource().elixir) {
                 resourceText.setColor(cc.color.RED);
             }
         }
 
         //nếu level nhà chính không đủ thì disable button
         let levelTownHall = MapManager.getInstance().getTownHall().getLevel();
-        let levelRequire = LoadManager.getInstance().getConfig(building._type, building._level + 1,"townHallLevelRequired")||1;
-        if(levelTownHall < levelRequire)
-        {
+        let levelRequire = LoadManager.getInstance().getConfig(building._type, building._level + 1, "townHallLevelRequired") || 1;
+        if (levelTownHall < levelRequire) {
             //label "Yêu cầu nhà chính cấp 2" and add to node_text at middle
             let label = new cc.LabelBMFont("Yêu cầu nhà chính cấp " + levelRequire, res.FONT.SOJI[20]);
             container.node_text.addChild(label);
             //set anchor point
-            label.setAnchorPoint(0.5,1);
+            label.setAnchorPoint(0.5, 1);
             //turn red
             label.setColor(cc.color.RED);
             //set visible false for buttn upgrade
@@ -109,7 +103,7 @@ var UpgradePopup = cc.Node.extend({
         }
 
         //set text time
-        let time = LoadManager.getInstance().getConfig(building._type, building._level + 1,"buildTime");
+        let time = LoadManager.getInstance().getConfig(building._type, building._level + 1, "buildTime");
         let stringTime = Utils.getTimeString(time);
         container.text_time.setString(stringTime);
     },
