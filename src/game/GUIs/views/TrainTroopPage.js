@@ -47,14 +47,16 @@ var TrainTroopPage = cc.Node.extend({
     initTrainingList: function () {
         let events = []
         this._curBarrack.getTrainingList().map(e => {
-            let event = {};
-            event.data = {
-                cfgId: e.cfgId,
-                count: e.count,
-                lastTrainingTime: this._curBarrack.getLastTrainingTime(),
-                isInit: true
+            if(TROOP_ANIMS_LIST.includes(e.cfgId)) {
+                let event = {};
+                event.data = {
+                    cfgId: e.cfgId,
+                    count: e.count,
+                    lastTrainingTime: this._curBarrack.getLastTrainingTime(),
+                    isInit: true
+                }
+                events.push(event);
             }
-            events.push(event);
         });
         cc.log("EVENTS TROOP _____________________________________________________ \n" + JSON.stringify(events));
         if (events.length > 0) {
@@ -155,7 +157,7 @@ var TrainTroopPage = cc.Node.extend({
     updateTotalTimeString: function () {
         cc.log("UPDATE TOTAL TIME ::: " + this._totalTime)
         let totalTimeString = this._trainContainer.getChildByName("total_time_string");
-        totalTimeString.setString(this._totalTime + "s");
+        totalTimeString.setString(fr.toGameTimeString(this._totalTime));
     },
 
     updateDoneNowButton: function (available) {
