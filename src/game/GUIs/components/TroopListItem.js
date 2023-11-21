@@ -155,6 +155,12 @@ var TroopListItem = cc.Node.extend({
                 this.setScale(BUTTON_TOUCH_SCALE_BIG);
                 this.schedule(this.handleLongPress, LONG_PRESS_THRESHOLD);
             }
+            if(type === ccui.Widget.TOUCH_MOVED) {
+                this.setScale(1);
+                this.unschedule(this.handleLongPress);
+                this._tempCount = 0;
+                this._isLongPress = false;
+            }
             if (type === ccui.Widget.TOUCH_ENDED) {
                 this.setScale(1);
                 this.unschedule(this.handleLongPress);
