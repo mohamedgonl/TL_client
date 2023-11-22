@@ -3,6 +3,11 @@
 //  level: level of building
 //  posX: position x of building
 //  posY: position y of building
+let BUILDING_STATE = {
+    IDLE: 0,
+    BUILD: 1,
+    UPGRADE: 2,
+}
 var Building = GameObject.extend({
     //  example: building = new Townhall(type, level,id, posX, posY);
     ctor: function (level =1 ,id,posX,posY,status,startTime,endTime) {
@@ -382,7 +387,6 @@ var Building = GameObject.extend({
     },
     //3 state of Square: 0: no square, 1: green square, 2: red square
     setSquare: function (square) {
-        cc.log("setSquare",square)
         if(square === 0){
             this._green_square.setVisible(false);
             this._red_square.setVisible(false);
@@ -517,8 +521,13 @@ var Building = GameObject.extend({
         this._startTime = null;
         this._endTime = null;
         this._progressBar.setVisible(false);
+
+        //fence
+        this._fence.setVisible(false);
+
         //reload button
         this.loadButton();
+
         //unschedule update
         this.unschedule(this.update);
     },
@@ -529,7 +538,11 @@ var Building = GameObject.extend({
 
         //remove from layer
         let mapLayer = cc.director.getRunningScene().mapLayer;
-        mapLayer.removeBuilding(this);
+        mapLayer.unSelectBuilding();
+        this._mainSprite.removeFromParent(true);
+        this._bottom.removeFromParent(true);
+        this._effect.removeFromParent(true);
+        this.removeFromParent(true);
 
         //remove from mapManager
         MapManager.getInstance().removeBuilding(this);
@@ -626,12 +639,28 @@ var Building = GameObject.extend({
     onClickStop: function () {
 
 
-        //if cancel, return 50% resource, if current resource + return resource > max resource, cannot cancel
-        let priceGold = LoadManager.getInstance().getConfig(this._type, this._level+1, "gold") || 0;
-        let priceElixir = LoadManager.getInstance().getConfig(this._type, this._level+1, "elixir") || 0;
+        //if cancel, return 50% resource, if current resource + return resource > max resource, cannot cancel]
+
+        let levelBuilding;
+        if(this._state === BUILDING_STATE.BUILD)
+        {
+            levelBuilding = 0;
+        }
+        else{
+            levelBuilding = this._level;
+        }
+        let priceGold = LoadManager.getInstance().getConfig(this._type, levelBuilding, "gold") || 0;
+        let priceElixir = LoadManager.getInstance().getConfig(this._type, levelBuilding, "elixir") || 0;
         let returnGold = Math.floor(priceGold/2);
         let returnElixir = Math.floor(priceElixir/2);
         let maxResource = PlayerInfoManager.getInstance().getMaxResource();
+
+        cc.log("returnGold",returnGold)
+        cc.log("returnElixir",returnElixir)
+        cc.log("maxResource",maxResource.gold,maxResource.elixir)
+        cc.log("PlayerInfoManager.getInstance().getResource().gold",PlayerInfoManager.getInstance().getResource().gold)
+        cc.log("PlayerInfoManager.getInstance().getResource().elixir",PlayerInfoManager.getInstance().getResource().elixir)
+
 
         if(PlayerInfoManager.getInstance().getResource().gold + returnGold > maxResource.gold ||
             PlayerInfoManager.getInstance().getResource().elixir + returnElixir > maxResource.elixir)

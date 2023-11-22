@@ -45,28 +45,24 @@ var BaseMine = Building.extend({
         testnetwork.connector.sendHarvest(this._id);
     },
 
+    getHarvestAmountClient: function () {
+        let timeNow = TimeManager.getInstance().getCurrentTimeInSecond();
+        let time = timeNow - this._lastCollectTime;
+        let productivity = LoadManager.getInstance().getConfig(this._type, this._level, "productivity");
+        let harvestAmount = Math.floor(time * productivity / 3600);
+        return harvestAmount;
+    },
 
     checkShowHarvestIcon: function () {
-        cc.log("checkShowHarvestIcon")
-
-        if (this._state !== 0) {
+        if (this._state !== BUILDING_STATE.IDLE) {
             this._iconHarvest.setVisible(false);
             return;
         }
-
-        //if can harvest >= 1% of capacity , show icon
-        let timeNow = TimeManager.getInstance().getCurrentTimeInSecond();
-
-        let time = timeNow - this._lastCollectTime;
-
-        let productivity = LoadManager.getInstance().getConfig(this._type, this._level, "productivity");
-
-        let harvestAmount = Math.floor(time * productivity / 3600);
-
+        let harvestAmount = this.getHarvestAmountClient();
         let capacity = LoadManager.getInstance().getConfig(this._type, this._level, "capacity");
 
-        cc.log("harvestAmount", harvestAmount);
-        if (harvestAmount >= 2) {
+        //if can harvest >= 1% of capacity , show icon
+        if (harvestAmount >= capacity / 100) {
             this._showIconHarvest = true;
             this._iconHarvest.setVisible(true);
         } else {
@@ -75,7 +71,6 @@ var BaseMine = Building.extend({
         }
     },
     harvest: function (lastCollectTime, gold, elixir) {
-
         this._lastCollectTime = lastCollectTime;
         let oldElixir = PlayerInfoManager.getInstance().getResource().elixir;
         PlayerInfoManager.getInstance().setResource({elixir: elixir});
@@ -105,23 +100,32 @@ var BaseMine = Building.extend({
             }
         )));
 
-        //if storage is full, harvest a part. If timeNow - lastCollectTime > offsetTime, harvest a part
-        let timeNow = TimeManager.getInstance().getCurrentTimeInSecond();
-        if (timeNow - this._lastCollectTime > OFFSET_HARVEST) {
-
+        //if storage is full, harvest a part and show full icon harvest
+        let capacity = LoadManager.getInstance().getConfig(this._type, this._level, "capacity");
+        let bg = this._iconHarvest.getChildByName("bg");
+        if(changes < this.getHarvestAmountClient()){
+            this._showIconHarvest = true;
+            this._canHarvest = true;
+            this._iconHarvest.setVisible(true);
+            bg.loadTexture(res_ui.RES_BG_COLLECT_FULL);
         }
-
-
-        //sau 5s moi duoc nhan 1 lan
-        this._canHarvest = false;
-        this._iconHarvest.setVisible(false);
-        this._showIconHarvest = false;
+        else{
+            this._showIconHarvest = false;
+            this._canHarvest = false;
+            this._iconHarvest.setVisible(false);
+            bg.loadTexture(res_ui.RES_BG_COLLECT);
+            this.scheduleOnce(function () {
+                this._canHarvest = true;
+                this.loadButton();
+            }.bind(this), 5);
+        }
 
         this.loadButton();
 
-        this.scheduleOnce(function () {
-            this._canHarvest = true;
-            this.loadButton();
-        }.bind(this), 5);
-    }
+
+    },
+    onSelected: function () {
+        this._super();
+        cc.log("harvestAmount", this.getHarvestAmountClient());
+    },
 });

@@ -110,42 +110,42 @@ var InfoPopup = cc.Node.extend({
                 icon.setTexture(res.ICON.GOLD_CAPACITY);
                 let current = this.building.getCurrentAmount().gold;
                 let capacity = this.building._capacityGold;
-                text.setString("Sức chứa:" + Utils.numberToText(current) + "/" + Utils.numberToText(capacity));
+                text.setString("Sức chứa: " + Utils.numberToText(current) + "/" + Utils.numberToText(capacity));
                 bar.setPercent(current/capacity*100)
                 break;
             case "capacityElixir":
                 icon.setTexture(res.ICON.ELIXIR_CAPACITY);
                 let currentElixir = this.building.getCurrentAmount().elixir;
                 let capacityElixir = this.building._capacityElixir;
-                text.setString("Sức chứa:" + Utils.numberToText(currentElixir) + "/" + Utils.numberToText(capacityElixir));
+                text.setString("Sức chứa: " + Utils.numberToText(currentElixir) + "/" + Utils.numberToText(capacityElixir));
                 bar.setPercent(currentElixir/capacityElixir*100)
                 break;
             case "hitpoints":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.HEART);
-                text.setString("Máu:" + Utils.numberToText(this.building._hitpoints));
+                text.setString("Máu: " + Utils.numberToText(this.building._hitpoints));
                 break;
             case "productionGold":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.GOLD_PD_RATE);
-                text.setString("Sản lượng:" + Utils.numberToText(this.building._productivityGold) + "/h");
+                text.setString("Sản lượng: " + Utils.numberToText(this.building._productivityGold) + "/h");
                 break;
             case "productionElixir":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.ELIXIR_PD_RATE);
-                text.setString("Sản lượng:" + Utils.numberToText(this.building._productivityElixir) + "/h");
+                text.setString("Sản lượng: " + Utils.numberToText(this.building._productivityElixir) + "/h");
                 break;
             case "damage":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.DAMAGE);
-                // text.setString("Sát thương:" + this.building._damage);
+                text.setString("Sát thương: " + this.building._damage);
                 break;
             case "army":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.ARMY);
                 let armyTotal = ArmyManager.getInstance().getMaxSpace();
                 let armyCurrent = ArmyManager.getInstance().getCurrentSpace();
-                text.setString("Quân lính:" + armyCurrent + "/" + armyTotal);
+                text.setString("Quân lính: " + armyCurrent + "/" + armyTotal);
                 break;
         }
     }

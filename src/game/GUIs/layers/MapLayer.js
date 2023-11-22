@@ -128,7 +128,7 @@ var MapLayer = cc.Layer.extend({
             return;
         }
         //check have builder
-        if (PlayerInfoManager.getInstance().builder.current <= 0 && this.chosenBuilding._type != "BDH_1") {
+        if (PlayerInfoManager.getInstance().builder.current <= 0 && this.chosenBuilding._type !== "BDH_1") {
             cc.log("not enough builder");
             // create content in popup
             let label = new cc.LabelBMFont("Bạn có muốn giải phóng thợ xây", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);

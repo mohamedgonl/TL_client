@@ -169,6 +169,8 @@ var res_ui = {
     USED_TROOP_ITEM: "UsedTroopItem.json",
     RES_1_COLLECT: "res/guis/collect_res/RES_1.png",
     RES_2_COLLECT: "res/guis/collect_res/RES_2.png",
+    RES_BG_COLLECT: "res/guis/collect_res/collect_bg.png",
+    RES_BG_COLLECT_FULL: "res/guis/collect_res/full_bg.png",
 }
 
 var res_shop = {
