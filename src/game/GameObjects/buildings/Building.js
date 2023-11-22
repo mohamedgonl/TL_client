@@ -27,8 +27,24 @@ var Building = GameObject.extend({
 
 
     },
-
+    //add child of building to mapLayer
     addIntoMapLayer: function () {
+        this.createSprite();
+        let mapLayer = cc.director.getRunningScene().getMapLayer();
+        let center = cc.p(this._posX + (this._width/2),this._posY +(this._height/2))
+        let posInMap = mapLayer.getMapPosFromGridPos(center) ;
+        mapLayer.addChild(this._bottom, ZORDER_BUILDING_BOTTOM);
+        mapLayer.addChild(this._mainSprite,mapLayer.getZOrderByPosition(center.x,center.y)); //add
+        mapLayer.addChild(this._effect, ZORDER_BUILDING_EFFECT);
+        mapLayer.addChild(this)
+
+
+        this._bottom.setPosition(posInMap);
+        this._mainSprite.setPosition(posInMap);
+        this._effect.setPosition(posInMap);
+
+    },
+    createSprite: function(){
         this._grass = new cc.Sprite();
         this._shadow = new cc.Sprite();
         this._green_square = new cc.Sprite();
@@ -66,27 +82,14 @@ var Building = GameObject.extend({
         this.loadBottomSprite();
         this.loadEffectSprite();
         this.loadMainSpriteByLevel(this._level);
+    },
 
-
-        let mapLayer = cc.director.getRunningScene().getMapLayer();
-        let center = cc.p(this._posX + (this._width/2),this._posY +(this._height/2))
-        cc.log("center",JSON.stringify(center))
-        let posInMap = mapLayer.getMapPosFromGridPos(center) ;
-        mapLayer.addChild(this._bottom, ZORDER_BUILDING_BOTTOM);
-        mapLayer.addChild(this._mainSprite,mapLayer.getZOrderByPosition(center.x,center.y)); //add
-        mapLayer.addChild(this._effect, ZORDER_BUILDING_EFFECT);
-        mapLayer.addChild(this)
-
-        cc.log("posInMap::::::::::::::::",JSON.stringify(posInMap,null,2))
-        this._bottom.setPosition(posInMap);
-        this._mainSprite.setPosition(posInMap);
-        this._effect.setPosition(posInMap);
-
-
-
-        // this.addChild(this._bottom);
-        // this.addChild(this._mainSprite);
-        // this.addChild(this._effect);
+    //addChild building sprite into popup
+    addSpriteIntoNode: function(node){
+        this.createSprite();
+        node.addChild(this._bottom);
+        node.addChild(this._mainSprite);
+        node.addChild(this._effect);
     },
     removeFromMapLayer: function(){
         this._bottom.removeFromParent(true);

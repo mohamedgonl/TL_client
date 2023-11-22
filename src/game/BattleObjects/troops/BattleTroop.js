@@ -48,6 +48,7 @@ var BattleTroop = cc.Node.extend({
     onEndGame: function () {
         cc.log("END GAME:::::")
         cc.eventManager.removeListener(this._eventListener);
+        if(this._state === TROOP_STATE.DEAD) return;
         this.performIdleAnimation();
 
     },
