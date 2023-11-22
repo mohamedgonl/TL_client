@@ -111,10 +111,10 @@ var Building = GameObject.extend({
         this._mainSprite.setPosition(posInMap);
         this._effect.setPosition(posInMap);
         if(mapLayer.checkValidPutBuilding(this,gridPosX,gridPosY)){
-            this.setSquare(1);
+            this.showColorSquare(1);
         }
         else {
-            this.setSquare(2);
+            this.showColorSquare(2);
         }
     },
     moveToGridPos:function (gridPosX,gridPosY){
@@ -386,7 +386,20 @@ var Building = GameObject.extend({
         this._state = state;
     },
     //3 state of Square: 0: no square, 1: green square, 2: red square
-    setSquare: function (square) {
+    showColorSquare: function (square){
+        if(square == undefined)
+        {
+            //check position
+            let mapLayer = cc.director.getRunningScene().getMapLayer();
+            if(mapLayer.checkValidPutBuilding(this,this._posX,this._posY)){
+                square = 1;
+            }
+            else {
+                square = 2;
+            }
+            cc.log("square == null")
+        }
+
         if(square === 0){
             this._green_square.setVisible(false);
             this._red_square.setVisible(false);

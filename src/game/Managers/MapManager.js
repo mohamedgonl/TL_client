@@ -106,6 +106,8 @@ var     MapManager = cc.Class.extend({
             return this.listBuildings.get(id) || null;
     },
     getBuildingByGrid: function (x,y) {
+        if(x<0 || y<0 || x>=GRID_SIZE || y>=GRID_SIZE)
+            return null;
         //if x y null, return null
         if(x === null || y === null)
             return null;

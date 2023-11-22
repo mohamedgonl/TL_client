@@ -241,25 +241,8 @@ testnetwork.Connector = cc.Class.extend({
         } else {
             cc.log("BUY BUILDING SUCCESS ::::::::: ",JSON.stringify(packet,null,2));
             testnetwork.connector.sendGetUserInfo();
-
             let mapLayer = cc.director.getRunningScene().mapLayer;
-            mapLayer.exitModeBuyBuilding();
-            let building = getBuildingFromType(packet.type, 1, packet.id, packet.posX, packet.posY, packet.status, packet.startTime, packet.endTime);
-            MapManager.getInstance().addBuilding(building, true);
-            building.addIntoMapLayer();
-            mapLayer.selectBuilding(building);
-
-            if (packet.type === "WAL_1") {
-                mapLayer.enterModeBuyBuilding("WAL_1", packet.posX, packet.posY - 1);
-                building.reloadSpriteWallAround();
-            }
-
-            if (packet.status !== 0) {
-                cc.log("call start build")
-                building.startBuild(packet.startTime, packet.endTime);
-            }
-
-
+            mapLayer.buyBuildingSuccess(packet);
         }
     },
 
