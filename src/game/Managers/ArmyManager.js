@@ -68,7 +68,7 @@ var ArmyManager = cc.Class.extend({
         for (let key in this._armyAmount) {
             if (this._armyAmount.hasOwnProperty(key)) {
                 const value = this._armyAmount[key];
-                currentSpace += TROOP_BASE[key]["housingSpace"] *value;
+                currentSpace += TROOP_BASE[key]["housingSpace"] * value;
             }
         }
         return currentSpace;
@@ -77,7 +77,7 @@ var ArmyManager = cc.Class.extend({
     getMaxSpace: function () {
         let maxTotalSpace = 0;
         this._armyCampList.map(armyCamp => {
-            if(armyCamp._state !== 1)
+            if (armyCamp._state !== 1)
                 maxTotalSpace += AMC["AMC_1"][armyCamp._level]["capacity"];
         })
         return maxTotalSpace;
@@ -92,9 +92,10 @@ var ArmyManager = cc.Class.extend({
     },
 
     updateArmyAmount: function (troops, curPage, isInit = false) {
-
+        cc.log("PARAMS :: " + JSON.stringify(troops) + " PAGE : " + curPage + " isInit : " + isInit)
+        cc.log("ARMY LIST :: " + this._armyCampList.length)
         troops.map(e => {
-            if(TROOP_ANIMS_LIST.indexOf(e.cfgId) !== -1) {
+            if (TROOP_ANIMS_LIST.indexOf(e.cfgId) !== -1) {
                 if (!isInit) {
                     if (!this._armyAmount[e.cfgId]) {
                         this._armyAmount[e.cfgId] = e.count;
@@ -106,13 +107,21 @@ var ArmyManager = cc.Class.extend({
 
                 // create troop sprite run to army camp
                 let armyCampIndex;
-                if (this._armyCampList.length === 1) {
-                    armyCampIndex = 0;
-                } else {
-                    armyCampIndex = (this._armyAmount[e.cfgId] - 1) % (this._armyCampList.length);
+                for (let i = 0; i< e.count; i++) {
+                    if (this._armyCampList.length === 1) {
+                        armyCampIndex = 0;
+                    } else {
+                        if(isInit)  {
+                            armyCampIndex = i % (this._armyCampList.length);
+                        }
+                        else {
+                            armyCampIndex = (this._armyAmount[e.cfgId] -1) % (this._armyCampList.length);
+                        }
+                    }
+                    let data = {barrackIndex: curPage, cfgId: e.cfgId, count: 1, armyCampIndex: armyCampIndex};
+                    this.createTroopOnMap(data);
                 }
-                let data = {barrackIndex: curPage, cfgId: e.cfgId, count: e.count, armyCampIndex: armyCampIndex};
-                this.createTroopOnMap(data);
+
             }
 
         });

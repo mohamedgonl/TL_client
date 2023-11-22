@@ -1,6 +1,7 @@
 //return new building from type
 //getBuildingFromType(data.type, 1, data.id, data.posX, data.posY,data.status,data.startTime,data.endTime);
 function getBuildingFromType(type, level, id, posX, posY, status, startTime, endTime) {
+    cc.log("GET BUILDING FROM TYPE :: " + type)
     var building = null;
 
     //obstacle
@@ -55,7 +56,7 @@ function getBuildingFromType(type, level, id, posX, posY, status, startTime, end
 
     }
     // building.setType(type);
-    building.retain();
+    if(building) building.retain();
     return building;
 }
 

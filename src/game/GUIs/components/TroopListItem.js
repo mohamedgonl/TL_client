@@ -10,7 +10,7 @@ var TroopListItem = cc.Node.extend({
         this._index = index;
         this._troopCfgId = troopCfgId;
         this._curPage = curPage;
-        if(!this.node) this.node = CCSUlties.parseUIFile(res_ui.TROOPS_LIST_ITEM);
+        if (!this.node) this.node = CCSUlties.parseUIFile(res_ui.TROOPS_LIST_ITEM);
         this._nodeButton = this.node.getChildByName("troop_item_button")
         this._node = this._nodeButton.getChildByName("troop_item");
         this._cost = TROOP[this._troopCfgId][this._level]["trainingElixir"];
@@ -91,7 +91,7 @@ var TroopListItem = cc.Node.extend({
             let barRequired = this._node.getChildByName("bar_required");
             barRequired.setVisible(true);
             let barRqString = barRequired.getChildByName("bar_rq_string");
-            if(!this.label){
+            if (!this.label) {
                 let label = new cc.LabelBMFont("Yêu cầu\nNhà lính cấp " + this._barrackRequired, res.FONT.FISTA["16"], 120, cc.TEXT_ALIGNMENT_CENTER);
                 label.setColor(COLOR_REQUIRED_TROOP)
                 barRqString.addChild(label);
@@ -149,13 +149,14 @@ var TroopListItem = cc.Node.extend({
     },
 
     handleTrainTroop: function (sender, type) {
-        if(this._available) {
-        cc.log("CREATE TROOP ::: " + this._troopCfgId + " PAGE :" + this._curPage)
+        cc.log("TRAIN TROOP")
+        if (this._available) {
+            cc.log("CREATE TROOP ::: " + this._troopCfgId + " PAGE :" + this._curPage)
             if (type === ccui.Widget.TOUCH_BEGAN) {
                 this.setScale(BUTTON_TOUCH_SCALE_BIG);
                 this.schedule(this.handleLongPress, LONG_PRESS_THRESHOLD);
             }
-            if(type === ccui.Widget.TOUCH_MOVED) {
+            if (type === ccui.Widget.TOUCH_MOVED) {
                 this.setScale(1);
                 this.unschedule(this.handleLongPress);
                 this._tempCount = 0;
@@ -169,6 +170,27 @@ var TroopListItem = cc.Node.extend({
 
                 this._tempCount = 0;
                 this._isLongPress = false;
+            }
+        } else {
+            if (type === ccui.Widget.TOUCH_ENDED) {
+                let price = TROOP[this._troopCfgId][1]["trainingElixir"];
+                if (this._barrackRequired > this._curBarrack._level) return;
+                if (PlayerInfoManager.getInstance().getResource("elixir") < price) {
+                    let label = new cc.LabelBMFont("Không đủ tài nguyên", res.FONT.FISTA["16"], 350, cc.TEXT_ALIGNMENT_CENTER);
+                    label.setColor(new cc.Color(150, 78, 3));
+                    let content = new cc.Node();
+                    content.addChild(label);
+
+                    let gameScene = cc.director.getRunningScene();
+                    let popUpLayer = gameScene.getPopUpLayer();
+                    let popup = new NotiPopup({
+                        title: "THÔNG BÁO", content: content, cancleCallBack: () => {
+                            popup.removeFromParent(true)
+                        }
+                    })
+
+                    popUpLayer.addChild(popup)
+                }
             }
         }
     },

@@ -71,7 +71,8 @@ var ItemInfoPopup = cc.Layer.extend({
 
         // adding item image
         let itemIcon = this._node.getChildByName("item_image");
-        let itemIconObj = getBuildingFromType(this._data.cfgId,1)
+        let itemIconObj =  getBuildingFromType(this._data.cfgId,1);
+        cc.log("FF " + itemIconObj._type)
         if(this._data.cfgId !== "AMC_1") {
             itemIconObj.setScale(SHOP_ITEM_SCALE);
         }

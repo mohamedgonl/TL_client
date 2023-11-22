@@ -82,7 +82,7 @@ var GameScene = cc.Scene.extend({
 
     onReceiveArmyInfo: function (armyInfo) {
         // MapManager.getInstance().loadFromServer(armyInfo.listTroops);
-        // cc.log("NHAN THONG TIN VE LINH : "+JSON.stringify(armyInfo.listTroops))
+        cc.log("NHAN THONG TIN VE LINH : "+JSON.stringify(armyInfo.listTroops))
         ArmyManager.getInstance().setArmyAmount(armyInfo.listTroops);
         testnetwork.connector.sendGetMapInfo();
     },
