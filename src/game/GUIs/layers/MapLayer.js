@@ -303,6 +303,7 @@ var MapLayer = cc.Layer.extend({
         let building = this.getBuildingFromTouch(locationInScreen);
         if (building != null && building._type.startsWith("RES") && building._state === 0 && building._showIconHarvest) {
             building.onClickHarvest();
+            this.unSelectBuilding();
             return;
         }
         //click building first time or click another building

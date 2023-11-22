@@ -7,7 +7,7 @@ var Cannon = Building.extend({
         this._upperSprite = null;
         this._shadowType = 2;
         this._isUpperAnimate = false;
-
+        this._damage = LoadManager.getInstance().getConfig(this._type,this._level,"damagePerShot");
     },
     loadMainSpriteByLevel: function (level) {
 

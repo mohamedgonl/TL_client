@@ -665,7 +665,7 @@
                   "X": 311.0,
                   "Y": 36.0
                 },
-                "Name": "bar_0",
+                "Name": "bar_yellow",
                 "ctype": "LoadingBarObjectData"
               },
               {
@@ -833,6 +833,41 @@
             "Tag": 163,
             "Children": [
               {
+                "ProgressInfo": 58,
+                "ImageFileData": {
+                  "Type": "Normal",
+                  "Path": "guis/upgrade_building_gui/info_bar_nextlv_BG.png",
+                  "Plist": ""
+                },
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 1.0,
+                  "Y": 1.0
+                },
+                "Tag": 27,
+                "ActionTag": 682291516,
+                "Size": {
+                  "X": 311.0,
+                  "Y": 36.0
+                },
+                "Name": "bar_yellow",
+                "ctype": "LoadingBarObjectData"
+              },
+              {
                 "ProgressInfo": 100,
                 "ImageFileData": {
                   "Type": "Normal",
@@ -996,6 +1031,41 @@
             "BottomMargin": 9.3174,
             "Tag": 159,
             "Children": [
+              {
+                "ProgressInfo": 58,
+                "ImageFileData": {
+                  "Type": "Normal",
+                  "Path": "guis/upgrade_building_gui/info_bar_nextlv_BG.png",
+                  "Plist": ""
+                },
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "PreSize": {
+                  "X": 1.0,
+                  "Y": 1.0
+                },
+                "Tag": 28,
+                "ActionTag": -356715484,
+                "Size": {
+                  "X": 311.0,
+                  "Y": 36.0
+                },
+                "Name": "bar_yellow",
+                "ctype": "LoadingBarObjectData"
+              },
               {
                 "ProgressInfo": 100,
                 "ImageFileData": {

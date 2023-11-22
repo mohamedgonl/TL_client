@@ -123,17 +123,17 @@ var InfoPopup = cc.Node.extend({
             case "hitpoints":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.HEART);
-                text.setString("Máu:" + this.building._hitpoints);
+                text.setString("Máu:" + Utils.numberToText(this.building._hitpoints));
                 break;
             case "productionGold":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.GOLD_PD_RATE);
-                text.setString("Sản lượng:" + this.building._productivityGold + "/h");
+                text.setString("Sản lượng:" + Utils.numberToText(this.building._productivityGold) + "/h");
                 break;
             case "productionElixir":
                 bar.setPercent(100);
                 icon.setTexture(res.ICON.ELIXIR_PD_RATE);
-                text.setString("Sản lượng:" + this.building._productivityElixir + "/h");
+                text.setString("Sản lượng:" + Utils.numberToText(this.building._productivityElixir) + "/h");
                 break;
             case "damage":
                 bar.setPercent(100);

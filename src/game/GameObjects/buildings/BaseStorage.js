@@ -79,9 +79,6 @@ var BaseStorage = Building.extend({
             elixir: this._currentElixir||0
         }
     },
-
-
-
     updateSprite: function () {
 
     }

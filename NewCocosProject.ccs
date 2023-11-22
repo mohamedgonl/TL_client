@@ -1759,6 +1759,7 @@
         <Project Name="BattleGUI.csd" Type="Layer" />
         <Project Name="CheatPopup.csd" Type="Node" />
         <Project Name="HistoryAttackPopup.csd" Type="Node" />
+        <Project Name="IconMine.csd" Type="Node" />
         <Project Name="InfoLayer1.csd" Type="Layer" />
         <Project Name="InfoPopup.csd" Type="Node" />
         <Project Name="InfoPopup.csd" Type="Node" />
@@ -1778,7 +1779,6 @@
         <Project Name="TroopTrainingItem.csd" Type="Node" />
         <Project Name="TroopTrainPopup.csd" Type="Node" />
         <Project Name="UpgradePopup.csd" Type="Node" />
-        <Project Name="IconMine.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

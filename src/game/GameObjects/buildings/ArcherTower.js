@@ -2,6 +2,7 @@ var ArcherTower = Building.extend({
     _type: "DEF_2",
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
+        this._damage = LoadManager.getInstance().getConfig(this._type,this._level,"damagePerShot");
     },
     loadMainSpriteByLevel: function (level) {
         this.loadMainSprite(res_map.SPRITE.BODY.ARCHER_TOWER.BOTTOM[level],res_map.SPRITE.BODY.ARCHER_TOWER.UPPER.IDLE[level],1);

@@ -89,7 +89,7 @@
                     <PreSize X="0.0000" Y="0.0000" />
                     <LabelBMFontFile_CNB Type="Normal" Path="fonts/soji_16.fnt" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="elixir_icon" Visible="False" ActionTag="837601324" Tag="139" IconVisible="False" LeftMargin="86.3120" RightMargin="7.6880" TopMargin="5.1213" BottomMargin="6.8787" ctype="SpriteObjectData">
+                  <AbstractNodeData Name="elixir_icon" ActionTag="837601324" Tag="139" IconVisible="False" LeftMargin="86.3120" RightMargin="7.6880" TopMargin="5.1213" BottomMargin="6.8787" ctype="SpriteObjectData">
                     <Size X="27.0000" Y="36.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="99.8120" Y="24.8787" />
@@ -100,7 +100,7 @@
                     <FileData Type="Normal" Path="guis/shop_gui/elixir.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="gold_icon" Visible="False" ActionTag="2132276158" Tag="141" IconVisible="False" LeftMargin="85.8100" RightMargin="7.1900" TopMargin="8.1200" BottomMargin="9.8800" ctype="SpriteObjectData">
+                  <AbstractNodeData Name="gold_icon" ActionTag="2132276158" Tag="141" IconVisible="False" LeftMargin="85.8100" RightMargin="7.1900" TopMargin="8.1200" BottomMargin="9.8800" ctype="SpriteObjectData">
                     <Size X="28.0000" Y="30.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="99.8100" Y="24.8800" />
@@ -145,10 +145,10 @@
             <FileData Type="Normal" Path="guis/research troop/nen 1.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="progress1" Visible="False" ActionTag="978176125" Tag="167" IconVisible="False" LeftMargin="-15.5000" RightMargin="-295.5000" TopMargin="-147.5309" BottomMargin="111.5309" ctype="SpriteObjectData">
+          <AbstractNodeData Name="progress1" ActionTag="978176125" Tag="167" IconVisible="False" LeftMargin="-15.5000" RightMargin="-295.5000" TopMargin="-147.5309" BottomMargin="111.5309" ctype="SpriteObjectData">
             <Size X="311.0000" Y="36.0000" />
             <Children>
-              <AbstractNodeData Name="bar_0" ActionTag="-1926773720" Tag="171" IconVisible="False" ProgressInfo="58" ctype="LoadingBarObjectData">
+              <AbstractNodeData Name="bar_yellow" ActionTag="-1926773720" Tag="171" IconVisible="False" ProgressInfo="58" ctype="LoadingBarObjectData">
                 <Size X="311.0000" Y="36.0000" />
                 <AnchorPoint />
                 <Position />
@@ -199,9 +199,19 @@
             <FileData Type="Normal" Path="guis/upgrade_building_gui/info_bar.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="progress2" Visible="False" ActionTag="1247363917" Tag="163" IconVisible="False" LeftMargin="-15.5000" RightMargin="-295.5000" TopMargin="-93.6196" BottomMargin="57.6196" ctype="SpriteObjectData">
+          <AbstractNodeData Name="progress2" ActionTag="1247363917" Tag="163" IconVisible="False" LeftMargin="-15.5000" RightMargin="-295.5000" TopMargin="-93.6196" BottomMargin="57.6196" ctype="SpriteObjectData">
             <Size X="311.0000" Y="36.0000" />
             <Children>
+              <AbstractNodeData Name="bar_yellow" ActionTag="682291516" Tag="27" IconVisible="False" ProgressInfo="58" ctype="LoadingBarObjectData">
+                <Size X="311.0000" Y="36.0000" />
+                <AnchorPoint />
+                <Position />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="1.0000" Y="1.0000" />
+                <ImageFileData Type="Normal" Path="guis/upgrade_building_gui/info_bar_nextlv_BG.png" Plist="" />
+              </AbstractNodeData>
               <AbstractNodeData Name="bar" ActionTag="-2127178493" Tag="164" IconVisible="False" ProgressInfo="100" ctype="LoadingBarObjectData">
                 <Size X="311.0000" Y="36.0000" />
                 <AnchorPoint />
@@ -243,9 +253,19 @@
             <FileData Type="Normal" Path="guis/upgrade_building_gui/info_bar.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="progress3" Visible="False" ActionTag="856981804" Tag="159" IconVisible="False" LeftMargin="-15.5000" RightMargin="-295.5000" TopMargin="-45.3174" BottomMargin="9.3174" ctype="SpriteObjectData">
+          <AbstractNodeData Name="progress3" ActionTag="856981804" Tag="159" IconVisible="False" LeftMargin="-15.5000" RightMargin="-295.5000" TopMargin="-45.3174" BottomMargin="9.3174" ctype="SpriteObjectData">
             <Size X="311.0000" Y="36.0000" />
             <Children>
+              <AbstractNodeData Name="bar_yellow" ActionTag="-356715484" Tag="28" IconVisible="False" ProgressInfo="58" ctype="LoadingBarObjectData">
+                <Size X="311.0000" Y="36.0000" />
+                <AnchorPoint />
+                <Position />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="1.0000" Y="1.0000" />
+                <ImageFileData Type="Normal" Path="guis/upgrade_building_gui/info_bar_nextlv_BG.png" Plist="" />
+              </AbstractNodeData>
               <AbstractNodeData Name="bar" ActionTag="545986114" Tag="160" IconVisible="False" ProgressInfo="100" ctype="LoadingBarObjectData">
                 <Size X="311.0000" Y="36.0000" />
                 <AnchorPoint />

@@ -400,7 +400,6 @@ var Building = GameObject.extend({
         //log start time, end time, current time
         let currentTime = TimeManager.getInstance().getCurrentTimeInSecond();
         let percent = (currentTime - this._startTime)/(this._endTime - this._startTime)*100;
-        cc.log("percent",percent)
         this._progressBar.setPercent(percent);
         //set time label = end time - current time in 1d2h3m40s format, if 0d -> 2h3m40s, if 0d0h -> 3m40s
         let time = this._endTime - currentTime;
@@ -419,7 +418,6 @@ var Building = GameObject.extend({
         }
     },
     update: function () {
-        cc.log("update")
         if(this._state === 1 || this._state === 2){
             this.updateProgress();
         }

@@ -1,26 +1,63 @@
 var UpgradePopup = cc.Node.extend({
-
-    // upgrade_container
-    //     close_btn
-    //     text
-    //     white_container
-    //     node_text
-    //     node_building
-    //     node_infor
-    //     btn_upgrade
-    //     text_time
+    /*
+    =====================================
+    Panel_1
+    upgrade_container
+    .   close_btn
+    .   text
+    .   white_container
+    .   node_text
+    .   node_building
+    .   btn_upgrade
+    .   text_time
+    progress1
+    .   bar_yellow
+    .   bar
+    .   icon
+    .   text
+    progress2
+    .   bar_yellow
+    .   bar
+    .   icon
+    .   text
+    progress3
+    .   bar_yellow
+    .   bar
+    .   icon
+    .   text
+    =====================================
+     */
     ctor: function (building) {
         this._super();
 
-        this.upgrade_container= {
-                close_btn: null,
-                text: null,
-                white_container: null,
-                node_building: null,
-                node_infor: null,
-                node_text: null,
-                btn_upgrade: null,
+        this.upgrade_container = {
+            close_btn: null,
+            text: null,
+            white_container: null,
+            node_building: null,
+            node_infor: null,
+            node_text: null,
+            btn_upgrade: null,
         }
+        this.progress1 = {
+            bar_yellow: null,
+            bar: null,
+            icon: null,
+            text: null,
+        }
+        this.progress2 = {
+            bar_yellow: null,
+            bar: null,
+            icon: null,
+            text: null,
+        }
+        this.progress3 = {
+            bar_yellow: null,
+            bar: null,
+            icon: null,
+            text: null,
+        }
+
         this.building = building;
         this.building = cc.director.getRunningScene().getMapLayer().chosenBuilding;
 
@@ -36,8 +73,10 @@ var UpgradePopup = cc.Node.extend({
             })
         })
         this.addChild(node);
-
         this.turnOn();
+
+
+
     },
     //init UI, add to layer, init attributes, load resources
     turnOn: function () {
@@ -47,11 +86,11 @@ var UpgradePopup = cc.Node.extend({
         cc.director.getRunningScene().infoLayer.setVisible(false);
 
         //set text : Nâng nhà chính cấp 7
-        let level = this.building._level+1;
+        let level = this.building._level + 1;
         container.text.setString("Nâng lên cấp " + level);
 
         //create a building and set to node_building
-        let newBuilding = getBuildingFromType(this.building._type, this.building._level+1);
+        let newBuilding = getBuildingFromType(this.building._type, this.building._level + 1);
         newBuilding.addSpriteIntoNode(container.node_building);
         container.node_building.addChild(newBuilding);
         container.node_building.setScale(1.5);
@@ -70,39 +109,33 @@ var UpgradePopup = cc.Node.extend({
         let building = this.building;
         let priceGold = LoadManager.getInstance().getConfig(building._type, building._level + 1).gold;
         let priceElixir = LoadManager.getInstance().getConfig(building._type, building._level + 1).elixir;
-        if(priceGold)
-        {
+        if (priceGold) {
             goldIcon.setVisible(true);
             elixirIcon.setVisible(false);
             resourceText.setString(priceGold);
             //nếu không đủ tiền, hiện tiền màu đỏ
-            if(priceGold > PlayerInfoManager.getInstance().getResource().gold)
-            {
+            if (priceGold > PlayerInfoManager.getInstance().getResource().gold) {
                 resourceText.setColor(cc.color.RED);
             }
-        }
-        else
-        {
+        } else {
             goldIcon.setVisible(false);
             elixirIcon.setVisible(true);
             resourceText.setString(priceElixir);
             //nếu không đủ tiền, hiện tiền màu đỏ
-            if(priceElixir > PlayerInfoManager.getInstance().getResource().elixir)
-            {
+            if (priceElixir > PlayerInfoManager.getInstance().getResource().elixir) {
                 resourceText.setColor(cc.color.RED);
             }
         }
 
         //nếu level nhà chính không đủ thì disable button
         let levelTownHall = MapManager.getInstance().getTownHall().getLevel();
-        let levelRequire = LoadManager.getInstance().getConfig(building._type, building._level + 1,"townHallLevelRequired")||1;
-        if(levelTownHall < levelRequire)
-        {
+        let levelRequire = LoadManager.getInstance().getConfig(building._type, building._level + 1, "townHallLevelRequired") || 1;
+        if (levelTownHall < levelRequire) {
             //label "Yêu cầu nhà chính cấp 2" and add to node_text at middle
             let label = new cc.LabelBMFont("Yêu cầu nhà chính cấp " + levelRequire, res.FONT.SOJI[20]);
             container.node_text.addChild(label);
             //set anchor point
-            label.setAnchorPoint(0.5,1);
+            label.setAnchorPoint(0.5, 1);
             //turn red
             label.setColor(cc.color.RED);
             //set visible false for buttn upgrade
@@ -110,9 +143,26 @@ var UpgradePopup = cc.Node.extend({
         }
 
         //set text time
-        let time = LoadManager.getInstance().getConfig(building._type, building._level + 1,"buildTime");
+        let time = LoadManager.getInstance().getConfig(building._type, building._level + 1, "buildTime");
         let stringTime = Utils.getTimeString(time);
         container.text_time.setString(stringTime);
+
+        //invisible 3 progress
+        this.progress1.setVisible(false);
+        this.progress2.setVisible(false);
+        this.progress3.setVisible(false);
+
+        //set progress
+        let dataInfo = BuildingInfo[this.building._type].dataInfo;
+        //for in dataInfo
+        for (let i = 1; i <= dataInfo.length; i++) {
+            let progress = this["progress" + i];
+            let barYellow = progress.bar_yellow;
+            let bar = progress.bar;
+            let icon = progress.icon;
+            let text = progress.text;
+            this.setProgress(progress, barYellow, bar, icon, text,dataInfo[i-1]);
+        }
     },
     onClose: function () {
         this.removeFromParent(true);
@@ -124,6 +174,90 @@ var UpgradePopup = cc.Node.extend({
         this.onClose();
         this.building.onClickUpgrade();
 
+    },
+    setProgress: function (progress, barYellow, bar, icon, text, typeRes) {
+        //setVisible
+        progress.setVisible(true);
+        let maxLevel = BuildingInfo[this.building._type].max_level;
+        let statNow;
+        let statNextLevel;
+        let statMaxLevel;
+        let difference;
+        switch (typeRes)
+        {
+            case "capacityGold":
+                icon.setTexture(res.ICON.GOLD_CAPACITY);
+
+                statNow = this.building._capacityGold;
+                statNextLevel = LoadManager.getInstance().getConfig(this.building._type, this.building._level + 1, "capacity");
+                statMaxLevel = LoadManager.getInstance().getConfig(this.building._type, maxLevel, "capacity");
+                difference = statNextLevel - statNow;
+
+                text.setString("Sức chứa: " + Utils.numberToText(statNow) + " + " + Utils.numberToText(difference) );
+                break;
+            case "capacityElixir":
+                icon.setTexture(res.ICON.ELIXIR_CAPACITY);
+
+                statNow = this.building._capacityElixir;
+                statNextLevel = LoadManager.getInstance().getConfig(this.building._type, this.building._level + 1, "capacity");
+                statMaxLevel = LoadManager.getInstance().getConfig(this.building._type, maxLevel, "capacity");
+                difference = statNextLevel - statNow;
+
+                text.setString("Sức chứa: " + Utils.numberToText(statNow) + " + " + Utils.numberToText(difference) );
+                break;
+            case "hitpoints":
+                icon.setTexture(res.ICON.HEART);
+
+                statNow = this.building._hitpoints;
+                statNextLevel = LoadManager.getInstance().getConfig(this.building._type, this.building._level + 1, "hitpoints");
+                statMaxLevel = LoadManager.getInstance().getConfig(this.building._type, maxLevel, "hitpoints");
+                difference = statNextLevel - statNow;
+
+                text.setString("Máu: " + Utils.numberToText(statNow) + " + " + Utils.numberToText(difference) );
+                break;
+            case "productionGold":
+                icon.setTexture(res.ICON.GOLD_PD_RATE);
+
+                statNow = this.building._productivityGold;
+                statNextLevel = LoadManager.getInstance().getConfig(this.building._type, this.building._level + 1, "productivity");
+                statMaxLevel = LoadManager.getInstance().getConfig(this.building._type, maxLevel, "productivity");
+                difference = statNextLevel - statNow;
+
+                text.setString("Sản lượng: " + Utils.numberToText(statNow) + " + " + Utils.numberToText(difference) + "/h");
+                break;
+            case "productionElixir":
+                icon.setTexture(res.ICON.ELIXIR_PD_RATE);
+
+                statNow = this.building._productivityElixir;
+                statNextLevel = LoadManager.getInstance().getConfig(this.building._type, this.building._level + 1, "productivity");
+                statMaxLevel = LoadManager.getInstance().getConfig(this.building._type, maxLevel, "productivity");
+                difference = statNextLevel - statNow;
+
+                text.setString("Sản lượng: " + Utils.numberToText(statNow) + " + " + Utils.numberToText(difference) + "/h");
+                break;
+            case "damage":
+                icon.setTexture(res.ICON.DAMAGE);
+
+                statNow = this.building._damage;
+                statNextLevel = LoadManager.getInstance().getConfig(this.building._type, this.building._level + 1, "damagePerShot");
+                statMaxLevel = LoadManager.getInstance().getConfig(this.building._type, maxLevel, "damagePerShot");
+                difference = statNextLevel - statNow;
+
+                text.setString("Sát thương: " + Utils.numberToText(statNow) + " + " + Utils.numberToText(difference) );
+                break;
+            case "army":
+                icon.setTexture(res.ICON.ARMY);
+
+                statNow = LoadManager.getInstance().getConfig(this.building._type, this.building._level, "capacity");
+                statNextLevel = LoadManager.getInstance().getConfig(this.building._type, this.building._level + 1, "capacity");
+                statMaxLevel = LoadManager.getInstance().getConfig(this.building._type, maxLevel, "capacity");
+                difference = statNextLevel - statNow;
+
+                text.setString("Sức chứa: " + Utils.numberToText(statNow) + " + " + Utils.numberToText(difference));
+                break;
+        }
+        bar.setPercent(statNow/statMaxLevel*100)
+        barYellow.setPercent(statNextLevel/statMaxLevel*100);
     }
 
 });
