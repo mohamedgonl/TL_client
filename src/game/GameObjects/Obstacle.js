@@ -22,8 +22,6 @@ var Obstacle = GameObject.extend({
         this._width = configObstacle.width;
         this._height = configObstacle.height;
 
-
-
     },
     addIntoMapLayer: function(){
         this.loadMainSprite();
@@ -180,6 +178,7 @@ var Obstacle = GameObject.extend({
         }
         else{
             this._progressBar.setVisible(false);
+            this.unschedule(this.update.bind(this));
         }
     },
     startRemove: function (startTime,endTime) {
@@ -188,6 +187,7 @@ var Obstacle = GameObject.extend({
         this._startTime = startTime;
         this._endTime = endTime;
         this.loadButton();
+        this.schedule(this.update.bind(this),1);
 
         let playerInfoManager = PlayerInfoManager.getInstance();
         let priceGold = LoadManager.getInstance().getConfig(this._type,this._level,"gold");
