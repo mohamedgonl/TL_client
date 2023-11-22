@@ -1,4 +1,4 @@
-var BattleGoldStorage = BattleBaseStorage.extend({
+var BattleGoldStorage = BattleStorage.extend({
     _type: "STO_1",
     _resourceType: RESOURCE_TYPE.GOLD,
 

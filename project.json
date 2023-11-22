@@ -95,12 +95,11 @@
 
         "src/game/BattleObjects/buildings/BattleBuilding.js",
         "src/game/BattleObjects/buildings/BattleDefence.js",
+        "src/game/BattleObjects/buildings/BattleStorage.js",
         "src/game/BattleObjects/buildings/BattleBuilderHut.js",
         "src/game/BattleObjects/buildings/BattleArmyCamp.js",
-        "src/game/BattleObjects/buildings/BattleBaseMine.js",
         "src/game/BattleObjects/buildings/BattleGoldMine.js",
         "src/game/BattleObjects/buildings/BattleElixirMine.js",
-        "src/game/BattleObjects/buildings/BattleBaseStorage.js",
         "src/game/BattleObjects/buildings/BattleTownhall.js",
         "src/game/BattleObjects/buildings/BattleGoldStorage.js",
         "src/game/BattleObjects/buildings/BattleElixirStorage.js",
