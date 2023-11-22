@@ -613,7 +613,6 @@ var MapLayer = cc.Layer.extend({
             if (this.checkValidPutBuilding(new Wall(), nextX, nextY) === false) continue;
             bestDirect = i;
         }
-
         //nếu có thể đặt được tường, đặt thêm , nếu không thể thì không đặt tường nữa
         if (bestDirect !== -1)
             this.enterModeBuyBuilding("WAL_1", currentWall._posX + dx[bestDirect], currentWall._posY + dy[bestDirect]);
