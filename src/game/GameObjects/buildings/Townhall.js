@@ -23,8 +23,11 @@ var Townhall = BaseStorage.extend({
         let mapManager = MapManager.getInstance();
         mapManager.townHall = this;
     },
-
-
+    getCapacityByLevel: function (level) {
+        let configCapacityGold = LoadManager.getInstance().getConfig(this._type,level,"capacityGold");
+        let configCapacityElixir = LoadManager.getInstance().getConfig(this._type,level,"capacityElixir");
+        return {gold: configCapacityGold, elixir: configCapacityElixir};
+    },
     completeProcess: function () {
         this._super();
         let playerInfoManager = PlayerInfoManager.getInstance();

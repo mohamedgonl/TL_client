@@ -58,6 +58,7 @@ var BaseStorage = Building.extend({
 
     },
 
+
     //get capacity , if building, return 0, if idle or upgrade, return capacity
     getCapacity: function () {
 

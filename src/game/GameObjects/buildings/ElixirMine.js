@@ -53,4 +53,8 @@ var ElixirMine = BaseMine.extend({
             elixir: currentAmount
         }
     },
+    getCapacityByLevel: function (level) {
+        let configCapacity = LoadManager.getInstance().getConfig(this._type, level, "capacity");
+        return {gold: 0, elixir: configCapacity};
+    }
 });

@@ -112,7 +112,7 @@ var UpgradePopup = cc.Node.extend({
         if (priceGold) {
             goldIcon.setVisible(true);
             elixirIcon.setVisible(false);
-            resourceText.setString(priceGold);
+            resourceText.setString(Utils.numberToText(priceGold));
             //nếu không đủ tiền, hiện tiền màu đỏ
             if (priceGold > PlayerInfoManager.getInstance().getResource().gold) {
                 resourceText.setColor(cc.color.RED);
@@ -120,7 +120,7 @@ var UpgradePopup = cc.Node.extend({
         } else {
             goldIcon.setVisible(false);
             elixirIcon.setVisible(true);
-            resourceText.setString(priceElixir);
+            resourceText.setString(Utils.numberToText(priceElixir));
             //nếu không đủ tiền, hiện tiền màu đỏ
             if (priceElixir > PlayerInfoManager.getInstance().getResource().elixir) {
                 resourceText.setColor(cc.color.RED);
@@ -189,8 +189,8 @@ var UpgradePopup = cc.Node.extend({
                 icon.setTexture(res.ICON.GOLD_CAPACITY);
 
                 statNow = this.building._capacityGold;
-                statNextLevel = LoadManager.getInstance().getConfig(this.building._type, this.building._level + 1, "capacity");
-                statMaxLevel = LoadManager.getInstance().getConfig(this.building._type, maxLevel, "capacity");
+                statNextLevel = this.building.getCapacityByLevel(this.building._level + 1).gold;
+                statMaxLevel = this.building.getCapacityByLevel(maxLevel).gold;
                 difference = statNextLevel - statNow;
 
                 text.setString("Sức chứa: " + Utils.numberToText(statNow) + " + " + Utils.numberToText(difference) );
@@ -199,8 +199,8 @@ var UpgradePopup = cc.Node.extend({
                 icon.setTexture(res.ICON.ELIXIR_CAPACITY);
 
                 statNow = this.building._capacityElixir;
-                statNextLevel = LoadManager.getInstance().getConfig(this.building._type, this.building._level + 1, "capacity");
-                statMaxLevel = LoadManager.getInstance().getConfig(this.building._type, maxLevel, "capacity");
+                statNextLevel = this.building.getCapacityByLevel(this.building._level + 1).elixir;
+                statMaxLevel = this.building.getCapacityByLevel(maxLevel).elixir;
                 difference = statNextLevel - statNow;
 
                 text.setString("Sức chứa: " + Utils.numberToText(statNow) + " + " + Utils.numberToText(difference) );
