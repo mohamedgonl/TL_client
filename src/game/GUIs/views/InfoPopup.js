@@ -52,8 +52,9 @@ var InfoPopup = cc.Node.extend({
 
         //add building image
         let buildingImage = getBuildingFromType(this.building._type, this.building._level);
-        this.item_image.addChild(buildingImage);
-        buildingImage.setScale(1.5);
+        buildingImage.addSpriteIntoNode(this.item_image);
+        // this.item_image.addChild(buildingImage);
+        this.item_image.setScale(1.5);
 
         //set name : "Nhà chính cấp 7"
         let level = this.building._level;

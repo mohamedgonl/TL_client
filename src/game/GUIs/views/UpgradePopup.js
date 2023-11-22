@@ -52,8 +52,9 @@ var UpgradePopup = cc.Node.extend({
 
         //create a building and set to node_building
         let newBuilding = getBuildingFromType(this.building._type, this.building._level+1);
-        newBuilding.setScale(1.5)
+        newBuilding.addSpriteIntoNode(container.node_building);
         container.node_building.addChild(newBuilding);
+        container.node_building.setScale(1.5);
 
 
         let goldIcon = container.btn_upgrade.getChildByName("gold_icon");
