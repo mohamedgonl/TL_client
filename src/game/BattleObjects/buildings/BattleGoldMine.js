@@ -1,4 +1,4 @@
-var BattleGoldMine = BattleBaseMine.extend({
+var BattleGoldMine = BattleStorage.extend({
     _type: "RES_1",
     _resourceType: RESOURCE_TYPE.GOLD,
 

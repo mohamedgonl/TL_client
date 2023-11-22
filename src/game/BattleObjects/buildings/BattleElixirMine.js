@@ -1,4 +1,4 @@
-var BattleElixirMine = BattleBaseMine.extend({
+var BattleElixirMine = BattleStorage.extend({
     _type: "RES_2",
     _resourceType: RESOURCE_TYPE.ELIXIR,
 

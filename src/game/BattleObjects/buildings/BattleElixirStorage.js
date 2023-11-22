@@ -1,4 +1,4 @@
-var BattleElixirStorage = BattleBaseStorage.extend({
+var BattleElixirStorage = BattleStorage.extend({
     _type: "STO_2",
     _resourceType: RESOURCE_TYPE.ELIXIR,
 
