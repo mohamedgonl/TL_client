@@ -634,6 +634,7 @@ var BattleTroop = cc.Node.extend({
 
     //call when troop gain damage, update hp bar, if hp = 0, call dead
     onGainDamage: function (damage) {
+        this._hpBar.setVisible(true);
         this._currentHitpoints -= damage;
         this._hpBar.setPercent(this._currentHitpoints / this._hitpoints * 100);
         if (this._currentHitpoints <= 0) {
@@ -684,7 +685,7 @@ var BattleTroop = cc.Node.extend({
         this._hpBar.loadBarTexture(res_map.SPRITE.HEALTH_BAR_BG);
         this._hpBar.loadProgressBarTexture(res_map.SPRITE.TROOP_HEALTH_BAR);
         this._hpBar.setAnchorPoint(0.5, 1);
-        this._hpBar.setPosition(0, 35);
+        this._hpBar.setPosition(0, TroopInfo[this._type]["hpBarPosY"]);
         this._hpBar.setPercent(100);
         this._hpBar.setVisible(true);
         this.addChild(this._hpBar, ZORDER_BUILDING_EFFECT);
