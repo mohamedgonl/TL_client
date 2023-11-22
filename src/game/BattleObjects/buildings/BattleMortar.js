@@ -1,5 +1,15 @@
 var BattleMortar = BattleDefence.extend({
     _type: "DEF_3",
+    deltaBarrelPosition: {//vi tri nong sung so voi center theo tung huong
+        0: {dx: 0, dy: 55,},
+        1: {dx: 35, dy: 50,},
+        2: {dx: 53, dy: 22,},
+        3: {dx: 37, dy: -6,},
+        4: {dx: 0, dy: -20,},
+        5: {dx: -35, dy: 0,},
+        6: {dx: -50, dy: 25,},
+        7: {dx: -35, dy: 50,},
+    },
 
     ctor: function (level, id, posX, posY) {
         this._super(level, id, posX, posY);
@@ -22,7 +32,7 @@ var BattleMortar = BattleDefence.extend({
 
     attack: function (target) {
         //logic
-        this._super(target,  cc.p(this.x, this.y));
+        this._super(target);
 
         //UI
         //run action attack

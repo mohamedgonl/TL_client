@@ -508,7 +508,7 @@ var BattleManager = cc.Class.extend({
         return troops;
     },
 
-    getOrCreateBullet: function (type, startPoint, target, damagePerShot, attackRadius, initPos) {
+    getOrCreateBullet: function (type, startPoint, target, damagePerShot, attackRadius, attackArea, initPos) {
         let newBullet = null;
         const listBullets = this.listBullets;
         for (let bullet of listBullets)
@@ -517,11 +517,11 @@ var BattleManager = cc.Class.extend({
                 return bullet;
             }
         if (type === "DEF_1") {
-            newBullet = new CannonBullet(type, startPoint, target, damagePerShot, attackRadius, initPos);
+            newBullet = new CannonBullet(type, startPoint, target, damagePerShot, attackRadius, attackArea, initPos);
         } else if (type === "DEF_2") {
-            newBullet = new ArcherTowerBullet(type, startPoint, target, damagePerShot, attackRadius, initPos);
+            newBullet = new ArcherTowerBullet(type, startPoint, target, damagePerShot, attackRadius, attackArea, initPos);
         } else if (type === "DEF_3") {
-            newBullet = new MortarBullet(type, startPoint, target, damagePerShot, attackRadius, initPos);
+            newBullet = new MortarBullet(type, startPoint, target, damagePerShot, attackRadius, attackArea, initPos);
         }
 
         this.battleScene.battleLayer.addBullet(newBullet);

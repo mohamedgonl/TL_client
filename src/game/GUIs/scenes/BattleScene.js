@@ -164,6 +164,7 @@ var BattleScene = cc.Scene.extend({
     },
 
     onFindMatchFail: function (errorCode) {
+        cc.error('FIND MATCH FAIL : ' + errorCode);
         cc.director.runScene(new GameScene());
     },
 

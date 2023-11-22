@@ -9,13 +9,14 @@ var Bullet = cc.Sprite.extend({
     time: 0, // time logic to reach destination
     minimumTime: 0, // minimum time to reach destination
 
-    ctor: function (type, spriteType, startPoint, target, damagePerShot, attackRadius, initPos, minimumTime) {
+    ctor: function (type, spriteType, startPoint, target, damagePerShot, attackRadius, attackArea, initPos, minimumTime) {
         this._super(spriteType);
         //this.setBlendFunc(cc.SRC_ALPHA, cc.ONE);
         this.target = target;
         this._type = type;
         this.damagePerShot = damagePerShot;
         this.attackRadius = attackRadius;
+        this.attackArea = attackArea;
 
         if (minimumTime > 0)
             this.minimumTime = minimumTime;
@@ -34,6 +35,7 @@ var Bullet = cc.Sprite.extend({
         this.time = Math.max(Utils.roundFloat(gridDist / this.gridSpeed, 2), this.minimumTime);
         this.totalTime = this.time;
 
+        LogUtils.writeLog('def ' + this._type + ' bullet: time to reach ' + this.destination._posX + ' ' + this.destination._posY + " : " + this.totalTime);
         this.setInitPosition();
 
         this.active = true;

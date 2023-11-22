@@ -3,9 +3,9 @@ var ArcherTowerBullet = Bullet.extend({
     target: null,
     gridSpeed: 50,
 
-    ctor: function (type, startPoint, target, damagePerShot, attackRadius, initPos) {
+    ctor: function (type, startPoint, target, damagePerShot, attackRadius, attackArea, initPos) {
         this._super(type, res_map.SPRITE.BODY.ARCHER_TOWER.BULLET, startPoint, target,
-            damagePerShot, attackRadius, initPos, Utils.roundFloat(15.0 / this.gridSpeed, 2));
+            damagePerShot, attackRadius, attackArea, initPos, Utils.roundFloat(15.0 / this.gridSpeed, 2));
 
         //bullet explosion
         this._explosion = new cc.Sprite();
@@ -21,8 +21,8 @@ var ArcherTowerBullet = Bullet.extend({
     init: function (startPoint, target, initPos) {
         this._super(startPoint, target, initPos);
 
-        this.func = this.calcMotionFunc(startPoint, cc.p((startPoint.x + this.destination.x) / 2, startPoint.y + 200), this.destination)
-        this.distanceX = this.destination.x - startPoint.x;
+        this.func = this.calcMotionFunc(initPos, cc.p((initPos.x + this.destination.x) / 2, initPos.y + 200), this.destination)
+        this.distanceX = this.destination.x - initPos.x;
     },
 
     gameLoop: function (dt) {

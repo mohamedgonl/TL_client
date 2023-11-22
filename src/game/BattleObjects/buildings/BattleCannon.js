@@ -2,13 +2,13 @@ var BattleCannon = BattleDefence.extend({
     _type: "DEF_1",
     deltaBarrelPosition: {//vi tri nong sung so voi center theo tung huong
         0: {dx: 0, dy: -35,},
-        1: {dx: -20, dy: -20,},
-        2: {dx: -25, dy: -5,},
-        3: {dx: -20, dy: 20,},
-        4: {dx: 0, dy: 20,},
-        5: {dx: 20, dy: 15,},
-        6: {dx: 25, dy: 0,},
-        7: {dx: 25, dy: -20,},
+        1: {dx: -20, dy: -7,},
+        2: {dx: -25, dy: 10,},
+        3: {dx: -20, dy: 40,},
+        4: {dx: 0, dy: 35,},
+        5: {dx: 20, dy: 35,},
+        6: {dx: 25, dy: 10,},
+        7: {dx: 25, dy: -15,},
     },
 
     ctor: function (level, id, posX, posY) {
@@ -46,8 +46,7 @@ var BattleCannon = BattleDefence.extend({
 
     attack: function (target) {
         //logic
-        this._super(target, cc.p(this.x + this.deltaBarrelPosition[this.direct].dx,
-            this.y + this.deltaBarrelPosition[this.direct].dy));
+        this._super(target);
 
         //UI
         //run action attack

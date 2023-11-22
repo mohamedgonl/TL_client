@@ -76,7 +76,7 @@ var BattleDefence = BattleBuilding.extend({
         return dist > this._minRange && dist < this._maxRange;
     },
 
-    attack: function (target, bulletInitPos) {
+    attack: function (target) {
         //{-1, -1} la toa do vector thang dung, chieu tu tren xuong duoi (huong 6h)
         let angle = cc.radiansToDegrees(cc.pAngleSigned(cc.p(target._posX - this.centerPoint.x, target._posY - this.centerPoint.y), cc.p(-1, -1)));
         if (angle < 0) angle += 360;
@@ -89,12 +89,18 @@ var BattleDefence = BattleBuilding.extend({
             this.setDirection(newDirect);
         }
 
+        let bulletInitPos;
+        if (this.deltaBarrelPosition)
+            bulletInitPos = cc.p(this.x + this.deltaBarrelPosition[this.direct].dx,
+                this.y + this.deltaBarrelPosition[this.direct].dy)
+        else bulletInitPos = cc.p(this.x, this.y)
+
         const bullet = BattleManager.getInstance().getOrCreateBullet(this._type, {
             x: this.x,
             y: this.y,
             _posX: this.centerPoint.x,
             _posY: this.centerPoint.y
-        }, target, this.damagePerShot, this._attackRadius, bulletInitPos);
+        }, target, this.damagePerShot, this._attackRadius, this.attackArea, bulletInitPos);
 
         LogUtils.writeLog('def ' + this._id + ' fire to ' + target._posX + ' ' + target._posY)
     },
