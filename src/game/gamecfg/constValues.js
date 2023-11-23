@@ -23,6 +23,17 @@ const DEF_ATTACK_AREA = {
     BOTH: 3,
 }
 
+const BULLET_GRID_SPEED= {
+    'DEF_1': 40,
+    'DEF_2': 50,
+    'DEF_3': 13,
+}
+const BULLET_MINIMUM_TIME_REACH_DEST= {
+    'DEF_1': 0,
+    'DEF_2': 0.35,
+    'DEF_3': 0,
+}
+
 const BATTlE_PREPARE_TIME = 30;
 const BATTlE_LIMIT_TIME = 150;
 const BATTLE_FPS = 60;

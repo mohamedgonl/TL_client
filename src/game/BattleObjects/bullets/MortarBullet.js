@@ -1,7 +1,6 @@
 var MortarBullet = Bullet.extend({
     active: true,
     target: null,
-    gridSpeed: 13,
 
     ctor: function (type, startPoint, target, damagePerShot, attackRadius, attackArea, initPos) {
         this._super(type, res_map.SPRITE.BODY.MORTAR.BULLET, startPoint, target, damagePerShot, attackRadius, attackArea, initPos);
