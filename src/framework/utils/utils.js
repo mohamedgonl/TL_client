@@ -5,7 +5,7 @@ function getBuildingFromType(type, level, id, posX, posY, status, startTime, end
     var building = null;
 
     //obstacle
-    if (type.substring(0, 3) === 'OBS') {
+    if (type.substring(0, 3) === GAMEOBJECT_PREFIX.OBSTACLE) {
 
         building = new Obstacle(type, id, posX, posY, status, startTime, endTime);
         building.retain();
@@ -14,40 +14,40 @@ function getBuildingFromType(type, level, id, posX, posY, status, startTime, end
 
     //building
     switch (type) {
-        case 'TOW_1':
+        case BUILDING_TYPE.TOWN_HALL:
             building = new Townhall(level, id, posX, posY, status, startTime, endTime);
             break;
-        case 'BDH_1':
+        case BUILDING_TYPE.BUILDER_HUT:
             building = new BuilderHut(level, id, posX, posY, status, startTime, endTime);
             break;
-        case 'AMC_1':
+        case BUILDING_TYPE.ARMY_CAMP:
             building = new ArmyCamp(level, id, posX, posY, status, startTime, endTime);
             break;
-        case 'RES_1':
+        case BUILDING_TYPE.GOLD_MINE:
             building = new GoldMine(level, id, posX, posY, status, startTime, endTime);
             break;
-        case 'RES_2':
+        case BUILDING_TYPE.ELIXIR_MINE:
             building = new ElixirMine(level, id, posX, posY, status, startTime, endTime);
             break;
-        case 'STO_1':
+        case BUILDING_TYPE.GOLD_STORAGE:
             building = new GoldStorage(level, id, posX, posY, status, startTime, endTime);
             break;
-        case 'STO_2':
+        case BUILDING_TYPE.ELIXIR_STORAGE:
             building = new ElixirStorage(level, id, posX, posY, status, startTime, endTime);
             break;
-        case 'BAR_1':
+        case BUILDING_TYPE.BARRACK:
             building = new Barrack(level, id, posX, posY, status, startTime, endTime);
             break;
-        case 'DEF_1':
+        case BUILDING_TYPE.CANNON:
             building = new Cannon(level, id, posX, posY, status, startTime, endTime);
             break;
-        case 'WAL_1':
+        case BUILDING_TYPE.WALL:
             building = new Wall(level, id, posX, posY, status, startTime, endTime);
             break;
-        case 'DEF_2':
+        case BUILDING_TYPE.ARCHER_TOWER:
             building = new ArcherTower(level, id, posX, posY, status, startTime, endTime);
             break;
-        case 'DEF_3':
+        case BUILDING_TYPE.MORTAR:
             building = new Mortar(level, id, posX, posY, status, startTime, endTime);
             break;
         default:
@@ -63,47 +63,47 @@ function getBuildingFromType(type, level, id, posX, posY, status, startTime, end
 function getBattleBuildingFromType(type, level, id, posX, posY) {
     var building = null;
 
-    if (type.substring(0, 3) === 'OBS') {
+    if (type.substring(0, 3) === GAMEOBJECT_PREFIX.OBSTACLE) {
         var typeOBS = type.substring(4);
         building = new BattleObstacle(type, id, posX, posY);
         return building;
     }
 
     switch (type) {
-        case 'TOW_1':
+        case BUILDING_TYPE.TOWN_HALL:
             building = new BattleTownhall(level, id, posX, posY);
             break;
-        case 'BDH_1':
+        case BUILDING_TYPE.BUILDER_HUT:
             building = new BattleBuilderHut(level, id, posX, posY);
             break;
-        case 'AMC_1':
+        case BUILDING_TYPE.ARMY_CAMP:
             building = new BattleArmyCamp(level, id, posX, posY);
             break;
-        case 'RES_1':
+        case BUILDING_TYPE.GOLD_MINE:
             building = new BattleGoldMine(level, id, posX, posY);
             break;
-        case 'RES_2':
+        case BUILDING_TYPE.ELIXIR_MINE:
             building = new BattleElixirMine(level, id, posX, posY);
             break;
-        case 'STO_1':
+        case BUILDING_TYPE.GOLD_STORAGE:
             building = new BattleGoldStorage(level, id, posX, posY);
             break;
-        case 'STO_2':
+        case BUILDING_TYPE.ELIXIR_STORAGE:
             building = new BattleElixirStorage(level, id, posX, posY);
             break;
-        case 'BAR_1':
+        case BUILDING_TYPE.BARRACK:
             building = new BattleBarrack(level, id, posX, posY);
             break;
-        case 'DEF_1':
+        case BUILDING_TYPE.CANNON:
             building = new BattleCannon(level, id, posX, posY);
             break;
-        case 'DEF_2':
+        case BUILDING_TYPE.ARCHER_TOWER:
             building = new BattleArcherTower(level, id, posX, posY);
             break;
-        case 'DEF_3':
+        case BUILDING_TYPE.MORTAR:
             building = new BattleMortar(level, id, posX, posY);
             break;
-        case 'WAL_1':
+        case BUILDING_TYPE.WALL:
             building = new BattleWall(level, id, posX, posY);
             break;
     }

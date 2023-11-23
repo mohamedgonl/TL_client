@@ -1,5 +1,5 @@
 var BattleElixirStorage = BattleStorage.extend({
-    _type: "STO_2",
+    _type: BUILDING_TYPE.ELIXIR_STORAGE,
     _resourceType: RESOURCE_TYPE.ELIXIR,
 
     ctor: function (level, id, posX, posY) {

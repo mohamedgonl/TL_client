@@ -1,5 +1,5 @@
 var BattleTownhall = BattleBuilding.extend({
-    _type: "TOW_1",
+    _type: BUILDING_TYPE.TOWN_HALL,
     totalFlame: 3,
 
     ctor: function (level, id, posX, posY) {

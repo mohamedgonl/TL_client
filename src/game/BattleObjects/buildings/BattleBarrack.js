@@ -1,5 +1,5 @@
 var BattleBarrack = BattleBuilding.extend({
-    _type: "BAR_1",
+    _type: BUILDING_TYPE.BARRACK,
     _upper: null,
     _width: null,
     _height: null,

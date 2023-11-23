@@ -1,5 +1,5 @@
 var GoldMine = BaseMine.extend({
-    _type: "RES_1",
+    _type: BUILDING_TYPE.GOLD_MINE,
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
         let capacity = LoadManager.getInstance().getConfig(this._type, this._level)

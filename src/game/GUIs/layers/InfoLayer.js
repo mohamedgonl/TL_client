@@ -340,7 +340,7 @@ var InfoLayer = cc.Layer.extend({
 
         //rename nameBuilding
         //if building is start with OBS
-        if (building._type.startsWith("OBS")) {
+        if (building._type.startsWith(GAMEOBJECT_PREFIX.OBSTACLE)) {
             //get gold and elixir of building
             let priceGold = LoadManager.getInstance().getConfig(building._type, building._level, "gold");
             let priceElixir = LoadManager.getInstance().getConfig(building._type, building._level, "elixir");

@@ -1,5 +1,5 @@
 var BattleGoldMine = BattleStorage.extend({
-    _type: "RES_1",
+    _type: BUILDING_TYPE.GOLD_MINE,
     _resourceType: RESOURCE_TYPE.GOLD,
 
     ctor: function (level, id, posX, posY) {

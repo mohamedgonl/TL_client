@@ -36,7 +36,7 @@ var     MapManager = cc.Class.extend({
 
             let building = getBuildingFromType(type, level,id, posX, posY,status,startTime,endTime);
 
-            if(type.startsWith("RES"))
+            if(type.startsWith(GAMEOBJECT_PREFIX.RESOURCE))
             {
                 let lastCollectTime = construct.lastCollectTime;
                 building.setLastCollectTime(lastCollectTime);
