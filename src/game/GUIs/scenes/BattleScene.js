@@ -195,7 +195,7 @@ var BattleScene = cc.Scene.extend({
                         if (action.type === ACTION_TYPE.DROP_TROOP) {
                             this.battleLayer.createTroopAtGridPos(action.troopType, action.posX, action.posY);
                         } else if (action.type === ACTION_TYPE.END_BATTLE) {
-                            // this.onEndBattle();
+                            this.onEndBattle();
                         }
                     }
                 }
