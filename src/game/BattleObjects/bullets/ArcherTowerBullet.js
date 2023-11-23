@@ -46,11 +46,15 @@ var ArcherTowerBullet = Bullet.extend({
 
     // y = ax^2+bx+c: parabol co tiep tuyen tai A la AB va tiep tuyen tai C la CB
     calcMotionFunc: function (A, B, C) {
-        let a = ((B.y - A.y) / (B.x - A.x) - (B.y - C.y) / (B.x - C.x)) / (2 * (A.x - C.x));
-        let b = (B.y - A.y) / (B.x - A.x) - 2 * a * A.x;
+        let a = ((B.y - A.y) / this.convertToNonZero(B.x - A.x) - (B.y - C.y) / this.convertToNonZero(B.x - C.x)) / this.convertToNonZero(2 * (A.x - C.x));
+        let b = (B.y - A.y) / this.convertToNonZero(B.x - A.x) - 2 * a * A.x;
         let c = A.y - a * A.x * A.x - b * A.x;
 
         return [a, b, c];
+    },
+
+    convertToNonZero: function (a) {
+        return a === 0 ? 0.001 : a;
     },
 
     //return y = ax^2+bx+c
@@ -80,7 +84,7 @@ var ArcherTowerBullet = Bullet.extend({
         this._explosion.runAction(this.actionExplose);
 
         if (this.target.isAlive() && typeof this.target.onGainDamage === 'function') {
-            this.target.onGainDamage(this.damagePerShot);
+            this.target.onGainDamage(this.damagePerShot, this.id);
         }
         this.destroyBullet();
     },

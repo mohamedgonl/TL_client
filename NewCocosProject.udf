@@ -7,5 +7,15 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="UpgradePopup.csd" />
+          <FilePathData Path="MatchHistoryItem.csd" />
+          <FilePathData Path="HistoryAttackPopup.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="HistoryAttackPopup.csd" />
+      </Value>
+    </Item>
   </Properties>
 </UserData>
