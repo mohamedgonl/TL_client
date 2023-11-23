@@ -219,8 +219,14 @@ var BattleBuilding = BattleGameObject.extend({
             cc.p(x + size, y + size)
         ];
     },
+    getCenterPosition: function () {
+        let sizeHalf = Math.floor(this._width / 2);
+        let x = this._posX;
+        let y = this._posY;
+        return cc.p(x + sizeHalf, y + sizeHalf);
+    },
 
-    getNearestPoint: function (point, troopDtCount) {
+    getNearestPoint: function (point, troopId = null, random = false) {
         let x = point.x;
         let y = point.y;
 
@@ -230,10 +236,36 @@ var BattleBuilding = BattleGameObject.extend({
         let yEnd = yStart + this._height;
         let xMid = xStart + Math.floor(this._width / 2);
         let yMid = yStart + Math.floor(this._height / 2);
-        let seed = Math.floor(troopDtCount) + "" + Math.floor(troopDtCount);
-        cc.log("xStart : " + xStart + " yStart : " + yStart + " xEnd : " + xEnd + " yEnd : " + yEnd + " xMid : " + xMid + " yMid : " + yMid)
-        cc.log("start to mid x:" ,RandomUtils.generateRandomBySeed(xStart, xMid, seed , true))
+        if (random === false) {
+            if (x <= xStart) {
+                if (y <= yStart)
+                    return cc.p(xStart, yStart);
+                else if (y >= yEnd)
+                    return cc.p(xStart, yEnd);
+                else
+                    return cc.p(xStart, y);
 
+            } else if (x >= xEnd) {
+                if (y <= yStart)
+                    return cc.p(xEnd, yStart);
+                else if (y >= yEnd)
+                    return cc.p(xEnd, yEnd);
+                else
+                    return cc.p(xEnd, y);
+
+            } else {
+                if (y <= yStart)
+                    return cc.p(x, yStart);
+                else if (y >= yEnd)
+                    return cc.p(x, yEnd);
+                else
+                    return cc.p(x, y);
+
+            }
+        }
+
+        let seed = troopId;
+        let distanceOffset = Math.ceil(this._width / 4);
         let choose = RandomUtils.generateRandomBySeed(0, 1, seed, true);
         //if nearest point is one of 4 corners, else return random near point on edge
         if (x <= xStart) {
@@ -250,9 +282,7 @@ var BattleBuilding = BattleGameObject.extend({
                         yStart
                     )
                 }
-            }
-
-            else if (y >= yEnd) {
+            } else if (y >= yEnd) {
                 if (choose === 0) {
                     return cc.p(
                         xStart,
@@ -264,17 +294,13 @@ var BattleBuilding = BattleGameObject.extend({
                         yEnd
                     )
                 }
-            }
-
-            else {
+            } else {
                 return cc.p(
                     xStart,
-                    RandomUtils.generateRandomBySeed(yStart, yEnd, seed, true)
+                    RandomUtils.generateRandomBySeed(yMid - distanceOffset, yMid + distanceOffset, seed, true)
                 )
             }
-        }
-
-        else if (x >= xEnd) {
+        } else if (x >= xEnd) {
             if (y <= yStart) {
                 if (choose === 0) {
                     return cc.p(
@@ -287,9 +313,7 @@ var BattleBuilding = BattleGameObject.extend({
                         yStart
                     )
                 }
-            }
-
-            else if (y >= yEnd) {
+            } else if (y >= yEnd) {
                 if (choose === 0) {
                     return cc.p(
                         xEnd,
@@ -301,31 +325,23 @@ var BattleBuilding = BattleGameObject.extend({
                         yEnd
                     )
                 }
-            }
-
-            else {
+            } else {
                 return cc.p(
                     xEnd,
-                    RandomUtils.generateRandomBySeed(yStart, yEnd, seed, true)
+                    RandomUtils.generateRandomBySeed(yMid - distanceOffset, yMid + distanceOffset, seed, true)
                 )
             }
-        }
-
-        else {
+        } else {
 
             if (y <= yStart) {
                 return cc.p(
-                    RandomUtils.generateRandomBySeed(xStart, xEnd, seed, true),
+                    RandomUtils.generateRandomBySeed(xMid - distanceOffset, xMid + distanceOffset, seed, true),
                     yStart);
-            }
-
-            else if (y >= yEnd) {
+            } else if (y >= yEnd) {
                 return cc.p(
-                    RandomUtils.generateRandomBySeed(xStart, xEnd, seed, true),
+                    RandomUtils.generateRandomBySeed(xMid - distanceOffset, xMid + distanceOffset, seed, true),
                     yEnd);
-            }
-
-            else {
+            } else {
                 return cc.p(x, y);
             }
         }

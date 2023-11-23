@@ -49,10 +49,12 @@ RandomUtils.hashCode = function (strInput) {
 }
 
 RandomUtils.generateRandomBySeed = function (min = 0, max = 1, seed, isInteger = false) {
-    let randomNumber = Math.sin(RandomUtils.hashCode(seed));
+    cc.log(min + " " +  max + " " +  seed + " " + isInteger)
+    let randomNumber = Math.abs(Math.sin(RandomUtils.hashCode(seed)));
     const scaledRandom = min + randomNumber * (max - min);
     let rd = isInteger ? Math.round(scaledRandom) : scaledRandom;
-    return Math.abs(rd);
+    cc.log("RANDOM : " + rd)
+    return rd;
 }
 
 

@@ -1,7 +1,7 @@
 var Warrior = BattleTroop.extend({
-    ctor: function (posX,posY) {
+    ctor: function (posX,posY,id) {
         this._type = "ARM_1",
-        this._super(posX,posY);
+        this._super(posX,posY,id);
     },
 
 

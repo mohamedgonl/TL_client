@@ -40,10 +40,15 @@ var BattleLayer = cc.Layer.extend({
             default:
                 cc.log("NOT FOUND TROOP TYPE");
         }
+
         if (troop) {
+            if(this.idTroop === undefined) this.idTroop = 0;
+            else this.idTroop++;
+
             let posToAdd = this.getMapPosFromGridPos({x: posX, y: posY});
             this.addChild(troop, MAP_ZORDER_TROOP);
             troop.setPosition(posToAdd);
+            troop.setId(this.idTroop);
 
             //droptroop animation
             let dropTroopAction = res_troop.EFFECT.DROP_TROOP.ANIM;
@@ -323,12 +328,14 @@ var BattleLayer = cc.Layer.extend({
         var locationInScreen = event.getLocation();
         var distance = cc.pDistance(locationInScreen, this.positionTouchBegan);
         this.canDragBuilding = false;
-        if (distance < 10) this.onClicked(this.positionTouchBegan);
+        if (distance < 10) this.onClickDropTroop(this.positionTouchBegan);
 
     },
 
-    onClicked: function (locationInScreen) {
-        let gridPos = this.getGridPosFromScreenPos(locationInScreen);
+    onClickDropTroop: function (locationInScreen) {
+        //random in -10 +10 pixel
+        let locationDrop = cc.pAdd(locationInScreen, cc.p(Math.random() * 20 - 10, Math.random() * 20 - 10));
+        let gridPos = this.getGridPosFromScreenPos(locationDrop);
         //get type of chosen slot
         let type = cc.director.getRunningScene().battleUILayer.getTypeOfChosenSlot();
         if (type == null) return;
