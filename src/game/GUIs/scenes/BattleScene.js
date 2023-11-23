@@ -239,6 +239,9 @@ var BattleScene = cc.Scene.extend({
     setTick: function (tick) {
         this.tick = tick;
         LogUtils.tick = tick;
+    },
+    getTick: function () {
+        return this.tick;
     }
 })
 

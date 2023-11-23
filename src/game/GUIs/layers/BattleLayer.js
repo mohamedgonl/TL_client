@@ -56,6 +56,7 @@ var BattleLayer = cc.Layer.extend({
             dropTroop.setScale(0.5);
             //biến mất sau frame cuối
             this.scheduleOnce(function () {
+                if(dropTroop)
                 dropTroop.setVisible(false);
             }, 0.5);
 

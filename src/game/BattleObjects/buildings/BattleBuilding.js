@@ -184,9 +184,9 @@ var BattleBuilding = BattleGameObject.extend({
 
         //delete after 0.2
         this.scheduleOnce(function () {
-            effect.removeFromParent(true);
+            if (effect)
+                effect.removeFromParent(true);
         }, 0.2)
-
 
 
         LogUtils.writeLog('building ' + this._id + ' gain ' + damage + ' ~ ' + this._hp)
@@ -218,6 +218,117 @@ var BattleBuilding = BattleGameObject.extend({
             cc.p(x, y + size),
             cc.p(x + size, y + size)
         ];
+    },
+
+    getNearestPoint: function (point, troopDtCount) {
+        let x = point.x;
+        let y = point.y;
+
+        let xStart = this._posX;
+        let yStart = this._posY;
+        let xEnd = xStart + this._width;
+        let yEnd = yStart + this._height;
+        let xMid = xStart + Math.floor(this._width / 2);
+        let yMid = yStart + Math.floor(this._height / 2);
+        let seed = Math.floor(troopDtCount) + "" + Math.floor(troopDtCount);
+        cc.log("xStart : " + xStart + " yStart : " + yStart + " xEnd : " + xEnd + " yEnd : " + yEnd + " xMid : " + xMid + " yMid : " + yMid)
+        cc.log("start to mid x:" ,RandomUtils.generateRandomBySeed(xStart, xMid, seed , true))
+
+        let choose = RandomUtils.generateRandomBySeed(0, 1, seed, true);
+        //if nearest point is one of 4 corners, else return random near point on edge
+        if (x <= xStart) {
+
+            if (y <= yStart) {
+                if (choose === 0) {
+                    return cc.p(
+                        xStart,
+                        RandomUtils.generateRandomBySeed(yStart, yMid, seed, true)
+                    )
+                } else {
+                    return cc.p(
+                        RandomUtils.generateRandomBySeed(xStart, xMid, seed, true),
+                        yStart
+                    )
+                }
+            }
+
+            else if (y >= yEnd) {
+                if (choose === 0) {
+                    return cc.p(
+                        xStart,
+                        RandomUtils.generateRandomBySeed(yMid, yEnd, seed, true)
+                    )
+                } else {
+                    return cc.p(
+                        RandomUtils.generateRandomBySeed(xStart, xMid, seed, true),
+                        yEnd
+                    )
+                }
+            }
+
+            else {
+                return cc.p(
+                    xStart,
+                    RandomUtils.generateRandomBySeed(yStart, yEnd, seed, true)
+                )
+            }
+        }
+
+        else if (x >= xEnd) {
+            if (y <= yStart) {
+                if (choose === 0) {
+                    return cc.p(
+                        xEnd,
+                        RandomUtils.generateRandomBySeed(yStart, yMid, seed, true)
+                    )
+                } else {
+                    return cc.p(
+                        RandomUtils.generateRandomBySeed(xMid, xEnd, seed, true),
+                        yStart
+                    )
+                }
+            }
+
+            else if (y >= yEnd) {
+                if (choose === 0) {
+                    return cc.p(
+                        xEnd,
+                        RandomUtils.generateRandomBySeed(yMid, yEnd, seed, true)
+                    )
+                } else {
+                    return cc.p(
+                        RandomUtils.generateRandomBySeed(xMid, xEnd, seed, true),
+                        yEnd
+                    )
+                }
+            }
+
+            else {
+                return cc.p(
+                    xEnd,
+                    RandomUtils.generateRandomBySeed(yStart, yEnd, seed, true)
+                )
+            }
+        }
+
+        else {
+
+            if (y <= yStart) {
+                return cc.p(
+                    RandomUtils.generateRandomBySeed(xStart, xEnd, seed, true),
+                    yStart);
+            }
+
+            else if (y >= yEnd) {
+                return cc.p(
+                    RandomUtils.generateRandomBySeed(xStart, xEnd, seed, true),
+                    yEnd);
+            }
+
+            else {
+                return cc.p(x, y);
+            }
+        }
     },
 
     toString: function (type) {

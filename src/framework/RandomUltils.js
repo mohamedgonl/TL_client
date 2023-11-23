@@ -33,8 +33,9 @@ RandomUtils.JenkinsSimpleFast32 = function (seed_1, seed_2, seed_3, seed_4) {
     }
 }
 
-RandomUtils.hashCode = function (str) {
+RandomUtils.hashCode = function (strInput) {
     let hash = 0;
+    let str = strInput.toString();
     if (str.length === 0) return hash;
 
     for (let i = 0; i < str.length; i++) {
