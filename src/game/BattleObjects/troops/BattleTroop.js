@@ -514,7 +514,6 @@ var BattleTroop = cc.Node.extend({
 
     attack: function () {
         let damage = this._damage;
-
         //if target is favorite target, damage *= damageScale
         if (this._target._type.startsWith(this._favoriteTarget) === true) {
             damage *= this._damageScale;
@@ -689,6 +688,9 @@ var BattleTroop = cc.Node.extend({
         this._hpBar.setPercent(100);
         this._hpBar.setVisible(true);
         this.addChild(this._hpBar, ZORDER_BUILDING_EFFECT);
+
+
+
     },
     refindTarget: function () {
         this._state = TROOP_STATE.FIND;

@@ -172,6 +172,23 @@ var BattleBuilding = BattleGameObject.extend({
             this._hpBar.setPercent(percent);
         }
 
+        let atkEffect = res_troop.EFFECT.ATK_HIT.ANIM.clone();
+        let effect = new cc.Sprite();
+        //set pos random in -10 10
+        let randomX = Math.random() * 20 - 10;
+        let randomY = Math.random() * 20 - 10;
+        this.addChild(effect, ZORDER_BUILDING_EFFECT);
+        effect.setPosition(randomX, randomY);
+        effect.runAction(cc.animate(atkEffect));
+        effect.setScale(0.5);
+
+        //delete after 0.2
+        this.scheduleOnce(function () {
+            effect.removeFromParent(true);
+        }, 0.2)
+
+
+
         LogUtils.writeLog('building ' + this._id + ' gain ' + damage + ' ~ ' + this._hp)
     },
 

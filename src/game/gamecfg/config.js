@@ -32,6 +32,7 @@ const MAP_ZORDER_BUILDING = 2000; // max to about 400
 const MAP_ZORDER_BULLET = 2600; // max to about 400
 const MAP_ZORDER_GUI = 3000;
 const MAP_ZORDER_TROOP = 2500;
+const MAP_ZORDER_DROP_TROOP = 2450;
 
 const POPUP_ZORDER = 10000000000;
 

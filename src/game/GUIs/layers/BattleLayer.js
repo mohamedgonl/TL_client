@@ -44,6 +44,21 @@ var BattleLayer = cc.Layer.extend({
             let posToAdd = this.getMapPosFromGridPos({x: posX, y: posY});
             this.addChild(troop, MAP_ZORDER_TROOP);
             troop.setPosition(posToAdd);
+
+            //droptroop animation
+            let dropTroopAction = res_troop.EFFECT.DROP_TROOP.ANIM;
+            let cloneDropTroopAction = dropTroopAction.clone();
+            let animate = cc.animate(cloneDropTroopAction);
+            let dropTroop = new cc.Sprite(res_troop.EFFECT.DROP_TROOP[0]);
+            dropTroop.runAction(animate);
+            this.addChild(dropTroop,MAP_ZORDER_DROP_TROOP);
+            dropTroop.setPosition(posToAdd);
+            dropTroop.setScale(0.5);
+            //biến mất sau frame cuối
+            this.scheduleOnce(function () {
+                dropTroop.setVisible(false);
+            }, 0.5);
+
             cc.director.getRunningScene().onDropTroop({
                 troopType: type,
                 posX,
@@ -332,6 +347,10 @@ var BattleLayer = cc.Layer.extend({
             cc.director.getRunningScene().onStartBattle();
         }
         this.createTroopAtGridPos(type, gridPos.x, gridPos.y);
+        //anim create troop
+
+
+
         //get battleUILayer to minus 1 troop
         cc.director.getRunningScene().battleUILayer.onInitTroop();
 

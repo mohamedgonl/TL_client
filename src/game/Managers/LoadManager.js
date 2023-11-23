@@ -518,6 +518,12 @@ var LoadManager = cc.Node.extend({
         this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/idle/image", 12, 17, res_troop.IDLE.ARM_6.LEFT);
         this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/idle/image", 18, 23, res_troop.IDLE.ARM_6.UP_LEFT);
         this.addAnimationToTarget("res/Troops/ARM_6_1/ARM_6_1/idle/image", 24, 29, res_troop.IDLE.ARM_6.UP);
+
+        //EFFECT DROP TROOP
+        this.addAnimationToTarget("res/battle/drop_troops/",0,7,res_troop.EFFECT.DROP_TROOP,0.5,2)
+
+        //EFFECT ATTACK
+        this.addAnimationToTarget("res/battle/AtkHit_01/",0,4,res_troop.EFFECT.ATK_HIT,0.2,2);
     },
     loadSpriteBuilding: function () {
         let maxLevel;
@@ -639,7 +645,7 @@ var LoadManager = cc.Node.extend({
         }
         //loop in 1s
         animation.setDelayPerUnit(duration / (end - start + 1));
-        animation.setRestoreOriginalFrame(true);
+        // animation.setRestoreOriginalFrame(true);
         target.ANIM = animation;
         target.ANIM.retain();
     }
@@ -882,6 +888,11 @@ var res_troop = {
     SHADOW: {
         SMALL: "res/Map/map_obj_bg/1x1_bong.png",
         BIG: "res/Map/map_obj_bg/big_shadow_troop.png"
+    },
+    EFFECT:{
+        DROP_TROOP:{},
+        ATK_HIT:{}
+
     }
 }
 var effect = {
