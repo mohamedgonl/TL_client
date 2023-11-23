@@ -49,18 +49,11 @@ var TrainTroopPopup = cc.Layer.extend({
     },
 
     getPage:  function ({page, barackId}){
-        cc.log("GO HERE" + JSON.stringify({page, barackId}))
-        cc.log("PAGE :: " + page)
-        cc.log("BAR ID :: "  + barackId)
         if(page !== undefined ) {
-            cc.log("GO TO PAGE")
             return this._trainPages[page];
         }
-        cc.log("GO GO GO")
         if(barackId !== undefined) {
-            cc.log("GO TO BARRACK ID")
             for (let i = 0; i <this._trainPages.length; i++) {
-                cc.log("BAR ID :: " + this._trainPages[i].getBarrackId() )
                 if(this._trainPages[i].getBarrackId() === barackId) {
                     return  this._trainPages[i];
                 }

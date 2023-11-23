@@ -76,9 +76,19 @@ var TrainTroopPage = cc.Node.extend({
     },
 
     stopUpdateUI: function () {
+        cc.log("STOP UPDATE UI BAR ID : " + this._curBarrack._id)
         this._isActive = false;
         this.unschedule(this.updateTrainTime);
     },
+
+    setCurrentBar : function () {
+            let curTroopTime = this._trainContainer.getChildByName("current");
+            let processBar = curTroopTime.getChildByName("current_process");
+            let timeString = curTroopTime.getChildByName("current_time_string");
+            timeString.setString("DỪNG");
+            processBar.setPercent(100);
+    },
+
 
 
     getBarrackId: function () {

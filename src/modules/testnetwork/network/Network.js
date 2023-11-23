@@ -147,8 +147,12 @@ testnetwork.Connector = cc.Class.extend({
             cc.log("TRAIN TROOP REQUEST ERROR with code ::::::::: ", packet.getError());
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
             let trainingPopup = popUpLayer.getTrainingPopup();
-
-            trainingPopup.getPage({barackId: packet.barrackId}).updateUI(1);
+            if(packet.getError() === ErrorCode.ARMY_MAX_SPACE) {
+                trainingPopup.getPage({barackId: packet.barrackId}).setCurrentBar();
+            }
+            else {
+                trainingPopup.getPage({barackId: packet.barrackId}).updateUI(1);
+            }
         } else {
             cc.log("TRAIN TROOP DONE REQUEST SUCCESS ::::::::: " + JSON.stringify(packet));
             let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
