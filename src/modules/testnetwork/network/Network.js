@@ -123,11 +123,19 @@ testnetwork.Connector = cc.Class.extend({
                 else
                     cc.director.getRunningScene().onFindMatchFail(packet.error);
                 break;
+            case gv.CMD.GET_MATCH_INFO: {
+                if (packet.error === ErrorCode.SUCCESS)
+                    cc.director.getRunningScene().onFindMatchSuccess(packet);
+                else
+                    cc.director.getRunningScene().onFindMatchFail(packet.error);
+                break;
+            }
             case gv.CMD.GET_HISTORY_ATTACK: {
                 if(packet.error === ErrorCode.SUCCESS) {
                     let popUpLayer = cc.director.getRunningScene().getPopUpLayer();
                     popUpLayer.getHistoryPopup().initMatches(packet.matches);
                 }
+                break;
             }
             case gv.CMD.DO_ACTION:
             // if (packet.error === ErrorCode.SUCCESS)
@@ -543,6 +551,13 @@ testnetwork.Connector = cc.Class.extend({
         cc.log("SEND END BATTLE");
         var pk = this.gameClient.getOutPacket(CmdSendEndBattle);
         pk.pack(data);
+        this.gameClient.sendPacket(pk);
+    },
+
+    sendGetMatchInfo: function (matchId) {
+        cc.log("SEND GET MATH INFO");
+        var pk = this.gameClient.getOutPacket(CmdSendGetMatchInfo);
+        pk.pack(matchId);
         this.gameClient.sendPacket(pk);
     },
 

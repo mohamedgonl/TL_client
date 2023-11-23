@@ -4,8 +4,9 @@ var BattleScene = cc.Scene.extend({
     tick: 0,
     countTick: 0, //from 0 to BATTLE_FPS
     secPerTick: Utils.roundFloat(1.0 / BATTLE_FPS, 6),
+    replaySpeed: 2,
 
-    ctor: function () {
+    ctor: function (setting) {
         this._super();
         PlayerInfoManager.releaseInstance();
         MapManager.releaseInstance();
@@ -16,7 +17,15 @@ var BattleScene = cc.Scene.extend({
 
         this.init();
         BattleManager.getInstance().battleScene = this;
-        this.schedule(this.gameLoop, this.secPerTick);
+
+        let dt = this.secPerTick;
+
+        if (setting && setting.onReplay){
+            BattleManager.getInstance().onReplay = setting.onReplay;
+            dt /= this.replaySpeed;
+        }
+
+        this.schedule(this.gameLoop, dt);
     },
 
     init: function () {
@@ -66,14 +75,18 @@ var BattleScene = cc.Scene.extend({
 
         this.stopCountDown();
         this.setTick(0);
-        testnetwork.connector.sendDoAction({type: ACTION_TYPE.START_BATTlE, tick: this.tick,});
+
+        if (!BattleManager.getInstance().isOnReplayMode())
+            testnetwork.connector.sendDoAction({type: ACTION_TYPE.START_BATTlE, tick: this.tick,});
+
         BattleManager.getInstance().onStartBattle();
         this.setTimeLeft(BATTlE_LIMIT_TIME);
         this.battleUILayer.onStartBattle();
     },
 
     onDropTroop: function (data) {
-        testnetwork.connector.sendDoAction({type: ACTION_TYPE.DROP_TROOP, tick: this.tick, data});
+        if (!BattleManager.getInstance().isOnReplayMode())
+            testnetwork.connector.sendDoAction({type: ACTION_TYPE.DROP_TROOP, tick: this.tick, data});
     },
 
     onEndBattle: function (delay = 0, isClickEnd = false) {
@@ -86,27 +99,13 @@ var BattleScene = cc.Scene.extend({
         if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING) {
 
             this.unschedule(this.gameLoop);
-            //send action end
-            const starAmount = BattleManager.getInstance().starAmount;
-            const robbedGold = BattleManager.getInstance().robbedGold;
-            const robbedElixir = BattleManager.getInstance().robbedElixir;
-            const trophyAmount = starAmount > 0 ? BattleManager.getInstance().winPoint : BattleManager.getInstance().losePoint;
-            const listTroops = BattleManager.getInstance().getListUsedTroops();
-            let percentage = BattleManager.getInstance().getDestroyedPercentage();
 
-            // testnetwork.connector.sendEndBattle({
-            //     result: starAmount > 0,
-            //     starAmount,
-            //     trophyAmount,
-            //     robbedGold,
-            //     robbedElixir,
-            //     listTroops,
-            //     tick: this.tick,
-            //     percentage,
-            // });
+            //send action end
             if (!isClickEnd)
                 this.setTick(this.tick + 1);
-            testnetwork.connector.sendDoAction({type: ACTION_TYPE.END_BATTLE, tick: this.tick,});
+
+            if (!BattleManager.getInstance().isOnReplayMode())
+                testnetwork.connector.sendDoAction({type: ACTION_TYPE.END_BATTLE, tick: this.tick,});
 
             // this.stopCountDown();
             BattleManager.getInstance().onEndBattle();
@@ -157,7 +156,9 @@ var BattleScene = cc.Scene.extend({
         this.battleUILayer.onLoadDataSuccess();
         this.loadingView.stopLoading();
 
-        this.timeLeft = BATTlE_PREPARE_TIME;
+        if (BattleManager.getInstance().isOnReplayMode())
+            this.timeLeft = 2;
+        else this.timeLeft = BATTlE_PREPARE_TIME;
         this.battleUILayer.setTimeLeft(this.timeLeft);
 
         this.schedule(this.countDown, 1);
@@ -184,6 +185,20 @@ var BattleScene = cc.Scene.extend({
                 this.setTimeLeft(this.timeLeft - 1);
             } else {
                 this.countTick++;
+            }
+
+            if (BattleManager.getInstance().isOnReplayMode() && BattleManager.getInstance().actions && BattleManager.getInstance().actions.length > 0) {
+                for (let action of BattleManager.getInstance().actions) {
+                    if (action.tick > this.tick)
+                        break;
+                    if (action.tick === this.tick) {
+                        if (action.type === ACTION_TYPE.DROP_TROOP) {
+                            this.battleLayer.createTroopAtGridPos(action.troopType, action.posX, action.posY);
+                        } else if (action.type === ACTION_TYPE.END_BATTLE) {
+                            // this.onEndBattle();
+                        }
+                    }
+                }
             }
 
             //check defences targets
@@ -228,12 +243,12 @@ var BattleScene = cc.Scene.extend({
                 // }
             }
 
-            if (this.timeLeft === 0){
+            if (this.timeLeft === 0) {
                 this.onEndBattle(1);
                 return;
             }
         }
-        this.setTick(this.tick + 1)
+        this.setTick(this.tick + 1);
     },
 
     setTick: function (tick) {
