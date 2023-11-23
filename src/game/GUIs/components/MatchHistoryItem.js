@@ -10,6 +10,8 @@ var MatchHistoryItem = cc.Node.extend({
         this._goldGot = node.getChildByName("gold_got");
         this._trophy = node.getChildByName("trophy");
         this._stars = node.getChildByName("stars");
+        this._replayButton = node.getChildByName("button_replay");
+        this._replayButton.addClickEventListener(this.onTouchReplay.bind(this))
         this.setScaleX(1.15);
         // this._node = node;
         this.addChild(node);
@@ -17,6 +19,7 @@ var MatchHistoryItem = cc.Node.extend({
     },
     initData: function (data) {
         cc.log(JSON.stringify(data))
+        this.id = data.id;
         this._enemyName.setString(data.enemyName);
         this._time.setString(fr.getTimeDifferenceString(TimeManager.getInstance().getCurrentTimeInSecond(), data.time));
         this._result.setString(data.isWin ? "CHIẾN THẮNG" : "THẤT BẠI");
@@ -35,6 +38,9 @@ var MatchHistoryItem = cc.Node.extend({
         for (let i = data.stars; i < 3; i++) {
             ColorUlties.setGrayObjects(stars[i]);
         }
+    },
+    onTouchReplay : function () {
+        cc.log(this.id);
     }
 })
 
