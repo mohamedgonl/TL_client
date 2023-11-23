@@ -187,7 +187,7 @@ var BattleManager = cc.Class.extend({
             this.totalTroop += troop.amount;
         }
 
-        if (this.isOnReplayMode()){
+        if (this.isOnReplayMode()) {
             this.actions = actions;
         }
     },
@@ -425,7 +425,7 @@ var BattleManager = cc.Class.extend({
         return Math.floor(this.buildingDestroyedPoint * 100 / this.totalBuildingPoint);
     },
 
-    isOnReplayMode: function (){
+    isOnReplayMode: function () {
         return this.onReplay;
     },
 
@@ -524,7 +524,7 @@ var BattleManager = cc.Class.extend({
         const listBullets = this.listBullets;
         for (let bullet of listBullets)
             if (!bullet.active && bullet._type === type) {
-                bullet.init(startPoint, target, initPos);
+                bullet.init(startPoint, target, damagePerShot, initPos);
                 return bullet;
             }
         if (type === "DEF_1") {
