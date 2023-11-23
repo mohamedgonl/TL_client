@@ -65,13 +65,13 @@ var BattleTroop = cc.Node.extend({
             }
             this.checkPath();
             LogUtils.writeLog("3 :troop " + this._type + " find target " + this._target._type);
-            //change weight of grid in path +1 for various path each troop
-            let graph = BattleManager.getInstance().getBattleGraph();
-            for (let i = 0; i < this._path.length; i++) {
-                let x = this._path[i].x;
-                let y = this._path[i].y;
-                graph.changeNodeWeight(x, y, graph.getNode(x, y).weight + 1);
-            }
+            // //change weight of grid in path +1 for various path each troop
+            // let graph = BattleManager.getInstance().getBattleGraph();
+            // for (let i = 0; i < this._path.length; i++) {
+            //     let x = this._path[i].x;
+            //     let y = this._path[i].y;
+            //     graph.changeNodeWeight(x, y, graph.getNode(x, y).weight + 1);
+            // }
             //if not found target, return
             if (this._target === null) {
                 cc.log("ERROR :::::: not found target");
@@ -144,21 +144,22 @@ var BattleTroop = cc.Node.extend({
         let graph = BattleManager.getInstance().getBattleGraph();
         let start = new BattleGridNode(this._posX, this._posY, graph.getNode(this._posX, this._posY).weight, null);
 
-        //get center of building
-        let targetCenterX = building._posX + Math.floor(building._width / 2);
-        let targetCenterY = building._posY + Math.floor(building._height / 2);
-        LogUtils.writeLog("target center: " + targetCenterX + " " + targetCenterY);
+        // //get center of building
+        // let targetCenterX = building._posX + Math.floor(building._width / 2);
+        // let targetCenterY = building._posY + Math.floor(building._height / 2);
+        // LogUtils.writeLog("target center: " + targetCenterX + " " + targetCenterY);
 
-        // let end = new BattleGridNode(targetCenter.x,targetCenter.y,graph.getNode(targetCenter.x,targetCenter.y).weight);
-        //let end = random node in building
-        // let buildingRandomX = Math.floor(Math.random() * (building._width-1)) + building._posX;
-        // let buildingRandomY = Math.floor(Math.random() * (building._height-1)) + building._posY;
+        //let end X Y random in building
+        let nearestPoint = building.getNearestPoint({x: this._posX, y: this._posY},this.dtCount);
 
+        let end = new BattleGridNode(
+            nearestPoint.x, nearestPoint.y,
+            graph.getNode(nearestPoint.x, nearestPoint.y).weight, building._id);
 
-        let end = new BattleGridNode(targetCenterX, targetCenterY, graph.getNode(targetCenterX, targetCenterY).weight, building._id);
         return BattleAStar.search(graph, start, end);
         // return BattleAStar.searchSimple(graph, start, end);
     },
+
 
     //check if troop in attack range of building,
     // normal case : troop._posX, troop._posY,
@@ -204,13 +205,9 @@ var BattleTroop = cc.Node.extend({
 
         //if distance from nearest corner to troop < attack range
         let distance = Math.sqrt(Math.pow(xNearest - x, 2) + Math.pow(yNearest - y, 2));
+        distance = Utils.roundFloat(distance,4);
 
-        if (distance <= this._attackRange) {
-
-            return true;
-        }
-
-        return false;
+        return distance <= this._attackRange;
     },
 
     findTarget: function () {
@@ -514,7 +511,6 @@ var BattleTroop = cc.Node.extend({
 
     attack: function () {
         let damage = this._damage;
-
         //if target is favorite target, damage *= damageScale
         if (this._target._type.startsWith(this._favoriteTarget) === true) {
             damage *= this._damageScale;
@@ -689,6 +685,9 @@ var BattleTroop = cc.Node.extend({
         this._hpBar.setPercent(100);
         this._hpBar.setVisible(true);
         this.addChild(this._hpBar, ZORDER_BUILDING_EFFECT);
+
+
+
     },
     refindTarget: function () {
         this._state = TROOP_STATE.FIND;
