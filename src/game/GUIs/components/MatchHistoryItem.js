@@ -18,7 +18,6 @@ var MatchHistoryItem = cc.Node.extend({
         this.initData(data);
     },
     initData: function (data) {
-        cc.log(JSON.stringify(data))
         this.id = data.id;
         this._enemyName.setString(data.enemyName);
         this._time.setString(fr.getTimeDifferenceString(TimeManager.getInstance().getCurrentTimeInSecond(), data.time));
@@ -39,9 +38,17 @@ var MatchHistoryItem = cc.Node.extend({
             ColorUlties.setGrayObjects(stars[i]);
         }
     },
-    onTouchReplay : function () {
-        cc.log(this.id);
+    onTouchReplay: function () {
+        const loadingView = new Loading(Loading.START);
+
+        MapManager.getInstance().gameScene.addChild(loadingView);
+
+        const matchId = this.id;
+
+        loadingView.startLoading(function () {
+            cc.eventManager.removeAllListeners();
+            cc.director.runScene(new BattleScene({onReplay: true}));
+            testnetwork.connector.sendGetMatchInfo(matchId);
+        });
     }
 })
-
-

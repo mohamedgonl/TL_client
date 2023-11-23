@@ -38,14 +38,18 @@ var BattleUILayer = cc.Layer.extend({
         this.timeLabel = node.getChildByName("time").getChildByName("BitmapFontLabel_5");
 
         //resource of player
-        this.goldCurrent = node.getChildByName("gold_container").getChildByName("text");
-        this.elixirCurrent = node.getChildByName("elixir_container").getChildByName("text");
-        this.gemCurrent = node.getChildByName("g_container").getChildByName("text");
-        this.goldMax = node.getChildByName("gold_container").getChildByName("text_max");
-        this.elixirMax = node.getChildByName("elixir_container").getChildByName("text_max");
+        this.goldContainer = node.getChildByName("gold_container");
+        this.elixirContainer = node.getChildByName("elixir_container");
+        this.gemContainer = node.getChildByName("g_container");
 
-        this.goldBar = this.node.getChildByName("gold_container").getChildByName("bar_bg").getChildByName("bar");
-        this.elixirBar = this.node.getChildByName("elixir_container").getChildByName("bar_bg").getChildByName("bar");
+        this.goldCurrent = this.goldContainer.getChildByName("text");
+        this.elixirCurrent = this.elixirContainer.getChildByName("text");
+        this.gemCurrent = this.gemContainer.getChildByName("text");
+        this.goldMax = this.goldContainer.getChildByName("text_max");
+        this.elixirMax = this.elixirContainer.getChildByName("text_max");
+
+        this.goldBar = this.goldContainer.getChildByName("bar_bg").getChildByName("bar");
+        this.elixirBar = this.elixirContainer.getChildByName("bar_bg").getChildByName("bar");
 
         //star result
         this.starContainer = node.getChildByName("star_container");
@@ -80,6 +84,8 @@ var BattleUILayer = cc.Layer.extend({
     },
 
     updatePlayerResources: function () {
+        if (BattleManager.getInstance().isOnReplayMode())
+            return;
         const {gold, elixir, gem} = BattleManager.getInstance().playerResources;
 
         this.goldCurrent.setString(Utils.numberToText(gold));
@@ -104,25 +110,33 @@ var BattleUILayer = cc.Layer.extend({
         this.eloTextWin.setString(" + " + BattleManager.getInstance().winPoint);
         this.eloTextLose.setString(" - " + BattleManager.getInstance().losePoint);
 
-        this.goldCurrent.setString(Utils.numberToText(BattleManager.getInstance().getPlayerResource(RESOURCE_TYPE.GOLD)));
-        this.elixirCurrent.setString(Utils.numberToText(BattleManager.getInstance().getPlayerResource(RESOURCE_TYPE.ELIXIR)));
-        this.goldMax.setString(Utils.numberToText(BattleManager.getInstance().getPlayerMaxResource(RESOURCE_TYPE.GOLD)));
-        this.elixirMax.setString(Utils.numberToText(BattleManager.getInstance().getPlayerMaxResource(RESOURCE_TYPE.ELIXIR)));
+        if (BattleManager.getInstance().isOnReplayMode()) {
+            this.goldContainer.setVisible(false);
+            this.elixirContainer.setVisible(false);
+            this.gemContainer.setVisible(false);
+            this.troopContainer.setVisible(false);
+            this.btnFind.setVisible(false);
+        } else {
+            this.goldCurrent.setString(Utils.numberToText(BattleManager.getInstance().getPlayerResource(RESOURCE_TYPE.GOLD)));
+            this.elixirCurrent.setString(Utils.numberToText(BattleManager.getInstance().getPlayerResource(RESOURCE_TYPE.ELIXIR)));
+            this.goldMax.setString(Utils.numberToText(BattleManager.getInstance().getPlayerMaxResource(RESOURCE_TYPE.GOLD)));
+            this.elixirMax.setString(Utils.numberToText(BattleManager.getInstance().getPlayerMaxResource(RESOURCE_TYPE.ELIXIR)));
 
-        //set bar percent
-        let goldPercent = BattleManager.getInstance().getPlayerResource(RESOURCE_TYPE.GOLD) /
-            BattleManager.getInstance().getPlayerMaxResource(RESOURCE_TYPE.GOLD);
-        let elixirPercent = BattleManager.getInstance().getPlayerResource(RESOURCE_TYPE.ELIXIR) /
-            BattleManager.getInstance().getPlayerMaxResource(RESOURCE_TYPE.ELIXIR);
+            //set bar percent
+            let goldPercent = BattleManager.getInstance().getPlayerResource(RESOURCE_TYPE.GOLD) /
+                BattleManager.getInstance().getPlayerMaxResource(RESOURCE_TYPE.GOLD);
+            let elixirPercent = BattleManager.getInstance().getPlayerResource(RESOURCE_TYPE.ELIXIR) /
+                BattleManager.getInstance().getPlayerMaxResource(RESOURCE_TYPE.ELIXIR);
 
-        this.goldBar.setPercent(goldPercent * 100);
-        this.elixirBar.setPercent(elixirPercent * 100);
+            this.goldBar.setPercent(goldPercent * 100);
+            this.elixirBar.setPercent(elixirPercent * 100);
 
+            this.btnFind.enabled = true;
+            //load state of troop
+            this.loadTroopSlots();
+        }
         this.timeLabel.setString("Bắt đầu sau:");
 
-        this.btnFind.enabled = true;
-        //load state of troop
-        this.loadTroopSlots();
     },
     loadTroopSlots: function () {
 
@@ -184,8 +198,12 @@ var BattleUILayer = cc.Layer.extend({
         cc.director.getRunningScene().onFindMatch();
     },
     onEndClick: function () {
-        this.btnEnd.setVisible(false);
-        cc.director.getRunningScene().onEndBattle(0, true);
+        if (BattleManager.getInstance().isOnReplayMode()) {
+            cc.director.getRunningScene().goToGameScene();
+        } else {
+            this.btnEnd.setVisible(false);
+            cc.director.getRunningScene().onEndBattle(0, true);
+        }
     },
     setStateSlot: function (slotIndex, troopType = null, troopAmount = null) {
         //empty case

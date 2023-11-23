@@ -102,6 +102,8 @@ var BattleManager = cc.Class.extend({
     },
 
     setPlayerResource: function ({gold, elixir, gem,}) {
+        if (this.isOnReplayMode()) return;
+
         if (gold >= 0) {
             this.playerResources.gold = Math.min(gold, this.playerResources.goldCapacity);
         }
@@ -132,7 +134,8 @@ var BattleManager = cc.Class.extend({
             winPoint,
             losePoint,
             buildings,
-            troops
+            troops,
+            actions
         } = data;
 
         //load info
@@ -182,6 +185,10 @@ var BattleManager = cc.Class.extend({
             let troop = troops[index];
             this.listTroops.set(troop.type, troop.amount);
             this.totalTroop += troop.amount;
+        }
+
+        if (this.isOnReplayMode()){
+            this.actions = actions;
         }
     },
     addToListCurrentTroop: function (troop) {
@@ -416,6 +423,10 @@ var BattleManager = cc.Class.extend({
 
     getDestroyedPercentage: function () {
         return Math.floor(this.buildingDestroyedPoint * 100 / this.totalBuildingPoint);
+    },
+
+    isOnReplayMode: function (){
+        return this.onReplay;
     },
 
     isAllTroopsDead: function () {

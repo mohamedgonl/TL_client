@@ -20,6 +20,7 @@ gv.CMD.FIND_MATCH = 6001;
 gv.CMD.DO_ACTION = 6002;
 gv.CMD.END_BATTLE = 6003;
 
+gv.CMD.GET_MATCH_INFO = 6004;
 gv.CMD.GET_HISTORY_ATTACK = 6005;
 
 //quyet----------------------
@@ -452,6 +453,20 @@ CmdSendEndBattle = fr.OutPacket.extend(
             }
             this.putInt(tick);
             this.putInt(percentage);
+            this.updateSize();
+        }
+    })
+
+CmdSendGetMatchInfo = fr.OutPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.GET_MATCH_INFO);
+        },
+        pack: function (matchId) {
+            this.packHeader();
+            this.putInt(matchId);
             this.updateSize();
         }
     })
@@ -920,6 +935,76 @@ testnetwork.packetMap[gv.CMD.DO_ACTION] = fr.InPacket.extend(
     }
 );
 
+testnetwork.packetMap[gv.CMD.GET_MATCH_INFO] = fr.InPacket.extend(
+    {
+        ctor: function () {
+            this._super();
+        },
+        readData: function () {
+            this.error = this.getError();
+            if (this.error === ErrorCode.SUCCESS) {
+                this.matchId = this.getInt();
+                this.enemyId = this.getInt();
+                this.enemyName = this.getString();
+
+                this.trophy = this.getInt();
+
+                this.winPoint = this.getInt();
+                this.losePoint = this.getInt();
+
+                this.availableGold = this.getInt();
+                this.availableElixir = this.getInt();
+
+                this.robbedGold = this.getInt();
+                this.robbedElixir = this.getInt();
+
+                this.isWin = this.getBool();
+                this.winPercentage = this.getInt();
+                this.starAmount = this.getInt();
+
+
+                const troopSize = this.getInt();
+                this.troops = [];
+
+                for (let i = 0; i < troopSize; i++) {
+                    let type = this.getString();
+                    let amount = this.getInt();
+                    this.troops.push({type, amount});
+                }
+
+                const buildingSize = this.getInt();
+                this.buildings = [];
+
+                for (let i = 0; i < buildingSize; i++) {
+                    let id = this.getInt();
+                    let type = this.getString();
+                    let level = this.getInt();
+                    let posX = this.getInt();
+                    let posY = this.getInt();
+                    this.buildings.push({id, type, level, posX, posY});
+                }
+
+                const actionSize = this.getInt();
+                this.actions = [];
+
+                for (let i = 0; i < actionSize; i++) {
+                    let type = this.getInt();
+                    let tick = this.getInt();
+
+                    if (type === ACTION_TYPE.DROP_TROOP) {
+                        let troopType = this.getString();
+                        let posX = this.getInt();
+                        let posY = this.getInt();
+                        this.actions.push({type, tick, troopType, posX, posY});
+                    } else {
+                        this.actions.push({type, tick});
+                    }
+                }
+            }
+        }
+    }
+);
+
 testnetwork.packetMap[gv.CMD.GET_HISTORY_ATTACK] = fr.InPacket.extend(
     {
         ctor: function () {
@@ -927,7 +1012,7 @@ testnetwork.packetMap[gv.CMD.GET_HISTORY_ATTACK] = fr.InPacket.extend(
         },
         readData: function () {
             this.error = this.getError();
-            if(this.error === 0) {
+            if (this.error === ErrorCode.SUCCESS) {
                 this.matchCount = this.getInt();
                 let matches = [];
                 for (let i = 0; i < this.matchCount; i++) {
@@ -938,7 +1023,7 @@ testnetwork.packetMap[gv.CMD.GET_HISTORY_ATTACK] = fr.InPacket.extend(
                     match.trophy = this.getInt();
                     match.goldGot = this.getInt();
                     match.elixirGot = this.getInt();
-                    match.isWin  = this.getInt() !== 0;
+                    match.isWin = this.getInt() !== 0;
                     match.percentage = this.getInt();
                     match.stars = this.getInt();
                     match.time = this.getInt();

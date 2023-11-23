@@ -1,11 +1,10 @@
 var ArcherTowerBullet = Bullet.extend({
     active: true,
     target: null,
-    gridSpeed: 50,
 
     ctor: function (type, startPoint, target, damagePerShot, attackRadius, attackArea, initPos) {
         this._super(type, res_map.SPRITE.BODY.ARCHER_TOWER.BULLET, startPoint, target,
-            damagePerShot, attackRadius, attackArea, initPos, Utils.roundFloat(15.0 / this.gridSpeed, 2));
+            damagePerShot, attackRadius, attackArea, initPos);
 
         //bullet explosion
         this._explosion = new cc.Sprite();

@@ -1,6 +1,6 @@
 var Bullet = cc.Sprite.extend({
     active: true,
-    gridSpeed: 1, //cell/s
+    gridSpeed: null, //cell/s
     power: 1,
     HP: 1,
     moveType: null,
@@ -9,7 +9,7 @@ var Bullet = cc.Sprite.extend({
     time: 0, // time logic to reach destination
     minimumTime: 0, // minimum time to reach destination
 
-    ctor: function (type, spriteType, startPoint, target, damagePerShot, attackRadius, attackArea, initPos, minimumTime) {
+    ctor: function (type, spriteType, startPoint, target, damagePerShot, attackRadius, attackArea, initPos) {
         this._super(spriteType);
         //this.setBlendFunc(cc.SRC_ALPHA, cc.ONE);
         this.target = target;
@@ -17,9 +17,8 @@ var Bullet = cc.Sprite.extend({
         this.damagePerShot = damagePerShot;
         this.attackRadius = attackRadius;
         this.attackArea = attackArea;
-
-        if (minimumTime > 0)
-            this.minimumTime = minimumTime;
+        this.gridSpeed = BULLET_GRID_SPEED[type];
+        this.minimumTime = Utils.roundFloat(BULLET_MINIMUM_TIME_REACH_DEST[type], 2);
 
         this.init(startPoint, target, initPos);
     },
