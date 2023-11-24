@@ -37,10 +37,16 @@ var LoadManager = cc.Node.extend({
         const def3Base = cc.loader.getRes(res_map.JSON.DEFENCE_BASE)['DEF_3'];
         this['DEF_3'].baseConfig = def3Base;
 
+        this['DEF_5'] = cc.loader.getRes(res_map.JSON.DEFENCE)['DEF_5'];
+        const def5Base = cc.loader.getRes(res_map.JSON.DEFENCE_BASE)['DEF_5'];
+        this['DEF_5'].baseConfig = def5Base;
+
 
         this['WAL_1'] = cc.loader.getRes(res_map.JSON.WALL)['WAL_1'];
         this['RES_1'] = cc.loader.getRes(res_map.JSON.RESOURCE)['RES_1'];
         this['RES_2'] = cc.loader.getRes(res_map.JSON.RESOURCE)['RES_2'];
+
+
 
         //add to resource OBS_1 to OBS_27
         var jsonObstacle = cc.loader.getRes(res_map.JSON.OBSTACLE);
@@ -261,6 +267,23 @@ var LoadManager = cc.Node.extend({
             this.loadSpriteToRes(res_map.SPRITE.BODY.MORTAR.ATK_3[level], prefixLink, ".png", null, 15, 19)
             this.loadSpriteToRes(res_map.SPRITE.BODY.MORTAR.ATK_4[level], prefixLink, ".png", null, 20, 24)
         }
+
+        //DEF_5
+        let levelDEF5 = BuildingInfo["DEF_5"].max_level;
+        for(let level = 1; level <= levelDEF5; level++){
+            let prefixLink = "res/Buildings/air_defense/DEF_5_"+level+"/DEF_5_"+level+"/attack01/image00"
+            res_map.SPRITE.BODY.AIR_DEFENSE.ATK_0[level] = {}
+            res_map.SPRITE.BODY.AIR_DEFENSE.ATK_1[level] = {}
+            res_map.SPRITE.BODY.AIR_DEFENSE.ATK_2[level] = {}
+            res_map.SPRITE.BODY.AIR_DEFENSE.ATK_3[level] = {}
+            res_map.SPRITE.BODY.AIR_DEFENSE.ATK_4[level] = {}
+            this.loadSpriteToRes(res_map.SPRITE.BODY.AIR_DEFENSE.ATK_0[level], prefixLink, ".png", null, 0, 4)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.AIR_DEFENSE.ATK_1[level], prefixLink, ".png", null, 5, 9)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.AIR_DEFENSE.ATK_2[level], prefixLink, ".png", null, 10, 14)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.AIR_DEFENSE.ATK_3[level], prefixLink, ".png", null, 15, 19)
+            this.loadSpriteToRes(res_map.SPRITE.BODY.AIR_DEFENSE.ATK_4[level], prefixLink, ".png", null, 20, 24)
+        }
+
         // cc.log("++++++++++++---------------::::::::::::::::")
         // cc.log(JSON.stringify(res_map.SPRITE.BODY.CANNON.ATK_0,null,2))
         // cc.log("++++++++++++---------------::::::::::::::::")
@@ -570,6 +593,17 @@ var LoadManager = cc.Node.extend({
             this.addAnimationToTarget(link, 0, 4, res_map.SPRITE.BODY.MORTAR.BOTTOM[level], 30);
         }
 
+        //DEF_5
+        maxLevel = BuildingInfo["DEF_5"].max_level;
+        for (let level = 1; level <= maxLevel; level++) {
+            //BOTTOM
+            //res/Buildings/air_defense/DEF_5_1/DEF_5_1/idle/image0000.png
+            let link = "res/Buildings/air_defense/DEF_5_" + level + "/DEF_5_" + level + "/idle/image";
+            res_map.SPRITE.BODY.AIR_DEFENSE.BOTTOM[level] = {};
+            this.addAnimationToTarget(link, 0, 4, res_map.SPRITE.BODY.AIR_DEFENSE.BOTTOM[level], 30);
+        }
+
+
         //RES_1
         maxLevel = BuildingInfo["RES_1"].max_level;
         for (let level = 1; level <= maxLevel; level++) {
@@ -619,6 +653,8 @@ var LoadManager = cc.Node.extend({
             res_map.SPRITE.BODY.ELIXIR_STORAGE.BOTTOM[level] = {};
             this.addAnimationToTarget(link, 0, 3, res_map.SPRITE.BODY.ELIXIR_STORAGE.BOTTOM[level], 4);
         }
+
+
 
     },
     addAnimationToTarget: function (link, start, end, target, duration = 1, numberLength = 4) {

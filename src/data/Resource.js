@@ -389,6 +389,22 @@ var res_map = {
                 ATK_3: {},
                 ATK_4: {}
             },
+            AIR_DEFENSE: {
+                BOTTOM:{},
+                JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
+                BULLET: null,
+                BULLETS: {
+
+                },
+                HIT: {
+
+                },
+                ATK_0: {},
+                ATK_1: {},
+                ATK_2: {},
+                ATK_3: {},
+                ATK_4: {}
+            },
             BARRACK: {
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/barrack/BAR_1_1/idle/image0000.png"

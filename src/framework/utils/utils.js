@@ -50,6 +50,9 @@ function getBuildingFromType(type, level, id, posX, posY, status, startTime, end
         case 'DEF_3':
             building = new Mortar(level, id, posX, posY, status, startTime, endTime);
             break;
+        case 'DEF_5':
+            building = new AirDefense(level, id, posX, posY, status, startTime, endTime);
+            break;
         default:
             cc.log("getBuildingFromType: not found type: " + type);
             break;
