@@ -15,6 +15,9 @@ var BattleDefence = BattleBuilding.extend({
         this.attackSpeed = defConfig.attackSpeed;
         this.attackArea = defConfig.attackArea;
 
+        this._minRangeSquare = this._minRange * this._minRange;
+        this._maxRangeSquare = this._maxRange * this._maxRange;
+
         this.target = null;
         this.centerPoint = cc.p(this._posX + Math.floor(this._width / 2), this._posY + Math.floor(this._height / 2))
     },
@@ -71,9 +74,14 @@ var BattleDefence = BattleBuilding.extend({
 
     isTargetInRange: function (target) {
         //check distance
-        let dist = Math.sqrt(Math.pow(this.centerPoint.x - target._posX, 2) + Math.pow(this.centerPoint.y - target._posY, 2));
-        dist = Utils.roundFloat(dist, 2);
-        return dist > this._minRange && dist < this._maxRange;
+        let dx = Math.abs(this.centerPoint.x - target._posX);
+        let dy = Math.abs(this.centerPoint.y - target._posY);
+
+        if (dx > this._maxRange || dy > this._maxRange)
+            return false;
+
+        let distSquare = dx * dx + dy * dy;
+        return distSquare >= this._minRangeSquare && distSquare <= this._maxRangeSquare;
     },
 
     attack: function (target) {

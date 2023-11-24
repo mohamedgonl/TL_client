@@ -338,7 +338,7 @@ var BattleLayer = cc.Layer.extend({
         let gridPos = this.getGridPosFromScreenPos(locationDrop);
         //get type of chosen slot
         let type = cc.director.getRunningScene().battleUILayer.getTypeOfChosenSlot();
-        if (type == null) return;
+        if (type == null || !gridPos) return;
         let canDropTroop = BattleManager.getInstance().getDropTroopGrid()[gridPos.x][gridPos.y];
 
         if (!canDropTroop) {
