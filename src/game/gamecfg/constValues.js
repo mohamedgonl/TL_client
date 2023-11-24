@@ -45,7 +45,7 @@ const BUILDING_TYPE = {
     CANNON: 'DEF_1',
     ARCHER_TOWER: 'DEF_2',
     MORTAR: 'DEF_3',
-    AIR_DEFENSE: 'DEF_4',
+    AIR_DEFENSE: 'DEF_5',
     BUILDER_HUT: 'BDH_1',
     BARRACK: 'BAR_1',
     ARMY_CAMP: 'AMC_1',
@@ -55,12 +55,14 @@ const BULLET_GRID_SPEED = {
     'DEF_1': 40,
     'DEF_2': 50,
     'DEF_3': 13,
+    'DEF_5': 40,
 }
 
 const BULLET_MINIMUM_TIME_REACH_DEST = {
     'DEF_1': 0,
     'DEF_2': 0.35,
     'DEF_3': 0,
+    'DEF_5': 0,
 }
 
 const BATTlE_PREPARE_TIME = 30;

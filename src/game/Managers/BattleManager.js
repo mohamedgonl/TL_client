@@ -525,12 +525,14 @@ var BattleManager = cc.Class.extend({
                 bullet.init(startPoint, target, damagePerShot, initPos);
                 return bullet;
             }
-        if (type === "DEF_1") {
+        if (type === BUILDING_TYPE.CANNON) {
             newBullet = new CannonBullet(type, startPoint, target, damagePerShot, attackRadius, attackArea, initPos);
-        } else if (type === "DEF_2") {
+        } else if (type === BUILDING_TYPE.ARCHER_TOWER) {
             newBullet = new ArcherTowerBullet(type, startPoint, target, damagePerShot, attackRadius, attackArea, initPos);
-        } else if (type === "DEF_3") {
+        } else if (type === BUILDING_TYPE.MORTAR) {
             newBullet = new MortarBullet(type, startPoint, target, damagePerShot, attackRadius, attackArea, initPos);
+        }else if (type === BUILDING_TYPE.AIR_DEFENSE) {
+            newBullet = new AirDefenseBullet(type, startPoint, target, damagePerShot, attackRadius, attackArea, initPos);
         }
 
         this.battleScene.battleLayer.addBullet(newBullet);

@@ -50,7 +50,7 @@ function getBuildingFromType(type, level, id, posX, posY, status, startTime, end
         case BUILDING_TYPE.MORTAR:
             building = new Mortar(level, id, posX, posY, status, startTime, endTime);
             break;
-        case 'DEF_5':
+        case BUILDING_TYPE.AIR_DEFENSE:
             building = new AirDefense(level, id, posX, posY, status, startTime, endTime);
             break;
         default:
@@ -59,7 +59,7 @@ function getBuildingFromType(type, level, id, posX, posY, status, startTime, end
 
     }
     // building.setType(type);
-    if(building) building.retain();
+    if (building) building.retain();
     return building;
 }
 
@@ -105,6 +105,9 @@ function getBattleBuildingFromType(type, level, id, posX, posY) {
             break;
         case BUILDING_TYPE.MORTAR:
             building = new BattleMortar(level, id, posX, posY);
+            break;
+        case BUILDING_TYPE.AIR_DEFENSE:
+            building = new BattleAirDefense(level, id, posX, posY);
             break;
         case BUILDING_TYPE.WALL:
             building = new BattleWall(level, id, posX, posY);
