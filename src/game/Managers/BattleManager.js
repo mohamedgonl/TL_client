@@ -187,7 +187,7 @@ var BattleManager = cc.Class.extend({
             this.totalTroop += troop.amount;
         }
 
-        if (this.isOnReplayMode()){
+        if (this.isOnReplayMode()) {
             this.actions = actions;
         }
     },
@@ -244,7 +244,7 @@ var BattleManager = cc.Class.extend({
 
     initMapLogic: function () {
         for (let building of this.listBuildings.values()) {
-            if (!building._type.startsWith("OBS")) {
+            if (!building._type.startsWith(GAMEOBJECT_PREFIX.OBSTACLE)) {
 
                 //update mapGrid
                 for (let column = building._posX; column < building._posX + building._width; column++)
@@ -252,7 +252,7 @@ var BattleManager = cc.Class.extend({
                         this.mapGrid[column][row] = building._id;
 
                 //update findPathGrid
-                if (building._type.startsWith("WAL")) {
+                if (building._type.startsWith(GAMEOBJECT_PREFIX.WALL)) {
                     for (let column = building._posX; column < building._posX + building._width; column++)
                         for (let row = building._posY; row < building._posY + building._height; row++)
                             this.findPathGrid[column][row] = 9;
@@ -295,31 +295,29 @@ var BattleManager = cc.Class.extend({
 
         this.listGameObjects.set(id, gameObject);
 
-        if (typeBuildingPrefix !== 'OBS') {
+        if (typeBuildingPrefix !== GAMEOBJECT_PREFIX.OBSTACLE) {
             this.listBuildings.set(id, gameObject);
-            if (typeBuildingPrefix !== 'WAL')
+            if (typeBuildingPrefix !== GAMEOBJECT_PREFIX.WALL)
                 this.totalBuildingPoint += gameObject._maxHp;
         }
         //update list storage, list mine, list builder hut
         switch (typeBuildingPrefix) {
-            case 'TOW':
+            case GAMEOBJECT_PREFIX.TOWN_HALL:
                 this.townHall = gameObject;
                 break;
-            case 'RES':
+            case GAMEOBJECT_PREFIX.RESOURCE:
                 this.listResources.push(gameObject);
                 break;
-            case 'STO':
+            case GAMEOBJECT_PREFIX.STORAGE:
                 this.listResources.push(gameObject);
                 break;
-            case 'WAL':
+            case GAMEOBJECT_PREFIX.WALL:
                 this.listWalls.push(gameObject);
                 break;
-            case 'DEF':
+            case GAMEOBJECT_PREFIX.DEFENCE:
                 this.listDefences.push(gameObject);
                 break;
-            case 'BDH':
-                break;
-            case 'OBS':
+            case GAMEOBJECT_PREFIX.OBSTACLE:
                 this.listObstacles.push(gameObject);
                 break;
             default :
@@ -425,7 +423,7 @@ var BattleManager = cc.Class.extend({
         return Math.floor(this.buildingDestroyedPoint * 100 / this.totalBuildingPoint);
     },
 
-    isOnReplayMode: function (){
+    isOnReplayMode: function () {
         return this.onReplay;
     },
 
@@ -439,7 +437,7 @@ var BattleManager = cc.Class.extend({
     },
 
     onDestroyBuilding: function (building) {
-        if (!building._type.startsWith("WAL")) {
+        if (!building._type.startsWith(GAMEOBJECT_PREFIX.WALL)) {
             this.buildingDestroyedPoint += building._maxHp;
 
             this.battleScene.battleUILayer.updateDestroyPercentage(Math.floor(this.buildingDestroyedPoint * 100 / this.totalBuildingPoint));
@@ -469,7 +467,7 @@ var BattleManager = cc.Class.extend({
                 this.mapGrid[column][row] = 0;
 
         //update findPathGrid
-        if (building._type.startsWith("WAL")) {
+        if (building._type.startsWith(GAMEOBJECT_PREFIX.WALL)) {
             for (let column = building._posX; column < building._posX + building._width; column++)
                 for (let row = building._posY; row < building._posY + building._height; row++)
                     // this.findPathGrid[column][row] = 0;
@@ -524,7 +522,7 @@ var BattleManager = cc.Class.extend({
         const listBullets = this.listBullets;
         for (let bullet of listBullets)
             if (!bullet.active && bullet._type === type) {
-                bullet.init(startPoint, target, initPos);
+                bullet.init(startPoint, target, damagePerShot, initPos);
                 return bullet;
             }
         if (type === "DEF_1") {

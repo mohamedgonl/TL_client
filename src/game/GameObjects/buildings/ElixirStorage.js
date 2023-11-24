@@ -1,5 +1,5 @@
 var ElixirStorage = BaseStorage.extend({
-    _type: "STO_2",
+    _type: BUILDING_TYPE.ELIXIR_STORAGE,
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
 

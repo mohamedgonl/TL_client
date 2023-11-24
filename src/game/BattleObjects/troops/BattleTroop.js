@@ -212,10 +212,10 @@ var BattleTroop = cc.Node.extend({
     findTarget: function () {
         let listTarget = [];
         switch (this._favoriteTarget) {
-            case "DEF":
+            case GAMEOBJECT_PREFIX.DEFENCE:
                 listTarget = BattleManager.getInstance().getListDefences();
                 break;
-            case "RES":
+            case GAMEOBJECT_PREFIX.RESOURCE:
                 listTarget = BattleManager.getInstance().getListResources();
                 break;
             case "NONE":
@@ -223,8 +223,8 @@ var BattleTroop = cc.Node.extend({
                 //to list
                 for (let [key, value] of mapListBuilding) {
                     //if obs, continue
-                    if (value._type.startsWith("OBS")) continue;
-                    if (value._type.startsWith("WAL")) continue;
+                    if (value._type.startsWith(GAMEOBJECT_PREFIX.OBSTACLE)) continue;
+                    if (value._type.startsWith(GAMEOBJECT_PREFIX.WALL)) continue;
                     listTarget.push(value);
                 }
                 break;
@@ -301,7 +301,7 @@ var BattleTroop = cc.Node.extend({
                 LogUtils.writeLog("building pos: " + building._posX + " " + building._posY);
                 LogUtils.writeLog("building width: " + building._width + " height: " + building._height);
             }
-            if (building !== null && building._type.startsWith("WAL")) {
+            if (building !== null && building._type.startsWith(GAMEOBJECT_PREFIX.WALL)) {
                 LogUtils.writeLog("troop " + this._type + " change target to " + building._type);
                 this._target = building;
                 //update this._path = _path from 0 to i

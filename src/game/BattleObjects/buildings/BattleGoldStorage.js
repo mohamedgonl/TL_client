@@ -1,5 +1,5 @@
 var BattleGoldStorage = BattleStorage.extend({
-    _type: "STO_1",
+    _type: BUILDING_TYPE.GOLD_STORAGE,
     _resourceType: RESOURCE_TYPE.GOLD,
 
     ctor: function (level, id, posX, posY) {

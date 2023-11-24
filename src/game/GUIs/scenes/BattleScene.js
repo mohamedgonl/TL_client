@@ -4,7 +4,7 @@ var BattleScene = cc.Scene.extend({
     tick: 0,
     countTick: 0, //from 0 to BATTLE_FPS
     secPerTick: Utils.roundFloat(1.0 / BATTLE_FPS, 6),
-    replaySpeed: 1,
+    replaySpeed: 3,
 
     ctor: function (setting) {
         this._super();

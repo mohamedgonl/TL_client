@@ -1,5 +1,5 @@
 var ElixirMine = BaseMine.extend({
-    _type: "RES_2",
+    _type: BUILDING_TYPE.ELIXIR_MINE,
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
         let capacity = LoadManager.getInstance().getConfig(this._type, this._level)

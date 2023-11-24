@@ -1,5 +1,5 @@
 var Mortar = Building.extend({
-    _type: "DEF_3",
+    _type: BUILDING_TYPE.MORTAR,
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
         this._damage = LoadManager.getInstance().getConfig(this._type,this._level,"damagePerShot");

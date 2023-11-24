@@ -19,9 +19,13 @@ var MortarBullet = Bullet.extend({
         this.actionExplose.retain();
     },
 
-    init: function (startPoint, target, initPos) {
-        this._super(startPoint, target, initPos);
+    init: function (startPoint, target, damagePerShot, initPos) {
+        this._super(startPoint, target, damagePerShot, initPos);
 
+        if (initPos.x === this.destination.x) {
+            this.initPos.x -= 3;//random pos to make sure initPos.x != destination.x
+            this.setInitPosition();
+        }
         this.func = this.calcMotionFunc(initPos, cc.p((initPos.x + this.destination.x) / 2, initPos.y + 200), this.destination)
         this.distanceX = this.destination.x - initPos.x;
     },
@@ -38,27 +42,36 @@ var MortarBullet = Bullet.extend({
         const newY = this.calcMotionFuncValue(this.func, newX);
 
         this.setPosition(newX, newY);
-    },
+    }
+    ,
 
     // y = ax^2+bx+c: parabol co tiep tuyen tai A la AB va tiep tuyen tai C la CB
     calcMotionFunc: function (A, B, C) {
-        let a = ((B.y - A.y) / (B.x - A.x) - (B.y - C.y) / (B.x - C.x)) / (2 * (A.x - C.x));
-        let b = (B.y - A.y) / (B.x - A.x) - 2 * a * A.x;
+        let a = ((B.y - A.y) / this.convertToNonZero(B.x - A.x) - (B.y - C.y) / this.convertToNonZero(B.x - C.x)) / this.convertToNonZero(2 * (A.x - C.x));
+        let b = (B.y - A.y) / this.convertToNonZero(B.x - A.x) - 2 * a * A.x;
         let c = A.y - a * A.x * A.x - b * A.x;
         return [a, b, c];
-    },
+    }
+    ,
+
+    convertToNonZero: function (a) {
+        return a === 0 ? 0.001 : a;
+    }
+    ,
 
     //return y = ax^2+bx+c
     calcMotionFuncValue: function (func, x) {
         const [a, b, c] = func;
         return a * x * x + b * x + c;
-    },
+    }
+    ,
 
     destroyBullet: function () {
         // var explode = HitEffect.getOrCreateHitEffect(this.x, this.y, Math.random() * 360);
         this.active = false;
         this.visible = false;
-    },
+    }
+    ,
 
     onReachDestination: function () {
         //run action explose
@@ -75,7 +88,8 @@ var MortarBullet = Bullet.extend({
         }
 
         this.destroyBullet();
-    },
+    }
+    ,
 
     //check if troop can be attacked
     checkTarget: function (target) {
@@ -88,6 +102,7 @@ var MortarBullet = Bullet.extend({
             return false;
         }
         return target.isAlive() && typeof this.target.onGainDamage === 'function';
-    },
+    }
+    ,
 });
 

@@ -79,7 +79,7 @@ var LoadManager = cc.Node.extend({
     },
 
     getDefBaseConfig: function (type) {
-        if (type.startsWith("DEF")) {
+        if (type.startsWith(GAMEOBJECT_PREFIX.DEFENCE)) {
             return this[type].baseConfig;
         }
         return null;

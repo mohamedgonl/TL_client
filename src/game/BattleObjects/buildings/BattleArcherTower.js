@@ -1,5 +1,5 @@
 var BattleArcherTower = BattleDefence.extend({
-    _type: "DEF_2",
+    _type: BUILDING_TYPE.ARCHER_TOWER,
     deltaBarrelPosition: {//vi tri nong sung so voi center theo tung huong
         0: {dx: 0, dy: 50,},
         1: {dx: -5, dy: 50,},

@@ -1,5 +1,5 @@
 var BattleWall = BattleBuilding.extend({
-    _type: "WAL_1",
+    _type: BUILDING_TYPE.WALL,
     ctor: function (level, id, posX, posY) {
         this._super(level, id, posX, posY);
         this._listTroopAttack = [];
@@ -14,8 +14,8 @@ var BattleWall = BattleBuilding.extend({
         let upBuilding = BattleManager.getInstance().getBuildingByGrid(this._posX, this._posY + 3); // battle grid size is x3
         let rightBuilding = BattleManager.getInstance().getBuildingByGrid(this._posX + 3, this._posY); // battle grid size is x3
 
-        let upGrid = upBuilding && upBuilding._type === "WAL_1";
-        let rightGrid = rightBuilding && rightBuilding._type === "WAL_1";
+        let upGrid = upBuilding && upBuilding._type === BUILDING_TYPE.WALL;
+        let rightGrid = rightBuilding && rightBuilding._type === BUILDING_TYPE.WALL;
 
         if (upGrid && rightGrid) {
             stateWall = 3;
@@ -36,7 +36,7 @@ var BattleWall = BattleBuilding.extend({
         //for in list troop, if troop attack type wall, remove from list troop attack
         for (let i = 0; i < listTroop.length; i++) {
             if(!listTroop[i].isAlive()) continue;
-            if(listTroop[i]._target._type.startsWith("WAL")){
+            if(listTroop[i]._target._type.startsWith(GAMEOBJECT_PREFIX.WALL)){
                 listTroop[i].refindTarget();
             }
         }

@@ -1,5 +1,5 @@
 var Townhall = BaseStorage.extend({
-    _type: "TOW_1",
+    _type: BUILDING_TYPE.TOWN_HALL,
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
 

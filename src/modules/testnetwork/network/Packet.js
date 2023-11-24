@@ -675,7 +675,7 @@ testnetwork.packetMap[gv.CMD.MAP_INFO] = fr.InPacket.extend(
                     startTime: this.getInt(),
                     endTime: this.getInt()
                 };
-                if (building.type.startsWith("RES"))
+                if (building.type.startsWith(GAMEOBJECT_PREFIX.RESOURCE))
                     building.lastCollectTime = this.getInt();
                 this.listBuildings.push(building);
             }

@@ -17,9 +17,13 @@ var ArcherTowerBullet = Bullet.extend({
         this.actionExplose.retain();
     },
 
-    init: function (startPoint, target, initPos) {
-        this._super(startPoint, target, initPos);
+    init: function (startPoint, target, damagePerShot, initPos) {
+        this._super(startPoint, target, damagePerShot, initPos);
 
+        if (initPos.x === this.destination.x) {
+            this.initPos.x -= 3;//random pos to make sure initPos.x != destination.x
+            this.setInitPosition();
+        }
         this.func = this.calcMotionFunc(initPos, cc.p((initPos.x + this.destination.x) / 2, initPos.y + 200), this.destination)
         this.distanceX = this.destination.x - initPos.x;
     },
