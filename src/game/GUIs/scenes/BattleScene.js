@@ -4,7 +4,7 @@ var BattleScene = cc.Scene.extend({
     tick: 0,
     countTick: 0, //from 0 to BATTLE_FPS
     secPerTick: Utils.roundFloat(1.0 / BATTLE_FPS, 6),
-    replaySpeed: 3,
+    replaySpeed: 1,
 
     ctor: function (setting) {
         this._super();
@@ -97,8 +97,7 @@ var BattleScene = cc.Scene.extend({
 
         //send action end game
         if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING) {
-
-            this.unschedule(this.gameLoop);
+            // this.unschedule(this.gameLoop);
 
             //send action end
             if (!isClickEnd)
