@@ -209,17 +209,7 @@ var BattleScene = cc.Scene.extend({
                 if (defence.isDestroy()) {
                     continue;
                 }
-                defence.validateCurrentTarget();
-                if (defence.hasTarget())
-                    continue;
-                for (let troop of listTroops) {
-                    if (!troop.isAlive()) continue;
-                    if (defence.checkTarget(troop)) {
-                        LogUtils.writeLog("check target :" + this.tick)
-                        defence.setTarget(troop);
-                        break;
-                    }
-                }
+                defence.findTarget(listTroops);
             }
 
             for (let defence of listDefences) {
