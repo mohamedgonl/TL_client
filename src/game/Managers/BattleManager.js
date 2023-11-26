@@ -11,7 +11,9 @@ var BattleManager = cc.Class.extend({
         this.buildingAmount = {};
 
         this.mapGrid = [];  //map of building id
-        this.findPathGrid = []; //map of weight for find path, if wall, weight += 9 ; if center of building, weight +=9999;
+
+        this.buildingWeightGrid = []; //map of weight for find path, if wall, weight += 9 ; if center of building, weight +=9999;
+        this.buildingWeightGridWithoutWall = []; //map of weight for find path; if center of building, weight +=9999;
 
         this.dropTroopGrid = [];//map logic for drop troops, 1 mean can drop, 0 mean can not drop
         this.battleScene = null;
@@ -19,11 +21,13 @@ var BattleManager = cc.Class.extend({
         //init map grid
         for (var i = 0; i < GRID_SIZE_BATTLE; i++) {
             this.mapGrid[i] = [];
-            this.findPathGrid[i] = [];
+            this.buildingWeightGrid[i] = [];
+            this.buildingWeightGridWithoutWall[i] = [];
             this.dropTroopGrid[i] = [];
             for (var j = 0; j < GRID_SIZE_BATTLE; j++) {
                 this.mapGrid[i].push(0);
-                this.findPathGrid[i].push(0);
+                this.buildingWeightGrid[i].push(0);
+                this.buildingWeightGridWithoutWall[i].push(0);
                 this.dropTroopGrid[i].push(1);
             }
         }
@@ -75,7 +79,8 @@ var BattleManager = cc.Class.extend({
         for (var i = 0; i < GRID_SIZE_BATTLE; i++) {
             for (var j = 0; j < GRID_SIZE_BATTLE; j++) {
                 this.mapGrid[i][j] = 0;
-                this.findPathGrid[i][j] = 0;
+                this.buildingWeightGrid[i][j] = 0;
+                this.buildingWeightGridWithoutWall[i][j] = 0;
                 this.dropTroopGrid[i][j] = 1;
             }
         }
@@ -251,15 +256,20 @@ var BattleManager = cc.Class.extend({
                     for (let row = building._posY; row < building._posY + building._height; row++)
                         this.mapGrid[column][row] = building._id;
 
-                //update findPathGrid
+                //update buildingWeightGrid
                 if (building._type.startsWith(GAMEOBJECT_PREFIX.WALL)) {
                     for (let column = building._posX; column < building._posX + building._width; column++)
                         for (let row = building._posY; row < building._posY + building._height; row++)
-                            this.findPathGrid[column][row] = 9;
+                        {this.buildingWeightGrid[column][row] = BATTLE_GRAPH.WALL_WEIGHT;
+                        }
+
                 } else {
                     for (let column = building._posX + 1; column < building._posX + building._width - 1; column++)
                         for (let row = building._posY + 1; row < building._posY + building._height - 1; row++)
-                            this.findPathGrid[column][row] = 99999;
+                        {this.buildingWeightGrid[column][row] = BATTLE_GRAPH.BUILDING_WEIGHT;
+                            this.buildingWeightGridWithoutWall[column][row] = BATTLE_GRAPH.BUILDING_WEIGHT;
+                        }
+
 
                 }
 
@@ -277,7 +287,7 @@ var BattleManager = cc.Class.extend({
             else {
                 // for (let column = building._posX + 1; column < building._posX + building._width - 1; column++)
                 //     for (let row = building._posY + 1; row < building._posY + building._height - 1; row++) {
-                //         this.findPathGrid[column][row] = 99999;
+                //         this.buildingWeightGrid[column][row] = 99999;
                 //         this.dropTroopGrid[column][row] = 0;
                 //     }
                 //update dropTroopGrid
@@ -285,8 +295,10 @@ var BattleManager = cc.Class.extend({
         }
 
         //update battle graph
-        this._battleGraph = new BattleGraph(this.findPathGrid, this.mapGrid);
+        this._battleGraph = new BattleGraph(this.buildingWeightGrid, this.mapGrid);
+        this._battleGraphWithoutWall = new BattleGraph(this.buildingWeightGridWithoutWall, this.mapGrid);
     },
+
 
     //add gameObject to list and to grid
     addBuilding: function (gameObject) {
@@ -466,16 +478,16 @@ var BattleManager = cc.Class.extend({
             for (var row = building._posY; row < building._posY + building._height; row++)
                 this.mapGrid[column][row] = 0;
 
-        //update findPathGrid
+        //update buildingWeightGrid
         if (building._type.startsWith(GAMEOBJECT_PREFIX.WALL)) {
             for (let column = building._posX; column < building._posX + building._width; column++)
                 for (let row = building._posY; row < building._posY + building._height; row++)
-                    // this.findPathGrid[column][row] = 0;
+                    // this.buildingWeightGrid[column][row] = 0;
                     this._battleGraph.changeNodeWeight(column, row, 0)
         } else {
             for (let column = building._posX + 1; column < building._posX + building._width - 1; column++)
                 for (let row = building._posY + 1; row < building._posY + building._height - 1; row++)
-                    // this.findPathGrid[column][row] = 0;
+                    // this.buildingWeightGrid[column][row] = 0;
                     this._battleGraph.changeNodeWeight(column, row, 0)
         }
     },
@@ -497,10 +509,13 @@ var BattleManager = cc.Class.extend({
         return this.mapGrid;
     },
     getFindPathGrid: function () {
-        return this.findPathGrid;
+        return this.buildingWeightGrid;
     },
     getBattleGraph: function () {
         return this._battleGraph;
+    },
+    getBattleGraphWithoutWall: function () {
+        return this._battleGraphWithoutWall;
     },
 
     //get list troops in a circle
@@ -539,6 +554,18 @@ var BattleManager = cc.Class.extend({
         this.listBullets.push(newBullet);
 
         return newBullet;
+    },
+    initTroopBullet: function (type,target, startPoint,damage) {
+        let troopBullet = null;
+        const listTroopBullets = this.listTroopBullets;
+        for (let bullet of listTroopBullets)
+            if (!bullet.active && bullet._type === type) {
+                bullet.init(target, startPoint, damage);
+                return bullet;
+            }
+        if (type === TROOP_TYPE.ARCHER) {
+                troopBullet = new ArcherBullet(target, startPoint, damage);
+        }
     },
 
     robResource: function (resource, type) {

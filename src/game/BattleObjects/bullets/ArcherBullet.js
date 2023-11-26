@@ -1,8 +1,14 @@
 var ArcherBullet = TroopBullet.extend({
 
-    ctor: function (target, startPoint, damage) {
+    ctor: function (target, startPoint, damage,troop) {
         this._speedPerSec = 20;
-        this._super(target, startPoint, damage);
+        this._type = "ARM_2";
+        this._super(target, startPoint, damage,troop);
+        this.init(target, startPoint, damage,troop);
+
+    },
+    init: function (target, startPoint, damage,troop) {
+        this._super(target, startPoint, damage,troop);
 
         //sprite
         this._sprite = new cc.Sprite(res_battle.BULLET.ARCHER_ARROW);
@@ -17,13 +23,7 @@ var ArcherBullet = TroopBullet.extend({
         let angle = cc.pToAngle(cc.pSub(endPosInMap, startPosInMap));
         let degree = cc.radiansToDegrees(angle);
 
-        //log all
-        cc.log("endPosInMap: " + endPosInMap.x + " " + endPosInMap.y);
-        cc.log("startPosInMap: " + startPosInMap.x + " " + startPosInMap.y);
-        cc.log("angle: " + angle);
-        cc.log("degree: " + degree);
-
-        //90 because image is up
+        //đuôi tên và hướng xoay của tên
         this.setRotation(90 - degree);
         this.oldPos = this.getPosition();
         this.schedule(this.createBlur.bind(this),0.07);

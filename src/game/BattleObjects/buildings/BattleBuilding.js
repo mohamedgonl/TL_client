@@ -28,6 +28,8 @@ var BattleBuilding = BattleGameObject.extend({
         this._maxHp = config.hitpoints;
         this._hp = this._maxHp;
 
+        this.listTroopAttack = [];
+
         this.setAnchorPoint(0.5, 0.5);
 
         this.loadSpriteByLevel(level);
@@ -158,9 +160,15 @@ var BattleBuilding = BattleGameObject.extend({
         return this._hp <= 0;
     },
 
-    onGainDamage: function (damage) {
+    onGainDamage: function (damage,troop) {
         if (damage <= 0 || this._hp <= 0)
             return;
+
+        if(this.listTroopAttack.indexOf(troop) === -1){
+            this.listTroopAttack.push(troop);
+        }
+
+
         this._hp = Math.max(this._hp - damage, 0);
         if (this._hp <= 0) {
             this.onDestroy();
