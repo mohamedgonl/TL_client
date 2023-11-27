@@ -51,6 +51,18 @@ const BUILDING_TYPE = {
     ARMY_CAMP: 'AMC_1',
 }
 
+const TROOP_TYPE = {
+    WARRIOR: 'ARM_1',
+    ARCHER: 'ARM_2',
+    THIEF: 'ARM_3',
+    GIANT: 'ARM_4',
+    BOMBER: 'ARM_6',
+}
+
+const TROOP_BULLET_GRID_SPEED = {
+    ARCHER : 20
+}
+
 const BULLET_GRID_SPEED = {
     'DEF_1': 40,
     'DEF_2': 50,
@@ -78,4 +90,11 @@ const MATCH_HISTORY_ITEM_WIDTH = 800;
 const MATCH_HISTORY_ITEM_MARGIN = 15;
 const TROOP_ITEM_WIDTH = 58;
 const TROOP_ITEM_MARGIN = 5;
+
+const BATTLE_GRAPH = {
+    WALL_WEIGHT : 9,
+    EMPTY_POSITION_WEIGHT : 0,
+    BUILDING_WEIGHT : 9999,
+    OBSTACLE_WEIGHT : 9999,
+}
 

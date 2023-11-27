@@ -63,7 +63,7 @@ var BattleTroop = cc.Node.extend({
 
             if(this._target === null) return;
             LogUtils.writeLog("troop ID:" +this._id);
-            LogUtils.writeLog("1 :troop " + this._type + " find target " + this._target._type);
+            LogUtils.writeLog("1 :troop " + this._type + " find target " + this._target._type + " id target:" + this._target._id);
             this.findPath();
             LogUtils.writeLog("2 :troop " + this._type + " find target " + this._target._type);
             for(let i = 0; i < this._path.length; i++){
@@ -136,28 +136,6 @@ var BattleTroop = cc.Node.extend({
         this._directY = directY;
     },
 
-
-    getPathToBuilding: function (building) {
-        //get path
-        let graph = BattleManager.getInstance().getBattleGraph();
-        let start = new BattleGridNode(this._posX, this._posY, graph.getNode(this._posX, this._posY).weight, null);
-
-
-        //let end X Y random in building
-        if(this._id === null)
-        {
-            cc.log("ID TROOP NULL :::::::::::::::::::")
-
-        }
-        let nearestPoint = building.getNearestPoint({x: this._posX, y: this._posY},this._id,true);
-
-        let end = new BattleGridNode(
-            nearestPoint.x, nearestPoint.y,
-            graph.getNode(nearestPoint.x, nearestPoint.y).weight, building._id);
-
-        return BattleAStar.search(graph, start, end);
-        // return BattleAStar.searchSimple(graph, start, end);
-    },
 
 
     //check if troop in attack range of building,
@@ -281,9 +259,24 @@ var BattleTroop = cc.Node.extend({
             }
         }
     },
-
     findPath: function () {
-        this._path = this.getPathToBuilding(this._target);
+        //get path
+        let graph = BattleManager.getInstance().getBattleGraph();
+        let start = new BattleGridNode(this._posX, this._posY, graph.getNode(this._posX, this._posY).weight, null);
+
+        //let end X Y random in building
+        if(this._id === null)
+        {
+            cc.log("ID TROOP NULL :::::::::::::::::::")
+
+        }
+        let nearestPoint = this._target.getNearestPoint({x: this._posX, y: this._posY},this._id,true);
+
+        let end = new BattleGridNode(
+            nearestPoint.x, nearestPoint.y,
+            graph.getNode(nearestPoint.x, nearestPoint.y).weight, this._target._id);
+
+        this._path = BattleAStar.search(graph, start, end);
     },
 
     //check that path is valid or not
@@ -511,7 +504,7 @@ var BattleTroop = cc.Node.extend({
         if (this._target._type.startsWith(this._favoriteTarget) === true) {
             damage *= this._damageScale;
         }
-        this._target.onGainDamage(damage);
+        this._target.onGainDamage(damage,this);
     },
 
     performAttackAnimation: function () {

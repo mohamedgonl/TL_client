@@ -203,31 +203,6 @@ var BattleLayer = cc.Layer.extend({
             onMouseScroll: this.zoom.bind(this)
         }, this);
 
-        //click space to check
-        cc.eventManager.addListener({
-            event: cc.EventListener.KEYBOARD,
-            onKeyPressed: function (keyCode) {
-                if (keyCode === cc.KEY.space) {
-                    console.log("==================================================================")
-                }
-                if (keyCode === cc.KEY.x) {
-                    let townhall = BattleManager.getInstance().getTownHall();
-                    cc.log("townhall ::::::::::::", townhall.isDestroy())
-                }
-                if (keyCode === cc.KEY.c) {
-                    //log list usedTroop
-                    let usedTroop = BattleManager.getInstance().listUsedTroop;
-                    //usedTroop is map
-                    for (let [key, value] of usedTroop) {
-                        cc.log("used troop: " + key + " " + value);
-                    }
-                }
-                if (keyCode === cc.KEY.z) {
-                }
-
-            }.bind(this)
-
-        }, this);
         //listen to multi touch to zoom
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ALL_AT_ONCE,
@@ -316,19 +291,61 @@ var BattleLayer = cc.Layer.extend({
 
     onTouchBegan: function (touch) {
         this.positionTouchBegan = touch.getLocation();
+        this.positionMoved = null;
+        this.timeStartTouch = Date.now();
+        this.schedule(this.checkModeDropTroop.bind(this), 0.1)
+    },
+    checkModeDropTroop: function () {
+        if(this.onModeDropTroop) return;
+        if(this.timeStartTouch === null) return;
+
+        let timeNow = Date.now();
+        let deltaTime = timeNow - this.timeStartTouch;
+        //if > 0.5s, drop troop
+        if (deltaTime > 500) {
+            this.onModeDropTroop = true;
+            this.unschedule(this.checkModeDropTroop.bind(this));
+            this.schedule(this.loopDropTroop.bind(this), 0.2);
+        }
+    },
+    loopDropTroop: function () {
+
+        if(this.onModeDropTroop){
+            let position = this.positionMoved;
+            if(position == null) position = this.positionTouchBegan;
+            this.onClickDropTroop(position);
+
+        }
     },
 
     //if not in move building mode, move view, else move building
     onDrag: function (event) {
+        this.positionMoved = event.getLocation();
+        if(this.onModeDropTroop) return;
+
+        if(this.timeStartTouch){
+            //neu di chuyen qua 10 pixel dat lai timeStartTouch
+            let locationInScreen = event.getLocation();
+            let distance = cc.pDistance(locationInScreen, this.positionTouchBegan);
+            if (distance > 10) {
+                this.timeStartTouch = null;
+                this.unschedule(this.checkModeDropTroop.bind(this));
+            }
+        }
+
         this.moveView(event.getDelta());
     },
 
     onTouchEnded: function (event) {
-
+        this.timeStartTouch = null;
+        this.unschedule(this.checkModeDropTroop.bind(this));
+        this.onModeDropTroop = false;
+        this.unschedule(this.loopDropTroop.bind(this));
         var locationInScreen = event.getLocation();
         var distance = cc.pDistance(locationInScreen, this.positionTouchBegan);
         this.canDragBuilding = false;
         if (distance < 10) this.onClickDropTroop(this.positionTouchBegan);
+        this.unschedule(this.loopDropTroop.bind(this));
 
     },
 
