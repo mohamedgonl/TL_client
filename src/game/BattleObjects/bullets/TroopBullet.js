@@ -31,6 +31,7 @@ var TroopBullet = cc.Node.extend({
         this.active = false;
         this.setVisible(false);
         this._target.onGainDamage(this._damage,this._troop);
+        BattleManager.getInstance().onTroopBulletDead(this);
         this.removeFromParent(false);
     },
     gameLoop: function(dt){

@@ -181,10 +181,11 @@ var BattleTroop = cc.Node.extend({
         if (y < yStart) yNearest = yStart; else if (y > yEnd) yNearest = yEnd; else yNearest = y;
 
         //if distance from nearest corner to troop < attack range
-        let distance = Math.sqrt(Math.pow(xNearest - x, 2) + Math.pow(yNearest - y, 2));
-        distance = Utils.roundFloat(distance,4);
+        let distanceSquare = (xNearest - x)*(xNearest - x) + (yNearest - y)*(yNearest - y);
 
-        return distance <= this._attackRange;
+        // distance = Utils.roundFloat(distance,4);
+
+        return distanceSquare <= this._attackRange*this._attackRange;
     },
 
     findTarget: function () {
@@ -200,6 +201,8 @@ var BattleTroop = cc.Node.extend({
                 let mapListBuilding = BattleManager.getInstance().getAllBuilding();
                 //to list
                 for (let [key, value] of mapListBuilding) {
+                    //if destroy, continue
+                    if (value.isDestroy()) continue;
                     //if obs, continue
                     if (value._type.startsWith(GAMEOBJECT_PREFIX.OBSTACLE)) continue;
                     if (value._type.startsWith(GAMEOBJECT_PREFIX.WALL)) continue;

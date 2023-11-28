@@ -447,6 +447,14 @@ var BattleManager = cc.Class.extend({
         this.starAmount++;
         this.battleScene.battleUILayer.updateStarUI();
     },
+    onTroopBulletDead: function (bullet) {
+        for (let i = 0; i < this.listTroopBullets.length; i++) {
+            if (this.listTroopBullets[i] === bullet) {
+                this.listTroopBullets.splice(i, 1);
+                break;
+            }
+        }
+    },
 
     onDestroyBuilding: function (building) {
         if (!building._type.startsWith(GAMEOBJECT_PREFIX.WALL)) {
