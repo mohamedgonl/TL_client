@@ -19,7 +19,8 @@ var BattleDefence = BattleBuilding.extend({
         this._maxRangeSquare = this._maxRange * this._maxRange;
 
         this.target = null;
-        this.centerPoint = cc.p(this._posX + Math.floor(this._width / 2), this._posY + Math.floor(this._height / 2))
+        this.centerPoint = cc.p(this._posX + this._width / 2.0 - 0.5, this._posY + this._height / 2.0 - 0.5)
+        // this.centerPoint = cc.p(this._posX + Math.floor(this._width / 2), this._posY + Math.floor(this._height / 2))
     },
 
     setDirection: function (direct) {
