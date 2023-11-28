@@ -46,16 +46,6 @@ var BattleWall = BattleBuilding.extend({
                     troop.refindTarget();
                 }
             }
-            let circle = new cc.Sprite(res_battle.EFFECT.ORANGE_PNG);
-            //setAnchorPoint rand in 0.4 - 0.6
-            let anchorX = 0.4 + Math.random() * 0.2;
-            let anchorY = 0.4 + Math.random() * 0.2;
-            circle.setAnchorPoint(cc.p(anchorX, anchorY));
-            //setScale rand in 0.2 - 0.3
-            circle.setScale(0.2 + Math.random() * 0.1);
-            cc.director.getRunningScene().battleLayer.addChild(circle,9999);
-            circle.setPosition(building.getPosition());
-            circle.runAction(cc.sequence(cc.delayTime(1), cc.hide()));
 
             visited.push(cur);
             let dx = [0, 0, 3, -3];

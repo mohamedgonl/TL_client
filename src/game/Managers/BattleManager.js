@@ -259,14 +259,14 @@ var BattleManager = cc.Class.extend({
                 //update buildingWeightGrid
                 if (building._type.startsWith(GAMEOBJECT_PREFIX.WALL)) {
                     for (let column = building._posX; column < building._posX + building._width; column++)
-                        for (let row = building._posY; row < building._posY + building._height; row++)
-                        {this.buildingWeightGrid[column][row] = BATTLE_GRAPH.WALL_WEIGHT;
+                        for (let row = building._posY; row < building._posY + building._height; row++) {
+                            this.buildingWeightGrid[column][row] = BATTLE_GRAPH.WALL_WEIGHT;
                         }
 
                 } else {
                     for (let column = building._posX + 1; column < building._posX + building._width - 1; column++)
-                        for (let row = building._posY + 1; row < building._posY + building._height - 1; row++)
-                        {this.buildingWeightGrid[column][row] = BATTLE_GRAPH.BUILDING_WEIGHT;
+                        for (let row = building._posY + 1; row < building._posY + building._height - 1; row++) {
+                            this.buildingWeightGrid[column][row] = BATTLE_GRAPH.BUILDING_WEIGHT;
                             this.buildingWeightGridWithoutWall[column][row] = BATTLE_GRAPH.BUILDING_WEIGHT;
                         }
 
@@ -492,6 +492,13 @@ var BattleManager = cc.Class.extend({
         }
     },
     onTroopDead: function (troop) {
+        //remove from list current troop
+        for (let i = 0; i < this.listCurrentTroop.length; i++) {
+            if (this.listCurrentTroop[i] === troop) {
+                this.listCurrentTroop.splice(i, 1);
+                break;
+            }
+        }
         this.totalDeadTroop++;
 
         if (this.isAllTroopsDead()) {
@@ -546,7 +553,7 @@ var BattleManager = cc.Class.extend({
             newBullet = new ArcherTowerBullet(type, startPoint, target, damagePerShot, attackRadius, attackArea, initPos);
         } else if (type === BUILDING_TYPE.MORTAR) {
             newBullet = new MortarBullet(type, startPoint, target, damagePerShot, attackRadius, attackArea, initPos);
-        }else if (type === BUILDING_TYPE.AIR_DEFENSE) {
+        } else if (type === BUILDING_TYPE.AIR_DEFENSE) {
             newBullet = new AirDefenseBullet(type, startPoint, target, damagePerShot, attackRadius, attackArea, initPos);
         }
 
@@ -555,7 +562,7 @@ var BattleManager = cc.Class.extend({
 
         return newBullet;
     },
-    initTroopBullet: function (type,target, startPoint,damage) {
+    initTroopBullet: function (type, target, startPoint, damage) {
         let troopBullet = null;
         const listTroopBullets = this.listTroopBullets;
         for (let bullet of listTroopBullets)
@@ -564,7 +571,7 @@ var BattleManager = cc.Class.extend({
                 return bullet;
             }
         if (type === TROOP_TYPE.ARCHER) {
-                troopBullet = new ArcherBullet(target, startPoint, damage);
+            troopBullet = new ArcherBullet(target, startPoint, damage);
         }
     },
 
