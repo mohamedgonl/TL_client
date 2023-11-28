@@ -21,9 +21,6 @@ var BattleObstacle = BattleGameObject.extend({
         this.loadSubSprite();
         this.initState();
 
-        //schedule update 1s 1 time
-        this.update()
-        this.schedule(this.update, 1, cc.REPEAT_FOREVER, 0)
     },
 
     initState: function () {
@@ -43,14 +40,14 @@ var BattleObstacle = BattleGameObject.extend({
         var body_link = res_map.SPRITE.BODY.OBS_LINK + typeIndex + "/idle/image0000.png";
         var grass_link = res_map.SPRITE.GRASS.OBSTACLE[size];
         this._body = new cc.Sprite(body_link);
-        this._grass = new cc.Sprite(grass_link);
+        this._bottom = new cc.Sprite(grass_link);
 
         this._body.setAnchorPoint(0.5, 0.5);
-        this._grass.setAnchorPoint(0.5, 0.5);
+        this._bottom.setAnchorPoint(0.5, 0.5);
 
         this._body.setScale(0.5);
 
-        this.addChild(this._grass);
+        // this.addChild(this._bottom);
         this.addChild(this._body);
     },
 

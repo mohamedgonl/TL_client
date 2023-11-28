@@ -227,7 +227,7 @@ var BattleScene = cc.Scene.extend({
                     //  find max 10 troop per loop
                       if (troop._state === TROOP_STATE.FIND) {
                           findCount++;
-                          if (findCount <= 10)
+                          if (findCount <= 6)
                           {
                               troop.gameLoop(this.secPerTick);
                           }
@@ -241,10 +241,16 @@ var BattleScene = cc.Scene.extend({
                 if (troopBullet.active)
                     troopBullet.gameLoop(this.secPerTick);
             }
+            //remove from list troop
+            for(let troop of listTroops){
+                if(!troop.isAlive())
+                    listTroops.splice(listTroops.indexOf(troop),1);
+            }
             for(let troopBullet of listTroopBullets){
                 if(!troopBullet.active)
                     listTroopBullets.splice(listTroopBullets.indexOf(troopBullet),1);
             }
+
 
             if (this.timeLeft === 0) {
                 this.onEndBattle(1);

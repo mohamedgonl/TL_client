@@ -13,14 +13,18 @@ var BattleBuilding = BattleGameObject.extend({
         this._body = new cc.Sprite();
         this._upper = new cc.Sprite();
         this._junk = new cc.Sprite();
+        this._bottom = new cc.Node();
 
         this._junk.setVisible(false);
 
-        this.addChild(this._grass, BATTLE_ZORDER_BUILDING_GRASS);
+        // this.addChild(this._grass, BATTLE_ZORDER_BUILDING_GRASS);
         this.addChild(this._body, BATTLE_ZORDER_BUILDING_BODY);
-        this.addChild(this._shadow, BATTLE_ZORDER_BUILDING_SHADOW);
+        // this.addChild(this._shadow, BATTLE_ZORDER_BUILDING_SHADOW);
         this.addChild(this._upper, BATTLE_ZORDER_BUILDING_UPPER);
         this.addChild(this._junk, BATTLE_ZORDER_BUILDING_BODY);
+
+        this._bottom.addChild(this._grass);
+        this._bottom.addChild(this._shadow);
 
         let config = LoadManager.getInstance().getConfig(this._type, level);
         this._width = config.width * GRID_BATTLE_RATIO;
@@ -36,10 +40,6 @@ var BattleBuilding = BattleGameObject.extend({
 
         this.loadSubSprite();
 
-        // this._grass.setGlobalZOrder(10);
-        // this._shadow.setGlobalZOrder(20);
-        // this._body.setGlobalZOrder(30);
-        // this._upper.setGlobalZOrder(40);
 
         //init action destroy
         this.actionDestroy = fr.createActionByFrames(res_map.SPRITE.BUILDING_EXPLOSION, {
@@ -160,13 +160,14 @@ var BattleBuilding = BattleGameObject.extend({
         return this._hp <= 0;
     },
 
+    addTroopListAttack: function (troop) {
+        if (this.listTroopAttack.indexOf(troop) === -1)
+            this.listTroopAttack.push(troop);
+    },
+
     onGainDamage: function (damage,troop) {
         if (damage <= 0 || this._hp <= 0)
             return;
-
-        if(this.listTroopAttack.indexOf(troop) === -1){
-            this.listTroopAttack.push(troop);
-        }
 
 
         this._hp = Math.max(this._hp - damage, 0);

@@ -178,17 +178,16 @@ var BattleLayer = cc.Layer.extend({
 
         let buildingCenterX = gridPosX + sizeX / 2;
         let buildingCenterY = gridPosY + sizeY / 2;
-        let zOrderValue = zOrder == null ? this.getZOrderBuilding(gridPosX, gridPosY) : zOrder;
 
         //nếu buildingCenterX không phải là số nguyên, add vào giữa của ô trung tâm
         if (buildingCenterX % 1 !== 0 || buildingCenterY % 1 !== 0) {
             buildingCenterX = Math.floor(buildingCenterX);
             buildingCenterY = Math.floor(buildingCenterY);
-            this.addGameObjectToMapLayer(building, buildingCenterX, buildingCenterY, zOrderValue, true);
+            this.addGameObjectToMapLayer(building, buildingCenterX, buildingCenterY,  true);
         }
         //add vào góc trái dưới của ô trung tâm
         else {
-            this.addGameObjectToMapLayer(building, buildingCenterX, buildingCenterY, zOrderValue)
+            this.addGameObjectToMapLayer(building, buildingCenterX, buildingCenterY)
         }
 
     },
@@ -249,7 +248,7 @@ var BattleLayer = cc.Layer.extend({
         tmxMap.setPosition(0, 0);
         tmxMap.setScale(GRID_SCALE)
 
-        this.addChild(tmxMap, MAP_ZORDER_GRID);
+        this.addChild(tmxMap, BATTLE_CONST.ZORDER_GRID);
 
         //load 4 corner of  background
 
@@ -278,34 +277,36 @@ var BattleLayer = cc.Layer.extend({
         backgroundDownRight.setScale(SCALE_BG);
 
 
-        this.addChild(backgroundUpLeft, MAP_ZORDER_BACKGROUND);
-        this.addChild(backgroundUpRight, MAP_ZORDER_BACKGROUND);
-        this.addChild(backgroundDownLeft, MAP_ZORDER_BACKGROUND);
-        this.addChild(backgroundDownRight, MAP_ZORDER_BACKGROUND);
+        this.addChild(backgroundUpLeft, BATTLE_CONST.ZORDER_BACKGROUND);
+        this.addChild(backgroundUpRight, BATTLE_CONST.ZORDER_BACKGROUND);
+        this.addChild(backgroundDownLeft, BATTLE_CONST.ZORDER_BACKGROUND);
+        this.addChild(backgroundDownRight, BATTLE_CONST.ZORDER_BACKGROUND);
     },
 
-    getZOrderBuilding: function (gridPosX, gridPosY) {
+    getZOrder: function (gameObject) {
         // gridPos cang thap thi zỎder cang cao, cao nhat la MAP_ZORDER_BUILDING
-        return MAP_ZORDER_BUILDING - gridPosX - gridPosY;
+        return BATTLE_CONST.ZORDER_BUILDING - gameObject.y;
     },
 
     onTouchBegan: function (touch) {
+        if(this.onModeDropTroop) return;
         this.positionTouchBegan = touch.getLocation();
         this.positionMoved = null;
         this.timeStartTouch = Date.now();
-        this.schedule(this.checkModeDropTroop.bind(this), 0.1)
+        this.schedule(this.checkModeDropTroop, 0.1)
     },
     checkModeDropTroop: function () {
+        cc.log("check mode drop troop chedule")
         if (this.onModeDropTroop) return;
         if (this.timeStartTouch === null) return;
 
         let timeNow = Date.now();
         let deltaTime = timeNow - this.timeStartTouch;
         //if > 0.5s, drop troop
-        if (deltaTime > 500) {
+        if (deltaTime > 400) {
             this.onModeDropTroop = true;
-            this.unschedule(this.checkModeDropTroop.bind(this));
-            this.schedule(this.loopDropTroop.bind(this), 0.2);
+            this.unschedule(this.checkModeDropTroop);
+            this.schedule(this.loopDropTroop, 0.2);
         }
     },
     loopDropTroop: function () {
@@ -329,7 +330,7 @@ var BattleLayer = cc.Layer.extend({
             let distance = cc.pDistance(locationInScreen, this.positionTouchBegan);
             if (distance > 10) {
                 this.timeStartTouch = null;
-                this.unschedule(this.checkModeDropTroop.bind(this));
+                this.unschedule(this.checkModeDropTroop);
             }
         }
 
@@ -337,21 +338,25 @@ var BattleLayer = cc.Layer.extend({
     },
 
     onTouchEnded: function (event) {
-        this.timeStartTouch = null;
-        this.unschedule(this.checkModeDropTroop.bind(this));
-        this.onModeDropTroop = false;
-        this.unschedule(this.loopDropTroop.bind(this));
-        var locationInScreen = event.getLocation();
-        var distance = cc.pDistance(locationInScreen, this.positionTouchBegan);
-        this.canDragBuilding = false;
-        if (distance < 10) this.onClickDropTroop(this.positionTouchBegan);
-        this.unschedule(this.loopDropTroop.bind(this));
+        let timeNow = Date.now();
+        let deltaTime = timeNow - this.timeStartTouch;
+        if(deltaTime < 400) {
+            var locationInScreen = event.getLocation();
+            var distance = cc.pDistance(locationInScreen, this.positionTouchBegan);
+            if (distance < 10) this.onClickDropTroop(this.positionTouchBegan);
+            return;
+        }
 
+
+        this.timeStartTouch = null;
+        this.unschedule(this.checkModeDropTroop);
+        this.onModeDropTroop = false;
+        this.unschedule(this.loopDropTroop);
     },
 
     onClickDropTroop: function (locationInScreen) {
         let tick = cc.director.getRunningScene().battleLayer.tick;
-        if (tick != undefined && tick === this.oldTick) {
+        if (tick !== undefined && tick === this.oldTick) {
             cc.log("tick same")
             cc.log(tick + " " + this.oldTick)
             return;
@@ -453,10 +458,14 @@ var BattleLayer = cc.Layer.extend({
     //use it to add, calculate position to add child in map layer
     //------------------------------------------------------------------------------------------------------------------
 
-    addGameObjectToMapLayer: function (gameObject, gridPosX, gridPosY, zOrder, isCenter = false) {
+    addGameObjectToMapLayer: function (gameObject, gridPosX, gridPosY, isCenter = false) {
         let posToAdd = this.getMapPosFromGridPos({x: gridPosX, y: gridPosY}, isCenter);
-        this.addChild(gameObject, zOrder);
         gameObject.setPosition(posToAdd);
+        gameObject._bottom.setPosition(posToAdd);
+        let zOrder = this.getZOrder(gameObject);
+        cc.log("add game object to map layer: " + zOrder)
+        this.addChild(gameObject, zOrder);
+        this.addChild(gameObject._bottom, BATTLE_CONST.ZORDER_BOTTOM);
     },
 
     //------------------------------------------------------------------------------------------------------------------
