@@ -1,5 +1,5 @@
 var BattleBuilderHut = BattleBuilding.extend({
-    _type: "BDH_1",
+    _type: BUILDING_TYPE.BUILDER_HUT,
     ctor: function (level, id, posX, posY) {
         this._super(level, id, posX, posY);
     },

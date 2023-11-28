@@ -14,19 +14,19 @@ var Bullet = cc.Sprite.extend({
         //this.setBlendFunc(cc.SRC_ALPHA, cc.ONE);
         this.target = target;
         this._type = type;
-        this.damagePerShot = damagePerShot;
         this.attackRadius = attackRadius;
         this.attackArea = attackArea;
         this.gridSpeed = BULLET_GRID_SPEED[type];
         this.minimumTime = Utils.roundFloat(BULLET_MINIMUM_TIME_REACH_DEST[type], 2);
 
-        this.init(startPoint, target, initPos);
+        this.init(startPoint, target, damagePerShot, initPos);
     },
 
-    init: function (startPoint, target, initPos) {
+    init: function (startPoint, target, damagePerShot, initPos) {
         this.startPoint = startPoint;
         this.initPos = initPos;
         this.target = target;
+        this.damagePerShot = damagePerShot;
         this.destination = {x: target.x, y: target.y, _posX: target._posX, _posY: target._posY};
 
         let gridDist = Math.sqrt(Math.pow(this.startPoint._posX - target._posX, 2) + Math.pow(this.startPoint._posY - target._posY, 2));

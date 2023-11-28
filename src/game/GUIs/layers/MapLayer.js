@@ -239,7 +239,7 @@ var MapLayer = cc.Layer.extend({
         if (this.chosenBuilding == null) return;
 
         let building = this.getBuildingFromTouch(touch.getLocation());
-        if (building !== this.chosenBuilding || this.chosenBuilding._type.startsWith("OBS")) return;
+        if (building !== this.chosenBuilding || this.chosenBuilding._type.startsWith(GAMEOBJECT_PREFIX.OBSTACLE)) return;
         this.enterModeMoveBuilding();
     },
 
@@ -284,7 +284,7 @@ var MapLayer = cc.Layer.extend({
 
         if (this.onModeBuyBuilding) return;
         let building = this.getBuildingFromTouch(locationInScreen);
-        if (building != null && building._type.startsWith("RES") && building._state === 0 && building._showIconHarvest) {
+        if (building != null && building._type.startsWith(GAMEOBJECT_PREFIX.RESOURCE) && building._state === 0 && building._showIconHarvest) {
             building.onClickHarvest();
             this.unSelectBuilding();
             return;
@@ -628,7 +628,7 @@ var MapLayer = cc.Layer.extend({
         this.secondLastBuildingBuy = this.lastBuildingBuy;
         this.lastBuildingBuy = building;
 
-        if (data.type === "WAL_1") {
+        if (data.type === BUILDING_TYPE.WALL) {
             building.reloadSpriteWallAround();
             this.onBuyWallSuccess();
         }

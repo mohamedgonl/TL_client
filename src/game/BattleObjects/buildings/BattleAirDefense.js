@@ -1,14 +1,14 @@
-var BattleCannon = BattleDefence.extend({
-    _type: BUILDING_TYPE.CANNON,
+var BattleAirDefense = BattleDefence.extend({
+    _type: BUILDING_TYPE.AIR_DEFENSE,
     deltaBarrelPosition: {//vi tri nong sung so voi center theo tung huong
-        0: {dx: 0, dy: -35,},
-        1: {dx: -20, dy: -7,},
+        0: {dx: 0, dy: -5,},
+        1: {dx: -15, dy: 0,},
         2: {dx: -25, dy: 10,},
         3: {dx: -20, dy: 40,},
-        4: {dx: 0, dy: 35,},
+        4: {dx: 0, dy: 45,},
         5: {dx: 20, dy: 35,},
-        6: {dx: 25, dy: 10,},
-        7: {dx: 25, dy: -15,},
+        6: {dx: 15, dy: 20,},
+        7: {dx: 30, dy: 0,},
     },
 
     ctor: function (level, id, posX, posY) {
@@ -21,7 +21,7 @@ var BattleCannon = BattleDefence.extend({
         this.addChild(this._fire);
 
         //init animation
-        this.actionFire = fr.createActionByFrames(res_map.SPRITE.BODY.CANNON.FIRE, {
+        this.actionFire = fr.createActionByFrames(res_map.SPRITE.BODY.AIR_DEFENSE.FIRE, {
             delayPerUnit: 0.1,
             restoreOriginalFrame: true
         });
@@ -29,16 +29,16 @@ var BattleCannon = BattleDefence.extend({
     },
 
     loadSpriteByLevel: function (level) {
-        this.loadSprite(res_map.SPRITE.BODY.CANNON.BOTTOM[level], res_map.SPRITE.BODY.CANNON[level], 2, null, res_map.SPRITE.BODY.CANNON.JUNK);
+        this.loadSprite(null, res_map.SPRITE.BODY.AIR_DEFENSE.BOTTOM[level], 2, null, res_map.SPRITE.BODY.AIR_DEFENSE.JUNK);
     },
 
     setDirection: function (direct) {
         this.direct = direct;
         if (this.direct <= TOTAL_DEFENCE_DIRECT / 2) {
-            this._upper.setTexture(res_map.SPRITE.BODY.CANNON[this._level][this.direct]);
+            this._upper.setTexture(res_map.SPRITE.BODY.AIR_DEFENSE.BOTTOM[this._level][this.direct]);
             this._upper.flippedX = false;
         } else {
-            this._upper.setTexture(res_map.SPRITE.BODY.CANNON[this._level][TOTAL_DEFENCE_DIRECT - this.direct]);
+            this._upper.setTexture(res_map.SPRITE.BODY.AIR_DEFENSE.BOTTOM[this._level][TOTAL_DEFENCE_DIRECT - this.direct]);
             this._upper.flippedX = true;
         }
         this._fire.setPosition(this._upper.x + this.deltaBarrelPosition[this.direct].dx, this._upper.y + this.deltaBarrelPosition[this.direct].dy);
@@ -52,7 +52,7 @@ var BattleCannon = BattleDefence.extend({
         //run action attack
         const directCfg = this.direct <= TOTAL_DEFENCE_DIRECT / 2 ? this.direct : TOTAL_DEFENCE_DIRECT - this.direct
 
-        let actionAttack = fr.createActionByFrames(res_map.SPRITE.BODY.CANNON['ATK_' + directCfg][this._level], {
+        let actionAttack = fr.createActionByFrames(res_map.SPRITE.BODY.AIR_DEFENSE['ATK_' + directCfg][this._level], {
             delayPerUnit: 0.1,
             restoreOriginalFrame: false
         });

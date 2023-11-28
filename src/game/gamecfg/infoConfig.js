@@ -43,6 +43,14 @@ const BuildingInfo = {
             "sau mỗi lần nâng cấp khiến Máy bắn đá trở thành công trình không thể thiếu của "+
             "vương quốc."
     },
+    "DEF_5":{
+        name: "Pháo phòng không",
+        max_level : 8,
+        dataInfo: ["damage","hitpoints"],
+        description: "Pháo đài là công trình phòng thủ cơ bản của bạn. Giá trị rõ ràng của mỗi phát đạn "+
+            "sau mỗi lần nâng cấp khiến Pháo đài trở thành công trình không thể thiếu của "+
+            "vương quốc."
+    },
     "RES_1":{
         name: "Mỏ vàng",
         max_level : 11,

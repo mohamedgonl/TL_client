@@ -1,5 +1,5 @@
 var ArcherTower = Building.extend({
-    _type: "DEF_2",
+    _type: BUILDING_TYPE.ARCHER_TOWER,
     ctor: function (level,id,posX,posY,status,startTime,endTime) {
         this._super(level,id,posX,posY,status,startTime,endTime);
         this._damage = LoadManager.getInstance().getConfig(this._type,this._level,"damagePerShot");

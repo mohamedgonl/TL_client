@@ -2,8 +2,8 @@ var BattleScene = cc.Scene.extend({
     battleLayer: null,
     popUpLayer: null,
     tick: 0,
-    countTick: 0, //from 0 to BATTLE_FPS
-    secPerTick: Utils.roundFloat(1.0 / BATTLE_FPS, 6),
+    countTick: 0, //from 0 to TICK_PER_SECOND
+    secPerTick: Utils.roundFloat(1.0 / TICK_PER_SECOND, 6),
     replaySpeed: 1,
 
     ctor: function (setting) {
@@ -97,8 +97,7 @@ var BattleScene = cc.Scene.extend({
 
         //send action end game
         if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING) {
-
-            this.unschedule(this.gameLoop);
+            // this.unschedule(this.gameLoop);
 
             //send action end
             if (!isClickEnd)
@@ -180,7 +179,7 @@ var BattleScene = cc.Scene.extend({
 
     gameLoop: function (dt) {
         if (BattleManager.getInstance().battleStatus === BATTLE_STATUS.HAPPENNING) {
-            if (this.countTick === BATTLE_FPS - 1) {
+            if (this.countTick === TICK_PER_SECOND - 1) {
                 this.countTick = 0;
                 this.setTimeLeft(this.timeLeft - 1);
             } else {
@@ -210,17 +209,7 @@ var BattleScene = cc.Scene.extend({
                 if (defence.isDestroy()) {
                     continue;
                 }
-                defence.validateCurrentTarget();
-                if (defence.hasTarget())
-                    continue;
-                for (let troop of listTroops) {
-                    if (!troop.isAlive()) continue;
-                    if (defence.checkTarget(troop)) {
-                        LogUtils.writeLog("check target :" + this.tick)
-                        defence.setTarget(troop);
-                        break;
-                    }
-                }
+                defence.findTarget(listTroops);
             }
 
             for (let defence of listDefences) {
@@ -254,6 +243,9 @@ var BattleScene = cc.Scene.extend({
     setTick: function (tick) {
         this.tick = tick;
         LogUtils.tick = tick;
+    },
+    getTick: function () {
+        return this.tick;
     }
 })
 

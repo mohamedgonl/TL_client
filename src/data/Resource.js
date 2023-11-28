@@ -389,6 +389,44 @@ var res_map = {
                 ATK_3: {},
                 ATK_4: {}
             },
+            AIR_DEFENSE: {
+                BOTTOM:{},
+                JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
+                BULLET: "res/battle/baby_fire_ball.png",
+                BULLETS: {
+
+                },
+                FIRE: {
+                    "0": "res/battle/cannon_fire/00.png",
+                    "1": "res/battle/cannon_fire/01.png",
+                    "2": "res/battle/cannon_fire/02.png",
+                    "3": "res/battle/cannon_fire/03.png",
+                    "4": "res/battle/cannon_fire/04.png",
+                    "5": "res/battle/cannon_fire/05.png",
+                    "6": "res/battle/cannon_fire/06.png",
+                    "7": "res/battle/cannon_fire/07.png",
+                    "8": "res/battle/cannon_fire/08.png",
+                    "9": "res/battle/cannon_fire/09.png",
+                },
+                HIT: {
+                    "0": "res/battle/cannon_hit/00.png",
+                    "1": "res/battle/cannon_hit/01.png",
+                    "2": "res/battle/cannon_hit/02.png",
+                    "3": "res/battle/cannon_hit/03.png",
+                    "4": "res/battle/cannon_hit/04.png",
+                    "5": "res/battle/cannon_hit/05.png",
+                    "6": "res/battle/cannon_hit/06.png",
+                    "7": "res/battle/cannon_hit/07.png",
+                    "8": "res/battle/cannon_hit/08.png",
+                    "9": "res/battle/cannon_hit/09.png",
+                    "10": "res/battle/cannon_hit/10.png",
+                },
+                ATK_0: {},
+                ATK_1: {},
+                ATK_2: {},
+                ATK_3: {},
+                ATK_4: {}
+            },
             BARRACK: {
                 JUNK: "res/Map/map_obj_bg/junk_contructs_0.png",
                 1: "res/Buildings/barrack/BAR_1_1/idle/image0000.png"

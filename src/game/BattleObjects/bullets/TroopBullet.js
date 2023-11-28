@@ -1,22 +1,27 @@
 var TroopBullet = cc.Node.extend({
-    ctor: function  (target,startPoint, damage) {
+    ctor: function  (target,startPoint, damage,troop) {
         this._super();
+        this.init(target,startPoint, damage,troop);
+    },
+    init:function (target,startPoint, damage,troop) {
         this._target = target;
         this._damage = damage;
         this.active = true;
+        this.setVisible(true);
         this._startPoint = startPoint;
         this._startTime = 0;
         this._currentTime = 0;
+        this._troop = troop;
 
         //calculate end time
-        this._endPoint  = cc.pAdd(target.getGridPosition(),
-            cc.p(Math.floor(target._width/2), Math.floor(target._height/2)));
+        this._endPoint = cc.pAdd(target.getGridPosition(),
+            cc.p(Math.floor(target._width / 2), Math.floor(target._height / 2)));
 
         let distance = cc.pDistance(startPoint, this._endPoint);
+        distance = Utils.roundFloat(distance, 4)
 
-        this._endTime = distance/this._speedPerSec;
-
-
+        this._endTime = distance / this._speedPerSec;
+        this._endTime = Utils.roundFloat(this._endTime, 4);
 
         //set position at start point
         let positionInMap = cc.director.getRunningScene().battleLayer.getMapPosFromGridPos(startPoint);
@@ -25,8 +30,8 @@ var TroopBullet = cc.Node.extend({
     onReachTarget: function () {
         this.active = false;
         this.setVisible(false);
-        this._target.onGainDamage(this._damage);
-        this.removeFromParent(true);
+        this._target.onGainDamage(this._damage,this._troop);
+        this.removeFromParent(false);
     },
     gameLoop: function(dt){
         this._currentTime += dt;
@@ -49,11 +54,11 @@ var TroopBullet = cc.Node.extend({
     }
 });
 
-TroopBullet.createBullet = function (type,target, startPoint, damage) {
+TroopBullet.createBullet = function (type,target, startPoint, damage, troop) {
     let bullet = null;
     switch(type){
         case "ARM_2":
-            bullet = new ArcherBullet(target, startPoint, damage);
+            bullet = new ArcherBullet(target, startPoint, damage,troop);
             break;
         default:
             cc.log("no bullet class")

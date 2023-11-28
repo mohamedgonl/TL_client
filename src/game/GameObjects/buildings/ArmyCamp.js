@@ -1,5 +1,5 @@
 var ArmyCamp = Building.extend({
-    _type: "AMC_1",
+    _type: BUILDING_TYPE.ARMY_CAMP,
     ctor: function (level,id, posX, posY,status,startTime,endTime) {
         this._super(level,id, posX, posY,status,startTime,endTime);
         this.troopAmount = {};

@@ -40,10 +40,31 @@ var BattleLayer = cc.Layer.extend({
             default:
                 cc.log("NOT FOUND TROOP TYPE");
         }
+
         if (troop) {
+            if(this.idTroop === undefined) this.idTroop = 0;
+            else this.idTroop++;
+
             let posToAdd = this.getMapPosFromGridPos({x: posX, y: posY});
             this.addChild(troop, MAP_ZORDER_TROOP);
             troop.setPosition(posToAdd);
+            troop.setId(this.idTroop);
+
+            //droptroop animation
+            let dropTroopAction = res_troop.EFFECT.DROP_TROOP.ANIM;
+            let cloneDropTroopAction = dropTroopAction.clone();
+            let animate = cc.animate(cloneDropTroopAction);
+            let dropTroop = new cc.Sprite(res_troop.EFFECT.DROP_TROOP[0]);
+            dropTroop.runAction(animate);
+            this.addChild(dropTroop,MAP_ZORDER_DROP_TROOP);
+            dropTroop.setPosition(posToAdd);
+            dropTroop.setScale(0.5);
+            //biến mất sau frame cuối
+            this.scheduleOnce(function () {
+                if(dropTroop)
+                dropTroop.setVisible(false);
+            }, 0.5);
+
             cc.director.getRunningScene().onDropTroop({
                 troopType: type,
                 posX,
@@ -182,31 +203,6 @@ var BattleLayer = cc.Layer.extend({
             onMouseScroll: this.zoom.bind(this)
         }, this);
 
-        //click space to check
-        cc.eventManager.addListener({
-            event: cc.EventListener.KEYBOARD,
-            onKeyPressed: function (keyCode) {
-                if (keyCode === cc.KEY.space) {
-                    console.log("==================================================================")
-                }
-                if (keyCode === cc.KEY.x) {
-                    let townhall = BattleManager.getInstance().getTownHall();
-                    cc.log("townhall ::::::::::::", townhall.isDestroy())
-                }
-                if (keyCode === cc.KEY.c) {
-                    //log list usedTroop
-                    let usedTroop = BattleManager.getInstance().listUsedTroop;
-                    //usedTroop is map
-                    for (let [key, value] of usedTroop) {
-                        cc.log("used troop: " + key + " " + value);
-                    }
-                }
-                if (keyCode === cc.KEY.z) {
-                }
-
-            }.bind(this)
-
-        }, this);
         //listen to multi touch to zoom
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ALL_AT_ONCE,
@@ -295,27 +291,71 @@ var BattleLayer = cc.Layer.extend({
 
     onTouchBegan: function (touch) {
         this.positionTouchBegan = touch.getLocation();
+        this.positionMoved = null;
+        this.timeStartTouch = Date.now();
+        this.schedule(this.checkModeDropTroop.bind(this), 0.1)
+    },
+    checkModeDropTroop: function () {
+        if(this.onModeDropTroop) return;
+        if(this.timeStartTouch === null) return;
+
+        let timeNow = Date.now();
+        let deltaTime = timeNow - this.timeStartTouch;
+        //if > 0.5s, drop troop
+        if (deltaTime > 500) {
+            this.onModeDropTroop = true;
+            this.unschedule(this.checkModeDropTroop.bind(this));
+            this.schedule(this.loopDropTroop.bind(this), 0.2);
+        }
+    },
+    loopDropTroop: function () {
+
+        if(this.onModeDropTroop){
+            let position = this.positionMoved;
+            if(position == null) position = this.positionTouchBegan;
+            this.onClickDropTroop(position);
+
+        }
     },
 
     //if not in move building mode, move view, else move building
     onDrag: function (event) {
+        this.positionMoved = event.getLocation();
+        if(this.onModeDropTroop) return;
+
+        if(this.timeStartTouch){
+            //neu di chuyen qua 10 pixel dat lai timeStartTouch
+            let locationInScreen = event.getLocation();
+            let distance = cc.pDistance(locationInScreen, this.positionTouchBegan);
+            if (distance > 10) {
+                this.timeStartTouch = null;
+                this.unschedule(this.checkModeDropTroop.bind(this));
+            }
+        }
+
         this.moveView(event.getDelta());
     },
 
     onTouchEnded: function (event) {
-
+        this.timeStartTouch = null;
+        this.unschedule(this.checkModeDropTroop.bind(this));
+        this.onModeDropTroop = false;
+        this.unschedule(this.loopDropTroop.bind(this));
         var locationInScreen = event.getLocation();
         var distance = cc.pDistance(locationInScreen, this.positionTouchBegan);
         this.canDragBuilding = false;
-        if (distance < 10) this.onClicked(this.positionTouchBegan);
+        if (distance < 10) this.onClickDropTroop(this.positionTouchBegan);
+        this.unschedule(this.loopDropTroop.bind(this));
 
     },
 
-    onClicked: function (locationInScreen) {
-        let gridPos = this.getGridPosFromScreenPos(locationInScreen);
+    onClickDropTroop: function (locationInScreen) {
+        //random in -10 +10 pixel
+        let locationDrop = cc.pAdd(locationInScreen, cc.p(Math.random() * 20 - 10, Math.random() * 20 - 10));
+        let gridPos = this.getGridPosFromScreenPos(locationDrop);
         //get type of chosen slot
         let type = cc.director.getRunningScene().battleUILayer.getTypeOfChosenSlot();
-        if (type == null) return;
+        if (type == null || !gridPos) return;
         let canDropTroop = BattleManager.getInstance().getDropTroopGrid()[gridPos.x][gridPos.y];
 
         if (!canDropTroop) {
@@ -332,6 +372,10 @@ var BattleLayer = cc.Layer.extend({
             cc.director.getRunningScene().onStartBattle();
         }
         this.createTroopAtGridPos(type, gridPos.x, gridPos.y);
+        //anim create troop
+
+
+
         //get battleUILayer to minus 1 troop
         cc.director.getRunningScene().battleUILayer.onInitTroop();
 

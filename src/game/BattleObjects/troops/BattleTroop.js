@@ -24,7 +24,7 @@ var BattleTroop = cc.Node.extend({
         //state: 3 state: 0: findPath,1: move,2: attack, 3:idle, 4: death
         this._state = TROOP_STATE.FIND;
         this._path = null;
-
+        this._id = null;
 
         this._stateAnimation = 0;
         this._firstAttack = true;
@@ -45,6 +45,9 @@ var BattleTroop = cc.Node.extend({
 
 
     },
+    setId: function (id) {
+        this._id = id;
+    },
     onEndGame: function () {
         cc.log("END GAME:::::")
         cc.eventManager.removeListener(this._eventListener);
@@ -57,7 +60,10 @@ var BattleTroop = cc.Node.extend({
         this.dtCount += dt;
         if (this._state === TROOP_STATE.FIND) {
             this.findTarget();
-            LogUtils.writeLog("1 :troop " + this._type + " find target " + this._target._type);
+
+            if(this._target === null) return;
+            LogUtils.writeLog("troop ID:" +this._id);
+            LogUtils.writeLog("1 :troop " + this._type + " find target " + this._target._type + " id target:" + this._target._id);
             this.findPath();
             LogUtils.writeLog("2 :troop " + this._type + " find target " + this._target._type);
             for(let i = 0; i < this._path.length; i++){
@@ -65,13 +71,7 @@ var BattleTroop = cc.Node.extend({
             }
             this.checkPath();
             LogUtils.writeLog("3 :troop " + this._type + " find target " + this._target._type);
-            //change weight of grid in path +1 for various path each troop
-            let graph = BattleManager.getInstance().getBattleGraph();
-            for (let i = 0; i < this._path.length; i++) {
-                let x = this._path[i].x;
-                let y = this._path[i].y;
-                graph.changeNodeWeight(x, y, graph.getNode(x, y).weight + 1);
-            }
+
             //if not found target, return
             if (this._target === null) {
                 cc.log("ERROR :::::: not found target");
@@ -83,8 +83,6 @@ var BattleTroop = cc.Node.extend({
 
                 this._state = TROOP_STATE.ATTACK;
                 this._firstAttack = true;
-                //set direct to target
-                this.setDirect(this._target._posX - this._posX, this._target._posY - this._posY);
             }
             //move case
             else {
@@ -139,26 +137,6 @@ var BattleTroop = cc.Node.extend({
     },
 
 
-    getPathToBuilding: function (building) {
-        //get path
-        let graph = BattleManager.getInstance().getBattleGraph();
-        let start = new BattleGridNode(this._posX, this._posY, graph.getNode(this._posX, this._posY).weight, null);
-
-        //get center of building
-        let targetCenterX = building._posX + Math.floor(building._width / 2);
-        let targetCenterY = building._posY + Math.floor(building._height / 2);
-        LogUtils.writeLog("target center: " + targetCenterX + " " + targetCenterY);
-
-        // let end = new BattleGridNode(targetCenter.x,targetCenter.y,graph.getNode(targetCenter.x,targetCenter.y).weight);
-        //let end = random node in building
-        // let buildingRandomX = Math.floor(Math.random() * (building._width-1)) + building._posX;
-        // let buildingRandomY = Math.floor(Math.random() * (building._height-1)) + building._posY;
-
-
-        let end = new BattleGridNode(targetCenterX, targetCenterY, graph.getNode(targetCenterX, targetCenterY).weight, building._id);
-        return BattleAStar.search(graph, start, end);
-        // return BattleAStar.searchSimple(graph, start, end);
-    },
 
     //check if troop in attack range of building,
     // normal case : troop._posX, troop._posY,
@@ -204,22 +182,18 @@ var BattleTroop = cc.Node.extend({
 
         //if distance from nearest corner to troop < attack range
         let distance = Math.sqrt(Math.pow(xNearest - x, 2) + Math.pow(yNearest - y, 2));
+        distance = Utils.roundFloat(distance,4);
 
-        if (distance <= this._attackRange) {
-
-            return true;
-        }
-
-        return false;
+        return distance <= this._attackRange;
     },
 
     findTarget: function () {
         let listTarget = [];
         switch (this._favoriteTarget) {
-            case "DEF":
+            case GAMEOBJECT_PREFIX.DEFENCE:
                 listTarget = BattleManager.getInstance().getListDefences();
                 break;
-            case "RES":
+            case GAMEOBJECT_PREFIX.RESOURCE:
                 listTarget = BattleManager.getInstance().getListResources();
                 break;
             case "NONE":
@@ -227,8 +201,8 @@ var BattleTroop = cc.Node.extend({
                 //to list
                 for (let [key, value] of mapListBuilding) {
                     //if obs, continue
-                    if (value._type.startsWith("OBS")) continue;
-                    if (value._type.startsWith("WAL")) continue;
+                    if (value._type.startsWith(GAMEOBJECT_PREFIX.OBSTACLE)) continue;
+                    if (value._type.startsWith(GAMEOBJECT_PREFIX.WALL)) continue;
                     listTarget.push(value);
                 }
                 break;
@@ -252,7 +226,7 @@ var BattleTroop = cc.Node.extend({
         }
 
         //get min distance target
-        let minDistance = null;
+        let minDistanceSquare = null;
         this._target = null;
         for (let i = 0; i < listTarget.length; i++) {
 
@@ -261,11 +235,12 @@ var BattleTroop = cc.Node.extend({
             //if destroy, continue
             if (target.isDestroy()) continue;
             //get min distance
-            let distance = Math.sqrt(Math.pow(this._posX - target._posX, 2) + Math.pow(this._posY - target._posY, 2));
-            distance = Utils.roundFloat(distance,4);
-            LogUtils.writeLog("troop " + this._type + " distance to " + target._type + " " + Math.floor(distance));
-            if (minDistance == null || distance < minDistance) {
-                minDistance = distance;
+            let nearestPoint = target.getNearestPoint({x: this._posX, y: this._posY});
+            let distanceSquare =  (nearestPoint.x- this._posX)*(nearestPoint.x- this._posX)
+                                        + (nearestPoint.y- this._posY)*(nearestPoint.y- this._posY);
+
+            if (minDistanceSquare == null || distanceSquare < minDistanceSquare) {
+                minDistanceSquare = distanceSquare;
                 this._target = target;
             }
         }
@@ -281,13 +256,27 @@ var BattleTroop = cc.Node.extend({
                 this._favoriteTarget = "NONE";
                 this._state = TROOP_STATE.FIND;
                 this.findTarget();
-
             }
         }
     },
-
     findPath: function () {
-        this._path = this.getPathToBuilding(this._target);
+        //get path
+        let graph = BattleManager.getInstance().getBattleGraph();
+        let start = new BattleGridNode(this._posX, this._posY, graph.getNode(this._posX, this._posY).weight, null);
+
+        //let end X Y random in building
+        if(this._id === null)
+        {
+            cc.log("ID TROOP NULL :::::::::::::::::::")
+
+        }
+        let nearestPoint = this._target.getNearestPoint({x: this._posX, y: this._posY},this._id,true);
+
+        let end = new BattleGridNode(
+            nearestPoint.x, nearestPoint.y,
+            graph.getNode(nearestPoint.x, nearestPoint.y).weight, this._target._id);
+
+        this._path = BattleAStar.search(graph, start, end);
     },
 
     //check that path is valid or not
@@ -305,7 +294,7 @@ var BattleTroop = cc.Node.extend({
                 LogUtils.writeLog("building pos: " + building._posX + " " + building._posY);
                 LogUtils.writeLog("building width: " + building._width + " height: " + building._height);
             }
-            if (building !== null && building._type.startsWith("WAL")) {
+            if (building !== null && building._type.startsWith(GAMEOBJECT_PREFIX.WALL)) {
                 LogUtils.writeLog("troop " + this._type + " change target to " + building._type);
                 this._target = building;
                 //update this._path = _path from 0 to i
@@ -359,7 +348,6 @@ var BattleTroop = cc.Node.extend({
         //if move in this grid, not ++ currentIndex
         if (this._nextIndexDistanceLeft > distance) {
             this._nextIndexDistanceLeft = Utils.roundFloat(this._nextIndexDistanceLeft - distance,4);
-            // LogUtils.writeLog("nextIndexDistanceLeft: " + this._nextIndexDistanceLeft + " distance: " + distance + " moveSpeed: " + this._moveSpeed + "dt: " + dt);
         }
 
         //if move to next index of path
@@ -422,13 +410,11 @@ var BattleTroop = cc.Node.extend({
             this._state = TROOP_STATE.FIND;
             return;
         }
-
-        // this.performAttackAnimation();
-
         let timeAttackAnimationHit = TroopInfo[this._type]["timeAttackAnimationHit"];
-
         if (this._firstAttack === true) {
             // attackCd = timeAttackAnimationHit for first time
+            let centerTarget = this._target.getCenterPosition();
+            this.setDirect(centerTarget.x - this._posX, centerTarget.y - this._posY);
             this._attackCd = timeAttackAnimationHit;
             this._attackCd = Utils.roundFloat(this._attackCd,4);
             this._firstAttack = false;
@@ -514,12 +500,11 @@ var BattleTroop = cc.Node.extend({
 
     attack: function () {
         let damage = this._damage;
-
         //if target is favorite target, damage *= damageScale
         if (this._target._type.startsWith(this._favoriteTarget) === true) {
             damage *= this._damageScale;
         }
-        this._target.onGainDamage(damage);
+        this._target.onGainDamage(damage,this);
     },
 
     performAttackAnimation: function () {
@@ -689,6 +674,9 @@ var BattleTroop = cc.Node.extend({
         this._hpBar.setPercent(100);
         this._hpBar.setVisible(true);
         this.addChild(this._hpBar, ZORDER_BUILDING_EFFECT);
+
+
+
     },
     refindTarget: function () {
         this._state = TROOP_STATE.FIND;

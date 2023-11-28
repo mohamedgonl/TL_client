@@ -1,5 +1,5 @@
 var BattleElixirMine = BattleStorage.extend({
-    _type: "RES_2",
+    _type: BUILDING_TYPE.ELIXIR_MINE,
     _resourceType: RESOURCE_TYPE.ELIXIR,
 
     ctor: function (level, id, posX, posY) {

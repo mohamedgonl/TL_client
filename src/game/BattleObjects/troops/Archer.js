@@ -4,7 +4,7 @@ var Archer = BattleTroop.extend({
         this._super(posX,posY);
     },
     attack: function(){
-        TroopBullet.createBullet("ARM_2",this._target, {x: this._posX, y: this._posY}, this._damage);
+        TroopBullet.createBullet("ARM_2",this._target, {x: this._posX, y: this._posY}, this._damage,this);
     },
 
 

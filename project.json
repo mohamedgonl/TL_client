@@ -88,7 +88,9 @@
         "src/game/GameObjects/buildings/Cannon.js",
         "src/game/GameObjects/buildings/ArcherTower.js",
         "src/game/GameObjects/buildings/Mortar.js",
+        "src/game/GameObjects/buildings/AirDefense.js",
         "src/game/GameObjects/Obstacle.js",
+
 
         "src/game/BattleObjects/BattleGameObject.js",
         "src/game/BattleObjects/BattleObstacle.js",
@@ -108,11 +110,13 @@
         "src/game/BattleObjects/buildings/BattleCannon.js",
         "src/game/BattleObjects/buildings/BattleArcherTower.js",
         "src/game/BattleObjects/buildings/BattleMortar.js",
+        "src/game/BattleObjects/buildings/BattleAirDefense.js",
 
         "src/game/BattleObjects/bullets/Bullet.js",
         "src/game/BattleObjects/bullets/CannonBullet.js",
         "src/game/BattleObjects/bullets/ArcherTowerBullet.js",
         "src/game/BattleObjects/bullets/MortarBullet.js",
+        "src/game/BattleObjects/bullets/AirDefenseBullet.js",
 
         "src/game/BattleObjects/troops/BattleTroop.js",
         "src/game/BattleObjects/troops/Warrior.js",

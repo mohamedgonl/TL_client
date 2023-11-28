@@ -33,8 +33,9 @@ RandomUtils.JenkinsSimpleFast32 = function (seed_1, seed_2, seed_3, seed_4) {
     }
 }
 
-RandomUtils.hashCode = function (str) {
+RandomUtils.hashCode = function (strInput) {
     let hash = 0;
+    let str = strInput.toString();
     if (str.length === 0) return hash;
 
     for (let i = 0; i < str.length; i++) {
@@ -48,10 +49,12 @@ RandomUtils.hashCode = function (str) {
 }
 
 RandomUtils.generateRandomBySeed = function (min = 0, max = 1, seed, isInteger = false) {
-    let randomNumber = Math.sin(RandomUtils.hashCode(seed));
+    cc.log(min + " " +  max + " " +  seed + " " + isInteger)
+    let randomNumber = Math.abs(Math.sin(RandomUtils.hashCode(seed)));
     const scaledRandom = min + randomNumber * (max - min);
     let rd = isInteger ? Math.round(scaledRandom) : scaledRandom;
-    return Math.abs(rd);
+    cc.log("RANDOM : " + rd)
+    return rd;
 }
 
 

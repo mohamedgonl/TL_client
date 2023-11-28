@@ -1,5 +1,5 @@
 var BattleMortar = BattleDefence.extend({
-    _type: "DEF_3",
+    _type: BUILDING_TYPE.MORTAR,
     deltaBarrelPosition: {//vi tri nong sung so voi center theo tung huong
         0: {dx: 0, dy: 55,},
         1: {dx: 35, dy: 50,},

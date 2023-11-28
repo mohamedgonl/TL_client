@@ -28,6 +28,8 @@ var BattleBuilding = BattleGameObject.extend({
         this._maxHp = config.hitpoints;
         this._hp = this._maxHp;
 
+        this.listTroopAttack = [];
+
         this.setAnchorPoint(0.5, 0.5);
 
         this.loadSpriteByLevel(level);
@@ -158,9 +160,15 @@ var BattleBuilding = BattleGameObject.extend({
         return this._hp <= 0;
     },
 
-    onGainDamage: function (damage) {
+    onGainDamage: function (damage,troop) {
         if (damage <= 0 || this._hp <= 0)
             return;
+
+        if(this.listTroopAttack.indexOf(troop) === -1){
+            this.listTroopAttack.push(troop);
+        }
+
+
         this._hp = Math.max(this._hp - damage, 0);
         if (this._hp <= 0) {
             this.onDestroy();
@@ -171,6 +179,23 @@ var BattleBuilding = BattleGameObject.extend({
             let percent = this._hp / this._maxHp * 100;
             this._hpBar.setPercent(percent);
         }
+
+        let atkEffect = res_troop.EFFECT.ATK_HIT.ANIM.clone();
+        let effect = new cc.Sprite();
+        //set pos random in -10 10
+        let randomX = Math.random() * 20 - 10;
+        let randomY = Math.random() * 20 - 10;
+        this.addChild(effect, ZORDER_BUILDING_EFFECT);
+        effect.setPosition(randomX, randomY);
+        effect.runAction(cc.animate(atkEffect));
+        effect.setScale(0.5);
+
+        //delete after 0.2
+        this.scheduleOnce(function () {
+            if (effect)
+                effect.removeFromParent(true);
+        }, 0.2)
+
 
         LogUtils.writeLog('building ' + this._id + ' gain ' + damage + ' ~ ' + this._hp)
     },
@@ -201,6 +226,133 @@ var BattleBuilding = BattleGameObject.extend({
             cc.p(x, y + size),
             cc.p(x + size, y + size)
         ];
+    },
+    getCenterPosition: function () {
+        let sizeHalf = Math.floor(this._width / 2);
+        let x = this._posX;
+        let y = this._posY;
+        return cc.p(x + sizeHalf, y + sizeHalf);
+    },
+
+    getNearestPoint: function (point, troopId = null, random = false) {
+        let x = point.x;
+        let y = point.y;
+
+        let xStart = this._posX;
+        let yStart = this._posY;
+        let xEnd = xStart + this._width;
+        let yEnd = yStart + this._height;
+        let xMid = xStart + Math.floor(this._width / 2);
+        let yMid = yStart + Math.floor(this._height / 2);
+        if (random === false) {
+            if (x <= xStart) {
+                if (y <= yStart)
+                    return cc.p(xStart, yStart);
+                else if (y >= yEnd)
+                    return cc.p(xStart, yEnd);
+                else
+                    return cc.p(xStart, y);
+
+            } else if (x >= xEnd) {
+                if (y <= yStart)
+                    return cc.p(xEnd, yStart);
+                else if (y >= yEnd)
+                    return cc.p(xEnd, yEnd);
+                else
+                    return cc.p(xEnd, y);
+
+            } else {
+                if (y <= yStart)
+                    return cc.p(x, yStart);
+                else if (y >= yEnd)
+                    return cc.p(x, yEnd);
+                else
+                    return cc.p(x, y);
+
+            }
+        }
+
+        let seed = troopId;
+        let distanceOffset = Math.ceil(this._width / 4);
+        let choose = RandomUtils.generateRandomBySeed(0, 1, seed, true);
+        //if nearest point is one of 4 corners, else return random near point on edge
+        if (x <= xStart) {
+
+            if (y <= yStart) {
+                if (choose === 0) {
+                    return cc.p(
+                        xStart,
+                        RandomUtils.generateRandomBySeed(yStart, yMid, seed, true)
+                    )
+                } else {
+                    return cc.p(
+                        RandomUtils.generateRandomBySeed(xStart, xMid, seed, true),
+                        yStart
+                    )
+                }
+            } else if (y >= yEnd) {
+                if (choose === 0) {
+                    return cc.p(
+                        xStart,
+                        RandomUtils.generateRandomBySeed(yMid, yEnd, seed, true)
+                    )
+                } else {
+                    return cc.p(
+                        RandomUtils.generateRandomBySeed(xStart, xMid, seed, true),
+                        yEnd
+                    )
+                }
+            } else {
+                return cc.p(
+                    xStart,
+                    RandomUtils.generateRandomBySeed(yMid - distanceOffset, yMid + distanceOffset, seed, true)
+                )
+            }
+        } else if (x >= xEnd) {
+            if (y <= yStart) {
+                if (choose === 0) {
+                    return cc.p(
+                        xEnd,
+                        RandomUtils.generateRandomBySeed(yStart, yMid, seed, true)
+                    )
+                } else {
+                    return cc.p(
+                        RandomUtils.generateRandomBySeed(xMid, xEnd, seed, true),
+                        yStart
+                    )
+                }
+            } else if (y >= yEnd) {
+                if (choose === 0) {
+                    return cc.p(
+                        xEnd,
+                        RandomUtils.generateRandomBySeed(yMid, yEnd, seed, true)
+                    )
+                } else {
+                    return cc.p(
+                        RandomUtils.generateRandomBySeed(xMid, xEnd, seed, true),
+                        yEnd
+                    )
+                }
+            } else {
+                return cc.p(
+                    xEnd,
+                    RandomUtils.generateRandomBySeed(yMid - distanceOffset, yMid + distanceOffset, seed, true)
+                )
+            }
+        } else {
+
+            if (y <= yStart) {
+                return cc.p(
+                    RandomUtils.generateRandomBySeed(xMid - distanceOffset, xMid + distanceOffset, seed, true),
+                    yStart);
+            } else if (y >= yEnd) {
+                return cc.p(
+                    RandomUtils.generateRandomBySeed(xMid - distanceOffset, xMid + distanceOffset, seed, true),
+                    yEnd);
+            } else {
+                return cc.p(x, y);
+            }
+        }
     },
 
     toString: function (type) {
