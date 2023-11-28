@@ -91,6 +91,22 @@ var ArmyManager = cc.Class.extend({
 
     },
 
+    getMaxSpaceAmcIndex: function () {
+        let max = 0;
+        let _index = 0;
+        this._armyCampList.map((e,index) => {
+            cc.log("FIND MAX:::: max space : " + e.getMaxSpace() + " : current :: " + e.getCurrentSpace() + " index :: " + index)
+            if(e.getMaxSpace() - e.getCurrentSpace() > max) {
+                max = e.getMaxSpace() - e.getCurrentSpace();
+                _index = index;
+            }
+        });
+
+        return _index;
+    },
+
+
+
     updateArmyAmount: function (troops, curPage, isInit = false) {
         cc.log("PARAMS :: " + JSON.stringify(troops) + " PAGE : " + curPage + " isInit : " + isInit)
         cc.log("ARMY LIST :: " + this._armyCampList.length)
@@ -106,19 +122,10 @@ var ArmyManager = cc.Class.extend({
                 }
 
                 // create troop sprite run to army camp
-                let armyCampIndex;
                 for (let i = 0; i< e.count; i++) {
-                    if (this._armyCampList.length === 1) {
-                        armyCampIndex = 0;
-                    } else {
-                        if(isInit)  {
-                            armyCampIndex = i % (this._armyCampList.length);
-                        }
-                        else {
-                            armyCampIndex = (this._armyAmount[e.cfgId] -1) % (this._armyCampList.length);
-                        }
-                    }
-                    let data = {barrackIndex: curPage, cfgId: e.cfgId, count: 1, armyCampIndex: armyCampIndex};
+                    let index = this.getMaxSpaceAmcIndex();
+                    let data = {barrackIndex: curPage, cfgId: e.cfgId, count: 1, armyCampIndex: index};
+                    this._armyCampList[index].addTroop({cfgId: e.cfgId, count: 1})
                     this.createTroopOnMap(data);
                 }
 

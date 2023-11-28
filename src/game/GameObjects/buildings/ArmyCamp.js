@@ -21,12 +21,13 @@ var ArmyCamp = Building.extend({
     },
 
     addTroop: function ({cfgId, count}) {
-      if(this.troopAmount[cfgId].count) {
-          this.troopAmount[cfgId] = count;
-      }
-      else {
-          this.troopAmount[cfgId] += count;
-      }
+          if(!this.troopAmount[cfgId]) {
+              this.troopAmount[cfgId] = count;
+          }
+          else {
+              this.troopAmount[cfgId] += count;
+          }
+
     },
 
     getCurrentSpace: function () {
