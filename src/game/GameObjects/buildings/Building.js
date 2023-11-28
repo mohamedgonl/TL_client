@@ -43,10 +43,14 @@ var Building = GameObject.extend({
         mapLayer.addChild(this._effect, ZORDER_BUILDING_EFFECT);
         mapLayer.addChild(this)
 
-
         this._bottom.setPosition(posInMap);
         this._mainSprite.setPosition(posInMap);
         this._effect.setPosition(posInMap);
+
+        //if state ==1
+        if(this._state === 1 || this._state === 2){
+            this.startProcess();
+        }
 
     },
     createSprite: function(){
