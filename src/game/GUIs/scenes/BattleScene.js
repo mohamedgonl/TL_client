@@ -224,25 +224,26 @@ var BattleScene = cc.Scene.extend({
             for (let troop of listTroops) {
                 if (troop.isAlive()) {
 
-                    //find max 10 troop per loop
-                    if (troop._state === TROOP_STATE.FIND) {
-                        LogUtils.writeLog("========================================");
-                        findCount++;
-                        if (findCount <= 10)
-                        {
-                            LogUtils.writeLog("troop " + troop._id + " find target" + "findCount: " + findCount);
-                        }
-                            // troop.gameLoop(this.secPerTick);
-                    }
-
-                    // else
-                        troop.gameLoop(this.secPerTick);
+                    //  find max 10 troop per loop
+                      if (troop._state === TROOP_STATE.FIND) {
+                          findCount++;
+                          if (findCount <= 10)
+                          {
+                              troop.gameLoop(this.secPerTick);
+                          }
+                      }
+                      else
+                    troop.gameLoop(this.secPerTick);
                 }
 
             }
             for (let troopBullet of listTroopBullets) {
                 if (troopBullet.active)
                     troopBullet.gameLoop(this.secPerTick);
+            }
+            for(let troopBullet of listTroopBullets){
+                if(!troopBullet.active)
+                    listTroopBullets.splice(listTroopBullets.indexOf(troopBullet),1);
             }
 
             if (this.timeLeft === 0) {

@@ -42,7 +42,7 @@ var BattleLayer = cc.Layer.extend({
         }
 
         if (troop) {
-            if(this.idTroop === undefined) this.idTroop = 0;
+            if (this.idTroop === undefined) this.idTroop = 0;
             else this.idTroop++;
 
             let posToAdd = this.getMapPosFromGridPos({x: posX, y: posY});
@@ -56,13 +56,13 @@ var BattleLayer = cc.Layer.extend({
             let animate = cc.animate(cloneDropTroopAction);
             let dropTroop = new cc.Sprite(res_troop.EFFECT.DROP_TROOP[0]);
             dropTroop.runAction(animate);
-            this.addChild(dropTroop,MAP_ZORDER_DROP_TROOP);
+            this.addChild(dropTroop, MAP_ZORDER_DROP_TROOP);
             dropTroop.setPosition(posToAdd);
             dropTroop.setScale(0.5);
             //biến mất sau frame cuối
             this.scheduleOnce(function () {
-                if(dropTroop)
-                dropTroop.setVisible(false);
+                if (dropTroop)
+                    dropTroop.setVisible(false);
             }, 0.5);
 
             cc.director.getRunningScene().onDropTroop({
@@ -296,8 +296,8 @@ var BattleLayer = cc.Layer.extend({
         this.schedule(this.checkModeDropTroop.bind(this), 0.1)
     },
     checkModeDropTroop: function () {
-        if(this.onModeDropTroop) return;
-        if(this.timeStartTouch === null) return;
+        if (this.onModeDropTroop) return;
+        if (this.timeStartTouch === null) return;
 
         let timeNow = Date.now();
         let deltaTime = timeNow - this.timeStartTouch;
@@ -310,9 +310,9 @@ var BattleLayer = cc.Layer.extend({
     },
     loopDropTroop: function () {
 
-        if(this.onModeDropTroop){
+        if (this.onModeDropTroop) {
             let position = this.positionMoved;
-            if(position == null) position = this.positionTouchBegan;
+            if (position == null) position = this.positionTouchBegan;
             this.onClickDropTroop(position);
 
         }
@@ -321,9 +321,9 @@ var BattleLayer = cc.Layer.extend({
     //if not in move building mode, move view, else move building
     onDrag: function (event) {
         this.positionMoved = event.getLocation();
-        if(this.onModeDropTroop) return;
+        if (this.onModeDropTroop) return;
 
-        if(this.timeStartTouch){
+        if (this.timeStartTouch) {
             //neu di chuyen qua 10 pixel dat lai timeStartTouch
             let locationInScreen = event.getLocation();
             let distance = cc.pDistance(locationInScreen, this.positionTouchBegan);
@@ -350,8 +350,15 @@ var BattleLayer = cc.Layer.extend({
     },
 
     onClickDropTroop: function (locationInScreen) {
+        let tick = cc.director.getRunningScene().battleLayer.tick;
+        if (tick != undefined && tick === this.oldTick) {
+            cc.log("tick same")
+            cc.log(tick + " " + this.oldTick)
+            return;
+        }
+
         //random in -10 +10 pixel
-        let locationDrop = cc.pAdd(locationInScreen, cc.p(Math.random() * 20 - 10, Math.random() * 20 - 10));
+        let locationDrop = cc.pAdd(locationInScreen, cc.p(Math.random() * 10 - 5, Math.random() * 10 - 5));
         let gridPos = this.getGridPosFromScreenPos(locationDrop);
         //get type of chosen slot
         let type = cc.director.getRunningScene().battleUILayer.getTypeOfChosenSlot();
@@ -375,11 +382,9 @@ var BattleLayer = cc.Layer.extend({
         //anim create troop
 
 
-
         //get battleUILayer to minus 1 troop
         cc.director.getRunningScene().battleUILayer.onInitTroop();
-
-
+        this.oldTick = tick;
     },
 
 
