@@ -679,6 +679,7 @@ var BattleTroop = cc.Node.extend({
 
     },
     refindTarget: function () {
+        if(this._state === TROOP_STATE.DEAD) return;
         this._state = TROOP_STATE.FIND;
     },
     toString: function () {
