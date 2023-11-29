@@ -35,13 +35,15 @@ var BattleTroop = cc.Node.extend({
         //listen event on end game
         this._eventListener = cc.eventManager.addCustomListener(EVENT_NAMES.END_BATTLE, this.onEndGame.bind(this));
 
-        //log all grid building
-        // for(let i = 0; i<132;i++)
-        // for(let j = 0; j<132;j++){
-        //     let id = BattleManager.getInstance().mapGrid[i][j];
-        //     if(id === 0) continue;
-        //     LogUtils.writeLog("map: " + i + " " + j + " " + id);
-        // }
+        //click space to log zorder
+        cc.eventManager.addListener({
+            event: cc.EventListener.KEYBOARD,
+            onKeyPressed: function(keyCode, event){
+                if(keyCode === 32){
+                    cc.log("zorder: " + event.getCurrentTarget().getLocalZOrder());
+                }
+            }
+        }, this);
 
 
     },
@@ -77,6 +79,8 @@ var BattleTroop = cc.Node.extend({
                 cc.log("ERROR :::::: not found target");
                 return;
             }
+
+            this._target.addTroopListAttack(this);
 
             //attack case
             if (this.isInAttackRange(this._target) === true) {
@@ -181,10 +185,11 @@ var BattleTroop = cc.Node.extend({
         if (y < yStart) yNearest = yStart; else if (y > yEnd) yNearest = yEnd; else yNearest = y;
 
         //if distance from nearest corner to troop < attack range
-        let distance = Math.sqrt(Math.pow(xNearest - x, 2) + Math.pow(yNearest - y, 2));
-        distance = Utils.roundFloat(distance,4);
+        let distanceSquare = (xNearest - x)*(xNearest - x) + (yNearest - y)*(yNearest - y);
 
-        return distance <= this._attackRange;
+        // distance = Utils.roundFloat(distance,4);
+
+        return distanceSquare <= this._attackRange*this._attackRange;
     },
 
     findTarget: function () {
@@ -200,6 +205,8 @@ var BattleTroop = cc.Node.extend({
                 let mapListBuilding = BattleManager.getInstance().getAllBuilding();
                 //to list
                 for (let [key, value] of mapListBuilding) {
+                    //if destroy, continue
+                    if (value.isDestroy()) continue;
                     //if obs, continue
                     if (value._type.startsWith(GAMEOBJECT_PREFIX.OBSTACLE)) continue;
                     if (value._type.startsWith(GAMEOBJECT_PREFIX.WALL)) continue;
@@ -401,12 +408,14 @@ var BattleTroop = cc.Node.extend({
             pos = cc.pLerp(posIndexInMap, posPrevIndexInMap, this._nextIndexDistanceLeft);
         } else pos = cc.pLerp(posIndexInMap, posPrevIndexInMap, this._nextIndexDistanceLeft / 1.414);
         this.setPosition(pos);
+        this.setLocalZOrder(BATTLE_CONST.ZORDER_BUILDING - this.y);
 
 
     },
 
     attackLoop: function (dt) {
         if (this._target.isDestroy()) {
+            this.performIdleAnimation();
             this._state = TROOP_STATE.FIND;
             return;
         }
@@ -418,6 +427,7 @@ var BattleTroop = cc.Node.extend({
             this._attackCd = timeAttackAnimationHit;
             this._attackCd = Utils.roundFloat(this._attackCd,4);
             this._firstAttack = false;
+
         }
 
         //loop Attack CD
@@ -674,6 +684,7 @@ var BattleTroop = cc.Node.extend({
         this._hpBar.setPercent(100);
         this._hpBar.setVisible(true);
         this.addChild(this._hpBar, ZORDER_BUILDING_EFFECT);
+        this.setLocalZOrder(BATTLE_CONST.ZORDER_BUILDING - this.y);
 
 
 

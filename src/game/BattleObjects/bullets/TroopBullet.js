@@ -30,10 +30,15 @@ var TroopBullet = cc.Node.extend({
     onReachTarget: function () {
         this.active = false;
         this.setVisible(false);
+        LogUtils.writeLog("Bullet reach target");
         this._target.onGainDamage(this._damage,this._troop);
+        // BattleManager.getInstance().onTroopBulletDead(this);
         this.removeFromParent(false);
     },
     gameLoop: function(dt){
+        if(this.active === false){
+            return;
+        }
         this._currentTime += dt;
         if(this._currentTime >= this._endTime){
             this.onReachTarget();

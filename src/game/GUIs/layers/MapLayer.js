@@ -49,6 +49,16 @@ var MapLayer = cc.Layer.extend({
             event: cc.EventListener.KEYBOARD, onKeyPressed: function (keyCode) {
                 if (keyCode === cc.KEY.space) {
                     console.log("==================================================================")
+                    //log full 40x40 grid
+                    let mapGrid = MapManager.getInstance().mapGrid;
+                    let str = "";
+                    for (let i = 0; i < GRID_SIZE; i++) {
+                        for (let j = 0; j < GRID_SIZE; j++) {
+                            str += mapGrid[i][j] + " ";
+                        }
+                        str += "\n";
+                    }
+                    cc.log(str);
                 }
                 if (keyCode === cc.KEY.x) {
                     let warrior = new Warrior(0, 0);
@@ -223,10 +233,10 @@ var MapLayer = cc.Layer.extend({
         backgroundDownRight.setScale(SCALE_BG);
 
 
-        this.addChild(backgroundUpLeft, MAP_ZORDER_BACKGROUND);
-        this.addChild(backgroundUpRight, MAP_ZORDER_BACKGROUND);
-        this.addChild(backgroundDownLeft, MAP_ZORDER_BACKGROUND);
-        this.addChild(backgroundDownRight, MAP_ZORDER_BACKGROUND);
+        this.addChild(backgroundUpLeft, ZORDER_BG);
+        this.addChild(backgroundUpRight, ZORDER_BG);
+        this.addChild(backgroundDownLeft, ZORDER_BG);
+        this.addChild(backgroundDownRight, ZORDER_BG);
     },
 
     //get ZORDER of troop, building. Depend on position of it, the higher position, the lower ZORDER, max is ZORDER_BUILDING_MAINSPRITE_MAX

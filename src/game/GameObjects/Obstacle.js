@@ -36,6 +36,11 @@ var Obstacle = GameObject.extend({
 
         //load sprites
         this.initState();
+
+        //state
+        if(this._state === 1){
+            this.startRemove(this._startTime,this._endTime);
+        }
     },
 
     initState: function(){
@@ -162,7 +167,7 @@ var Obstacle = GameObject.extend({
         this._progressBar.setPercent(percent);
 
         //update time left
-        let time = this._endTime - currentTime;
+        let time = Math.min(this._endTime - currentTime,this._endTime - this._startTime);
         this._timeLabel.setString(Utils.getTimeString(time));
         if(currentTime >= this._endTime){
             //send to server to check
@@ -187,6 +192,7 @@ var Obstacle = GameObject.extend({
         this._startTime = startTime;
         this._endTime = endTime;
         this.loadButton();
+        this.update();
         this.schedule(this.update.bind(this),1);
 
         let playerInfoManager = PlayerInfoManager.getInstance();
@@ -287,6 +293,7 @@ var Obstacle = GameObject.extend({
         }
     },
     onAddIntoMapManager: function () {
+
     },
     onReceivedBuyResourceByGemSuccess: function (packet) {
       this.onClickRemove();

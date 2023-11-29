@@ -20,7 +20,7 @@ var BattleScene = cc.Scene.extend({
 
         let dt = this.secPerTick;
 
-        if (setting && setting.onReplay){
+        if (setting && setting.onReplay) {
             BattleManager.getInstance().onReplay = setting.onReplay;
             dt /= this.replaySpeed;
         }
@@ -220,17 +220,37 @@ var BattleScene = cc.Scene.extend({
                 if (bullet.active)
                     bullet.gameLoop(this.secPerTick);
             }
+            let findCount = 0;
             for (let troop of listTroops) {
-                troop.gameLoop(this.secPerTick);
+                if (troop.isAlive()) {
+
+                    //  find max 10 troop per loop
+                      if (troop._state === TROOP_STATE.FIND) {
+                          findCount++;
+                          if (findCount <= 6)
+                          {
+                              troop.gameLoop(this.secPerTick);
+                          }
+                      }
+                      else
+                    troop.gameLoop(this.secPerTick);
+                }
+
             }
             for (let troopBullet of listTroopBullets) {
                 if (troopBullet.active)
                     troopBullet.gameLoop(this.secPerTick);
-                // else
-                // {
-                //     listTroopBullets.shift();
-                // }
             }
+            //remove from list troop
+            for(let troop of listTroops){
+                if(!troop.isAlive())
+                    listTroops.splice(listTroops.indexOf(troop),1);
+            }
+            for(let troopBullet of listTroopBullets){
+                if(!troopBullet.active)
+                    listTroopBullets.splice(listTroopBullets.indexOf(troopBullet),1);
+            }
+
 
             if (this.timeLeft === 0) {
                 this.onEndBattle(1);

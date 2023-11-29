@@ -260,7 +260,7 @@ var BattleManager = cc.Class.extend({
                 if (building._type.startsWith(GAMEOBJECT_PREFIX.WALL)) {
                     for (let column = building._posX; column < building._posX + building._width; column++)
                         for (let row = building._posY; row < building._posY + building._height; row++) {
-                            this.buildingWeightGrid[column][row] = BATTLE_GRAPH.WALL_WEIGHT;
+                            this.buildingWeightGrid[column][row] = BATTLE_GRAPH.WALL_WEIGHT* building._level;
                         }
 
                 } else {
@@ -447,6 +447,14 @@ var BattleManager = cc.Class.extend({
         this.starAmount++;
         this.battleScene.battleUILayer.updateStarUI();
     },
+    onTroopBulletDead: function (bullet) {
+        for (let i = 0; i < this.listTroopBullets.length; i++) {
+            if (this.listTroopBullets[i] === bullet) {
+                this.listTroopBullets.splice(i, 1);
+                break;
+            }
+        }
+    },
 
     onDestroyBuilding: function (building) {
         if (!building._type.startsWith(GAMEOBJECT_PREFIX.WALL)) {
@@ -492,13 +500,13 @@ var BattleManager = cc.Class.extend({
         }
     },
     onTroopDead: function (troop) {
-        //remove from list current troop
-        for (let i = 0; i < this.listCurrentTroop.length; i++) {
-            if (this.listCurrentTroop[i] === troop) {
-                this.listCurrentTroop.splice(i, 1);
-                break;
-            }
-        }
+        // //remove from list current troop
+        // for (let i = 0; i < this.listCurrentTroop.length; i++) {
+        //     if (this.listCurrentTroop[i] === troop) {
+        //         this.listCurrentTroop.splice(i, 1);
+        //         break;
+        //     }
+        // }
         this.totalDeadTroop++;
 
         if (this.isAllTroopsDead()) {
