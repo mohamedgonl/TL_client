@@ -237,6 +237,8 @@ var BattleLayer = cc.Layer.extend({
 
     removeBuilding: function (building) {
         //remove child from layer
+        if (building._bottom)
+            building._bottom.removeFromParent(true);
         building.removeFromParent(true);
     },
 
