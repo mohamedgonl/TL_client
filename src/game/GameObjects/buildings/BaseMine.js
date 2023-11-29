@@ -62,7 +62,7 @@ var BaseMine = Building.extend({
         let capacity = LoadManager.getInstance().getConfig(this._type, this._level, "capacity");
 
         //if can harvest >= 1% of capacity , show icon
-        if (harvestAmount >= capacity / 100) {
+        if (harvestAmount >= capacity / 3) {
             this._showIconHarvest = true;
             this._iconHarvest.setVisible(true);
         } else {
