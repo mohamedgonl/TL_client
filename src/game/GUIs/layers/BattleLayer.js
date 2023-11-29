@@ -344,7 +344,7 @@ var BattleLayer = cc.Layer.extend({
             var locationInScreen = event.getLocation();
             var distance = cc.pDistance(locationInScreen, this.positionTouchBegan);
             if (distance < 10) this.onClickDropTroop(this.positionTouchBegan);
-            return;
+            // return;
         }
 
 
